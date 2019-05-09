@@ -1,0 +1,134 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "ngx-tinynodes": {
+      "root": "apps/ngx-tinynodes/",
+      "sourceRoot": "apps/ngx-tinynodes/src",
+      "projectType": "application",
+      "prefix": "tinynodes",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/ngx-tinynodes",
+            "index": "apps/ngx-tinynodes/src/index.html",
+            "main": "apps/ngx-tinynodes/src/main.ts",
+            "polyfills": "apps/ngx-tinynodes/src/polyfills.ts",
+            "tsConfig": "apps/ngx-tinynodes/tsconfig.app.json",
+            "assets": [
+              "apps/ngx-tinynodes/src/favicon.ico",
+              "apps/ngx-tinynodes/src/assets"
+            ],
+            "styles": ["apps/ngx-tinynodes/src/styles.css"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/ngx-tinynodes/src/environments/environment.ts",
+                  "with": "apps/ngx-tinynodes/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngx-tinynodes:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-tinynodes:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-tinynodes:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/ngx-tinynodes/tsconfig.app.json",
+              "apps/ngx-tinynodes/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/ngx-tinynodes/jest.config.js",
+            "tsConfig": "apps/ngx-tinynodes/tsconfig.spec.json",
+            "setupFile": "apps/ngx-tinynodes/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "ngx-tinynodes-e2e": {
+      "root": "apps/ngx-tinynodes-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/ngx-tinynodes-e2e/cypress.json",
+            "tsConfig": "apps/ngx-tinynodes-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ngx-tinynodes:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngx-tinynodes:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/ngx-tinynodes-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/schematics"
+  },
+  "schematics": {
+    "@nrwl/schematics:application": {
+      "framework": "angular"
+    }
+  },
+  "defaultProject": "ngx-tinynodes"
+}
