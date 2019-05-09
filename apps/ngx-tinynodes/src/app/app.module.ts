@@ -1,26 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
-import { AppComponent } from './app.component';
-import EditorJS from '@editorjs/editorjs';
+import { NgxEditorjsDemoModule } from '@tinynodes/ngx-editorjs-demo';
+import { MarkdownModule } from 'ngx-markdown';
+import { AppComponent } from './components/app-component/app.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SidebarComponent } from './components/sidebar-component/sidebar.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavBarComponent, SidebarComponent],
   imports: [
     BrowserModule,
-    NgxEditorJSModule.forRoot({
-      editorjs: {
-        autofocus: false,
-        holder: '',
-        initialBlock: 'paragraph',
-        tools: [],
-        data: {
-          time: Date.now(),
-          version: EditorJS.version,
-          blocks: []
-        }
-      }
-    })
+    HttpClientModule,
+    RouterModule.forRoot([]),
+    NgxEditorJSModule,
+    NgxEditorjsDemoModule,
+    MarkdownModule.forRoot({ loader: HttpClient })
   ],
   bootstrap: [AppComponent]
 })

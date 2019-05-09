@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="card text-center page">
+      <div class="card-header">
+        <h4 class="mb-0">Page Information</h4>
+      </div>
+      <div class="card-body">
+        <form class="form" role="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Page Title</label>
+            <div class="col-lg-9">
+              <input class="form-control" type="text" value="Jane" formControlName="pageTitle" />
+            </div>
+          </div>
+          <button type="submit">Save Page</button>
+        </form>
+        <ngx-editorjs></ngx-editorjs>
+      </div>
+    </div>
+  </div>
+</div>

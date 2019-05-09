@@ -2,12 +2,14 @@
 
 This library provides Angular support for [EditorJS](https://editojs.io) via a directive, component and service.
 
+A demo for this library is available [on GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
+
 ## Installing and usage
 
 Install the library via `npm`:
 
 ```bash
-$ npm install @tinynodes/ngx-editorjs
+>$ npm install @tinynodes/ngx-editorjs
 ```
 
 Once installed, include the `NgxEditorJSModule` module in your project with the `forRoot` method:
@@ -69,3 +71,8 @@ This component can be used in any Angular component using the `<ngx-editorjs>` t
 ### `NgxEditorJSService`
 
 This service provides handling the lifecycle of the EditorJS instance, and exposes the underlying `EditorJS` instance.[API](https://editorjs.io/api) - in future releases more of the API will be exposed via service methods to make controlling the container easier.
+
+## Links
+
+- GitHub: [https://github.com/tanepiper/ngx-tinynodes](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
+- NPM: [@tinynodes/ngx-editorjs](https://www.npmjs.com/package/@tinynodes/ngx-editorjs)

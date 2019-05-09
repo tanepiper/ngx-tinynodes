@@ -1,0 +1,26 @@
+<div class="page-container container">
+  <div class="row">
+    <div class="card">
+      <div class="card-header">
+        Ngx-EditorJS Pages Manager - A useful demo of the
+        <code>@tinynodes/ngx-editorjs</code>
+        module
+      </div>
+      <div class="card-body">
+        <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/ngx-editorjs-demo/pages/editor']" routerLinkActive="router-link-active">Go to Demo &gt;</button>
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title">
+          README.md
+        </h5>
+        <markdown [src]="'https://raw.githubusercontent.com/tanepiper/ngx-tinynodes/master/libs/ngx-editorjs/README.md'"></markdown>
+      </div>
+      <div class="card-footer">
+        <div class="alert warning alert-warning">
+          <strong>Please note:</strong> Pages persist between refresh and can easily be removed from `localStorage`. A future feature to switch this off will be added.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

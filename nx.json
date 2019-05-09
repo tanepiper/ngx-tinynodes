@@ -16,6 +16,9 @@
     },
     "ngx-editorjs": {
       "tags": []
+    },
+    "ngx-editorjs-demo": {
+      "tags": []
     }
   }
 }

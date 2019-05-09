@@ -22,14 +22,36 @@ const DEFAULT_TOOLS = {
 };
 
 const DEFAULT_CONFIG: NgxEditorJSConfig = {
-  editorjs: { autofocus: false, tools: DEFAULT_TOOLS }
+  editorjs: { autofocus: false, tools: {} }
 };
 
+const DEFAULT_HOLDER = 'editor-js';
+
+/**
+ * The ngx-editorjs module provides a collection of features to allow
+ * any Angular app to use and control an [EditorJS](http://editorjs.io)
+ * instance
+ *
+ * To use import the module `NgxEditorJSModule` into the root of your application,
+ * this will provide a default instance
+ *
+ * If you want to overide it in a feature you can call the `.withConfig` method
+ */
 @NgModule({
   imports: [CommonModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
   exports: [NgxEditorJSComponent, NgxEditorJSDirective],
-  providers: [NgxEditorJSService]
+  providers: [
+    NgxEditorJSService,
+    [
+      {
+        provide: NGX_EDITORJS_CONFIG,
+        useValue: {
+          editorjs: NgxEditorJSModule.createEditorJSConfig(DEFAULT_CONFIG)
+        }
+      }
+    ]
+  ]
 })
 export class NgxEditorJSModule {
   constructor(
@@ -38,7 +60,7 @@ export class NgxEditorJSModule {
     parentModule: NgxEditorJSModule
   ) {}
 
-  static forRoot(
+  static withConfig(
     config: NgxEditorJSConfig = DEFAULT_CONFIG
   ): ModuleWithProviders {
     return {
@@ -54,13 +76,21 @@ export class NgxEditorJSModule {
     };
   }
 
+  /**
+   * Creates a default configuration
+   * @param config
+   */
   static createEditorJSConfig(config: NgxEditorJSConfig): EditorJSConfig {
     const newConfig: EditorJSConfig = {
-      autofocus: config.editorjs.autofocus || false,
+      autofocus: config.editorjs.autofocus,
+      holder: config.editorjs.holder || DEFAULT_HOLDER,
       tools: { ...DEFAULT_TOOLS, ...config.editorjs.tools }
     };
     if (config.editorjs.initialBlock) {
       newConfig.initialBlock = config.editorjs.initialBlock;
+    }
+    if (config.editorjs.data) {
+      newConfig.data = config.editorjs.data;
     }
     return newConfig;
   }
