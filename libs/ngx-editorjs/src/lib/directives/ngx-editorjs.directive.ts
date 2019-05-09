@@ -1,4 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, Inject, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges
+} from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
@@ -26,7 +35,11 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterViewInit
   @Input()
   blocks: Block[] = [];
 
-  constructor(private readonly el: ElementRef, public readonly editorService: NgxEditorJSService, @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig) {}
+  constructor(
+    private readonly el: ElementRef,
+    public readonly editorService: NgxEditorJSService,
+    @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig
+  ) {}
 
   /**
    * Get the instance of the editor this directive has created
@@ -50,7 +63,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterViewInit
   }
 
   ngOnDestroy() {
-    this.editor.destroy();
     this.editorService.destroy();
   }
 }

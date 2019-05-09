@@ -1,31 +1,22 @@
 import { CommonModule } from '@angular/common';
-import {
-  ModuleWithProviders,
-  NgModule,
-  Optional,
-  SkipSelf
-} from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
-import {
-  EditorJSConfig,
-  NgxEditorJSConfig,
-  NGX_EDITORJS_CONFIG
-} from './types/config';
+import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 
 const DEFAULT_TOOLS = {
   header: Header,
   list: List
 };
 
-const DEFAULT_CONFIG: NgxEditorJSConfig = {
-  editorjs: { autofocus: false, tools: {} }
-};
-
 const DEFAULT_HOLDER = 'editor-js';
+
+const DEFAULT_CONFIG: NgxEditorJSConfig = {
+  editorjs: { autofocus: false, tools: {}, holder: DEFAULT_HOLDER }
+};
 
 /**
  * The ngx-editorjs module provides a collection of features to allow
@@ -47,7 +38,7 @@ const DEFAULT_HOLDER = 'editor-js';
       {
         provide: NGX_EDITORJS_CONFIG,
         useValue: {
-          editorjs: NgxEditorJSModule.createEditorJSConfig(DEFAULT_CONFIG)
+          editorjs: { autofocus: false, tools: {}, holder: 'editor-js' }
         }
       }
     ]
@@ -60,38 +51,23 @@ export class NgxEditorJSModule {
     parentModule: NgxEditorJSModule
   ) {}
 
-  static withConfig(
-    config: NgxEditorJSConfig = DEFAULT_CONFIG
-  ): ModuleWithProviders {
+  static withConfig(config: NgxEditorJSConfig = DEFAULT_CONFIG): ModuleWithProviders {
     return {
       ngModule: NgxEditorJSModule,
       providers: [
         {
           provide: NGX_EDITORJS_CONFIG,
           useValue: {
-            editorjs: NgxEditorJSModule.createEditorJSConfig(config)
+            editorjs: {
+              autofocus: config.editorjs.autofocus,
+              holder: config.editorjs.holder || DEFAULT_HOLDER,
+              tools: { ...DEFAULT_TOOLS, ...config.editorjs.tools },
+              initialBlock: config.editorjs.initialBlock || 'paragraph',
+              data: config.editorjs.data
+            }
           }
         }
       ]
     };
-  }
-
-  /**
-   * Creates a default configuration
-   * @param config
-   */
-  static createEditorJSConfig(config: NgxEditorJSConfig): EditorJSConfig {
-    const newConfig: EditorJSConfig = {
-      autofocus: config.editorjs.autofocus,
-      holder: config.editorjs.holder || DEFAULT_HOLDER,
-      tools: { ...DEFAULT_TOOLS, ...config.editorjs.tools }
-    };
-    if (config.editorjs.initialBlock) {
-      newConfig.initialBlock = config.editorjs.initialBlock;
-    }
-    if (config.editorjs.data) {
-      newConfig.data = config.editorjs.data;
-    }
-    return newConfig;
   }
 }

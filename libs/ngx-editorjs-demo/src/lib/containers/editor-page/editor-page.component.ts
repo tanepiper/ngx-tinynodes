@@ -2,7 +2,7 @@ import { AfterContentInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
 import { combineLatest, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-editor-page',
@@ -30,6 +30,7 @@ export class EditorPageComponent implements AfterContentInit {
 
   public onSubmit() {
     this.pageData$.pipe(
+      tap(console.log),
       switchMap(([form, blocks]) => {
         console.log(form, blocks);
         return [];

@@ -88,6 +88,10 @@ export class NgxEditorJSService {
    * Destroy the EditorJS instance
    */
   public destroy(): void {
-    this.editorInstance.destroy();
+    this.zone.run(async () => {
+      if (this.editorInstance) {
+        this.editorInstance.destroy();
+      }
+    });
   }
 }
