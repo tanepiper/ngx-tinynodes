@@ -9,7 +9,7 @@ A demo for this library is available [on GitHub](https://github.com/tanepiper/ng
 Install the library via `npm`:
 
 ```bash
->$ npm install @tinynodes/ngx-editorjs
+> npm install @tinynodes/ngx-editorjs
 ```
 
 Once installed, include the `NgxEditorJSModule` module in your project with the `forRoot` method:
@@ -52,11 +52,11 @@ The module configuration allows EditorJS to be provided with a set of options fo
 
 | Configuration Key | Description                                                                                       | Default             |
 | ----------------- | ------------------------------------------------------------------------------------------------- | ------------------- |
-| `autofocus`       | Sets the EditorJS instance to autofocus on load                                                   | `false              |
-| `holder`          | The element ID of the holder, this will set all instances in this module to use this as a default | 'editor-js'         |
+| `autofocus`       | Sets the EditorJS instance to autofocus on load                                                   | `false`             |
+| `holder`          | The element ID of the holder, this will set all instances in this module to use this as a default | `editor-js`         |
 | `initialBlock`    | The default block type to use in the editor                                                       | `paragraph`         |
 | `tools`           | A map of tools to be added to the editor                                                          | `Header` and `List` |
-| `data`            | Initial data to load into the editor, this is an `OutputData` object from EditorJS                | None`               |
+| `data`            | Initial data to load into the editor, this is an `OutputData` object from EditorJS                | `None`              |
 
 ## What's in the library
 
