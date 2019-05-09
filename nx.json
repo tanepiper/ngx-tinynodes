@@ -13,6 +13,9 @@
     },
     "ngx-tinynodes-e2e": {
       "tags": []
+    },
+    "ngx-editorjs": {
+      "tags": []
     }
   }
 }

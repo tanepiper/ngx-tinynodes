@@ -116,6 +116,40 @@
           }
         }
       }
+    },
+    "ngx-editorjs": {
+      "root": "libs/ngx-editorjs",
+      "sourceRoot": "libs/ngx-editorjs/src",
+      "projectType": "library",
+      "prefix": "tinynodes",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/ngx-editorjs/tsconfig.lib.json",
+            "project": "libs/ngx-editorjs/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ngx-editorjs/tsconfig.lib.json",
+              "libs/ngx-editorjs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/ngx-editorjs/jest.config.js",
+            "tsConfig": "libs/ngx-editorjs/tsconfig.spec.json",
+            "setupFile": "libs/ngx-editorjs/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {
