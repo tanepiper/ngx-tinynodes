@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf, InjectionToken, forwardRef } from '@angular/core';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
-import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
+import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG, HEADER_TOOL, LIST_TOOL } from './types/config';
 
 const DEFAULT_TOOLS = {
   header: Header,
@@ -32,7 +32,17 @@ const DEFAULT_CONFIG: NgxEditorJSConfig = {
   imports: [CommonModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
   exports: [NgxEditorJSComponent, NgxEditorJSDirective],
-  providers: [NgxEditorJSService]
+  providers: [
+    NgxEditorJSService,
+    {
+      provide: HEADER_TOOL,
+      useValue: Header
+    },
+    {
+      provide: LIST_TOOL,
+      useValue: List
+    }
+  ]
 })
 export class NgxEditorJSModule {
   constructor(

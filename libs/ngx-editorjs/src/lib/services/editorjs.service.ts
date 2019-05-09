@@ -1,7 +1,7 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, Inject } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import { Block } from '../types/blocks';
-import { EditorJSConfig } from '../types/config';
+import { EditorJSConfig, HEADER_TOOL, LIST_TOOL } from '../types/config';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
@@ -12,7 +12,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class NgxEditorJSService {
   /**
    * Editor instance
-   */
+   */ LIST_TOOL;
   private editorInstance: EditorJS;
 
   /**
@@ -20,7 +20,7 @@ export class NgxEditorJSService {
    */
   private blocks$ = new BehaviorSubject<Block[]>([]);
 
-  constructor(private zone: NgZone) {}
+  constructor(@Inject(HEADER_TOOL) private header: any, @Inject(LIST_TOOL) private list: any, private zone: NgZone) {}
 
   /**
    * This method initialised the EditorJS instance

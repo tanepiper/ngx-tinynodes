@@ -52,3 +52,6 @@ export interface NgxEditorJSConfig {
 }
 
 export const NGX_EDITORJS_CONFIG = new InjectionToken('NGX_EDITORJS_CONFIG');
+
+export const HEADER_TOOL = new InjectionToken<ConfigToolInstance>('HEADER_TOOL');
+export const LIST_TOOL = new InjectionToken<ConfigToolInstance>('LIST_TOOL');
