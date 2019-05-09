@@ -1,14 +1,14 @@
 import { async, TestBed } from '@angular/core/testing';
-import { NgxEditorjsModule } from './ngx-editorjs.module';
+import { NgxEditorJSModule } from './ngx-editorjs.module';
 
-describe('NgxEditorjsModule', () => {
+describe('NgxEditorJSModule', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NgxEditorjsModule]
+      imports: [NgxEditorJSModule]
     }).compileComponents();
   }));
 
   it('should create', () => {
-    expect(NgxEditorjsModule).toBeDefined();
+    expect(NgxEditorJSModule).toBeDefined();
   });
 });

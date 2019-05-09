@@ -24,7 +24,6 @@ export class EditorPageComponent implements AfterContentInit {
   }
 
   ngAfterContentInit() {
-    console.log(this);
     this.pageData$ = combineLatest([this.form$, this.editor.blocks]);
   }
 
@@ -32,7 +31,6 @@ export class EditorPageComponent implements AfterContentInit {
     this.pageData$.pipe(
       tap(console.log),
       switchMap(([form, blocks]) => {
-        console.log(form, blocks);
         return [];
       })
     );

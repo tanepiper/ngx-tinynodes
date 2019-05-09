@@ -6,7 +6,6 @@ import EditorJSCode from '@editorjs/code';
 import EditorJSImage from '@editorjs/image';
 import EditorJSList from '@editorjs/list';
 import EditorJSMarker from '@editorjs/marker';
-import EditorJSSimpleImage from '@editorjs/simple-image';
 import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
 import { MarkdownModule } from 'ngx-markdown';
 import { EditorPageComponent } from './containers/editor-page/editor-page.component';
@@ -21,19 +20,10 @@ import { PageStoreModule } from './store/pages/pages.module';
     MarkdownModule.forChild(),
     ReactiveFormsModule,
     PageStoreModule,
-    NgxEditorJSModule.withConfig({
-      editorjs: {
-        tools: {
-          EditorJSImage,
-          EditorJSSimpleImage,
-          EditorJSList,
-          EditorJSMarker,
-          EditorJSCode
-        }
-      }
-    })
+    NgxEditorJSModule
   ],
   declarations: [EditorPageComponent, PageContainerComponent],
-  exports: [EditorPageComponent, PageContainerComponent, PageStoreModule]
+  exports: [EditorPageComponent, PageStoreModule, PageContainerComponent],
+  entryComponents: [PageContainerComponent]
 })
 export class NgxEditorjsDemoModule {}
