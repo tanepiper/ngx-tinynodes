@@ -1,25 +1,71 @@
-# NgxEditorjs
+# Ngx-EditorJS
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+This library provides Angular support for [EditorJS](https://editojs.io) via a directive, component and service.
 
-## Code scaffolding
+## Installing and usage
 
-Run `ng generate component component-name --project ngx-editorjs` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-editorjs`.
+Install the library via `npm`:
 
-> Note: Don't forget to add `--project ngx-editorjs` or else it will be added to the default project in your `angular.json` file.
+```bash
+$ npm install @tinynodes/ngx-editorjs
+```
 
-## Build
+Once installed, include the `NgxEditorJSModule` module in your project with the `forRoot` method:
 
-Run `ng build ngx-editorjs` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
+import { AppComponent } from './app.component';
+import EditorJS from '@editorjs/editorjs';
 
-## Publishing
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    NgxEditorJSModule.forRoot({
+      editorjs: {
+        autofocus: false,
+        holder: 'editor',
+        initialBlock: 'paragraph',
+        tools: [],
+        data: {
+          time: Date.now(),
+          version: EditorJS.version,
+          blocks: []
+        }
+      }
+    })
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
 
-After building your library with `ng build ngx-editorjs`, go to the dist folder `cd dist/ngx-editorjs` and run `npm publish`.
+### Configuration
 
-## Running unit tests
+The configuration is degined to be extendable in the future, so each potential feature has a key. For configuring EditorJS pass the options below into a `editorjs` key in the config.
 
-Run `ng test ngx-editorjs` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The module configuration allows EditorJS to be provided with a set of options for use. See the [EditorJS docs](https://editorjs.io/configuration) for more details.
 
-## Further help
+| Configuration Key | Description                                                                                       | Default             |
+| ----------------- | ------------------------------------------------------------------------------------------------- | ------------------- |
+| `autofocus`       | Sets the EditorJS instance to autofocus on load                                                   | `false              |
+| `holder`          | The element ID of the holder, this will set all instances in this module to use this as a default | 'editor-js'         |
+| `initialBlock`    | The default block type to use in the editor                                                       | `paragraph`         |
+| `tools`           | A map of tools to be added to the editor                                                          | `Header` and `List` |
+| `data`            | Initial data to load into the editor, this is an `OutputData` object from EditorJS                | None`               |
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## What's in the library
+
+### `NgxEditorJSDirective`
+
+This is the main directive which can be used on any element with the `[ngxEditorJS]`. It has one input which is `blocks` and this takes an array of EditorJS blocks.
+
+### `NgxEditorJSComponent`
+
+This component can be used in any Angular component using the `<ngx-editorjs>` tag. Again this component can take a set of blocks, it also provides a `holder` input for overriding the ID.
+
+### `NgxEditorJSService`
+
+This service provides handling the lifecycle of the EditorJS instance, and exposes the underlying `EditorJS` instance.[API](https://editorjs.io/api) - in future releases more of the API will be exposed via service methods to make controlling the container easier.

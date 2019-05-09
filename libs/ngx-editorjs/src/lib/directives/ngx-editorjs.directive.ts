@@ -1,42 +1,55 @@
 import {
-  AfterContentInit,
+  AfterViewInit,
   Directive,
   ElementRef,
   Inject,
-  OnDestroy,
   Input,
-  OnInit,
   OnChanges,
-  SimpleChanges,
-  AfterViewInit
+  OnDestroy,
+  SimpleChanges
 } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
-import { Subject } from 'rxjs';
 import { NgxEditorJSService } from '../services/editorjs.service';
-import { NGX_EDITORJS_CONFIG, NgxEditorJSConfig } from '../types/config';
 import { Block } from '../types/blocks';
+import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 
+/**
+ * The main directive of `ngx-editorjs` provides a way to attach
+ * an EditorJS instance to any element and control it via
+ * Angular services and components
+ *
+ * To use attach to any element with an `id` property
+ *
+ * @example
+ * ```html
+ * <div id="my-editor" ngxEditorJS></div>
+ * ```
+ */
 @Directive({
   selector: '[ngxEditorJS]'
 })
 export class NgxEditorJSDirective
   implements OnDestroy, OnChanges, AfterViewInit {
-  private onDestroy$ = new Subject<boolean>();
-
+  /**
+   * Provide `EditorJS` blocks to render within the instance
+   */
   @Input()
   blocks: Block[] = [];
 
   constructor(
-    private el: ElementRef,
-    private editorService: NgxEditorJSService,
+    private readonly el: ElementRef,
+    private readonly editorService: NgxEditorJSService,
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig
   ) {}
 
+  /**
+   * Get the instance of the editor this directive has created
+   */
   get editor(): EditorJS {
     return this.editorService.editor;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
       this.editorService.update(changes.blocks.currentValue);
     }
@@ -53,7 +66,5 @@ export class NgxEditorJSDirective
   ngOnDestroy() {
     this.editor.destroy();
     this.editorService.destroy();
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
   }
 }
