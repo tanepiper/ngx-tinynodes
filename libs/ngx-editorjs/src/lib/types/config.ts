@@ -27,8 +27,6 @@ export interface EditorJSConfig {
    * Any initial output data to render
    */
   data?: OutputData;
-
-  tools?: NgxEditorJSTools;
 }
 
 export interface NgxEditorJSConfig {

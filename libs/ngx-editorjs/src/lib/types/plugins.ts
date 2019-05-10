@@ -2,13 +2,12 @@ import { InjectionToken } from '@angular/core';
 import { ToolSettings } from '@editorjs/editorjs';
 
 export interface PluginConfig {
-  [key: string]: ToolSettings;
+  [key: string]: BasePlugin;
 }
 
-export class EditorJSPlugin {
-  static plugin(): ToolSettings {
-    throw new Error('You must implement this method in your own class');
-  }
+export interface BasePlugin {
+  plugin: () => ToolSettings;
+  shortcut?: () => string;
 }
 
 export const InitialPlugins = new InjectionToken<PluginConfig>('InitialPlugins');

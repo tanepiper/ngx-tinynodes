@@ -3,7 +3,9 @@
 This library provides Angular support for [EditorJS](https://editojs.io) via a directive, component and service.
 
 You can see a [demo in action](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo) or download it
-[on GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
+[on GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs) to see how it was implemented.
+
+For changes see the [CHANGELOG](./CHANGELOG.md)
 
 ## Installing and usage
 
@@ -57,24 +59,25 @@ The module configuration allows EditorJS to be provided with a set of options fo
 | `autofocus`       | Sets the EditorJS instance to autofocus on load                                                   | `false`     |
 | `holder`          | The element ID of the holder, this will set all instances in this module to use this as a default | `editor-js` |
 | `initialBlock`    | The default block type to use in the editor                                                       | `paragraph` |
-| `data`            | Initial data to load into the editor, this is an `OutputData` object from EditorJS                | `None`      |
+| `data`            | Initial data to load into the editor, this is an `OutputData` object from EditorJS                | `undefined` |
 
 ### Adding custom tools
 
-To include tools in an Angular AOT-friendly way, below is the suggested way.
-
-Inside your project, create a folder for your plugin and add an `Injectable` class with a `static plugin()` method:
+To include tools in an Angular AOT-friendly way, inside your project, create a folder for your plugin and add an `Injectable` class with a `plugin()` method, and optional `shortcut` method for features that support it.
 
 ```ts
 import { Injectable } from '@angular/core';
 import { ToolSettings } from '@editorjs/editorjs';
-import Code from '@editorjs/code';
-import { EditorJSPlugin } from '@tinynodes/ngx-editorjs';
+import Marker from '@editorjs/marker';
+import { BasePlugin } from '@tinynodes/ngx-editorjs';
 
 @Injectable()
-export class PluginCode extends EditorJSPlugin {
-  static plugin(): ToolSettings {
-    return Code;
+export class PluginMarker implements BasePlugin {
+  plugin(): ToolSettings {
+    return Marker;
+  }
+  shortcut(): string {
+    return 'SHIFT+CTRL+M';
   }
 }
 ```
@@ -83,12 +86,12 @@ This allows Angular's AOT to include the editor component bundled within the app
 
 ```ts
 import { NgModule } from '@angular/core';
-import { PluginCode } from './code.plugin';
+import { PluginMarker } from './marker.plugin';
 
 @NgModule({
-  providers: [PluginCode]
+  providers: [PluginMarker]
 })
-export class CodeModule {}
+export class PluginMarkerModule {}
 ```
 
 Once you have created all your required modules, inside your Application or Feature module you need to provide an instance of `UserPlugins` using a factory function. Inside your module you can now add the following:
@@ -96,24 +99,24 @@ Once you have created all your required modules, inside your Application or Feat
 ```ts
 import { NgModule } from '@angular/core';
 import { NgxEditorJSModule, UserPlugins, PluginConfig } from '@tinynodes/ngx-editorjs';
-import { CodeModule } from './plugins/code/code.module';
-import { PluginCode } from '../plugins/code/code.plugin';
+import { PluginMarkerModule } from './plugins/marker/marker.module';
+import { PluginMarker } from '../plugins/marker/marker.plugin';
 
 export function createTools(): PluginConfig {
   return {
-    code: PluginCode.plugin()
+    code: new PluginCode()
   };
 }
 
 @NgModule({
-  imports: [NgxEditorJSModule, CodeModule],
+  imports: [NgxEditorJSModule, PluginMarker],
   providers: [
     {
       provide: UserPlugins,
       useFactory: createTools
     }
   ],
-  exports: [CodeModule]
+  exports: [PluginMarker]
 })
 export class CustomModule {}
 ```
@@ -134,5 +137,6 @@ This service provides handling the life-cycle of the EditorJS instance, and expo
 
 ## Links
 
-- GitHub: [https://github.com/tanepiper/ngx-tinynodes](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
-- NPM: [@tinynodes/ngx-editorjs](https://www.npmjs.com/package/@tinynodes/ngx-editorjs)
+- [GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
+- [NPM](https://www.npmjs.com/package/@tinynodes/ngx-editorjs)
+- [Angular Demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo)

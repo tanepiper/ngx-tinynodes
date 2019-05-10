@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ToolSettings } from '@editorjs/editorjs';
 import Link from '@editorjs/link';
-import { EditorJSPlugin } from '@tinynodes/ngx-editorjs';
+import { BasePlugin } from '@tinynodes/ngx-editorjs';
 
 @Injectable()
-export class PluginLink extends EditorJSPlugin {
-  static plugin(): ToolSettings {
+export class PluginLink implements BasePlugin {
+  plugin(): ToolSettings {
     return Link;
   }
 }

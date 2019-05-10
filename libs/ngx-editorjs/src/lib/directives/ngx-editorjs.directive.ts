@@ -31,7 +31,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterViewInit
    * Get the instance of the editor this directive has created
    */
   get editor(): EditorJS {
-    return this.editorService.editor;
+    return this.editorService.getEditor(this.el.nativeElement.id);
   }
 
   get service(): NgxEditorJSService {
@@ -40,15 +40,15 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterViewInit
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
-      this.editorService.update(changes.blocks.currentValue);
+      this.editorService.update(this.el.nativeElement.id, changes.blocks.currentValue);
     }
   }
 
   ngAfterViewInit() {
-    this.editorService.init(this.el.nativeElement.id, this.blocks);
+    this.editorService.createEditor(this.el.nativeElement.id, this.blocks);
   }
 
   ngOnDestroy() {
-    this.editorService.destroy();
+    this.editorService.destroy(this.el.nativeElement.id);
   }
 }

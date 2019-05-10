@@ -4,4 +4,4 @@ import { PluginList } from './list.plugin';
 @NgModule({
   providers: [PluginList]
 })
-export class ListHeaderModule {}
+export class PluginListModule {}
