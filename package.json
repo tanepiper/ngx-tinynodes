@@ -24,7 +24,8 @@
     "update:check": "ng update",
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
-    "help": "./node_modules/.bin/nx help"
+    "help": "./node_modules/.bin/nx help",
+    "docs:generate": "compodoc -p tsconfig.json -d docs --theme material"
   },
   "private": true,
   "dependencies": {
@@ -51,6 +52,7 @@
     "@angular/cli": "~7.3.9",
     "@angular/compiler-cli": "~7.2.15",
     "@angular/language-service": "~7.2.15",
+    "@compodoc/compodoc": "^1.1.9",
     "@datorama/akita": "^3.10.2",
     "@editorjs/code": "^2.4.1",
     "@editorjs/image": "^2.3.0",
