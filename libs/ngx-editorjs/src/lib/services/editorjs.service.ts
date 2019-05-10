@@ -1,8 +1,15 @@
-import { Injectable, NgZone, Inject } from '@angular/core';
+import { Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
-import { Block } from '../types/blocks';
-import { EditorJSConfig, HEADER_TOOL, LIST_TOOL } from '../types/config';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Block } from '../types/blocks';
+import {
+  EditorJSConfig,
+  NgxEditorJSTools,
+  NGX_EDITORJS_TOOLS,
+  NGX_EDITORJS_CONFIG,
+  NgxEditorJSConfig
+} from '../types/config';
+import { PluginService } from './plugins.service';
 
 /**
  * The NgxEditorJSService provides control over an editor instance
@@ -12,7 +19,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class NgxEditorJSService {
   /**
    * Editor instance
-   */ LIST_TOOL;
+   */
   private editorInstance: EditorJS;
 
   /**
@@ -20,7 +27,11 @@ export class NgxEditorJSService {
    */
   private blocks$ = new BehaviorSubject<Block[]>([]);
 
-  constructor(@Inject(HEADER_TOOL) private header: any, @Inject(LIST_TOOL) private list: any, private zone: NgZone) {}
+  constructor(
+    @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
+    private readonly plugins: PluginService,
+    private zone: NgZone
+  ) {}
 
   /**
    * This method initialised the EditorJS instance
@@ -28,18 +39,20 @@ export class NgxEditorJSService {
    * @param config
    * @param blocks
    */
-  public init(holder: string, config: EditorJSConfig, blocks: Block[]) {
+  public init(holder: string, blocks: Block[]) {
     this.zone.run(() => {
       const options: EditorJSConfig = {
         holder,
-        ...config,
+
+        tools: this.plugins.plugins,
         data: {
           blocks,
           time: Date.now(),
           version: EditorJS.version
-        }
+        },
+        ...this.config.editorjs
       };
-      this.editorInstance = new EditorJS(options);
+      this.editorInstance = new EditorJS(options as any);
     });
   }
 

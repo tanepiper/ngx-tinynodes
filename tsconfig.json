@@ -17,7 +17,8 @@
     "paths": {
       "@tinynodes/ngx-editorjs": ["libs/ngx-editorjs/src/index.ts"],
       "@tinynodes/ngx-editorjs-demo": ["libs/ngx-editorjs-demo/src/index.ts"]
-    }
+    },
+    "downlevelIteration": true
   },
   "exclude": ["node_modules", "tmp"]
 }

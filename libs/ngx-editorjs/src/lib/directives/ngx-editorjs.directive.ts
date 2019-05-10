@@ -1,17 +1,7 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  Inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  SimpleChanges
-} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
-import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 
 /**
  * The main directive of `ngx-editorjs` provides a way to attach
@@ -35,11 +25,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterViewInit
   @Input()
   blocks: Block[] = [];
 
-  constructor(
-    private readonly el: ElementRef,
-    public readonly editorService: NgxEditorJSService,
-    @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig
-  ) {}
+  constructor(private readonly el: ElementRef, public readonly editorService: NgxEditorJSService) {}
 
   /**
    * Get the instance of the editor this directive has created
@@ -59,7 +45,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterViewInit
   }
 
   ngAfterViewInit() {
-    this.editorService.init(this.el.nativeElement.id, this.config.editorjs, this.blocks);
+    this.editorService.init(this.el.nativeElement.id, this.blocks);
   }
 
   ngOnDestroy() {

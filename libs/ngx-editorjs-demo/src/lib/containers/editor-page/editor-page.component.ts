@@ -29,7 +29,6 @@ export class EditorPageComponent implements AfterContentInit {
 
   public onSubmit() {
     this.pageData$.pipe(
-      tap(console.log),
       switchMap(([form, blocks]) => {
         return [];
       })

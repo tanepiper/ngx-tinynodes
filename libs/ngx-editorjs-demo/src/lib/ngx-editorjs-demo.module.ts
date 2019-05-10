@@ -6,12 +6,14 @@ import EditorJSCode from '@editorjs/code';
 import EditorJSImage from '@editorjs/image';
 import EditorJSList from '@editorjs/list';
 import EditorJSMarker from '@editorjs/marker';
-import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
+import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
 import { MarkdownModule } from 'ngx-markdown';
 import { EditorPageComponent } from './containers/editor-page/editor-page.component';
 import { PageContainerComponent } from './containers/page-container/page-container.component';
 import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
+import { CodeModule } from './plugins/code/code.module';
+import { createTools } from './config';
 
 @NgModule({
   imports: [
@@ -20,7 +22,14 @@ import { PageStoreModule } from './store/pages/pages.module';
     MarkdownModule.forChild(),
     ReactiveFormsModule,
     PageStoreModule,
-    NgxEditorJSModule
+    NgxEditorJSModule,
+    CodeModule
+  ],
+  providers: [
+    {
+      provide: UserPlugins,
+      useFactory: createTools
+    }
   ],
   declarations: [EditorPageComponent, PageContainerComponent],
   exports: [EditorPageComponent, PageStoreModule, PageContainerComponent],

@@ -1,21 +1,8 @@
-import {
-  BaseToolConstructable,
-  BlockToolConstructable,
-  InlineToolConstructable,
-  ToolSettings,
-  OutputData
-} from '@editorjs/editorjs';
 import { InjectionToken } from '@angular/core';
+import { OutputData, Tool } from '@editorjs/editorjs';
 
-export type ConfigToolInstance =
-  | BaseToolConstructable
-  | BlockToolConstructable
-  | InlineToolConstructable
-  | ToolSettings
-  | any;
-
-export interface ToolConfig {
-  [key: string]: ConfigToolInstance;
+export interface NgxEditorJSTools {
+  [key: string]: Tool;
 }
 
 /**
@@ -37,21 +24,19 @@ export interface EditorJSConfig {
   initialBlock?: string;
 
   /**
-   * A map of tools and their options
-   */
-  tools?: ToolConfig;
-
-  /**
    * Any initial output data to render
    */
   data?: OutputData;
+
+  tools?: NgxEditorJSTools;
 }
 
 export interface NgxEditorJSConfig {
-  editorjs: EditorJSConfig;
+  editorjs?: EditorJSConfig;
 }
 
-export const NGX_EDITORJS_CONFIG = new InjectionToken('NGX_EDITORJS_CONFIG');
+export const NGX_EDITORJS_CONFIG = new InjectionToken<NgxEditorJSConfig>('NGX_EDITORJS_CONFIG');
+export const NGX_EDITORJS_TOOLS = new InjectionToken<NgxEditorJSTools>('NGX_EDITORJS_TOOLS');
 
-export const HEADER_TOOL = new InjectionToken<ConfigToolInstance>('HEADER_TOOL');
-export const LIST_TOOL = new InjectionToken<ConfigToolInstance>('LIST_TOOL');
+export const HEADER_TOOL = new InjectionToken<Tool>('HEADER_TOOL');
+export const LIST_TOOL = new InjectionToken<Tool>('LIST_TOOL');
