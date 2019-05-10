@@ -91,11 +91,12 @@ import { PluginCode } from './code.plugin';
 export class CodeModule {}
 ```
 
-Once you have created all your required modules, inside your Application or Feature module you need to provide an instance of `UserPlugins` using a factory function. It's recommended to put this function in a separate file and import into your module:
+Once you have created all your required modules, inside your Application or Feature module you need to provide an instance of `UserPlugins` using a factory function. Inside your module you can now add the following:
 
 ```ts
-// config.ts
-import { PluginConfig } from '@tinynodes/ngx-editorjs';
+import { NgModule } from '@angular/core';
+import { NgxEditorJSModule, UserPlugins, PluginConfig } from '@tinynodes/ngx-editorjs';
+import { CodeModule } from './plugins/code/code.module';
 import { PluginCode } from '../plugins/code/code.plugin';
 
 export function createTools(): PluginConfig {
@@ -103,15 +104,6 @@ export function createTools(): PluginConfig {
     code: PluginCode.plugin()
   };
 }
-```
-
-Inside your module you can now add the following:
-
-```ts
-import { NgModule } from '@angular/core';
-import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
-import { createTools } from './config';
-import { CodeModule } from './plugins/code/code.module';
 
 @NgModule({
   imports: [NgxEditorJSModule, CodeModule],

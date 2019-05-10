@@ -70,9 +70,4 @@ export interface ImageBlock extends Block<Image> {
   type: 'image';
 }
 
-export type BlockTypes =
-  | ParagraphBlock
-  | HeaderBlock
-  | ImageBlock
-  | Block
-  | ListBlock;
+export type BlockTypes = ParagraphBlock | HeaderBlock | ImageBlock | Block | ListBlock;

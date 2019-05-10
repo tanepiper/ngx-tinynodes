@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { createTools, defaultConfig } from './config';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { PluginHeaderModule } from './plugins/header/header.module';
@@ -8,7 +7,19 @@ import { ListHeaderModule } from './plugins/list/list.module';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { PluginService } from './services/plugins.service';
 import { NgxEditorJSConfig, NgxEditorJSTools, NGX_EDITORJS_CONFIG } from './types/config';
-import { InitialPlugins } from './types/plugins';
+import { InitialPlugins, PluginConfig } from './types/plugins';
+import { PluginHeader } from './plugins/header/header.plugin';
+import { PluginList } from './plugins/list/list.plugin';
+
+export function defaultConfig() {
+  return {
+    editorjs: { autofocus: false, holder: 'editor-js', initialBlock: 'paragraph' }
+  };
+}
+
+export function createTools(): PluginConfig {
+  return { header: PluginHeader.plugin(), list: PluginList.plugin() };
+}
 
 const DEFAULT_CONFIG: NgxEditorJSConfig = defaultConfig();
 
