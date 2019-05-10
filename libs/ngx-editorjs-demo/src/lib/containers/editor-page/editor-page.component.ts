@@ -24,7 +24,7 @@ export class EditorPageComponent implements AfterContentInit {
   }
 
   ngAfterContentInit() {
-    this.pageData$ = combineLatest([this.form$, this.editor.blocks]);
+    // this.pageData$ = combineLatest([this.form$, this.editor.blocks]);
   }
 
   public onSubmit() {

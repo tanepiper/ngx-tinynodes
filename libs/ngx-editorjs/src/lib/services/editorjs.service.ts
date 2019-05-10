@@ -1,25 +1,19 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
-import EditorJS from '@editorjs/editorjs';
+import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Block } from '../types/blocks';
-import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
+import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { PluginService } from './plugins.service';
 
 /**
- * The NgxEditorJSService provides control over an editor instance
- * within a page, provided by the directive
+ * The NgxEditorJSService provides control over an editor instance within an application
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NgxEditorJSService {
-  /**
-   * Editor instance
-   */
-  private editorInstance: EditorJS;
-
-  /**
-   * A subject containing the current blocks
-   */
-  private blocks$ = new BehaviorSubject<Block[]>([]);
+  private editorMap = new Map<string, EditorJS>();
+  private blocksMap = new Map<string, BehaviorSubject<Block[]>>();
 
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
@@ -28,36 +22,52 @@ export class NgxEditorJSService {
   ) {}
 
   /**
-   * This method initialised the EditorJS instance
-   * @param holder
-   * @param config
-   * @param blocks
+   * This method creates an editor instance and adds it to a map of
+   * instances using the holder as the key
+   * @param holder The ID of the holder of the instance
+   * @param blocks Optional initial set of blocks to render in the editor
+   * @param exclude String array of keys to not include with this editor
    */
-  public init(holder: string, blocks: Block[]) {
-    this.zone.run(() => {
-      const options: EditorJSConfig = {
-        holder,
+  public createEditor(holder: string, blocks?: Block[], excludeTools?: string[]) {
+    if (this.editorMap.has(holder)) {
+      this.destroy(holder);
+    }
 
-        tools: this.plugins.plugins,
-        data: {
+    this.zone.run(() => {
+      const options: EditorConfig = {
+        ...this.config.editorjs,
+        holder,
+        tools: this.plugins.getTools(excludeTools)
+      };
+      if (blocks) {
+        options.data = {
           blocks,
           time: Date.now(),
           version: EditorJS.version
-        },
-        ...this.config.editorjs
-      };
-      this.editorInstance = new EditorJS(options as any);
+        };
+      }
+      this.editorMap.set(holder, new EditorJS(options));
     });
   }
 
   /**
-   * This method updates the blocks within the EditorJS instance
-   * @param blocks
+   * Get the EditorJS instance
+   * See the [EditorJS API](https://editorjs.io/api) docs for more details
+   * @param holder The ID of the holder of the instance
    */
-  public update(blocks: Block[]) {
+  public getEditor(holder: string): EditorJS | undefined {
+    return this.editorMap.get(holder);
+  }
+
+  /**
+   * This method updates the blocks within the EditorJS instance
+   * @param holder The ID of the holder of the instance
+   * @param blocks The array of blocks to render
+   */
+  public update(holder: string, blocks: Block[]) {
     this.zone.run(() => {
-      this.editorInstance.blocks.clear();
-      this.editorInstance.blocks.render({
+      this.editorMap.get(holder).blocks.clear();
+      this.editorMap.get(holder).blocks.render({
         blocks,
         time: Date.now(),
         version: EditorJS.version
@@ -68,37 +78,33 @@ export class NgxEditorJSService {
   /**
    * This methods gets the block data from the output data and updates
    * the service subject
+   * @param holder The ID of the holder of the instance
    */
-  public save(): void {
+  public save(holder: string): void {
     this.zone.run(async () => {
-      const outputData = await this.editorInstance.saver.save();
-      this.blocks$.next(outputData.blocks);
+      const outputData = await this.editorMap.get(holder).saver.save();
+      this.blocksMap.get(holder).next(outputData.blocks);
     });
   }
 
   /**
    * Get an observable of the blocks for this EditorJS instance
+   * @param holder The ID of the holder of the instance
    */
-  public get blocks(): Observable<Block[]> {
-    return this.blocks$.asObservable();
-  }
-
-  /**
-   * Get the EditorJS instance
-   * See the [EditorJS API](https://editorjs.io/api) docs for more details
-   */
-  public get editor(): EditorJS {
-    return this.editorInstance;
+  public blocks(holder: string): Observable<Block[]> {
+    return this.blocksMap.get(holder).asObservable();
   }
 
   /**
    * Destroy the EditorJS instance
+   * @param holder The ID of the holder of the instance
    */
-  public destroy(): void {
-    this.zone.run(async () => {
-      if (this.editorInstance) {
-        this.editorInstance.destroy();
+  public destroy(holder: string): void {
+    this.zone.run(() => {
+      if (this.editorMap.has(holder)) {
+        this.editorMap.get(holder).destroy();
       }
     });
+    this.editorMap.delete(holder);
   }
 }

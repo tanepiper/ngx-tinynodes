@@ -6,9 +6,9 @@ import { PluginMarker } from '../plugins/marker/marker.plugin';
 
 export function createTools(): PluginConfig {
   return {
-    code: PluginCode.plugin(),
-    image: PluginSimpleImage.plugin(),
-    link: PluginLink.plugin(),
-    marker: PluginMarker.plugin()
+    code: new PluginCode(),
+    image: new PluginSimpleImage(),
+    link: new PluginLink(),
+    marker: new PluginMarker()
   };
 }

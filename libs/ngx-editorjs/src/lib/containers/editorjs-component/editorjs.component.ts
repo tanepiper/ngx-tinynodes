@@ -12,7 +12,7 @@ export class NgxEditorJSComponent {
   @ViewChild(NgxEditorJSDirective) public editor: NgxEditorJSDirective;
 
   @Input()
-  public holder = 'editor-js';
+  public holder: string;
 
   @Input()
   public blocks: Block[];
