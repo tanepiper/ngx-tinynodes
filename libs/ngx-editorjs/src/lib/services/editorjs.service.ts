@@ -2,13 +2,7 @@ import { Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Block } from '../types/blocks';
-import {
-  EditorJSConfig,
-  NgxEditorJSTools,
-  NGX_EDITORJS_TOOLS,
-  NGX_EDITORJS_CONFIG,
-  NgxEditorJSConfig
-} from '../types/config';
+import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { PluginService } from './plugins.service';
 
 /**

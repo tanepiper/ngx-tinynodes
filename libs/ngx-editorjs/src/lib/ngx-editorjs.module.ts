@@ -17,10 +17,8 @@ const DEFAULT_CONFIG: NgxEditorJSConfig = defaultConfig();
  * any Angular app to use and control an [EditorJS](http://editorjs.io)
  * instance
  *
- * To use import the module `NgxEditorJSModule` into the root of your application,
- * this will provide a default instance
- *
- * If you want to overide it in a feature you can call the `.withConfig` method
+ * To use import the module `NgxEditorJSModule.forRoot()` into the root of your application,
+ * this will provide a default instance, import with `NgxEditorJSModule` in feature modules
  */
 @NgModule({
   imports: [CommonModule, PluginHeaderModule, ListHeaderModule],
