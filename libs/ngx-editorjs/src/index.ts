@@ -11,3 +11,4 @@ export { NgxEditorJSService } from './lib/services/editorjs.service';
 export { Block, HeaderBlock, ImageBlock, ListBlock, ListStyle, ParagraphBlock } from './lib/types/blocks';
 export { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './lib/types/config';
 export { BasePlugin, PluginConfig, UserPlugins } from './lib/types/plugins';
+export { PluginService as ɵPluginService } from './lib/services/plugins.service';

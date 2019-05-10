@@ -140,3 +140,11 @@ This service provides handling the life-cycle of the EditorJS instance, and expo
 - [GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
 - [NPM](https://www.npmjs.com/package/@tinynodes/ngx-editorjs)
 - [Angular Demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo)
+
+## Todo
+
+- [] Add unit tests for all features (😔)
+- [] Improve documentation
+- [] Provide better plugin support
+- [] Provide enhancements for `@ngrx/effects` and other state management tools via pre-developed effects and services.
+- [] Set up CD pipeline
