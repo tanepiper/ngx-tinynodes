@@ -9,13 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- EditorJS default paragraph plugin is now included in the default
+- EditorJS default paragraph plugin is now included in the default tools, fixes issue where the regenerated component failed to use the default plugin.
 
 ### Changed
 
-- `NgxEditorJSService` is now provided in the root and now internally uses a Map to store editor instances. Getters removed and replaced with methods that take the `holder` parameter which is the ID of the DOM element the editor should be attached to.
+- `NgxEditorJSService` is now provided in the root and now stores multiple editor instances. Getters removed and replaced with methods that take the `holder` parameter which is the ID of the DOM element the editor should be attached to.
 - Plugins are now instances of an `Injectable` class for AOT and have an instance method of `plugin`. Also supports `shortcut` as an optional method that returns the string to set up as the shortcut.
 - `EditorJSPlugin` now renamed `BasePlugin` and changed from class to interface.
+- Improved documentation
 
 ## [1.0.0] - 2019-05-10
 

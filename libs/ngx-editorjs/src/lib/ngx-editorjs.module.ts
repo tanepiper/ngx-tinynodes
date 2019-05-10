@@ -15,7 +15,7 @@ import { PluginParagraph } from './plugins/paragraph/paragraph.plugin';
 
 export function defaultConfig() {
   return {
-    editorjs: { autofocus: false, initialBlock: 'paragraph' }
+    editorjs: { autofocus: false, initialBlock: 'paragraph', holder: 'editor-js' }
   };
 }
 
@@ -69,7 +69,7 @@ export class NgxEditorJSModule {
           useValue: {
             editorjs: {
               autofocus: config.editorjs.autofocus || DEFAULT_CONFIG.editorjs.autofocus,
-              holder: config.editorjs.holder || '',
+              holder: config.editorjs.holder || DEFAULT_CONFIG.editorjs.holder,
               initialBlock: config.editorjs.initialBlock || DEFAULT_CONFIG.editorjs.initialBlock,
               data: config.editorjs.data
             }
