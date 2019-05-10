@@ -11,9 +11,7 @@ import { Block } from '../types/blocks';
  * To use attach to any element with an `id` property
  *
  * @example
- * ```html
  * <div id="my-editor" ngxEditorJS></div>
- * ```
  */
 @Directive({
   selector: '[ngxEditorJS]'
