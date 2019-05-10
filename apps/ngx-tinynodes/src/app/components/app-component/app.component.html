@@ -1,4 +1,21 @@
-<ngx-nav-bar></ngx-nav-bar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation" mode="side" opened>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/ngx-editorjs-demo']" routerLinkActive="router-link-active">
+        <span class="label">Demo: ngx-editor</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ngx-nav-bar title="Tinynodes Angular Demos"></ngx-nav-bar>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <ngx-nav-bar></ngx-nav-bar>
 
 <div class="container-fluid">
   <div class="row">
@@ -13,4 +30,4 @@
       </div>
     </main>
   </div>
-</div>
+</div> -->

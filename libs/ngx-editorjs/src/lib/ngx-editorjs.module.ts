@@ -6,7 +6,7 @@ import { PluginHeaderModule } from './plugins/header/header.module';
 import { PluginListModule } from './plugins/list/list.module';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { PluginService } from './services/plugins.service';
-import { NgxEditorJSConfig, NgxEditorJSTools, NGX_EDITORJS_CONFIG } from './types/config';
+import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 import { InitialPlugins, PluginConfig } from './types/plugins';
 import { PluginHeader } from './plugins/header/header.plugin';
 import { PluginList } from './plugins/list/list.plugin';
@@ -26,12 +26,12 @@ export function createTools(): PluginConfig {
 const DEFAULT_CONFIG: NgxEditorJSConfig = defaultConfig();
 
 /**
- * The ngx-editorjs module provides a collection of features to allow
- * any Angular app to use and control an [EditorJS](http://editorjs.io)
- * instance
+ * The `@tinynodes/ngx-editorjs` module provides a collection of features to allow
+ * any Angular app to use and control an [EditorJS](http://editorjs.io) instance
  *
- * To use import the module `NgxEditorJSModule.forRoot()` into the root of your application,
- * this will provide a default instance, import with `NgxEditorJSModule` in feature modules
+ * To use import the module `NgxEditorJSModule.forRoot()` into the root of your application.
+ * The `forRoot` method takes an optional `NgxEditorJSConfig` config, this will provide a
+ * default instance.
  */
 @NgModule({
   imports: [CommonModule, PluginHeaderModule, PluginListModule, PluginParagraphModule],
@@ -60,7 +60,12 @@ export class NgxEditorJSModule {
     parentModule: NgxEditorJSModule
   ) {}
 
-  static forRoot(tools?: NgxEditorJSTools, config: NgxEditorJSConfig = DEFAULT_CONFIG): ModuleWithProviders {
+  /**
+   * Use this method in the root of the application.  You can pass an optional configuration
+   * which sets some defaults, or use the provided defaults.
+   * @param config The optional configuration to pass
+   */
+  static forRoot(config: NgxEditorJSConfig = DEFAULT_CONFIG): ModuleWithProviders {
     return {
       ngModule: NgxEditorJSModule,
       providers: [

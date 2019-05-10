@@ -3,18 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ngx-tinynodes documentation</title>
+        <title>Tinynode Angular Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	      <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/material.css">
+        <link rel="stylesheet" href="../styles/readthedocs.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ngx-tinynodes documentation</a>
+            <a href="../" class="navbar-brand">Tinynode Angular Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -264,11 +264,11 @@
             <h3>Description</h3>
         </p>
         <p class="comment">
-            <p>The ngx-editorjs module provides a collection of features to allow
-any Angular app to use and control an <a href="http://editorjs.io">EditorJS</a>
-instance</p>
-<p>To use import the module <code>NgxEditorJSModule.forRoot()</code> into the root of your application,
-this will provide a default instance, import with <code>NgxEditorJSModule</code> in feature modules</p>
+            <p>The <code>@tinynodes/ngx-editorjs</code> module provides a collection of features to allow
+any Angular app to use and control an <a href="http://editorjs.io">EditorJS</a> instance</p>
+<p>To use import the module <code>NgxEditorJSModule.forRoot()</code> into the root of your application.
+The <code>forRoot</code> method takes an optional <code>NgxEditorJSConfig</code> config, this will provide a
+default instance.</p>
 
         </p>
 
@@ -360,21 +360,24 @@ this will provide a default instance, import with <code>NgxEditorJSModule</code>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>forRoot(tools?: <a href="../interfaces/NgxEditorJSTools.html">NgxEditorJSTools</a>, config: <a href="../interfaces/NgxEditorJSConfig.html">NgxEditorJSConfig</a>)</code>
+                    <code>forRoot(config: <a href="../interfaces/NgxEditorJSConfig.html">NgxEditorJSConfig</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts:63</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts:68</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Use this method in the root of the application.  You can pass an optional configuration
+which sets some defaults, or use the provided defaults.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -385,23 +388,10 @@ this will provide a default instance, import with <code>NgxEditorJSModule</code>
                                     <td>Type</td>
                                     <td>Optional</td>
                                     <td>Default value</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>tools</td>
-                                    <td>
-                                                <code><a href="../interfaces/NgxEditorJSTools.html" target="_self" >NgxEditorJSTools</a></code>
-                                    </td>
-
-                                    <td>
-                                        Yes
-                                    </td>
-
-                                    <td>
-                                    </td>
-
-                                </tr>
                                 <tr>
                                     <td>config</td>
                                     <td>
@@ -416,6 +406,10 @@ this will provide a default instance, import with <code>NgxEditorJSModule</code>
                                         <code>DEFAULT_CONFIG</code>
                                     </td>
 
+                                    <td>
+                                        <p>The optional configuration to pass</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -446,7 +440,7 @@ import { PluginHeaderModule } from &#x27;./plugins/header/header.module&#x27;;
 import { PluginListModule } from &#x27;./plugins/list/list.module&#x27;;
 import { NgxEditorJSService } from &#x27;./services/editorjs.service&#x27;;
 import { PluginService } from &#x27;./services/plugins.service&#x27;;
-import { NgxEditorJSConfig, NgxEditorJSTools, NGX_EDITORJS_CONFIG } from &#x27;./types/config&#x27;;
+import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;./types/config&#x27;;
 import { InitialPlugins, PluginConfig } from &#x27;./types/plugins&#x27;;
 import { PluginHeader } from &#x27;./plugins/header/header.plugin&#x27;;
 import { PluginList } from &#x27;./plugins/list/list.plugin&#x27;;
@@ -466,12 +460,12 @@ export function createTools(): PluginConfig {
 const DEFAULT_CONFIG: NgxEditorJSConfig &#x3D; defaultConfig();
 
 /**
- * The ngx-editorjs module provides a collection of features to allow
- * any Angular app to use and control an [EditorJS](http://editorjs.io)
- * instance
+ * The &#x60;@tinynodes/ngx-editorjs&#x60; module provides a collection of features to allow
+ * any Angular app to use and control an [EditorJS](http://editorjs.io) instance
  *
- * To use import the module &#x60;NgxEditorJSModule.forRoot()&#x60; into the root of your application,
- * this will provide a default instance, import with &#x60;NgxEditorJSModule&#x60; in feature modules
+ * To use import the module &#x60;NgxEditorJSModule.forRoot()&#x60; into the root of your application.
+ * The &#x60;forRoot&#x60; method takes an optional &#x60;NgxEditorJSConfig&#x60; config, this will provide a
+ * default instance.
  */
 @NgModule({
   imports: [CommonModule, PluginHeaderModule, PluginListModule, PluginParagraphModule],
@@ -500,7 +494,12 @@ export class NgxEditorJSModule {
     parentModule: NgxEditorJSModule
   ) {}
 
-  static forRoot(tools?: NgxEditorJSTools, config: NgxEditorJSConfig &#x3D; DEFAULT_CONFIG): ModuleWithProviders {
+  /**
+   * Use this method in the root of the application.  You can pass an optional configuration
+   * which sets some defaults, or use the provided defaults.
+   * @param config The optional configuration to pass
+   */
+  static forRoot(config: NgxEditorJSConfig &#x3D; DEFAULT_CONFIG): ModuleWithProviders {
     return {
       ngModule: NgxEditorJSModule,
       providers: [

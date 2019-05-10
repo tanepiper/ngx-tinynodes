@@ -1,12 +1,28 @@
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" [routerLink]="['/']" routerLinkActive="router-link-active">Tinynode Angular Demos</a>
-
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="https://github.com/tanepiper/ngx-tinynodes">GitHub</a>
-    </li>
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="https://www.npmjs.com/org/tinynodes">NPM</a>
-    </li>
-  </ul>
-</nav>
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidebar()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  &nbsp;
+  <span>
+    <a [routerLink]="['/']" routerLinkActive="router-link-active">{{ title }}</a>
+  </span>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+      <li>
+        <a href="https://tanepiper.github.io/ngx-tinynodes/">
+          <span class="label">Docs</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/tanepiper/ngx-tinynodes">
+          <span class="label">Github</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.npmjs.com/org/tinynodes">
+          <span class="label">NPM</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

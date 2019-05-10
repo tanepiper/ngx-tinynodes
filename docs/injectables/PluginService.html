@@ -3,18 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ngx-tinynodes documentation</title>
+        <title>Tinynode Angular Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	      <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/material.css">
+        <link rel="stylesheet" href="../styles/readthedocs.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ngx-tinynodes documentation</a>
+            <a href="../" class="navbar-brand">Tinynode Angular Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -452,7 +452,7 @@ will be passed in and merged and stored in the config map</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/PluginMap.html" target="_self" >PluginMap</a></code>
+                        <b>Returns : </b>        <code><a href="../interfaces/ToolSettingsMap.html" target="_self" >ToolSettingsMap</a></code>
 
                     </div>
                     <div class="io-description">
@@ -608,7 +608,7 @@ will be passed in and merged and stored in the config map</p>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Returns a map of all the plugins registered with this servuce</p>
+                                <div class="io-description"><p>Returns a map of all the plugins registered with this service</p>
 </div>
 
                                 <div class="io-description">
@@ -626,7 +626,7 @@ will be passed in and merged and stored in the config map</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable, Optional } from &#x27;@angular/core&#x27;;
-import { BasePlugin, InitialPlugins, PluginConfig, PluginMap, UserPlugins } from &#x27;../types/plugins&#x27;;
+import { BasePlugin, InitialPlugins, PluginConfig, ToolSettingsMap, UserPlugins } from &#x27;../types/plugins&#x27;;
 
 /**
  * The plugin service provides a singleton to store all plugins injected into the application
@@ -681,7 +681,7 @@ export class PluginService {
   }
 
   /**
-   * Returns a map of all the plugins registered with this servuce
+   * Returns a map of all the plugins registered with this service
    */
   public get plugins(): PluginConfig {
     return this.pluginsMap;
@@ -691,7 +691,7 @@ export class PluginService {
    * Returns a map of tools to be initialized by the editor
    * @param exclude Optional array of keys to exclude from the map
    */
-  public getTools(exclude: string[] &#x3D; []): PluginMap {
+  public getTools(exclude: string[] &#x3D; []): ToolSettingsMap {
     return Object.entries(this.pluginsMap)
       .filter(([key]) &#x3D;&gt; {
         return !exclude.includes(key);

@@ -3,18 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ngx-tinynodes documentation</title>
+        <title>Tinynode Angular Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	      <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/material.css">
+        <link rel="stylesheet" href="../styles/readthedocs.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ngx-tinynodes documentation</a>
+            <a href="../" class="navbar-brand">Tinynode Angular Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -65,6 +65,13 @@
     <code>apps/ngx-tinynodes/src/app/components/app-component/app.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>The main application component that provides the root container</p>
+
+    </p>
 
 
 
@@ -125,7 +132,45 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#title">title</a>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#onDestroy$">onDestroy$</a>
+                            </li>
+                            <li>
+                                <a href="#sidenav">sidenav</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#pageTitle">pageTitle</a>
                             </li>
                         </ul>
                     </td>
@@ -134,18 +179,175 @@
 
 
 
-
-
         </tbody>
     </table>
 </section>
 
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(app: <a href="../injectables/ApplicationService.html">ApplicationService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>app</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ApplicationService.html" target="_self" >ApplicationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pageTitle"></a>
+                        <b>pageTitle</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Tinynodes Angular Demos&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:20</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The page title</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
 
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:34</a></div>
+                </td>
+            </tr>
 
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:28</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
     <section>
     
         <h3 id="inputs">
@@ -155,28 +357,60 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="title"></a>
+                        <a name="onDestroy$"></a>
                         <span class="name">
                             <b>
-                            title</b>
-                            <a href="#title"><span class="icon ion-ios-link"></span></a>
+                                <span class="modifier">Private</span>
+                                <span class="modifier">Readonly</span>
+                            onDestroy$</b>
+                            <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sidenav"></a>
+                        <span class="name">
+                            <b>
+                            sidenav</b>
+                            <a href="#sidenav"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatSidenav</code>
 
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;ngx-tinynodes&#x27;</code>
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(MatSidenav)<br />
+                            </code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:9</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -189,21 +423,66 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, ViewChild } from &#x27;@angular/core&#x27;;
+import { MatSidenav } from &#x27;@angular/material&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
+import { ApplicationService } from &#x27;../../store/app/application.service&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
 
+/**
+ * The main application component that provides the root container
+ */
 @Component({
   selector: &#x27;tinynodes-root&#x27;,
   templateUrl: &#x27;./app.component.html&#x27;,
   styleUrls: [&#x27;./app.component.css&#x27;]
 })
 export class AppComponent {
-  title &#x3D; &#x27;ngx-tinynodes&#x27;;
+  /**
+   * The page title
+   */
+  @Input()
+  public pageTitle &#x3D; &#x27;Tinynodes Angular Demos&#x27;;
+
+  @ViewChild(MatSidenav) sidenav: MatSidenav;
+
+  private readonly onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
+
+  constructor(private readonly app: ApplicationService) {}
+
+  ngOnInit() {
+    this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe(value &#x3D;&gt; {
+      value ? this.sidenav.close() : this.sidenav.open();
+    });
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;ngx-nav-bar&gt;&lt;/ngx-nav-bar&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container&gt;
+  &lt;mat-sidenav #sidenav role&#x3D;&quot;navigation&quot; mode&#x3D;&quot;side&quot; opened&gt;
+    &lt;mat-nav-list&gt;
+      &lt;a mat-list-item [routerLink]&#x3D;&quot;[&#x27;/ngx-editorjs-demo&#x27;]&quot; routerLinkActive&#x3D;&quot;router-link-active&quot;&gt;
+        &lt;span class&#x3D;&quot;label&quot;&gt;Demo: ngx-editor&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/mat-nav-list&gt;
+  &lt;/mat-sidenav&gt;
+  &lt;mat-sidenav-content&gt;
+    &lt;ngx-nav-bar title&#x3D;&quot;Tinynodes Angular Demos&quot;&gt;&lt;/ngx-nav-bar&gt;
+
+    &lt;main&gt;
+      &lt;router-outlet&gt;&lt;/router-outlet&gt;
+    &lt;/main&gt;
+  &lt;/mat-sidenav-content&gt;
+&lt;/mat-sidenav-container&gt;
+
+&lt;!-- &lt;ngx-nav-bar&gt;&lt;/ngx-nav-bar&gt;
 
 &lt;div class&#x3D;&quot;container-fluid&quot;&gt;
   &lt;div class&#x3D;&quot;row&quot;&gt;
@@ -218,7 +497,7 @@ export class AppComponent {
       &lt;/div&gt;
     &lt;/main&gt;
   &lt;/div&gt;
-&lt;/div&gt;
+&lt;/div&gt; --&gt;
 </code></pre>
     </div>
 
@@ -226,7 +505,50 @@ export class AppComponent {
                 <p class="comment">
                     <code>./app.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover,
+a:active {
+  color: lightgray;
+}
+
+.navigation-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.icon {
+  display: inline-block;
+  height: 30px;
+  margin: 0 auto;
+  padding-right: 5px;
+  text-align: center;
+  vertical-align: middle;
+  width: 15%;
+}
+
+.label {
+  display: inline-block;
+  line-height: 30px;
+  margin: 0;
+  width: 85%;
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -254,7 +576,7 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ngx-nav-bar></ngx-nav-bar><div class="container-fluid">  <div class="row">    <nav class="col-md-2 d-none d-md-block bg-light sidebar">      <div class="sidebar-sticky">        <ngx-sidebar></ngx-sidebar>      </div>    </nav>    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">        <router-outlet></router-outlet>      </div>    </main>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container>  <mat-sidenav #sidenav role="navigation" mode="side" opened>    <mat-nav-list>      <a mat-list-item [routerLink]="[\'/ngx-editorjs-demo\']" routerLinkActive="router-link-active">        <span class="label">Demo: ngx-editor</span>      </a>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <ngx-nav-bar title="Tinynodes Angular Demos"></ngx-nav-bar>    <main>      <router-outlet></router-outlet>    </main>  </mat-sidenav-content></mat-sidenav-container><!-- <ngx-nav-bar></ngx-nav-bar><div class="container-fluid">  <div class="row">    <nav class="col-md-2 d-none d-md-block bg-light sidebar">      <div class="sidebar-sticky">        <ngx-sidebar></ngx-sidebar>      </div>    </nav>    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">        <router-outlet></router-outlet>      </div>    </main>  </div></div> --></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'ngx-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'ngx-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};

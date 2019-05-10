@@ -1,8 +1,13 @@
 # Ngx-Tinynodes
 
-This repo is a collection of Angular components developed by me, [Tane Piper](https://tane.dev).
+This repository is a collection of Angular components and demos with full documentation.
 
-The application for this repo runs on [https://tinynodes-ngx.firebaseapp.com/](https://tinynodes-ngx.firebaseapp.com/)
+## Links
+
+- [Repository](https://github.com/tanepiper/ngx-tinynodes)
+- [Documentation](https://tanepiper.github.io/ngx-tinynodes/)
+- [Demo Application Site](https://tinynodes-ngx.firebaseapp.com/)
+- [NPM Collection](https://www.npmjs.com/org/tinynodes)
 
 ## Libraries
 
@@ -10,9 +15,11 @@ The application for this repo runs on [https://tinynodes-ngx.firebaseapp.com/](h
 
 This project provides a set of features for using [EditorJS](https://editorjs.io) within Angular 7+ - including a directive, component and service
 
-- [Readme](./libs/ngx-editorjs/README.md)
+- [Readme](libs/ngx-editorjs/README.md)
 - [Changelog](./libs/ngx-editorjs/CHANGELOG.md)
 - [Demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/pages)
 - [Project Folder](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
 
-This project was generated using [Nx](https://nx.dev).
+### Development Information
+
+This repository is run by [Tane Piper](https://tane.dev) and was generated using [Nx](https://nx.dev).

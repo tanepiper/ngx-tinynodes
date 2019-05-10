@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ApplicationService } from '../../store/app/application.service';
 
 @Component({
   selector: 'ngx-nav-bar',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['nav-bar.component.scss']
 })
 export class NavBarComponent {
-  constructor() {}
+  @Input()
+  title = 'Navbar Component';
+
+  constructor(private readonly app: ApplicationService) {}
+
+  public toggleSidebar() {
+    this.app.toggleSidebar();
+  }
 }

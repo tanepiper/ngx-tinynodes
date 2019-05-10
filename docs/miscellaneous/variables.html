@@ -3,18 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ngx-tinynodes documentation</title>
+        <title>Tinynode Angular Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	      <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/material.css">
+        <link rel="stylesheet" href="../styles/readthedocs.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ngx-tinynodes documentation</a>
+            <a href="../" class="navbar-brand">Tinynode Angular Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -76,6 +76,9 @@
                             <a href="#InitialPlugins" title="libs/ngx-editorjs/src/lib/types/plugins.ts"><b>InitialPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
                         </li>
                         <li>
+                            <a href="#InitialPlugins" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>InitialPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
+                        </li>
+                        <li>
                             <a href="#NGX_EDITORJS_CONFIG" title="libs/ngx-editorjs/src/lib/types/config.ts"><b>NGX_EDITORJS_CONFIG</b>&nbsp;&nbsp;&nbsp;(libs/.../config.ts)</a>
                         </li>
                         <li>
@@ -83,6 +86,9 @@
                         </li>
                         <li>
                             <a href="#UserPlugins" title="libs/ngx-editorjs/src/lib/types/plugins.ts"><b>UserPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserPlugins" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>UserPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -123,6 +129,12 @@
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The main application routes</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -265,6 +277,12 @@
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The Injection token for initial plugins as defined in the ngx-editorjs module</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -286,6 +304,69 @@
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The injection token for adding plugins via your own application</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+    <h3>libs/ngx-editorjs-plugins/src/lib/types/plugins.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="InitialPlugins"></a>
+                        <span class="name">
+                            <b>
+                            InitialPlugins</b>
+                            <a href="#InitialPlugins"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The Injection token for initial plugins as defined in the ngx-editorjs module</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="UserPlugins"></a>
+                        <span class="name">
+                            <b>
+                            UserPlugins</b>
+                            <a href="#UserPlugins"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The injection token for adding plugins via your own application</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>

@@ -3,18 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ngx-tinynodes documentation</title>
+        <title>Tinynode Angular Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	      <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/material.css">
+        <link rel="stylesheet" href="../styles/readthedocs.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ngx-tinynodes documentation</a>
+            <a href="../" class="navbar-brand">Tinynode Angular Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -247,32 +247,20 @@ export class PageContainerComponent {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;page-container container&quot;&gt;
-  &lt;div class&#x3D;&quot;row&quot;&gt;
-    &lt;div class&#x3D;&quot;card&quot;&gt;
-      &lt;div class&#x3D;&quot;card-header&quot;&gt;
-        Ngx-EditorJS Pages Manager - A useful demo of the
-        &lt;code&gt;@tinynodes/ngx-editorjs&lt;/code&gt;
-        module
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;card-body&quot;&gt;
-        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot; [routerLink]&#x3D;&quot;[&#x27;/ngx-editorjs-demo/pages/editor&#x27;]&quot; routerLinkActive&#x3D;&quot;router-link-active&quot;&gt;Go to Demo &amp;gt;&lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;card-body&quot;&gt;
-        &lt;h5 class&#x3D;&quot;card-title&quot;&gt;
-          README.md
-        &lt;/h5&gt;
-        &lt;markdown [src]&#x3D;&quot;&#x27;https://raw.githubusercontent.com/tanepiper/ngx-tinynodes/master/libs/ngx-editorjs/README.md&#x27;&quot;&gt;&lt;/markdown&gt;
-      &lt;/div&gt;
-      &lt;div class&#x3D;&quot;card-footer&quot;&gt;
-        &lt;div class&#x3D;&quot;alert warning alert-warning&quot;&gt;
-          &lt;strong&gt;Please note:&lt;/strong&gt; Pages persist between refresh and can easily be removed from &#x60;localStorage&#x60;. A future feature to switch this off will be added.
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card&gt;
+  &lt;mat-card-title&gt;Ngx-EditorJS Pages Manager&lt;/mat-card-title&gt;
+  &lt;mat-card-subtitle
+    &gt;A useful demo of the
+    &lt;code&gt;@tinynodes/ngx-editorjs&lt;/code&gt;
+    module&lt;/mat-card-subtitle
+  &gt;
+  &lt;mat-card-content&gt;
+    &lt;button mat-raised-button [routerLink]&#x3D;&quot;[&#x27;/ngx-editorjs-demo/pages/editor&#x27;]&quot; routerLinkActive&#x3D;&quot;router-link-active&quot;&gt;Go to Demo &amp;gt;&lt;/button&gt;
+  &lt;/mat-card-content&gt;
+  &lt;mat-card-content&gt;
+    &lt;markdown [src]&#x3D;&quot;&#x27;https://raw.githubusercontent.com/tanepiper/ngx-tinynodes/master/libs/ngx-editorjs/README.md&#x27;&quot;&gt;&lt;/markdown&gt;
+  &lt;/mat-card-content&gt;
+&lt;/mat-card&gt;
 </code></pre>
     </div>
 
@@ -312,7 +300,7 @@ export class PageContainerComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="page-container container">  <div class="row">    <div class="card">      <div class="card-header">        Ngx-EditorJS Pages Manager - A useful demo of the        <code>@tinynodes/ngx-editorjs</code>        module      </div>      <div class="card-body">        <button type="button" class="btn btn-primary btn-lg" [routerLink]="[\'/ngx-editorjs-demo/pages/editor\']" routerLinkActive="router-link-active">Go to Demo &gt;</button>      </div>      <div class="card-body">        <h5 class="card-title">          README.md        </h5>        <markdown [src]="\'https://raw.githubusercontent.com/tanepiper/ngx-tinynodes/master/libs/ngx-editorjs/README.md\'"></markdown>      </div>      <div class="card-footer">        <div class="alert warning alert-warning">          <strong>Please note:</strong> Pages persist between refresh and can easily be removed from `localStorage`. A future feature to switch this off will be added.        </div>      </div>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-card>  <mat-card-title>Ngx-EditorJS Pages Manager</mat-card-title>  <mat-card-subtitle    >A useful demo of the    <code>@tinynodes/ngx-editorjs</code>    module</mat-card-subtitle  >  <mat-card-content>    <button mat-raised-button [routerLink]="[\'/ngx-editorjs-demo/pages/editor\']" routerLinkActive="router-link-active">Go to Demo &gt;</button>  </mat-card-content>  <mat-card-content>    <markdown [src]="\'https://raw.githubusercontent.com/tanepiper/ngx-tinynodes/master/libs/ngx-editorjs/README.md\'"></markdown>  </mat-card-content></mat-card></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'ngx-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'ngx-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'PageContainerComponent'};

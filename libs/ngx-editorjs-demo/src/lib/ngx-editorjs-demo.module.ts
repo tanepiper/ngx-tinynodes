@@ -17,6 +17,7 @@ import { createTools } from './config';
 import { SimpleImageModule } from './plugins/simple-image/simple-image.module';
 import { LinkModule } from './plugins/link/link.module';
 import { MarkerModule } from './plugins/marker/marker.module';
+import { MatCardModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -29,7 +30,9 @@ import { MarkerModule } from './plugins/marker/marker.module';
     CodeModule,
     SimpleImageModule,
     LinkModule,
-    MarkerModule
+    MarkerModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [
     {

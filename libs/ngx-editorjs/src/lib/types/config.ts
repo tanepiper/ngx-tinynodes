@@ -1,9 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { OutputData, ToolSettings } from '@editorjs/editorjs';
-
-export interface NgxEditorJSTools {
-  [key: string]: ToolSettings;
-}
+import { OutputData, SanitizerConfig } from '@editorjs/editorjs';
 
 /**
  * Configuration for the EditorJS instance
@@ -27,6 +23,26 @@ export interface EditorJSConfig {
    * Any initial output data to render
    */
   data?: OutputData;
+
+  /**
+   * First Block placeholder
+   */
+  placeholder?: string;
+
+  /**
+   * Define default sanitizer configuration
+   */
+  sanitizer?: SanitizerConfig;
+
+  /**
+   * If true, toolbar won't be shown
+   */
+  hideToolbar?: boolean;
+
+  /**
+   * Height of Editor's bottom area that allows to set focus on the last Block
+   */
+  minHeight?: number;
 }
 
 export interface NgxEditorJSConfig {

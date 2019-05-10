@@ -1,5 +1,5 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { BasePlugin, InitialPlugins, PluginConfig, PluginMap, UserPlugins } from '../types/plugins';
+import { BasePlugin, InitialPlugins, PluginConfig, ToolSettingsMap, UserPlugins } from '../types/plugins';
 
 /**
  * The plugin service provides a singleton to store all plugins injected into the application
@@ -54,7 +54,7 @@ export class PluginService {
   }
 
   /**
-   * Returns a map of all the plugins registered with this servuce
+   * Returns a map of all the plugins registered with this service
    */
   public get plugins(): PluginConfig {
     return this.pluginsMap;
@@ -64,7 +64,7 @@ export class PluginService {
    * Returns a map of tools to be initialized by the editor
    * @param exclude Optional array of keys to exclude from the map
    */
-  public getTools(exclude: string[] = []): PluginMap {
+  public getTools(exclude: string[] = []): ToolSettingsMap {
     return Object.entries(this.pluginsMap)
       .filter(([key]) => {
         return !exclude.includes(key);

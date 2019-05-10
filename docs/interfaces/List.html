@@ -3,18 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ngx-tinynodes documentation</title>
+        <title>Tinynode Angular Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	      <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/material.css">
+        <link rel="stylesheet" href="../styles/readthedocs.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ngx-tinynodes documentation</a>
+            <a href="../" class="navbar-brand">Tinynode Angular Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -69,7 +69,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Interface for a list type</p>
+                <p>Default data type for a list block</p>
 
             </p>
 
@@ -130,6 +130,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>List items of type T</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -159,6 +165,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The list style</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -167,34 +179,59 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Block&lt;T &#x3D; any&gt; {
+  /**
+   * The EditorJS block type
+   */
   type: string;
+
+  /**
+   * The data interface for the block type
+   */
   data: T;
+
+  /**
+   * Additional properties on the type
+   */
+  [key: string]: any;
 }
 
 /**
- * Available list styles
+ * Available list styles, supports &#x60;ordered&#x60; and &#x60;unordered&#x60;.
+ * A custom string can also be added
  */
 export type ListStyle &#x3D; &#x27;ordered&#x27; | &#x27;unordered&#x27; | string;
 
 /**
- * Interface for a list type
+ * Default data type for a list block
  */
 export interface List&lt;T &#x3D; any&gt; {
+  /**
+   * The list style
+   */
   style: ListStyle;
+  /**
+   * List items of type T
+   */
   items: T[];
 }
 
 /**
- * Interface for a basic list block
+ * The default list block is provided by the EditorJS list plugin
  */
 export interface ListBlock extends Block&lt;List&lt;string&gt;&gt; {
+  /**
+   * The EditorJS block type
+   */
   type: &#x27;list&#x27;;
 }
 
 /**
- * Interface for a paragraph type
+ * Default data type for a paragraph block
  */
 interface Paragraph {
+  /**
+   * The paragraph text
+   */
   text: string;
 }
 
@@ -202,40 +239,78 @@ interface Paragraph {
  * Interface for a paragraph block
  */
 export interface ParagraphBlock extends Block&lt;Paragraph&gt; {
+  /**
+   * The EditorJS block type
+   */
   type: &#x27;paragraph&#x27;;
 }
 
 /**
- * Header data type
+ * Default data type for a header block
  */
 interface Header {
+  /**
+   * The header text
+   */
   text: string;
+  /**
+   * The header level from 1-6
+   */
   level: number;
 }
 
 /**
- * Header blocks
+ * Interface for a header block
  */
 export interface HeaderBlock extends Block&lt;Header&gt; {
+  /**
+   * The EditorJS block type
+   */
   type: &#x27;header&#x27;;
 }
 
 /**
- * Image data
+ * Default data type for a header block
  */
 export interface Image {
+  /**
+   * The image URL
+   */
   url: string;
-  [key: string]: any;
+  /**
+   * Optional image caption
+   */
+  caption?: string;
+  /**
+   * Optional border property
+   */
+  withBorder?: boolean;
+
+  /**
+   * Optional background property
+   */
+  withBackground?: boolean;
+
+  /**
+   * Optional stretch property
+   */
+  stretched?: boolean;
 }
 
 /**
- * Image blocks
+ * Interface for a image block
  */
 export interface ImageBlock extends Block&lt;Image&gt; {
+  /**
+   * The EditorJS block type
+   */
   type: &#x27;image&#x27;;
 }
 
-export type BlockTypes &#x3D; ParagraphBlock | HeaderBlock | ImageBlock | Block | ListBlock;
+/**
+ * Type of all the basic block type
+ */
+export type BlockTypes &#x3D; ParagraphBlock | HeaderBlock | ImageBlock | ListBlock | Block;
 </code></pre>
     </div>
 </div>
