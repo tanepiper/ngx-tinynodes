@@ -143,8 +143,9 @@ This service provides handling the life-cycle of the EditorJS instance, and expo
 
 ## Todo
 
-- [] Add unit tests for all features (😔)
-- [] Improve documentation
-- [] Provide better plugin support
-- [] Provide enhancements for `@ngrx/effects` and other state management tools via pre-developed effects and services.
-- [] Set up CD pipeline
+- [ ] Add unit tests for all features (😔)
+- [ ] Improve documentation
+- [ ] Provide better plugin support
+- [ ] Provide enhancements for `@ngrx/effects` and other state management tools via pre-developed effects and services.
+- [ ] Set up CD pipeline
+- [ ] Provide more @Input on Directive/Component to make instance generation more configurable.
