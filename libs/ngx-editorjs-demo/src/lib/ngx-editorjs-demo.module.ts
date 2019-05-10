@@ -14,6 +14,9 @@ import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
 import { CodeModule } from './plugins/code/code.module';
 import { createTools } from './config';
+import { SimpleImageModule } from './plugins/simple-image/simple-image.module';
+import { LinkModule } from './plugins/link/link.module';
+import { MarkerModule } from './plugins/marker/marker.module';
 
 @NgModule({
   imports: [
@@ -23,7 +26,10 @@ import { createTools } from './config';
     ReactiveFormsModule,
     PageStoreModule,
     NgxEditorJSModule,
-    CodeModule
+    CodeModule,
+    SimpleImageModule,
+    LinkModule,
+    MarkerModule
   ],
   providers: [
     {

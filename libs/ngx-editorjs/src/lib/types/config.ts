@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
-import { OutputData, Tool } from '@editorjs/editorjs';
+import { OutputData, ToolSettings } from '@editorjs/editorjs';
 
 export interface NgxEditorJSTools {
-  [key: string]: Tool;
+  [key: string]: ToolSettings;
 }
 
 /**
@@ -38,5 +38,5 @@ export interface NgxEditorJSConfig {
 export const NGX_EDITORJS_CONFIG = new InjectionToken<NgxEditorJSConfig>('NGX_EDITORJS_CONFIG');
 export const NGX_EDITORJS_TOOLS = new InjectionToken<NgxEditorJSTools>('NGX_EDITORJS_TOOLS');
 
-export const HEADER_TOOL = new InjectionToken<Tool>('HEADER_TOOL');
-export const LIST_TOOL = new InjectionToken<Tool>('LIST_TOOL');
+export const HEADER_TOOL = new InjectionToken<ToolSettings>('HEADER_TOOL');
+export const LIST_TOOL = new InjectionToken<ToolSettings>('LIST_TOOL');

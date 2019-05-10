@@ -1,10 +1,10 @@
 import { Injectable, Inject, Optional } from '@angular/core';
-import { Tool } from '@editorjs/editorjs';
+import { ToolSettings } from '@editorjs/editorjs';
 import { InitialPlugins, PluginConfig, UserPlugins } from '../types/plugins';
 
 @Injectable({ providedIn: 'root' })
 export class PluginService {
-  private pluginsMap = new Map<string, Tool>();
+  private pluginsMap = new Map<string, ToolSettings>();
 
   constructor(
     @Inject(InitialPlugins) initialPlugins: PluginConfig,
@@ -15,7 +15,7 @@ export class PluginService {
     });
   }
 
-  public add(name: string, tool: Tool) {
+  public add(name: string, tool: ToolSettings) {
     this.pluginsMap.set(name, tool);
   }
 

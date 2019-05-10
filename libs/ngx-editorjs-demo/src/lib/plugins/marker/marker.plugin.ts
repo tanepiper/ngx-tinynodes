@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ToolSettings } from '@editorjs/editorjs';
-import Code from '@editorjs/code';
+import Marker from '@editorjs/marker';
 import { EditorJSPlugin } from '@tinynodes/ngx-editorjs';
 
 @Injectable()
-export class PluginCode extends EditorJSPlugin {
+export class PluginMarker extends EditorJSPlugin {
   static plugin(): ToolSettings {
-    return Code;
+    return {
+      class: Marker,
+      shortcut: 'CMD+SHIFT+M'
+    };
   }
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ToolSettings } from '@editorjs/editorjs';
-import Code from '@editorjs/code';
+import Image from '@editorjs/image';
 import { EditorJSPlugin } from '@tinynodes/ngx-editorjs';
 
 @Injectable()
-export class PluginCode extends EditorJSPlugin {
+export class PluginImage extends EditorJSPlugin {
   static plugin(): ToolSettings {
-    return Code;
+    return Image;
   }
 }
