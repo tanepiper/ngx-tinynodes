@@ -1,7 +1,7 @@
 {
   "name": "@tinynodes/ngx-editorjs",
-  "description": "An Angular library that allows EditorJS to be used in an application",
-  "version": "1.1.1",
+  "description": "A library for using EditorJS in any Angular application",
+  "version": "1.1.2",
   "author": {
     "name": "Tane Piper",
     "email": "me@tane.dev",

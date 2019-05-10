@@ -1,6 +1,6 @@
 # Ngx-EditorJS
 
-This library provides Angular support for [EditorJS](https://editojs.io) via a directive, component and service.
+This library provides Angular support for [EditorJS](https://editorjs.io) via a directive, component and service.
 
 You can see a [demo in action](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo) or download it
 [on GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs) to see how it was implemented.
