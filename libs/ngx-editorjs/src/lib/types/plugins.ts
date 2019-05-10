@@ -1,11 +1,17 @@
 import { InjectionToken } from '@angular/core';
 import { ToolSettings } from '@editorjs/editorjs';
 
+/**
+ * A map of tool keys to their plugin file, a plugin should implement BasePlugin
+ */
 export interface PluginConfig {
   [key: string]: BasePlugin;
 }
 
-export interface PluginMap {
+/**
+ * A map of took keys to ToolSettings
+ */
+export interface ToolSettingsMap {
   [key: string]: ToolSettings;
 }
 
