@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import {
+  InitialPlugins,
+  NgxEditorJSPluginServiceModule,
+  PluginConfig,
   PluginHeader,
   PluginHeaderModule,
   PluginList,
   PluginListModule,
   PluginParagraph,
-  PluginParagraphModule,
-  PluginConfig,
-  InitialPlugins,
-  NgxEditorJSPluginService
+  PluginParagraphModule
 } from '@tinynodes/ngx-editorjs-plugins';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
@@ -40,23 +40,15 @@ const DEFAULT_CONFIG: NgxEditorJSConfig = {
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule, PluginHeaderModule, PluginListModule, PluginParagraphModule],
+  imports: [CommonModule, PluginHeaderModule, PluginListModule, PluginParagraphModule, NgxEditorJSPluginServiceModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
-  exports: [
-    NgxEditorJSComponent,
-    NgxEditorJSDirective,
-    PluginHeaderModule,
-    PluginParagraphModule,
-    PluginParagraphModule
-  ],
+  exports: [NgxEditorJSComponent, NgxEditorJSDirective],
   providers: [
     NgxEditorJSService,
     {
       provide: InitialPlugins,
       useFactory: createTools
-    },
-    NgxEditorJSPluginService,
-    PluginHeaderModule
+    }
   ]
 })
 export class NgxEditorJSModule {
