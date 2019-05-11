@@ -22,6 +22,9 @@
     },
     "ngx-editorjs-plugins": {
       "tags": []
+    },
+    "ngx-editorjs-ngrx": {
+      "tags": []
     }
   }
 }
