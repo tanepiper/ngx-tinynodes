@@ -367,8 +367,8 @@ default instance.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="73"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts:73</a></div>
                 </td>
             </tr>
 
@@ -434,14 +434,16 @@ which sets some defaults, or use the provided defaults.</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from &#x27;@angular/core&#x27;;
+import {
+  PluginHeader,
+  PluginHeaderModule,
+  PluginList,
+  PluginListModule,
+  PluginParagraph,
+  PluginParagraphModule
+} from &#x27;@tinynodes/ngx-editorjs-plugins&#x27;;
 import { NgxEditorJSComponent } from &#x27;./containers/editorjs-component/editorjs.component&#x27;;
 import { NgxEditorJSDirective } from &#x27;./directives/ngx-editorjs.directive&#x27;;
-import { PluginHeaderModule } from &#x27;./plugins/header/header.module&#x27;;
-import { PluginHeader } from &#x27;./plugins/header/header.plugin&#x27;;
-import { PluginListModule } from &#x27;./plugins/list/list.module&#x27;;
-import { PluginList } from &#x27;./plugins/list/list.plugin&#x27;;
-import { PluginParagraphModule } from &#x27;./plugins/paragraph/paragraph.module&#x27;;
-import { PluginParagraph } from &#x27;./plugins/paragraph/paragraph.plugin&#x27;;
 import { NgxEditorJSService } from &#x27;./services/editorjs.service&#x27;;
 import { PluginService } from &#x27;./services/plugins.service&#x27;;
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;./types/config&#x27;;
@@ -555,7 +557,7 @@ export class NgxEditorJSModule {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSModule.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -6,14 +6,15 @@ import {
   PluginList,
   PluginListModule,
   PluginParagraph,
-  PluginParagraphModule
+  PluginParagraphModule,
+  PluginConfig,
+  InitialPlugins,
+  NgxEditorJSPluginService
 } from '@tinynodes/ngx-editorjs-plugins';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
-import { PluginService } from './services/plugins.service';
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
-import { InitialPlugins, PluginConfig } from './types/plugins';
 
 /**
  * Factory method for creating the initial set of tool plugins used with the
@@ -54,7 +55,7 @@ const DEFAULT_CONFIG: NgxEditorJSConfig = {
       provide: InitialPlugins,
       useFactory: createTools
     },
-    PluginService,
+    NgxEditorJSPluginService,
     PluginHeaderModule
   ]
 })

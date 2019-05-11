@@ -15,3 +15,5 @@ export { PluginParagraphModule } from './lib/plugins/paragraph/paragraph.module'
 export { PluginParagraph } from './lib/plugins/paragraph/paragraph.plugin';
 export { PluginSimpleImageModule } from './lib/plugins/simple-image/simple-image.module';
 export { PluginSimpleImage } from './lib/plugins/simple-image/simple-image.plugin';
+export { NgxEditorJSPluginService } from './lib/services/plugins.service';
+export { BasePlugin, InitialPlugins, PluginConfig, ToolSettingsMap, UserPlugins } from './lib/types/plugins';

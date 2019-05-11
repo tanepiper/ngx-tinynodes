@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Block } from '../types/blocks';
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from '../types/maps';
-import { PluginService } from './plugins.service';
+import { NgxEditorJSPluginService } from '@tinynodes/ngx-editorjs-plugins';
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
@@ -40,7 +40,7 @@ export class NgxEditorJSService {
 
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
-    private readonly plugins: PluginService,
+    private readonly plugins: NgxEditorJSPluginService,
     private zone: NgZone
   ) {}
 

@@ -74,6 +74,13 @@
     </p>
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
 
 
 <section>
@@ -172,7 +179,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -277,10 +284,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">apps/ngx-tinynodes/src/app/components/app-component/app.component.ts:25</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The Material sidebar</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -290,7 +303,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, ViewChild } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, ViewChild, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
 import { MatSidenav } from &#x27;@angular/material&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { ApplicationService } from &#x27;../../store/app/application.service&#x27;;
@@ -304,25 +317,37 @@ import { takeUntil } from &#x27;rxjs/operators&#x27;;
   templateUrl: &#x27;./app.component.html&#x27;,
   styleUrls: [&#x27;./app.component.css&#x27;]
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   /**
    * The page title
    */
   @Input()
   public pageTitle &#x3D; &#x27;Tinynodes Angular Demos&#x27;;
 
+  /**
+   * The Material sidebar
+   */
   @ViewChild(MatSidenav) sidenav: MatSidenav;
 
+  /**
+   * When the component is destroyed
+   */
   private readonly onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
 
   constructor(private readonly app: ApplicationService) {}
 
+  /**
+   * Component initialized
+   */
   ngOnInit() {
     this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe(value &#x3D;&gt; {
       value ? this.sidenav.close() : this.sidenav.open();
     });
   }
 
+  /**
+   * Component destroyed
+   */
   ngOnDestroy() {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
@@ -480,7 +505,7 @@ a:active {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

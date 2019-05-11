@@ -8,7 +8,7 @@ import { BasePlugin, InitialPlugins, PluginConfig, ToolSettingsMap, UserPlugins 
 @Injectable({
   providedIn: 'root'
 })
-export class PluginService {
+export class NgxEditorJSPluginService {
   /**
    * Object map of the plugin configurations
    */

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import Code from '@editorjs/code';
 import { ToolSettings } from '@editorjs/editorjs';
-import { BasePlugin } from '@tinynodes/ngx-editorjs';
+import { BasePlugin } from '../../types/plugins';
 
 /**
  * This plugin returns the tool settings for a `<code>` block tool for `EditorJS`

@@ -57,9 +57,16 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-demo/src/lib/plugins/marker/marker.plugin.ts</code>
+            <code>libs/ngx-editorjs-plugins/src/lib/plugins/marker/marker.plugin.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This plugin returns the tool settings for a inline marker tool for <code>EditorJS</code></p>
+
+            </p>
 
 
 
@@ -77,9 +84,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#plugin">plugin</a>
                             </li>
                             <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#shortcut">shortcut</a>
                             </li>
                         </ul>
@@ -107,6 +116,7 @@
                     <a name="plugin"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Public</span>
                             plugin
                         </b>
                         <a href="#plugin"><span class="icon ion-ios-link"></span></a>
@@ -115,21 +125,24 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>plugin()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>plugin()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="8"
-                            class="link-to-prism">libs/ngx-editorjs-demo/src/lib/plugins/marker/marker.plugin.ts:8</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="14"
+                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/plugins/marker/marker.plugin.ts:14</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Returns the plugin settings</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>    <code>ToolSettings</code>
@@ -146,6 +159,7 @@
                     <a name="shortcut"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Public</span>
                             shortcut
                         </b>
                         <a href="#shortcut"><span class="icon ion-ios-link"></span></a>
@@ -154,21 +168,24 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>shortcut()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>shortcut()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">libs/ngx-editorjs-demo/src/lib/plugins/marker/marker.plugin.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/plugins/marker/marker.plugin.ts:20</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Returns the plugin shortcut</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
@@ -189,13 +206,21 @@ import { ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
 import Marker from &#x27;@editorjs/marker&#x27;;
 import { BasePlugin } from &#x27;@tinynodes/ngx-editorjs&#x27;;
 
+/**
+ * This plugin returns the tool settings for a inline marker tool for &#x60;EditorJS&#x60;
+ */
 @Injectable()
 export class PluginMarker implements BasePlugin {
-  plugin(): ToolSettings {
+  /**
+   * Returns the plugin settings
+   */
+  public plugin(): ToolSettings {
     return Marker;
   }
-
-  shortcut() {
+  /**
+   * Returns the plugin shortcut
+   */
+  public shortcut() {
     return &#x27;CMD+SHIFT+M&#x27;;
   }
 }
