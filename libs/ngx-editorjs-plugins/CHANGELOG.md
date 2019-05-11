@@ -9,4 +9,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release of module with default plugs
+- Initial release of module with default plugins - see [README.md]('./README.md) for details.
+- Moved the internal PluginService to public `NgxEditorJSPluginService` provided by this module

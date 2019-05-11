@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/@compodoc/compodoc/src/config/schema.json",
+  "name": "Tinynodes Angular Documentation",
+  "output": "./docs/",
+  "tsconfig": "./tsconfig.json",
+  "includes": "./libs",
+  "theme": "readthedocs",
+  "disableLifeCycleHooks": true,
+  "disablePrivate": true,
+  "disableInternal": true
+}
