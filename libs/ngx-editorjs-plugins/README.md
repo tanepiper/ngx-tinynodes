@@ -1,25 +1,17 @@
-# NgxEditorjsPlugins
+# Ngx-EditorJS Plugins
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+This module provides a default set of [EditorJS](https://editorjs.io) plugins available via
+Angular modules.
 
-## Code scaffolding
+## Plugin List
 
-Run `ng generate component component-name --project ngx-editorjs-plugins` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-editorjs-plugins`.
-
-> Note: Don't forget to add `--project ngx-editorjs-plugins` or else it will be added to the default project in your `angular.json` file.
-
-## Build
-
-Run `ng build ngx-editorjs-plugins` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build ngx-editorjs-plugins`, go to the dist folder `cd dist/ngx-editorjs-plugins` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ngx-editorjs-plugins` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+| Plugin Name             | Description                                            | EditorJS Plugin Link                             |
+| ----------------------- | ------------------------------------------------------ | ------------------------------------------------ |
+| PluginCodeModule        | Provides a `<code>` block editor                       | [GitHub](https://github.com/editor-js/code)      |
+| PluginHeaderModule      | Provides a `<h1> - <h6>` block editor                  | [GitHub](https://github.com/editor-js/header)    |
+| PluginImageModule       | Provides an `<img>` block editor + file upload support | [GitHub](https://github.com/editor-js/image)     |
+| PluginLinkModule        | Provides an `<a>` block editor                         | [GitHub](https://github.com/editor-js/link)      |
+| PluginIListModule       | Provides an `<ol>/<li>` block editor                   | [GitHub](https://github.com/editor-js/list)      |
+| PluginMarkerModule      | Provides inline text marking                           | [GitHub](https://github.com/editor-js/marker)    |
+| PluginParagraphModule   | Provides an `<p>` block editor                         | [GitHub](https://github.com/editor-js/paragraph) |
+| PluginSimpleImageModule | Provides an `<img>` block editor with paste support    | [GitHub](https://github.com/editor-js/paragraph) |

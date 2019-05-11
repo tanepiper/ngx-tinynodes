@@ -367,8 +367,8 @@ default instance.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="68"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts:68</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts:71</a></div>
                 </td>
             </tr>
 
@@ -437,27 +437,30 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from &#x27;@angular
 import { NgxEditorJSComponent } from &#x27;./containers/editorjs-component/editorjs.component&#x27;;
 import { NgxEditorJSDirective } from &#x27;./directives/ngx-editorjs.directive&#x27;;
 import { PluginHeaderModule } from &#x27;./plugins/header/header.module&#x27;;
+import { PluginHeader } from &#x27;./plugins/header/header.plugin&#x27;;
 import { PluginListModule } from &#x27;./plugins/list/list.module&#x27;;
+import { PluginList } from &#x27;./plugins/list/list.plugin&#x27;;
+import { PluginParagraphModule } from &#x27;./plugins/paragraph/paragraph.module&#x27;;
+import { PluginParagraph } from &#x27;./plugins/paragraph/paragraph.plugin&#x27;;
 import { NgxEditorJSService } from &#x27;./services/editorjs.service&#x27;;
 import { PluginService } from &#x27;./services/plugins.service&#x27;;
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;./types/config&#x27;;
 import { InitialPlugins, PluginConfig } from &#x27;./types/plugins&#x27;;
-import { PluginHeader } from &#x27;./plugins/header/header.plugin&#x27;;
-import { PluginList } from &#x27;./plugins/list/list.plugin&#x27;;
-import { PluginParagraphModule } from &#x27;./plugins/paragraph/paragraph.module&#x27;;
-import { PluginParagraph } from &#x27;./plugins/paragraph/paragraph.plugin&#x27;;
 
-export function defaultConfig() {
-  return {
-    editorjs: { autofocus: false, initialBlock: &#x27;paragraph&#x27;, holder: &#x27;editor-js&#x27; }
-  };
-}
-
+/**
+ * Factory method for creating the initial set of tool plugins used with the
+ * editor
+ */
 export function createTools(): PluginConfig {
   return { header: new PluginHeader(), list: new PluginList(), paragraph: new PluginParagraph() };
 }
 
-const DEFAULT_CONFIG: NgxEditorJSConfig &#x3D; defaultConfig();
+/**
+ * A default configuration used by each EditorJS instance
+ */
+const DEFAULT_CONFIG: NgxEditorJSConfig &#x3D; {
+  editorjs: { autofocus: false, initialBlock: &#x27;paragraph&#x27;, holder: &#x27;editor-js&#x27; }
+};
 
 /**
  * The &#x60;@tinynodes/ngx-editorjs&#x60; module provides a collection of features to allow

@@ -66,10 +66,10 @@
             <p class="comment">
                 <p>The NgxEditorJSService provides control EditorJS instances via Angular.
 The service has several maps:
-* A map of <code>EditorJS</code> instances
-* A map of <code>BehaviorSubject</code> containing the current array of blocks
-* A map of ready states
-from the last save made on that instance</p>
+- A map of <code>EditorJS</code> instances
+- A map of <code>BehaviorSubject</code> containing the current array of blocks
+- A map of ready states
+The are generated from the last save made on that instance</p>
 
             </p>
 
@@ -79,33 +79,6 @@ from the last save made on that instance</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#blocksMap">blocksMap</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#changeMap">changeMap</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#editorMap">editorMap</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#readyMap">readyMap</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -944,168 +917,6 @@ If there is no instance of that name it will throw an error.</p>
         </tbody>
     </table>
 </section>
-            <section>
-    
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="blocksMap"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            blocksMap</b>
-                            <a href="#blocksMap"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/BlocksMap.html" target="_self" >BlocksMap</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>{}</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:29</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Internal map of all Block <code>BehaviorSubject</code> instances</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="changeMap"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            changeMap</b>
-                            <a href="#changeMap"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/ChangeMap.html" target="_self" >ChangeMap</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>{}</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:39</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Internal map of all EditorJS change states</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="editorMap"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            editorMap</b>
-                            <a href="#editorMap"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/EditorMap.html" target="_self" >EditorMap</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>{}</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:24</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Internal map of all EditorJS instances</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="readyMap"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            readyMap</b>
-                            <a href="#readyMap"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/ReadyMap.html" target="_self" >ReadyMap</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>{}</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:34</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Internal map of all EditorJS ready states</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
 
     </div>
 
@@ -1122,10 +933,10 @@ import { PluginService } from &#x27;./plugins.service&#x27;;
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
  * The service has several maps:
- * * A map of &#x60;EditorJS&#x60; instances
- * * A map of &#x60;BehaviorSubject&#x60; containing the current array of blocks
- * * A map of ready states
- * from the last save made on that instance
+ * - A map of &#x60;EditorJS&#x60; instances
+ * - A map of &#x60;BehaviorSubject&#x60; containing the current array of blocks
+ * - A map of ready states
+ * The are generated from the last save made on that instance
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -1350,7 +1161,7 @@ export class NgxEditorJSService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -1,10 +1,10 @@
-import { PluginCode } from '../plugins/code/code.plugin';
 import { PluginConfig } from '@tinynodes/ngx-editorjs';
-import { PluginSimpleImage } from '../plugins/simple-image/simple-image.plugin';
-import { PluginLink } from '../plugins/link/link.plugin';
-import { PluginMarker } from '../plugins/marker/marker.plugin';
+import { PluginCode, PluginLink, PluginMarker, PluginSimpleImage } from '@tinynodes/ngx-editorjs-plugins';
 
-export function createTools(): PluginConfig {
+/**
+ * Creates the tools for the `ngx-tinynodes` demo application
+ */
+export function createNgxEditorJSDemoTools(): PluginConfig {
   return {
     code: new PluginCode(),
     image: new PluginSimpleImage(),

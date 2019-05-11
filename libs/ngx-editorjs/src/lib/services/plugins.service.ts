@@ -3,7 +3,7 @@ import { BasePlugin, InitialPlugins, PluginConfig, ToolSettingsMap, UserPlugins 
 
 /**
  * The plugin service provides a singleton to store all plugins injected into the application
- * and makes them available for all instances of EditorJS
+ * and makes them available for all instances of `EditorJS`
  */
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { PluginParagraph } from './paragraph.plugin';
 
 /**
- * Internal module to provide the Paragraph block editor
+ * A module that provides the default `EditorJS` `<p>` block tool.
+ * See [the GitHub repo](https://github.com/editor-js/paragraph) for API details
  */
 @NgModule({
   providers: [PluginParagraph]

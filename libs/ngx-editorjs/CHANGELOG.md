@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Removed
+
+- Removed default plugins from project. All plugins are now provided by the `@tinynodes/ngx-editorjs-plugins` module
+
 ## [1.1.2] - 2019-05-11
 
 ### Added

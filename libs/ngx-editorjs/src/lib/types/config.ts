@@ -45,8 +45,17 @@ export interface EditorJSConfig {
   minHeight?: number;
 }
 
+/**
+ * The configuration option that can be passed to the `NgxEditorJSModule.forRoot` method
+ */
 export interface NgxEditorJSConfig {
+  /**
+   * Configuration options for `EditorJS`
+   */
   editorjs?: EditorJSConfig;
 }
 
+/**
+ * Injection token provied for `NgxEditorJSConfig`
+ */
 export const NGX_EDITORJS_CONFIG = new InjectionToken<NgxEditorJSConfig>('NGX_EDITORJS_CONFIG');

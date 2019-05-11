@@ -1,29 +1,34 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import {
+  PluginHeader,
+  PluginHeaderModule,
+  PluginList,
+  PluginListModule,
+  PluginParagraph,
+  PluginParagraphModule
+} from '@tinynodes/ngx-editorjs-plugins';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
-import { PluginHeaderModule } from './plugins/header/header.module';
-import { PluginListModule } from './plugins/list/list.module';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { PluginService } from './services/plugins.service';
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 import { InitialPlugins, PluginConfig } from './types/plugins';
-import { PluginHeader } from './plugins/header/header.plugin';
-import { PluginList } from './plugins/list/list.plugin';
-import { PluginParagraphModule } from './plugins/paragraph/paragraph.module';
-import { PluginParagraph } from './plugins/paragraph/paragraph.plugin';
 
-export function defaultConfig() {
-  return {
-    editorjs: { autofocus: false, initialBlock: 'paragraph', holder: 'editor-js' }
-  };
-}
-
+/**
+ * Factory method for creating the initial set of tool plugins used with the
+ * editor
+ */
 export function createTools(): PluginConfig {
   return { header: new PluginHeader(), list: new PluginList(), paragraph: new PluginParagraph() };
 }
 
-const DEFAULT_CONFIG: NgxEditorJSConfig = defaultConfig();
+/**
+ * A default configuration used by each EditorJS instance
+ */
+const DEFAULT_CONFIG: NgxEditorJSConfig = {
+  editorjs: { autofocus: false, initialBlock: 'paragraph', holder: 'editor-js' }
+};
 
 /**
  * The `@tinynodes/ngx-editorjs` module provides a collection of features to allow

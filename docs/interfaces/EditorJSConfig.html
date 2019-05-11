@@ -501,10 +501,19 @@ export interface EditorJSConfig {
   minHeight?: number;
 }
 
+/**
+ * The configuration option that can be passed to the &#x60;NgxEditorJSModule.forRoot&#x60; method
+ */
 export interface NgxEditorJSConfig {
+  /**
+   * Configuration options for &#x60;EditorJS&#x60;
+   */
   editorjs?: EditorJSConfig;
 }
 
+/**
+ * Injection token provied for &#x60;NgxEditorJSConfig&#x60;
+ */
 export const NGX_EDITORJS_CONFIG &#x3D; new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;);
 </code></pre>
     </div>

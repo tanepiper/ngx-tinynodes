@@ -22,6 +22,7 @@ export class NgxEditorJSEffects {
       (action: SaveStart): Observable<Block[]> => this.editorService.getBlocks(action.payload.holder)
     ]),
     mergeMap(([action, blocks]) => {
+      blocks.subscribe();
       return new SaveEnd({
         holder: action.payload.holder,
         data: {
