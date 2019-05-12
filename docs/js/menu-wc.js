@@ -16,7 +16,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
         <nav>
             <ul class="list">
                 <li class="title">
-                    <a href="index.html" data-type="index-link">Tinynode Angular Documentation</a>
+                    <a href="index.html" data-type="index-link">Tinynodes Angular Documentation</a>
                 </li>
 
                 <li class="divider"></li>
@@ -35,6 +35,26 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </a>
                         </li>
                         <li class="link">
+                            <a href="changelog.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>CHANGELOG
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="contributing.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>CONTRIBUTING
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="license.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>LICENSE
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="todo.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>TODO
+                            </a>
+                        </li>
+                        <li class="link">
                             <a href="dependencies.html" data-type="chapter-link">
                                 <span class="icon ion-ios-list"></span>Dependencies
                             </a>
@@ -49,11 +69,28 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
                         <ul class="links collapse" ${ isNormalMode ? 'id="additional-pages"' : 'id="xs-additional-pages"' }>
-                                    <li class="link ">
-                                        <a href="additional-documentation/ngx-editorjs-readme.html" data-type="entity-link" data-context-id="additional">ngx-editorjs Readme</a>
-                                    </li>
-                                    <li class="link ">
-                                        <a href="additional-documentation/ngx-editorjs-changelog.html" data-type="entity-link" data-context-id="additional">ngx-editorjs Changelog</a>
+                                    <li class="chapter inner">
+                                        <a data-type="chapter-link" href="additional-documentation/tinynodes-library-docs.html" data-context-id="additional">
+                                            <div class="menu-toggler linked" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#additional-page-ca88ec7b85d4d30c1ba6341c020a7464"' : 'data-target="#xs-additional-page-ca88ec7b85d4d30c1ba6341c020a7464"' }>
+                                                <span class="link-name">Tinynodes Library Docs</span>
+                                                <span class="icon ion-ios-arrow-down"></span>
+                                            </div>
+                                        </a>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="additional-page-ca88ec7b85d4d30c1ba6341c020a7464"' : 'id="xs-additional-page-ca88ec7b85d4d30c1ba6341c020a7464"' }>
+                                            <li class="link for-chapter2">
+                                                <a href="additional-documentation/tinynodes-library-docs/ngx-editorjs-readme.html" data-type="entity-link" data-context="sub-entity" data-context-id="additional">ngx-editorjs Readme</a>
+                                            </li>
+                                            <li class="link for-chapter3">
+                                                <a href="additional-documentation/tinynodes-library-docs/ngx-editorjs-readme/ngx-editorjs-changelog.html" data-type="entity-link" data-context="sub-entity" data-context-id="additional">ngx-editorjs Changelog</a>
+                                            </li>
+                                            <li class="link for-chapter2">
+                                                <a href="additional-documentation/tinynodes-library-docs/ngx-editorjs-plugins-readme.html" data-type="entity-link" data-context="sub-entity" data-context-id="additional">ngx-editorjs-plugins Readme</a>
+                                            </li>
+                                            <li class="link for-chapter3">
+                                                <a href="additional-documentation/tinynodes-library-docs/ngx-editorjs-plugins-readme/ngx-editorjs-plugins-changelog.html" data-type="entity-link" data-context="sub-entity" data-context-id="additional">ngx-editorjs-plugins Changelog</a>
+                                            </li>
+                                        </ul>
                                     </li>
                         </ul>
                     </li>
@@ -269,6 +306,24 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                             </li>
                             <li class="link">
+                                <a href="modules/NgxEditorJSPluginServiceModule.html" data-type="entity-link">NgxEditorJSPluginServiceModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-NgxEditorJSPluginServiceModule-0dfabf3e25d71413a365c3072b33982a"' : 'data-target="#xs-injectables-links-module-NgxEditorJSPluginServiceModule-0dfabf3e25d71413a365c3072b33982a"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-NgxEditorJSPluginServiceModule-0dfabf3e25d71413a365c3072b33982a"' :
+                                        'id="xs-injectables-links-module-NgxEditorJSPluginServiceModule-0dfabf3e25d71413a365c3072b33982a"' }>
+                                        <li class="link">
+                                            <a href="injectables/NgxEditorJSPluginService.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>NgxEditorJSPluginService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
                                 <a href="modules/NgxEditorjsPluginsModule.html" data-type="entity-link">NgxEditorjsPluginsModule</a>
                             </li>
                             <li class="link">
@@ -298,16 +353,34 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                             </li>
                             <li class="link">
-                                <a href="modules/PluginHeaderModule.html" data-type="entity-link">PluginHeaderModule</a>
+                                <a href="modules/PluginCodeModule.html" data-type="entity-link">PluginCodeModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-PluginHeaderModule-e66ca4c1e3e3097a5da95c22a224a6b4"' : 'data-target="#xs-injectables-links-module-PluginHeaderModule-e66ca4c1e3e3097a5da95c22a224a6b4"' }>
+                                        'data-target="#injectables-links-module-PluginCodeModule-87d15724131de9bee2a348a05c53e6c6"' : 'data-target="#xs-injectables-links-module-PluginCodeModule-87d15724131de9bee2a348a05c53e6c6"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginHeaderModule-e66ca4c1e3e3097a5da95c22a224a6b4"' :
-                                        'id="xs-injectables-links-module-PluginHeaderModule-e66ca4c1e3e3097a5da95c22a224a6b4"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginCodeModule-87d15724131de9bee2a348a05c53e6c6"' :
+                                        'id="xs-injectables-links-module-PluginCodeModule-87d15724131de9bee2a348a05c53e6c6"' }>
+                                        <li class="link">
+                                            <a href="injectables/PluginCode.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginCode</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/PluginHeaderModule.html" data-type="entity-link">PluginHeaderModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-PluginHeaderModule-bf44308eb33a41ad8f78a6b4c5b0822c"' : 'data-target="#xs-injectables-links-module-PluginHeaderModule-bf44308eb33a41ad8f78a6b4c5b0822c"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginHeaderModule-bf44308eb33a41ad8f78a6b4c5b0822c"' :
+                                        'id="xs-injectables-links-module-PluginHeaderModule-bf44308eb33a41ad8f78a6b4c5b0822c"' }>
                                         <li class="link">
                                             <a href="injectables/PluginHeader.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginHeader</a>
@@ -319,16 +392,52 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/PluginHeaderModule.html" data-type="entity-link">PluginHeaderModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-PluginHeaderModule-f71f276a6e4d0874fd16722abfc6d325-1"' : 'data-target="#xs-injectables-links-module-PluginHeaderModule-f71f276a6e4d0874fd16722abfc6d325-1"' }>
+                                        'data-target="#injectables-links-module-PluginHeaderModule-e66ca4c1e3e3097a5da95c22a224a6b4-1"' : 'data-target="#xs-injectables-links-module-PluginHeaderModule-e66ca4c1e3e3097a5da95c22a224a6b4-1"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginHeaderModule-f71f276a6e4d0874fd16722abfc6d325-1"' :
-                                        'id="xs-injectables-links-module-PluginHeaderModule-f71f276a6e4d0874fd16722abfc6d325-1"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginHeaderModule-e66ca4c1e3e3097a5da95c22a224a6b4-1"' :
+                                        'id="xs-injectables-links-module-PluginHeaderModule-e66ca4c1e3e3097a5da95c22a224a6b4-1"' }>
                                         <li class="link">
                                             <a href="injectables/PluginHeader.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginHeader</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/PluginImageModule.html" data-type="entity-link">PluginImageModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-PluginImageModule-5ae097ac2e3064965945a9b45bc74236"' : 'data-target="#xs-injectables-links-module-PluginImageModule-5ae097ac2e3064965945a9b45bc74236"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginImageModule-5ae097ac2e3064965945a9b45bc74236"' :
+                                        'id="xs-injectables-links-module-PluginImageModule-5ae097ac2e3064965945a9b45bc74236"' }>
+                                        <li class="link">
+                                            <a href="injectables/PluginImage.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginImage</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/PluginLinkModule.html" data-type="entity-link">PluginLinkModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-PluginLinkModule-b61a77f03dc78fd4f1f331a372cba82d"' : 'data-target="#xs-injectables-links-module-PluginLinkModule-b61a77f03dc78fd4f1f331a372cba82d"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginLinkModule-b61a77f03dc78fd4f1f331a372cba82d"' :
+                                        'id="xs-injectables-links-module-PluginLinkModule-b61a77f03dc78fd4f1f331a372cba82d"' }>
+                                        <li class="link">
+                                            <a href="injectables/PluginLink.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginLink</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -337,13 +446,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/PluginListModule.html" data-type="entity-link">PluginListModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-PluginListModule-7bf46593460b0c0822c3991beb0afa55"' : 'data-target="#xs-injectables-links-module-PluginListModule-7bf46593460b0c0822c3991beb0afa55"' }>
+                                        'data-target="#injectables-links-module-PluginListModule-ef5fd19e6b88b490398f8648ac43ad0d"' : 'data-target="#xs-injectables-links-module-PluginListModule-ef5fd19e6b88b490398f8648ac43ad0d"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginListModule-7bf46593460b0c0822c3991beb0afa55"' :
-                                        'id="xs-injectables-links-module-PluginListModule-7bf46593460b0c0822c3991beb0afa55"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginListModule-ef5fd19e6b88b490398f8648ac43ad0d"' :
+                                        'id="xs-injectables-links-module-PluginListModule-ef5fd19e6b88b490398f8648ac43ad0d"' }>
                                         <li class="link">
                                             <a href="injectables/PluginList.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginList</a>
@@ -370,16 +479,34 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                             </li>
                             <li class="link">
-                                <a href="modules/PluginParagraphModule.html" data-type="entity-link">PluginParagraphModule</a>
+                                <a href="modules/PluginMarkerModule.html" data-type="entity-link">PluginMarkerModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-PluginParagraphModule-43c7ce1f1a8d168ede11bc979d870b74"' : 'data-target="#xs-injectables-links-module-PluginParagraphModule-43c7ce1f1a8d168ede11bc979d870b74"' }>
+                                        'data-target="#injectables-links-module-PluginMarkerModule-5c46e2d3dc72e6e12dcbe895b7e08762"' : 'data-target="#xs-injectables-links-module-PluginMarkerModule-5c46e2d3dc72e6e12dcbe895b7e08762"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginParagraphModule-43c7ce1f1a8d168ede11bc979d870b74"' :
-                                        'id="xs-injectables-links-module-PluginParagraphModule-43c7ce1f1a8d168ede11bc979d870b74"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginMarkerModule-5c46e2d3dc72e6e12dcbe895b7e08762"' :
+                                        'id="xs-injectables-links-module-PluginMarkerModule-5c46e2d3dc72e6e12dcbe895b7e08762"' }>
+                                        <li class="link">
+                                            <a href="injectables/PluginMarker.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginMarker</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/PluginParagraphModule.html" data-type="entity-link">PluginParagraphModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-PluginParagraphModule-7a9b483a258a55e505891463b9c25375"' : 'data-target="#xs-injectables-links-module-PluginParagraphModule-7a9b483a258a55e505891463b9c25375"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginParagraphModule-7a9b483a258a55e505891463b9c25375"' :
+                                        'id="xs-injectables-links-module-PluginParagraphModule-7a9b483a258a55e505891463b9c25375"' }>
                                         <li class="link">
                                             <a href="injectables/PluginParagraph.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginParagraph</a>
@@ -401,6 +528,24 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                         <li class="link">
                                             <a href="injectables/PluginParagraph.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginParagraph</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/PluginSimpleImageModule.html" data-type="entity-link">PluginSimpleImageModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-PluginSimpleImageModule-7a8a52e06037019ae919582daff40c16"' : 'data-target="#xs-injectables-links-module-PluginSimpleImageModule-7a8a52e06037019ae919582daff40c16"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PluginSimpleImageModule-7a8a52e06037019ae919582daff40c16"' :
+                                        'id="xs-injectables-links-module-PluginSimpleImageModule-7a8a52e06037019ae919582daff40c16"' }>
+                                        <li class="link">
+                                            <a href="injectables/PluginSimpleImage.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PluginSimpleImage</a>
                                         </li>
                                     </ul>
                                 </li>

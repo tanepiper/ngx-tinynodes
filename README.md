@@ -2,6 +2,10 @@
 
 This repository is a collection of Angular components and demos with full documentation.
 
+See the [Changelog](./CHANGELOG.md) for the development diary of this site, or visit [the documentation of libraries](additional-documentation/tinynodes-library-docs.html).
+
+You can also find a fully searchable API documentation for all `@tinynode` components.
+
 ## Links
 
 - [Repository](https://github.com/tanepiper/ngx-tinynodes)
