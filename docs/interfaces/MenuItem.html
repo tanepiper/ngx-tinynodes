@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Tinynode Angular Documentation</title>
+        <title>Tinynodes Angular Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,7 +14,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">Tinynode Angular Documentation</a>
+            <a href="../" class="navbar-brand">Tinynodes Angular Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -44,7 +44,7 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>BasePlugin</li>
+  <li>MenuItem</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,17 +62,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-plugins/src/lib/types/plugins.ts</code>
+            <code>apps/ngx-tinynodes/src/app/store/app/application.model.ts</code>
         </p>
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Defines the interface for required and optional plugin methods.
-These methods allow a plugin to return a EditorJS plugin and an optional shortcut</p>
-
-            </p>
 
 
         <section>
@@ -88,11 +80,10 @@ These methods allow a plugin to return a EditorJS plugin and an optional shortcu
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#plugin">plugin</a>
+                                        <a href="#label">label</a>
                                 </li>
                                 <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#shortcut">shortcut</a>
+                                        <a href="#link">link</a>
                                 </li>
                             </ul>
                         </td>
@@ -109,13 +100,13 @@ These methods allow a plugin to return a EditorJS plugin and an optional shortcu
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="plugin"></a>
-                                        <span class="name"><b>plugin</b><a href="#plugin"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="label"></a>
+                                        <span class="name"><b>label</b><a href="#label"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>plugin:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                        <code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -123,7 +114,7 @@ These methods allow a plugin to return a EditorJS plugin and an optional shortcu
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -132,25 +123,19 @@ These methods allow a plugin to return a EditorJS plugin and an optional shortcu
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>The plugin settings to be returned</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="shortcut"></a>
-                                        <span class="name"><b>shortcut</b><a href="#shortcut"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="link"></a>
+                                        <span class="name"><b>link</b><a href="#link"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>shortcut:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                        <code>link:         <code><a href="https://angular.io/api/router/RouterLink" target="_blank" >RouterLink</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -158,26 +143,15 @@ These methods allow a plugin to return a EditorJS plugin and an optional shortcu
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            <i>Type : </i>        <code><a href="https://angular.io/api/router/RouterLink" target="_blank" >RouterLink</a></code>
 
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
 
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Optional shortcut for the plugin</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -185,54 +159,17 @@ These methods allow a plugin to return a EditorJS plugin and an optional shortcu
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import { ToolSettings, ToolConstructable } from &#x27;@editorjs/editorjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { RouterLink } from &#x27;@angular/router&#x27;;
 
-/**
- * A Module plugin configuration
- */
-export interface PluginConfig {
-  /**
-   * The key of the plugin and the plugin class extending &#x60;BasePlugin&#x60;
-   */
-  [key: string]: BasePlugin;
+export interface MenuItem {
+  label: string;
+  link: RouterLink;
 }
 
-/**
- * A map of all the tools settings
- */
-export interface ToolSettingsMap {
-  /**
-   * The key of the plugin and the plugin exported tool settings
-   */
-  [key: string]: ToolConstructable | ToolSettings;
+export interface ApplicationState {
+  hidden: boolean;
+  menu: MenuItem[];
 }
-
-/**
- * Defines the interface for required and optional plugin methods.
- * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
- */
-export interface BasePlugin {
-  /**
-   * The plugin settings to be returned
-   */
-  plugin: () &#x3D;&gt; ToolConstructable | ToolSettings;
-
-  /**
-   * Optional shortcut for the plugin
-   */
-  shortcut?: () &#x3D;&gt; string;
-}
-
-/**
- * The Injection token for initial plugins as defined in the ngx-editorjs module
- */
-export const InitialPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;);
-
-/**
- * The injection token for adding plugins via your own application
- */
-export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;);
 </code></pre>
     </div>
 </div>
@@ -259,7 +196,7 @@ export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;Use
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'BasePlugin-1.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

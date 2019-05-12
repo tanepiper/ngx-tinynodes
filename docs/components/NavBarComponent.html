@@ -86,7 +86,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>ngx-nav-bar</code></td>
+                <td class="col-md-9"><code>tinynodes-nav-bar</code></td>
             </tr>
 
             <tr>
@@ -161,7 +161,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(app: <a href="../injectables/ApplicationService.html">ApplicationService</a>)</code>
+<code>constructor(app: <a href="../injectables/AppService.html">AppService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -187,7 +187,7 @@
                                                         <td>app</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ApplicationService.html" target="_self" >ApplicationService</a></code>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -283,10 +283,10 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
-import { ApplicationService } from &#x27;../../store/app/application.service&#x27;;
+import { AppService } from &#x27;../../store/app/application.service&#x27;;
 
 @Component({
-  selector: &#x27;ngx-nav-bar&#x27;,
+  selector: &#x27;tinynodes-nav-bar&#x27;,
   templateUrl: &#x27;nav-bar.component.html&#x27;,
   styleUrls: [&#x27;nav-bar.component.scss&#x27;]
 })
@@ -294,7 +294,7 @@ export class NavBarComponent {
   @Input()
   title &#x3D; &#x27;Navbar Component&#x27;;
 
-  constructor(private readonly app: ApplicationService) {}
+  constructor(private readonly app: AppService) {}
 
   public toggleSidebar() {
     this.app.toggleSidebar();
@@ -401,7 +401,7 @@ a:active {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary">  <button mat-icon-button (click)="toggleSidebar()">    <mat-icon>menu</mat-icon>  </button>  &nbsp;  <span>    <a [routerLink]="[\'/\']" routerLinkActive="router-link-active">{{ title }}</a>  </span>  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>    <ul fxLayout fxLayoutGap="20px" class="navigation-items">      <li>        <a href="https://tanepiper.github.io/ngx-tinynodes/">          <span class="label">Docs</span>        </a>      </li>      <li>        <a href="https://github.com/tanepiper/ngx-tinynodes">          <span class="label">Github</span>        </a>      </li>      <li>        <a href="https://www.npmjs.com/org/tinynodes">          <span class="label">NPM</span>        </a>      </li>    </ul>  </div></mat-toolbar></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'ngx-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'ngx-sidebar'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NavBarComponent'};
 </script>
@@ -437,7 +437,7 @@ a:active {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'NavBarComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -1113,11 +1113,11 @@ If there is no instance of that name it will throw an error.</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable, NgZone } from &#x27;@angular/core&#x27;;
 import EditorJS, { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
+import { NgxEditorJSPluginService } from &#x27;@tinynodes/ngx-editorjs-plugins&#x27;;
 import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
 import { Block } from &#x27;../types/blocks&#x27;;
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;../types/config&#x27;;
 import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from &#x27;../types/maps&#x27;;
-import { NgxEditorJSPluginService } from &#x27;@tinynodes/ngx-editorjs-plugins&#x27;;
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
@@ -1350,7 +1350,7 @@ export class NgxEditorJSService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

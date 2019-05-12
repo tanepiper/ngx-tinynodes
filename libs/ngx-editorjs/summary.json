@@ -1,0 +1,12 @@
+[
+  {
+    "title": "ngx-editorjs Readme",
+    "file": "README.md",
+    "children": [
+      {
+        "title": "ngx-editorjs Changelog",
+        "file": "CHANGELOG.md"
+      }
+    ]
+  }
+]

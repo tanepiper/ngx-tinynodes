@@ -4,7 +4,7 @@ import { ApplicationStore } from './application.store';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class ApplicationService {
+export class AppService {
   constructor(private readonly query: ApplicationQuery, private readonly store: ApplicationStore) {}
 
   get hidden(): Observable<boolean> {

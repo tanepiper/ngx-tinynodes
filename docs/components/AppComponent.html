@@ -196,7 +196,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(app: <a href="../injectables/ApplicationService.html">ApplicationService</a>)</code>
+<code>constructor(app: <a href="../injectables/AppService.html">AppService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -222,7 +222,7 @@
                                                         <td>app</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ApplicationService.html" target="_self" >ApplicationService</a></code>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -449,7 +449,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, ViewChild, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
 import { MatSidenav } from &#x27;@angular/material&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
-import { ApplicationService } from &#x27;../../store/app/application.service&#x27;;
+import { AppService } from &#x27;../../store/app/application.service&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
 
 /**
@@ -477,7 +477,7 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   private readonly onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
 
-  constructor(private readonly app: ApplicationService) {}
+  constructor(private readonly app: AppService) {}
 
   /**
    * Component initialized
@@ -509,7 +509,7 @@ export class AppComponent implements OnInit, OnDestroy {
     &lt;/mat-nav-list&gt;
   &lt;/mat-sidenav&gt;
   &lt;mat-sidenav-content&gt;
-    &lt;ngx-nav-bar title&#x3D;&quot;Tinynodes Angular Demos&quot;&gt;&lt;/ngx-nav-bar&gt;
+    &lt;tinynodes-nav-bar title&#x3D;&quot;Tinynodes Angular Demos&quot;&gt;&lt;/tinynodes-nav-bar&gt;
 
     &lt;main&gt;
       &lt;router-outlet&gt;&lt;/router-outlet&gt;
@@ -517,13 +517,13 @@ export class AppComponent implements OnInit, OnDestroy {
   &lt;/mat-sidenav-content&gt;
 &lt;/mat-sidenav-container&gt;
 
-&lt;!-- &lt;ngx-nav-bar&gt;&lt;/ngx-nav-bar&gt;
+&lt;!-- &lt;tinynodes-nav-bar&gt;&lt;/tinynodes-nav-bar&gt;
 
 &lt;div class&#x3D;&quot;container-fluid&quot;&gt;
   &lt;div class&#x3D;&quot;row&quot;&gt;
     &lt;nav class&#x3D;&quot;col-md-2 d-none d-md-block bg-light sidebar&quot;&gt;
       &lt;div class&#x3D;&quot;sidebar-sticky&quot;&gt;
-        &lt;ngx-sidebar&gt;&lt;/ngx-sidebar&gt;
+        &lt;tinynodes-sidebar&gt;&lt;/tinynodes-sidebar&gt;
       &lt;/div&gt;
     &lt;/nav&gt;
     &lt;main role&#x3D;&quot;main&quot; class&#x3D;&quot;col-md-9 ml-sm-auto col-lg-10 pt-3 px-4&quot;&gt;
@@ -611,8 +611,8 @@ a:active {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container>  <mat-sidenav #sidenav role="navigation" mode="side" opened>    <mat-nav-list>      <a mat-list-item [routerLink]="[\'/ngx-editorjs-demo\']" routerLinkActive="router-link-active">        <span class="label">Demo: ngx-editor</span>      </a>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <ngx-nav-bar title="Tinynodes Angular Demos"></ngx-nav-bar>    <main>      <router-outlet></router-outlet>    </main>  </mat-sidenav-content></mat-sidenav-container><!-- <ngx-nav-bar></ngx-nav-bar><div class="container-fluid">  <div class="row">    <nav class="col-md-2 d-none d-md-block bg-light sidebar">      <div class="sidebar-sticky">        <ngx-sidebar></ngx-sidebar>      </div>    </nav>    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">        <router-outlet></router-outlet>      </div>    </main>  </div></div> --></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'ngx-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'ngx-sidebar'}];
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container>  <mat-sidenav #sidenav role="navigation" mode="side" opened>    <mat-nav-list>      <a mat-list-item [routerLink]="[\'/ngx-editorjs-demo\']" routerLinkActive="router-link-active">        <span class="label">Demo: ngx-editor</span>      </a>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <tinynodes-nav-bar title="Tinynodes Angular Demos"></tinynodes-nav-bar>    <main>      <router-outlet></router-outlet>    </main>  </mat-sidenav-content></mat-sidenav-container><!-- <tinynodes-nav-bar></tinynodes-nav-bar><div class="container-fluid">  <div class="row">    <nav class="col-md-2 d-none d-md-block bg-light sidebar">      <div class="sidebar-sticky">        <tinynodes-sidebar></tinynodes-sidebar>      </div>    </nav>    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">        <router-outlet></router-outlet>      </div>    </main>  </div></div> --></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>
@@ -648,7 +648,7 @@ a:active {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

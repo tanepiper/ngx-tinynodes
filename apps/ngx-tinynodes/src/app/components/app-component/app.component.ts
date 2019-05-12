@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Subject } from 'rxjs';
-import { ApplicationService } from '../../store/app/application.service';
+import { AppService } from '../../store/app/application.service';
 import { takeUntil } from 'rxjs/operators';
 
 /**
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   private readonly onDestroy$ = new Subject<boolean>();
 
-  constructor(private readonly app: ApplicationService) {}
+  constructor(private readonly app: AppService) {}
 
   /**
    * Component initialized

@@ -3,18 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ngx-tinynodes documentation</title>
+        <title>Tinynodes Angular Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	      <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/material.css">
+        <link rel="stylesheet" href="../styles/readthedocs.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ngx-tinynodes documentation</a>
+            <a href="../" class="navbar-brand">Tinynodes Angular Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -28,7 +28,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content interface">
+               <div class="content additional-page">
                    <div class="content-data">
 
 
@@ -42,100 +42,23 @@
 
 
 
-<ol class="breadcrumb">
-  <li>Interfaces</li>
-  <li>NgxEditorJSTools</li>
-</ol>
-
-<ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
-</ul>
-
-<div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
-        <p class="comment">
-            <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/types/config.ts</code>
-        </p>
 
 
 
 
 
-            <section>
-    <h3 id="inputs">Indexable</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <code>[key: string]:    <code>ToolSettings</code>
-</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">libs/ngx-editorjs/src/lib/types/config.ts:4</a></div>
-                            </td>
-                        </tr>
-            </tbody>
-        </table>
-</section>
 
-    </div>
-
-
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import { OutputData, ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
-
-export interface NgxEditorJSTools {
-  [key: string]: ToolSettings;
-}
-
-/**
- * Configuration for the EditorJS instance
- */
-export interface EditorJSConfig {
-  /**
-   * ID of the element to hold the config
-   */
-  holder?: string;
-  /**
-   * If the EditorJS is autofocused on creation (default: false)
-   */
-  autofocus?: boolean;
-
-  /**
-   * The name of the initial block (default &quot;paragraph&quot;)
-   */
-  initialBlock?: string;
-
-  /**
-   * Any initial output data to render
-   */
-  data?: OutputData;
-}
-
-export interface NgxEditorJSConfig {
-  editorjs?: EditorJSConfig;
-}
-
-export const NGX_EDITORJS_CONFIG &#x3D; new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;);
-</code></pre>
-    </div>
+<h1 id="tinynodes-development-diary">Tinynodes Development Diary</h1>
+<div class="alert alert-info">
+Welcome to the Tinynodes development diary. This is a place to find small updates and news related to projects contained within this repo.
 </div>
 
-
-
-
-
+<h2 id="sunday-12th-may-2019">Sunday, 12th May 2019</h2>
+<p>The first devlog is to report that currently <code>version 1.2</code> has been delayed due to current build issues.
+A <a href="https://github.com/nrwl/nx/issues/1077">bug report has been filed</a> on <code>@nrwl/nx</code> project.</p>
+<p>In 1.2 there is a new <a href="https://www.npmjs.com/package/@tinynodes/ngx-editorjs-plugins"><code>@tinynodes/ngx-editorjs-plugins</code></a> module that provides exports for several common <code>EditorJS</code> plugins and will be expanded to cover all the officially released plugins.</p>
+<p>With this change the current build scripts break, and until it is resolved this will block the release.</p>
+<p>In the meantime I&#39;ll continue to work on this small demo site, making it more useful as a good example of an Angular app.</p>
 
                    </div><div class="search-results">
     <div class="has-results">
@@ -153,8 +76,8 @@ export const NGX_EDITORJS_CONFIG &#x3D; new InjectionToken&lt;NgxEditorJSConfig&
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSTools.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
+            var COMPODOC_CURRENT_PAGE_URL = 'tinynodes-dev-log.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

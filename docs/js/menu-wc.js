@@ -35,6 +35,21 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </a>
                         </li>
                         <li class="link">
+                            <a href="changelog.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>CHANGELOG
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="contributing.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>CONTRIBUTING
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="license.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>LICENSE
+                            </a>
+                        </li>
+                        <li class="link">
                             <a href="todo.html"  data-type="chapter-link">
                                 <span class="icon ion-ios-paper"></span>TODO
                             </a>
@@ -93,20 +108,20 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/ApplicationDataModule.html" data-type="entity-link">ApplicationDataModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-ApplicationDataModule-8a2c46eefb197db73af50fb03f39404b"' : 'data-target="#xs-injectables-links-module-ApplicationDataModule-8a2c46eefb197db73af50fb03f39404b"' }>
+                                        'data-target="#injectables-links-module-ApplicationDataModule-f24c30e7d76176104710b63b7b8cacac"' : 'data-target="#xs-injectables-links-module-ApplicationDataModule-f24c30e7d76176104710b63b7b8cacac"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ApplicationDataModule-8a2c46eefb197db73af50fb03f39404b"' :
-                                        'id="xs-injectables-links-module-ApplicationDataModule-8a2c46eefb197db73af50fb03f39404b"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ApplicationDataModule-f24c30e7d76176104710b63b7b8cacac"' :
+                                        'id="xs-injectables-links-module-ApplicationDataModule-f24c30e7d76176104710b63b7b8cacac"' }>
+                                        <li class="link">
+                                            <a href="injectables/AppService.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>AppService</a>
+                                        </li>
                                         <li class="link">
                                             <a href="injectables/ApplicationQuery.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>ApplicationQuery</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="injectables/ApplicationService.html"
-                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>ApplicationService</a>
                                         </li>
                                         <li class="link">
                                             <a href="injectables/ApplicationStore.html"
@@ -170,13 +185,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/NgxEditorJSModule.html" data-type="entity-link">NgxEditorJSModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' : 'data-target="#xs-components-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' }>
+                                            'data-target="#components-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' : 'data-target="#xs-components-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' :
-                                            'id="xs-components-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' :
+                                            'id="xs-components-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' }>
                                             <li class="link">
                                                 <a href="components/NgxEditorJSComponent.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxEditorJSComponent</a>
@@ -185,13 +200,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#directives-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' : 'data-target="#xs-directives-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' }>
+                                        'data-target="#directives-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' : 'data-target="#xs-directives-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' :
-                                        'id="xs-directives-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' :
+                                        'id="xs-directives-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' }>
                                         <li class="link">
                                             <a href="directives/NgxEditorJSDirective.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxEditorJSDirective</a>
@@ -200,17 +215,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' : 'data-target="#xs-injectables-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' }>
+                                        'data-target="#injectables-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' : 'data-target="#xs-injectables-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' :
-                                        'id="xs-injectables-links-module-NgxEditorJSModule-020d5ee122275d8db273cceb26c1ebc3"' }>
-                                        <li class="link">
-                                            <a href="injectables/NgxEditorJSPluginService.html"
-                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>NgxEditorJSPluginService</a>
-                                        </li>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' :
+                                        'id="xs-injectables-links-module-NgxEditorJSModule-5ecaf5509039c63c068bc3ea40fb1975"' }>
                                         <li class="link">
                                             <a href="injectables/NgxEditorJSService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>NgxEditorJSService</a>
@@ -225,13 +236,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/NgxEditorJSPluginServiceModule.html" data-type="entity-link">NgxEditorJSPluginServiceModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-NgxEditorJSPluginServiceModule-2279afaa57dfe04a990498f8dd701f94"' : 'data-target="#xs-injectables-links-module-NgxEditorJSPluginServiceModule-2279afaa57dfe04a990498f8dd701f94"' }>
+                                        'data-target="#injectables-links-module-NgxEditorJSPluginServiceModule-0dfabf3e25d71413a365c3072b33982a"' : 'data-target="#xs-injectables-links-module-NgxEditorJSPluginServiceModule-0dfabf3e25d71413a365c3072b33982a"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-NgxEditorJSPluginServiceModule-2279afaa57dfe04a990498f8dd701f94"' :
-                                        'id="xs-injectables-links-module-NgxEditorJSPluginServiceModule-2279afaa57dfe04a990498f8dd701f94"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-NgxEditorJSPluginServiceModule-0dfabf3e25d71413a365c3072b33982a"' :
+                                        'id="xs-injectables-links-module-NgxEditorJSPluginServiceModule-0dfabf3e25d71413a365c3072b33982a"' }>
                                         <li class="link">
                                             <a href="injectables/NgxEditorJSPluginService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>NgxEditorJSPluginService</a>
@@ -498,6 +509,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/ListBlock.html" data-type="entity-link">ListBlock</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MenuItem.html" data-type="entity-link">MenuItem</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/NgxEditorJSConfig.html" data-type="entity-link">NgxEditorJSConfig</a>

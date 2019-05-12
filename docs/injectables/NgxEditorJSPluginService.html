@@ -236,7 +236,7 @@ will be passed in and merged and stored in the config map</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>add(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, tool: <a href="../interfaces/BasePlugin.html">BasePlugin</a>)</code>
+                    <code>add(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, plugin: <a href="../interfaces/BasePlugin.html">BasePlugin</a>)</code>
                 </td>
             </tr>
 
@@ -262,11 +262,12 @@ will be passed in and merged and stored in the config map</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>name</td>
+                                    <td>key</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -276,9 +277,13 @@ will be passed in and merged and stored in the config map</p>
                                     </td>
 
 
+                                    <td>
+                                        <p>The key for the map to store the plugin</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>tool</td>
+                                    <td>plugin</td>
                                     <td>
                                                 <code><a href="../interfaces/BasePlugin.html" target="_self" >BasePlugin</a></code>
                                     </td>
@@ -288,6 +293,10 @@ will be passed in and merged and stored in the config map</p>
                                     </td>
 
 
+                                    <td>
+                                        <p>The plugin instance to add to the service</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -322,7 +331,7 @@ will be passed in and merged and stored in the config map</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>get(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>get(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -352,7 +361,7 @@ will be passed in and merged and stored in the config map</p>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>name</td>
+                                    <td>key</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -369,7 +378,7 @@ will be passed in and merged and stored in the config map</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>        <code><a href="../interfaces/BasePlugin.html" target="_self" >BasePlugin</a></code>
 
                     </div>
                     <div class="io-description">
@@ -479,7 +488,7 @@ will be passed in and merged and stored in the config map</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>remove(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>remove(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -509,7 +518,7 @@ will be passed in and merged and stored in the config map</p>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>name</td>
+                                    <td>key</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -656,28 +665,28 @@ export class NgxEditorJSPluginService {
 
   /**
    * Add a plugin to the store
-   * @param name
-   * @param tool
+   * @param key The key for the map to store the plugin
+   * @param plugin The plugin instance to add to the service
    */
-  public add(name: string, tool: BasePlugin) {
-    this.pluginsMap[name] &#x3D; tool;
+  public add(key: string, plugin: BasePlugin) {
+    this.pluginsMap[key] &#x3D; plugin;
   }
 
   /**
    * Remove a plugin from the store
-   * @param name
+   * @param key
    */
-  public remove(name: string) {
-    this.pluginsMap[name] &#x3D; null;
-    delete this.pluginsMap[name];
+  public remove(key: string) {
+    this.pluginsMap[key] &#x3D; null;
+    delete this.pluginsMap[key];
   }
 
   /**
    * Get a single plugin from the map
    * @param name
    */
-  public get(name: string) {
-    this.pluginsMap[name];
+  public get(key: string): BasePlugin {
+    return this.pluginsMap[key];
   }
 
   /**
@@ -697,18 +706,17 @@ export class NgxEditorJSPluginService {
         return !exclude.includes(key);
       })
       .reduce((finalTools, [key, plugin]) &#x3D;&gt; {
-        let p;
         if (plugin.shortcut) {
-          p &#x3D; {
+          return {
             [key]: {
               class: plugin.plugin(),
               shortcut: plugin.shortcut()
-            }
+            },
+            ...finalTools
           };
         } else {
-          p &#x3D; { [key]: plugin.plugin() };
+          return { [key]: plugin.plugin(), ...finalTools };
         }
-        return { ...finalTools, ...p };
       }, {});
   }
 }
@@ -744,7 +752,7 @@ export class NgxEditorJSPluginService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSPluginService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

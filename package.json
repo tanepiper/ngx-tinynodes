@@ -25,8 +25,8 @@
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "help": "./node_modules/.bin/nx help",
-    "docs:generate": "compodoc -p tsconfig.json -d docs --theme readthedocs --includes libs/ngx-editorjs -n 'Tinynode Angular Documentation' --disableLifeCycleHooks --disableInternal --disablePrivate --disableProtected",
-    "docs:serve": "compodoc -p tsconfig.json -d docs --theme readthedocs --includes libs/ngx-editorjs -n 'Tinynode Angular Documentation' --disableLifeCycleHooks --disableInternal --disablePrivate --disableProtected -w -s"
+    "docs:generate": "./tools/scripts/docs/build-prod.sh",
+    "docs:serve": "./tools/scripts/docs/watch.sh"
   },
   "private": true,
   "dependencies": {
