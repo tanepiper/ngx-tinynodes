@@ -2,7 +2,7 @@ import { Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Block } from '../types/blocks';
-import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
+import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG, EditorJSConfig } from '../types/config';
 import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from '../types/maps';
 import { NgxEditorJSPluginService } from './plugins.service';
 
@@ -52,43 +52,36 @@ export class NgxEditorJSService {
    * @param excludeTools String array of keys to not include with this editor
    * @param autoSave When an instance changes we update the block map, set to false if you want to disable
    */
-  public createEditor(holder: string, blocks?: Block[], excludeTools?: string[], autoSave = true): void {
-    if (this.editorMap[holder]) {
-      this.destroy(holder);
+  public createEditor(config: EditorJSConfig, includeTools?: string[], autoSave = true): void {
+    if (this.editorMap[config.holder]) {
+      this.destroy(config.holder);
     }
 
-    if (this.readyMap[holder]) {
-      this.readyMap[holder].next(false);
+    if (this.readyMap[config.holder]) {
+      this.readyMap[config.holder].next(false);
     } else {
-      this.readyMap[holder] = new BehaviorSubject<boolean>(false);
+      this.readyMap[config.holder] = new BehaviorSubject<boolean>(false);
     }
-    if (this.changeMap[holder]) {
-      this.changeMap[holder].next(0);
+    if (this.changeMap[config.holder]) {
+      this.changeMap[config.holder].next(0);
     } else {
-      this.changeMap[holder] = new BehaviorSubject<number>(0);
+      this.changeMap[config.holder] = new BehaviorSubject<number>(0);
     }
 
     this.zone.run(() => {
       const options: EditorConfig = {
         ...this.config.editorjs,
-        holder,
-        tools: this.plugins.getTools(excludeTools)
+        ...config,
+        tools: this.plugins.getTools(includeTools)
       };
-      if (blocks) {
-        options.data = {
-          blocks,
-          time: Date.now(),
-          version: EditorJS.version
-        };
-      }
-      this.editorMap[holder] = new EditorJS({
+      this.editorMap[config.holder] = new EditorJS({
         ...options,
         onReady: () => {
-          this.readyMap[holder].next(true);
+          this.readyMap[config.holder].next(true);
         },
         onChange: () => {
-          this.changeMap[holder].next(Date.now());
-          if (autoSave) this.save(holder);
+          this.changeMap[config.holder].next(Date.now());
+          if (autoSave) this.save(config.holder);
         }
       });
     });
@@ -102,7 +95,7 @@ export class NgxEditorJSService {
    */
   public getEditor(holder: string): EditorJS {
     if (!this.editorMap[holder]) {
-      this.createEditor(holder);
+      this.createEditor({ holder });
     }
     return this.editorMap[holder];
   }

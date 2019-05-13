@@ -1,58 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { InjectionToken, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { createConfig } from './config/module-config';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
-import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
-
-/**
- * The default holder ID to attach `EditorJS` to
- */
-const DEFAULT_HOLDER_ID = 'editor-js';
-
-/**
- * Creates a configuration for EditorJS
- * @param config Optional module configurations
- */
-export function createConfig(config?: NgxEditorJSConfig): NgxEditorJSConfig {
-  if (!config || !config.editorjs) {
-    return {
-      editorjs: {
-        holder: DEFAULT_HOLDER_ID
-      }
-    };
-  }
-  const editorJsConfig: EditorJSConfig = {};
-  if (config.editorjs.autofocus) {
-    editorJsConfig.autofocus = config.editorjs.autofocus;
-  }
-  if (config.editorjs.data) {
-    editorJsConfig.data = config.editorjs.data;
-  }
-  if (config.editorjs.hideToolbar) {
-    editorJsConfig.hideToolbar = config.editorjs.hideToolbar;
-  }
-  if (config.editorjs.initialBlock) {
-    editorJsConfig.initialBlock = config.editorjs.initialBlock;
-  }
-  if (config.editorjs.minHeight) {
-    editorJsConfig.minHeight = config.editorjs.minHeight;
-  }
-  if (config.editorjs.placeholder) {
-    editorJsConfig.placeholder = config.editorjs.placeholder;
-  }
-  if (config.editorjs.sanitizer) {
-    editorJsConfig.sanitizer = config.editorjs.sanitizer;
-  }
-
-  return {
-    editorjs: {
-      holder: config.editorjs.holder || DEFAULT_HOLDER_ID,
-      ...editorJsConfig
-    }
-  };
-}
+import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 
 /**
  * Internal token for injecting the `NgxEditorJSConfig` into the config factory
@@ -68,7 +22,7 @@ export const FOR_ROOT_OPTIONS_TOKEN = new InjectionToken<NgxEditorJSConfig>('for
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
   exports: [NgxEditorJSComponent, NgxEditorJSDirective],
   providers: [NgxEditorJSService, NgxEditorJSPluginService]
