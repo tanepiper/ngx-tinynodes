@@ -1,4 +1,4 @@
-# ngx-tinynodes General MIT Licence
+# Tinynodes General MIT Licence
 
 Copyright 2019 Tane Piper <me@tane.dev>
 
