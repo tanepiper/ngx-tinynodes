@@ -2,7 +2,7 @@ import { Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Block } from '../types/blocks';
-import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG, EditorJSConfig } from '../types/config';
+import { EditorJSConfig, EDITIOR_JS_INSTANCE, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from '../types/maps';
 import { NgxEditorJSPluginService } from './plugins.service';
 
@@ -40,6 +40,7 @@ export class NgxEditorJSService {
 
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
+    @Inject(EDITIOR_JS_INSTANCE) private readonly EditorJS: EditorJS,
     private readonly plugins: NgxEditorJSPluginService,
     private zone: NgZone
   ) {}
@@ -67,6 +68,11 @@ export class NgxEditorJSService {
     } else {
       this.changeMap[config.holder] = new BehaviorSubject<number>(0);
     }
+    if (this.blocksMap[config.holder]) {
+      this.blocksMap[config.holder].next([]);
+    } else {
+      this.blocksMap[config.holder] = new BehaviorSubject<Block[]>([]);
+    }
 
     this.zone.run(() => {
       const options: EditorConfig = {
@@ -74,7 +80,7 @@ export class NgxEditorJSService {
         ...config,
         tools: this.plugins.getTools(includeTools)
       };
-      this.editorMap[config.holder] = new EditorJS({
+      this.editorMap[config.holder] = new (this.EditorJS as any)({
         ...options,
         onReady: () => {
           this.readyMap[config.holder].next(true);
@@ -151,9 +157,11 @@ export class NgxEditorJSService {
       this.editorMap[holder].blocks.render({
         blocks,
         time: Date.now(),
-        version: EditorJS.version
+        version: (this.EditorJS as any).version
       });
     });
+    this.blocksMap[holder].next(blocks);
+    this.changeMap[holder].next(Date.now());
   }
 
   /**

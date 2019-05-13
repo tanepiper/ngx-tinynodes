@@ -1,23 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
-import { ToolSettings } from '@editorjs/editorjs';
-import { BasePlugin, UserPlugins } from '../types/plugins';
+import { UserPlugins } from '../types/plugins';
 import { NgxEditorJSPluginService } from './plugins.service';
-
-export class TestClass {
-  constructor() {}
-  render() {
-    return document.createElement('div');
-  }
-}
-
-export class MockPlugin implements BasePlugin {
-  public plugin(): ToolSettings {
-    return { class: TestClass };
-  }
-  shortcut() {
-    return 'test-shortcut';
-  }
-}
+import { MockPlugin } from './testing/shared';
 
 describe('NgxEditorJSPluginService', () => {
   let service: NgxEditorJSPluginService;
@@ -70,5 +54,17 @@ describe('NgxEditorJSPluginService', () => {
   it('should have support getting a plugin', () => {
     const instance = service.get('paragraph');
     expect(instance).toBeInstanceOf(MockPlugin);
+  });
+
+  it('should return a list of tools', () => {
+    const tools = service.getTools();
+    const keys = Object.keys(tools);
+    expect(keys).toContain('paragraph');
+  });
+
+  it('should return a list of tools without excluded tools', () => {
+    const tools = service.getTools(['paragraph']);
+    const keys = Object.keys(tools);
+    expect(keys['paragraph']).toBeFalsy();
   });
 });

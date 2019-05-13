@@ -12,7 +12,11 @@ import { takeUntil } from 'rxjs/operators';
 export class SidebarComponent {
   constructor(private readonly app: AppService) {}
 
-  public get menu() {
-    return this.app.getMenu();
+  public get projects() {
+    return this.app.getMenu('tinynode-projects');
+  }
+
+  public get openSource() {
+    return this.app.getMenu('other-projects');
   }
 }

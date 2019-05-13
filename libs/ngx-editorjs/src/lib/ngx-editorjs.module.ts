@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { InjectionToken, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import EditorJS from '@editorjs/editorjs';
 import { createConfig } from './config/module-config';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
-import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
+import { EDITIOR_JS_INSTANCE, FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 
-/**
- * Internal token for injecting the `NgxEditorJSConfig` into the config factory
- */
-export const FOR_ROOT_OPTIONS_TOKEN = new InjectionToken<NgxEditorJSConfig>('forRoot() NgxEditorJSConfig.');
+export function editorJSInstance(editorJS: EditorJS) {
+  console.log(editorJS);
+  return editorJS;
+}
 
 /**
  * The `@tinynodes/ngx-editorjs` module provides a collection of features to allow
@@ -25,7 +26,14 @@ export const FOR_ROOT_OPTIONS_TOKEN = new InjectionToken<NgxEditorJSConfig>('for
   imports: [CommonModule, FormsModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
   exports: [NgxEditorJSComponent, NgxEditorJSDirective],
-  providers: [NgxEditorJSService, NgxEditorJSPluginService]
+  providers: [
+    NgxEditorJSService,
+    NgxEditorJSPluginService,
+    {
+      provide: EDITIOR_JS_INSTANCE,
+      useValue: EditorJS
+    }
+  ]
 })
 export class NgxEditorJSModule {
   constructor(

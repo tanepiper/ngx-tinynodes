@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { OutputData, SanitizerConfig } from '@editorjs/editorjs';
+import EditorJS, { OutputData, SanitizerConfig } from '@editorjs/editorjs';
 
 /**
  * Configuration for the EditorJS instance
@@ -60,3 +60,13 @@ export interface NgxEditorJSConfig {
  * Injection token provied for `NgxEditorJSConfig`
  */
 export const NGX_EDITORJS_CONFIG = new InjectionToken<NgxEditorJSConfig>('NGX_EDITORJS_CONFIG');
+
+/**
+ * Internal token for injecting the `NgxEditorJSConfig` into the config factory
+ */
+export const FOR_ROOT_OPTIONS_TOKEN = new InjectionToken<NgxEditorJSConfig>('FOR_ROOT_OPTIONS_TOKEN');
+
+/**
+ * Get the EditorJS instance injected into the app
+ */
+export const EDITIOR_JS_INSTANCE = new InjectionToken<EditorJS>('EDITIOR_JS_INSTANCE');

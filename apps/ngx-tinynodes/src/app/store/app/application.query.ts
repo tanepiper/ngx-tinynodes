@@ -10,6 +10,6 @@ export class ApplicationQuery extends Query<ApplicationState> {
   }
 
   getMenu() {
-    return this.getValue().menu;
+    return this.getValue().menus;
   }
 }
