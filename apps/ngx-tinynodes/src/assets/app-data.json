@@ -1,0 +1,16 @@
+{
+  "menuItems": [
+    {
+      "label": "Tinynode Projects",
+      "children": [
+        {
+          "label": "Demo: ngx-editorjs",
+          "link": ["/ngx-editorjs-demo"]
+        }
+      ]
+    },
+    {
+      "label": "Other Projects"
+    }
+  ]
+}

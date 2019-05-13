@@ -1,18 +1,9 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnDestroy,
-  SimpleChanges,
-  AfterContentInit
-} from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import EditorJS, { SanitizerConfig } from '@editorjs/editorjs';
+import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
 import { EditorJSConfig } from '../types/config';
-import { createEditorJSConfig } from '../config/editor-config';
 
 /**
  * The main directive of `ngx-editorjs` provides a way to attach

@@ -1,5 +1,5 @@
-<mat-sidenav #sidenav role="navigation" mode="side" opened>
-  <mat-nav-list>
-    <a mat-list-item [routerLink]="['/ngx-editorjs-demo']" routerLinkActive="active">Demo: ngx-editorjs</a>
-  </mat-nav-list>
-</mat-sidenav>
+<mat-nav-list *ngFor="let menuItem of menu">
+  <h3 mat-subheader>{{ menuItem.label }}</h3>
+
+  <a *ngFor="let child of menuItem.children" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
+</mat-nav-list>

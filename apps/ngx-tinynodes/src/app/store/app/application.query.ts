@@ -8,4 +8,8 @@ export class ApplicationQuery extends Query<ApplicationState> {
   constructor(protected store: ApplicationStore) {
     super(store);
   }
+
+  getMenu() {
+    return this.getValue().menu;
+  }
 }
