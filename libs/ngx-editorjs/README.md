@@ -12,10 +12,12 @@ For changes see the [CHANGELOG](./CHANGELOG.md)
 Install the library via `npm`:
 
 ```bash
-> npm install @tinynodes/ngx-editorjs
+> npm install @tinynodes/ngx-editorjs @tinynodes/ngx-editorjs-plugins
 ```
 
-Once installed, include the `NgxEditorJSModule` module in your project with the `forRoot` method. By default the editor is pre-configured with the standard Header and List tools provided by the EditorJS Team. To overwrite existing tools or add your own see documentation on adding then via Plugin Modules.
+Once installed, include the `NgxEditorJSModule` module in your project with the `forRoot` method. The `forRoot` takes an optional configuration.
+
+You also need to pass a provider for `UserPlugins` with a factory function that returns an options map tools to provide to the `EditorJS` instance. An example of this is shows [in the demo application](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-demo/src/lib/config/index.ts)
 
 ```ts
 import { NgModule } from '@angular/core';
@@ -23,6 +25,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
 import { AppComponent } from './app.component';
 import EditorJS from '@editorjs/editorjs';
+
+import { createTools } from './create-tools.config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,6 +44,12 @@ import EditorJS from '@editorjs/editorjs';
         }
       }
     })
+  ],
+  providers: [
+    {
+      provide: UserPlugins,
+      useFactory: createTools
+    }
   ],
   bootstrap: [AppComponent]
 })

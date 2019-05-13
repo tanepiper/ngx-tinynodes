@@ -3,13 +3,15 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
+import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
 import {
   PluginCodeModule,
+  PluginHeaderModule,
   PluginLinkModule,
+  PluginListModule,
   PluginMarkerModule,
-  PluginSimpleImageModule,
-  UserPlugins
+  PluginParagraphModule,
+  PluginSimpleImageModule
 } from '@tinynodes/ngx-editorjs-plugins';
 import { MarkdownModule } from 'ngx-markdown';
 import { createNgxEditorJSDemoTools } from './config';
@@ -26,6 +28,9 @@ import { PageStoreModule } from './store/pages/pages.module';
     ReactiveFormsModule,
     PageStoreModule,
     NgxEditorJSModule,
+    PluginHeaderModule,
+    PluginParagraphModule,
+    PluginListModule,
     PluginCodeModule,
     PluginSimpleImageModule,
     PluginLinkModule,

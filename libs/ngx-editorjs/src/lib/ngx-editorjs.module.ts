@@ -1,35 +1,63 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import {
-  InitialPlugins,
-  NgxEditorJSPluginServiceModule,
-  PluginConfig,
-  PluginHeader,
-  PluginHeaderModule,
-  PluginList,
-  PluginListModule,
-  PluginParagraph,
-  PluginParagraphModule
-} from '@tinynodes/ngx-editorjs-plugins';
+import { InjectionToken, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
-import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
+import { NgxEditorJSPluginService } from './services/plugins.service';
+import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 
 /**
- * Factory method for creating the initial set of tool plugins used with the
- * editor
+ * The default holder ID to attach `EditorJS` to
  */
-export function createTools(): PluginConfig {
-  return { header: new PluginHeader(), list: new PluginList(), paragraph: new PluginParagraph() };
+const DEFAULT_HOLDER_ID = 'editor-js';
+
+/**
+ * Creates a configuration for EditorJS
+ * @param config Optional module configurations
+ */
+export function createConfig(config?: NgxEditorJSConfig): NgxEditorJSConfig {
+  if (!config || !config.editorjs) {
+    return {
+      editorjs: {
+        holder: DEFAULT_HOLDER_ID
+      }
+    };
+  }
+  const editorJsConfig: EditorJSConfig = {};
+  if (config.editorjs.autofocus) {
+    editorJsConfig.autofocus = config.editorjs.autofocus;
+  }
+  if (config.editorjs.data) {
+    editorJsConfig.data = config.editorjs.data;
+  }
+  if (config.editorjs.hideToolbar) {
+    editorJsConfig.hideToolbar = config.editorjs.hideToolbar;
+  }
+  if (config.editorjs.initialBlock) {
+    editorJsConfig.initialBlock = config.editorjs.initialBlock;
+  }
+  if (config.editorjs.minHeight) {
+    editorJsConfig.minHeight = config.editorjs.minHeight;
+  }
+  if (config.editorjs.placeholder) {
+    editorJsConfig.placeholder = config.editorjs.placeholder;
+  }
+  if (config.editorjs.sanitizer) {
+    editorJsConfig.sanitizer = config.editorjs.sanitizer;
+  }
+
+  return {
+    editorjs: {
+      holder: config.editorjs.holder || DEFAULT_HOLDER_ID,
+      ...editorJsConfig
+    }
+  };
 }
 
 /**
- * A default configuration used by each EditorJS instance
+ * Internal token for injecting the `NgxEditorJSConfig` into the config factory
  */
-const DEFAULT_CONFIG: NgxEditorJSConfig = {
-  editorjs: { autofocus: false, initialBlock: 'paragraph', holder: 'editor-js' }
-};
+export const FOR_ROOT_OPTIONS_TOKEN = new InjectionToken<NgxEditorJSConfig>('forRoot() NgxEditorJSConfig.');
 
 /**
  * The `@tinynodes/ngx-editorjs` module provides a collection of features to allow
@@ -40,16 +68,10 @@ const DEFAULT_CONFIG: NgxEditorJSConfig = {
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule, PluginHeaderModule, PluginListModule, PluginParagraphModule, NgxEditorJSPluginServiceModule],
+  imports: [CommonModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
   exports: [NgxEditorJSComponent, NgxEditorJSDirective],
-  providers: [
-    NgxEditorJSService,
-    {
-      provide: InitialPlugins,
-      useFactory: createTools
-    }
-  ]
+  providers: [NgxEditorJSService, NgxEditorJSPluginService]
 })
 export class NgxEditorJSModule {
   constructor(
@@ -63,20 +85,18 @@ export class NgxEditorJSModule {
    * which sets some defaults, or use the provided defaults.
    * @param config The optional configuration to pass
    */
-  static forRoot(config: NgxEditorJSConfig = DEFAULT_CONFIG): ModuleWithProviders {
+  static forRoot(@Optional() config?: NgxEditorJSConfig): ModuleWithProviders {
     return {
       ngModule: NgxEditorJSModule,
       providers: [
         {
+          provide: FOR_ROOT_OPTIONS_TOKEN,
+          useValue: config
+        },
+        {
           provide: NGX_EDITORJS_CONFIG,
-          useValue: {
-            editorjs: {
-              autofocus: config.editorjs.autofocus || DEFAULT_CONFIG.editorjs.autofocus,
-              holder: config.editorjs.holder || DEFAULT_CONFIG.editorjs.holder,
-              initialBlock: config.editorjs.initialBlock || DEFAULT_CONFIG.editorjs.initialBlock,
-              data: config.editorjs.data
-            }
-          }
+          useFactory: createConfig,
+          deps: [FOR_ROOT_OPTIONS_TOKEN]
         }
       ]
     };

@@ -1,5 +1,5 @@
-import { Inject, Injectable, Optional } from '@angular/core';
-import { BasePlugin, InitialPlugins, PluginConfig, ToolSettingsMap, UserPlugins } from '../types/plugins';
+import { Inject, Injectable } from '@angular/core';
+import { BasePlugin, PluginConfig, ToolSettingsMap, UserPlugins } from '../types/plugins';
 
 /**
  * The plugin service provides a singleton to store all plugins injected into the application
@@ -20,11 +20,8 @@ export class NgxEditorJSPluginService {
    * @param initialPlugins Default plugins produced by the module
    * @param userPlugins User plugins injected into the application
    */
-  constructor(
-    @Inject(InitialPlugins) initialPlugins: PluginConfig,
-    @Optional() @Inject(UserPlugins) userPlugins: PluginConfig
-  ) {
-    Object.entries({ ...initialPlugins, ...userPlugins }).forEach(([key, tool]) => this.add(key, tool));
+  constructor(@Inject(UserPlugins) userPlugins: PluginConfig) {
+    Object.entries({ ...userPlugins }).forEach(([key, tool]) => this.add(key, tool));
   }
 
   /**

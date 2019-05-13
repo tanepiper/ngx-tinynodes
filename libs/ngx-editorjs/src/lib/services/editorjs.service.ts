@@ -1,10 +1,10 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
-import { NgxEditorJSPluginService } from '@tinynodes/ngx-editorjs-plugins';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Block } from '../types/blocks';
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from '../types/maps';
+import { NgxEditorJSPluginService } from './plugins.service';
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.

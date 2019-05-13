@@ -5,12 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.2.0] - 2019-05-13
+
+### Added
+
+- Added all configuration options for `EditorJS` to the module configuration
 
 ### Removed
 
-- Removed default plugins from project. All plugins are now provided by the `@tinynodes/ngx-editorjs-plugins` module
-- Removed `PluginService` from core and moved to `@tinynodes/ngx-editorjs-plugins`
+- Removed all plugins from the `ngx-editorjs` project. All plugins are now provided by the `@tinynodes/ngx-editorjs-plugins` module and a default set of tools must be provided in an application.
 
 ## [1.1.2] - 2019-05-11
 
