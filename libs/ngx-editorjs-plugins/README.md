@@ -2,6 +2,14 @@
 
 This module provides a default set of [EditorJS](https://editorjs.io) plugins for [@tinynodes/ngx-editorjs](https://www.npmjs.com/package/@tinynodes/ngx-editorjs) via Angular modules.
 
+## Peer Dependencies
+
+All `EditorJS` plugins are listed as `peerDependencies` of the project - this is because Angular requires these modules to be in the root. You must manually install these are the root of your Angular application.
+
+```bash
+> npm install @editorjs/paragraph @editorjs/header ....
+```
+
 ## Plugin List
 
 | Plugin Name             | Description                                            | EditorJS Plugin Link                             |

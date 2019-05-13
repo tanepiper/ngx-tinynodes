@@ -50,6 +50,13 @@
 
 <h1 id="ngx-editorjs-plugins">Ngx-EditorJS Plugins</h1>
 <p>This module provides a default set of <a href="https://editorjs.io">EditorJS</a> plugins for <a href="https://www.npmjs.com/package/@tinynodes/ngx-editorjs">@tinynodes/ngx-editorjs</a> via Angular modules.</p>
+<h2 id="peer-dependencies">Peer Dependencies</h2>
+<p>All <code>EditorJS</code> plugins are listed as <code>peerDependencies</code> of the project - this is because Angular requires these modules to be in the root. You must manually install these are the root of your Angular application.</p>
+<p>```bash</p>
+<blockquote>
+<p>npm install @editorjs/paragraph @editorjs/header ....
+```</p>
+</blockquote>
 <h2 id="plugin-list">Plugin List</h2>
 <p>| Plugin Name             | Description                                            | EditorJS Plugin Link                             |
 | ----------------------- | ------------------------------------------------------ | ------------------------------------------------ |
