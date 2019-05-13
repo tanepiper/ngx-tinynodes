@@ -1,11 +1,6 @@
 # Ngx-EditorJS Plugins
 
-This module provides a default set of [EditorJS](https://editorjs.io) plugins for [@tinynodes/ngx-editorjs](https://www.npmjs.com/package/@tinynodes/ngx-editorjs) via Angular modules and also provides the plugin service for registering and providing these plugins.
-
-## Plugin Service
-
-This package includes the `NgxEditorJSPluginService` which provides a singleton for registering
-EditorJS plugins with.
+This module provides a default set of [EditorJS](https://editorjs.io) plugins for [@tinynodes/ngx-editorjs](https://www.npmjs.com/package/@tinynodes/ngx-editorjs) via Angular modules.
 
 ## Plugin List
 

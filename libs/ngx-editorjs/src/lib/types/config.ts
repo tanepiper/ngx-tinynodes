@@ -6,13 +6,24 @@ import { OutputData, SanitizerConfig } from '@editorjs/editorjs';
  */
 export interface EditorJSConfig {
   /**
-   * ID of the element to hold the config
-   */
-  holder?: string;
-  /**
    * If the EditorJS is autofocused on creation (default: false)
    */
   autofocus?: boolean;
+
+  /**
+   * Any initial output data to render
+   */
+  data?: OutputData;
+
+  /**
+   * If true, toolbar won't be shown
+   */
+  hideToolbar?: boolean;
+
+  /**
+   * ID of the element to hold the config
+   */
+  holder?: string;
 
   /**
    * The name of the initial block (default "paragraph")
@@ -20,9 +31,9 @@ export interface EditorJSConfig {
   initialBlock?: string;
 
   /**
-   * Any initial output data to render
+   * Height of Editor's bottom area that allows to set focus on the last Block
    */
-  data?: OutputData;
+  minHeight?: number;
 
   /**
    * First Block placeholder
@@ -33,16 +44,6 @@ export interface EditorJSConfig {
    * Define default sanitizer configuration
    */
   sanitizer?: SanitizerConfig;
-
-  /**
-   * If true, toolbar won't be shown
-   */
-  hideToolbar?: boolean;
-
-  /**
-   * Height of Editor's bottom area that allows to set focus on the last Block
-   */
-  minHeight?: number;
 }
 
 /**

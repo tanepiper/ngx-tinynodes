@@ -11,9 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added all configuration options for `EditorJS` to the module configuration
 
-### Removed
+### Changed
 
 - Removed all plugins from the `ngx-editorjs` project. All plugins are now provided by the `@tinynodes/ngx-editorjs-plugins` module and a default set of tools must be provided in an application.
+- Added `NgxEditorJSPluginService` back to core, all plugins must now be provided with a `UserPlugin` provider.
 
 ## [1.1.2] - 2019-05-11
 
