@@ -65,6 +65,13 @@
             <code>libs/ngx-editorjs/src/lib/types/config.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The configuration option that can be passed to the <code>NgxEditorJSModule.forRoot</code> method</p>
+
+            </p>
 
 
         <section>
@@ -126,6 +133,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Configuration options for <code>EditorJS</code></p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -141,13 +154,24 @@ import { OutputData, SanitizerConfig } from &#x27;@editorjs/editorjs&#x27;;
  */
 export interface EditorJSConfig {
   /**
-   * ID of the element to hold the config
-   */
-  holder?: string;
-  /**
    * If the EditorJS is autofocused on creation (default: false)
    */
   autofocus?: boolean;
+
+  /**
+   * Any initial output data to render
+   */
+  data?: OutputData;
+
+  /**
+   * If true, toolbar won&#x27;t be shown
+   */
+  hideToolbar?: boolean;
+
+  /**
+   * ID of the element to hold the config
+   */
+  holder?: string;
 
   /**
    * The name of the initial block (default &quot;paragraph&quot;)
@@ -155,9 +179,9 @@ export interface EditorJSConfig {
   initialBlock?: string;
 
   /**
-   * Any initial output data to render
+   * Height of Editor&#x27;s bottom area that allows to set focus on the last Block
    */
-  data?: OutputData;
+  minHeight?: number;
 
   /**
    * First Block placeholder
@@ -168,22 +192,21 @@ export interface EditorJSConfig {
    * Define default sanitizer configuration
    */
   sanitizer?: SanitizerConfig;
-
-  /**
-   * If true, toolbar won&#x27;t be shown
-   */
-  hideToolbar?: boolean;
-
-  /**
-   * Height of Editor&#x27;s bottom area that allows to set focus on the last Block
-   */
-  minHeight?: number;
 }
 
+/**
+ * The configuration option that can be passed to the &#x60;NgxEditorJSModule.forRoot&#x60; method
+ */
 export interface NgxEditorJSConfig {
+  /**
+   * Configuration options for &#x60;EditorJS&#x60;
+   */
   editorjs?: EditorJSConfig;
 }
 
+/**
+ * Injection token provied for &#x60;NgxEditorJSConfig&#x60;
+ */
 export const NGX_EDITORJS_CONFIG &#x3D; new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;);
 </code></pre>
     </div>

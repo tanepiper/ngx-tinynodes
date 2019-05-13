@@ -93,7 +93,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>ngx-sidebar</code></td>
+                <td class="col-md-9"><code>tinynodes-sidebar</code></td>
             </tr>
 
             <tr>
@@ -153,7 +153,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(app: <a href="../injectables/ApplicationService.html">ApplicationService</a>)</code>
+<code>constructor(app: <a href="../injectables/AppService.html">AppService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -179,7 +179,7 @@
                                                         <td>app</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ApplicationService.html" target="_self" >ApplicationService</a></code>
+                                                                        <code><a href="../injectables/AppService.html" target="_self" >AppService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -249,13 +249,13 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild, OnDestroy } from &#x27;@angular/core&#x27;;
-import { ApplicationService } from &#x27;../../store/app/application.service&#x27;;
+import { AppService } from &#x27;../../store/app/application.service&#x27;;
 import { MatSidenav } from &#x27;@angular/material&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
 
 @Component({
-  selector: &#x27;ngx-sidebar&#x27;,
+  selector: &#x27;tinynodes-sidebar&#x27;,
   templateUrl: &#x27;sidebar.component.html&#x27;,
   styleUrls: [&#x27;sidebar.component.scss&#x27;]
 })
@@ -264,7 +264,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private readonly onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
 
-  constructor(private readonly app: ApplicationService) {}
+  constructor(private readonly app: AppService) {}
 
   ngOnInit() {
     this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe(value &#x3D;&gt; {
@@ -283,7 +283,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav #sidenav role&#x3D;&quot;navigation&quot; mode&#x3D;&quot;side&quot; opened&gt;
   &lt;mat-nav-list&gt;
-    &lt;a mat-list-item [routerLink]&#x3D;&quot;[&#x27;/ngx-editorjs-demo&#x27;]&quot; routerLinkActive&#x3D;&quot;router-link-active&quot;&gt;Demo: ngx-editorjs&lt;/a&gt;
+    &lt;a mat-list-item [routerLink]&#x3D;&quot;[&#x27;/ngx-editorjs-demo&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Demo: ngx-editorjs&lt;/a&gt;
   &lt;/mat-nav-list&gt;
 &lt;/mat-sidenav&gt;
 </code></pre>
@@ -321,8 +321,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-sidenav #sidenav role="navigation" mode="side" opened>  <mat-nav-list>    <a mat-list-item [routerLink]="[\'/ngx-editorjs-demo\']" routerLinkActive="router-link-active">Demo: ngx-editorjs</a>  </mat-nav-list></mat-sidenav></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'ngx-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'ngx-sidebar'}];
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav #sidenav role="navigation" mode="side" opened>  <mat-nav-list>    <a mat-list-item [routerLink]="[\'/ngx-editorjs-demo\']" routerLinkActive="active">Demo: ngx-editorjs</a>  </mat-nav-list></mat-sidenav></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'SidebarComponent'};
 </script>

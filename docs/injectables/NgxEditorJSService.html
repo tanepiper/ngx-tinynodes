@@ -66,10 +66,10 @@
             <p class="comment">
                 <p>The NgxEditorJSService provides control EditorJS instances via Angular.
 The service has several maps:
-* A map of <code>EditorJS</code> instances
-* A map of <code>BehaviorSubject</code> containing the current array of blocks
-* A map of ready states
-from the last save made on that instance</p>
+- A map of <code>EditorJS</code> instances
+- A map of <code>BehaviorSubject</code> containing the current array of blocks
+- A map of ready states
+The are generated from the last save made on that instance</p>
 
             </p>
 
@@ -138,7 +138,7 @@ from the last save made on that instance</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(config: <a href="../interfaces/NgxEditorJSConfig.html">NgxEditorJSConfig</a>, plugins: <a href="../injectables/PluginService.html">PluginService</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>)</code>
+<code>constructor(config: <a href="../interfaces/NgxEditorJSConfig.html">NgxEditorJSConfig</a>, plugins: <a href="../injectables/NgxEditorJSPluginService.html">NgxEditorJSPluginService</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -176,7 +176,7 @@ from the last save made on that instance</p>
                                                         <td>plugins</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/PluginService.html" target="_self" >PluginService</a></code>
+                                                                        <code><a href="../injectables/NgxEditorJSPluginService.html" target="_self" >NgxEditorJSPluginService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -928,15 +928,15 @@ import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
 import { Block } from &#x27;../types/blocks&#x27;;
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;../types/config&#x27;;
 import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from &#x27;../types/maps&#x27;;
-import { PluginService } from &#x27;./plugins.service&#x27;;
+import { NgxEditorJSPluginService } from &#x27;./plugins.service&#x27;;
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
  * The service has several maps:
- * * A map of &#x60;EditorJS&#x60; instances
- * * A map of &#x60;BehaviorSubject&#x60; containing the current array of blocks
- * * A map of ready states
- * from the last save made on that instance
+ * - A map of &#x60;EditorJS&#x60; instances
+ * - A map of &#x60;BehaviorSubject&#x60; containing the current array of blocks
+ * - A map of ready states
+ * The are generated from the last save made on that instance
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -964,7 +964,7 @@ export class NgxEditorJSService {
 
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
-    private readonly plugins: PluginService,
+    private readonly plugins: NgxEditorJSPluginService,
     private zone: NgZone
   ) {}
 

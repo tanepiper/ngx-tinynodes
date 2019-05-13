@@ -4,15 +4,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Block } from '../types/blocks';
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from '../types/maps';
-import { PluginService } from './plugins.service';
+import { NgxEditorJSPluginService } from './plugins.service';
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
  * The service has several maps:
- * * A map of `EditorJS` instances
- * * A map of `BehaviorSubject` containing the current array of blocks
- * * A map of ready states
- * from the last save made on that instance
+ * - A map of `EditorJS` instances
+ * - A map of `BehaviorSubject` containing the current array of blocks
+ * - A map of ready states
+ * The are generated from the last save made on that instance
  */
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class NgxEditorJSService {
 
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
-    private readonly plugins: PluginService,
+    private readonly plugins: NgxEditorJSPluginService,
     private zone: NgZone
   ) {}
 

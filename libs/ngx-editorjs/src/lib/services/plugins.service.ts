@@ -1,14 +1,14 @@
-import { Inject, Injectable, Optional } from '@angular/core';
-import { BasePlugin, InitialPlugins, PluginConfig, ToolSettingsMap, UserPlugins } from '../types/plugins';
+import { Inject, Injectable } from '@angular/core';
+import { BasePlugin, PluginConfig, ToolSettingsMap, UserPlugins } from '../types/plugins';
 
 /**
  * The plugin service provides a singleton to store all plugins injected into the application
- * and makes them available for all instances of EditorJS
+ * and makes them available for all instances of `EditorJS`
  */
 @Injectable({
   providedIn: 'root'
 })
-export class PluginService {
+export class NgxEditorJSPluginService {
   /**
    * Object map of the plugin configurations
    */
@@ -20,37 +20,34 @@ export class PluginService {
    * @param initialPlugins Default plugins produced by the module
    * @param userPlugins User plugins injected into the application
    */
-  constructor(
-    @Inject(InitialPlugins) initialPlugins: PluginConfig,
-    @Optional() @Inject(UserPlugins) userPlugins: PluginConfig
-  ) {
-    Object.entries({ ...initialPlugins, ...userPlugins }).forEach(([key, tool]) => this.add(key, tool));
+  constructor(@Inject(UserPlugins) userPlugins: PluginConfig) {
+    Object.entries({ ...userPlugins }).forEach(([key, tool]) => this.add(key, tool));
   }
 
   /**
    * Add a plugin to the store
-   * @param name
-   * @param tool
+   * @param key The key for the map to store the plugin
+   * @param plugin The plugin instance to add to the service
    */
-  public add(name: string, tool: BasePlugin) {
-    this.pluginsMap[name] = tool;
+  public add(key: string, plugin: BasePlugin) {
+    this.pluginsMap[key] = plugin;
   }
 
   /**
    * Remove a plugin from the store
-   * @param name
+   * @param key
    */
-  public remove(name: string) {
-    this.pluginsMap[name] = null;
-    delete this.pluginsMap[name];
+  public remove(key: string) {
+    this.pluginsMap[key] = null;
+    delete this.pluginsMap[key];
   }
 
   /**
    * Get a single plugin from the map
    * @param name
    */
-  public get(name: string) {
-    this.pluginsMap[name];
+  public get(key: string): BasePlugin {
+    return this.pluginsMap[key];
   }
 
   /**
@@ -70,18 +67,17 @@ export class PluginService {
         return !exclude.includes(key);
       })
       .reduce((finalTools, [key, plugin]) => {
-        let p;
         if (plugin.shortcut) {
-          p = {
+          return {
             [key]: {
               class: plugin.plugin(),
               shortcut: plugin.shortcut()
-            }
+            },
+            ...finalTools
           };
         } else {
-          p = { [key]: plugin.plugin() };
+          return { [key]: plugin.plugin(), ...finalTools };
         }
-        return { ...finalTools, ...p };
       }, {});
   }
 }

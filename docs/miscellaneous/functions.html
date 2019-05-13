@@ -58,13 +58,10 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
-                            <a href="#createTools" title="libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts"><b>createTools</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-editorjs.module.ts)</a>
+                            <a href="#createConfig" title="libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts"><b>createConfig</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-editorjs.module.ts)</a>
                         </li>
                         <li>
-                            <a href="#createTools" title="libs/ngx-editorjs-demo/src/lib/config/index.ts"><b>createTools</b>&nbsp;&nbsp;&nbsp;(libs/.../index.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#defaultConfig" title="libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts"><b>defaultConfig</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-editorjs.module.ts)</a>
+                            <a href="#createNgxEditorJSDemoTools" title="libs/ngx-editorjs-demo/src/lib/config/index.ts"><b>createNgxEditorJSDemoTools</b>&nbsp;&nbsp;&nbsp;(libs/.../index.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -79,18 +76,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createTools"></a>
+                    <a name="createConfig"></a>
                     <span class="name">
                         <b>
-                            createTools
+                            createConfig
                         </b>
-                        <a href="#createTools"><span class="icon ion-ios-link"></span></a>
+                        <a href="#createConfig"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createTools()</code>
+<code>createConfig(config?)</code>
                 </td>
             </tr>
 
@@ -99,37 +96,47 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Creates a configuration for EditorJS</p>
+</div>
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/PluginConfig.html" target="_self" >PluginConfig</a></code>
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>config</td>
 
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>Optional module configurations</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/NgxEditorJSConfig.html" target="_self" >NgxEditorJSConfig</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="defaultConfig"></a>
-                    <span class="name">
-                        <b>
-                            defaultConfig
-                        </b>
-                        <a href="#defaultConfig"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>defaultConfig()</code>
-                </td>
-            </tr>
-
-
-
-
         </tbody>
     </table>
 </section>    <h3>libs/ngx-editorjs-demo/src/lib/config/index.ts</h3>
@@ -138,18 +145,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createTools"></a>
+                    <a name="createNgxEditorJSDemoTools"></a>
                     <span class="name">
                         <b>
-                            createTools
+                            createNgxEditorJSDemoTools
                         </b>
-                        <a href="#createTools"><span class="icon ion-ios-link"></span></a>
+                        <a href="#createNgxEditorJSDemoTools"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createTools()</code>
+<code>createNgxEditorJSDemoTools()</code>
                 </td>
             </tr>
 
@@ -158,6 +165,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Creates the tools for the <code>ngx-tinynodes</code> demo application</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="../interfaces/PluginConfig.html" target="_self" >PluginConfig</a></code>

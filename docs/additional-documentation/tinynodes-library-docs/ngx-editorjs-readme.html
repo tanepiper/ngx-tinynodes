@@ -57,16 +57,32 @@
 <p>Install the library via <code>npm</code>:</p>
 <p>```bash</p>
 <blockquote>
-<p>npm install @tinynodes/ngx-editorjs
+<p>npm install @tinynodes/ngx-editorjs @tinynodes/ngx-editorjs-plugins
 ```</p>
 </blockquote>
-<p>Once installed, include the <code>NgxEditorJSModule</code> module in your project with the <code>forRoot</code> method. By default the editor is pre-configured with the standard Header and List tools provided by the EditorJS Team. To overwrite existing tools or add your own see documentation on adding then via Plugin Modules.</p>
+<p>Once installed, include the <code>NgxEditorJSModule</code> module in your project with the <code>forRoot</code> method. The <code>forRoot</code> takes an optional configuration.</p>
+<p>You also need to pass a provider for <code>UserPlugins</code> with a factory function that returns an options map tools to provide to the <code>EditorJS</code> instance. An example of this is shows <a href="https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-demo/src/lib/config/index.ts">in the demo application</a></p>
 <p>```ts
 import { NgModule } from &#39;@angular/core&#39;;
 import { BrowserModule } from &#39;@angular/platform-browser&#39;;
 import { NgxEditorJSModule } from &#39;@tinynodes/ngx-editorjs&#39;;
 import { AppComponent } from &#39;./app.component&#39;;
-import EditorJS from &#39;@editorjs/editorjs&#39;;</p>
+import EditorJS from &#39;@editorjs/editorjs&#39;;
+import {
+  PluginParagraphModule,
+  PluginParagraph,
+  PluginHeaderModule,
+  PluginHeader,
+  PluginListModule,
+  PluginList
+} from &#39;@tinynodes/ngx-editorjs-plugins&#39;;</p>
+<p>export function createTools() {
+  return {
+    paragraph: new PluginParagraph(),
+    header: new PluginHeader(),
+    list: new PluginList()
+  };
+}</p>
 <p>@NgModule({
   declarations: [AppComponent],
   imports: [
@@ -84,6 +100,12 @@ import EditorJS from &#39;@editorjs/editorjs&#39;;</p>
       }
     })
   ],
+  providers: [
+    {
+      provide: UserPlugins,
+      useFactory: createTools
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
@@ -92,12 +114,16 @@ export class AppModule {}
 <h3 id="editorjs-config">EditorJS Config</h3>
 <p>The configuration is deigned to be extendable in the future, so each potential feature has a key. For configuring EditorJS pass the options below into a <code>editorjs</code> key in the config.</p>
 <p>The module configuration allows EditorJS to be provided with a set of options for use. See the <a href="https://editorjs.io/configuration">EditorJS docs</a> for more details.</p>
-<p>| Configuration Key | Description                                                                                       | Default     |
-| ----------------- | ------------------------------------------------------------------------------------------------- | ----------- |
-| <code>autofocus</code>       | Sets the EditorJS instance to autofocus on load                                                   | <code>false</code>     |
-| <code>holder</code>          | The element ID of the holder, this will set all instances in this module to use this as a default | <code>editor-js</code> |
-| <code>initialBlock</code>    | The default block type to use in the editor                                                       | <code>paragraph</code> |
-| <code>data</code>            | Initial data to load into the editor, this is an <code>OutputData</code> object from EditorJS                | <code>undefined</code> |</p>
+<p>| Configuration Key | Description                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------------- |
+| <code>autofocus</code>       | Sets the EditorJS instance to autofocus on load                                                   |
+| <code>data</code>            | Initial data to load into the editor, this is an <code>OutputData</code> object from EditorJS                |
+| <code>hideToolbar</code>     | Hides the toolbar by default                                                                      |
+| <code>holder</code>          | The element ID of the holder, this will set all instances in this module to use this as a default |
+| <code>initialBlock</code>    | The default block type to use in the editor                                                       |
+| <code>minHeight</code>       | Height of Editor&#39;s bottom area that allows to set focus on the last Block                         |
+| <code>placeholder</code>     | Placeholder of the first block                                                                    |
+| <code>sanitizer</code>       | Content sanitizer configurations                                                                  |</p>
 <h3 id="adding-custom-tools">Adding custom tools</h3>
 <p>To include tools in an Angular AOT-friendly way, inside your project, create a folder for your plugin and add an <code>Injectable</code> class with a <code>plugin()</code> method, and optional <code>shortcut</code> method for features that support it.</p>
 <p>```ts
@@ -156,18 +182,10 @@ export class CustomModule {}
 <p>This service provides handling the life-cycle of the EditorJS instance, and exposes the underlying <code>EditorJS</code> instance.<a href="https://editorjs.io/api">API</a> - in future releases more of the API will be exposed via service methods to make controlling the container easier.</p>
 <h2 id="links">Links</h2>
 <ul>
+<li><a href="https://tanepiper.github.io/ngx-tinynodes/">Documentation</a></li>
 <li><a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs">GitHub</a></li>
 <li><a href="https://www.npmjs.com/package/@tinynodes/ngx-editorjs">NPM</a></li>
 <li><a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo">Angular Demo</a></li>
-</ul>
-<h2 id="todo">Todo</h2>
-<ul>
-<li><input disabled="" type="checkbox"> Add unit tests for all features (😔)</li>
-<li><input disabled="" type="checkbox"> Improve documentation</li>
-<li><input disabled="" type="checkbox"> Provide better plugin support</li>
-<li><input disabled="" type="checkbox"> Provide enhancements for <code>@ngrx/effects</code> and other state management tools via pre-developed effects and services.</li>
-<li><input disabled="" type="checkbox"> Set up CD pipeline</li>
-<li><input disabled="" type="checkbox"> Provide more @Input on Directive/Component to make instance generation more configurable.</li>
 </ul>
 
                    </div><div class="search-results">
