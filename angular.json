@@ -231,6 +231,33 @@
         }
       },
       "schematics": {}
+    },
+    "ngx-hideable-header-demo": {
+      "root": "libs/ngx-hideable-header-demo",
+      "sourceRoot": "libs/ngx-hideable-header-demo/src",
+      "projectType": "library",
+      "prefix": "tinynodes",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ngx-hideable-header-demo/tsconfig.lib.json",
+              "libs/ngx-hideable-header-demo/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/ngx-hideable-header-demo/jest.config.js",
+            "tsConfig": "libs/ngx-hideable-header-demo/tsconfig.spec.json",
+            "setupFile": "libs/ngx-hideable-header-demo/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

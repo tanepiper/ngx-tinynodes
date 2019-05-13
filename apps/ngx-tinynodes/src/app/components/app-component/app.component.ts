@@ -1,8 +1,8 @@
-import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, ViewChild, OnInit, OnDestroy, AfterContentInit } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { AppService } from '../../store/app/application.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
 
 /**
  * The main application component that provides the root container
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements AfterContentInit, OnDestroy {
   /**
    * The page title
    */
@@ -29,15 +29,31 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   private readonly onDestroy$ = new Subject<boolean>();
 
-  constructor(private readonly app: AppService) {}
+  /**
+   * Stores the current sidebar state
+   */
+  private readonly sidebarHidden$ = new BehaviorSubject<boolean>(false);
+
+  constructor(private readonly app: AppService) {
+    this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe(hidden => {
+      this.sidebarHidden$.next(hidden);
+    });
+  }
+
+  public get sidebarHidden(): Observable<boolean> {
+    return this.sidebarHidden$.asObservable();
+  }
 
   /**
    * Component initialized
    */
-  ngOnInit() {
-    this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe(value => {
-      value ? this.sidenav.close() : this.sidenav.open();
-    });
+  ngAfterContentInit() {
+    this.sidebarHidden$
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(hidden => (hidden ? this.sidenav.close() : this.sidenav.open()));
   }
 
   /**

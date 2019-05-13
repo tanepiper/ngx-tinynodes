@@ -1,16 +1,6 @@
-import { RouterLink } from '@angular/router';
-
-export interface MenuItem {
-  label: string;
-  link?: RouterLink;
-  children: MenuItem[];
-}
-
-export interface ApplicationData {
-  menuItems: MenuItem[];
-}
+import { MenuGroup } from '../../types/app';
 
 export interface ApplicationState {
   hidden: boolean;
-  menu: MenuItem[];
+  menus: MenuGroup[];
 }

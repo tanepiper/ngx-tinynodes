@@ -25,6 +25,9 @@
     },
     "ngx-editorjs-ngrx": {
       "tags": []
+    },
+    "ngx-hideable-header-demo": {
+      "tags": []
     }
   }
 }

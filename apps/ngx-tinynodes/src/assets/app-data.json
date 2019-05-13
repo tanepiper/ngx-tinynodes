@@ -1,16 +1,28 @@
 {
-  "menuItems": [
+  "menus": [
     {
-      "label": "Tinynode Projects",
-      "children": [
+      "key": "tinynode-projects",
+      "title": "Tinynode Projects",
+      "items": [
         {
           "label": "Demo: ngx-editorjs",
           "link": ["/ngx-editorjs-demo"]
+        },
+
+        {
+          "label": "Other Projects"
         }
       ]
     },
     {
-      "label": "Other Projects"
+      "key": "other-projects",
+      "title": "Open Source Contributions",
+      "items": [
+        {
+          "label": "Demo: nxg-hidable-header",
+          "link": ["/ngx-hidable-header-demo"]
+        }
+      ]
     }
   ]
 }

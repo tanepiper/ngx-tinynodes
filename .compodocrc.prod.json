@@ -7,5 +7,6 @@
   "theme": "readthedocs",
   "disableLifeCycleHooks": true,
   "disablePrivate": true,
-  "disableInternal": true
+  "disableInternal": true,
+  "disableCoverage": true
 }
