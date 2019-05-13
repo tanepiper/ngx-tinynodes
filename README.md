@@ -24,6 +24,14 @@ This project provides a set of features for using [EditorJS](https://editorjs.io
 - [Demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/pages)
 - [Project Folder](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
 
+### `@tinynodes/ngx-editorjs-plugins`
+
+This project provides a module that exports a set of default plugins for `EditorJS`.
+
+- [Readme](libs/ngx-editorjs-plugins/README.md)
+- [Changelog](./libs/ngx-editorjs-plugins/CHANGELOG.md)
+- [Project Folder](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs-plugins)
+
 ### Development Information
 
 This repository is run by [Tane Piper](https://tane.dev) and was generated using [Nx](https://nx.dev).
