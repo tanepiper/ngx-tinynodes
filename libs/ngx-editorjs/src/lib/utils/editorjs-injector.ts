@@ -12,11 +12,7 @@ export const EDITORJS_MODULE_FACTORY = new InjectionToken<any>('EDITORJS_MODULE_
 export class EditorJSInstance extends EditorJS {
   constructor(@Inject(EDITORJS_IMPORT_CONFIG) config: EditorConfig) {
     super(config);
-    console.log('config', config);
-    let clone = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
-    console.log(clone);
-    const props = Object.getOwnPropertyNames(this);
-    console.log(props);
+    console.log(Object.getOwnPropertyNames(this));
   }
 
   get version() {
@@ -29,9 +25,6 @@ export class EditorJSInstance extends EditorJS {
 })
 export class EditorFactory {
   createInstance(config: EditorConfig) {
-    // const editor = new EditorJSInstance(config);
-    // console.log(EditorJSInstance, editor);
-    // return editor;
     return new EditorJSInstance(config);
   }
 }
