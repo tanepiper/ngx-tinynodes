@@ -258,6 +258,30 @@
         }
       },
       "schematics": {}
+    },
+    "ngx-tinynodes-core": {
+      "root": "libs/ngx-tinynodes-core",
+      "sourceRoot": "libs/ngx-tinynodes-core/src",
+      "projectType": "library",
+      "prefix": "tinynodes",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/ngx-tinynodes-core/tsconfig.lib.json", "libs/ngx-tinynodes-core/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/ngx-tinynodes-core/jest.config.js",
+            "tsConfig": "libs/ngx-tinynodes-core/tsconfig.spec.json",
+            "setupFile": "libs/ngx-tinynodes-core/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

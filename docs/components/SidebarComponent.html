@@ -324,7 +324,7 @@ export class SidebarComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><mat-nav-list *ngIf="(projects | async); let menuItem">  <h3 mat-subheader>{{ menuItem.title }}</h3>  <a *ngFor="let child of menuItem.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a></mat-nav-list><mat-nav-list *ngIf="(openSource | async); let menuItem">  <h3 mat-subheader>{{ menuItem.title }}</h3>  <a *ngFor="let child of menuItem.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a></mat-nav-list></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'SidebarComponent'};
 </script>
@@ -360,7 +360,7 @@ export class SidebarComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'SidebarComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

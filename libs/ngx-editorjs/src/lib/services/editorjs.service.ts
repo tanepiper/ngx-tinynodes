@@ -2,9 +2,10 @@ import { Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Block } from '../types/blocks';
-import { EditorJSConfig, EDITIOR_JS_INSTANCE, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
+import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from '../types/maps';
 import { NgxEditorJSPluginService } from './plugins.service';
+import { EditorJSInstance, EditorFactory } from '../utils/editorjs-injector';
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
@@ -40,10 +41,12 @@ export class NgxEditorJSService {
 
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
-    @Inject(EDITIOR_JS_INSTANCE) private readonly EditorJS: EditorJS,
+    private readonly editorFactory: EditorFactory,
     private readonly plugins: NgxEditorJSPluginService,
     private zone: NgZone
-  ) {}
+  ) {
+    console.log(EditorJS);
+  }
 
   /**
    * This method creates a new EditorJS instance and adds it to the editor map.
@@ -74,23 +77,27 @@ export class NgxEditorJSService {
       this.blocksMap[config.holder] = new BehaviorSubject<Block[]>([]);
     }
 
-    this.zone.run(() => {
-      const options: EditorConfig = {
-        ...this.config.editorjs,
-        ...config,
-        tools: this.plugins.getTools(includeTools)
-      };
-      this.editorMap[config.holder] = new (this.EditorJS as any)({
-        ...options,
-        onReady: () => {
-          this.readyMap[config.holder].next(true);
-        },
-        onChange: () => {
-          this.changeMap[config.holder].next(Date.now());
-          if (autoSave) this.save(config.holder);
-        }
-      });
+    const options: EditorConfig = {
+      ...this.config.editorjs,
+      ...config,
+      tools: this.plugins.getTools(includeTools)
+    };
+
+    const editor = this.editorFactory.createInstance({
+      ...options,
+      onReady: () => {
+        this.readyMap[config.holder].next(true);
+      },
+      onChange: () => {
+        this.changeMap[config.holder].next(Date.now());
+        if (autoSave) this.save(config.holder);
+      }
     });
+    console.log(editor);
+    // this.EditorJS.editorInstance.subscribe(editor => {
+    //   console.dir(editor);
+    //   this.editorMap[config.holder] = editor;
+    // });
   }
 
   /**
@@ -152,13 +159,12 @@ export class NgxEditorJSService {
     if (!this.editorMap[holder]) {
       throw new Error(`No EditorJS instance for ${holder}`);
     }
-    this.zone.run(() => {
-      this.editorMap[holder].blocks.clear();
-      this.editorMap[holder].blocks.render({
-        blocks,
-        time: Date.now(),
-        version: (this.EditorJS as any).version
-      });
+    const editor = this.editorMap[holder];
+    this.editorMap[holder].blocks.clear();
+    this.editorMap[holder].blocks.render({
+      blocks,
+      time: Date.now(),
+      version: EditorJS.version
     });
     this.blocksMap[holder].next(blocks);
     this.changeMap[holder].next(Date.now());
@@ -170,15 +176,13 @@ export class NgxEditorJSService {
    * If there is no instance of that name it will throw an error.
    * @param holder The ID of the holder of the instance
    */
-  public save(holder: string): void {
+  public async save(holder: string): Promise<void> {
     if (!this.editorMap[holder]) {
       throw new Error(`No EditorJS instance for ${holder}`);
     }
-    this.zone.run(async () => {
-      const outputData = await this.editorMap[holder].saver.save();
-      this.blocksMap[holder].next(outputData.blocks);
-      this.changeMap[holder].next(outputData.time);
-    });
+    const outputData = await this.editorMap[holder].saver.save();
+    this.blocksMap[holder].next(outputData.blocks);
+    this.changeMap[holder].next(outputData.time);
   }
 
   /**

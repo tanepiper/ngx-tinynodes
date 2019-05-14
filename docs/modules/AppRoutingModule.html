@@ -55,7 +55,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/app.routes.ts</code>
+            <code>apps/ngx-tinynodes/src/app/app-routing.module.ts</code>
         </p>
 
 
@@ -73,6 +73,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Route, RouterModule } from &#x27;@angular/router&#x27;;
 import { NgModule } from &#x27;@angular/core&#x27;;
+import { HomePageComponent } from &#x27;./pages/home/home-page.component&#x27;;
 
 /**
  * The main application routes
@@ -80,8 +81,12 @@ import { NgModule } from &#x27;@angular/core&#x27;;
 export const appRoutes: Route[] &#x3D; [
   {
     path: &#x27;&#x27;,
-    redirectTo: &#x27;ngx-editorjs-demo&#x27;,
+    redirectTo: &#x27;home&#x27;,
     pathMatch: &#x27;full&#x27;
+  },
+  {
+    path: &#x27;home&#x27;,
+    component: HomePageComponent
   }
 ];
 
@@ -124,7 +129,7 @@ export class AppRoutingModule {}
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppRoutingModule.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

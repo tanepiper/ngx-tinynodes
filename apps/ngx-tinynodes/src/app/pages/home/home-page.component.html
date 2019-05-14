@@ -7,20 +7,10 @@
     <mat-card-content>
       <p>This site contains demos of components released under <code>@tinynodes</code> on <code>npm</code>, you can find a list of them on the menu to the left.</p>
       <p>You can also visit the sites below for additional documentation and code:</p>
-      <mat-list>
-        <mat-list-item>
-          <a mat-raised-button color="primary" href="https://tanepiper.github.io/ngx-tinynodes/" target="_new">
-            <span class="label">Docs</span>
-          </a>
-        </mat-list-item>
-        <mat-list-item>
-          <a mat-raised-button color="primary" href="https://github.com/tanepiper/ngx-tinynodes" target="_new">
-            <span class="label">Github</span>
-          </a>
-        </mat-list-item>
-        <mat-list-item>
-          <a mat-raised-button color="primary" href="https://www.npmjs.com/org/tinynodes" target="_new">
-            <span class="label">NPM</span>
+      <mat-list *ngIf="(menu | async); let menuItems">
+        <mat-list-item *ngFor="let menu of menuItems.items">
+          <a mat-raised-button color="primary" href="{{ menu.link }}" target="_new">
+            <span class="label">{{ menu.label }}</span>
           </a>
         </mat-list-item>
       </mat-list>

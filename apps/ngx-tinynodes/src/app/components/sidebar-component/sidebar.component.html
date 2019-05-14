@@ -1,11 +1,11 @@
-<mat-nav-list *ngIf="(projects | async); let menuItem">
-  <h3 mat-subheader>{{ menuItem.title }}</h3>
+<mat-nav-list *ngIf="projectsMenu">
+  <h3 mat-subheader *ngIf="projectsMenu.title">{{ projectsMenu.title }}</h3>
 
-  <a *ngFor="let child of menuItem.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
+  <a *ngFor="let child of projectsMenu.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
 </mat-nav-list>
 
-<mat-nav-list *ngIf="(openSource | async); let menuItem">
-  <h3 mat-subheader>{{ menuItem.title }}</h3>
+<mat-nav-list *ngIf="openSourceMenu">
+  <h3 mat-subheader *ngIf="openSourceMenu.title">{{ openSourceMenu.title }}</h3>
 
-  <a *ngFor="let child of menuItem.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
+  <a *ngFor="let child of openSourceMenu.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
 </mat-nav-list>

@@ -17,9 +17,9 @@ export interface MenuItem {
    */
   description?: string;
   /**
-   * The {RouterLink} for the menu item
+   * The {RouterLink} for the menu item or a string url
    */
-  link?: RouterLink;
+  link?: RouterLink | string;
 
   /**
    * Any children to render in the menu

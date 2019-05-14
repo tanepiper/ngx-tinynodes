@@ -1,14 +1,46 @@
-<mat-card>
-  <mat-card-title>Ngx-EditorJS Pages Manager</mat-card-title>
-  <mat-card-subtitle
-    >A useful demo of the
-    <code>@tinynodes/ngx-editorjs</code>
-    module</mat-card-subtitle
-  >
-  <mat-card-content>
-    <button mat-raised-button [routerLink]="['/ngx-editorjs-demo/pages/editor']" routerLinkActive="router-link-active">Go to Demo &gt;</button>
-  </mat-card-content>
-  <mat-card-content>
-    <markdown [src]="'https://raw.githubusercontent.com/tanepiper/ngx-tinynodes/master/libs/ngx-editorjs/README.md'"></markdown>
-  </mat-card-content>
-</mat-card>
+<div class="container">
+  <mat-card class="application-card">
+    <mat-card-header>
+      <mat-card-title><code>@tinynodes/ngx-editor</code> Demo</mat-card-title>
+      <mat-card-subtitle>A single page demo of the <code>EditorJS</code> component</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h2 mat-card-title>How to use</h2>
+      <p>
+        Below is an instance of an <code>EditorJS</code> block editor. Click on the area and the block tool will appear, or you can just
+        start typing.
+      </p>
+      <p>
+        The default block is a <code>&lt;p></code> paragraph, you can also add header <code>&lt;h1> - &lt;h6></code> blocks, list with
+        <code>&lt;ol> / &lt;li></code> and <code>&lt;code></code> blocks.
+      </p>
+      <p>
+        You can also paste in an <code>&lt;img></code> url into the editor and it will start the <code>SimpleImage</code> plugin which
+        provides an <code>&lt;img></code> tag pointing to the image, and with some additional controls.
+      </p>
+      <p>
+        When saving check your console to see results;
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <h3 mat-card-title>Demo</h3>
+      <button mat-raised-button (click)="save()">Save</button>
+      <button mat-raised-button>Reset</button>
+    </mat-card-actions>
+    <mat-card-content>
+      <ngx-editorjs [holder]="holder" [blocks]="blocks | async"></ngx-editorjs>
+    </mat-card-content>
+    <mat-card-footer>
+      <h3 mat-card-title>Links</h3>
+      <p>
+        <a mat-raised-button color="primary" href="https://tanepiper.github.io/ngx-tinynodes/modules/NgxEditorJSModule.html" target="_new"
+          >Docs</a
+        >
+        &nbsp;
+        <a mat-raised-button color="primary" href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs" target="_new"
+          >GitHub</a
+        >
+      </p>
+    </mat-card-footer>
+  </mat-card>
+</div>

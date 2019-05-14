@@ -28,6 +28,9 @@
     },
     "ngx-hideable-header-demo": {
       "tags": []
+    },
+    "ngx-tinynodes-core": {
+      "tags": []
     }
   }
 }

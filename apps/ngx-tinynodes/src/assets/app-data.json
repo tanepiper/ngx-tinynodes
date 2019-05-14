@@ -1,5 +1,64 @@
 {
+  "demoData": [
+    {
+      "name": "ngx-editorjs-demo",
+      "data": {
+        "blocks": [
+          {
+            "type": "header",
+            "data": {
+              "text": "Welcome to ngx-editorjs",
+              "level": 1
+            }
+          },
+          {
+            "type": "header",
+            "data": {
+              "text": "What Is It?",
+              "level": 2
+            }
+          },
+          {
+            "type": "paragraph",
+            "data": {
+              "text": "This component provide block level editing of your content - with an extendable Plugin architecture and Observable API you can use EditorJS in your application in minutes"
+            }
+          },
+          {
+            "type": "header",
+            "data": {
+              "text": "How to use?",
+              "level": 2
+            }
+          },
+          {
+            "type": "paragraph",
+            "data": {
+              "text": "Click on the editor area and select a block and then start typing!  Check your console when you hit save."
+            }
+          }
+        ]
+      }
+    }
+  ],
   "menus": [
+    {
+      "key": "main-links",
+      "items": [
+        {
+          "label": "Documentation",
+          "link": "https://tanepiper.github.io/ngx-tinynodes/"
+        },
+        {
+          "label": "GitHub",
+          "link": "https://github.com/tanepiper/ngx-tinynodes"
+        },
+        {
+          "label": "NPM",
+          "link": "https://www.npmjs.com/org/tinynodes"
+        }
+      ]
+    },
     {
       "key": "tinynode-projects",
       "title": "Tinynode Projects",

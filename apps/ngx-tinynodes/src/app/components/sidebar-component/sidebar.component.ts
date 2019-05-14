@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
-import { AppService } from '../../store/app/application.service';
-import { MatSidenav } from '@angular/material';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, Input } from '@angular/core';
+import { MenuGroup } from '@tinynodes/ngx-tinynodes-core';
 
 @Component({
   selector: 'tinynodes-sidebar',
@@ -10,13 +7,9 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['sidebar.component.scss']
 })
 export class SidebarComponent {
-  constructor(private readonly app: AppService) {}
+  @Input()
+  projectsMenu: MenuGroup;
 
-  public get projects() {
-    return this.app.getMenu('tinynode-projects');
-  }
-
-  public get openSource() {
-    return this.app.getMenu('other-projects');
-  }
+  @Input()
+  openSourceMenu: MenuGroup;
 }

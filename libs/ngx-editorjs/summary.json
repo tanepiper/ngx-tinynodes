@@ -6,6 +6,10 @@
       {
         "title": "ngx-editorjs Changelog",
         "file": "CHANGELOG.md"
+      },
+      {
+        "title": "Adding custom tools",
+        "file": "./docs/adding-custom-tools.md"
       }
     ]
   }

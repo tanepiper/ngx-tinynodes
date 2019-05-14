@@ -117,21 +117,6 @@
     <table class="table table-sm table-bordered index-table">
         <tbody>
 
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#toggleSidebar">toggleSidebar</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -148,9 +133,37 @@
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#toggleSidebar">toggleSidebar</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#menu">menu</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
         </tbody>
     </table>
 </section>
@@ -166,7 +179,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">apps/ngx-tinynodes/src/app/components/nav-bar/nav-bar.component.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">apps/ngx-tinynodes/src/app/components/nav-bar/nav-bar.component.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -227,62 +240,66 @@
             </tbody>
         </table>
 </section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggleSidebar"></a>
+                        <b>toggleSidebar</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">apps/ngx-tinynodes/src/app/components/nav-bar/nav-bar.component.ts:14</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
 
 
 
     <section>
-    
-    <h3 id="methods">
-        Methods
+    <h3 id="accessors">
+        Accessors
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="toggleSidebar"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            toggleSidebar
-                        </b>
-                        <a href="#toggleSidebar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>toggleSidebar()</code>
-                </td>
-            </tr>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="menu"></a>
+                        <span class="name"><b>menu</b><a href="#menu"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>menu()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">apps/ngx-tinynodes/src/app/components/nav-bar/nav-bar.component.ts:18</a></div>
+                                </td>
+                            </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">apps/ngx-tinynodes/src/app/components/nav-bar/nav-bar.component.ts:15</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 </section>
-
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
 import { AppService } from &#x27;../../store/app/application.service&#x27;;
 
 @Component({
@@ -294,10 +311,13 @@ export class NavBarComponent {
   @Input()
   title &#x3D; &#x27;Navbar Component&#x27;;
 
+  @Output()
+  toggleSidebar &#x3D; new EventEmitter&lt;void&gt;();
+
   constructor(private readonly app: AppService) {}
 
-  public toggleSidebar() {
-    this.app.toggleSidebar();
+  public get menu() {
+    return this.app.getMenu(&#x27;main-links&#x27;);
   }
 }
 </code></pre>
@@ -305,7 +325,7 @@ export class NavBarComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;mat-toolbar color&#x3D;&quot;primary&quot;&gt;
-  &lt;button mat-icon-button (click)&#x3D;&quot;toggleSidebar()&quot;&gt;
+  &lt;button mat-icon-button (click)&#x3D;&quot;toggleSidebar.emit()&quot;&gt;
     &lt;mat-icon&gt;menu&lt;/mat-icon&gt;
   &lt;/button&gt;
   &amp;nbsp;
@@ -313,20 +333,10 @@ export class NavBarComponent {
     &lt;a [routerLink]&#x3D;&quot;[&#x27;/&#x27;]&quot; routerLinkActive&#x3D;&quot;router-link-active&quot;&gt;{{ title }}&lt;/a&gt;
   &lt;/span&gt;
   &lt;div fxFlex fxLayout fxLayoutAlign&#x3D;&quot;flex-end&quot; fxHide.xs&gt;
-    &lt;ul fxLayout fxLayoutGap&#x3D;&quot;20px&quot; class&#x3D;&quot;navigation-items&quot;&gt;
-      &lt;li&gt;
-        &lt;a href&#x3D;&quot;https://tanepiper.github.io/ngx-tinynodes/&quot;&gt;
-          &lt;span class&#x3D;&quot;label&quot;&gt;Docs&lt;/span&gt;
-        &lt;/a&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;a href&#x3D;&quot;https://github.com/tanepiper/ngx-tinynodes&quot;&gt;
-          &lt;span class&#x3D;&quot;label&quot;&gt;Github&lt;/span&gt;
-        &lt;/a&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;a href&#x3D;&quot;https://www.npmjs.com/org/tinynodes&quot;&gt;
-          &lt;span class&#x3D;&quot;label&quot;&gt;NPM&lt;/span&gt;
+    &lt;ul fxLayout fxLayoutGap&#x3D;&quot;20px&quot; class&#x3D;&quot;navigation-items&quot; *ngIf&#x3D;&quot;(menu | async); let mainMenu&quot;&gt;
+      &lt;li *ngFor&#x3D;&quot;let menu of mainMenu.items&quot;&gt;
+        &lt;a [href]&#x3D;&quot;menu.link&quot; target&#x3D;&quot;_new&quot;&gt;
+          &lt;span class&#x3D;&quot;label&quot;&gt;{{ menu.label }}&lt;/span&gt;
         &lt;/a&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -400,8 +410,8 @@ a:active {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary">  <button mat-icon-button (click)="toggleSidebar()">    <mat-icon>menu</mat-icon>  </button>  &nbsp;  <span>    <a [routerLink]="[\'/\']" routerLinkActive="router-link-active">{{ title }}</a>  </span>  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>    <ul fxLayout fxLayoutGap="20px" class="navigation-items">      <li>        <a href="https://tanepiper.github.io/ngx-tinynodes/">          <span class="label">Docs</span>        </a>      </li>      <li>        <a href="https://github.com/tanepiper/ngx-tinynodes">          <span class="label">Github</span>        </a>      </li>      <li>        <a href="https://www.npmjs.com/org/tinynodes">          <span class="label">NPM</span>        </a>      </li>    </ul>  </div></mat-toolbar></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary">  <button mat-icon-button (click)="toggleSidebar.emit()">    <mat-icon>menu</mat-icon>  </button>  &nbsp;  <span>    <a [routerLink]="[\'/\']" routerLinkActive="router-link-active">{{ title }}</a>  </span>  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>    <ul fxLayout fxLayoutGap="20px" class="navigation-items" *ngIf="(menu | async); let mainMenu">      <li *ngFor="let menu of mainMenu.items">        <a [href]="menu.link" target="_new">          <span class="label">{{ menu.label }}</span>        </a>      </li>    </ul>  </div></mat-toolbar></div>'
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NavBarComponent'};
 </script>
@@ -437,7 +447,7 @@ a:active {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'NavBarComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

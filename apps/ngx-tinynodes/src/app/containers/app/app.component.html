@@ -1,7 +1,7 @@
-<tinynodes-nav-bar title="Tinynodes Angular Demos" (toggleSidebar)="toggleSidebar()"></tinynodes-nav-bar>
+<tinynodes-nav-bar title="Tinynodes Angular Demos" [menu]="mainMenu | async" (toggleSidebar)="toggleSidebar()"></tinynodes-nav-bar>
 <mat-sidenav-container class="application">
   <mat-sidenav #sidenav role="navigation" mode="side" opened>
-    <tinynodes-sidebar></tinynodes-sidebar>
+    <tinynodes-sidebar [projectsMenu]="projectsMenu | async" [openSourceMenu]="openSourceMenu | async"></tinynodes-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
     <main>

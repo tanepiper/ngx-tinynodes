@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap, switchMapTo } from 'rxjs/operators';
 import { ApplicationData, MenuGroup } from '../../types/app';
 import { ApplicationQuery } from './application.query';
 import { ApplicationStore } from './application.store';
+import { DemoData } from './application.model';
+import { Block } from '@tinynodes/ngx-editorjs/src';
 
 @Injectable()
 export class AppService {
@@ -13,7 +15,7 @@ export class AppService {
     private readonly store: ApplicationStore,
     private readonly http: HttpClient
   ) {
-    this.loadMenu();
+    this.loadData();
   }
 
   get hidden(): Observable<boolean> {
@@ -22,6 +24,15 @@ export class AppService {
 
   public toggleSidebar() {
     this.store.update({ hidden: !this.store._value().hidden });
+  }
+
+  public getDemoData(demoName: string): Block[] {
+    return this.query.select('demoData').pipe(
+      filter(data => typeof data !== 'undefined'),
+      map((demoData: DemoData[]) => {
+        return demoData.find(demo => demo.name === demoName).data.blocks as any;
+      })
+    ) as any;
   }
 
   public getMenu(key: string): Observable<MenuGroup> {
@@ -34,9 +45,9 @@ export class AppService {
     );
   }
 
-  private loadMenu() {
+  private loadData() {
     this.http.get('/assets/app-data.json').subscribe((appData: ApplicationData) => {
-      this.store.update({ menus: appData.menus });
+      this.store.update(appData);
     });
   }
 }

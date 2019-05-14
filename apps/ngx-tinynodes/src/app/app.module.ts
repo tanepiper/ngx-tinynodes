@@ -15,8 +15,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SidebarComponent } from './components/sidebar-component/sidebar.component';
 import { MaterialModule } from './material.module';
 import { HomePageComponent } from './pages/home/home-page.component';
-import { ApplicationDataModule } from './store/app/application.module';
 import { MatButtonModule } from '@angular/material';
+import { ApplicationDataModule, NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
 
 /**
  * The main `ngx-tinynodes` module that builds the core single page application.
@@ -33,6 +33,7 @@ import { MatButtonModule } from '@angular/material';
     FlexLayoutModule,
     ApplicationDataModule,
     AppRoutingModule,
+    NgxTinynodesCoreModule,
     NgxEditorJSModule.forRoot(),
     NgxEditorjsDemoModule,
     MarkdownModule.forRoot({ loader: HttpClient }),

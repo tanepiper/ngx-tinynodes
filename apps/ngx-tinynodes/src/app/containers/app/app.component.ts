@@ -1,8 +1,8 @@
-import { Component, Input, ViewChild, OnInit, OnDestroy, AfterContentInit } from '@angular/core';
+import { AfterContentInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
-import { AppService } from '../../store/app/application.service';
-import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { AppService } from '@tinynodes/ngx-tinynodes-core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 /**
  * The main application component that provides the root container
@@ -66,5 +66,26 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
   ngOnDestroy() {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  /**
+   * Get the application main menu
+   */
+  public get mainMenu() {
+    return this.app.getMenu('main-links');
+  }
+
+  /**
+   * Get the projects menu
+   */
+  public get projectsMenu() {
+    return this.app.getMenu('tinynode-projects');
+  }
+
+  /**
+   * Get the open source menu
+   */
+  public get openSourceMenu() {
+    return this.app.getMenu('other-projects');
   }
 }
