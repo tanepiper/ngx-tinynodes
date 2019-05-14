@@ -1,13 +1,13 @@
 import { NgZone } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
-import { takeUntil, filter, tap, distinctUntilChanged } from 'rxjs/operators';
-import { EDITIOR_JS_INSTANCE, NGX_EDITORJS_CONFIG, EditorJSConfig } from '../types/config';
+import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
+import { MockNgZone } from '../../testing/ng-zone-mock';
+import { MockEditorJS, MockPlugin } from '../../testing/shared';
+import { EDITIOR_JS_INSTANCE, NGX_EDITORJS_CONFIG } from '../types/config';
 import { UserPlugins } from '../types/plugins';
 import { NgxEditorJSService } from './editorjs.service';
 import { NgxEditorJSPluginService } from './plugins.service';
-import { MockNgZone } from '../../testing/ng-zone-mock';
-import { MockPlugin, MockEditorJS } from '../../testing/shared';
 
 describe('NgxEditorJSService', () => {
   let service: NgxEditorJSService;

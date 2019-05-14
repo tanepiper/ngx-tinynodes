@@ -1,7 +1,6 @@
-import { async, TestBed } from '@angular/core/testing';
-import { NgxEditorJSModule, editorJSInstance } from './ngx-editorjs.module';
-import EditorJS from '@editorjs/editorjs';
+import { TestBed } from '@angular/core/testing';
 import { MockEditorJS } from '../testing/shared';
+import { editorJSInstance, NgxEditorJSModule } from './ngx-editorjs.module';
 
 describe('NgxEditorJSModule', () => {
   let module;

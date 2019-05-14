@@ -81,7 +81,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * An initial set of blocks to render in the component
    */
   @Input()
-  public blocks: Block[];
+  public blocks: Block[] = [];
 
   constructor(private readonly el: ElementRef, private readonly editorService: NgxEditorJSService) {}
 
@@ -107,15 +107,37 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     this.service.createEditor(config, this.includeTools, this.autosave);
   }
 
+  /**
+   * When ngOnChanges are called, there are two paths
+   * If it's just blocks, then the service is updated with the blocks
+   * If it's any other property it means we create a new editor, as this
+   * is a destructive process we also need to wait for an existing editor
+   * to be ready
+   * @param changes
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
-      this.service.update(this.id, changes.blocks.currentValue);
+      return this.service.update(this.id, changes.blocks.currentValue);
+    }
+    if (this.id) {
+      this.createEditor(this.createConfig());
     }
   }
 
   ngAfterContentInit() {
     this.id = this.el.nativeElement.id || this.holder;
 
+    if (!this.id) {
+      throw new Error('Error in NgxEditorJSDirective::ngAfterContentInit - Directive element has no ID');
+    }
+    this.createEditor(this.createConfig());
+  }
+
+  ngOnDestroy() {
+    this.service.destroy(this.id);
+  }
+
+  private createConfig(): EditorJSConfig {
     const config: EditorJSConfig = createEditorJSConfig({
       holder: this.id,
       autofocus: this.autofocus,
@@ -132,10 +154,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
         blocks: this.blocks
       };
     }
-    this.createEditor(config);
-  }
-
-  ngOnDestroy() {
-    this.service.destroy(this.id);
+    return config;
   }
 }

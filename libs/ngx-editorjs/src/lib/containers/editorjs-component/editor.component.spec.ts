@@ -1,14 +1,13 @@
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { NgxEditorJSComponent } from './editorjs.component';
-import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
-import { NGX_EDITORJS_CONFIG, EDITIOR_JS_INSTANCE } from '../../types/config';
-import { UserPlugins } from '../../types/plugins';
-import { MockPlugin, MockEditorJS } from '@tinynodes/ngx-editorjs/src/testing/shared';
-import { NgxEditorJSPluginService } from '../../services/plugins.service';
-import { NgZone, DebugElement, Component, ViewChild } from '@angular/core';
+import { Component, DebugElement, NgZone, ViewChild } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockNgZone } from '@tinynodes/ngx-editorjs/src/testing/ng-zone-mock';
+import { MockEditorJS, MockPlugin } from '@tinynodes/ngx-editorjs/src/testing/shared';
+import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
-import { By } from '@angular/platform-browser';
+import { NgxEditorJSPluginService } from '../../services/plugins.service';
+import { EDITIOR_JS_INSTANCE, NGX_EDITORJS_CONFIG } from '../../types/config';
+import { UserPlugins } from '../../types/plugins';
+import { NgxEditorJSComponent } from './editorjs.component';
 
 describe('NgxEditorJSComponent', () => {
   let fixture: ComponentFixture<NgxEditorJSComponent>;

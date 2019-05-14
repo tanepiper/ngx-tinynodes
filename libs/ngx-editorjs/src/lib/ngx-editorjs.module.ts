@@ -2,13 +2,16 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import EditorJS from '@editorjs/editorjs';
-import { createConfig } from './config/module-config';
+import { createModuleConfig } from './config/module-config';
 import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { EDITIOR_JS_INSTANCE, FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 
+/**
+ * return an EditorJS class to that is used to create new `EditorJS` instances
+ */
 export function editorJSInstance(editorJS: any) {
   return editorJS;
 }
@@ -56,7 +59,7 @@ export class NgxEditorJSModule {
         },
         {
           provide: NGX_EDITORJS_CONFIG,
-          useFactory: createConfig,
+          useFactory: createModuleConfig,
           deps: [FOR_ROOT_OPTIONS_TOKEN]
         }
       ]

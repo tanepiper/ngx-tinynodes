@@ -1,14 +1,14 @@
-import { EventEmitter, NgZone, DebugElement, Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { NGX_EDITORJS_CONFIG, EDITIOR_JS_INSTANCE } from '../types/config';
-import { UserPlugins } from '../types/plugins';
-import { MockPlugin, MockEditorJS } from '../../testing/shared';
-import { NgxEditorJSPluginService } from '../services/plugins.service';
-import { MockNgZone } from '../../testing/ng-zone-mock';
-import { NgxEditorJSService } from '../services/editorjs.service';
-import { NgxEditorJSDirective } from './ngx-editorjs.directive';
+import { Component, DebugElement, EventEmitter, NgZone, SimpleChanges } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { MockNgZone } from '../../testing/ng-zone-mock';
+import { MockEditorJS, MockPlugin } from '../../testing/shared';
+import { NgxEditorJSService } from '../services/editorjs.service';
+import { NgxEditorJSPluginService } from '../services/plugins.service';
+import { Block } from '../types/blocks';
+import { EDITIOR_JS_INSTANCE, NGX_EDITORJS_CONFIG } from '../types/config';
+import { UserPlugins } from '../types/plugins';
+import { NgxEditorJSDirective } from './ngx-editorjs.directive';
 
 describe('NgxEditorJSDirective', () => {
   @Component({
@@ -25,6 +25,15 @@ describe('NgxEditorJSDirective', () => {
   let componentInstance: MockComponent;
   let directiveElement: DebugElement;
   let directive: NgxEditorJSDirective;
+
+  const blocks: Block[] = [
+    {
+      type: 'test',
+      data: {
+        text: 'test'
+      }
+    }
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -68,7 +77,6 @@ describe('NgxEditorJSDirective', () => {
   }));
 
   it('should create the directive on the component', () => {
-    expect(directiveElement).toBeDefined();
     expect(directive).toBeDefined();
   });
 
@@ -78,5 +86,40 @@ describe('NgxEditorJSDirective', () => {
 
   it('should provide the service instance', () => {
     expect(directive.service).toBeInstanceOf(NgxEditorJSService);
+  });
+
+  it('should update the service when changes are detected', () => {
+    spyOn(directive.service, 'update');
+
+    const changes: SimpleChanges = {
+      blocks: {
+        firstChange: false,
+        previousValue: [],
+        currentValue: blocks,
+        isFirstChange: () => false
+      }
+    };
+    directive.ngOnChanges(changes);
+    expect(directive.service.update).toHaveBeenCalledWith('my-editor', blocks);
+  });
+
+  it('should create a new instance when another property is changed', () => {
+    spyOn(directive, 'createEditor');
+
+    const changes: SimpleChanges = {
+      autofocus: {
+        firstChange: false,
+        previousValue: false,
+        currentValue: true,
+        isFirstChange: () => false
+      }
+    };
+    directive.autofocus = true;
+    directive.ngOnChanges(changes);
+
+    expect(directive.createEditor).toHaveBeenCalledWith({
+      autofocus: true,
+      holder: 'my-editor'
+    });
   });
 });
