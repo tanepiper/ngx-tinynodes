@@ -9,8 +9,7 @@ import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { EDITIOR_JS_INSTANCE, FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 
-export function editorJSInstance(editorJS: EditorJS) {
-  console.log(editorJS);
+export function editorJSInstance(editorJS: any) {
   return editorJS;
 }
 

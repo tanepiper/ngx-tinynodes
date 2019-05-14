@@ -22,9 +22,12 @@ export class MockEditorJS {
   blocks: any;
   saver: any;
   version: string;
+  destroy: () => void;
 
   constructor(private config: EditorJSConfig) {
     this.version = 'test';
+
+    this.destroy = () => {};
 
     this.blocks = {
       clear: () => {},
@@ -40,7 +43,6 @@ export class MockEditorJS {
         });
       }
     };
-
     (config as any).onReady();
   }
 }

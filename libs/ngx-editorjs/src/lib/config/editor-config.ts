@@ -3,7 +3,7 @@ import { EditorJSConfig } from '../types/config';
 /**
  * The default holder ID to attach `EditorJS` to
  */
-const DEFAULT_HOLDER_ID = 'editor-js';
+export const DEFAULT_HOLDER_ID = 'editor-js';
 
 /**
  * Creates an EditorJS config

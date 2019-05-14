@@ -5,7 +5,7 @@ import { createEditorJSConfig } from './editor-config';
  * Creates the configuration from the module config
  * @param config Optional module configurations
  */
-export function createConfig(config?: NgxEditorJSConfig): NgxEditorJSConfig {
+export function createModuleConfig(config?: NgxEditorJSConfig): NgxEditorJSConfig {
   if (!config || !config.editorjs) {
     return {
       editorjs: createEditorJSConfig()

@@ -71,4 +71,12 @@ describe('NgxEditorJSDirective', () => {
     expect(directiveElement).toBeDefined();
     expect(directive).toBeDefined();
   });
+
+  it('should provide the editor instance', () => {
+    expect(directive.editor).toBeInstanceOf(MockEditorJS);
+  });
+
+  it('should provide the service instance', () => {
+    expect(directive.service).toBeInstanceOf(NgxEditorJSService);
+  });
 });

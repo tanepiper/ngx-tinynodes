@@ -89,7 +89,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Get the `EditorJS` instance for this directive
    */
   public get editor(): EditorJS {
-    return this.editorService.getEditor(this.id);
+    return this.service.getEditor(this.id);
   }
 
   /**
@@ -104,12 +104,12 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * @param config Configuration for this instance
    */
   public createEditor(config?: EditorJSConfig): void {
-    this.editorService.createEditor(config, this.includeTools, this.autosave);
+    this.service.createEditor(config, this.includeTools, this.autosave);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
-      this.editorService.update(this.id, changes.blocks.currentValue);
+      this.service.update(this.id, changes.blocks.currentValue);
     }
   }
 
@@ -136,6 +136,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   }
 
   ngOnDestroy() {
-    this.editorService.destroy(this.id);
+    this.service.destroy(this.id);
   }
 }
