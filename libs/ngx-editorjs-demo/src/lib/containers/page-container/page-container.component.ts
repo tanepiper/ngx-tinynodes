@@ -24,9 +24,7 @@ export class PageContainerComponent {
     this.editor
       .getBlocks(this.holder)
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(blocks => {
-        console.log(blocks);
-      });
+      .subscribe(blocks => {});
   }
 
   get blocks() {

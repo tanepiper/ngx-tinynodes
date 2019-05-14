@@ -29,16 +29,16 @@ export class EditorFactory {
   }
   createInstance(config: EditorConfig) {
     //return new EditorJSInstance(config);
-    // return new (this.editorFactory as any)(config);
-    return new class EditorJSInstance extends this.editorFactory {
-      constructor() {
-        super(config);
-        console.log(Object.getOwnPropertyNames(this));
-      }
+    return new (this.editorFactory as any)(config);
+    // return new class EditorJSInstance extends this.editorFactory {
+    //   constructor() {
+    //     super(config);
+    //     console.log(Object.getOwnPropertyNames(this));
+    //   }
 
-      get version() {
-        return EditorJS.version;
-      }
-    }();
+    //   get version() {
+    //     return EditorJS.version;
+    //   }
+    // }();
   }
 }

@@ -12,7 +12,8 @@ export function editorjsModuleFactory(instance) {
     EditorJSInstance,
     {
       provide: EDITORJS_MODULE_IMPORT,
-      useValue: EditorJS
+      useClass: EditorJS,
+      deps: []
     },
     {
       provide: EDITORJS_MODULE_FACTORY,
