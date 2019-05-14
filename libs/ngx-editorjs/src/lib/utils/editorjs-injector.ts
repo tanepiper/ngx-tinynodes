@@ -25,10 +25,20 @@ export class EditorJSInstance extends EditorJS {
 })
 export class EditorFactory {
   constructor(@Inject(EDITORJS_MODULE_FACTORY) private editorFactory: any) {
-    console.log('editorFactory', editorFactory);
+    console.dir('editorFactory', editorFactory);
   }
   createInstance(config: EditorConfig) {
     //return new EditorJSInstance(config);
-    return new (this.editorFactory as any)(config);
+    // return new (this.editorFactory as any)(config);
+    return new class EditorJSInstance extends this.editorFactory {
+      constructor() {
+        super(config);
+        console.log(Object.getOwnPropertyNames(this));
+      }
+
+      get version() {
+        return EditorJS.version;
+      }
+    }();
   }
 }
