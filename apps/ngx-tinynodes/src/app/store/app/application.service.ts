@@ -1,10 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { ApplicationData, MenuGroup } from '../../types/app';
 import { ApplicationQuery } from './application.query';
 import { ApplicationStore } from './application.store';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { ApplicationData, MenuGroup } from '../../types/app';
-import { switchMapTo, map, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Injectable()
 export class AppService {

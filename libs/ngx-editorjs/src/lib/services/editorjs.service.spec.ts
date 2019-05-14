@@ -6,35 +6,8 @@ import { EDITIOR_JS_INSTANCE, NGX_EDITORJS_CONFIG, EditorJSConfig } from '../typ
 import { UserPlugins } from '../types/plugins';
 import { NgxEditorJSService } from './editorjs.service';
 import { NgxEditorJSPluginService } from './plugins.service';
-import { MockNgZone } from './testing/ng-zone-mock';
-import { MockPlugin } from './testing/shared';
-
-export class MockEditorJS {
-  blocks: any;
-  saver: any;
-  version: string;
-
-  constructor(private config: EditorJSConfig) {
-    this.version = 'test';
-
-    this.blocks = {
-      clear: () => {},
-      render: () => {}
-    };
-
-    this.saver = {
-      save: (): Promise<any> => {
-        return Promise.resolve({
-          time: Date.now(),
-          version: 'test',
-          blocks: []
-        });
-      }
-    };
-
-    (config as any).onReady();
-  }
-}
+import { MockNgZone } from '../../testing/ng-zone-mock';
+import { MockPlugin, MockEditorJS } from '../../testing/shared';
 
 describe('NgxEditorJSService', () => {
   let service: NgxEditorJSService;

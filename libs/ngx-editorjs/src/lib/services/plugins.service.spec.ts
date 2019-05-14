@@ -1,7 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { UserPlugins } from '../types/plugins';
 import { NgxEditorJSPluginService } from './plugins.service';
-import { MockPlugin } from './testing/shared';
+import { MockPlugin } from '../../testing/shared';
 
 describe('NgxEditorJSPluginService', () => {
   let service: NgxEditorJSPluginService;
