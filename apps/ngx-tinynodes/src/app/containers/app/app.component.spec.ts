@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { NavBarComponent } from '../nav-bar/nav-bar.component';
-import { SidebarComponent } from '../sidebar-component/sidebar.component';
+import { AppContainerComponent } from './app.component';
+import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
+import { SidebarComponent } from '../../components/sidebar-component/sidebar.component';
 import { MatSidenavModule, MatIconModule, MatToolbarModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../../material.module';
@@ -20,7 +20,7 @@ describe('AppComponent', () => {
         HttpClientModule,
         NoopAnimationsModule
       ],
-      declarations: [AppComponent, NavBarComponent, SidebarComponent],
+      declarations: [AppContainerComponent, NavBarComponent, SidebarComponent],
       providers: [
         {
           provide: APP_BASE_HREF,
@@ -31,13 +31,13 @@ describe('AppComponent', () => {
   }));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(AppContainerComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it('should call onDestroy$ when destroyed', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(AppContainerComponent);
     const app = fixture.debugElement.componentInstance;
 
     spyOn(app.onDestroy$, 'next');

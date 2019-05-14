@@ -28,7 +28,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content class">
                    <div class="content-data">
 
 
@@ -37,9 +37,13 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li>Injectables</li>
-  <li>ApplicationQuery</li>
+  <li>Classes</li>
+  <li>MockPlugin</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -57,15 +61,16 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/store/app/application.query.ts</code>
+            <code>libs/ngx-editorjs/src/testing/shared.ts</code>
         </p>
 
 
+
             <p class="comment">
-                <h3>Extends</h3>
+                <h3>Implements</h3>
             </p>
             <p class="comment">
-                        <code><a href="https://angular.io/api/core/Query" target="_blank" >Query</a></code>
+                            <code><a href="../interfaces/BasePlugin.html" target="_self" >BasePlugin</a></code>
             </p>
 
 
@@ -83,7 +88,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getMenu">getMenu</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#plugin">plugin</a>
+                            </li>
+                            <li>
+                                <a href="#shortcut">shortcut</a>
                             </li>
                         </ul>
                     </td>
@@ -97,54 +106,7 @@
     </table>
 </section>
 
-            <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(store: <a href="../injectables/ApplicationStore.html">ApplicationStore</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.query.ts:7</a></div>
-                            </td>
-                        </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>store</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ApplicationStore.html" target="_self" >ApplicationStore</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
             <section>
     
@@ -155,26 +117,28 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getMenu"></a>
+                    <a name="plugin"></a>
                     <span class="name">
                         <b>
-                            getMenu
+                            <span class="modifier">Public</span>
+                            plugin
                         </b>
-                        <a href="#getMenu"><span class="icon ion-ios-link"></span></a>
+                        <a href="#plugin"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getMenu()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>plugin()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.query.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">libs/ngx-editorjs/src/testing/shared.ts:13</a></div>
                 </td>
             </tr>
 
@@ -183,7 +147,46 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>ToolSettings</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="shortcut"></a>
+                    <span class="name">
+                        <b>
+                            shortcut
+                        </b>
+                        <a href="#shortcut"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>shortcut()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">libs/ngx-editorjs/src/testing/shared.ts:16</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </div>
                 </td>
@@ -192,33 +195,65 @@
     </table>
 </section>
 
+
+
+
+
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Query } from &#x27;@datorama/akita&#x27;;
-import { ApplicationState } from &#x27;./application.model&#x27;;
-import { ApplicationStore } from &#x27;./application.store&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
+import { BasePlugin } from &#x27;../lib/types/plugins&#x27;;
+import { EditorJSConfig } from &#x27;../lib/types/config&#x27;;
 
-@Injectable()
-export class ApplicationQuery extends Query&lt;ApplicationState&gt; {
-  constructor(protected store: ApplicationStore) {
-    super(store);
+export class TestClass {
+  constructor() {}
+  render() {
+    return document.createElement(&#x27;div&#x27;);
   }
+}
 
-  getMenu() {
-    return this.getValue().menus;
+export class MockPlugin implements BasePlugin {
+  public plugin(): ToolSettings {
+    return { class: TestClass };
+  }
+  shortcut() {
+    return &#x27;test-shortcut&#x27;;
+  }
+}
+
+export class MockEditorJS {
+  blocks: any;
+  saver: any;
+  version: string;
+  destroy: () &#x3D;&gt; void;
+
+  constructor(private config: EditorJSConfig) {
+    this.version &#x3D; &#x27;test&#x27;;
+
+    this.destroy &#x3D; () &#x3D;&gt; {};
+
+    this.blocks &#x3D; {
+      clear: () &#x3D;&gt; {},
+      render: () &#x3D;&gt; {}
+    };
+
+    this.saver &#x3D; {
+      save: (): Promise&lt;any&gt; &#x3D;&gt; {
+        return Promise.resolve({
+          time: Date.now(),
+          version: &#x27;test&#x27;,
+          blocks: []
+        });
+      }
+    };
+    (config as any).onReady();
   }
 }
 </code></pre>
     </div>
-
 </div>
-
-
-
-
 
 
 
@@ -242,8 +277,8 @@ export class ApplicationQuery extends Query&lt;ApplicationState&gt; {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'ApplicationQuery.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'MockPlugin.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

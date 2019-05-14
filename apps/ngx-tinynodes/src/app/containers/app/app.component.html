@@ -1,10 +1,9 @@
-<mat-sidenav-container>
+<tinynodes-nav-bar title="Tinynodes Angular Demos" (toggleSidebar)="toggleSidebar()"></tinynodes-nav-bar>
+<mat-sidenav-container class="application">
   <mat-sidenav #sidenav role="navigation" mode="side" opened>
     <tinynodes-sidebar></tinynodes-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
-    <tinynodes-nav-bar title="Tinynodes Angular Demos"></tinynodes-nav-bar>
-
     <main>
       <router-outlet></router-outlet>
     </main>

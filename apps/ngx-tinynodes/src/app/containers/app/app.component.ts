@@ -9,10 +9,10 @@ import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
  */
 @Component({
   selector: 'tinynodes-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
-export class AppComponent implements AfterContentInit, OnDestroy {
+export class AppContainerComponent implements AfterContentInit, OnDestroy {
   /**
    * The page title
    */
@@ -42,6 +42,10 @@ export class AppComponent implements AfterContentInit, OnDestroy {
 
   public get sidebarHidden(): Observable<boolean> {
     return this.sidebarHidden$.asObservable();
+  }
+
+  public toggleSidebar() {
+    this.app.toggleSidebar();
   }
 
   /**

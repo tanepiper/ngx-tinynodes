@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AppService } from '../../store/app/application.service';
 
 @Component({
@@ -10,9 +10,12 @@ export class NavBarComponent {
   @Input()
   title = 'Navbar Component';
 
+  @Output()
+  toggleSidebar = new EventEmitter<void>();
+
   constructor(private readonly app: AppService) {}
 
-  public toggleSidebar() {
-    this.app.toggleSidebar();
-  }
+  // public toggleSidebar() {
+  //   this.app.toggleSidebar();
+  // }
 }

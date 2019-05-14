@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="toggleSidebar()">
+  <button mat-icon-button (click)="toggleSidebar.emit()">
     <mat-icon>menu</mat-icon>
   </button>
   &nbsp;
@@ -9,17 +9,17 @@
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="20px" class="navigation-items">
       <li>
-        <a href="https://tanepiper.github.io/ngx-tinynodes/">
+        <a href="https://tanepiper.github.io/ngx-tinynodes/" target="_new">
           <span class="label">Docs</span>
         </a>
       </li>
       <li>
-        <a href="https://github.com/tanepiper/ngx-tinynodes">
+        <a href="https://github.com/tanepiper/ngx-tinynodes" target="_new">
           <span class="label">Github</span>
         </a>
       </li>
       <li>
-        <a href="https://www.npmjs.com/org/tinynodes">
+        <a href="https://www.npmjs.com/org/tinynodes" target="_new">
           <span class="label">NPM</span>
         </a>
       </li>

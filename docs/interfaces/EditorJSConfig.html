@@ -455,7 +455,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import { OutputData, SanitizerConfig } from &#x27;@editorjs/editorjs&#x27;;
+import EditorJS, { OutputData, SanitizerConfig } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
  * Configuration for the EditorJS instance
@@ -516,6 +516,16 @@ export interface NgxEditorJSConfig {
  * Injection token provied for &#x60;NgxEditorJSConfig&#x60;
  */
 export const NGX_EDITORJS_CONFIG &#x3D; new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;);
+
+/**
+ * Internal token for injecting the &#x60;NgxEditorJSConfig&#x60; into the config factory
+ */
+export const FOR_ROOT_OPTIONS_TOKEN &#x3D; new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;FOR_ROOT_OPTIONS_TOKEN&#x27;);
+
+/**
+ * Get the EditorJS instance injected into the app
+ */
+export const EDITIOR_JS_INSTANCE &#x3D; new InjectionToken&lt;EditorJS&gt;(&#x27;EDITIOR_JS_INSTANCE&#x27;);
 </code></pre>
     </div>
 </div>

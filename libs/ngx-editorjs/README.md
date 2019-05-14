@@ -19,7 +19,7 @@ Once installed, include the `NgxEditorJSModule` module in your project with the 
 
 You also need to pass a provider for `UserPlugins` with a factory function that returns an options map tools to provide to the `EditorJS` instance. An example of this is shows [in the demo application](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-demo/src/lib/config/index.ts)
 
-```ts
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
@@ -93,7 +93,7 @@ The module configuration allows EditorJS to be provided with a set of options fo
 
 To include tools in an Angular AOT-friendly way, inside your project, create a folder for your plugin and add an `Injectable` class with a `plugin()` method, and optional `shortcut` method for features that support it.
 
-```ts
+```typescript
 import { Injectable } from '@angular/core';
 import { ToolSettings } from '@editorjs/editorjs';
 import Marker from '@editorjs/marker';
@@ -112,7 +112,7 @@ export class PluginMarker implements BasePlugin {
 
 This allows Angular's AOT to include the editor component bundled within the application. Then export this via a module:
 
-```ts
+```typescript
 import { NgModule } from '@angular/core';
 import { PluginMarker } from './marker.plugin';
 
@@ -124,7 +124,7 @@ export class PluginMarkerModule {}
 
 Once you have created all your required modules, inside your Application or Feature module you need to provide an instance of `UserPlugins` using a factory function. Inside your module you can now add the following:
 
-```ts
+```typescript
 import { NgModule } from '@angular/core';
 import { NgxEditorJSModule, UserPlugins, PluginConfig } from '@tinynodes/ngx-editorjs';
 import { PluginMarkerModule } from './plugins/marker/marker.module';

@@ -61,7 +61,10 @@
                             <a href="#appRoutes" title="apps/ngx-tinynodes/src/app/app.routes.ts"><b>appRoutes</b>&nbsp;&nbsp;&nbsp;(apps/.../app.routes.ts)</a>
                         </li>
                         <li>
-                            <a href="#DEFAULT_HOLDER_ID" title="libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts"><b>DEFAULT_HOLDER_ID</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-editorjs.module.ts)</a>
+                            <a href="#DEFAULT_HOLDER_ID" title="libs/ngx-editorjs/src/lib/config/editor-config.ts"><b>DEFAULT_HOLDER_ID</b>&nbsp;&nbsp;&nbsp;(libs/.../editor-config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EDITIOR_JS_INSTANCE" title="libs/ngx-editorjs/src/lib/types/config.ts"><b>EDITIOR_JS_INSTANCE</b>&nbsp;&nbsp;&nbsp;(libs/.../config.ts)</a>
                         </li>
                         <li>
                             <a href="#environment" title="apps/ngx-tinynodes/src/environments/environment.prod.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(apps/.../environment.prod.ts)</a>
@@ -70,7 +73,7 @@
                             <a href="#environment" title="apps/ngx-tinynodes/src/environments/environment.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(apps/.../environment.ts)</a>
                         </li>
                         <li>
-                            <a href="#FOR_ROOT_OPTIONS_TOKEN" title="libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts"><b>FOR_ROOT_OPTIONS_TOKEN</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-editorjs.module.ts)</a>
+                            <a href="#FOR_ROOT_OPTIONS_TOKEN" title="libs/ngx-editorjs/src/lib/types/config.ts"><b>FOR_ROOT_OPTIONS_TOKEN</b>&nbsp;&nbsp;&nbsp;(libs/.../config.ts)</a>
                         </li>
                         <li>
                             <a href="#getGreeting" title="apps/ngx-tinynodes-e2e/src/support/app.po.ts"><b>getGreeting</b>&nbsp;&nbsp;&nbsp;(apps/.../app.po.ts)</a>
@@ -86,6 +89,9 @@
                         </li>
                         <li>
                             <a href="#ngxEditorjsDemoRoutes" title="libs/ngx-editorjs-demo/src/lib/ngx-editorjs-demo.routes.ts"><b>ngxEditorjsDemoRoutes</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-editorjs-demo.routes.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ngxHideableHeaderDemoRoutes" title="libs/ngx-hideable-header-demo/src/lib/ngx-hideable-header-demo.module.ts"><b>ngxHideableHeaderDemoRoutes</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-hideable-header-demo.module.ts)</a>
                         </li>
                         <li>
                             <a href="#UserPlugins" title="libs/ngx-editorjs/src/lib/types/plugins.ts"><b>UserPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
@@ -142,7 +148,7 @@
             </tbody>
         </table>
 </section>
-    <h3>libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts</h3>
+    <h3>libs/ngx-editorjs/src/lib/config/editor-config.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
             <tbody>
@@ -177,6 +183,36 @@
 
             </tbody>
         </table>
+</section>
+    <h3>libs/ngx-editorjs/src/lib/types/config.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="EDITIOR_JS_INSTANCE"></a>
+                        <span class="name">
+                            <b>
+                            EDITIOR_JS_INSTANCE</b>
+                            <a href="#EDITIOR_JS_INSTANCE"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new InjectionToken&lt;EditorJS&gt;(&#x27;EDITIOR_JS_INSTANCE&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Get the EditorJS instance injected into the app</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -191,13 +227,40 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;forRoot() NgxEditorJSConfig.&#x27;)</code>
+                            <i>Default value : </i><code>new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;FOR_ROOT_OPTIONS_TOKEN&#x27;)</code>
                         </td>
                     </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Internal token for injecting the <code>NgxEditorJSConfig</code> into the config factory</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="NGX_EDITORJS_CONFIG"></a>
+                        <span class="name">
+                            <b>
+                            NGX_EDITORJS_CONFIG</b>
+                            <a href="#NGX_EDITORJS_CONFIG"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Injection token provied for <code>NgxEditorJSConfig</code></p>
 </div>
                     </td>
                 </tr>
@@ -407,36 +470,6 @@
             </tbody>
         </table>
 </section>
-    <h3>libs/ngx-editorjs/src/lib/types/config.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="NGX_EDITORJS_CONFIG"></a>
-                        <span class="name">
-                            <b>
-                            NGX_EDITORJS_CONFIG</b>
-                            <a href="#NGX_EDITORJS_CONFIG"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;)</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Injection token provied for <code>NgxEditorJSConfig</code></p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
     <h3>libs/ngx-editorjs-demo/src/lib/ngx-editorjs-demo.routes.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
@@ -478,6 +511,36 @@
     component: EditorPageComponent
   }
 ]</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>libs/ngx-hideable-header-demo/src/lib/ngx-hideable-header-demo.module.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngxHideableHeaderDemoRoutes"></a>
+                        <span class="name">
+                            <b>
+                            ngxHideableHeaderDemoRoutes</b>
+                            <a href="#ngxHideableHeaderDemoRoutes"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Route[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
                         </td>
                     </tr>
 

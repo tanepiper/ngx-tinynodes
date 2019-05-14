@@ -58,10 +58,19 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
-                            <a href="#createConfig" title="libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts"><b>createConfig</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-editorjs.module.ts)</a>
+                            <a href="#createEditorInstance" title="libs/ngx-editorjs/src/lib/config/editor-instance.ts"><b>createEditorInstance</b>&nbsp;&nbsp;&nbsp;(libs/.../editor-instance.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createEditorJSConfig" title="libs/ngx-editorjs/src/lib/config/editor-config.ts"><b>createEditorJSConfig</b>&nbsp;&nbsp;&nbsp;(libs/.../editor-config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createModuleConfig" title="libs/ngx-editorjs/src/lib/config/module-config.ts"><b>createModuleConfig</b>&nbsp;&nbsp;&nbsp;(libs/.../module-config.ts)</a>
                         </li>
                         <li>
                             <a href="#createNgxEditorJSDemoTools" title="libs/ngx-editorjs-demo/src/lib/config/index.ts"><b>createNgxEditorJSDemoTools</b>&nbsp;&nbsp;&nbsp;(libs/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#editorJSInstance" title="libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts"><b>editorJSInstance</b>&nbsp;&nbsp;&nbsp;(libs/.../ngx-editorjs.module.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -70,24 +79,50 @@
     </table>
 </section>
 
-    <h3>libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts</h3>
+    <h3>libs/ngx-editorjs/src/lib/config/editor-instance.ts</h3>
     <section>
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createConfig"></a>
+                    <a name="createEditorInstance"></a>
                     <span class="name">
                         <b>
-                            createConfig
+                            createEditorInstance
                         </b>
-                        <a href="#createConfig"><span class="icon ion-ios-link"></span></a>
+                        <a href="#createEditorInstance"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createConfig(config?)</code>
+<code>createEditorInstance()</code>
+                </td>
+            </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>    <h3>libs/ngx-editorjs/src/lib/config/editor-config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createEditorJSConfig"></a>
+                    <span class="name">
+                        <b>
+                            createEditorJSConfig
+                        </b>
+                        <a href="#createEditorJSConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createEditorJSConfig(inputConfig?)</code>
                 </td>
             </tr>
 
@@ -96,7 +131,76 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Creates a configuration for EditorJS</p>
+                    <div class="io-description"><p>Creates an EditorJS config</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>inputConfig</td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>The config to merge</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/EditorJSConfig.html" target="_self" >EditorJSConfig</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>libs/ngx-editorjs/src/lib/config/module-config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createModuleConfig"></a>
+                    <span class="name">
+                        <b>
+                            createModuleConfig
+                        </b>
+                        <a href="#createModuleConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createModuleConfig(config?)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creates the configuration from the module config</p>
 </div>
 
                     <div class="io-description">
@@ -171,6 +275,67 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="../interfaces/PluginConfig.html" target="_self" >PluginConfig</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editorJSInstance"></a>
+                    <span class="name">
+                        <b>
+                            editorJSInstance
+                        </b>
+                        <a href="#editorJSInstance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editorJSInstance(editorJS: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>return an EditorJS class to that is used to create new <code>EditorJS</code> instances</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>editorJS</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
                     </div>
                 </td>
             </tr>

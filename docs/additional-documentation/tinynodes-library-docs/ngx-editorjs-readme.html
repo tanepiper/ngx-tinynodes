@@ -62,7 +62,7 @@
 </blockquote>
 <p>Once installed, include the <code>NgxEditorJSModule</code> module in your project with the <code>forRoot</code> method. The <code>forRoot</code> takes an optional configuration.</p>
 <p>You also need to pass a provider for <code>UserPlugins</code> with a factory function that returns an options map tools to provide to the <code>EditorJS</code> instance. An example of this is shows <a href="https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-demo/src/lib/config/index.ts">in the demo application</a></p>
-<p>```ts
+<p>```typescript
 import { NgModule } from &#39;@angular/core&#39;;
 import { BrowserModule } from &#39;@angular/platform-browser&#39;;
 import { NgxEditorJSModule } from &#39;@tinynodes/ngx-editorjs&#39;;
@@ -126,7 +126,7 @@ export class AppModule {}
 | <code>sanitizer</code>       | Content sanitizer configurations                                                                  |</p>
 <h3 id="adding-custom-tools">Adding custom tools</h3>
 <p>To include tools in an Angular AOT-friendly way, inside your project, create a folder for your plugin and add an <code>Injectable</code> class with a <code>plugin()</code> method, and optional <code>shortcut</code> method for features that support it.</p>
-<p>```ts
+<p>```typescript
 import { Injectable } from &#39;@angular/core&#39;;
 import { ToolSettings } from &#39;@editorjs/editorjs&#39;;
 import Marker from &#39;@editorjs/marker&#39;;
@@ -142,7 +142,7 @@ export class PluginMarker implements BasePlugin {
 }
 ```</p>
 <p>This allows Angular&#39;s AOT to include the editor component bundled within the application. Then export this via a module:</p>
-<p>```ts
+<p>```typescript
 import { NgModule } from &#39;@angular/core&#39;;
 import { PluginMarker } from &#39;./marker.plugin&#39;;</p>
 <p>@NgModule({
@@ -151,7 +151,7 @@ import { PluginMarker } from &#39;./marker.plugin&#39;;</p>
 export class PluginMarkerModule {}
 ```</p>
 <p>Once you have created all your required modules, inside your Application or Feature module you need to provide an instance of <code>UserPlugins</code> using a factory function. Inside your module you can now add the following:</p>
-<p>```ts
+<p>```typescript
 import { NgModule } from &#39;@angular/core&#39;;
 import { NgxEditorJSModule, UserPlugins, PluginConfig } from &#39;@tinynodes/ngx-editorjs&#39;;
 import { PluginMarkerModule } from &#39;./plugins/marker/marker.module&#39;;

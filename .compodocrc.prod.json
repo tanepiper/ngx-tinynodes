@@ -5,7 +5,6 @@
   "tsconfig": "./tsconfig.json",
   "includes": "./libs",
   "theme": "readthedocs",
-  "disableLifeCycleHooks": true,
   "disablePrivate": true,
   "disableInternal": true,
   "disableCoverage": true

@@ -78,6 +78,14 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#getMenu">getMenu</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadMenu">loadMenu</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#toggleSidebar">toggleSidebar</a>
                             </li>
                         </ul>
@@ -112,12 +120,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(query: <a href="../injectables/ApplicationQuery.html">ApplicationQuery</a>, store: <a href="../injectables/ApplicationStore.html">ApplicationStore</a>)</code>
+<code>constructor(query: <a href="../injectables/ApplicationQuery.html">ApplicationQuery</a>, store: <a href="../injectables/ApplicationStore.html">ApplicationStore</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -158,6 +166,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -172,6 +192,119 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMenu"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getMenu
+                        </b>
+                        <a href="#getMenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMenu(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:27</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/MenuGroup.html" target="_self" >Observable&lt;MenuGroup&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadMenu"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            loadMenu
+                        </b>
+                        <a href="#loadMenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadMenu()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -196,8 +329,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -235,7 +368,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:19</a></div>
                                 </td>
                             </tr>
 
@@ -246,14 +379,23 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { distinctUntilChanged, filter, map } from &#x27;rxjs/operators&#x27;;
+import { ApplicationData, MenuGroup } from &#x27;../../types/app&#x27;;
 import { ApplicationQuery } from &#x27;./application.query&#x27;;
 import { ApplicationStore } from &#x27;./application.store&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
 
 @Injectable()
 export class AppService {
-  constructor(private readonly query: ApplicationQuery, private readonly store: ApplicationStore) {}
+  constructor(
+    private readonly query: ApplicationQuery,
+    private readonly store: ApplicationStore,
+    private readonly http: HttpClient
+  ) {
+    this.loadMenu();
+  }
 
   get hidden(): Observable&lt;boolean&gt; {
     return this.query.select(&#x27;hidden&#x27;);
@@ -261,6 +403,22 @@ export class AppService {
 
   public toggleSidebar() {
     this.store.update({ hidden: !this.store._value().hidden });
+  }
+
+  public getMenu(key: string): Observable&lt;MenuGroup&gt; {
+    return this.query.select(&#x27;menus&#x27;).pipe(
+      distinctUntilChanged(),
+      filter(menus &#x3D;&gt; menus !&#x3D;&#x3D; undefined &amp;&amp; menus.length &gt; 0),
+      map(menus &#x3D;&gt; {
+        return menus.find(menu &#x3D;&gt; menu.key &#x3D;&#x3D; key);
+      })
+    );
+  }
+
+  private loadMenu() {
+    this.http.get(&#x27;/assets/app-data.json&#x27;).subscribe((appData: ApplicationData) &#x3D;&gt; {
+      this.store.update({ menus: appData.menus });
+    });
   }
 }
 </code></pre>

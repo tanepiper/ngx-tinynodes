@@ -12,13 +12,13 @@ All `EditorJS` plugins are listed as `peerDependencies` of the project - this is
 
 ## Plugin List
 
-| Plugin Name             | Description                                            | EditorJS Plugin Link                             |
-| ----------------------- | ------------------------------------------------------ | ------------------------------------------------ |
-| PluginCodeModule        | Provides a `<code>` block editor                       | [GitHub](https://github.com/editor-js/code)      |
-| PluginHeaderModule      | Provides a `<h1> - <h6>` block editor                  | [GitHub](https://github.com/editor-js/header)    |
-| PluginImageModule       | Provides an `<img>` block editor + file upload support | [GitHub](https://github.com/editor-js/image)     |
-| PluginLinkModule        | Provides an `<a>` block editor                         | [GitHub](https://github.com/editor-js/link)      |
-| PluginIListModule       | Provides an `<ol>/<li>` block editor                   | [GitHub](https://github.com/editor-js/list)      |
-| PluginMarkerModule      | Provides inline text marking                           | [GitHub](https://github.com/editor-js/marker)    |
-| PluginParagraphModule   | Provides an `<p>` block editor                         | [GitHub](https://github.com/editor-js/paragraph) |
-| PluginSimpleImageModule | Provides an `<img>` block editor with paste support    | [GitHub](https://github.com/editor-js/paragraph) |
+| Plugin Name             | Description                                            | Links                                                                                               |
+| ----------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| PluginCodeModule        | Provides a `<code>` block editor                       | [README](./src/lib/plugins/code/README.md) [GitHub](https://github.com/editor-js/code)              |
+| PluginHeaderModule      | Provides a `<h1> - <h6>` block editor                  | [README](./src/lib/plugins/header/README.md) [GitHub](https://github.com/editor-js/header)          |
+| PluginImageModule       | Provides an `<img>` block editor + file upload support | [README](./src/lib/plugins/image/README.md) [GitHub](https://github.com/editor-js/image)            |
+| PluginLinkModule        | Provides an `<a>` block editor                         | [README](./src/lib/plugins/link/README.md) [GitHub](https://github.com/editor-js/link)              |
+| PluginIListModule       | Provides an `<ol>/<li>` block editor                   | [README](./src/lib/plugins/list/README.md) [GitHub](https://github.com/editor-js/list)              |
+| PluginMarkerModule      | Provides inline text marking                           | [README](./src/lib/plugins/marker/README.md) [GitHub](https://github.com/editor-js/marker)          |
+| PluginParagraphModule   | Provides an `<p>` block editor                         | [README](./src/lib/plugins/paragraph/README.md) [GitHub](https://github.com/editor-js/paragraph)    |
+| PluginSimpleImageModule | Provides an `<img>` block editor with paste support    | [README](./src/lib/plugins/simple-image/README.md) [GitHub](https://github.com/editor-js/paragraph) |
