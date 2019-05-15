@@ -123,7 +123,6 @@ export class PageContainerComponent implements AfterContentInit {
       .getDemoData<NgxEditorJSDemo>('ngx-editorjs-demo')
       .pipe(take(1))
       .subscribe((data: NgxEditorJSDemo) => {
-        console.log(this.holder, data);
         this.menu$.next(data.links);
         this.editor.update(this.holder, data.blocks);
       });

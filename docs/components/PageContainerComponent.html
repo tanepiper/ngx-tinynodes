@@ -393,8 +393,8 @@ the <code>ngx-editorjs-demo</code></p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="147"
-                            class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/page-container/page-container.component.ts:147</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="146"
+                            class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/page-container/page-container.component.ts:146</a></div>
                 </td>
             </tr>
 
@@ -759,7 +759,7 @@ the <code>ngx-editorjs-demo</code></p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/page-container/page-container.component.ts:135</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/page-container/page-container.component.ts:134</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -902,7 +902,6 @@ export class PageContainerComponent implements AfterContentInit {
       .getDemoData&lt;NgxEditorJSDemo&gt;(&#x27;ngx-editorjs-demo&#x27;)
       .pipe(take(1))
       .subscribe((data: NgxEditorJSDemo) &#x3D;&gt; {
-        console.log(this.holder, data);
         this.menu$.next(data.links);
         this.editor.update(this.holder, data.blocks);
       });

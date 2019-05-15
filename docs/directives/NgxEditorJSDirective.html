@@ -653,8 +653,8 @@ all tools will be included</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="132"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:132</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="131"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:131</a></div>
                 </td>
             </tr>
 
@@ -770,8 +770,8 @@ to be ready</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="144"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:144</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="143"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:143</a></div>
                 </td>
             </tr>
 
@@ -986,7 +986,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * @param changes
    */
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (changes.blocks &amp;&amp; !changes.blocks.firstChange) {
       return this.service.update(this.id, changes.blocks.currentValue);
     }

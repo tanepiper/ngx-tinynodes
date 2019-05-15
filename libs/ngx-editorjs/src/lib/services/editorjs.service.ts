@@ -80,7 +80,6 @@ export class NgxEditorJSService {
    * @param blocks The array of `Block` elements to render
    */
   public update(holder: string, blocks: Block[]) {
-    console.log(blocks);
     this.editorService.update(holder, blocks);
   }
 
