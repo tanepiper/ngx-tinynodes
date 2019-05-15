@@ -246,8 +246,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="121"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:121</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:101</a></div>
                 </td>
             </tr>
 
@@ -440,8 +440,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="131"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:131</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:111</a></div>
                 </td>
             </tr>
 
@@ -830,8 +830,8 @@ the <code>createEditor</code> method</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="113"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:113</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:93</a></div>
                 </td>
             </tr>
 
@@ -1071,28 +1071,8 @@ export class NgxEditorJSService {
    * @param blocks The array of &#x60;Block&#x60; elements to render
    */
   public update(holder: string, blocks: Block[]) {
+    console.log(blocks);
     this.editorService.update(holder, blocks);
-    // const updateDone$ &#x3D; new Subject&lt;boolean&gt;();
-    // combineLatest([this.isReady(holder), this.getEditor(holder)])
-    //   .pipe(
-    //     takeUntil(updateDone$),
-    //     filter(([ready, editor]) &#x3D;&gt; ready &amp;&amp; typeof editor !&#x3D;&#x3D; &#x27;undefined&#x27;)
-    //   )
-    //   .subscribe(([ready, editor]) &#x3D;&gt; {
-    //     if (!ready || !editor) {
-    //       return;
-    //     }
-    //     if (ready &amp;&amp; editor) {
-    //       (editor as any).render({
-    //         blocks,
-    //         time: Date.now(),
-    //         version: EditorJS.version
-    //       });
-
-    //       updateDone$.next(true);
-    //       updateDone$.complete();
-    //     }
-    //   });
   }
 
   /**

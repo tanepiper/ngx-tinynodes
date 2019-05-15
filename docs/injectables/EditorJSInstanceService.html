@@ -1146,7 +1146,7 @@ export class EditorJSInstanceService {
     if (!this.eventMap[holder]) {
       this.eventMap[holder] &#x3D; new BehaviorSubject&lt;EventType&gt;({ type: &#x27;&#x27; });
     }
-    this.eventMap[holder].next({ type: &#x27;update&#x27;, payload: blocks });
+    this.eventMap[holder].next({ type: &#x27;update&#x27;, payload: { blocks } });
   }
 
   /**

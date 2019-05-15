@@ -141,7 +141,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Block } from &#x27;@tinynodes/ngx-editorjs&#x27;;
-import { MenuGroup } from &#x27;../../types/app&#x27;;
+import { MenuGroup, MenuItem } from &#x27;../../types/app&#x27;;
 
 /**
  * An Enum of the keys in the application state
@@ -186,6 +186,11 @@ export interface NgxEditorJSDemo {
    * The initial blocks for the demo
    */
   blocks: Block[];
+
+  /**
+   * Links for this demo
+   */
+  links: MenuGroup;
 }
 
 /**

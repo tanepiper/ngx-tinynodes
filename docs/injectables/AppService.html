@@ -526,7 +526,7 @@ export class AppService {
    */
   public getDemoData&lt;T&gt;(demoName: string): Observable&lt;T&gt; {
     return this.query.select(ApplicationStateKeys.DemoData).pipe(
-      filter(data &#x3D;&gt; typeof data !&#x3D;&#x3D; &#x27;undefined&#x27;),
+      filter((data: DemoData[]) &#x3D;&gt; typeof data !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; (data &amp;&amp; data.length &gt; 0)),
       map((demoData: DemoData[]) &#x3D;&gt; {
         return demoData.find(demo &#x3D;&gt; demo.name &#x3D;&#x3D;&#x3D; demoName).data;
       })
