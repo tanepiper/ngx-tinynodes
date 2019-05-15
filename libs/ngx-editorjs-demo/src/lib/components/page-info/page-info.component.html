@@ -1,0 +1,52 @@
+<mat-expansion-panel [expanded]="panelOpen | async" (opened)="togglePanel(true)" (closed)="togglePanel(false)">
+  <mat-expansion-panel-header>
+    <mat-panel-title>ngx-editorjs Information </mat-panel-title>
+    <mat-panel-description
+      >Details on usage and links - {{ (panelOpen | async) ? 'Click To Close' : 'Click To View +' }}</mat-panel-description
+    >
+  </mat-expansion-panel-header>
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>How To Use...</mat-card-title>
+          <mat-card-subtitle>Instructions on the demo below</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Below is an instance of an <code>EditorJS</code> block editor. Click on the area and the block tool will appear, or you can just
+            start typing.
+          </p>
+          <p>
+            The default block is a <code>&lt;p></code> paragraph, you can also add header <code>&lt;h1> - &lt;h6></code> blocks, list with
+            <code>&lt;ol> / &lt;li></code> and <code>&lt;code></code> blocks.
+          </p>
+
+          <p>
+            You can also paste in an <code>&lt;img></code> url into the editor and it will start the <code>SimpleImage</code> plugin which
+            provides an <code>&lt;img></code> tag pointing to the image, and with some additional controls.
+          </p>
+          <p>
+            When saving check the output panel below to see the data results. <strong>Note:</strong> This demo stores data in your local
+            store Shortly a feature will be added to disable it or clear it.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Links</mat-card-title>
+          <mat-card-subtitle>Links for all things related to <code>@tinynodes/ngx-editorjs</code></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item *ngFor="let link of links">
+              <a mat-raised-button color="primary" [href]="link.link" target="_new">{{ link.label }}</a>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-expansion-panel>

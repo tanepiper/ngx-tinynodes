@@ -45,17 +45,15 @@ export class PageContainerComponent implements AfterContentInit {
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
 
   /**
+   * Pages available in the apps
+   */
+  private pages$ = new BehaviorSubject<Page[]>([]);
+
+  /**
    * Gets if the panel is open or not
    */
   public get panelOpen() {
     return this.panelOpen$.asObservable();
-  }
-
-  /**
-   * Toggles the panel state
-   */
-  public togglePanel(value: boolean) {
-    this.panelOpen$.next(value);
   }
 
   /**
@@ -75,6 +73,13 @@ export class PageContainerComponent implements AfterContentInit {
       distinctUntilChanged(),
       takeUntil(this.onDestroy$)
     );
+
+    this.pagesService.pages
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(pages => this.pages$.next(pages));
   }
 
   /**
@@ -82,6 +87,10 @@ export class PageContainerComponent implements AfterContentInit {
    */
   public get blocks() {
     return this.blocks$;
+  }
+
+  public addPage() {
+    this.pagesService.add();
   }
 
   /**
@@ -98,7 +107,7 @@ export class PageContainerComponent implements AfterContentInit {
    * Get a list of pages
    */
   get pages(): Observable<Page[]> {
-    return this.pagesService.pages;
+    return this.pages$.asObservable();
   }
 
   /**

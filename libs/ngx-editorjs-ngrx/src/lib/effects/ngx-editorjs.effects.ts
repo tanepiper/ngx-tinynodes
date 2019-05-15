@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions, ofType } from '@ngrx/effects';
-import { NgxEditorJSService, Block } from '@tinynodes/ngx-editorjs';
-import { EditorJSActionTypes, SaveStart, SaveEnd } from '../actions/ngx-editorjs.actions';
-import { switchMap, map, withLatestFrom, tap, mergeMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import EditorJS from '@editorjs/editorjs';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
+import { map, switchMap } from 'rxjs/operators';
+import { EditorJSActionTypes, SaveEnd, SaveStart } from '../actions/ngx-editorjs.actions';
 
 @Injectable()
 export class NgxEditorJSEffects {
   constructor(private readonly actions$: Actions, private readonly editorService: NgxEditorJSService) {}
 
   @Effect({ dispatch: false })
-  $save = this.actions$.pipe(
+  saveStart$ = this.actions$.pipe(
     ofType(EditorJSActionTypes.SaveStart),
-    map((action: SaveStart) => {
+    switchMap((action: SaveStart) => {
       this.editorService.save(action.payload.holder);
-      return action;
-    }),
-    withLatestFrom([
-      map((action: SaveStart) => action),
-      (action: SaveStart): Observable<Block[]> => this.editorService.getBlocks(action.payload.holder)
-    ]),
-    mergeMap(([action, blocks]) => {
-      blocks.subscribe();
-      return new SaveEnd({
-        holder: action.payload.holder,
-        data: {
-          time: Date.now(),
-          version: EditorJS.version,
-          blocks: blocks
-        }
-      });
+      return this.editorService.getBlocks(action.payload.holder).pipe(
+        map((blocks: Block[]) => {
+          return new SaveEnd({
+            holder: action.payload.holder,
+            data: {
+              version: '',
+              time: Date.now(),
+              blocks
+            }
+          });
+        })
+      );
     })
   );
+
+  @Effect()
+  saveEnd$ = this.actions$;
 }

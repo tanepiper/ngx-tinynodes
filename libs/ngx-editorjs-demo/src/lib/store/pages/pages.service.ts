@@ -37,6 +37,7 @@ export class PagesService {
       blocks: [],
       ...page
     };
+    console.log(newPage);
     this.store.add(newPage);
   }
 

@@ -1,0 +1,16 @@
+<mat-card>
+  <h3 mat-card-header>Pages</h3>
+  <mat-card-subtitle>Add, edit and remove pages of EditorJS content</mat-card-subtitle>
+  <mat-card-actions>
+    <mat-action-row>
+      <button mat-button (click)="page()">Add Page +</button>
+    </mat-action-row>
+  </mat-card-actions>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let page of pages">
+        <a routerLink="/ngx-editorjs-demo/pages/{{ page.id }}" routerLinkActive="router-link-active">{{ page.pageTitle }}</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
