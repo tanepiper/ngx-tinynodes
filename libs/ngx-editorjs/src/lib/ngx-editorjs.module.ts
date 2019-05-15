@@ -7,7 +7,7 @@ import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
-import { EditorJSInjectorModule } from './utils/editorjs-injector.module';
+import { EditorJSInstanceModule } from './utils/editorjs-injector.module';
 import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
 
 /**
@@ -19,9 +19,9 @@ import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule, FormsModule, EditorJSInjectorModule, NgxTinynodesCoreModule],
+  imports: [CommonModule, FormsModule, EditorJSInstanceModule, NgxTinynodesCoreModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
-  exports: [NgxEditorJSComponent, NgxEditorJSDirective, EditorJSInjectorModule],
+  exports: [NgxEditorJSComponent, NgxEditorJSDirective, EditorJSInstanceModule],
   providers: [NgxEditorJSService, NgxEditorJSPluginService]
 })
 export class NgxEditorJSModule {

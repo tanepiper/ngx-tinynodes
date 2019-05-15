@@ -20,25 +20,7 @@ export class PageContainerComponent {
     private readonly pagesService: PagesService,
     private app: AppService,
     private readonly editor: NgxEditorJSService
-  ) {
-    this.editor
-      .isReady(this.holder)
-      .pipe(
-        filter(isReady => {
-          return isReady;
-        }),
-        withLatestFrom(this.blocks),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(([isReady, blocks]) => {
-        console.log(blocks);
-        this.editor.update(this.holder, blocks);
-      });
-    // this.editor
-    //   .getBlocks(this.holder)
-    //   .pipe(takeUntil(this.onDestroy$))
-    //   .subscribe(blocks => {});
-  }
+  ) {}
 
   get blocks() {
     return this.app.getDemoData('ngx-editorjs-demo');
@@ -50,5 +32,13 @@ export class PageContainerComponent {
 
   public save() {
     this.editor.save(this.holder);
+  }
+
+  public clear() {
+    this.editor.clear(this.holder);
+  }
+
+  public reset(blocks: Block[]) {
+    this.editor.update(this.holder, blocks);
   }
 }
