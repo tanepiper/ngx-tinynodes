@@ -239,8 +239,8 @@ it to the store, from here the main state can be updated and queried.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:49</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:53</a></div>
                 </td>
             </tr>
 
@@ -326,8 +326,8 @@ it to the store, from here the main state can be updated and queried.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:62</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:66</a></div>
                 </td>
             </tr>
 
@@ -406,7 +406,7 @@ it to the store, from here the main state can be updated and queried.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>toggleSidebar()</code>
+                    <code>toggleSidebar(value?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
@@ -425,8 +425,39 @@ it to the store, from here the main state can be updated and queried.</p>
 </div>
 
                     <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -516,8 +547,12 @@ export class AppService {
   /**
    * Toggles the sidebar state
    */
-  public toggleSidebar() {
-    this.store.update({ [ApplicationStateKeys.Hidden]: !this.store._value()[ApplicationStateKeys.Hidden] });
+  public toggleSidebar(value?: boolean) {
+    console.log(value);
+    this.store.update({
+      [ApplicationStateKeys.Hidden]:
+        typeof value !&#x3D;&#x3D; &#x27;undefined&#x27; ? value : !this.store._value()[ApplicationStateKeys.Hidden]
+    });
   }
 
   /**

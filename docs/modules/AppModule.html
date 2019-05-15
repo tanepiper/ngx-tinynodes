@@ -340,6 +340,7 @@ import { MaterialModule } from &#x27;./material.module&#x27;;
 import { HomePageComponent } from &#x27;./pages/home/home-page.component&#x27;;
 import { MatButtonModule } from &#x27;@angular/material&#x27;;
 import { ApplicationDataModule, NgxTinynodesCoreModule } from &#x27;@tinynodes/ngx-tinynodes-core&#x27;;
+import { LayoutModule } from &#x27;@angular/cdk/layout&#x27;;
 
 /**
  * The main &#x60;ngx-tinynodes&#x60; module that builds the core single page application.
@@ -349,6 +350,7 @@ import { ApplicationDataModule, NgxTinynodesCoreModule } from &#x27;@tinynodes/n
   declarations: [AppContainerComponent, NavBarComponent, SidebarComponent, HomePageComponent],
   imports: [
     BrowserModule,
+    LayoutModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,

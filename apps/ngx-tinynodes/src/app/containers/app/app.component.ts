@@ -41,7 +41,7 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
   private mobileView: MediaQueryList;
 
   constructor(private readonly app: AppService, private readonly matcher: MediaMatcher) {
-    this.mobileView = this.matcher.matchMedia('(min-width: 500px)');
+    this.mobileView = this.matcher.matchMedia('(max-width: 768px)');
     this.mobileView.addListener(this.matchView.bind(this));
 
     this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe(hidden => {

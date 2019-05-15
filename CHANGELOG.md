@@ -6,7 +6,7 @@ This changelog is related to the overall site. You can also find changelogs for 
 
 ## Wednesday, 15th May 2019
 
-Today I have released `@tinynodes/ngx-editorjs@1.3.0`. This will be without a Forms component. In this release the main change is internally I'm using a new [EditorJS Injector module](/modules/EditorJSInstanceModule.html) I've created to handle managing the underlying instance. There are also a lot of documentation improvments
+Today I have released `@tinynodes/ngx-editorjs@1.3.2`. This will be without a Forms component. In this release the main change is internally I'm using a new [EditorJS Injector module](/modules/EditorJSInstanceModule.html) I've created to handle managing the underlying instance. There are also a lot of documentation improvements and a completly new [updated demo site](https://tinynodes-ngx.firebaseapp.com).
 
 ## Monday, 13th May 2019
 
