@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatGridListModule, MatExpansionModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
 import {
@@ -39,7 +39,9 @@ import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core/src';
     MaterialModule,
     MatCardModule,
     MatButtonModule,
-    NgxTinynodesCoreModule
+    NgxTinynodesCoreModule,
+    MatGridListModule,
+    MatExpansionModule
   ],
   providers: [
     {

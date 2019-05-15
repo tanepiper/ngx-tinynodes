@@ -62,7 +62,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/types/app.ts</code>
+            <code>libs/ngx-tinynodes-core/src/lib/types/app.ts</code>
         </p>
 
             <p class="comment">
@@ -183,7 +183,7 @@
 /**
  * A menu item in the Tinynodes app
  */
-export interface MenuItem {
+export interface MenuItem&lt;T&gt; {
   /**
    * The display label for the app
    */
@@ -204,13 +204,13 @@ export interface MenuItem {
   /**
    * Any children to render in the menu
    */
-  children?: MenuItem[];
+  children?: MenuItem&lt;T&gt;[];
 }
 
 /**
  * A menu group describes a set of menu items with a key and optional title
  */
-export interface MenuGroup {
+export interface MenuGroup&lt;T &#x3D; any&gt; {
   /**
    * The key of the menu (e.g. &#x60;sidebar&#x60;, &#x60;topnav&#x60;, etc)
    */
@@ -223,7 +223,7 @@ export interface MenuGroup {
   /**
    * The menu items, can contain one or more items with children
    */
-  items: MenuItem[];
+  items: MenuItem&lt;T&gt;[];
 }
 
 /**
@@ -266,7 +266,7 @@ export interface ApplicationData {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ApplicationData.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

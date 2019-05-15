@@ -4,8 +4,8 @@
   <a *ngFor="let child of projectsMenu.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
 </mat-nav-list>
 
-<mat-nav-list *ngIf="openSourceMenu">
+<!-- <mat-nav-list *ngIf="openSourceMenu">
   <h3 mat-subheader *ngIf="openSourceMenu.title">{{ openSourceMenu.title }}</h3>
 
   <a *ngFor="let child of openSourceMenu.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
-</mat-nav-list>
+</mat-nav-list> -->

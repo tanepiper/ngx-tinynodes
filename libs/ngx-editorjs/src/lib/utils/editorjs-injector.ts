@@ -58,6 +58,7 @@ export class EditorJSInstanceService {
    * Import the `EditorJS` class
    * @param EditorJS The `EditorJS` class
    * @param zone Angular zone to run
+   * @param ref The application reference to trigger a tick
    */
   constructor(
     @Inject(EDITORJS_MODULE_IMPORT) private EditorJS: any,
@@ -229,10 +230,11 @@ export class EditorJSInstanceService {
           this.clearHandler(holder, editor);
         }
         if (event.type === 'update') {
-          this.updateHandler(holder, editor, event.payload);
+          this.updateHandler(holder, editor, event.payload.blocks);
         }
         this.eventMap[holder].next({ type: '' });
       });
+    this.ref.tick();
   }
 
   /**
@@ -280,7 +282,6 @@ export class EditorJSInstanceService {
       editor.saver.save().then(data => {
         this.zone.run(() => {
           this.blocksMap[holder].next(data.blocks);
-          this.ref.tick();
         });
       });
     });
@@ -299,7 +300,6 @@ export class EditorJSInstanceService {
       this.zone.run(() => {
         this.blocksMap[holder].next([]);
         this.changeMap[holder].next(Date.now());
-        this.ref.tick();
       });
     });
   }
@@ -312,6 +312,9 @@ export class EditorJSInstanceService {
    * @param blocks The {Block} items to render
    */
   private updateHandler(holder: string, editor: EditorJS, blocks: Block[]) {
+    if (!blocks) {
+      return;
+    }
     this.zone.runOutsideAngular(() => {
       editor.blocks.render({
         time: Date.now(),
@@ -321,7 +324,6 @@ export class EditorJSInstanceService {
       this.zone.run(() => {
         this.blocksMap[holder].next(blocks);
         this.changeMap[holder].next(Date.now());
-        this.ref.tick();
       });
     });
   }

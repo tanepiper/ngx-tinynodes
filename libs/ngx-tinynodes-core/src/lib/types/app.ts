@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 /**
  * A menu item in the Tinynodes app
  */
-export interface MenuItem {
+export interface MenuItem<T> {
   /**
    * The display label for the app
    */
@@ -24,13 +24,13 @@ export interface MenuItem {
   /**
    * Any children to render in the menu
    */
-  children?: MenuItem[];
+  children?: MenuItem<T>[];
 }
 
 /**
  * A menu group describes a set of menu items with a key and optional title
  */
-export interface MenuGroup {
+export interface MenuGroup<T = any> {
   /**
    * The key of the menu (e.g. `sidebar`, `topnav`, etc)
    */
@@ -43,7 +43,7 @@ export interface MenuGroup {
   /**
    * The menu items, can contain one or more items with children
    */
-  items: MenuItem[];
+  items: MenuItem<T>[];
 }
 
 /**

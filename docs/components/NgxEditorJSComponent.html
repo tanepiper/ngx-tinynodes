@@ -758,13 +758,18 @@ export class NgxEditorJSComponent {
                     <code>editorjs.component.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">:host {
+  position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .editor {
+  flex: 1;
+  position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   border: 2px solid darkgray;
   border-radius: 1em;
   text-align: left;
@@ -798,7 +803,7 @@ export class NgxEditorJSComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div  class="editor"  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [placeholder]="placeholder"  [sanitizer]="sanitizer"  [blocks]="blocks"></div></div>'
-    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NgxEditorJSComponent'};
 </script>

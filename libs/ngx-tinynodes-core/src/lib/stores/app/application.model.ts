@@ -1,6 +1,12 @@
 import { Block } from '@tinynodes/ngx-editorjs';
 import { MenuGroup } from '../../types/app';
 
+export enum ApplicationStateKeys {
+  Hidden = 'hidden',
+  Menus = 'menus',
+  DemoData = 'demoData'
+}
+
 export interface DemoData<T = any> {
   name: string;
   data: T;

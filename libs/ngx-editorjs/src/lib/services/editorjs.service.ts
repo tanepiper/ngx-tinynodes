@@ -1,20 +1,14 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
-import { BehaviorSubject, Observable, combineLatest, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { Block } from '../types/blocks';
 import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
-import { BlocksMap, ChangeMap, EditorMap, ReadyMap } from '../types/maps';
 import { EditorJSInstanceService } from '../utils/editorjs-injector';
 import { NgxEditorJSPluginService } from './plugins.service';
-import { filter, takeUntil } from 'rxjs/operators';
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
- * The service has several maps:
- * - A map of `EditorJS` instances
- * - A map of `BehaviorSubject` containing the current array of blocks
- * - A map of ready states
- * The are generated from the last save made on that instance
  */
 @Injectable({
   providedIn: 'root'
@@ -22,13 +16,13 @@ import { filter, takeUntil } from 'rxjs/operators';
 export class NgxEditorJSService {
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
-    private readonly editorFactory: EditorJSInstanceService,
+    private readonly editorService: EditorJSInstanceService,
     private readonly plugins: NgxEditorJSPluginService,
     private zone: NgZone
   ) {}
 
   /**
-   * This method creates a new EditorJS instance and adds it to the editor map.
+   * This method creates a new EditorJS instance
    * @param holder The ID of the holder of the instance
    * @param blocks Optional initial set of blocks to render in the editor
    * @param excludeTools String array of keys to not include with this editor
@@ -41,26 +35,24 @@ export class NgxEditorJSService {
       tools: this.plugins.getTools(includeTools)
     };
 
-    await this.editorFactory.createInstance(options);
+    await this.editorService.createInstance(options);
   }
 
   /**
-   * Get an `EditorJS` instance, if the instance does not exist it will be created
-   * and returned with the default settings
+   * Get an `EditorJS` instance
    * See the [EditorJS API](https://editorjs.io/api) docs for more details
    * @param holder The ID of the holder of the instance
    */
   public getEditor(holder: string): Observable<EditorJS> {
-    return this.editorFactory.getInstance(holder).pipe(filter(editor => typeof editor !== 'undefined'));
+    return this.editorService.getInstance(holder).pipe(filter(editor => typeof editor !== 'undefined'));
   }
 
   /**
    * Get an observable of the blocks for an `EditorJS` instance
-   * If there is no instance of that name it will throw an error.
    * @param holder The ID of the holder of the instance
    */
   public getBlocks(holder: string): Observable<Block[]> {
-    return this.editorFactory.getBlocks[holder];
+    return this.editorService.getBlocks(holder);
   }
 
   /**
@@ -69,7 +61,7 @@ export class NgxEditorJSService {
    * @param holder
    */
   public isReady(holder: string): Observable<boolean> {
-    return this.editorFactory.getReady(holder);
+    return this.editorService.getReady(holder);
   }
 
   /**
@@ -78,7 +70,7 @@ export class NgxEditorJSService {
    * @param holder
    */
   public hasChanged(holder: string): Observable<number> {
-    return this.editorFactory.getChanged(holder);
+    return this.editorService.getChanged(holder);
   }
 
   /**
@@ -88,7 +80,7 @@ export class NgxEditorJSService {
    * @param blocks The array of `Block` elements to render
    */
   public update(holder: string, blocks: Block[]) {
-    this.editorFactory.update(holder, blocks);
+    this.editorService.update(holder, blocks);
     // const updateDone$ = new Subject<boolean>();
     // combineLatest([this.isReady(holder), this.getEditor(holder)])
     //   .pipe(
@@ -119,7 +111,7 @@ export class NgxEditorJSService {
    * @param holder The ID of the holder of the instance
    */
   public save(holder: string): void {
-    this.editorFactory.save(holder);
+    this.editorService.save(holder);
   }
 
   /**
@@ -127,7 +119,7 @@ export class NgxEditorJSService {
    * @param holder The ID of the holder of the instance
    */
   public clear(holder: string): void {
-    this.editorFactory.clear(holder);
+    this.editorService.clear(holder);
   }
 
   /**
@@ -137,6 +129,6 @@ export class NgxEditorJSService {
    * @param holder The ID of the holder of the instance
    */
   public destroy(holder: string): void {
-    this.editorFactory.destroyInstance(holder);
+    this.editorService.destroyInstance(holder);
   }
 }

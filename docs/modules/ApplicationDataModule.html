@@ -142,10 +142,18 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/store/app/application.module.ts</code>
+            <code>libs/ngx-tinynodes-core/src/lib/stores/app/application.module.ts</code>
         </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>This module provide the Application state and helper functions that
+are used across the Tinynodes site</p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -178,6 +186,10 @@ import { ApplicationQuery } from &#x27;./application.query&#x27;;
 import { AppService } from &#x27;./application.service&#x27;;
 import { ApplicationStore } from &#x27;./application.store&#x27;;
 
+/**
+ * This module provide the Application state and helper functions that
+ * are used across the Tinynodes site
+ */
 @NgModule({
   providers: [AppService, ApplicationQuery, ApplicationStore]
 })

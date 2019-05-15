@@ -118,7 +118,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
-      console.log(changes);
       return this.service.update(this.id, changes.blocks.currentValue);
     }
     if (this.id) {
@@ -126,6 +125,9 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     }
   }
 
+  /**
+   * After content is created, we create the editor instance
+   */
   ngAfterContentInit() {
     this.id = this.el.nativeElement.id || this.holder;
 
@@ -135,6 +137,9 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     this.createEditor(this.createConfig());
   }
 
+  /**
+   * Destroy the editor and subjects for this service
+   */
   ngOnDestroy() {
     this.service.destroy(this.id);
   }

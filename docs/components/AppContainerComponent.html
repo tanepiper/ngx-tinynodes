@@ -206,6 +206,15 @@
                                 <li>
                                     <a href="#sidebarHidden">sidebarHidden</a>
                                 </li>
+                                <li>
+                                    <a href="#mainMenu">mainMenu</a>
+                                </li>
+                                <li>
+                                    <a href="#projectsMenu">projectsMenu</a>
+                                </li>
+                                <li>
+                                    <a href="#openSourceMenu">openSourceMenu</a>
+                                </li>
                             </ul>
                         </td>
                     </tr>
@@ -566,16 +575,103 @@
 
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mainMenu"></a>
+                        <span class="name"><b>mainMenu</b><a href="#mainMenu"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>mainMenu()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:74</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get the application main menu</p>
+</div>
+
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="projectsMenu"></a>
+                        <span class="name"><b>projectsMenu</b><a href="#projectsMenu"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>projectsMenu()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:81</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get the projects menu</p>
+</div>
+
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openSourceMenu"></a>
+                        <span class="name"><b>openSourceMenu</b><a href="#openSourceMenu"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>openSourceMenu()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:88</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get the open source menu</p>
+</div>
+
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
 </section>
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, ViewChild, OnInit, OnDestroy, AfterContentInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterContentInit, Component, Input, OnDestroy, ViewChild } from &#x27;@angular/core&#x27;;
 import { MatSidenav } from &#x27;@angular/material&#x27;;
-import { Subject, BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
-import { AppService } from &#x27;../../store/app/application.service&#x27;;
-import { takeUntil, distinctUntilChanged } from &#x27;rxjs/operators&#x27;;
+import { AppService } from &#x27;@tinynodes/ngx-tinynodes-core&#x27;;
+import { BehaviorSubject, Observable, Subject } from &#x27;rxjs&#x27;;
+import { distinctUntilChanged, takeUntil } from &#x27;rxjs/operators&#x27;;
 
 /**
  * The main application component that provides the root container
@@ -640,15 +736,36 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
   }
+
+  /**
+   * Get the application main menu
+   */
+  public get mainMenu() {
+    return this.app.getMenu(&#x27;main-links&#x27;);
+  }
+
+  /**
+   * Get the projects menu
+   */
+  public get projectsMenu() {
+    return this.app.getMenu(&#x27;tinynode-projects&#x27;);
+  }
+
+  /**
+   * Get the open source menu
+   */
+  public get openSourceMenu() {
+    return this.app.getMenu(&#x27;other-projects&#x27;);
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;tinynodes-nav-bar title&#x3D;&quot;Tinynodes Angular Demos&quot; (toggleSidebar)&#x3D;&quot;toggleSidebar()&quot;&gt;&lt;/tinynodes-nav-bar&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;tinynodes-nav-bar title&#x3D;&quot;Tinynodes Angular Demos&quot; [menu]&#x3D;&quot;mainMenu | async&quot; (toggleSidebar)&#x3D;&quot;toggleSidebar()&quot;&gt;&lt;/tinynodes-nav-bar&gt;
 &lt;mat-sidenav-container class&#x3D;&quot;application&quot;&gt;
   &lt;mat-sidenav #sidenav role&#x3D;&quot;navigation&quot; mode&#x3D;&quot;side&quot; opened&gt;
-    &lt;tinynodes-sidebar&gt;&lt;/tinynodes-sidebar&gt;
+    &lt;tinynodes-sidebar [projectsMenu]&#x3D;&quot;projectsMenu | async&quot; [openSourceMenu]&#x3D;&quot;openSourceMenu | async&quot;&gt;&lt;/tinynodes-sidebar&gt;
   &lt;/mat-sidenav&gt;
   &lt;mat-sidenav-content&gt;
     &lt;main&gt;
@@ -734,8 +851,8 @@ a:active {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><tinynodes-nav-bar title="Tinynodes Angular Demos" (toggleSidebar)="toggleSidebar()"></tinynodes-nav-bar><mat-sidenav-container class="application">  <mat-sidenav #sidenav role="navigation" mode="side" opened>    <tinynodes-sidebar></tinynodes-sidebar>  </mat-sidenav>  <mat-sidenav-content>    <main>      <router-outlet></router-outlet>    </main>  </mat-sidenav-content></mat-sidenav-container></div>'
-    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'EditorPageComponent', 'selector': 'ngx-editor-page'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+        var COMPONENT_TEMPLATE = '<div><tinynodes-nav-bar title="Tinynodes Angular Demos" [menu]="mainMenu | async" (toggleSidebar)="toggleSidebar()"></tinynodes-nav-bar><mat-sidenav-container class="application">  <mat-sidenav #sidenav role="navigation" mode="side" opened>    <tinynodes-sidebar [projectsMenu]="projectsMenu | async" [openSourceMenu]="openSourceMenu | async"></tinynodes-sidebar>  </mat-sidenav>  <mat-sidenav-content>    <main>      <router-outlet></router-outlet>    </main>  </mat-sidenav-content></mat-sidenav-container></div>'
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'AppContainerComponent'};
 </script>

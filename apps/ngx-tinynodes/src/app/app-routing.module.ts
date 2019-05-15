@@ -17,6 +17,9 @@ export const appRoutes: Route[] = [
   }
 ];
 
+/**
+ * The App routing module provides the base roots of the application
+ */
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
