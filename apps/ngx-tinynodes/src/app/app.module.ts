@@ -17,6 +17,7 @@ import { MaterialModule } from './material.module';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { MatButtonModule } from '@angular/material';
 import { ApplicationDataModule, NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
+import { LayoutModule } from '@angular/cdk/layout';
 
 /**
  * The main `ngx-tinynodes` module that builds the core single page application.
@@ -26,6 +27,7 @@ import { ApplicationDataModule, NgxTinynodesCoreModule } from '@tinynodes/ngx-ti
   declarations: [AppContainerComponent, NavBarComponent, SidebarComponent, HomePageComponent],
   imports: [
     BrowserModule,
+    LayoutModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,

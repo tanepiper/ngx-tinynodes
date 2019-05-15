@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material';
 import { AppService } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 /**
  * The main application component that provides the root container
@@ -34,18 +35,41 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
    */
   private readonly sidebarHidden$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private readonly app: AppService) {
+  /**
+   * If it's a mobile view, hide the menu
+   */
+  private mobileView: MediaQueryList;
+
+  constructor(private readonly app: AppService, private readonly matcher: MediaMatcher) {
+    this.mobileView = this.matcher.matchMedia('(min-width: 500px)');
+    this.mobileView.addListener(this.matchView.bind(this));
+
     this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe(hidden => {
       this.sidebarHidden$.next(hidden);
     });
   }
 
+  /**
+   * Sidebar State
+   */
   public get sidebarHidden(): Observable<boolean> {
     return this.sidebarHidden$.asObservable();
   }
 
-  public toggleSidebar() {
-    this.app.toggleSidebar();
+  /**
+   * View matcher for mobile
+   * @param event
+   */
+  private matchView(event: any) {
+    this.toggleSidebar(!event.matches);
+  }
+
+  /**
+   * Toggle sidebar
+   * @param value
+   */
+  public toggleSidebar(value?: boolean) {
+    this.app.toggleSidebar(value);
   }
 
   /**
@@ -64,6 +88,7 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
    * Component destroyed
    */
   ngOnDestroy() {
+    this.mobileView.removeListener(this.matchView);
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
   }

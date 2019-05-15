@@ -38,8 +38,12 @@ export class AppService {
   /**
    * Toggles the sidebar state
    */
-  public toggleSidebar() {
-    this.store.update({ [ApplicationStateKeys.Hidden]: !this.store._value()[ApplicationStateKeys.Hidden] });
+  public toggleSidebar(value?: boolean) {
+    console.log(value);
+    this.store.update({
+      [ApplicationStateKeys.Hidden]:
+        typeof value !== 'undefined' ? value : !this.store._value()[ApplicationStateKeys.Hidden]
+    });
   }
 
   /**
