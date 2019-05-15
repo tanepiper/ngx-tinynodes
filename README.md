@@ -15,21 +15,27 @@ You can also find a fully searchable API documentation for all `@tinynode` compo
 
 ## Libraries
 
-### `@tinynodes/ngx-editorjs`
+### `ngx-editorjs`
 
-This project provides a set of features for using [EditorJS](https://editorjs.io) within Angular 7+ - including a directive, component and service
+The `ngx-editorjs` module provides an [EditorJS](https://editorjs.io) instance within an Angular application and provides a Directive to attach to and block element, a out-of-the-box component to use and a service to interact with `EditorJS` instances.
 
-- [Readme](libs/ngx-editorjs/README.md)
-- [Changelog](./libs/ngx-editorjs/CHANGELOG.md)
+Below are the dependencies to use the features.
+
+#### `@tinynodes/ngx-editorjs`
+
+This project provides a set of features for using [EditorJS](https://editorjs.io) within Angular 7+
+
+- [Readme](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs/README.md)
+- [Changelog](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs/CHANGELOG.md)
 - [Demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/pages)
 - [Project Folder](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs)
 
-### `@tinynodes/ngx-editorjs-plugins`
+#### `@tinynodes/ngx-editorjs-plugins`
 
-This project provides a module that exports a set of default plugins for `EditorJS`.
+This project provides a module that exports a set of default plugins for `@tinynodes/ngx-editorjs`.
 
-- [Readme](libs/ngx-editorjs-plugins/README.md)
-- [Changelog](./libs/ngx-editorjs-plugins/CHANGELOG.md)
+- [Readme](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-plugins/README.md)
+- [Changelog](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-plugins/CHANGELOG.md)
 - [Project Folder](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs-plugins)
 
 ### Development Information

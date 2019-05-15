@@ -1,14 +1,30 @@
-import { async, TestBed } from '@angular/core/testing';
-import { NgxEditorJSModule } from './ngx-editorjs.module';
+import { TestBed } from '@angular/core/testing';
+import { MockEditorJS } from '../testing/shared';
+import { editorJSInstance, NgxEditorJSModule } from './ngx-editorjs.module';
 
 describe('NgxEditorJSModule', () => {
-  beforeEach(async(() => {
+  let module;
+
+  it('should create from a module import', () => {
     TestBed.configureTestingModule({
       imports: [NgxEditorJSModule]
     }).compileComponents();
-  }));
 
-  it('should create', () => {
+    module = TestBed.get(NgxEditorJSModule);
+
     expect(NgxEditorJSModule).toBeDefined();
+  });
+
+  it('should create from a forRoot import', () => {
+    TestBed.configureTestingModule({
+      imports: [NgxEditorJSModule.forRoot()]
+    }).compileComponents();
+
+    expect(NgxEditorJSModule).toBeDefined();
+  });
+
+  it('should return EditorJS when calling the factory function', () => {
+    const editor = editorJSInstance(MockEditorJS);
+    expect(editor).toBe(MockEditorJS);
   });
 });

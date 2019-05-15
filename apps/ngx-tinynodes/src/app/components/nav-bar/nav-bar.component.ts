@@ -1,18 +1,28 @@
-import { Component, Input } from '@angular/core';
-import { AppService } from '../../store/app/application.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MenuGroup } from '@tinynodes/ngx-tinynodes-core/src';
 
+/**
+ * Internal NavBar component for the Tinynodes application, provides
+ * control over the sidebar toggle and displays the main menu
+ */
 @Component({
   selector: 'tinynodes-nav-bar',
   templateUrl: 'nav-bar.component.html',
   styleUrls: ['nav-bar.component.scss']
 })
 export class NavBarComponent {
+  /**
+   * Set the title of the component
+   */
   @Input()
   title = 'Navbar Component';
 
-  constructor(private readonly app: AppService) {}
+  @Input()
+  menu: MenuGroup;
 
-  public toggleSidebar() {
-    this.app.toggleSidebar();
-  }
+  /**
+   * Get an event when the sidebar toggle has been pressed
+   */
+  @Output()
+  toggleSidebar = new EventEmitter<void>();
 }

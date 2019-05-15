@@ -57,9 +57,16 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/store/app/application.query.ts</code>
+            <code>libs/ngx-tinynodes-core/src/lib/stores/app/application.query.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The {Query} handler for the Application state data</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -81,12 +88,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.query.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.query.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Provide the store for the class instance</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -95,6 +104,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -109,6 +119,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Store to be provided</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -130,8 +144,15 @@ import { Query } from &#x27;@datorama/akita&#x27;;
 import { ApplicationState } from &#x27;./application.model&#x27;;
 import { ApplicationStore } from &#x27;./application.store&#x27;;
 
+/**
+ * The {Query} handler for the Application state data
+ */
 @Injectable()
 export class ApplicationQuery extends Query&lt;ApplicationState&gt; {
+  /**
+   * Provide the store for the class instance
+   * @param store Store to be provided
+   */
   constructor(protected store: ApplicationStore) {
     super(store);
   }

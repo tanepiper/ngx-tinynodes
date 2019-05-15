@@ -1,5 +1,11 @@
-<mat-sidenav #sidenav role="navigation" mode="side" opened>
-  <mat-nav-list>
-    <a mat-list-item [routerLink]="['/ngx-editorjs-demo']" routerLinkActive="active">Demo: ngx-editorjs</a>
-  </mat-nav-list>
-</mat-sidenav>
+<mat-nav-list *ngIf="projectsMenu">
+  <h3 mat-subheader *ngIf="projectsMenu.title">{{ projectsMenu.title }}</h3>
+
+  <a *ngFor="let child of projectsMenu.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
+</mat-nav-list>
+
+<!-- <mat-nav-list *ngIf="openSourceMenu">
+  <h3 mat-subheader *ngIf="openSourceMenu.title">{{ openSourceMenu.title }}</h3>
+
+  <a *ngFor="let child of openSourceMenu.items" mat-list-item [routerLink]="child.link" routerLinkActive="active">{{ child.label }}</a>
+</mat-nav-list> -->

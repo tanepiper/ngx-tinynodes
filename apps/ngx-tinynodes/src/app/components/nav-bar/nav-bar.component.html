@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="toggleSidebar()">
+  <button mat-icon-button (click)="toggleSidebar.emit()">
     <mat-icon>menu</mat-icon>
   </button>
   &nbsp;
@@ -7,20 +7,10 @@
     <a [routerLink]="['/']" routerLinkActive="router-link-active">{{ title }}</a>
   </span>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-    <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-      <li>
-        <a href="https://tanepiper.github.io/ngx-tinynodes/">
-          <span class="label">Docs</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/tanepiper/ngx-tinynodes">
-          <span class="label">Github</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://www.npmjs.com/org/tinynodes">
-          <span class="label">NPM</span>
+    <ul fxLayout fxLayoutGap="20px" class="navigation-items" *ngIf="menu">
+      <li *ngFor="let menuItem of menu.items">
+        <a [href]="menuItem.link" target="_new">
+          <span class="label">{{ menuItem.label }}</span>
         </a>
       </li>
     </ul>

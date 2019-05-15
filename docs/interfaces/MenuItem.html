@@ -62,9 +62,16 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/store/app/application.model.ts</code>
+            <code>libs/ngx-tinynodes-core/src/lib/types/app.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>A menu item in the Tinynodes app</p>
+
+            </p>
 
 
         <section>
@@ -80,9 +87,22 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#children">children</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#description">description</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#icon">icon</a>
+                                </li>
+                                <li>
                                         <a href="#label">label</a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#link">link</a>
                                 </li>
                             </ul>
@@ -96,6 +116,126 @@
 
             <section>
                 <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="children"></a>
+                                        <span class="name"><b>children</b><a href="#children"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>children:     <code>MenuItem&lt;T&gt;[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>MenuItem&lt;T&gt;[]</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Any children to render in the menu</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="description"></a>
+                                        <span class="name"><b>description</b><a href="#description"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>description:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Description of the item, used for title, aria, etc</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="icon"></a>
+                                        <span class="name"><b>icon</b><a href="#icon"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>icon:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Optional icon for the menu item</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
@@ -123,6 +263,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The display label for the app</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -135,7 +281,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>link:         <code><a href="https://angular.io/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+                                        <code>link:     <code>RouterLink | string</code>
 </code>
                                     </td>
                                 </tr>
@@ -143,15 +289,26 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://angular.io/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+                                            <i>Type : </i>    <code>RouterLink | string</code>
 
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
                                         </td>
                                     </tr>
 
 
 
 
-
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The {RouterLink} for the menu item or a string url</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -161,14 +318,65 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { RouterLink } from &#x27;@angular/router&#x27;;
 
-export interface MenuItem {
+/**
+ * A menu item in the Tinynodes app
+ */
+export interface MenuItem&lt;T&gt; {
+  /**
+   * The display label for the app
+   */
   label: string;
-  link: RouterLink;
+  /**
+   * Optional icon for the menu item
+   */
+  icon?: string;
+  /**
+   * Description of the item, used for title, aria, etc
+   */
+  description?: string;
+  /**
+   * The {RouterLink} for the menu item or a string url
+   */
+  link?: RouterLink | string;
+
+  /**
+   * Any children to render in the menu
+   */
+  children?: MenuItem&lt;T&gt;[];
 }
 
-export interface ApplicationState {
+/**
+ * A menu group describes a set of menu items with a key and optional title
+ */
+export interface MenuGroup&lt;T &#x3D; any&gt; {
+  /**
+   * The key of the menu (e.g. &#x60;sidebar&#x60;, &#x60;topnav&#x60;, etc)
+   */
+  key: string;
+  /**
+   * Optional title to render in the menu
+   */
+  title?: string;
+
+  /**
+   * The menu items, can contain one or more items with children
+   */
+  items: MenuItem&lt;T&gt;[];
+}
+
+/**
+ * The aggregate application interface
+ */
+export interface ApplicationData {
+  /**
+   * If the sidebar menu is hidden
+   */
   hidden: boolean;
-  menu: MenuItem[];
+
+  /**
+   * An list of menu groups available in the apps
+   */
+  menus: MenuGroup[];
 }
 </code></pre>
     </div>

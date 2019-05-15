@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatGridListModule, MatExpansionModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
 import {
@@ -15,10 +15,11 @@ import {
 } from '@tinynodes/ngx-editorjs-plugins';
 import { MarkdownModule } from 'ngx-markdown';
 import { createNgxEditorJSDemoTools } from './config';
-import { EditorPageComponent } from './containers/editor-page/editor-page.component';
 import { PageContainerComponent } from './containers/page-container/page-container.component';
 import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
+import { MaterialModule } from 'apps/ngx-tinynodes/src/app/material.module';
+import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core/src';
 
 @NgModule({
   imports: [
@@ -35,8 +36,12 @@ import { PageStoreModule } from './store/pages/pages.module';
     PluginSimpleImageModule,
     PluginLinkModule,
     PluginMarkerModule,
+    MaterialModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxTinynodesCoreModule,
+    MatGridListModule,
+    MatExpansionModule
   ],
   providers: [
     {
@@ -44,8 +49,8 @@ import { PageStoreModule } from './store/pages/pages.module';
       useFactory: createNgxEditorJSDemoTools
     }
   ],
-  declarations: [EditorPageComponent, PageContainerComponent],
-  exports: [EditorPageComponent, PageStoreModule, PageContainerComponent],
+  declarations: [PageContainerComponent],
+  exports: [PageStoreModule, PageContainerComponent],
   entryComponents: [PageContainerComponent]
 })
 export class NgxEditorjsDemoModule {}

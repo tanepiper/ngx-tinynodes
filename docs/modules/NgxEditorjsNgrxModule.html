@@ -122,6 +122,15 @@
         </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p><strong>Warning</strong>: This module is current in development and not yet published</p>
+<p>This module provides a set of <a href="https://ngrx.io/guide/effects">NGRX Effects</a> that allow you to control
+an <code>EditorJS</code> instance via store actions.</p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -148,6 +157,12 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { EffectsModule } from &#x27;@ngrx/effects&#x27;;
 import { NgxEditorJSModule } from &#x27;@tinynodes/ngx-editorjs&#x27;;
 
+/**
+ * **Warning**: This module is current in development and not yet published
+ *
+ * This module provides a set of [NGRX Effects](https://ngrx.io/guide/effects) that allow you to control
+ * an &#x60;EditorJS&#x60; instance via store actions.
+ */
 @NgModule({
   imports: [CommonModule, NgxEditorJSModule, EffectsModule.forFeature([])]
 })

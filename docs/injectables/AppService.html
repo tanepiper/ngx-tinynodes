@@ -57,9 +57,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/store/app/application.service.ts</code>
+            <code>libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The main application service, this loads the initial data and then provides
+it to the store, from here the main state can be updated and queried.</p>
+
+            </p>
 
 
 
@@ -76,6 +84,14 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getDemoData">getDemoData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getMenu">getMenu</a>
+                            </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#toggleSidebar">toggleSidebar</a>
@@ -112,17 +128,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(query: <a href="../injectables/ApplicationQuery.html">ApplicationQuery</a>, store: <a href="../injectables/ApplicationStore.html">ApplicationStore</a>)</code>
+<code>constructor(query: <a href="../injectables/ApplicationQuery.html">ApplicationQuery</a>, store: <a href="../injectables/ApplicationStore.html">ApplicationStore</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:15</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the providers for service methods</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -131,6 +149,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -145,6 +164,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>The application query provider</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>store</td>
@@ -157,6 +180,26 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>The application store provider</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>The HTTP client provider</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -172,6 +215,180 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDemoData"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getDemoData
+                        </b>
+                        <a href="#getDemoData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getDemoData(demoName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:49</a></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns the demo data for a specific demo <T></p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>demoName</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The name of the demo data to load</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;T&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMenu"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getMenu
+                        </b>
+                        <a href="#getMenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMenu(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:62</a></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gets a {MenuGroup} from the men data</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The key of the menu to load</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;MenuGroup&lt;T&gt;&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -196,14 +413,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:41</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Toggles the sidebar state</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -235,9 +454,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.service.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:34</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Returns if the side menu hidden state is set</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -246,21 +476,75 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { distinctUntilChanged, filter, map } from &#x27;rxjs/operators&#x27;;
+import { ApplicationData, MenuGroup } from &#x27;../../types/app&#x27;;
+import { ApplicationStateKeys, DemoData } from &#x27;./application.model&#x27;;
 import { ApplicationQuery } from &#x27;./application.query&#x27;;
 import { ApplicationStore } from &#x27;./application.store&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
 
+/**
+ * The main application service, this loads the initial data and then provides
+ * it to the store, from here the main state can be updated and queried.
+ */
 @Injectable()
 export class AppService {
-  constructor(private readonly query: ApplicationQuery, private readonly store: ApplicationStore) {}
-
-  get hidden(): Observable&lt;boolean&gt; {
-    return this.query.select(&#x27;hidden&#x27;);
+  /**
+   * Sets up the providers for service methods
+   * @param query The application query provider
+   * @param store The application store provider
+   * @param http  The HTTP client provider
+   */
+  constructor(
+    private readonly query: ApplicationQuery,
+    private readonly store: ApplicationStore,
+    private readonly http: HttpClient
+  ) {
+    // Load the application data
+    this.http.get(&#x27;/assets/app-data.json&#x27;).subscribe((appData: ApplicationData) &#x3D;&gt; this.store.update(appData));
   }
 
+  /**
+   * Returns if the side menu hidden state is set
+   */
+  get hidden(): Observable&lt;boolean&gt; {
+    return this.query.select(ApplicationStateKeys.Hidden);
+  }
+
+  /**
+   * Toggles the sidebar state
+   */
   public toggleSidebar() {
-    this.store.update({ hidden: !this.store._value().hidden });
+    this.store.update({ [ApplicationStateKeys.Hidden]: !this.store._value()[ApplicationStateKeys.Hidden] });
+  }
+
+  /**
+   * Returns the demo data for a specific demo &lt;T&gt;
+   * @param demoName The name of the demo data to load
+   */
+  public getDemoData&lt;T&gt;(demoName: string): Observable&lt;T&gt; {
+    return this.query.select(ApplicationStateKeys.DemoData).pipe(
+      filter(data &#x3D;&gt; typeof data !&#x3D;&#x3D; &#x27;undefined&#x27;),
+      map((demoData: DemoData[]) &#x3D;&gt; {
+        return demoData.find(demo &#x3D;&gt; demo.name &#x3D;&#x3D;&#x3D; demoName).data;
+      })
+    ) as Observable&lt;T&gt;;
+  }
+
+  /**
+   * Gets a {MenuGroup} from the men data
+   * @param key The key of the menu to load
+   */
+  public getMenu&lt;T&gt;(key: string): Observable&lt;MenuGroup&lt;T&gt;&gt; {
+    return this.query.select(&#x27;menus&#x27;).pipe(
+      distinctUntilChanged(),
+      filter(menus &#x3D;&gt; menus !&#x3D;&#x3D; undefined &amp;&amp; menus.length &gt; 0),
+      map(menus &#x3D;&gt; {
+        return menus.find(menu &#x3D;&gt; menu.key &#x3D;&#x3D; key);
+      })
+    ) as Observable&lt;MenuGroup&lt;T&gt;&gt;;
   }
 }
 </code></pre>

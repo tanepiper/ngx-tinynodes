@@ -1,11 +1,16 @@
 :host {
+  position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .editor {
+  flex: 1;
+  position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   border: 2px solid darkgray;
   border-radius: 1em;
   text-align: left;

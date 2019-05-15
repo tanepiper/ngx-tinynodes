@@ -5,21 +5,21 @@ This library provides Angular support for [EditorJS](https://editorjs.io) via a 
 You can see a [demo in action](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo) or download it
 [on GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs) to see how it was implemented.
 
-For changes see the [CHANGELOG](./CHANGELOG.md)
+For changes see the [CHANGELOG](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/CHANGELOG.md)
 
 ## Installing and usage
 
-Install the library via `npm`:
+Install the library via `npm` along with the plugins module and `EditorJS` module. For each plugin you want to use you also need to install it's dependency - see the [Plugin Docs](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs-plugins) for more information.
 
 ```bash
-> npm install @tinynodes/ngx-editorjs @tinynodes/ngx-editorjs-plugins
+> npm install @tinynodes/ngx-editorjs @tinynodes/ngx-editorjs-plugins @editorjs/editorjs @editorjs/paragraph....
 ```
 
 Once installed, include the `NgxEditorJSModule` module in your project with the `forRoot` method. The `forRoot` takes an optional configuration.
 
 You also need to pass a provider for `UserPlugins` with a factory function that returns an options map tools to provide to the `EditorJS` instance. An example of this is shows [in the demo application](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-demo/src/lib/config/index.ts)
 
-```ts
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
@@ -91,63 +91,7 @@ The module configuration allows EditorJS to be provided with a set of options fo
 
 ### Adding custom tools
 
-To include tools in an Angular AOT-friendly way, inside your project, create a folder for your plugin and add an `Injectable` class with a `plugin()` method, and optional `shortcut` method for features that support it.
-
-```ts
-import { Injectable } from '@angular/core';
-import { ToolSettings } from '@editorjs/editorjs';
-import Marker from '@editorjs/marker';
-import { BasePlugin } from '@tinynodes/ngx-editorjs';
-
-@Injectable()
-export class PluginMarker implements BasePlugin {
-  plugin(): ToolSettings {
-    return Marker;
-  }
-  shortcut(): string {
-    return 'SHIFT+CTRL+M';
-  }
-}
-```
-
-This allows Angular's AOT to include the editor component bundled within the application. Then export this via a module:
-
-```ts
-import { NgModule } from '@angular/core';
-import { PluginMarker } from './marker.plugin';
-
-@NgModule({
-  providers: [PluginMarker]
-})
-export class PluginMarkerModule {}
-```
-
-Once you have created all your required modules, inside your Application or Feature module you need to provide an instance of `UserPlugins` using a factory function. Inside your module you can now add the following:
-
-```ts
-import { NgModule } from '@angular/core';
-import { NgxEditorJSModule, UserPlugins, PluginConfig } from '@tinynodes/ngx-editorjs';
-import { PluginMarkerModule } from './plugins/marker/marker.module';
-import { PluginMarker } from '../plugins/marker/marker.plugin';
-
-export function createTools(): PluginConfig {
-  return {
-    code: new PluginCode()
-  };
-}
-
-@NgModule({
-  imports: [NgxEditorJSModule, PluginMarker],
-  providers: [
-    {
-      provide: UserPlugins,
-      useFactory: createTools
-    }
-  ],
-  exports: [PluginMarker]
-})
-export class CustomModule {}
-```
+See [Adding Custom Tools](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/docs/adding-custom-tools.md)
 
 ## What's in the library
 

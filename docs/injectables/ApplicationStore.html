@@ -57,9 +57,16 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/store/app/application.store.ts</code>
+            <code>libs/ngx-tinynodes-core/src/lib/stores/app/application.store.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Store for the Application state data</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -69,33 +76,6 @@
             </p>
 
 
-            <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#toggleMenu">toggleMenu</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
 
             <section>
     <h3 id="constructor">Constructor</h3>
@@ -108,59 +88,21 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.store.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.store.ts:10</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Provide an empty state for the application</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
 
-            <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="toggleMenu"></a>
-                    <span class="name">
-                        <b>
-                            toggleMenu
-                        </b>
-                        <a href="#toggleMenu"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>toggleMenu()</code>
-                </td>
-            </tr>
 
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">apps/ngx-tinynodes/src/app/store/app/application.store.ts:14</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
 
     </div>
 
@@ -170,17 +112,21 @@
 import { Injectable } from &#x27;@angular/core&#x27;;
 import { ApplicationState } from &#x27;./application.model&#x27;;
 
+/**
+ * Store for the Application state data
+ */
 @Injectable()
 @StoreConfig({ name: &#x27;application&#x27; })
 export class ApplicationStore extends Store&lt;ApplicationState&gt; {
+  /**
+   * Provide an empty state for the application
+   */
   constructor() {
     super({
-      hidden: false
+      hidden: false,
+      menus: [],
+      demoData: []
     });
-  }
-
-  toggleMenu() {
-    this.update({ hidden: !this._value().hidden });
   }
 }
 </code></pre>
