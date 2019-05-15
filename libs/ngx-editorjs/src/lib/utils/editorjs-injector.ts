@@ -1,44 +1,53 @@
-import { Injectable, InjectionToken, Inject } from '@angular/core';
-import EditorJS, { EditorConfig } from '@editorjs/editorjs';
+import { Inject, Injectable, InjectionToken, NgZone } from '@angular/core';
+import { EditorConfig } from '@editorjs/editorjs';
+import { BehaviorSubject } from 'rxjs';
 
-export const EDITORJS_IMPORT_CONFIG = new InjectionToken<EditorConfig>('EDITORJS_IMPORT_CONFIG');
-
+/**
+ * Injection token for the EditorJS class
+ */
 export const EDITORJS_MODULE_IMPORT = new InjectionToken<any>('EDITORJS_MODULE_IMPORT');
-export const EDITORJS_MODULE_FACTORY = new InjectionToken<any>('EDITORJS_MODULE_FACTORY');
 
+/**
+ * EditorJS factory service, call `createInstance` with an `EditorConfig` to
+ * return an instance after the DOM element is ready
+ */
 @Injectable({
   providedIn: 'root'
 })
-export class EditorJSInstance extends EditorJS {
-  constructor(@Inject(EDITORJS_IMPORT_CONFIG) config: EditorConfig) {
-    super(config);
-    console.log(Object.getOwnPropertyNames(this));
-  }
+export class EditorJSFactory {
+  constructor(@Inject(EDITORJS_MODULE_IMPORT) private editorFactory: any, private zone: NgZone) {}
 
-  get version() {
-    return EditorJS.version;
-  }
-}
+  instances = new BehaviorSubject<any>(null);
 
-@Injectable({
-  providedIn: 'root'
-})
-export class EditorFactory {
-  constructor(@Inject(EDITORJS_MODULE_FACTORY) private editorFactory: any) {
-    console.dir('editorFactory', editorFactory);
-  }
+  /**
+   * Return a new EditorJS instance
+   * @param config The Editor configuration to create
+   */
   createInstance(config: EditorConfig) {
-    //return new EditorJSInstance(config);
-    return new (this.editorFactory as any)(config);
-    // return new class EditorJSInstance extends this.editorFactory {
-    //   constructor() {
-    //     super(config);
-    //     console.log(Object.getOwnPropertyNames(this));
-    //   }
-
-    //   get version() {
-    //     return EditorJS.version;
-    //   }
-    // }();
+    let retVal: any;
+    const editor = this.zone.runOutsideAngular(() => {
+      const e = new (this.editorFactory as any)(config);
+      return e.isReady.then(() => {
+        this.instances.next({ holder: config.holder, editor: e });
+        retVal = e;
+        return e;
+      });
+    });
+    if (!editor) {
+      return;
+    }
+    //console.log(editor, retVal);
+    //return editor.then(e => e);
+    return editor.then(e => {
+      return e;
+      // const foo = {};
+      // for (let key in Object.getOwnPropertyDescriptors(e.__proto__)) {
+      //   console.log(key, e[key]);
+      //   foo[key] = e[key];
+      // }
+      // console.log(foo);
+      // return foo;
+    });
+    return Object.create(editor);
   }
 }

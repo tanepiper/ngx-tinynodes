@@ -8,6 +8,7 @@ import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 import { EditorJSInjectorModule } from './utils/editorjs-injector.module';
+import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
 
 /**
  * The `@tinynodes/ngx-editorjs` module provides a collection of features to allow
@@ -18,7 +19,7 @@ import { EditorJSInjectorModule } from './utils/editorjs-injector.module';
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule, FormsModule, EditorJSInjectorModule],
+  imports: [CommonModule, FormsModule, EditorJSInjectorModule, NgxTinynodesCoreModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
   exports: [NgxEditorJSComponent, NgxEditorJSDirective, EditorJSInjectorModule],
   providers: [NgxEditorJSService, NgxEditorJSPluginService]

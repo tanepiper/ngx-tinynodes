@@ -4,7 +4,7 @@ import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
 import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter, withLatestFrom, map } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-page-container',
@@ -22,9 +22,22 @@ export class PageContainerComponent {
     private readonly editor: NgxEditorJSService
   ) {
     this.editor
-      .getBlocks(this.holder)
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(blocks => {});
+      .isReady(this.holder)
+      .pipe(
+        filter(isReady => {
+          return isReady;
+        }),
+        withLatestFrom(this.blocks),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(([isReady, blocks]) => {
+        console.log(blocks);
+        this.editor.update(this.holder, blocks);
+      });
+    // this.editor
+    //   .getBlocks(this.holder)
+    //   .pipe(takeUntil(this.onDestroy$))
+    //   .subscribe(blocks => {});
   }
 
   get blocks() {

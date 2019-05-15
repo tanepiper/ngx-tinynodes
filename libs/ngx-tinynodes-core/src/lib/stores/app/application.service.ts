@@ -26,13 +26,13 @@ export class AppService {
     this.store.update({ hidden: !this.store._value().hidden });
   }
 
-  public getDemoData(demoName: string): Block[] {
+  public getDemoData(demoName: string): Observable<Block[]> {
     return this.query.select('demoData').pipe(
       filter(data => typeof data !== 'undefined'),
       map((demoData: DemoData[]) => {
         return demoData.find(demo => demo.name === demoName).data.blocks as any;
       })
-    ) as any;
+    );
   }
 
   public getMenu(key: string): Observable<MenuGroup> {

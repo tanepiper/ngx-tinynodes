@@ -4,6 +4,7 @@ import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
 import { EditorJSConfig } from '../types/config';
+import { Observable } from 'rxjs';
 
 /**
  * The main directive of `ngx-editorjs` provides a way to attach
@@ -88,7 +89,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   /**
    * Get the `EditorJS` instance for this directive
    */
-  public get editor(): EditorJS {
+  public get editor(): Observable<EditorJS> {
     return this.service.getEditor(this.id);
   }
 
@@ -117,6 +118,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
+      console.log(changes);
       return this.service.update(this.id, changes.blocks.currentValue);
     }
     if (this.id) {

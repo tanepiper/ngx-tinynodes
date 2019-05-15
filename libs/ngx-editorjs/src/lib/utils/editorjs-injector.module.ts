@@ -1,24 +1,16 @@
 import { NgModule } from '@angular/core';
-import { EditorFactory, EditorJSInstance, EDITORJS_MODULE_IMPORT, EDITORJS_MODULE_FACTORY } from './editorjs-injector';
 import EditorJS from '@editorjs/editorjs';
+import { EditorJSFactory, EDITORJS_MODULE_IMPORT } from './editorjs-injector';
 
-export function editorjsModuleFactory(instance) {
-  return instance;
-}
-
+/**
+ * This module provides EditorJS as an injectable item and a factory to create EditorJS instances
+ */
 @NgModule({
   providers: [
-    EditorFactory,
-    EditorJSInstance,
+    EditorJSFactory,
     {
       provide: EDITORJS_MODULE_IMPORT,
-      useClass: EditorJS,
-      deps: []
-    },
-    {
-      provide: EDITORJS_MODULE_FACTORY,
-      useFactory: editorjsModuleFactory,
-      deps: [EDITORJS_MODULE_IMPORT]
+      useValue: EditorJS
     }
   ]
 })

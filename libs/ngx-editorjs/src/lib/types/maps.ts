@@ -6,7 +6,7 @@ import { Block } from './blocks';
  * A map containing instances of `EditorJS`
  */
 export interface EditorMap {
-  [key: string]: EditorJS;
+  [key: string]: BehaviorSubject<EditorJS>;
 }
 
 /**
