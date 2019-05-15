@@ -29,7 +29,6 @@ import { ApplicationDataModule, NgxTinynodesCoreModule } from '@tinynodes/ngx-ti
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    MatButtonModule,
     FlexLayoutModule,
     ApplicationDataModule,
     AppRoutingModule,

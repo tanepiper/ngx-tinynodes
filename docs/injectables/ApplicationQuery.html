@@ -60,6 +60,13 @@
             <code>libs/ngx-tinynodes-core/src/lib/stores/app/application.query.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The {Query} handler for the Application state data</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -69,33 +76,6 @@
             </p>
 
 
-            <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#getMenu">getMenu</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
 
             <section>
     <h3 id="constructor">Constructor</h3>
@@ -108,12 +88,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.query.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.query.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Provide the store for the class instance</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -122,6 +104,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -136,6 +119,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Store to be provided</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -146,51 +133,7 @@
         </table>
 </section>
 
-            <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getMenu"></a>
-                    <span class="name">
-                        <b>
-                            getMenu
-                        </b>
-                        <a href="#getMenu"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getMenu()</code>
-                </td>
-            </tr>
 
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.query.ts:12</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
 
     </div>
 
@@ -201,14 +144,17 @@ import { Query } from &#x27;@datorama/akita&#x27;;
 import { ApplicationState } from &#x27;./application.model&#x27;;
 import { ApplicationStore } from &#x27;./application.store&#x27;;
 
+/**
+ * The {Query} handler for the Application state data
+ */
 @Injectable()
 export class ApplicationQuery extends Query&lt;ApplicationState&gt; {
+  /**
+   * Provide the store for the class instance
+   * @param store Store to be provided
+   */
   constructor(protected store: ApplicationStore) {
     super(store);
-  }
-
-  getMenu() {
-    return this.getValue().menus;
   }
 }
 </code></pre>

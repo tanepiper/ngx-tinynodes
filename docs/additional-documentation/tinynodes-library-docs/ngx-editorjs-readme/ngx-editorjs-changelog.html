@@ -52,18 +52,22 @@
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2 id="unreleased">[Unreleased]</h2>
+<h2 id="130---2019-05-15">[1.3.0] - 2019-05-15</h2>
 <h2 id="added">Added</h2>
 <ul>
 <li><code>@Input</code> properties on the component and directive for providing <code>EditorJS</code> instance configuration</li>
 <li><code>createEditorJSConfig</code> function available to generate <code>EditorJS</code> configurations</li>
+</ul>
+<h2 id="changed">Changed</h2>
+<ul>
+<li>Internal service now uses an <code>EditorJS</code> injector module and service, provides more robust control and creation of <code>EditorJS</code> instances and controlling them.</li>
 </ul>
 <h2 id="120---2019-05-13">[1.2.0] - 2019-05-13</h2>
 <h3 id="added-1">Added</h3>
 <ul>
 <li>Added all configuration options for <code>EditorJS</code> to the module configuration</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-1">Changed</h3>
 <ul>
 <li>Removed all plugins from the <code>ngx-editorjs</code> project. All plugins are now provided by the <code>@tinynodes/ngx-editorjs-plugins</code> module and a default set of tools must be provided in an application.</li>
 <li>Added <code>NgxEditorJSPluginService</code> back to core, all plugins must now be provided with a <code>UserPlugin</code> provider.</li>
@@ -88,7 +92,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <ul>
 <li>EditorJS default paragraph plugin is now included in the default tools, fixes issue where the regenerated component failed to use the default plugin.</li>
 </ul>
-<h3 id="changed-1">Changed</h3>
+<h3 id="changed-2">Changed</h3>
 <ul>
 <li><code>NgxEditorJSService</code> is now provided in the root and now stores multiple editor instances. Getters removed and replaced with methods that take the <code>holder</code> parameter which is the ID of the DOM element the editor should be attached to.</li>
 <li>Plugins are now instances of an <code>Injectable</code> class for AOT and have an instance method of <code>plugin</code>. Also supports <code>shortcut</code> as an optional method that returns the string to set up as the shortcut.</li>

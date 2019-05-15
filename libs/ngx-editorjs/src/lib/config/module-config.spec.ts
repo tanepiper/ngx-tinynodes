@@ -1,6 +1,6 @@
-import { createModuleConfig } from './module-config';
-import { DEFAULT_HOLDER_ID } from './editor-config';
 import { EditorJSConfig } from '../types/config';
+import { DEFAULT_HOLDER_ID } from './editor-config';
+import { createModuleConfig } from './module-config';
 
 describe('createModuleConfig', () => {
   it('should return a default config', () => {

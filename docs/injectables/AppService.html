@@ -60,6 +60,14 @@
             <code>libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The main application service, this loads the initial data and then provides
+it to the store, from here the main state can be updated and queried.</p>
+
+            </p>
 
 
 
@@ -83,10 +91,6 @@
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#getMenu">getMenu</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#loadData">loadData</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -129,12 +133,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:15</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Sets up the providers for service methods</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -143,6 +149,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -157,6 +164,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>The application query provider</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>store</td>
@@ -169,6 +180,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>The application store provider</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>http</td>
@@ -181,6 +196,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>The HTTP client provider</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -220,8 +239,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:49</a></div>
                 </td>
             </tr>
 
@@ -307,8 +326,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:62</a></div>
                 </td>
             </tr>
 
@@ -360,52 +379,11 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/MenuGroup.html" target="_self" >Observable&lt;MenuGroup&lt;T&gt;&gt;</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;MenuGroup&lt;T&gt;&gt;</code>
 
                     </div>
                     <div class="io-description">
                         
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadData"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            loadData
-                        </b>
-                        <a href="#loadData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadData()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:63</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
                     </div>
                 </td>
             </tr>
@@ -435,8 +413,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:41</a></div>
                 </td>
             </tr>
 
@@ -476,7 +454,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:34</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -501,15 +479,24 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { distinctUntilChanged, filter, map, switchMap, switchMapTo } from &#x27;rxjs/operators&#x27;;
+import { distinctUntilChanged, filter, map } from &#x27;rxjs/operators&#x27;;
 import { ApplicationData, MenuGroup } from &#x27;../../types/app&#x27;;
+import { ApplicationStateKeys, DemoData } from &#x27;./application.model&#x27;;
 import { ApplicationQuery } from &#x27;./application.query&#x27;;
 import { ApplicationStore } from &#x27;./application.store&#x27;;
-import { DemoData, ApplicationStateKeys } from &#x27;./application.model&#x27;;
-import { Block } from &#x27;@tinynodes/ngx-editorjs/src&#x27;;
 
+/**
+ * The main application service, this loads the initial data and then provides
+ * it to the store, from here the main state can be updated and queried.
+ */
 @Injectable()
 export class AppService {
+  /**
+   * Sets up the providers for service methods
+   * @param query The application query provider
+   * @param store The application store provider
+   * @param http  The HTTP client provider
+   */
   constructor(
     private readonly query: ApplicationQuery,
     private readonly store: ApplicationStore,
@@ -558,12 +545,6 @@ export class AppService {
         return menus.find(menu &#x3D;&gt; menu.key &#x3D;&#x3D; key);
       })
     ) as Observable&lt;MenuGroup&lt;T&gt;&gt;;
-  }
-
-  private loadData() {
-    this.http.get(&#x27;/assets/app-data.json&#x27;).subscribe((appData: ApplicationData) &#x3D;&gt; {
-      this.store.update(appData);
-    });
   }
 }
 </code></pre>

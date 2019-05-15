@@ -106,21 +106,6 @@ Angular services and components</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#id">id</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -130,10 +115,6 @@ Angular services and components</p>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#createConfig">createConfig</a>
-                            </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#createEditor">createEditor</a>
@@ -575,47 +556,6 @@ all tools will be included</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createConfig"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            createConfig
-                        </b>
-                        <a href="#createConfig"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createConfig()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="147"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:147</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/EditorJSConfig.html" target="_self" >EditorJSConfig</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="createEditor"></a>
                     <span class="name">
                         <b>
@@ -850,40 +790,6 @@ to be ready</p>
         </tbody>
     </table>
 </section>
-            <section>
-    
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="id"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            id</b>
-                            <a href="#id"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:23</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-</section>
 
             <section>
     <h3 id="accessors">
@@ -963,11 +869,11 @@ to be ready</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterContentInit, Directive, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from &#x27;@angular/core&#x27;;
 import EditorJS, { SanitizerConfig } from &#x27;@editorjs/editorjs&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
 import { createEditorJSConfig } from &#x27;../config/editor-config&#x27;;
 import { NgxEditorJSService } from &#x27;../services/editorjs.service&#x27;;
 import { Block } from &#x27;../types/blocks&#x27;;
 import { EditorJSConfig } from &#x27;../types/config&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
 
 /**
  * The main directive of &#x60;ngx-editorjs&#x60; provides a way to attach

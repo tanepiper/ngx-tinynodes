@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken, NgZone, ApplicationRef } from '@angular/core';
+import { ApplicationRef, Inject, Injectable, InjectionToken, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';

@@ -39,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>PluginCode</li>
+  <li>ApplicationQuery</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -57,100 +57,104 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-demo/src/lib/plugins/code/code.plugin.ts</code>
+            <code>apps/ngx-tinynodes/src/app/core/stores/app/application.query.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The {Query} handler for the Application state data</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="https://angular.io/api/core/Query" target="_blank" >Query</a></code>
+            </p>
 
 
 
             <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(store: <a href="../injectables/ApplicationStore.html">ApplicationStore</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">apps/ngx-tinynodes/src/app/core/stores/app/application.query.ts:10</a></div>
+                            </td>
+                        </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                            <div class="io-description"><p>Provide the store for the class instance</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ApplicationStore.html" target="_self" >ApplicationStore</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Store to be provided</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#plugin">plugin</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 </section>
 
 
-            <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="plugin"></a>
-                    <span class="name">
-                        <b>
-                            plugin
-                        </b>
-                        <a href="#plugin"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>plugin()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="8"
-                            class="link-to-prism">libs/ngx-editorjs-demo/src/lib/plugins/code/code.plugin.ts:8</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>ToolSettings</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
-import Code from &#x27;@editorjs/code&#x27;;
-import { BasePlugin } from &#x27;@tinynodes/ngx-editorjs&#x27;;
+import { Query } from &#x27;@datorama/akita&#x27;;
+import { ApplicationState } from &#x27;./application.model&#x27;;
+import { ApplicationStore } from &#x27;./application.store&#x27;;
 
+/**
+ * The {Query} handler for the Application state data
+ */
 @Injectable()
-export class PluginCode implements BasePlugin {
-  plugin(): ToolSettings {
-    return Code;
+export class ApplicationQuery extends Query&lt;ApplicationState&gt; {
+  /**
+   * Provide the store for the class instance
+   * @param store Store to be provided
+   */
+  constructor(protected store: ApplicationStore) {
+    super(store);
   }
 }
 </code></pre>
@@ -185,7 +189,7 @@ export class PluginCode implements BasePlugin {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginCode-1.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ApplicationQuery-1.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

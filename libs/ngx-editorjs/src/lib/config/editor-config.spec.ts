@@ -1,5 +1,5 @@
-import { createEditorJSConfig, DEFAULT_HOLDER_ID } from './editor-config';
 import { EditorJSConfig } from '../types/config';
+import { createEditorJSConfig, DEFAULT_HOLDER_ID } from './editor-config';
 
 describe('createEditorJSConfig', () => {
   it('should return a default config', () => {

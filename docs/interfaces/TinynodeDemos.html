@@ -65,6 +65,13 @@
             <code>libs/ngx-tinynodes-core/src/lib/stores/app/application.model.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The demos on tinynodes</p>
+
+            </p>
 
 
         <section>
@@ -80,7 +87,7 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#ngx-editorjs">ngx-editorjs</a>
+                                        <a href="#ngx-editorjs-demo">ngx-editorjs-demo</a>
                                 </li>
                             </ul>
                         </td>
@@ -97,13 +104,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="ngx-editorjs"></a>
-                                        <span class="name"><b>ngx-editorjs</b><a href="#ngx-editorjs"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="ngx-editorjs-demo"></a>
+                                        <span class="name"><b>ngx-editorjs-demo</b><a href="#ngx-editorjs-demo"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>ngx-editorjs:         <code><a href="../interfaces/NgxEditorJSDemoData.html" target="_self" >NgxEditorJSDemoData</a></code>
+                                        <code>ngx-editorjs-demo:         <code><a href="../interfaces/NgxEditorJSDemoData.html" target="_self" >NgxEditorJSDemoData</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -120,6 +127,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The <code>ngx-editorjs-demo</code> data</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -130,25 +143,64 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Block } from &#x27;@tinynodes/ngx-editorjs&#x27;;
 import { MenuGroup } from &#x27;../../types/app&#x27;;
 
+/**
+ * An Enum of the keys in the application state
+ */
 export enum ApplicationStateKeys {
+  /**
+   * The hidden state key
+   */
   Hidden &#x3D; &#x27;hidden&#x27;,
+
+  /**
+   * The menus key
+   */
   Menus &#x3D; &#x27;menus&#x27;,
+
+  /**
+   * The demo data key
+   */
   DemoData &#x3D; &#x27;demoData&#x27;
 }
 
+/**
+ * Interface for a demo data object
+ */
 export interface DemoData&lt;T &#x3D; any&gt; {
+  /**
+   * The name of the demo (e.g. &#x60;ngx-editorjs-demo&#x60;)
+   */
   name: string;
+  /**
+   * The data for the demo as &#x60;&lt;T&gt;&#x60;
+   */
   data: T;
 }
 
+/**
+ * Interface for &#x60;ngx-editorjs-demo&#x60; data
+ * TODO: This should be moved
+ */
 export interface NgxEditorJSDemo {
+  /**
+   * The initial blocks for the demo
+   */
   blocks: Block[];
 }
 
+/**
+ * The demo data for &#x60;ngx-editorjs-demo&#x60;
+ */
 export interface NgxEditorJSDemoData extends DemoData&lt;NgxEditorJSDemo&gt; {}
 
+/**
+ * The demos on tinynodes
+ */
 export interface TinynodeDemos {
-  &#x27;ngx-editorjs&#x27;: NgxEditorJSDemoData;
+  /**
+   * The &#x60;ngx-editorjs-demo&#x60; data
+   */
+  &#x27;ngx-editorjs-demo&#x27;: NgxEditorJSDemoData;
 }
 
 /**

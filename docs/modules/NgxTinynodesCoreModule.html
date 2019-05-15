@@ -138,6 +138,16 @@
         </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>This module provides all the core features across the Tinynodes site
+that need shared.</p>
+<p>This includes the <code>ApplicationDataModule</code> which provides state and data loading via
+the <code>AppService</code></p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -171,6 +181,13 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { ApplicationDataModule } from &#x27;./stores/app/application.module&#x27;;
 
+/**
+ * This module provides all the core features across the Tinynodes site
+ * that need shared.
+ *
+ * This includes the &#x60;ApplicationDataModule&#x60; which provides state and data loading via
+ * the &#x60;AppService&#x60;
+ */
 @NgModule({
   imports: [ApplicationDataModule],
   exports: [ApplicationDataModule]
@@ -210,7 +227,7 @@ export class NgxTinynodesCoreModule {}
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxTinynodesCoreModule.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

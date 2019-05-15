@@ -9,5 +9,6 @@ if ! [ -x "$(command -v compodoc)" ]; then
   exit 1
 fi
 
+rm -rf ./docs
 compodoc -c .compodocrc.prod.json
 

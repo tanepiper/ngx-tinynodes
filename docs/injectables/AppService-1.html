@@ -39,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>PluginService</li>
+  <li>AppService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -57,15 +57,15 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/services/plugins.service.ts</code>
+            <code>apps/ngx-tinynodes/src/app/core/stores/app/application.service.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>The plugin service provides a singleton to store all plugins injected into the application
-and makes them available for all instances of EditorJS</p>
+                <p>The main application service, this loads the initial data and then provides
+it to the store, from here the main state can be updated and queried.</p>
 
             </p>
 
@@ -86,19 +86,15 @@ and makes them available for all instances of EditorJS</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#add">add</a>
+                                <a href="#getDemoData">getDemoData</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#get">get</a>
+                                <a href="#getMenu">getMenu</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getTools">getTools</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#remove">remove</a>
+                                <a href="#toggleSidebar">toggleSidebar</a>
                             </li>
                         </ul>
                     </td>
@@ -117,7 +113,7 @@ and makes them available for all instances of EditorJS</p>
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                    <a href="#plugins">plugins</a>
+                                    <a href="#hidden">hidden</a>
                                 </li>
                             </ul>
                         </td>
@@ -132,19 +128,18 @@ and makes them available for all instances of EditorJS</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(initialPlugins: <a href="../interfaces/PluginConfig.html">PluginConfig</a>, userPlugins: <a href="../interfaces/PluginConfig.html">PluginConfig</a>)</code>
+<code>constructor(query: <a href="../injectables/ApplicationQuery.html">ApplicationQuery</a>, store: <a href="../injectables/ApplicationStore.html">ApplicationStore</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">libs/ngx-editorjs/src/lib/services/plugins.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">apps/ngx-tinynodes/src/app/core/stores/app/application.service.ts:15</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>When the class is initialized the initial plugins and any user plugins
-will be passed in and merged and stored in the config map</p>
+                            <div class="io-description"><p>Sets up the providers for service methods</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -159,10 +154,10 @@ will be passed in and merged and stored in the config map</p>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>initialPlugins</td>
+                                                        <td>query</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../interfaces/PluginConfig.html" target="_self" >PluginConfig</a></code>
+                                                                        <code><a href="../injectables/ApplicationQuery.html" target="_self" >ApplicationQuery</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -170,15 +165,15 @@ will be passed in and merged and stored in the config map</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Default plugins produced by the module</p>
+                                                                <code><p>The application query provider</p>
 </code>
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>userPlugins</td>
+                                                        <td>store</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../interfaces/PluginConfig.html" target="_self" >PluginConfig</a></code>
+                                                                        <code><a href="../injectables/ApplicationStore.html" target="_self" >ApplicationStore</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -186,7 +181,23 @@ will be passed in and merged and stored in the config map</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>User plugins injected into the application</p>
+                                                                <code><p>The application store provider</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>The HTTP client provider</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -208,35 +219,43 @@ will be passed in and merged and stored in the config map</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="add"></a>
+                    <a name="getDemoData"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Public</span>
-                            add
+                            getDemoData
                         </b>
-                        <a href="#add"><span class="icon ion-ios-link"></span></a>
+                        <a href="#getDemoData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>add(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, tool: <a href="../interfaces/BasePlugin.html">BasePlugin</a>)</code>
+                    <code>getDemoData(demoName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/plugins.service.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/core/stores/app/application.service.ts:49</a></div>
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                    </ul>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Add a plugin to the store</p>
+                    <div class="io-description"><p>Returns the demo data for a specific demo <T></p>
 </div>
 
                     <div class="io-description">
@@ -247,187 +266,23 @@ will be passed in and merged and stored in the config map</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>tool</td>
-                                    <td>
-                                                <code><a href="../interfaces/BasePlugin.html" target="_self" >BasePlugin</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="get"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            get
-                        </b>
-                        <a href="#get"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>get(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/plugins.service.ts:52</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Get a single plugin from the map</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTools"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getTools
-                        </b>
-                        <a href="#getTools"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getTools(exclude: string[])</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="67"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/plugins.service.ts:67</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Returns a map of tools to be initialized by the editor</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Default value</td>
                                     <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>exclude</td>
+                                    <td>demoName</td>
                                     <td>
-                                            <code>string[]</code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
 
                                     <td>
                                         No
                                     </td>
 
-                                    <td>
-                                        <code>[]</code>
-                                    </td>
 
                                     <td>
-                                        <p>Optional array of keys to exclude from the map</p>
+                                        <p>The name of the demo data to load</p>
 
                                     </td>
                                 </tr>
@@ -437,7 +292,7 @@ will be passed in and merged and stored in the config map</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/ToolSettingsMap.html" target="_self" >ToolSettingsMap</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;T&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -451,35 +306,43 @@ will be passed in and merged and stored in the config map</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="remove"></a>
+                    <a name="getMenu"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Public</span>
-                            remove
+                            getMenu
                         </b>
-                        <a href="#remove"><span class="icon ion-ios-link"></span></a>
+                        <a href="#getMenu"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>remove(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>getMenu(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/plugins.service.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/core/stores/app/application.service.ts:62</a></div>
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                    </ul>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Remove a plugin from the store</p>
+                    <div class="io-description"><p>Gets a {MenuGroup} from the men data</p>
 </div>
 
                     <div class="io-description">
@@ -490,11 +353,12 @@ will be passed in and merged and stored in the config map</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>name</td>
+                                    <td>key</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -504,6 +368,10 @@ will be passed in and merged and stored in the config map</p>
                                     </td>
 
 
+                                    <td>
+                                        <p>The key of the menu to load</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -511,11 +379,54 @@ will be passed in and merged and stored in the config map</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;MenuGroup&lt;T&gt;&gt;</code>
 
                     </div>
                     <div class="io-description">
                         
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSidebar"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            toggleSidebar
+                        </b>
+                        <a href="#toggleSidebar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggleSidebar()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/core/stores/app/application.service.ts:41</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggles the sidebar state</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
                     </div>
                 </td>
             </tr>
@@ -531,28 +442,28 @@ will be passed in and merged and stored in the config map</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="plugins"></a>
-                        <span class="name"><b>plugins</b><a href="#plugins"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="hidden"></a>
+                        <span class="name"><b>hidden</b><a href="#hidden"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>plugins()</code></span>
+                        <span class="accessor"><b>get</b><code>hidden()</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">libs/ngx-editorjs/src/lib/services/plugins.service.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">apps/ngx-tinynodes/src/app/core/stores/app/application.service.ts:34</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Returns a map of all the plugins registered with this service</p>
+                                <div class="io-description"><p>Returns if the side menu hidden state is set</p>
 </div>
 
                                 <div class="io-description">
-                                    <b>Returns : </b>        <code><a href="../interfaces/PluginConfig.html" target="_self" >PluginConfig</a></code>
+                                    <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                                 </div>
                         </td>
@@ -565,91 +476,75 @@ will be passed in and merged and stored in the config map</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable, Optional } from &#x27;@angular/core&#x27;;
-import { BasePlugin, InitialPlugins, PluginConfig, ToolSettingsMap, UserPlugins } from &#x27;../types/plugins&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { distinctUntilChanged, filter, map } from &#x27;rxjs/operators&#x27;;
+import { ApplicationData, MenuGroup } from &#x27;../../types/app&#x27;;
+import { ApplicationStateKeys, DemoData } from &#x27;./application.model&#x27;;
+import { ApplicationQuery } from &#x27;./application.query&#x27;;
+import { ApplicationStore } from &#x27;./application.store&#x27;;
 
 /**
- * The plugin service provides a singleton to store all plugins injected into the application
- * and makes them available for all instances of EditorJS
+ * The main application service, this loads the initial data and then provides
+ * it to the store, from here the main state can be updated and queried.
  */
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
-export class PluginService {
+@Injectable()
+export class AppService {
   /**
-   * Object map of the plugin configurations
-   */
-  private pluginsMap: PluginConfig &#x3D; {};
-
-  /**
-   * When the class is initialized the initial plugins and any user plugins
-   * will be passed in and merged and stored in the config map
-   * @param initialPlugins Default plugins produced by the module
-   * @param userPlugins User plugins injected into the application
+   * Sets up the providers for service methods
+   * @param query The application query provider
+   * @param store The application store provider
+   * @param http  The HTTP client provider
    */
   constructor(
-    @Inject(InitialPlugins) initialPlugins: PluginConfig,
-    @Optional() @Inject(UserPlugins) userPlugins: PluginConfig
+    private readonly query: ApplicationQuery,
+    private readonly store: ApplicationStore,
+    private readonly http: HttpClient
   ) {
-    Object.entries({ ...initialPlugins, ...userPlugins }).forEach(([key, tool]) &#x3D;&gt; this.add(key, tool));
+    // Load the application data
+    this.http.get(&#x27;/assets/app-data.json&#x27;).subscribe((appData: ApplicationData) &#x3D;&gt; this.store.update(appData));
   }
 
   /**
-   * Add a plugin to the store
-   * @param name
-   * @param tool
+   * Returns if the side menu hidden state is set
    */
-  public add(name: string, tool: BasePlugin) {
-    this.pluginsMap[name] &#x3D; tool;
+  get hidden(): Observable&lt;boolean&gt; {
+    return this.query.select(ApplicationStateKeys.Hidden);
   }
 
   /**
-   * Remove a plugin from the store
-   * @param name
+   * Toggles the sidebar state
    */
-  public remove(name: string) {
-    this.pluginsMap[name] &#x3D; null;
-    delete this.pluginsMap[name];
+  public toggleSidebar() {
+    this.store.update({ [ApplicationStateKeys.Hidden]: !this.store._value()[ApplicationStateKeys.Hidden] });
   }
 
   /**
-   * Get a single plugin from the map
-   * @param name
+   * Returns the demo data for a specific demo &lt;T&gt;
+   * @param demoName The name of the demo data to load
    */
-  public get(name: string) {
-    this.pluginsMap[name];
-  }
-
-  /**
-   * Returns a map of all the plugins registered with this service
-   */
-  public get plugins(): PluginConfig {
-    return this.pluginsMap;
-  }
-
-  /**
-   * Returns a map of tools to be initialized by the editor
-   * @param exclude Optional array of keys to exclude from the map
-   */
-  public getTools(exclude: string[] &#x3D; []): ToolSettingsMap {
-    return Object.entries(this.pluginsMap)
-      .filter(([key]) &#x3D;&gt; {
-        return !exclude.includes(key);
+  public getDemoData&lt;T&gt;(demoName: string): Observable&lt;T&gt; {
+    return this.query.select(ApplicationStateKeys.DemoData).pipe(
+      filter(data &#x3D;&gt; typeof data !&#x3D;&#x3D; &#x27;undefined&#x27;),
+      map((demoData: DemoData[]) &#x3D;&gt; {
+        return demoData.find(demo &#x3D;&gt; demo.name &#x3D;&#x3D;&#x3D; demoName).data;
       })
-      .reduce((finalTools, [key, plugin]) &#x3D;&gt; {
-        let p;
-        if (plugin.shortcut) {
-          p &#x3D; {
-            [key]: {
-              class: plugin.plugin(),
-              shortcut: plugin.shortcut()
-            }
-          };
-        } else {
-          p &#x3D; { [key]: plugin.plugin() };
-        }
-        return { ...finalTools, ...p };
-      }, {});
+    ) as Observable&lt;T&gt;;
+  }
+
+  /**
+   * Gets a {MenuGroup} from the men data
+   * @param key The key of the menu to load
+   */
+  public getMenu&lt;T&gt;(key: string): Observable&lt;MenuGroup&lt;T&gt;&gt; {
+    return this.query.select(&#x27;menus&#x27;).pipe(
+      distinctUntilChanged(),
+      filter(menus &#x3D;&gt; menus !&#x3D;&#x3D; undefined &amp;&amp; menus.length &gt; 0),
+      map(menus &#x3D;&gt; {
+        return menus.find(menu &#x3D;&gt; menu.key &#x3D;&#x3D; key);
+      })
+    ) as Observable&lt;MenuGroup&lt;T&gt;&gt;;
   }
 }
 </code></pre>
@@ -684,7 +579,7 @@ export class PluginService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AppService-1.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

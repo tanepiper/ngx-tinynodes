@@ -28,7 +28,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content interface">
                    <div class="content-data">
 
 
@@ -37,9 +37,14 @@
 
 
 
+
+
+
+
+
 <ol class="breadcrumb">
-  <li>Injectables</li>
-  <li>PluginHeader</li>
+  <li>Interfaces</li>
+  <li>NgxEditorJSDemoData</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -57,129 +62,116 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/plugins/header/header.plugin.ts</code>
+            <code>apps/ngx-tinynodes/src/app/core/stores/app/application.model.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Plugin class to return the EditorJS plugin</p>
+                <p>The demo data for <code>ngx-editorjs-demo</code></p>
 
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../interfaces/DemoData.html" target="_self" >DemoData</a></code>
             </p>
 
 
 
-            <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#plugin">plugin</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
-
-            <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="plugin"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            plugin
-                        </b>
-                        <a href="#plugin"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>plugin()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/plugins/header/header.plugin.ts:14</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Returns the plugin settings</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>ToolSettings</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import Header from &#x27;@editorjs/header&#x27;;
-import { ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
-import { BasePlugin } from &#x27;../../types/plugins&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Block } from &#x27;@tinynodes/ngx-editorjs&#x27;;
+import { MenuGroup } from &#x27;../../types/app&#x27;;
 
 /**
- * Plugin class to return the EditorJS plugin
+ * An Enum of the keys in the application state
  */
-@Injectable()
-export class PluginHeader implements BasePlugin {
+export enum ApplicationStateKeys {
   /**
-   * Returns the plugin settings
+   * The hidden state key
    */
-  public plugin(): ToolSettings {
-    return Header;
-  }
+  Hidden &#x3D; &#x27;hidden&#x27;,
+
+  /**
+   * The menus key
+   */
+  Menus &#x3D; &#x27;menus&#x27;,
+
+  /**
+   * The demo data key
+   */
+  DemoData &#x3D; &#x27;demoData&#x27;
+}
+
+/**
+ * Interface for a demo data object
+ */
+export interface DemoData&lt;T &#x3D; any&gt; {
+  /**
+   * The name of the demo (e.g. &#x60;ngx-editorjs-demo&#x60;)
+   */
+  name: string;
+  /**
+   * The data for the demo as &#x60;&lt;T&gt;&#x60;
+   */
+  data: T;
+}
+
+/**
+ * Interface for &#x60;ngx-editorjs-demo&#x60; data
+ * TODO: This should be moved
+ */
+export interface NgxEditorJSDemo {
+  /**
+   * The initial blocks for the demo
+   */
+  blocks: Block[];
+}
+
+/**
+ * The demo data for &#x60;ngx-editorjs-demo&#x60;
+ */
+export interface NgxEditorJSDemoData extends DemoData&lt;NgxEditorJSDemo&gt; {}
+
+/**
+ * The demos on tinynodes
+ */
+export interface TinynodeDemos {
+  /**
+   * The &#x60;ngx-editorjs-demo&#x60; data
+   */
+  &#x27;ngx-editorjs-demo&#x27;: NgxEditorJSDemoData;
+}
+
+/**
+ * A representation of the application state
+ */
+export interface ApplicationState {
+  /**
+   * If the side menu is hidden
+   */
+  hidden: boolean;
+
+  /**
+   * A set of menus loaded from application data
+   */
+  menus: MenuGroup[];
+
+  /**
+   * Data for demos
+   */
+  demoData: DemoData[];
 }
 </code></pre>
     </div>
-
 </div>
-
-
-
-
-
 
 
 
@@ -202,8 +194,8 @@ export class PluginHeader implements BasePlugin {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginHeader-1.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSDemoData-1.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

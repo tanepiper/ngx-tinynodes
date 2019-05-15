@@ -39,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>PluginMarker</li>
+  <li>ApplicationStore</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -57,146 +57,76 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-demo/src/lib/plugins/marker/marker.plugin.ts</code>
+            <code>apps/ngx-tinynodes/src/app/core/stores/app/application.store.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Store for the Application state data</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                    <code>Store</code>
+            </p>
 
 
 
             <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">apps/ngx-tinynodes/src/app/core/stores/app/application.store.ts:10</a></div>
+                            </td>
+                        </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                            <div class="io-description"><p>Provide an empty state for the application</p>
+</div>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#plugin">plugin</a>
-                            </li>
-                            <li>
-                                <a href="#shortcut">shortcut</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 </section>
 
 
-            <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="plugin"></a>
-                    <span class="name">
-                        <b>
-                            plugin
-                        </b>
-                        <a href="#plugin"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>plugin()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="8"
-                            class="link-to-prism">libs/ngx-editorjs-demo/src/lib/plugins/marker/marker.plugin.ts:8</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>ToolSettings</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="shortcut"></a>
-                    <span class="name">
-                        <b>
-                            shortcut
-                        </b>
-                        <a href="#shortcut"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>shortcut()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">libs/ngx-editorjs-demo/src/lib/plugins/marker/marker.plugin.ts:12</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
-import Marker from &#x27;@editorjs/marker&#x27;;
-import { BasePlugin } from &#x27;@tinynodes/ngx-editorjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Store, StoreConfig } from &#x27;@datorama/akita&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { ApplicationState } from &#x27;./application.model&#x27;;
 
+/**
+ * Store for the Application state data
+ */
 @Injectable()
-export class PluginMarker implements BasePlugin {
-  plugin(): ToolSettings {
-    return Marker;
-  }
-
-  shortcut() {
-    return &#x27;CMD+SHIFT+M&#x27;;
+@StoreConfig({ name: &#x27;application&#x27; })
+export class ApplicationStore extends Store&lt;ApplicationState&gt; {
+  /**
+   * Provide an empty state for the application
+   */
+  constructor() {
+    super({
+      hidden: false,
+      menus: [],
+      demoData: []
+    });
   }
 }
 </code></pre>
@@ -231,7 +161,7 @@ export class PluginMarker implements BasePlugin {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginMarker-1.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ApplicationStore-1.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
