@@ -3,6 +3,23 @@
     {
       "name": "ngx-editorjs-demo",
       "data": {
+        "links": {
+          "key": "",
+          "items": [
+            {
+              "label": "Documentation",
+              "link": "https://tanepiper.github.io/ngx-tinynodes/modules/NgxEditorJSModule.html"
+            },
+            {
+              "label": "GitHub",
+              "link": "https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs"
+            },
+            {
+              "label": "NPM",
+              "link": "https://www.npmjs.com/package/@tinynodes/ngx-editorjs"
+            }
+          ]
+        },
         "blocks": [
           {
             "type": "header",

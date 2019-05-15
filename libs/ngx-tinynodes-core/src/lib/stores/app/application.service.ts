@@ -48,7 +48,7 @@ export class AppService {
    */
   public getDemoData<T>(demoName: string): Observable<T> {
     return this.query.select(ApplicationStateKeys.DemoData).pipe(
-      filter(data => typeof data !== 'undefined'),
+      filter((data: DemoData[]) => typeof data !== 'undefined' && (data && data.length > 0)),
       map((demoData: DemoData[]) => {
         return demoData.find(demo => demo.name === demoName).data;
       })

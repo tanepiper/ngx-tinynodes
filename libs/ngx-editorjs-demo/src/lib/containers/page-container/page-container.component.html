@@ -13,26 +13,31 @@
           >
         </mat-expansion-panel-header>
         <mat-grid-list cols="2" rowHeight="300px">
-          <mat-grid-tile-header>How To Use...</mat-grid-tile-header>
           <mat-grid-tile>
-            <div>
-              <p>
-                Below is an instance of an <code>EditorJS</code> block editor. Click on the area and the block tool will appear, or you can
-                just start typing.
-              </p>
-              <p>
-                The default block is a <code>&lt;p></code> paragraph, you can also add header <code>&lt;h1> - &lt;h6></code> blocks, list
-                with <code>&lt;ol> / &lt;li></code> and <code>&lt;code></code> blocks.
-              </p>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>How To Use...</mat-card-title>
+                <mat-card-subtitle>Instructions on the demo below</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  Below is an instance of an <code>EditorJS</code> block editor. Click on the area and the block tool will appear, or you
+                  can just start typing.
+                </p>
+                <p>
+                  The default block is a <code>&lt;p></code> paragraph, you can also add header <code>&lt;h1> - &lt;h6></code> blocks, list
+                  with <code>&lt;ol> / &lt;li></code> and <code>&lt;code></code> blocks.
+                </p>
 
-              <p>
-                You can also paste in an <code>&lt;img></code> url into the editor and it will start the <code>SimpleImage</code> plugin
-                which provides an <code>&lt;img></code> tag pointing to the image, and with some additional controls.
-              </p>
-              <p>
-                When saving check the output panel below to see the data results.
-              </p>
-            </div>
+                <p>
+                  You can also paste in an <code>&lt;img></code> url into the editor and it will start the <code>SimpleImage</code> plugin
+                  which provides an <code>&lt;img></code> tag pointing to the image, and with some additional controls.
+                </p>
+                <p>
+                  When saving check the output panel below to see the data results.
+                </p>
+              </mat-card-content>
+            </mat-card>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-card>
@@ -40,22 +45,13 @@
                 <mat-card-title>Links</mat-card-title>
                 <mat-card-subtitle>Links for all things related to <code>@tinynodes/ngx-editorjs</code></mat-card-subtitle>
               </mat-card-header>
-              <mat-card-actions>
-                <a
-                  mat-raised-button
-                  color="primary"
-                  href="https://tanepiper.github.io/ngx-tinynodes/modules/NgxEditorJSModule.html"
-                  target="_new"
-                  >Docs</a
-                >
-                <a
-                  mat-raised-button
-                  color="primary"
-                  href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs"
-                  target="_new"
-                  >GitHub</a
-                >
-              </mat-card-actions>
+              <mat-card-content>
+                <mat-list>
+                  <mat-list-item *ngFor="let link of (links | async)">
+                    <a mat-raised-button color="primary" [href]="link.link" target="_new">{{ link.label }}</a>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card-content>
             </mat-card>
           </mat-grid-tile>
         </mat-grid-list>
@@ -69,7 +65,7 @@
       <button mat-raised-button *ngIf="(blocks | async); let b" (click)="reset(b)">Reset</button>
     </mat-card-actions>
     <mat-card-content>
-      <ngx-editorjs [holder]="holder" [blocks]="blocks | async"></ngx-editorjs>
+      <ngx-editorjs [holder]="holder"></ngx-editorjs>
     </mat-card-content>
     <mat-card-content>
       <mat-card class="output-card">

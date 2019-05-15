@@ -117,6 +117,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * @param changes
    */
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
     if (changes.blocks && !changes.blocks.firstChange) {
       return this.service.update(this.id, changes.blocks.currentValue);
     }

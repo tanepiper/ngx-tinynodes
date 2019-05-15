@@ -1,5 +1,5 @@
 import { Block } from '@tinynodes/ngx-editorjs';
-import { MenuGroup } from '../../types/app';
+import { MenuGroup, MenuItem } from '../../types/app';
 
 /**
  * An Enum of the keys in the application state
@@ -44,6 +44,11 @@ export interface NgxEditorJSDemo {
    * The initial blocks for the demo
    */
   blocks: Block[];
+
+  /**
+   * Links for this demo
+   */
+  links: MenuGroup;
 }
 
 /**

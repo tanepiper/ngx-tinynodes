@@ -80,28 +80,8 @@ export class NgxEditorJSService {
    * @param blocks The array of `Block` elements to render
    */
   public update(holder: string, blocks: Block[]) {
+    console.log(blocks);
     this.editorService.update(holder, blocks);
-    // const updateDone$ = new Subject<boolean>();
-    // combineLatest([this.isReady(holder), this.getEditor(holder)])
-    //   .pipe(
-    //     takeUntil(updateDone$),
-    //     filter(([ready, editor]) => ready && typeof editor !== 'undefined')
-    //   )
-    //   .subscribe(([ready, editor]) => {
-    //     if (!ready || !editor) {
-    //       return;
-    //     }
-    //     if (ready && editor) {
-    //       (editor as any).render({
-    //         blocks,
-    //         time: Date.now(),
-    //         version: EditorJS.version
-    //       });
-
-    //       updateDone$.next(true);
-    //       updateDone$.complete();
-    //     }
-    //   });
   }
 
   /**

@@ -2,9 +2,11 @@ import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component
 import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
 import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, takeUntil, tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, takeUntil, tap, pluck, filter, take } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
+import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
+import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
 
 /**
  * The Page Container component provides the main routable page for loading
@@ -38,6 +40,11 @@ export class PageContainerComponent implements AfterContentInit {
   private panelOpen$ = new BehaviorSubject<boolean>(true);
 
   /**
+   * Links for the page
+   */
+  private menu$ = new BehaviorSubject<MenuGroup>(undefined);
+
+  /**
    * Gets if the panel is open or not
    */
   public get panelOpen() {
@@ -64,7 +71,10 @@ export class PageContainerComponent implements AfterContentInit {
     private readonly editor: NgxEditorJSService,
     private readonly cd: ChangeDetectorRef
   ) {
-    // this.blocks$ = this.app.getDemoData('ngx-editorjs-demo');
+    this.blocks$ = this.editor.getBlocks(this.holder).pipe(
+      distinctUntilChanged(),
+      takeUntil(this.onDestroy$)
+    );
   }
 
   /**
@@ -72,6 +82,16 @@ export class PageContainerComponent implements AfterContentInit {
    */
   public get blocks() {
     return this.blocks$;
+  }
+
+  /**
+   * Get the page links
+   */
+  public get links() {
+    return this.menu$.pipe(
+      filter(data => typeof data !== 'undefined'),
+      pluck('items')
+    );
   }
 
   /**
@@ -99,9 +119,14 @@ export class PageContainerComponent implements AfterContentInit {
    * Reset the editor with demo data
    */
   public reset() {
-    this.app.getDemoData('ngx-editorjs-demo').subscribe((blocks: Block[]) => {
-      this.editor.update(this.holder, blocks);
-    });
+    this.app
+      .getDemoData<NgxEditorJSDemo>('ngx-editorjs-demo')
+      .pipe(take(1))
+      .subscribe((data: NgxEditorJSDemo) => {
+        console.log(this.holder, data);
+        this.menu$.next(data.links);
+        this.editor.update(this.holder, data.blocks);
+      });
   }
 
   /**
@@ -120,10 +145,6 @@ export class PageContainerComponent implements AfterContentInit {
    * After the content has init overide the blocks with blocks from the service
    */
   ngAfterContentInit() {
-    this.blocks$ = this.editor.getBlocks(this.holder).pipe(
-      distinctUntilChanged(),
-      takeUntil(this.onDestroy$)
-    );
     this.reset();
   }
 }

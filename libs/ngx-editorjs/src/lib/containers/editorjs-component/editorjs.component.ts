@@ -83,7 +83,7 @@ export class NgxEditorJSComponent {
    * An initial set of blocks to render in the component
    */
   @Input()
-  public blocks: Block[] = [];
+  public blocks: Block[];
 
   /**
    * When created an instance of the service is available as
