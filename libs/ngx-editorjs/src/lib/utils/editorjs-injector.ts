@@ -61,7 +61,7 @@ export class EditorJSInstanceService {
    * @param ref The application reference to trigger a tick
    */
   constructor(
-    @Inject(EDITORJS_MODULE_IMPORT) private EditorJS: any,
+    @Inject(EDITORJS_MODULE_IMPORT) private EditorJSClass: any,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
   ) {}
@@ -71,7 +71,7 @@ export class EditorJSInstanceService {
    * then adds it to the editor instances
    * @param config The {EditorConfig} configuration to create
    */
-  public createInstance(config: EditorConfig, autosave = false): void {
+  public createInstance(config: EditorConfig, autoSave = false): void {
     const holder = config.holder as string;
     const editorConfig = {
       ...config,
@@ -80,8 +80,7 @@ export class EditorJSInstanceService {
       }
     };
     this.zone.runOutsideAngular(() => {
-      const editor = new (this.EditorJS as any)(editorConfig);
-      const holder = config.holder as string;
+      const editor = new (this.EditorJSClass as any)(editorConfig);
       editor.isReady.then(() => {
         this.zone.run(() => {
           this.setupSubjects(holder, editor);

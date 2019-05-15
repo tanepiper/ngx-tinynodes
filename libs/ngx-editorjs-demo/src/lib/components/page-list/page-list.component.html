@@ -8,7 +8,7 @@
   </mat-card-actions>
   <mat-card-content>
     <mat-list>
-      <mat-list-item *ngFor="let page of pages">
+      <mat-list-item *ngFor="let page of pages; trackBy: trackPages">
         <a routerLink="/ngx-editorjs-demo/pages/{{ page.id }}" routerLinkActive="router-link-active">{{ page.pageTitle }}</a>
       </mat-list-item>
     </mat-list>

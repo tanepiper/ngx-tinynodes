@@ -17,4 +17,8 @@ export class PageListComponent {
     console.log('called');
     this.addPage.next();
   }
+
+  public trackPages(index: number, page: Page) {
+    return page.id;
+  }
 }

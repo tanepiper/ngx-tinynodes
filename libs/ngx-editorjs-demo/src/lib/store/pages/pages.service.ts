@@ -58,6 +58,19 @@ export class PagesService {
     this.store.remove(pageId);
   }
 
+  /**
+   * Get a page from the store
+   * @param pageId The ID of the page to get
+   */
+  getPage(pageId: ID) {
+    return this.query.selectEntity(pageId);
+  }
+
+  /**
+   *
+   * @param pageId The Page ID
+   * @param blocks The blocks to store
+   */
   setBlocks(pageId: ID | any, blocks: PageBlock[]) {
     this.store.update(pageId, { blocks });
   }

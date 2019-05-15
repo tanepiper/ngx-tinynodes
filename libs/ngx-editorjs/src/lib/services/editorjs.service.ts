@@ -8,7 +8,8 @@ import { EditorJSInstanceService } from '../utils/editorjs-injector';
 import { NgxEditorJSPluginService } from './plugins.service';
 
 /**
- * The NgxEditorJSService provides control EditorJS instances via Angular.
+ * The NgxEditorJSService provides a service for an Angular application
+ * to talk to an EditorJS instance
  */
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,7 @@ export class NgxEditorJSService {
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
     private readonly editorService: EditorJSInstanceService,
-    private readonly plugins: NgxEditorJSPluginService,
-    private zone: NgZone
+    private readonly plugins: NgxEditorJSPluginService
   ) {}
 
   /**
