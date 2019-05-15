@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `@Input` properties on the component and directive for providing `EditorJS` instance configuration
 - `createEditorJSConfig` function available to generate `EditorJS` configurations
+- Lots more [doc improvements](https://tanepiper.github.io/ngx-tinynodes/) and [updated demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo)
 
 ## Changed
 

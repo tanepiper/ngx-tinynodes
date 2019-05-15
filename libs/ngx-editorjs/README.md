@@ -5,7 +5,7 @@ This library provides Angular support for [EditorJS](https://editorjs.io) via a 
 You can see a [demo in action](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo) or download it
 [on GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs) to see how it was implemented.
 
-For changes see the [CHANGELOG](./CHANGELOG.md)
+For changes see the [CHANGELOG](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/CHANGELOG.md)
 
 ## Installing and usage
 
@@ -91,7 +91,7 @@ The module configuration allows EditorJS to be provided with a set of options fo
 
 ### Adding custom tools
 
-See [Adding Custom Tools](./docs/adding-custom-tools.md)
+See [Adding Custom Tools](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/docs/adding-custom-tools.md)
 
 ## What's in the library
 
