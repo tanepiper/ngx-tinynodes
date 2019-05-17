@@ -17,7 +17,8 @@ export class PageContainerComponent {
       type: 'default',
       data: {
         title: 'This is Panel 1',
-        content: 'Panel 1 Content'
+        content: 'Panel 1 Content',
+        imageUrl: 'https://picsum.photos/id/1/800/500'
       }
     },
     {
@@ -26,7 +27,8 @@ export class PageContainerComponent {
       type: 'default',
       data: {
         title: 'This is Panel 2',
-        content: 'Panel 2 Content'
+        content: 'Panel 2 Content',
+        imageUrl: 'https://picsum.photos/id/2/800/500'
       }
     },
     {
@@ -35,7 +37,8 @@ export class PageContainerComponent {
       type: 'default',
       data: {
         title: 'This is Panel 3',
-        content: 'Panel 3 Content'
+        content: 'Panel 3 Content',
+        imageUrl: 'https://picsum.photos/id/3/800/500'
       }
     },
     {
@@ -44,7 +47,8 @@ export class PageContainerComponent {
       type: 'default',
       data: {
         title: 'This is Panel 4',
-        content: 'Panel 4 Content'
+        content: 'Panel 4 Content',
+        imageUrl: 'https://picsum.photos/id/4/800/500'
       }
     },
     {
@@ -53,7 +57,8 @@ export class PageContainerComponent {
       type: 'default',
       data: {
         title: 'This is Panel 5',
-        content: 'Panel 5 Content'
+        content: 'Panel 5 Content',
+        imageUrl: 'https://picsum.photos/id/5/800/500'
       }
     }
   ];

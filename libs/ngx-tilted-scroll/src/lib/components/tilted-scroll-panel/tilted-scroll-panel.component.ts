@@ -70,6 +70,15 @@ export class TiltedScrollPanelComponent implements AfterContentInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
+  public styleGenerate(imageUrl: string) {
+    return {
+      'background-image': `url(${imageUrl})`,
+      'background-size': 'cover',
+      width: '100%',
+      height: '500px'
+    };
+  }
+
   private isElementInViewport(scrollValue: number) {
     const childOffsetTop = this.wrapperEl.nativeElement.getBoundingClientRect().top;
     const parentOffsetTop = this.parent.element.getBoundingClientRect().top;
