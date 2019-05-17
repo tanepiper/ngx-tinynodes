@@ -282,6 +282,72 @@
         }
       },
       "schematics": {}
+    },
+    "ngx-tilted-scroll": {
+      "root": "libs/ngx-tilted-scroll",
+      "sourceRoot": "libs/ngx-tilted-scroll/src",
+      "projectType": "library",
+      "prefix": "tinynodes",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/ngx-tilted-scroll/tsconfig.lib.json",
+            "project": "libs/ngx-tilted-scroll/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/ngx-tilted-scroll/tsconfig.lib.json", "libs/ngx-tilted-scroll/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/ngx-tilted-scroll/jest.config.js",
+            "tsConfig": "libs/ngx-tilted-scroll/tsconfig.spec.json",
+            "setupFile": "libs/ngx-tilted-scroll/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ngx-tilted-page-scroll-demo": {
+      "root": "libs/ngx-tilted-page-scroll-demo",
+      "sourceRoot": "libs/ngx-tilted-page-scroll-demo/src",
+      "projectType": "library",
+      "prefix": "tinynodes",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ngx-tilted-page-scroll-demo/tsconfig.lib.json",
+              "libs/ngx-tilted-page-scroll-demo/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/ngx-tilted-page-scroll-demo/jest.config.js",
+            "tsConfig": "libs/ngx-tilted-page-scroll-demo/tsconfig.spec.json",
+            "setupFile": "libs/ngx-tilted-page-scroll-demo/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

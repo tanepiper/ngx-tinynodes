@@ -1,0 +1,5 @@
+<ng-container *ngIf="panels">
+  <cdk-virtual-scroll-viewport itemSize="1" class="tilted-panel-container" (scrolledIndexChange)="scrollChange($event)">
+    <ngx-tilted-scroll-panel *cdkVirtualFor="let panel of panels" [panel]="panel"></ngx-tilted-scroll-panel>]
+  </cdk-virtual-scroll-viewport>
+</ng-container>

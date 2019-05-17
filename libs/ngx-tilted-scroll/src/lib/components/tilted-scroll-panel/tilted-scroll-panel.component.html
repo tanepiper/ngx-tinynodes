@@ -1,0 +1,12 @@
+<ng-template #defaultTemplate let-title="title" let-content="content" let-image="imageUrl">
+  <div class="tiled-scroll-inner" [style.backgroundImage]="image" style.backgroundSize="cover" style.width="100%" style.height="100vh">
+    <h1 class="title">{{ title }}</h1>
+    <p>{{ content }}</p>
+  </div>
+</ng-template>
+
+<div #panelEl *ngIf="panel" class="tiled-scroll-panel" [id]="panel.id" class="tiled-scroll-panel" [ngClass]="panel.class">
+  <div #wrapperEl class="wrapper">
+    <ng-container #container *ngTemplateOutlet="panelTemplate ? panelTemplate : defaultTemplate; context: panel.data"></ng-container>
+  </div>
+</div>

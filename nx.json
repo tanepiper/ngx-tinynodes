@@ -31,6 +31,12 @@
     },
     "ngx-tinynodes-core": {
       "tags": []
+    },
+    "ngx-tilted-scroll": {
+      "tags": []
+    },
+    "ngx-tilted-page-scroll-demo": {
+      "tags": []
     }
   }
 }

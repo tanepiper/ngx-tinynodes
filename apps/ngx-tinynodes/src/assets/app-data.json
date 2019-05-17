@@ -83,6 +83,10 @@
         {
           "label": "Demo: ngx-editorjs",
           "link": ["/ngx-editorjs-demo"]
+        },
+        {
+          "label": "Demo: ngx-tiled-scroll",
+          "link": ["/ngx-tilted-page-scroll"]
         }
       ]
     },
