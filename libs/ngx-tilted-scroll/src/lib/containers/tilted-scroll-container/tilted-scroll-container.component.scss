@@ -1,28 +1,11 @@
 :host {
   width: 100%;
-  height: 100vh;
+  height: 500px;
   display: flex;
   flex-direction: row;
 }
 
 cdk-virtual-scroll-viewport {
   width: 100%;
-  height: 100vh;
-
-  li {
-    height: 100px;
-  }
-
-  // Bonus points
-  &::-webkit-scrollbar {
-    width: 1em;
-  }
-
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgb(238, 169, 79);
-  }
+  height: 500px;
 }

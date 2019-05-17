@@ -1,6 +1,6 @@
-import { Component, Input, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { Panel } from '../../types/panel';
-import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
+import { ScrollDispatcher, CdkScrollable, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -13,6 +13,8 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['tilted-scroll-container.component.scss']
 })
 export class TiltedScrollContainerComponent {
+  @ViewChild('scrollViewport') private scrollViewport: CdkVirtualScrollViewport;
+
   private scrollEvent$ = new BehaviorSubject<number | undefined>(undefined);
   /**
    * The panels to render inside the component
@@ -20,7 +22,14 @@ export class TiltedScrollContainerComponent {
   @Input()
   panels: Panel[];
 
+  @Input()
+  itemSize = 1;
+
   constructor(private readonly el: ElementRef, private readonly scrollDispatcher: ScrollDispatcher) {}
+
+  public get viewport(): CdkVirtualScrollViewport {
+    return this.scrollViewport;
+  }
 
   public get scroll(): Observable<number> {
     return this.scrollEvent$.pipe(filter(event => typeof event !== 'undefined'));

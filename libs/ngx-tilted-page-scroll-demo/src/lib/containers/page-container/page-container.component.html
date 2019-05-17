@@ -1,0 +1,63 @@
+<div class="container">
+  <mat-card class="application-card">
+    <mat-card-header>
+      <mat-card-title><code>@tinynodes/ngx-tilted-scroll</code> Demo</mat-card-title>
+      <mat-card-subtitle>A single page demo of the tilted scroll component</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-expansion-panel [expanded]="panelOpen | async" (opened)="togglePanel(true)" (closed)="togglePanel(false)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>ngx-tilted-scroll Information </mat-panel-title>
+          <mat-panel-description
+            >Details on usage and links - {{ (panelOpen | async) ? 'Click To Close' : 'Click To View +' }}</mat-panel-description
+          >
+        </mat-expansion-panel-header>
+        <mat-grid-list cols="2" rowHeight="300px">
+          <mat-grid-tile>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>How To Use...</mat-card-title>
+                <mat-card-subtitle>Instructions on the demo below</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  Below is an instance of an <code>&lt;ngx-tilted-scroll-container></code> with default
+                  <code>&lt;ngx-tilted-scroll-panel></code> child components.
+                </p>
+                <p>
+                  The container uses <code>@angular/cdk</code> to create a virtual scrolling areas. The container provides a
+                  <code>&lt;cdk-virtual-scroll-viewport></code> and the <code>[cdkVirtualFor]</code> directive to render the child
+                  components.
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>Links</mat-card-title>
+                <mat-card-subtitle>Links for all things related to <code>@tinynodes/ngx-editorjs</code></mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-list>
+                  <mat-list-item *ngFor="let link of (links | async)">
+                    <a mat-raised-button color="primary" [href]="link.link" target="_new">{{ link.label }}</a>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-expansion-panel>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <h3 mat-card-title>Demo</h3>
+    </mat-card-actions>
+    <mat-card-content>
+      <ngx-tilted-scroll-container [panels]="panels"></ngx-tilted-scroll-container>
+    </mat-card-content>
+
+    <mat-card-footer> </mat-card-footer>
+  </mat-card>
+</div>

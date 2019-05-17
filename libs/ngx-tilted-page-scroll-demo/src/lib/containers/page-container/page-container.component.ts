@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Panel } from '@tinynodes/ngx-tilted-scroll/src';
+import { BehaviorSubject } from 'rxjs';
+import { MenuGroup } from '@tinynodes/ngx-tinynodes-core/src';
+import { filter, pluck } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-tiled-page-scroll-demo-page',
@@ -54,4 +57,38 @@ export class PageContainerComponent {
       }
     }
   ];
+
+  /**
+   * If the panel is open or not
+   */
+  private panelOpen$ = new BehaviorSubject<boolean>(true);
+
+  /**
+   * Links for the page
+   */
+  private menu$ = new BehaviorSubject<MenuGroup>(undefined);
+
+  /**
+   * Gets if the panel is open or not
+   */
+  public get panelOpen() {
+    return this.panelOpen$.asObservable();
+  }
+
+  /**
+   * Toggles the panel state
+   */
+  public togglePanel(value: boolean) {
+    this.panelOpen$.next(value);
+  }
+
+  /**
+   * Get the page links
+   */
+  public get links() {
+    return this.menu$.pipe(
+      filter(data => typeof data !== 'undefined'),
+      pluck('items')
+    );
+  }
 }

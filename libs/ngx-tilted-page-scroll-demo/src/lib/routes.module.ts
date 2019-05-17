@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
-import { PageContainerComponent } from '../containers/page-container/page-container.component';
+import { PageContainerComponent } from './containers/page-container/page-container.component';
 
 const routes: Route[] = [
   {

@@ -33,6 +33,8 @@ export class TiltedScrollPanelComponent implements AfterContentInit, OnDestroy {
 
   private onDestroy$ = new Subject<boolean>();
 
+  private lastScrollTop = 0;
+
   /**
    * The panel data being passed to render
    */
@@ -69,7 +71,6 @@ export class TiltedScrollPanelComponent implements AfterContentInit, OnDestroy {
   }
 
   private isElementInViewport(scrollValue: number) {
-    console.log(scrollValue);
     const childOffsetTop = this.wrapperEl.nativeElement.getBoundingClientRect().top;
     const parentOffsetTop = this.parent.element.getBoundingClientRect().top;
     const childHeight = this.wrapperEl.nativeElement.offsetHeight;
@@ -78,40 +79,42 @@ export class TiltedScrollPanelComponent implements AfterContentInit, OnDestroy {
   }
 
   private animate(scrollValue: number) {
-    //console.dir(this.parent.element, this.panelEl.nativeElement, this.wrapperEl.nativeElement);
+    console.log('top', this.parent.viewport.measureScrollOffset('top'));
+    console.dir(this.panelEl.nativeElement);
+    console.log('Height 2', this.parent.viewport.elementRef.nativeElement.offsetHeight);
+
     let opacity = 0;
     let degrees =
-      ((this.parent.element.offsetTop - this.parent.element.offsetHeight - scrollValue) / window.innerHeight) *
+      ((this.parent.viewport.measureScrollOffset('top') - this.panelEl.nativeElement.offsetHeight - scrollValue) /
+        window.innerHeight) *
       (50 * 3);
     let scale =
-      (scrollValue + window.innerHeight - (this.parent.element.offsetTop - this.parent.element.offsetHeight)) /
+      (scrollValue +
+        window.innerHeight -
+        (this.parent.viewport.measureScrollOffset('top') -
+          this.parent.viewport.elementRef.nativeElement.offsetHeight)) /
       window.innerHeight;
     if (scale > 1) scale = 1;
     if (degrees < 0) degrees = 0;
 
-    if (scrollValue > this.parent.element.offsetTop) {
-      opacity = (this.parent.element.offsetTop + (window.innerHeight * 1.2 - scrollValue)) / window.innerHeight;
-      console.log('opacity 1', opacity);
+    console.log(scrollValue, this.lastScrollTop);
+    if (scrollValue > this.lastScrollTop) {
+      opacity =
+        (this.parent.viewport.measureScrollOffset('top') + (window.innerHeight * 1.2 - scrollValue)) /
+        window.innerHeight;
       opacity = Math.pow(opacity, 25);
-      console.log('opacity 2', opacity);
-      degrees = ((this.parent.element.offsetTop - scrollValue) / window.innerHeight) * (50 * 3);
-      scale = (scrollValue + window.innerHeight - this.parent.element.offsetTop) / window.innerHeight;
+      degrees = ((this.parent.viewport.measureScrollOffset('top') - scrollValue) / window.innerHeight) * (50 * 3);
+      scale = (scrollValue + window.innerHeight - this.parent.viewport.measureScrollOffset('top')) / window.innerHeight;
     } else {
       // prettier-ignore
       opacity =
-        scrollValue + window.innerHeight - this.parent.element.offsetTop + (this.wrapperEl.nativeElement.offsetTop / 2) / window.innerHeight;
-      console.log(
-        'opacity 3',
-        opacity,
-        scrollValue,
-        window.innerHeight,
-        this.parent.element.offsetTop,
-        this.wrapperEl.nativeElement.offsetTop
-      );
+        scrollValue + window.innerHeight - this.parent.viewport.measureScrollOffset('top') + (this.wrapperEl.nativeElement.offsetTop / 2) / window.innerHeight;
+
       degrees = 0;
       scale = 1;
     }
-    console.log(degrees, scale, opacity, scrollValue);
+
+    this.lastScrollTop = scrollValue;
 
     this.renderer.setStyle(
       this.wrapperEl.nativeElement,
