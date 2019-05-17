@@ -5,6 +5,10 @@
     class="tilted-panel-container"
     (scrolledIndexChange)="scrollChange($event)"
   >
-    <ngx-tilted-scroll-panel *cdkVirtualFor="let panel of panels" [panel]="panel"></ngx-tilted-scroll-panel>]
+    <ngx-tilted-scroll-panel
+      *cdkVirtualFor="let panel of panels; let i = index; trackBy: trackByIdx"
+      [panel]="panel"
+    ></ngx-tilted-scroll-panel
+    >]
   </cdk-virtual-scroll-viewport>
 </ng-container>

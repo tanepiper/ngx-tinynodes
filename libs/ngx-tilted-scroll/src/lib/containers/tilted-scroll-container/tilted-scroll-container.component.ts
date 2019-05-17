@@ -46,4 +46,8 @@ export class TiltedScrollContainerComponent {
   public scrollChange(event: number) {
     this.scrollEvent$.next(event);
   }
+
+  public trackByIdx(i: number): number {
+    return i;
+  }
 }
