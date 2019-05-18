@@ -1,3 +1,5 @@
+import { ViewportScrollPosition } from '@angular/cdk/scrolling';
+
 /**
  * A generic panel interface that provides a way to render panels inside the container.
  * That have an ID, order and optional class properties, and a data property that
@@ -62,4 +64,14 @@ export interface DefaultPanel extends Panel<DefaultPanelData> {
    * Default container class
    */
   class: 'default-container';
+}
+
+export interface ScrollEvent {
+  scrollTop: number;
+  viewportSize: Readonly<{
+    width: number;
+    height: number;
+  }>;
+  viewportRect: ClientRect;
+  viewportScrollPosition: ViewportScrollPosition;
 }

@@ -1,19 +1,18 @@
 import {
-  Component,
-  Input,
-  TemplateRef,
   AfterContentInit,
+  Component,
   ElementRef,
-  Renderer2,
   Host,
+  Input,
   OnDestroy,
+  Renderer2,
+  TemplateRef,
   ViewChild
 } from '@angular/core';
-import { Panel } from '../../types/panel';
-import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { takeUntil, combineLatest, filter, withLatestFrom, distinctUntilChanged, tap } from 'rxjs/operators';
 import { TiltedScrollContainerComponent } from '../../containers/tilted-scroll-container/tilted-scroll-container.component';
-import { filter, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Panel, ScrollEvent } from '../../types/panel';
 
 @Component({
   selector: 'ngx-tilted-scroll-panel',
@@ -31,9 +30,20 @@ export class TiltedScrollPanelComponent implements AfterContentInit, OnDestroy {
    */
   @ViewChild('wrapperEl', { read: ElementRef }) wrapperEl: ElementRef;
 
+  /**
+   * Private destroyer for observables
+   */
   private onDestroy$ = new Subject<boolean>();
 
-  private lastScrollTop = 0;
+  /**
+   * Last scroll top value
+   */
+  private lastScrollTop$ = new BehaviorSubject<number>(0);
+
+  /**
+   * Scroll event
+   */
+  private scrollEvent$ = new BehaviorSubject<ScrollEvent | undefined>(undefined);
 
   /**
    * The panel data being passed to render
@@ -47,22 +57,30 @@ export class TiltedScrollPanelComponent implements AfterContentInit, OnDestroy {
   @Input()
   panelTemplate: TemplateRef<any>;
 
-  constructor(
-    private readonly el: ElementRef,
-    private readonly renderer: Renderer2,
-    private readonly scroll: ScrollDispatcher,
-    @Host() private parent: TiltedScrollContainerComponent
-  ) {}
+  constructor(private readonly renderer: Renderer2, @Host() private parent: TiltedScrollContainerComponent) {}
 
   ngAfterContentInit() {
-    this.parent.scroll.pipe(takeUntil(this.onDestroy$)).subscribe((scroll: number) => {
-      if (this.isElementInViewport(scroll)) {
-        this.renderer.addClass(this.wrapperEl.nativeElement, 'in-view');
-      } else {
-        this.renderer.removeClass(this.wrapperEl.nativeElement, 'in-view');
-      }
-      this.animate(scroll);
+    this.parent.scroll.pipe(takeUntil(this.onDestroy$)).subscribe((scroll: ScrollEvent) => {
+      this.scrollEvent$.next(scroll);
     });
+
+    this.scrollEvent$
+      .pipe(
+        filter(scrollEvent => typeof scrollEvent !== 'undefined'),
+        tap(scrollEvent => this.lastScrollTop$.next(scrollEvent.scrollTop)),
+        takeUntil(this.onDestroy$),
+        withLatestFrom(this.lastScrollTop$.pipe(distinctUntilChanged()))
+      )
+      .subscribe(([scrollEvent, lastScroll]) => {
+        if (this.isElementInViewport(scrollEvent)) {
+          this.renderer.addClass(this.wrapperEl.nativeElement, 'in-view');
+        } else {
+          this.renderer.removeClass(this.wrapperEl.nativeElement, 'in-view');
+        }
+        this.animate(scrollEvent, lastScroll);
+      });
+
+    combineLatest([this.scrollEvent$, this.lastScrollTop$]);
   }
 
   ngOnDestroy() {
@@ -79,26 +97,33 @@ export class TiltedScrollPanelComponent implements AfterContentInit, OnDestroy {
     };
   }
 
-  private isElementInViewport(scrollValue: number) {
-    const childOffsetTop = this.wrapperEl.nativeElement.getBoundingClientRect().top;
-    const parentOffsetTop = this.parent.element.getBoundingClientRect().top;
+  private isElementInViewport(scrollEvent: ScrollEvent) {
+    const wrapperOffsetTop = this.wrapperEl.nativeElement.getBoundingClientRect().top;
     const childHeight = this.wrapperEl.nativeElement.offsetHeight;
-    const parentHeight = this.parent.element.offsetHeight;
-    return !(childHeight >= parentOffsetTop && childOffsetTop <= parentHeight);
+    console.log(
+      wrapperOffsetTop,
+      childHeight,
+      scrollEvent.viewportRect.top,
+      scrollEvent.viewportRect.bottom,
+      childHeight >= scrollEvent.viewportRect.bottom && wrapperOffsetTop <= scrollEvent.viewportRect.top,
+      wrapperOffsetTop >= 200,
+      wrapperOffsetTop <= scrollEvent.viewportRect.bottom
+    );
+    return childHeight >= scrollEvent.viewportRect.bottom && wrapperOffsetTop >= scrollEvent.viewportScrollPosition.top;
   }
 
-  private animate(scrollValue: number) {
-    console.log('top', this.parent.viewport.measureScrollOffset('top'));
-    console.dir(this.panelEl.nativeElement);
-    console.log('Height 2', this.parent.viewport.elementRef.nativeElement.offsetHeight);
+  private animate(scrollEvent: ScrollEvent, lastScroll: number) {
+    // console.log('top', this.parent.viewport.measureScrollOffset('top'));
+    // console.dir(this.panelEl.nativeElement);
+    // console.log('Height 2', this.parent.viewport.elementRef.nativeElement.offsetHeight);
 
     let opacity = 0;
     let degrees =
-      ((this.parent.viewport.measureScrollOffset('top') - this.panelEl.nativeElement.offsetHeight - scrollValue) /
-        window.innerHeight) *
+      ((scrollEvent.viewportRect.top - this.panelEl.nativeElement.offsetHeight - scrollEvent.scrollTop) /
+        scrollEvent.viewportRect.height) *
       (50 * 3);
     let scale =
-      (scrollValue +
+      (scrollEvent.scrollTop +
         window.innerHeight -
         (this.parent.viewport.measureScrollOffset('top') -
           this.parent.viewport.elementRef.nativeElement.offsetHeight)) /
@@ -106,24 +131,28 @@ export class TiltedScrollPanelComponent implements AfterContentInit, OnDestroy {
     if (scale > 1) scale = 1;
     if (degrees < 0) degrees = 0;
 
-    console.log(scrollValue, this.lastScrollTop);
-    if (scrollValue > this.lastScrollTop) {
+    // console.log(scrollEvent.scrollTop, this.lastScrollTop);
+    if (scrollEvent.scrollTop > lastScroll) {
       opacity =
-        (this.parent.viewport.measureScrollOffset('top') + (window.innerHeight * 1.2 - scrollValue)) /
+        (this.parent.viewport.measureScrollOffset('top') + (window.innerHeight * 1.2 - scrollEvent.scrollTop)) /
         window.innerHeight;
       opacity = Math.pow(opacity, 25);
-      degrees = ((this.parent.viewport.measureScrollOffset('top') - scrollValue) / window.innerHeight) * (50 * 3);
-      scale = (scrollValue + window.innerHeight - this.parent.viewport.measureScrollOffset('top')) / window.innerHeight;
+      degrees =
+        ((this.parent.viewport.measureScrollOffset('top') - scrollEvent.scrollTop) / window.innerHeight) * (50 * 3);
+      scale =
+        (scrollEvent.scrollTop + window.innerHeight - this.parent.viewport.measureScrollOffset('top')) /
+        window.innerHeight;
     } else {
       // prettier-ignore
       opacity =
-        scrollValue + window.innerHeight - this.parent.viewport.measureScrollOffset('top') + (this.wrapperEl.nativeElement.offsetTop / 2) / window.innerHeight;
+        scrollEvent.scrollTop +
+        window.innerHeight -
+        this.parent.viewport.measureScrollOffset('top') +
+        this.wrapperEl.nativeElement.offsetTop / 2 / window.innerHeight;
 
       degrees = 0;
       scale = 1;
     }
-
-    this.lastScrollTop = scrollValue;
 
     this.renderer.setStyle(
       this.wrapperEl.nativeElement,
