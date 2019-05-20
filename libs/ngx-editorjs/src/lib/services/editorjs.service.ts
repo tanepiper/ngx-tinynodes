@@ -17,8 +17,7 @@ export class NgxEditorJSService {
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
     private readonly editorService: EditorJSInstanceService,
-    private readonly plugins: NgxEditorJSPluginService,
-    private zone: NgZone
+    private readonly plugins: NgxEditorJSPluginService
   ) {}
 
   /**

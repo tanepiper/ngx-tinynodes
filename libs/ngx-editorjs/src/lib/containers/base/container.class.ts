@@ -1,28 +1,13 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { SanitizerConfig } from '@editorjs/editorjs';
-import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
 
 /**
- * This component is provided as a shortcut to using EditorJS in your
- * application. The attributes are optional and without a default component
- * will be created
- *
- * @example
- * <ngx-editorjs holder="my-editor"></ngx-editorjs>
+ * A base EditorJS component, can be used to create other extended components
  */
-@Component({
-  selector: 'ngx-editorjs',
-  templateUrl: 'editorjs.component.html',
-  styleUrls: ['editorjs.component.scss']
-})
-export class NgxEditorJSComponent {
-  /**
-   * Access to the underlying editor directive
-   */
-  @ViewChild(NgxEditorJSDirective) public editor: NgxEditorJSDirective;
-
+@Injectable()
+export class EditorJSContainerComponent {
   /**
    * Sets if the `EditorJS` component will request autofocus in the browser
    */

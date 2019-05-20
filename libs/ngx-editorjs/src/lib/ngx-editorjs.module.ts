@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { createModuleConfig } from './config/module-config';
-import { NgxEditorJSComponent } from './containers/editorjs-component/editorjs.component';
+import { NgxEditorJSComponent } from './containers/editorjs/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
 import { EditorJSInstanceModule } from './utils/editorjs-injector.module';
+import { EditorJSContainerComponent } from './containers/base/container.class';
+import { NgxEditorJSFormComponent } from './containers/editorjs-form/editorjs-form.component';
 
 /**
  * The `@tinynodes/ngx-editorjs` module provides a collection of features to allow
@@ -19,8 +21,14 @@ import { EditorJSInstanceModule } from './utils/editorjs-injector.module';
  */
 @NgModule({
   imports: [CommonModule, FormsModule, EditorJSInstanceModule],
-  declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
-  exports: [NgxEditorJSComponent, NgxEditorJSDirective, EditorJSInstanceModule],
+  declarations: [NgxEditorJSComponent, NgxEditorJSFormComponent, NgxEditorJSDirective, EditorJSContainerComponent],
+  exports: [
+    NgxEditorJSComponent,
+    NgxEditorJSFormComponent,
+    NgxEditorJSDirective,
+    EditorJSInstanceModule,
+    EditorJSContainerComponent
+  ],
   providers: [NgxEditorJSService, NgxEditorJSPluginService]
 })
 export class NgxEditorJSModule {
