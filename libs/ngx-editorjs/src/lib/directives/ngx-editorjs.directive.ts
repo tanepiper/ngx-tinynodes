@@ -1,6 +1,16 @@
-import { AfterContentInit, Directive, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import {
+  AfterContentInit,
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+  Renderer2,
+  HostListener
+} from '@angular/core';
 import EditorJS, { SanitizerConfig } from '@editorjs/editorjs';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
@@ -20,6 +30,8 @@ import { EditorJSConfig } from '../types/config';
   selector: '[ngxEditorJS]'
 })
 export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentInit {
+  private touched$ = new BehaviorSubject<boolean>(false);
+
   private id: string;
 
   /**
@@ -84,6 +96,11 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   @Input()
   public blocks: Block[] = [];
 
+  @HostListener('click', ['$event'])
+  onclick() {
+    this.touched$.next(true);
+  }
+
   constructor(private readonly el: ElementRef, private readonly editorService: NgxEditorJSService) {}
 
   /**
@@ -98,6 +115,10 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    */
   public get service(): NgxEditorJSService {
     return this.editorService;
+  }
+
+  public get touched() {
+    return this.touched$.asObservable();
   }
 
   /**

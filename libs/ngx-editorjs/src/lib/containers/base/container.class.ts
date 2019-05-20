@@ -1,4 +1,4 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable, Input, Component } from '@angular/core';
 import { SanitizerConfig } from '@editorjs/editorjs';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
@@ -6,7 +6,9 @@ import { Block } from '../../types/blocks';
 /**
  * A base EditorJS component, can be used to create other extended components
  */
-@Injectable()
+@Component({
+  template: ''
+})
 export class EditorJSContainerComponent {
   /**
    * Sets if the `EditorJS` component will request autofocus in the browser

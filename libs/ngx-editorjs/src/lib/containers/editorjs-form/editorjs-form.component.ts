@@ -1,12 +1,11 @@
-import { Component, Input, ViewChild, forwardRef, OnDestroy } from '@angular/core';
-import { SanitizerConfig } from '@editorjs/editorjs';
+import { Component, forwardRef, OnDestroy, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
 import { EditorJSContainerComponent } from '../base/container.class';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 /**
  * This component is provided as a shortcut to using EditorJS in your
@@ -47,6 +46,10 @@ export class NgxEditorJSFormComponent extends EditorJSContainerComponent impleme
       .subscribe(hasChanged => {
         this.onChange(hasChanged);
       });
+
+    this.editor.touched.subscribe(() => {
+      this.onTouch();
+    });
   }
 
   onTouch = () => {};
