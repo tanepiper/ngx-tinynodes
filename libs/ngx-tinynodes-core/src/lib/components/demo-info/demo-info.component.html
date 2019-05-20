@@ -1,0 +1,42 @@
+<mat-expansion-panel [expanded]="isPanelOpen | async" (opened)="togglePanel(true)" (closed)="togglePanel(false)">
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ title }}</mat-panel-title>
+    <mat-panel-description
+      >Details on usage and links - {{ (isPanelOpen | async) ? 'Click To Close' : 'Click To View' }}</mat-panel-description
+    >
+  </mat-expansion-panel-header>
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>How To Use...</mat-card-title>
+          <mat-card-subtitle>Instructions on the demo below</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="demo-info">
+          <ng-content *ngTemplateOutlet="body ? body : defaultInfoTemplate"></ng-content>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Links</mat-card-title>
+          <mat-card-subtitle
+            >Links for all things related to <code>@tinynodes/{{ title }}</code></mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list *ngIf="menu">
+            <mat-list-item *ngFor="let link of menu.items">
+              <a mat-raised-button color="primary" [href]="link.link" target="_new">{{ link.label }}</a>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-expansion-panel>
+
+<ng-template #defaultInfoTemplate>
+  <p>This is where some demo information goes</p>
+</ng-template>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ApplicationDataModule } from './stores/app/application.module';
-
+import { NgxEditorJSDemoInfoComponent } from './components/demo-info/demo-info.component';
+import { NgxTinynodesCoreMaterialModule } from './ngx-tinynodes-core-material.module';
 /**
  * This module provides all the core features across the Tinynodes site
  * that need shared.
@@ -9,7 +10,8 @@ import { ApplicationDataModule } from './stores/app/application.module';
  * the `AppService`
  */
 @NgModule({
-  imports: [ApplicationDataModule],
-  exports: [ApplicationDataModule]
+  imports: [ApplicationDataModule, NgxTinynodesCoreMaterialModule],
+  declarations: [NgxEditorJSDemoInfoComponent],
+  exports: [ApplicationDataModule, NgxEditorJSDemoInfoComponent, NgxTinynodesCoreMaterialModule]
 })
 export class NgxTinynodesCoreModule {}

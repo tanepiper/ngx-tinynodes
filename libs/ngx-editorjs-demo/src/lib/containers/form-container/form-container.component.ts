@@ -7,18 +7,20 @@ import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
 import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { NgxEditorJSFormComponent } from '@tinynodes/ngx-editorjs/src/lib/containers/editorjs-form/editorjs-form.component';
 
 /**
  * The Page Container component provides the main routable page for loading
  * the `ngx-editorjs-demo`
  */
 @Component({
-  selector: 'ngx-page-container',
-  templateUrl: 'page-container.component.html',
-  styleUrls: ['page-container.component.scss'],
+  selector: 'ngx-form-container',
+  templateUrl: 'form-container.component.html',
+  styleUrls: ['form-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PageContainerComponent implements AfterContentInit {
+export class FormContainerComponent implements AfterContentInit {
   /**
    * Internal onDestroy$ subject
    */
@@ -30,9 +32,33 @@ export class PageContainerComponent implements AfterContentInit {
   public holder = 'ngx-editorjs-demo';
 
   /**
+   * The blocks on the page
+   */
+  private blocks$: Observable<Block[]>;
+
+  /**
+   * If the panel is open or not
+   */
+  private panelOpen$ = new BehaviorSubject<boolean>(true);
+
+  /**
    * Links for the page
    */
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
+
+  /**
+   * Gets if the panel is open or not
+   */
+  public get panelOpen() {
+    return this.panelOpen$.asObservable();
+  }
+
+  /**
+   * Toggles the panel state
+   */
+  public togglePanel(value: boolean) {
+    this.panelOpen$.next(value);
+  }
 
   /**
    * The constructor sets up the blocks to the initial demo data
@@ -45,21 +71,35 @@ export class PageContainerComponent implements AfterContentInit {
     private readonly pagesService: PagesService,
     private app: AppService,
     private readonly editor: NgxEditorJSService,
-    private readonly cd: ChangeDetectorRef
-  ) {}
-
-  /**
-   * Get the blocks for the page
-   */
-  public get blocks() {
-    return this.editor.getBlocks(this.holder);
+    private readonly cd: ChangeDetectorRef,
+    private readonly fb: FormBuilder
+  ) {
+    this.editor
+      .getBlocks(this.holder)
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(blocks => {
+        this.editorForm.patchValue({
+          pageEditor: blocks
+        });
+      });
   }
+
+  public editorForm = this.fb.group({
+    pageName: [''],
+    pageEditor: new FormControl()
+  });
 
   /**
    * Get the page links
    */
-  public get menu() {
-    return this.menu$;
+  public get links() {
+    return this.menu$.pipe(
+      filter(data => typeof data !== 'undefined'),
+      pluck('items')
+    );
   }
 
   /**
@@ -97,21 +137,11 @@ export class PageContainerComponent implements AfterContentInit {
   }
 
   /**
-   * Get the blocks data as formatted JSON
-   */
-  public get asJSON() {
-    return this.blocks.pipe(
-      map(blocks => {
-        return JSON.stringify(blocks, null, 4);
-      }),
-      tap(() => this.cd.markForCheck())
-    );
-  }
-
-  /**
    * After the content has init overide the blocks with blocks from the service
    */
   ngAfterContentInit() {
     this.reset();
+
+    this.editorForm.valueChanges.subscribe(changes => console.log('form changes', changes));
   }
 }

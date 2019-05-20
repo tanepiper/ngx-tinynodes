@@ -1,11 +1,71 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Block } from '../types/blocks';
 import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
-import { EditorJSInstanceService } from '../utils/editorjs-injector';
+import { NgxEditorJSInstanceService } from './editorjs-injector';
 import { NgxEditorJSPluginService } from './plugins.service';
+
+/**
+ * Interface describing an action to trigger EditorJS
+ */
+export interface EditorJSAction<T = any> {
+  /**
+   * The name of the action to trigger
+   */
+  action: string;
+
+  /**
+   * The payload for the action <T>
+   */
+  payload?: T;
+}
+
+/**
+ * Supported actions by the API
+ */
+export enum EditorJSActionTypes {
+  /**
+   * Create a new editor
+   */
+  CreateEditor = 'createEditor',
+
+  /**
+   * Update an editor instance
+   */
+  UpdateEditor = 'updateEditor',
+  /**
+   * Clear a editor instance
+   */
+  ClearEditor = 'clearEditor',
+  /**
+   * Destroy an Editor instance
+   */
+  DestroyEditor = 'destroyEditor',
+  /**
+   * Save the blocks in an editor instance
+   */
+  SaveEditor = 'saveEditor'
+}
+
+/**
+ * EditorJS options
+ */
+export interface CreateEditorJSOptions {
+  /**
+   * Configuration
+   */
+  config: EditorJSConfig;
+  /**
+   * Tools to include, Optional - if not set all tools will be used
+   */
+  includeTools?: string[];
+  /**
+   * Autosave on change, is set to false
+   */
+  autoSave?: boolean;
+}
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
@@ -14,11 +74,46 @@ import { NgxEditorJSPluginService } from './plugins.service';
   providedIn: 'root'
 })
 export class NgxEditorJSService {
+  private onDestroy$ = new Subject<boolean>();
+  /**
+   * Internal editor action state
+   */
+  private readonly editorActions$ = new BehaviorSubject<EditorJSAction>({
+    action: ''
+  });
+
+  /**
+   * Editor action stream
+   */
+  public get editorActions() {
+    return this.editorActions$.pipe(filter(action => action.action !== ''));
+  }
+
   constructor(
     @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
-    private readonly editorService: EditorJSInstanceService,
+    private readonly editorService: NgxEditorJSInstanceService,
     private readonly plugins: NgxEditorJSPluginService
-  ) {}
+  ) {
+    this.editorActions.pipe(takeUntil(this.onDestroy$)).subscribe(editorAction => {
+      switch (editorAction.action) {
+        case EditorJSActionTypes.CreateEditor: {
+          this.createEditor(editorAction.payload);
+        }
+        case EditorJSActionTypes.ClearEditor: {
+          this.clear(editorAction.payload);
+        }
+        case EditorJSActionTypes.DestroyEditor: {
+          this.destroy(editorAction.payload);
+        }
+        case EditorJSActionTypes.SaveEditor: {
+          this.save(editorAction.payload);
+        }
+        case EditorJSActionTypes.UpdateEditor: {
+          this.update(editorAction.payload);
+        }
+      }
+    });
+  }
 
   /**
    * This method creates a new EditorJS instance
@@ -27,14 +122,14 @@ export class NgxEditorJSService {
    * @param excludeTools String array of keys to not include with this editor
    * @param autoSave When an instance changes we update the block map, set to false if you want to disable
    */
-  public async createEditor(config: EditorJSConfig, includeTools?: string[], autoSave = false): Promise<void> {
-    const options: EditorConfig = {
+  public async createEditor(options: CreateEditorJSOptions): Promise<void> {
+    const editorConfig: EditorConfig = {
       ...this.config.editorjs,
-      ...config,
-      tools: this.plugins.getTools(includeTools)
+      ...options.config,
+      tools: this.plugins.getTools(options.includeTools)
     };
 
-    await this.editorService.createInstance(options);
+    await this.editorService.createInstance({ editorConfig });
   }
 
   /**
@@ -69,6 +164,7 @@ export class NgxEditorJSService {
    * @param holder
    */
   public hasChanged(holder: string): Observable<number> {
+    console.log('get has changed', holder);
     return this.editorService.getChanged(holder);
   }
 
@@ -78,7 +174,7 @@ export class NgxEditorJSService {
    * @param holder The ID of the holder of the instance
    * @param blocks The array of `Block` elements to render
    */
-  public update(holder: string, blocks: Block[]) {
+  public update({ holder, blocks }: { holder: string; blocks: Block[] }) {
     this.editorService.update(holder, blocks);
   }
 
@@ -88,7 +184,7 @@ export class NgxEditorJSService {
    * If there is no instance of that name it will throw an error.
    * @param holder The ID of the holder of the instance
    */
-  public save(holder: string): void {
+  public save({ holder }: { holder: string }): void {
     this.editorService.save(holder);
   }
 
@@ -96,7 +192,7 @@ export class NgxEditorJSService {
    * Clears all blocks from an `EditorJS instance`
    * @param holder The ID of the holder of the instance
    */
-  public clear(holder: string): void {
+  public clear({ holder }: { holder: string }): void {
     this.editorService.clear(holder);
   }
 
@@ -106,7 +202,7 @@ export class NgxEditorJSService {
    * completes and destroys them
    * @param holder The ID of the holder of the instance
    */
-  public destroy(holder: string): void {
+  public destroy({ holder }: { holder: string }): void {
     this.editorService.destroyInstance(holder);
   }
 }

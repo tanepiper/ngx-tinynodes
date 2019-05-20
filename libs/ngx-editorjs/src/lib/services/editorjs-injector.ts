@@ -6,6 +6,25 @@ import { Block } from '../types/blocks';
 import { BlocksMap, ChangeMap, EditorMap, EventMap, EventType, ReadyMap } from '../types/maps';
 
 /**
+ * Configuration for creating an EditorJS instance
+ */
+export interface EditorJSInstanceConfig {
+  /**
+   * The editor configuration, this is required with at least the `holder` property
+   */
+  editorConfig: EditorConfig;
+  /**
+   * The method to call when the editor makes a change
+   */
+  onChange?: (holder?: string) => void;
+
+  /**
+   * The method to call with an editor is ready
+   */
+  onReady?: (holder?: string) => void;
+}
+
+/**
  * Default values for each internal map
  */
 const MAP_DEFAULTS = [['blocksMap', []], ['changeMap', 0], ['readyMap', false]];
@@ -15,6 +34,8 @@ const MAP_DEFAULTS = [['blocksMap', []], ['changeMap', 0], ['readyMap', false]];
  */
 export const EDITORJS_MODULE_IMPORT = new InjectionToken<any>('EDITORJS_MODULE_IMPORT');
 
+export const EditorJSInstance = new InjectionToken<any>('EditorJSInstance');
+
 /**
  * EditorJS factory service, call `createInstance` with an `EditorConfig` to
  * return an instance after the DOM element is ready, this is stored in a subject to
@@ -23,7 +44,7 @@ export const EDITORJS_MODULE_IMPORT = new InjectionToken<any>('EDITORJS_MODULE_I
 @Injectable({
   providedIn: 'root'
 })
-export class EditorJSInstanceService {
+export class NgxEditorJSInstanceService {
   /**
    * Internal destroy method for the service
    */
@@ -61,7 +82,7 @@ export class EditorJSInstanceService {
    * @param ref The application reference to trigger a tick
    */
   constructor(
-    @Inject(EDITORJS_MODULE_IMPORT) private EditorJS: any,
+    @Inject(EditorJSInstance) private EditorJS: any,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
   ) {}
@@ -71,19 +92,17 @@ export class EditorJSInstanceService {
    * then adds it to the editor instances
    * @param config The {EditorConfig} configuration to create
    */
-  public createInstance(config: EditorConfig, autosave = false): void {
-    const holder = config.holder as string;
+  public createInstance(config: EditorJSInstanceConfig): Promise<void> {
     const editorConfig = {
-      ...config,
-      onChange: () => {
-        this.changeMap[holder].next(Date.now());
-      }
+      ...config.editorConfig
     };
-    this.zone.runOutsideAngular(() => {
+    editorConfig.onChange = (config.onChange ? config.onChange : this.onChange(editorConfig.holder as string)) as any;
+    editorConfig.onReady = (config.onReady ? config.onReady : this.onReady(editorConfig.holder as string)) as any;
+    return this.zone.runOutsideAngular(() => {
       const editor = new (this.EditorJS as any)(editorConfig);
-      const holder = config.holder as string;
-      editor.isReady.then(() => {
-        this.zone.run(() => {
+      const holder = editorConfig.holder as string;
+      return editor.isReady.then(() => {
+        return this.zone.run(() => {
           this.setupSubjects(holder, editor);
           this.setupEvents(holder);
           this.readyMap[holder].next(true);
@@ -91,6 +110,21 @@ export class EditorJSInstanceService {
         });
       });
     });
+  }
+
+  private onChange(holder: string): void {
+    console.log('change');
+    if (!this.changeMap[holder]) {
+      this.changeMap[holder] = new BehaviorSubject<number>(Date.now());
+    }
+    this.changeMap[holder].next(Date.now());
+  }
+
+  private onReady(holder: string) {
+    if (!this.readyMap[holder]) {
+      this.readyMap[holder] = new BehaviorSubject<boolean>(false);
+    }
+    this.readyMap[holder].next(true);
   }
 
   /**

@@ -1,0 +1,10 @@
+:host {
+  width: 100%;
+  height: 100vh;
+}
+
+.demo-info {
+  width: 100%;
+  height: calc(300px);
+  overflow: scroll;
+}

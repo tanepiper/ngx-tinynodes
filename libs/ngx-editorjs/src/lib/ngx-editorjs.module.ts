@@ -7,9 +7,15 @@ import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
-import { EditorJSInstanceModule } from './utils/editorjs-injector.module';
 import { EditorJSContainerComponent } from './containers/base/container.class';
 import { NgxEditorJSFormComponent } from './containers/editorjs-form/editorjs-form.component';
+import { EDITORJS_MODULE_IMPORT, NgxEditorJSInstanceService, EditorJSInstance } from './services/editorjs-injector';
+import EditorJS from '@editorjs/editorjs';
+import { MatInputModule, MatFormFieldModule } from '@angular/material';
+
+export function createEditorJSInstance(editorjs: any) {
+  return editorjs;
+}
 
 /**
  * The `@tinynodes/ngx-editorjs` module provides a collection of features to allow
@@ -20,16 +26,23 @@ import { NgxEditorJSFormComponent } from './containers/editorjs-form/editorjs-fo
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule, FormsModule, EditorJSInstanceModule],
+  imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSFormComponent, NgxEditorJSDirective, EditorJSContainerComponent],
-  exports: [
-    NgxEditorJSComponent,
-    NgxEditorJSFormComponent,
-    NgxEditorJSDirective,
-    EditorJSInstanceModule,
-    EditorJSContainerComponent
-  ],
-  providers: [NgxEditorJSService, NgxEditorJSPluginService]
+  exports: [NgxEditorJSComponent, NgxEditorJSFormComponent, NgxEditorJSDirective, EditorJSContainerComponent],
+  providers: [
+    NgxEditorJSService,
+    NgxEditorJSPluginService,
+    NgxEditorJSInstanceService,
+    {
+      provide: EDITORJS_MODULE_IMPORT,
+      useValue: EditorJS
+    },
+    {
+      provide: EditorJSInstance,
+      useFactory: createEditorJSInstance,
+      deps: [EDITORJS_MODULE_IMPORT]
+    }
+  ]
 })
 export class NgxEditorJSModule {
   constructor(
