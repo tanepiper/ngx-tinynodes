@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import EditorJS from '@editorjs/editorjs';
 import { createModuleConfig } from './config/module-config';
-import { EditorJSContainerComponent } from './containers/base/container.class';
-import { EditorJSFormField } from './containers/base/form-field.class';
+import { EditorJSBaseComponent } from './containers/base/container.class';
 import { NgxEditorJSMatFieldComponent } from './containers/editorjs-mat-field/editorjs-mat-field.component';
 import { NgxEditorJSComponent } from './containers/editorjs/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
@@ -31,14 +30,8 @@ export function createEditorJSInstance(editorjs: any) {
  */
 @NgModule({
   imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule],
-  declarations: [
-    NgxEditorJSComponent,
-    NgxEditorJSMatFieldComponent,
-    NgxEditorJSDirective,
-    EditorJSContainerComponent,
-    EditorJSFormField
-  ],
-  exports: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective, EditorJSContainerComponent],
+  declarations: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective, EditorJSBaseComponent],
+  exports: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective, EditorJSBaseComponent],
   providers: [
     NgxEditorJSService,
     NgxEditorJSPluginService,

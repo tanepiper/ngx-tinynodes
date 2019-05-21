@@ -1,0 +1,486 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Tinynodes Angular Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/readthedocs.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Tinynodes Angular Documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>EditorJSMaterialForm</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Single interface for EditorJSMaterialForm</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+            </p>
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { FocusMonitor } from &#x27;@angular/cdk/a11y&#x27;;
+import { coerceBooleanProperty } from &#x27;@angular/cdk/coercion&#x27;;
+import {
+  AfterContentInit,
+  Component,
+  DoCheck,
+  forwardRef,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Provider,
+  Self,
+  ViewChild,
+  Output,
+  EventEmitter
+} from &#x27;@angular/core&#x27;;
+import { NgControl } from &#x27;@angular/forms&#x27;;
+import { MatFormFieldControl } from &#x27;@angular/material&#x27;;
+import { Subject, Subscription, timer, BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { pluck, tap, timeInterval, map } from &#x27;rxjs/operators&#x27;;
+import { NgxEditorJSDirective } from &#x27;../../directives/ngx-editorjs.directive&#x27;;
+import { NgxEditorJSService } from &#x27;../../services/editorjs.service&#x27;;
+import { EditorJSBaseComponent } from &#x27;../base/container.class&#x27;;
+
+/**
+ * Provider for the EditorJS Material Field Component
+ */
+export const EDITORJS_MATERIAL_FIELD_CONTROL: Provider &#x3D; {
+  provide: MatFormFieldControl,
+  useExisting: forwardRef(() &#x3D;&gt; NgxEditorJSMatFieldComponent),
+  multi: true
+};
+
+/**
+ * Single interface for EditorJSMaterialForm
+ */
+export interface EditorJSMaterialForm
+  extends OnInit,
+    AfterContentInit,
+    OnDestroy,
+    DoCheck,
+    MatFormFieldControl&lt;NgxEditorJSMatFieldComponent&gt; {}
+
+/**
+ * This component is provided as a shortcut to using EditorJS in your
+ * application. The attributes are optional and without a default component
+ * will be created
+ *
+ * @example
+ * &lt;mat-form-field&gt;
+ *  &lt;ngx-editorjs-mat-field holder&#x3D;&quot;my-editor&quot;&gt;&lt;/ngx-editorjs&gt;
+ * &lt;/mat-form-field&gt;
+ */
+@Component({
+  selector: &#x27;ngx-editorjs-mat-field&#x27;,
+  templateUrl: &#x27;editorjs-mat-field.component.html&#x27;,
+  styleUrls: [&#x27;editorjs-mat-field.component.scss&#x27;],
+  host: {
+    &#x27;[id]&#x27;: &#x27;id&#x27;,
+    &#x27;[attr.aria-describedby]&#x27;: &#x27;describedBy&#x27;
+  },
+  providers: [EDITORJS_MATERIAL_FIELD_CONTROL]
+})
+export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implements EditorJSMaterialForm {
+  /**
+   * Internal Static ID for Material for each editor instance
+   */
+  static nextId &#x3D; 0;
+  /**
+   * Material state change subject
+   */
+  public stateChanges &#x3D; new Subject&lt;void&gt;();
+
+  /**
+   * Material control type
+   */
+  public controlType &#x3D; &#x27;ngx-editorjs-mat-field&#x27;;
+
+  /**
+   * Material error state
+   */
+  public errorState &#x3D; false;
+
+  /**
+   * Get the component value
+   */
+  get value(): any {
+    return this._value;
+  }
+
+  /**
+   * Set the component value
+   * @param value The value to set
+   */
+  @Input(&#x27;value&#x27;)
+  set value(value: any) {
+    this._value &#x3D; value;
+    this.stateChanges.next();
+  }
+
+  /**
+   * Material placeholder value
+   */
+  private _placeholder: string;
+
+  /**
+   * Get the Material placeholder value
+   */
+  get placeholder() {
+    return this._placeholder;
+  }
+  /**
+   * Set the material Placeholder value
+   * @input placeholder The placeholder state to set
+   */
+  @Input(&#x27;placeholder&#x27;)
+  set placeholder(placeholder: string) {
+    this._placeholder &#x3D; placeholder;
+    this.stateChanges.next();
+  }
+
+  /**
+   * Material focused state
+   */
+  private _focused: boolean;
+  /**
+   * Get the Material focused state
+   */
+  get focused() {
+    return this._focused;
+  }
+  /**
+   * Set the Material focused state
+   * @param focused The focused state to set
+   */
+  @Input(&#x27;focused&#x27;)
+  set focused(focused: boolean) {
+    this._focused &#x3D; coerceBooleanProperty(focused);
+    if (this._focused) {
+      this.onTouch();
+    }
+    this.stateChanges.next();
+  }
+
+  /**
+   * Material Required Value
+   */
+  private _required &#x3D; false;
+
+  /**
+   * Get the Material required state
+   */
+  get required() {
+    return this._required;
+  }
+  /**
+   * Set the Material requied state
+   * @param required The required state to set
+   */
+  @Input(&#x27;required&#x27;)
+  set required(required: boolean) {
+    this._required &#x3D; coerceBooleanProperty(required);
+    this.stateChanges.next();
+  }
+
+  /**
+   * Material disabled state
+   */
+  private _disabled &#x3D; false;
+
+  /**
+   * Get the Material disabled state
+   */
+  get disabled() {
+    return this._disabled;
+  }
+  /**
+   * Set the Material disabled state
+   * @param disabled The disabled state to set
+   */
+  @Input(&#x27;disabled&#x27;)
+  set disabled(disabled: boolean) {
+    this._disabled &#x3D; coerceBooleanProperty(disabled);
+    this.stateChanges.next();
+  }
+
+  /**
+   * Access to the underlying {NgxEditorJSDirective}
+   */
+  @ViewChild(NgxEditorJSDirective) public editorEl: NgxEditorJSDirective;
+
+  /**
+   * Host binding to the unique ID for this editor for material
+   */
+  @HostBinding()
+  id &#x3D; &#x60;ngx-editorjs-mat-field-${NgxEditorJSMatFieldComponent.nextId++}&#x60;;
+
+  /**
+   * Gets if the Material label should float
+   */
+  @HostBinding(&#x27;class.floating&#x27;)
+  get shouldLabelFloat() {
+    return this.focused || !this.empty;
+  }
+
+  /**
+   * Host binding for ARIA label
+   */
+  @HostBinding(&#x27;attr.aria-describedby&#x27;) describedBy &#x3D; &#x27;&#x27;;
+
+  /**
+   *
+   * @param ids The IDs of the Material components
+   */
+  public setDescribedByIds(ids: string[]) {
+    this.describedBy &#x3D; ids.join(&#x27; &#x27;);
+  }
+
+  /**
+   * Material empty state
+   */
+  private _empty &#x3D; true;
+  /**
+   * Get the Material empty state
+   */
+  public get empty() {
+    return this._empty;
+  }
+  /**
+   * Set the Material empty state
+   * @param empty The empty value
+   */
+  public set empty(empty: boolean) {
+    this._empty &#x3D; empty;
+  }
+
+  /**
+   * Material on container click
+   * @param event The {MouseEvent} for the container click
+   */
+  public onContainerClick(event: MouseEvent) {
+    this.onTouch(event);
+    this.isSaved.emit(false);
+    this.stateChanges.next();
+  }
+
+  /**
+   * Creates the Material field
+   * @param service The {NgxEditorJSService} instance
+   * @param fm Focus monitor for the Material element
+   * @param ngControl The Angular control base class
+   */
+  constructor(
+    protected readonly service: NgxEditorJSService,
+    private readonly fm: FocusMonitor,
+    @Optional() @Self() public ngControl: NgControl
+  ) {
+    super(service);
+  }
+
+  /**
+   * Called on OnInit
+   */
+  ngOnInit(): void {
+    if (this.ngControl !&#x3D;&#x3D; null) {
+      this.ngControl.valueAccessor &#x3D; this;
+    }
+  }
+
+  /**
+   * Internal method to return a new timer for the autosave support
+   * @param time Time to do with autosave
+   * @param timeStart When to trigger the first autosave
+   */
+  private getTimer(time: number, timeStart &#x3D; 0): Observable&lt;number&gt; {
+    return timer(timeStart, time).pipe(
+      timeInterval(),
+      map(interval &#x3D;&gt; interval.interval),
+      tap(() &#x3D;&gt; {
+        this.service.save({ holder: this.holder });
+        this.isSaved.emit(true);
+      })
+    );
+  }
+
+  /**
+   * Internal Subscription for the timer subscription
+   */
+  private timerSubscription$: Subscription;
+
+  /**
+   * Get the current saved state
+   */
+  @Output()
+  public isSaved &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  /**
+   * Inside the AfterContentInit life-cycle we set up a listener for focus
+   * and trigger focus autosave subscribe and unsubscribe
+   */
+  ngAfterContentInit(): void {
+    this.fm.monitor(this.editorEl.element, true).subscribe(origin &#x3D;&gt; {
+      this.focused &#x3D; !!origin;
+      if (!this.focused) {
+        if (!this.autosave) {
+          this.isSaved.emit(false);
+        }
+        this.timerSubscription$ &amp;&amp; this.timerSubscription$.unsubscribe();
+      }
+      this.isSaved.emit(false);
+      if (this.autosave &gt; 0) {
+        this.timerSubscription$ &#x3D; this.getTimer(this.autosave).subscribe();
+      }
+      this.stateChanges.next();
+    });
+  }
+
+  /**
+   * Set the error state based on the underlying control state
+   */
+  ngDoCheck(): void {
+    if (this.ngControl) {
+      this.errorState &#x3D; this.ngControl.invalid &amp;&amp; this.ngControl.touched;
+      this.stateChanges.next();
+    }
+  }
+
+  /**
+   * Destroy the focus monitoring
+   */
+  ngOnDestroy(): void {
+    this.fm.stopMonitoring(this.editorEl.element);
+    if (this.timerSubscription$ &amp;&amp; !this.timerSubscription$.closed) {
+      this.timerSubscription$.unsubscribe();
+    }
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'EditorJSMaterialForm.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

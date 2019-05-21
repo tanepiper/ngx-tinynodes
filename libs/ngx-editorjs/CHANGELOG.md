@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2019-05-21
+
+## Added
+
+- `NgxEditorJSComponent` can be used in Angular Forms via it's `ControlValueAccessor`
+- `EditorJSBaseComponent` exported and can be used to create custom components
+- `NgxEditorJSMatFieldComponent` provided as a [Material](https://material.angular.io/) field component.
+
+## Changed
+
+- `EditorJS` instance service refactored
+
 ## [1.3.2] - 2019-05-15
 
 ### Changed

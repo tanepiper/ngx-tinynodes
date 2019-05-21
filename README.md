@@ -2,7 +2,7 @@
 
 This repository is a collection of Angular components and demos with full documentation.
 
-See the [Changelog](./CHANGELOG.md) for the development diary of this site, or visit [the documentation of libraries](additional-documentation/tinynodes-library-docs.html).
+See the [Changelog](https://github.com/tanepiper/ngx-tinynodes/blob/master/CHANGELOG.md) for the development diary of this site, or visit [the documentation of libraries](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/README.md).
 
 You can also find a fully searchable API documentation for all `@tinynode` components.
 
@@ -17,7 +17,12 @@ You can also find a fully searchable API documentation for all `@tinynode` compo
 
 ### `ngx-editorjs`
 
-The `ngx-editorjs` module provides an [EditorJS](https://editorjs.io) instance within an Angular application and provides a Directive to attach to and block element, a out-of-the-box component to use and a service to interact with `EditorJS` instances.
+The `ngx-editorjs` module provides an [EditorJS](https://editorjs.io) instance within an Angular application and provides several features to use it:
+
+- A Directive to attach to and block element
+- An out-of-the-box component to use within any Angular application or Angular form
+- A Material Form Field component
+- A Service to interact with `EditorJS` instances.
 
 Below are the dependencies to use the features.
 

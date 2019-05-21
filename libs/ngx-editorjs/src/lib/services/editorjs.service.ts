@@ -163,8 +163,12 @@ export class NgxEditorJSService {
    * this can be subscribed to before calling the `createEditor` method
    * @param holder
    */
-  public hasChanged(holder: string): Observable<number> {
+  public getChanged(holder: string): Observable<number> {
     return this.editorService.getChanged(holder);
+  }
+
+  public hasChanged(holder: string) {
+    this.editorService.onChange(holder);
   }
 
   /**

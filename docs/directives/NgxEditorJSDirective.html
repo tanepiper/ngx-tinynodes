@@ -106,6 +106,25 @@ Angular services and components</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#id">id</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#touched$">touched$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -115,6 +134,10 @@ Angular services and components</p>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#createConfig">createConfig</a>
+                            </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#createEditor">createEditor</a>
@@ -147,6 +170,9 @@ Angular services and components</p>
                                 <a href="#autosave">autosave</a>
                             </li>
                             <li>
+                                <a href="#blockPlaceholder">blockPlaceholder</a>
+                            </li>
+                            <li>
                                 <a href="#blocks">blocks</a>
                             </li>
                             <li>
@@ -165,9 +191,6 @@ Angular services and components</p>
                                 <a href="#minHeight">minHeight</a>
                             </li>
                             <li>
-                                <a href="#placeholder">placeholder</a>
-                            </li>
-                            <li>
                                 <a href="#sanitizer">sanitizer</a>
                             </li>
                         </ul>
@@ -176,6 +199,20 @@ Angular services and components</p>
 
 
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#click">click</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                     <tr>
                         <td class="col-md-4">
@@ -189,7 +226,13 @@ Angular services and components</p>
                                     <a href="#editor">editor</a>
                                 </li>
                                 <li>
+                                    <a href="#element">element</a>
+                                </li>
+                                <li>
                                     <a href="#service">service</a>
+                                </li>
+                                <li>
+                                    <a href="#touched">touched</a>
                                 </li>
                             </ul>
                         </td>
@@ -209,12 +252,14 @@ Angular services and components</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:85</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:105</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates the directive instance</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -223,6 +268,7 @@ Angular services and components</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -237,6 +283,10 @@ Angular services and components</p>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>The element the directive is attached to</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>editorService</td>
@@ -249,6 +299,10 @@ Angular services and components</p>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>The editor service</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -277,7 +331,7 @@ Angular services and components</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:47</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -304,13 +358,40 @@ Angular services and components</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:79</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:91</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>If set, when the <code>EditorJS</code> save is called the <code>Observable</code> of blocks will be updated,
 if set to <code>false</code> on the change <code>Observable</code> will be updated</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="blockPlaceholder"></a>
+                        <b>blockPlaceholder</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:71</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>First Block placeholder</p>
 </div>
                     </td>
                 </tr>
@@ -337,7 +418,7 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:85</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:97</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -364,7 +445,7 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:53</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -391,7 +472,7 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:41</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -423,7 +504,7 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:72</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:84</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -451,7 +532,7 @@ all tools will be included</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:47</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:59</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -478,39 +559,12 @@ all tools will be included</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:65</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Height of Editor&#39;s bottom area that allows to set focus on the last Block</p>
-</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="placeholder"></a>
-                        <b>placeholder</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:59</a></div>
-                            </td>
-                        </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>First Block placeholder</p>
 </div>
                     </td>
                 </tr>
@@ -532,7 +586,7 @@ all tools will be included</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:65</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:77</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -546,12 +600,98 @@ all tools will be included</p>
 </section>
 
 
+            <section>
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="click"></a>
+                    <span class="name">
+                        <b>
+                            click
+                        </b>
+                        <a href="#click"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>click()</code>
+                </td>
+            </tr>
 
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:103</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Host click listener</p>
+</div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
             <section>
     
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createConfig"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            createConfig
+                        </b>
+                        <a href="#createConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createConfig()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="200"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:200</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Create a configuration for EditorJS</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/EditorJSConfig.html" target="_self" >EditorJSConfig</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -576,8 +716,8 @@ all tools will be included</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="107"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:107</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="146"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:146</a></div>
                 </td>
             </tr>
 
@@ -653,8 +793,8 @@ all tools will be included</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="131"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:131</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="181"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:181</a></div>
                 </td>
             </tr>
 
@@ -694,8 +834,8 @@ all tools will be included</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="119"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:119</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:162</a></div>
                 </td>
             </tr>
 
@@ -717,6 +857,7 @@ to be ready</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -731,6 +872,10 @@ to be ready</p>
                                     </td>
 
 
+                                    <td>
+                                        <p>Changes on the component</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -770,8 +915,8 @@ to be ready</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="143"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:143</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="193"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:193</a></div>
                 </td>
             </tr>
 
@@ -789,6 +934,67 @@ to be ready</p>
             </tr>
         </tbody>
     </table>
+</section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="id"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            id</b>
+                            <a href="#id"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="touched$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            touched$</b>
+                            <a href="#touched$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(false)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
 </section>
 
             <section>
@@ -811,7 +1017,7 @@ to be ready</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:92</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:117</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -823,6 +1029,35 @@ to be ready</p>
                                     <b>Returns : </b>    <code>Observable&lt;EditorJS&gt;</code>
 
                                 </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="element"></a>
+                        <span class="name"><b>element</b><a href="#element"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>element()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:124</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get the element for the directive</p>
+</div>
+
                         </td>
                     </tr>
 
@@ -844,7 +1079,7 @@ to be ready</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:99</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:131</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -861,15 +1096,54 @@ to be ready</p>
 
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="touched"></a>
+                        <span class="name"><b>touched</b><a href="#touched"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>touched()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:138</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get the touched state</p>
+</div>
+
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
 </section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterContentInit, Directive, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AfterContentInit,
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+  Renderer2,
+  HostListener
+} from &#x27;@angular/core&#x27;;
 import EditorJS, { SanitizerConfig } from &#x27;@editorjs/editorjs&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
+import { Observable, BehaviorSubject } from &#x27;rxjs&#x27;;
 import { createEditorJSConfig } from &#x27;../config/editor-config&#x27;;
 import { NgxEditorJSService } from &#x27;../services/editorjs.service&#x27;;
 import { Block } from &#x27;../types/blocks&#x27;;
@@ -889,6 +1163,8 @@ import { EditorJSConfig } from &#x27;../types/config&#x27;;
   selector: &#x27;[ngxEditorJS]&#x27;
 })
 export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentInit {
+  private touched$ &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+
   private id: string;
 
   /**
@@ -925,7 +1201,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * First Block placeholder
    */
   @Input()
-  public placeholder: string;
+  public blockPlaceholder: string;
 
   /**
    * Define default sanitizer configuration
@@ -953,6 +1229,19 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   @Input()
   public blocks: Block[] &#x3D; [];
 
+  /**
+   * Host click listener
+   */
+  @HostListener(&#x27;click&#x27;, [&#x27;$event&#x27;])
+  onclick() {
+    this.touched$.next(true);
+  }
+
+  /**
+   * Creates the directive instance
+   * @param el The element the directive is attached to
+   * @param editorService The editor service
+   */
   constructor(private readonly el: ElementRef, private readonly editorService: NgxEditorJSService) {}
 
   /**
@@ -963,6 +1252,13 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   }
 
   /**
+   * Get the element for the directive
+   */
+  public get element() {
+    return this.el.nativeElement;
+  }
+
+  /**
    * Get the &#x60;NgxEditorJSService&#x60; for this directive
    */
   public get service(): NgxEditorJSService {
@@ -970,11 +1266,22 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   }
 
   /**
+   * Get the touched state
+   */
+  public get touched() {
+    return this.touched$.asObservable();
+  }
+
+  /**
    * Creates an &#x60;EditorJS&#x60; instance for this directive
    * @param config Configuration for this instance
    */
   public createEditor(config?: EditorJSConfig): void {
-    this.service.createEditor(config, this.includeTools, this.autosave);
+    this.service.createEditor({
+      config,
+      includeTools: this.includeTools,
+      autoSave: this.autosave
+    });
   }
 
   /**
@@ -983,13 +1290,20 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * If it&#x27;s any other property it means we create a new editor, as this
    * is a destructive process we also need to wait for an existing editor
    * to be ready
-   * @param changes
+   * @param changes Changes on the component
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks &amp;&amp; !changes.blocks.firstChange) {
-      return this.service.update(this.id, changes.blocks.currentValue);
+      return this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
     }
-    if (this.id) {
+    const changesKeys &#x3D; Object.keys(changes);
+    if (
+      this.id &amp;&amp;
+      // Ignore placeholder change
+      [&#x27;autofocus&#x27;, &#x27;holder&#x27;, &#x27;hideToolbar&#x27;, &#x27;initialBlock&#x27;, &#x27;minHeight&#x27;].find(key &#x3D;&gt; {
+        return changesKeys.includes(key);
+      })
+    ) {
       this.createEditor(this.createConfig());
     }
   }
@@ -1010,16 +1324,19 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Destroy the editor and subjects for this service
    */
   ngOnDestroy() {
-    this.service.destroy(this.id);
+    this.service.destroy({ holder: this.id });
   }
 
+  /**
+   * Create a configuration for EditorJS
+   */
   private createConfig(): EditorJSConfig {
     const config: EditorJSConfig &#x3D; createEditorJSConfig({
       holder: this.id,
       autofocus: this.autofocus,
       hideToolbar: this.hideToolbar,
       initialBlock: this.initialBlock,
-      placeholder: this.placeholder,
+      placeholder: this.blockPlaceholder,
       minHeight: this.minHeight,
       sanitizer: this.sanitizer
     });

@@ -62,7 +62,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts</code>
+    <code>libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts</code>
 </p>
 
     <p class="comment">
@@ -75,6 +75,12 @@ will be created</p>
 
     </p>
 
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+    </p>
 
 
     <p class="comment">
@@ -150,10 +156,52 @@ will be created</p>
                                     <span class="modifier">Readonly</span>
                                 <a href="#service">service</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#_value">_value</a>
+                            </li>
+                            <li>
+                                <a href="#onChange">onChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#onDestroy$">onDestroy$</a>
+                            </li>
+                            <li>
+                                <a href="#onTouch">onTouch</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getChanged">getChanged</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#registerOnChange">registerOnChange</a>
+                            </li>
+                            <li>
+                                <a href="#registerOnTouched">registerOnTouched</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#writeValue">writeValue</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -168,6 +216,9 @@ will be created</p>
                             </li>
                             <li>
                                 <a href="#autosave">autosave</a>
+                            </li>
+                            <li>
+                                <a href="#blockPlaceholder">blockPlaceholder</a>
                             </li>
                             <li>
                                 <a href="#blocks">blocks</a>
@@ -186,9 +237,6 @@ will be created</p>
                             </li>
                             <li>
                                 <a href="#minHeight">minHeight</a>
-                            </li>
-                            <li>
-                                <a href="#placeholder">placeholder</a>
                             </li>
                             <li>
                                 <a href="#sanitizer">sanitizer</a>
@@ -215,14 +263,13 @@ will be created</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:86</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:24</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>When created an instance of the service is available as
-a public interface</p>
+                            <div class="io-description"><p>Constructs the Editor component</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -248,7 +295,7 @@ a public interface</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>The editor service</p>
+                                                                <code><p>The NgxEditorJSService instance</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -277,9 +324,16 @@ a public interface</p>
 
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:30</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:34</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
@@ -300,19 +354,60 @@ a public interface</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:80</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:84</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>If set, when the <code>EditorJS</code> save is called the <code>Observable</code> of blocks will be updated,
 if set to <code>false</code> on the change <code>Observable</code> will be updated</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="blockPlaceholder"></a>
+                        <b>blockPlaceholder</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:64</a></code>
+</div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>First Block placeholder</p>
 </div>
                     </td>
                 </tr>
@@ -332,9 +427,16 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
 
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:86</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:90</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
@@ -359,9 +461,16 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
 
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:36</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:40</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
@@ -386,9 +495,16 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
 
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:42</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:46</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
@@ -418,9 +534,16 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                         <i>Default value : </i><code>[]</code>
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:73</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:77</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
@@ -446,9 +569,16 @@ all tools will be included</p>
 
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:48</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:52</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
@@ -473,41 +603,21 @@ all tools will be included</p>
 
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:54</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:58</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Height of Editor&#39;s bottom area that allows to set focus on the last Block</p>
-</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="placeholder"></a>
-                        <b>placeholder</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:60</a></div>
-                            </td>
-                        </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>First Block placeholder</p>
 </div>
                     </td>
                 </tr>
@@ -527,9 +637,16 @@ all tools will be included</p>
 
                     </td>
                 </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:66</a></div>
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:70</a></code>
+</div>
                             </td>
                         </tr>
                 <tr>
@@ -544,7 +661,342 @@ all tools will be included</p>
 
 
 
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getChanged"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getChanged
+                        </b>
+                        <a href="#getChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getChanged()</code>
+                </td>
+            </tr>
 
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:151</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Get the changed status for the <code>EditorJS</code> instance</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;number&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:136</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOnChange"></a>
+                    <span class="name">
+                        <b>
+                            registerOnChange
+                        </b>
+                        <a href="#registerOnChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registerOnChange(fn: (blocks: <a href="../interfaces/Block.html">Block[]</a>) => void)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:125</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Register on Change for forms</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fn</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOnTouched"></a>
+                    <span class="name">
+                        <b>
+                            registerOnTouched
+                        </b>
+                        <a href="#registerOnTouched"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registerOnTouched(fn: (event: MouseEvent) => void)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:132</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>registerOnTouched for forms</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fn</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="writeValue"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            writeValue
+                        </b>
+                        <a href="#writeValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>writeValue(blocks: <a href="../interfaces/Block.html">Block[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:118</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Form Write Values</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>blocks</td>
+                                    <td>
+                                                <code><a href="../interfaces/Block.html" target="_self" >Block[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
     <section>
     
         <h3 id="inputs">
@@ -580,7 +1032,7 @@ all tools will be included</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -615,13 +1067,172 @@ all tools will be included</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-component/editorjs.component.ts:93</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:30</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description">The editor service</div>
+                        <div class="io-description">The NgxEditorJSService instance</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_value"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            _value</b>
+                            <a href="#_value"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:102</a></code>
+</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Form field value if used as a field component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onChange"></a>
+                        <span class="name">
+                            <b>
+                            onChange</b>
+                            <a href="#onChange"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:112</a></code>
+</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Field onChange method</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onDestroy$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            onDestroy$</b>
+                            <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:29</a></code>
+</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Private destroy subject</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onTouch"></a>
+                        <span class="name">
+                            <b>
+                            onTouch</b>
+                            <a href="#onTouch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:107</a></code>
+</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Field on touch method</p>
+</div>
                     </td>
                 </tr>
 
@@ -633,11 +1244,11 @@ all tools will be included</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, ViewChild } from &#x27;@angular/core&#x27;;
-import { SanitizerConfig } from &#x27;@editorjs/editorjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild } from &#x27;@angular/core&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
 import { NgxEditorJSDirective } from &#x27;../../directives/ngx-editorjs.directive&#x27;;
 import { NgxEditorJSService } from &#x27;../../services/editorjs.service&#x27;;
-import { Block } from &#x27;../../types/blocks&#x27;;
+import { EditorJSBaseComponent } from &#x27;../base/container.class&#x27;;
 
 /**
  * This component is provided as a shortcut to using EditorJS in your
@@ -652,96 +1263,35 @@ import { Block } from &#x27;../../types/blocks&#x27;;
   templateUrl: &#x27;editorjs.component.html&#x27;,
   styleUrls: [&#x27;editorjs.component.scss&#x27;]
 })
-export class NgxEditorJSComponent {
+export class NgxEditorJSComponent extends EditorJSBaseComponent {
   /**
    * Access to the underlying editor directive
    */
   @ViewChild(NgxEditorJSDirective) public editor: NgxEditorJSDirective;
 
   /**
-   * Sets if the &#x60;EditorJS&#x60; component will request autofocus in the browser
+   * Constructs the Editor component
+   * @param service The NgxEditorJSService instance
    */
-  @Input()
-  public autofocus: boolean;
-
-  /**
-   * Sets if the toolbar will be shown in &#x60;EditorJS&#x60;
-   */
-  @Input()
-  public hideToolbar: boolean;
-
-  /**
-   * The ID of the dom element that will hold the editor
-   */
-  @Input()
-  public holder: string;
-
-  /**
-   * The name of the initial block (default &quot;paragraph&quot;)
-   */
-  @Input()
-  public initialBlock?: string;
-
-  /**
-   * Height of Editor&#x27;s bottom area that allows to set focus on the last Block
-   */
-  @Input()
-  public minHeight?: number;
-
-  /**
-   * First Block placeholder
-   */
-  @Input()
-  public placeholder?: string;
-
-  /**
-   * Define default sanitizer configuration
-   */
-  @Input()
-  public sanitizer?: SanitizerConfig;
-
-  /**
-   * A string array of tools that will be included in this instance, if empty
-   * all tools will be included
-   */
-  @Input()
-  public includeTools: string[] &#x3D; [];
-
-  /**
-   * If set, when the &#x60;EditorJS&#x60; save is called the &#x60;Observable&#x60; of blocks will be updated,
-   * if set to &#x60;false&#x60; on the change &#x60;Observable&#x60; will be updated
-   */
-  @Input()
-  public autosave: boolean;
-
-  /**
-   * An initial set of blocks to render in the component
-   */
-  @Input()
-  public blocks: Block[];
-
-  /**
-   * When created an instance of the service is available as
-   * a public interface
-   * @param service The editor service
-   */
-  constructor(public readonly service: NgxEditorJSService) {}
+  constructor(public readonly service: NgxEditorJSService) {
+    super(service);
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div
+  [id]&#x3D;&quot;holder&quot;
   class&#x3D;&quot;editor&quot;
   ngxEditorJS
-  [id]&#x3D;&quot;holder&quot;
   [holder]&#x3D;&quot;holder&quot;
   [autofocus]&#x3D;&quot;autofocus&quot;
   [autosave]&#x3D;&quot;autosave&quot;
   [hideToolbar]&#x3D;&quot;hideToolbar&quot;
   [initialBlock]&#x3D;&quot;initialBlock&quot;
   [minHeight]&#x3D;&quot;minHeight&quot;
-  [placeholder]&#x3D;&quot;placeholder&quot;
+  [blockPlaceholder]&#x3D;&quot;blockPlaceholder&quot;
   [sanitizer]&#x3D;&quot;sanitizer&quot;
   [blocks]&#x3D;&quot;blocks&quot;
 &gt;&lt;/div&gt;
@@ -797,8 +1347,8 @@ export class NgxEditorJSComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div  class="editor"  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [placeholder]="placeholder"  [sanitizer]="sanitizer"  [blocks]="blocks"></div></div>'
-    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+        var COMPONENT_TEMPLATE = '<div><div  [id]="holder"  class="editor"  ngxEditorJS  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"></div></div>'
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'EditorJSBaseComponent', 'selector': ''},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NgxEditorJSComponent'};
 </script>

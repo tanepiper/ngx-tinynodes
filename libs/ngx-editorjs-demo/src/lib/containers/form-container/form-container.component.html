@@ -11,24 +11,51 @@
 
     <mat-card-actions>
       <h3 mat-card-title>Demo</h3>
-      <button mat-raised-button (click)="save()">Save</button>
-      <button mat-raised-button (click)="clear()">Clear</button>
-      <!-- <button mat-raised-button *ngIf="(blocks | async); let b" (click)="reset(b)">Reset</button> -->
+      <button mat-raised-button color="primary" (click)="save()">Save</button>
+      <button mat-raised-button color="primary" (click)="clear()">Clear</button>
+      <button mat-raised-button color="primary" *ngIf="(autosave | async) === 0" (click)="enableAutosave(autosaveTime.value * 1000)">
+        Enable Autosave
+      </button>
+      <button mat-raised-button color="secondary" *ngIf="(autosave | async) > 0" (click)="disableAutosave()">Disable Autosave</button>
+      <mat-icon
+        [matBadgeHidden]="isSaved | async"
+        matBadge="1"
+        [matBadgeColor]="isSaved ? 'accent' : 'warn'"
+        matBadgePosition="above before"
+        >save</mat-icon
+      >
+      <mat-form-field>
+        <mat-label>Autosave Time</mat-label>
+        <input matInput #autosaveTime type="number" id="autosaveTime" placeholder="Enter a value for the autosave" value="10" />
+        <span matSuffix>seconds</span>
+        <mat-hint *ngIf="(autosave | async) > 0">
+          EditorJS Autosave is enabled, now when you focus on the component the reactive form value will be updated - You still need to call
+          save to save all the form data.</mat-hint
+        >
+      </mat-form-field>
     </mat-card-actions>
     <mat-card-content class="form-content">
       <form [formGroup]="editorForm">
         <mat-form-field>
-          <input matInput formControlName="pageName" type="text" placeholder="Enter a Page Name" />
+          <mat-label>Page Name</mat-label>
+          <input matInput id="pageName" formControlName="pageName" type="text" placeholder="Enter a Page Name" />
+          <mat-hint>Enter the name for this page</mat-hint>
         </mat-form-field>
         <mat-form-field class="page-tags-list">
+          <mat-label>Page Tags</mat-label>
           <ngx-editorjs-tag-component formControlName="pageTags" placeholder="Enter some page tags..."></ngx-editorjs-tag-component>
+          <mat-hint>Press <code>Enter</code> or <code>, (comma)</code> to add tags</mat-hint>
         </mat-form-field>
         <mat-form-field>
+          <mat-label>Content Editor for {{ editorForm.value.pageName || 'Page Name' }}</mat-label>
+          <mat-hint>Click on the editor to active it</mat-hint>
           <ngx-editorjs-mat-field
             [id]="holder"
             [holder]="holder"
             formCotrolName="pageEditor"
             [blocks]="blocks | async"
+            [autosave]="autosave | async"
+            (isSaved)="setIsSaved($event)"
             placeholder="EditorJS for {{ editorForm.value.pageName || 'Page Name' }}"
           ></ngx-editorjs-mat-field>
         </mat-form-field>

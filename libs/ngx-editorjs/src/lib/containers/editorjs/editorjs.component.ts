@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
-import { EditorJSContainerComponent } from '../base/container.class';
-import { Observable } from 'rxjs';
+import { EditorJSBaseComponent } from '../base/container.class';
 
 /**
  * This component is provided as a shortcut to using EditorJS in your
@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
   templateUrl: 'editorjs.component.html',
   styleUrls: ['editorjs.component.scss']
 })
-export class NgxEditorJSComponent extends EditorJSContainerComponent {
+export class NgxEditorJSComponent extends EditorJSBaseComponent {
   /**
    * Access to the underlying editor directive
    */
@@ -29,13 +29,5 @@ export class NgxEditorJSComponent extends EditorJSContainerComponent {
    */
   constructor(public readonly service: NgxEditorJSService) {
     super(service);
-  }
-
-  public get isReady(): Observable<boolean> {
-    return this.service.isReady(this.holder);
-  }
-
-  public hasChanged(): Observable<number> {
-    return this.service.hasChanged(this.holder);
   }
 }

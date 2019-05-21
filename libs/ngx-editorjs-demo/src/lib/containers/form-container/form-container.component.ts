@@ -1,6 +1,5 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
 import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
 import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
@@ -9,7 +8,6 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
-import { MatChipInputEvent } from '@angular/material';
 
 /**
  * The Page Container component provides the main routable page for loading
@@ -66,11 +64,59 @@ export class FormContainerComponent implements AfterContentInit {
   }
 
   /**
+   * Autosave state
+   */
+  private autoSave$ = new BehaviorSubject<number>(0);
+
+  /**
+   * Is saved state
+   */
+  private isSaved$ = new BehaviorSubject<boolean>(true);
+
+  /**
+   * Get `isSaved` state
+   */
+  public get isSaved(): Observable<boolean> {
+    return this.isSaved$.asObservable();
+  }
+
+  /**
+   * Set the current saved state
+   * @param isSaved The current saved state
+   */
+  public setIsSaved(isSaved: boolean) {
+    this.isSaved$.next(isSaved);
+  }
+
+  /**
+   * Enable autosave, set the value from the autosaveTime
+   * @param autosaveTime Time to set for autosave
+   */
+  public enableAutosave(autosaveTime: number) {
+    this.autoSave$.next(autosaveTime);
+  }
+
+  /**
+   * Disable autosave
+   */
+  public disableAutosave() {
+    this.autoSave$.next(0);
+  }
+
+  /**
+   * Get the current autosave value
+   */
+  public get autosave() {
+    return this.autoSave$.asObservable();
+  }
+
+  /**
    * The constructor sets up the blocks to the initial demo data
    * @param pagesService The pages service
    * @param app The application service
    * @param editor The Editor service
    * @param cd The change detection ref
+   * @param fb The form builder
    */
   constructor(
     private readonly pagesService: PagesService,
@@ -89,13 +135,17 @@ export class FormContainerComponent implements AfterContentInit {
         this.editorForm.patchValue({
           pageEditor: blocks
         });
+        this.cd.markForCheck();
       });
   }
 
+  /**
+   * Editor form group
+   */
   public editorForm = this.fb.group({
     pageName: [''],
-    pageTags: new FormControl(),
-    pageEditor: new FormControl()
+    pageTags: new FormControl([]),
+    pageEditor: new FormControl([])
   });
 
   /**
@@ -112,6 +162,9 @@ export class FormContainerComponent implements AfterContentInit {
     return this.pagesService.pages;
   }
 
+  /**
+   * Get the blocks for the container
+   */
   get blocks(): Observable<Block[]> {
     return this.blocks$;
   }
@@ -121,6 +174,8 @@ export class FormContainerComponent implements AfterContentInit {
    */
   public save() {
     this.editor.save({ holder: this.holder });
+    this.setIsSaved(true);
+    this.cd.markForCheck();
   }
 
   /**
@@ -128,6 +183,8 @@ export class FormContainerComponent implements AfterContentInit {
    */
   public clear() {
     this.editor.clear({ holder: this.holder });
+    this.setIsSaved(true);
+    this.cd.markForCheck();
   }
 
   /**
@@ -179,6 +236,8 @@ export class FormContainerComponent implements AfterContentInit {
         ];
         this.menu$.next(data.links);
         this.editor.update({ holder: this.holder, blocks });
+        this.setIsSaved(true);
+        this.cd.markForCheck();
       });
   }
 

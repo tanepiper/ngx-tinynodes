@@ -1,16 +1,28 @@
-import { Injectable, Input, Component, OnDestroy } from '@angular/core';
+import { Injectable, Input, Component, OnDestroy, forwardRef } from '@angular/core';
 import { SanitizerConfig } from '@editorjs/editorjs';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+
+/**
+ * This provides the Control Value Accessor for the form component
+ */
+export const EDITORJS_FORM_VALUE_ACCESSOR: Provider = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => EditorJSBaseComponent),
+  multi: true
+};
 
 /**
  * A base EditorJS component, can be used to create other extended components
  */
 @Component({
-  template: ''
+  template: '',
+  providers: [EDITORJS_FORM_VALUE_ACCESSOR]
 })
-export class EditorJSContainerComponent implements OnDestroy {
+export class EditorJSBaseComponent implements OnDestroy, ControlValueAccessor {
   /**
    * Private destroy subject
    */
@@ -49,7 +61,7 @@ export class EditorJSContainerComponent implements OnDestroy {
    * First Block placeholder
    */
   @Input()
-  public placeholder?: string;
+  public blockPlaceholder?: string;
 
   /**
    * Define default sanitizer configuration
@@ -69,7 +81,7 @@ export class EditorJSContainerComponent implements OnDestroy {
    * if set to `false` on the change `Observable` will be updated
    */
   @Input()
-  public autosave: boolean;
+  public autosave: number;
 
   /**
    * An initial set of blocks to render in the component
@@ -82,10 +94,61 @@ export class EditorJSContainerComponent implements OnDestroy {
    * a public interface
    * @param service The editor service
    */
-  constructor(public readonly service: NgxEditorJSService) {}
+  constructor(protected readonly service: NgxEditorJSService) {}
+
+  /**
+   * Form field value if used as a field component
+   */
+  protected _value: any;
+
+  /**
+   * Field on touch method
+   */
+  onTouch = (event?: MouseEvent) => {};
+
+  /**
+   * Field onChange method
+   */
+  onChange = (blocks: Block[]) => {};
+
+  /**
+   * Form Write Values
+   * @param blocks
+   */
+  public writeValue(blocks: Block[]) {
+    this._value = blocks;
+  }
+
+  /**
+   * Register on Change for forms
+   */
+  registerOnChange(fn: (blocks: Block[]) => void) {
+    this.onChange = fn;
+  }
+
+  /**
+   * registerOnTouched for forms
+   */
+  registerOnTouched(fn: (event?: MouseEvent) => void) {
+    this.onTouch = fn;
+  }
 
   ngOnDestroy() {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  /**
+   * Get the ready status for the `EditorJS` instance
+   */
+  public get isReady(): Observable<boolean> {
+    return this.service.isReady(this.holder);
+  }
+
+  /**
+   * Get the changed status for the `EditorJS` instance
+   */
+  public getChanged(): Observable<number> {
+    return this.service.getChanged(this.holder);
   }
 }

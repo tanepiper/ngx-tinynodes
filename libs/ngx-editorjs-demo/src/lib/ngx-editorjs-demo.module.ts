@@ -8,7 +8,9 @@ import {
   MatExpansionModule,
   MatInputModule,
   MatFormFieldModule,
-  MatChipsModule
+  MatChipsModule,
+  MatBadgeModule,
+  MatIconModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
@@ -55,7 +57,9 @@ import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.comp
     MatExpansionModule,
     MatInputModule,
     MatFormFieldModule,
-    MatChipsModule
+    MatChipsModule,
+    MatBadgeModule,
+    MatIconModule
   ],
   providers: [
     {

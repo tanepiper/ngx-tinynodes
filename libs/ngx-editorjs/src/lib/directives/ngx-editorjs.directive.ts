@@ -68,7 +68,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * First Block placeholder
    */
   @Input()
-  public placeholder: string;
+  public blockPlaceholder: string;
 
   /**
    * Define default sanitizer configuration
@@ -96,11 +96,19 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   @Input()
   public blocks: Block[] = [];
 
+  /**
+   * Host click listener
+   */
   @HostListener('click', ['$event'])
   onclick() {
     this.touched$.next(true);
   }
 
+  /**
+   * Creates the directive instance
+   * @param el The element the directive is attached to
+   * @param editorService The editor service
+   */
   constructor(private readonly el: ElementRef, private readonly editorService: NgxEditorJSService) {}
 
   /**
@@ -110,6 +118,9 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     return this.service.getEditor(this.id);
   }
 
+  /**
+   * Get the element for the directive
+   */
   public get element() {
     return this.el.nativeElement;
   }
@@ -121,6 +132,9 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     return this.editorService;
   }
 
+  /**
+   * Get the touched state
+   */
   public get touched() {
     return this.touched$.asObservable();
   }
@@ -143,7 +157,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * If it's any other property it means we create a new editor, as this
    * is a destructive process we also need to wait for an existing editor
    * to be ready
-   * @param changes
+   * @param changes Changes on the component
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
@@ -180,13 +194,16 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     this.service.destroy({ holder: this.id });
   }
 
+  /**
+   * Create a configuration for EditorJS
+   */
   private createConfig(): EditorJSConfig {
     const config: EditorJSConfig = createEditorJSConfig({
       holder: this.id,
       autofocus: this.autofocus,
       hideToolbar: this.hideToolbar,
       initialBlock: this.initialBlock,
-      placeholder: this.placeholder,
+      placeholder: this.blockPlaceholder,
       minHeight: this.minHeight,
       sanitizer: this.sanitizer
     });

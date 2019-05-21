@@ -57,7 +57,7 @@ describe('NgxEditorJSService', () => {
 
   it('should create an instance of EditorJS', () => {
     const holder = 'test-editor';
-    service.createEditor({ holder });
+    service.createEditor({ config: { holder } });
     const editor = service.getEditor(holder);
     expect(editor).toBeDefined();
   });
@@ -77,14 +77,14 @@ describe('NgxEditorJSService', () => {
         done();
       });
 
-    service.createEditor({ holder });
+    service.createEditor({ config: { holder } });
   });
 
   it('should trigger a change on update', done => {
     const holder = 'test-editor';
 
     service
-      .hasChanged(holder)
+      .getChanged(holder)
       .pipe(
         distinctUntilChanged(),
         filter(hasChanged => hasChanged !== 0),
@@ -95,15 +95,15 @@ describe('NgxEditorJSService', () => {
         done();
       });
 
-    service.createEditor({ holder });
-    service.update(holder, [{ type: 'test', data: { text: 'Test' } }]);
+    service.createEditor({ config: { holder } });
+    service.update({ holder: holder, blocks: [{ type: 'test', data: { text: 'Test' } }] });
   });
 
   it('should trigger a change on save', done => {
     const holder = 'test-editor';
 
     service
-      .hasChanged(holder)
+      .getChanged(holder)
       .pipe(
         distinctUntilChanged(),
         filter(hasChanged => hasChanged !== 0),
@@ -114,7 +114,7 @@ describe('NgxEditorJSService', () => {
         done();
       });
 
-    service.createEditor({ holder });
-    service.save(holder);
+    service.createEditor({ config: { holder } });
+    service.save({ holder });
   });
 });

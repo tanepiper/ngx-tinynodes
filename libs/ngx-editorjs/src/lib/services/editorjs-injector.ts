@@ -118,14 +118,15 @@ export class NgxEditorJSInstanceService {
     });
   }
 
-  private onChange(holder: string): void {
+  public onChange(holder: string): void {
+    const d = Date.now();
     if (!this.changeMap[holder]) {
-      this.changeMap[holder] = new BehaviorSubject<number>(Date.now());
+      this.changeMap[holder] = new BehaviorSubject<number>(d);
     }
-    this.changeMap[holder].next(Date.now());
+    this.changeMap[holder].next(d);
   }
 
-  private onReady(holder: string) {
+  public onReady(holder: string) {
     if (!this.readyMap[holder]) {
       this.readyMap[holder] = new BehaviorSubject<boolean>(false);
     }
