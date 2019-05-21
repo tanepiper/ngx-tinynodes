@@ -7,3 +7,8 @@ export { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG, EDITIOR_JS_INST
 export { BasePlugin, UserPlugins, PluginConfig } from './lib/types/plugins';
 export { createEditorJSConfig } from './lib/config/editor-config';
 export { EditorJSContainerComponent } from './lib/containers/base/container.class';
+export { EditorJSFormField, EDITORJS_FORM_VALUE_ACCESSOR } from './lib/containers/base/form-field.class';
+export {
+  NgxEditorJSMatFieldComponent,
+  EDITORJS_MATERIAL_FIELD_CONTROL
+} from './lib/containers/editorjs-mat-field/editorjs-mat-field.component';

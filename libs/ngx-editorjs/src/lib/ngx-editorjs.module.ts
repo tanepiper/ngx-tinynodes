@@ -1,18 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import EditorJS from '@editorjs/editorjs';
 import { createModuleConfig } from './config/module-config';
+import { EditorJSContainerComponent } from './containers/base/container.class';
+import { EditorJSFormField } from './containers/base/form-field.class';
+import { NgxEditorJSMatFieldComponent } from './containers/editorjs-mat-field/editorjs-mat-field.component';
 import { NgxEditorJSComponent } from './containers/editorjs/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
+import { EditorJSInstance, EDITORJS_MODULE_IMPORT, NgxEditorJSInstanceService } from './services/editorjs-injector';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
-import { EditorJSContainerComponent } from './containers/base/container.class';
-import { NgxEditorJSFormComponent } from './containers/editorjs-form/editorjs-form.component';
-import { EDITORJS_MODULE_IMPORT, NgxEditorJSInstanceService, EditorJSInstance } from './services/editorjs-injector';
-import EditorJS from '@editorjs/editorjs';
-import { MatInputModule, MatFormFieldModule } from '@angular/material';
 
+/**
+ * Factory function to return the EditorJS base class
+ */
 export function createEditorJSInstance(editorjs: any) {
   return editorjs;
 }
@@ -27,8 +31,14 @@ export function createEditorJSInstance(editorjs: any) {
  */
 @NgModule({
   imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule],
-  declarations: [NgxEditorJSComponent, NgxEditorJSFormComponent, NgxEditorJSDirective, EditorJSContainerComponent],
-  exports: [NgxEditorJSComponent, NgxEditorJSFormComponent, NgxEditorJSDirective, EditorJSContainerComponent],
+  declarations: [
+    NgxEditorJSComponent,
+    NgxEditorJSMatFieldComponent,
+    NgxEditorJSDirective,
+    EditorJSContainerComponent,
+    EditorJSFormField
+  ],
+  exports: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective, EditorJSContainerComponent],
   providers: [
     NgxEditorJSService,
     NgxEditorJSPluginService,

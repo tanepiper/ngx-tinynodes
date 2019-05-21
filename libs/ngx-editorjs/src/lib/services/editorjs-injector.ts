@@ -45,6 +45,12 @@ export const EditorJSInstance = new InjectionToken<any>('EditorJSInstance');
   providedIn: 'root'
 })
 export class NgxEditorJSInstanceService {
+  static nextIdValue = 0;
+
+  get idValue() {
+    NgxEditorJSInstanceService.nextIdValue++;
+    return NgxEditorJSInstanceService.nextIdValue;
+  }
   /**
    * Internal destroy method for the service
    */

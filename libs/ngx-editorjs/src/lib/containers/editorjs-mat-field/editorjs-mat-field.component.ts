@@ -14,28 +14,28 @@ import {
   Self,
   ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
-import { EditorJSContainerComponent } from '../base/container.class';
+import { EditorJSFormField } from '../base/form-field.class';
 
 /**
- * This provides the Control Value Accessor for the form component
+ * Provider for Material field support
  */
-export const EDITORJS_FORM_VALUE_ACCESSOR: Provider = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NgxEditorJSFormComponent),
+export const EDITORJS_MATERIAL_FIELD_CONTROL: Provider = {
+  provide: MatFormFieldControl,
+  useExisting: forwardRef(() => NgxEditorJSMatFieldComponent),
   multi: true
 };
 
-export const EDITORJS_MATERIAL_FIELD_CONTROL: Provider = {
-  provide: MatFormFieldControl,
-  useExisting: forwardRef(() => NgxEditorJSFormComponent)
-};
+/**
+ * Interface for the component
+ */
+export interface EditorJSMaterialForm extends OnInit, AfterContentInit, OnDestroy, DoCheck, MatFormFieldControl<any> {}
 
 /**
  * This component is provided as a shortcut to using EditorJS in your
@@ -43,20 +43,22 @@ export const EDITORJS_MATERIAL_FIELD_CONTROL: Provider = {
  * will be created
  *
  * @example
- * <ngx-editorjs holder="my-editor"></ngx-editorjs>
+ * <ngx-editorjs-mat-field holder="my-editor"></ngx-editorjs>
  */
 @Component({
-  selector: 'ngx-editorjs-form',
-  templateUrl: 'editorjs-form.component.html',
-  styleUrls: ['editorjs-form.component.scss'],
+  selector: 'ngx-editorjs-mat-field',
+  templateUrl: 'editorjs-mat-field.component.html',
+  styleUrls: ['editorjs-mat-field.component.scss'],
   host: {
     '[id]': 'id',
     '[attr.aria-describedby]': 'describedBy'
   },
-  providers: [EDITORJS_FORM_VALUE_ACCESSOR, EDITORJS_MATERIAL_FIELD_CONTROL]
+  providers: [EDITORJS_MATERIAL_FIELD_CONTROL]
 })
-export class NgxEditorJSFormComponent extends EditorJSContainerComponent
-  implements ControlValueAccessor, OnInit, AfterContentInit, OnDestroy, DoCheck, MatFormFieldControl<any> {
+export class NgxEditorJSMatFieldComponent extends EditorJSFormField implements EditorJSMaterialForm {
+  /**
+   * Internal Static ID for Material
+   */
   static nextId = 0;
   /**
    * Material Form Control state changes
@@ -73,85 +75,137 @@ export class NgxEditorJSFormComponent extends EditorJSContainerComponent
    */
   public errorState = false;
 
-  private _value: Block[];
-
+  /**
+   * Get the value of the material field
+   */
   get value() {
-    return this.value;
+    return this._value;
   }
 
+  /**
+   * Set the value of the material field
+   */
+  @Input('value')
   set value(blocks: Block[]) {
-    console.log(blocks);
     this._value = blocks;
-    this.service.update({
-      holder: this.holder,
-      blocks
-    });
-    this.onChange(blocks);
     this.stateChanges.next();
   }
 
-  @Input()
+  /**
+   * Placeholder value
+   */
+  private _placeholder: string;
+
+  /**
+   * Get the Placeholder value
+   */
   get placeholder() {
     return this._placeholder;
   }
+  /**
+   * Set the Placeholder value
+   */
+  @Input('placeholder')
   set placeholder(plh) {
     this._placeholder = plh;
     this.stateChanges.next();
   }
-  private _placeholder: string;
 
-  @Input()
+  /**
+   * Set the focused state of the element
+   */
+
+  private _focused: boolean;
   get focused() {
     return this._focused;
   }
+  @Input('focused')
   set focused(focused: boolean) {
-    console.log(focused);
-    this._focused = focused;
+    this._focused = coerceBooleanProperty(focused);
+    if (this._focused) {
+      this.onTouch();
+    }
+    this.stateChanges.next();
   }
-  private _focused: boolean;
 
-  @Input()
+  /**
+   * Material Required Value
+   */
+  private _required = false;
   get required() {
     return this._required;
   }
-  set required(req) {
-    this._required = coerceBooleanProperty(req);
+  @Input('required')
+  set required(required: boolean) {
+    this._required = coerceBooleanProperty(required);
     this.stateChanges.next();
   }
-  private _required = false;
 
-  @Input()
+  /**
+   * Disabled state of the matertial component
+   */
+  private _disabled = false;
   get disabled() {
     return this._disabled;
   }
-  set disabled(dis) {
-    this._disabled = coerceBooleanProperty(dis);
+  @Input('disabled')
+  set disabled(disabled: boolean) {
+    this._disabled = coerceBooleanProperty(disabled);
     this.stateChanges.next();
   }
-  private _disabled = false;
-  /**
-   * Private destroy subject
-   */
-  private onDestroy$ = new Subject<boolean>();
+
   /**
    * Access to the underlying editor directive
    */
   @ViewChild(NgxEditorJSDirective) public editor: NgxEditorJSDirective;
 
-  @HostBinding() id = `ngx-editorjs-form-${NgxEditorJSFormComponent.nextId++}`;
+  /**
+   * Host binding to the unique ID for this editor for material
+   */
+  @HostBinding()
+  id = `ngx-editorjs-mat-field-${NgxEditorJSMatFieldComponent.nextId++}`;
 
+  /**
+   * Gets if the Material label should float
+   */
   @HostBinding('class.floating')
   get shouldLabelFloat() {
     return this.focused || !this.empty;
   }
 
+  /**
+   * Host binding for ARIA label
+   */
   @HostBinding('attr.aria-describedby') describedBy = '';
-  setDescribedByIds(ids: string[]) {
+
+  /**
+   *
+   * @param ids The IDs of the Material components
+   */
+  public setDescribedByIds(ids: string[]) {
     this.describedBy = ids.join(' ');
   }
 
-  get empty() {
-    return this.editor.blocks && this.editor.blocks.length === 0;
+  /**
+   * Returns if the editor has
+   */
+  public get empty() {
+    let empty = true;
+    this.service
+      .getBlocks(this.holder)
+      .pipe(
+        take(1),
+        tap(blocks => {
+          if (blocks) {
+            this.writeValue(blocks);
+            this.onChange(blocks);
+            this.stateChanges.next();
+          }
+        }),
+        map(blocks => blocks.length === 0)
+      )
+      .subscribe(e => (empty = e));
+    return empty;
   }
 
   /**
@@ -164,11 +218,6 @@ export class NgxEditorJSFormComponent extends EditorJSContainerComponent
     @Optional() @Self() public ngControl: NgControl
   ) {
     super(service);
-
-    this.service
-      .getBlocks(this.holder)
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(blocks => this.onChange(blocks));
   }
 
   ngOnInit(): void {
@@ -181,7 +230,7 @@ export class NgxEditorJSFormComponent extends EditorJSContainerComponent
     this.editor.touched.subscribe(() => this.onTouch());
 
     this.fm.monitor(this.editor.element, true).subscribe(origin => {
-      this._focused = !!origin;
+      this.focused = !!origin;
       this.stateChanges.next();
     });
   }
@@ -197,27 +246,7 @@ export class NgxEditorJSFormComponent extends EditorJSContainerComponent
     this.onTouch();
   }
 
-  onTouch = () => {};
-
-  onChange = (blocks: Block[]) => {};
-
-  writeValue(blocks: Block[]) {
-    console.log('write value', blocks);
-    this.service.update({ holder: this.holder, blocks });
-  }
-
-  registerOnChange(fn: (blocks: Block[]) => void) {
-    console.log('on change registered');
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void) {
-    this.onTouch = fn;
-  }
-
   ngOnDestroy() {
     this.fm.stopMonitoring(this.editor.element);
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
   }
 }

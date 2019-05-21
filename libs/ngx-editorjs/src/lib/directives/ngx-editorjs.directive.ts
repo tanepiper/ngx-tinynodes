@@ -149,7 +149,14 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     if (changes.blocks && !changes.blocks.firstChange) {
       return this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
     }
-    if (this.id) {
+    const changesKeys = Object.keys(changes);
+    if (
+      this.id &&
+      // Ignore placeholder change
+      ['autofocus', 'holder', 'hideToolbar', 'initialBlock', 'minHeight'].find(key => {
+        return changesKeys.includes(key);
+      })
+    ) {
       this.createEditor(this.createConfig());
     }
   }

@@ -8,7 +8,6 @@ import { PagesService } from '../../store/pages/pages.service';
 import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
 import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { NgxEditorJSFormComponent } from '@tinynodes/ngx-editorjs/src/lib/containers/editorjs-form/editorjs-form.component';
 
 /**
  * The Page Container component provides the main routable page for loading
@@ -109,6 +108,10 @@ export class FormContainerComponent implements AfterContentInit {
     return this.pagesService.pages;
   }
 
+  get blocks(): Observable<Block[]> {
+    return this.blocks$;
+  }
+
   /**
    * Call the editor save method
    */
@@ -141,7 +144,5 @@ export class FormContainerComponent implements AfterContentInit {
    */
   ngAfterContentInit() {
     this.reset();
-
-    this.editorForm.valueChanges.subscribe(changes => console.log('form changes', changes));
   }
 }

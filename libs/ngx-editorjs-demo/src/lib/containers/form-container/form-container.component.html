@@ -70,7 +70,13 @@
           <input matInput formControlName="pageName" type="text" placeholder="Enter a Page Name" />
         </mat-form-field>
         <mat-form-field>
-          <ngx-editorjs-form [id]="holder" [holder]="holder" formCotrolName="pageEditor"></ngx-editorjs-form>
+          <ngx-editorjs-mat-field
+            [id]="holder"
+            [holder]="holder"
+            formCotrolName="pageEditor"
+            [blocks]="blocks | async"
+            placeholder="EditorJS for {{ editorForm.value.pageName || 'Page Name' }}"
+          ></ngx-editorjs-mat-field>
         </mat-form-field>
       </form>
     </mat-card-content>

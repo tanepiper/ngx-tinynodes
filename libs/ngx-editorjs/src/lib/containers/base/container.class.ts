@@ -1,7 +1,8 @@
-import { Injectable, Input, Component } from '@angular/core';
+import { Injectable, Input, Component, OnDestroy } from '@angular/core';
 import { SanitizerConfig } from '@editorjs/editorjs';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
+import { Subject } from 'rxjs';
 
 /**
  * A base EditorJS component, can be used to create other extended components
@@ -9,7 +10,11 @@ import { Block } from '../../types/blocks';
 @Component({
   template: ''
 })
-export class EditorJSContainerComponent {
+export class EditorJSContainerComponent implements OnDestroy {
+  /**
+   * Private destroy subject
+   */
+  private onDestroy$ = new Subject<boolean>();
   /**
    * Sets if the `EditorJS` component will request autofocus in the browser
    */
@@ -78,4 +83,9 @@ export class EditorJSContainerComponent {
    * @param service The editor service
    */
   constructor(public readonly service: NgxEditorJSService) {}
+
+  ngOnDestroy() {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
+  }
 }
