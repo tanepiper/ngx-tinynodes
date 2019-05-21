@@ -7,7 +7,8 @@ import {
   MatGridListModule,
   MatExpansionModule,
   MatInputModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatChipsModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
@@ -29,6 +30,7 @@ import { MaterialModule } from 'apps/ngx-tinynodes/src/app/material.module';
 import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core/src';
 import { FormContainerComponent } from './containers/form-container/form-container.component';
 import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-container.component';
+import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.component';
 
 @NgModule({
   imports: [
@@ -52,7 +54,8 @@ import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-c
     MatGridListModule,
     MatExpansionModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatChipsModule
   ],
   providers: [
     {
@@ -60,7 +63,12 @@ import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-c
       useFactory: createNgxEditorJSDemoTools
     }
   ],
-  declarations: [PageContainerComponent, FormContainerComponent, NgxEditorJSDemoHomeComponent],
+  declarations: [
+    PageContainerComponent,
+    FormContainerComponent,
+    NgxEditorJSDemoHomeComponent,
+    NgxEditorJSDemoTagComponent
+  ],
   exports: [PageStoreModule, PageContainerComponent, FormContainerComponent],
   entryComponents: [PageContainerComponent, FormContainerComponent]
 })

@@ -1,13 +1,15 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
 import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
+import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
+import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, takeUntil, tap, pluck, filter, take } from 'rxjs/operators';
+import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
-import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
-import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material';
 
 /**
  * The Page Container component provides the main routable page for loading
@@ -20,6 +22,10 @@ import { FormBuilder, FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormContainerComponent implements AfterContentInit {
+  /**
+   * Title of the page
+   */
+  public title = 'ngx-editorjs Material Field';
   /**
    * Internal onDestroy$ subject
    */
@@ -88,6 +94,7 @@ export class FormContainerComponent implements AfterContentInit {
 
   public editorForm = this.fb.group({
     pageName: [''],
+    pageTags: new FormControl(),
     pageEditor: new FormControl()
   });
 

@@ -119,7 +119,6 @@ export class NgxEditorJSInstanceService {
   }
 
   private onChange(holder: string): void {
-    console.log('change');
     if (!this.changeMap[holder]) {
       this.changeMap[holder] = new BehaviorSubject<number>(Date.now());
     }

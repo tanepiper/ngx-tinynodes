@@ -164,7 +164,6 @@ export class NgxEditorJSService {
    * @param holder
    */
   public hasChanged(holder: string): Observable<number> {
-    console.log('get has changed', holder);
     return this.editorService.getChanged(holder);
   }
 

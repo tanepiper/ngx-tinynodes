@@ -6,7 +6,7 @@
     </mat-card-header>
 
     <mat-card-content>
-      <ngx-editorjs-demo-info title="ngx-editorjs Material Field" [menu]="menu | async" [body]="infoTemplate"></ngx-editorjs-demo-info>
+      <ngx-editorjs-demo-info [title]="title" [menu]="menu | async" [body]="infoTemplate"></ngx-editorjs-demo-info>
     </mat-card-content>
 
     <mat-card-actions>
@@ -19,6 +19,9 @@
       <form [formGroup]="editorForm">
         <mat-form-field>
           <input matInput formControlName="pageName" type="text" placeholder="Enter a Page Name" />
+        </mat-form-field>
+        <mat-form-field class="page-tags-list">
+          <ngx-editorjs-tag-component formControlName="pageTags" placeholder="Enter some page tags..."></ngx-editorjs-tag-component>
         </mat-form-field>
         <mat-form-field>
           <ngx-editorjs-mat-field
@@ -48,7 +51,7 @@
 
 <ng-template #infoTemplate>
   <p>
-    Below is an instance of an <code>EditorJS</code> Material Field component. Click on the area and the block tool will appear, or you can
+    Below is an instance of an {{ title }} <code>EditorJS</code> component. Click on the area and the block tool will appear, or you can
     just start typing.
   </p>
   <p>
