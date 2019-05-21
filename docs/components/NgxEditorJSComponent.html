@@ -164,10 +164,6 @@ will be created</p>
                                 <a href="#onChange">onChange</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#onDestroy$">onDestroy$</a>
-                            </li>
-                            <li>
                                 <a href="#onTouch">onTouch</a>
                             </li>
                         </ul>
@@ -263,7 +259,7 @@ will be created</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -1032,7 +1028,7 @@ all tools will be included</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -1067,7 +1063,7 @@ all tools will be included</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -1163,46 +1159,6 @@ all tools will be included</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="onDestroy$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            onDestroy$</b>
-                            <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../components/EditorJSBaseComponent.html" target="_self" >EditorJSBaseComponent</a></code>
-</div>
-                                </td>
-                            </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/EditorJSBaseComponent.html#source" target="_self" >EditorJSBaseComponent:29</a></code>
-</div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Private destroy subject</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="onTouch"></a>
                         <span class="name">
                             <b>
@@ -1245,7 +1201,6 @@ all tools will be included</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild } from &#x27;@angular/core&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
 import { NgxEditorJSDirective } from &#x27;../../directives/ngx-editorjs.directive&#x27;;
 import { NgxEditorJSService } from &#x27;../../services/editorjs.service&#x27;;
 import { EditorJSBaseComponent } from &#x27;../base/container.class&#x27;;
@@ -1282,9 +1237,9 @@ export class NgxEditorJSComponent extends EditorJSBaseComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div
-  [id]&#x3D;&quot;holder&quot;
   class&#x3D;&quot;editor&quot;
   ngxEditorJS
+  [id]&#x3D;&quot;holder&quot;
   [holder]&#x3D;&quot;holder&quot;
   [autofocus]&#x3D;&quot;autofocus&quot;
   [autosave]&#x3D;&quot;autosave&quot;
@@ -1347,7 +1302,7 @@ export class NgxEditorJSComponent extends EditorJSBaseComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div  [id]="holder"  class="editor"  ngxEditorJS  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div  class="editor"  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"></div></div>'
     var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'EditorJSBaseComponent', 'selector': ''},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NgxEditorJSComponent'};

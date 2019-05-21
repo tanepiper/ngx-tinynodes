@@ -93,22 +93,22 @@ import {
   AfterContentInit,
   Component,
   DoCheck,
+  EventEmitter,
   forwardRef,
   HostBinding,
   Input,
   OnDestroy,
   OnInit,
   Optional,
+  Output,
   Provider,
   Self,
-  ViewChild,
-  Output,
-  EventEmitter
+  ViewChild
 } from &#x27;@angular/core&#x27;;
 import { NgControl } from &#x27;@angular/forms&#x27;;
 import { MatFormFieldControl } from &#x27;@angular/material&#x27;;
-import { Subject, Subscription, timer, BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
-import { pluck, tap, timeInterval, map } from &#x27;rxjs/operators&#x27;;
+import { Observable, Subject, Subscription, timer } from &#x27;rxjs&#x27;;
+import { map, tap, timeInterval } from &#x27;rxjs/operators&#x27;;
 import { NgxEditorJSDirective } from &#x27;../../directives/ngx-editorjs.directive&#x27;;
 import { NgxEditorJSService } from &#x27;../../services/editorjs.service&#x27;;
 import { EditorJSBaseComponent } from &#x27;../base/container.class&#x27;;
@@ -276,6 +276,35 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
   }
 
   /**
+   * Material empty state
+   */
+  private _empty: boolean;
+  /**
+   * Get the Material empty state
+   */
+  public get empty() {
+    return this._empty;
+  }
+  /**
+   * Set the Material empty state
+   * @param empty The empty value
+   */
+  public set empty(empty: boolean) {
+    this._empty &#x3D; empty;
+  }
+
+  /**
+   * Internal Subscription for the timer subscription
+   */
+  private timerSubscription$: Subscription;
+
+  /**
+   * Get the current saved state
+   */
+  @Output()
+  public isSaved &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  /**
    * Access to the underlying {NgxEditorJSDirective}
    */
   @ViewChild(NgxEditorJSDirective) public editorEl: NgxEditorJSDirective;
@@ -305,24 +334,6 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
    */
   public setDescribedByIds(ids: string[]) {
     this.describedBy &#x3D; ids.join(&#x27; &#x27;);
-  }
-
-  /**
-   * Material empty state
-   */
-  private _empty &#x3D; true;
-  /**
-   * Get the Material empty state
-   */
-  public get empty() {
-    return this._empty;
-  }
-  /**
-   * Set the Material empty state
-   * @param empty The empty value
-   */
-  public set empty(empty: boolean) {
-    this._empty &#x3D; empty;
   }
 
   /**
@@ -375,17 +386,6 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
   }
 
   /**
-   * Internal Subscription for the timer subscription
-   */
-  private timerSubscription$: Subscription;
-
-  /**
-   * Get the current saved state
-   */
-  @Output()
-  public isSaved &#x3D; new EventEmitter&lt;boolean&gt;();
-
-  /**
    * Inside the AfterContentInit life-cycle we set up a listener for focus
    * and trigger focus autosave subscribe and unsubscribe
    */
@@ -396,7 +396,9 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
         if (!this.autosave) {
           this.isSaved.emit(false);
         }
-        this.timerSubscription$ &amp;&amp; this.timerSubscription$.unsubscribe();
+        if (this.timerSubscription$) {
+          this.timerSubscription$.unsubscribe();
+        }
       }
       this.isSaved.emit(false);
       if (this.autosave &gt; 0) {

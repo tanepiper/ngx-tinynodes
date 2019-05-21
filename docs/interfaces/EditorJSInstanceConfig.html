@@ -313,12 +313,12 @@ export class NgxEditorJSInstanceService {
 
   /**
    * Import the &#x60;EditorJS&#x60; class
-   * @param EditorJS The &#x60;EditorJS&#x60; class
+   * @param editorJs The &#x60;EditorJS&#x60; class
    * @param zone Angular zone to run
    * @param ref The application reference to trigger a tick
    */
   constructor(
-    @Inject(EditorJSInstance) private EditorJS: any,
+    @Inject(EditorJSInstance) private editorJs: any,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
   ) {}
@@ -332,10 +332,14 @@ export class NgxEditorJSInstanceService {
     const editorConfig &#x3D; {
       ...config.editorConfig
     };
-    editorConfig.onChange &#x3D; (config.onChange ? config.onChange : this.onChange(editorConfig.holder as string)) as any;
-    editorConfig.onReady &#x3D; (config.onReady ? config.onReady : this.onReady(editorConfig.holder as string)) as any;
+    editorConfig.onChange &#x3D; (config.onChange &amp;&amp; typeof config.onChange &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
+      ? config.onChange
+      : this.onChange.bind(this, editorConfig.holder as string)) as any;
+    editorConfig.onReady &#x3D; (config.onReady &amp;&amp; typeof config.onReady &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
+      ? config.onReady
+      : this.onReady.bind(this, editorConfig.holder as string)) as any;
     return this.zone.runOutsideAngular(() &#x3D;&gt; {
-      const editor &#x3D; new (this.EditorJS as any)(editorConfig);
+      const editor &#x3D; new (this.editorJs as any)(editorConfig);
       const holder &#x3D; editorConfig.holder as string;
       return editor.isReady.then(() &#x3D;&gt; {
         return this.zone.run(() &#x3D;&gt; {
@@ -368,7 +372,9 @@ export class NgxEditorJSInstanceService {
    * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
    */
   public save(holder: string) {
-    this.eventMap[holder].next({ type: &#x27;save&#x27; });
+    if (!this.eventMap[holder]) {
+      this.eventMap[holder].next({ type: &#x27;save&#x27; });
+    }
   }
 
   /**
@@ -588,7 +594,7 @@ export class NgxEditorJSInstanceService {
     this.zone.runOutsideAngular(() &#x3D;&gt; {
       editor.blocks.render({
         time: Date.now(),
-        version: EditorJS.version,
+        version: this.editorJs.version,
         blocks
       });
       this.zone.run(() &#x3D;&gt; {

@@ -143,36 +143,12 @@ the <code>ngx-editorjs-demo</code></p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#autoSave$">autoSave$</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#blocks$">blocks$</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#editorForm">editorForm</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#holder">holder</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#isSaved$">isSaved$</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#menu$">menu$</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#onDestroy$">onDestroy$</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#panelOpen$">panelOpen$</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -846,73 +822,6 @@ the <code>ngx-editorjs-demo</code></p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="autoSave$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            autoSave$</b>
-                            <a href="#autoSave$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;number&gt;(0)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/form-container/form-container.component.ts:69</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Autosave state</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="blocks$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            blocks$</b>
-                            <a href="#blocks$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Block.html" target="_self" >Observable&lt;Block[]&gt;</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/form-container/form-container.component.ts:40</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The blocks on the page</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="editorForm"></a>
                         <span class="name">
                             <b>
@@ -979,138 +888,6 @@ the <code>ngx-editorjs-demo</code></p>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>The holder ID for this demo</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="isSaved$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            isSaved$</b>
-                            <a href="#isSaved$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(true)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/form-container/form-container.component.ts:74</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Is saved state</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="menu$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            menu$</b>
-                            <a href="#menu$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;MenuGroup&gt;(undefined)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/form-container/form-container.component.ts:50</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Links for the page</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="onDestroy$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            onDestroy$</b>
-                            <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/form-container/form-container.component.ts:30</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Internal onDestroy$ subject</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="panelOpen$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            panelOpen$</b>
-                            <a href="#panelOpen$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(true)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/form-container/form-container.component.ts:45</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>If the panel is open or not</p>
 </div>
                     </td>
                 </tr>

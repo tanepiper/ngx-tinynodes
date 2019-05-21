@@ -56,7 +56,7 @@ export interface CreateEditorJSOptions {
   /**
    * Configuration
    */
-  config: EditorJSConfig;
+  config: EditorConfig;
   /**
    * Tools to include, Optional - if not set all tools will be used
    */

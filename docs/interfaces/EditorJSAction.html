@@ -184,9 +184,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable, NgZone } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable } from &#x27;@angular/core&#x27;;
 import EditorJS, { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
-import { Observable, BehaviorSubject, Subject } from &#x27;rxjs&#x27;;
+import { BehaviorSubject, Observable, Subject } from &#x27;rxjs&#x27;;
 import { filter, takeUntil } from &#x27;rxjs/operators&#x27;;
 import { Block } from &#x27;../types/blocks&#x27;;
 import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;../types/config&#x27;;
@@ -242,7 +242,7 @@ export interface CreateEditorJSOptions {
   /**
    * Configuration
    */
-  config: EditorJSConfig;
+  config: EditorConfig;
   /**
    * Tools to include, Optional - if not set all tools will be used
    */
@@ -283,19 +283,22 @@ export class NgxEditorJSService {
     this.editorActions.pipe(takeUntil(this.onDestroy$)).subscribe(editorAction &#x3D;&gt; {
       switch (editorAction.action) {
         case EditorJSActionTypes.CreateEditor: {
-          this.createEditor(editorAction.payload);
+          return this.createEditor(editorAction.payload);
         }
         case EditorJSActionTypes.ClearEditor: {
-          this.clear(editorAction.payload);
+          return this.clear(editorAction.payload);
         }
         case EditorJSActionTypes.DestroyEditor: {
-          this.destroy(editorAction.payload);
+          return this.destroy(editorAction.payload);
         }
         case EditorJSActionTypes.SaveEditor: {
-          this.save(editorAction.payload);
+          return this.save(editorAction.payload);
         }
         case EditorJSActionTypes.UpdateEditor: {
-          this.update(editorAction.payload);
+          return this.update(editorAction.payload);
+        }
+        default: {
+          return;
         }
       }
     });
@@ -353,6 +356,10 @@ export class NgxEditorJSService {
     return this.editorService.getChanged(holder);
   }
 
+  /**
+   * Check to see if the &#x60;EditorJS&#x60; instance has changed
+   * @param holder The ID of the holder of the instance
+   */
   public hasChanged(holder: string) {
     this.editorService.onChange(holder);
   }

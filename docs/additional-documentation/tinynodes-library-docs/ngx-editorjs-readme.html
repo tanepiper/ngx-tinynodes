@@ -49,7 +49,7 @@
 
 
 <h1 id="ngx-editorjs">Ngx-EditorJS</h1>
-<p>This library provides Angular support for <a href="https://editorjs.io">EditorJS</a> via a directive, component and service.</p>
+<p>This library provides Angular support for <a href="https://editorjs.io">EditorJS</a> via a directive, components and service.</p>
 <p>You can see a <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo">demo in action</a> or download it
 <a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs">on GitHub</a> to see how it was implemented.</p>
 <p>For changes see the <a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/CHANGELOG.md">CHANGELOG</a></p>
@@ -114,16 +114,16 @@ export class AppModule {}
 <h3 id="editorjs-config">EditorJS Config</h3>
 <p>The configuration is deigned to be extendable in the future, so each potential feature has a key. For configuring EditorJS pass the options below into a <code>editorjs</code> key in the config.</p>
 <p>The module configuration allows EditorJS to be provided with a set of options for use. See the <a href="https://editorjs.io/configuration">EditorJS docs</a> for more details.</p>
-<p>| Configuration Key | Description                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------- |
-| <code>autofocus</code>       | Sets the EditorJS instance to autofocus on load                                                   |
-| <code>data</code>            | Initial data to load into the editor, this is an <code>OutputData</code> object from EditorJS                |
-| <code>hideToolbar</code>     | Hides the toolbar by default                                                                      |
-| <code>holder</code>          | The element ID of the holder, this will set all instances in this module to use this as a default |
-| <code>initialBlock</code>    | The default block type to use in the editor                                                       |
-| <code>minHeight</code>       | Height of Editor&#39;s bottom area that allows to set focus on the last Block                         |
-| <code>placeholder</code>     | Placeholder of the first block                                                                    |
-| <code>sanitizer</code>       | Content sanitizer configurations                                                                  |</p>
+<p>| Configuration Key  | Description                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------- |
+| <code>autofocus</code>        | Sets the EditorJS instance to autofocus on load                                                   |
+| <code>data</code>             | Initial data to load into the editor, this is an <code>OutputData</code> object from EditorJS                |
+| <code>hideToolbar</code>      | Hides the toolbar by default                                                                      |
+| <code>holder</code>           | The element ID of the holder, this will set all instances in this module to use this as a default |
+| <code>initialBlock</code>     | The default block type to use in the editor                                                       |
+| <code>minHeight</code>        | Height of Editor&#39;s bottom area that allows to set focus on the last Block                         |
+| <code>blockPlaceholder</code> | Placeholder of the first block                                                                    |
+| <code>sanitizer</code>        | Content sanitizer configurations                                                                  |</p>
 <h3 id="adding-custom-tools">Adding custom tools</h3>
 <p>See <a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/docs/adding-custom-tools.md">Adding Custom Tools</a></p>
 <h2 id="whats-in-the-library">What&#39;s in the library</h2>

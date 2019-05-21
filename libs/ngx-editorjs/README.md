@@ -1,6 +1,6 @@
 # Ngx-EditorJS
 
-This library provides Angular support for [EditorJS](https://editorjs.io) via a directive, component and service.
+This library provides Angular support for [EditorJS](https://editorjs.io) via a directive, components and service.
 
 You can see a [demo in action](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo) or download it
 [on GitHub](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs) to see how it was implemented.
@@ -78,16 +78,16 @@ The configuration is deigned to be extendable in the future, so each potential f
 
 The module configuration allows EditorJS to be provided with a set of options for use. See the [EditorJS docs](https://editorjs.io/configuration) for more details.
 
-| Configuration Key | Description                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------- |
-| `autofocus`       | Sets the EditorJS instance to autofocus on load                                                   |
-| `data`            | Initial data to load into the editor, this is an `OutputData` object from EditorJS                |
-| `hideToolbar`     | Hides the toolbar by default                                                                      |
-| `holder`          | The element ID of the holder, this will set all instances in this module to use this as a default |
-| `initialBlock`    | The default block type to use in the editor                                                       |
-| `minHeight`       | Height of Editor's bottom area that allows to set focus on the last Block                         |
-| `placeholder`     | Placeholder of the first block                                                                    |
-| `sanitizer`       | Content sanitizer configurations                                                                  |
+| Configuration Key  | Description                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------- |
+| `autofocus`        | Sets the EditorJS instance to autofocus on load                                                   |
+| `data`             | Initial data to load into the editor, this is an `OutputData` object from EditorJS                |
+| `hideToolbar`      | Hides the toolbar by default                                                                      |
+| `holder`           | The element ID of the holder, this will set all instances in this module to use this as a default |
+| `initialBlock`     | The default block type to use in the editor                                                       |
+| `minHeight`        | Height of Editor's bottom area that allows to set focus on the last Block                         |
+| `blockPlaceholder` | Placeholder of the first block                                                                    |
+| `sanitizer`        | Content sanitizer configurations                                                                  |
 
 ### Adding custom tools
 

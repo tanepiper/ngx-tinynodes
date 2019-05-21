@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import EditorJS, { OutputData, SanitizerConfig } from '@editorjs/editorjs';
+import EditorJS, { OutputData, SanitizerConfig, EditorConfig } from '@editorjs/editorjs';
 
 /**
  * Configuration for the EditorJS instance
@@ -38,7 +38,7 @@ export interface EditorJSConfig {
   /**
    * First Block placeholder
    */
-  placeholder?: string;
+  blockPlaceholder?: string;
 
   /**
    * Define default sanitizer configuration
@@ -53,7 +53,7 @@ export interface NgxEditorJSConfig {
   /**
    * Configuration options for `EditorJS`
    */
-  editorjs?: EditorJSConfig;
+  editorjs?: EditorConfig;
 }
 
 /**

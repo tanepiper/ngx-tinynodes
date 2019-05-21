@@ -134,10 +134,6 @@
                                 <a href="#onChange">onChange</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#onDestroy$">onDestroy$</a>
-                            </li>
-                            <li>
                                 <a href="#onTouch">onTouch</a>
                             </li>
                         </ul>
@@ -957,39 +953,6 @@ all tools will be included</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="onDestroy$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            onDestroy$</b>
-                            <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/base/container.class.ts:29</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Private destroy subject</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="onTouch"></a>
                         <span class="name">
                             <b>
@@ -1062,13 +1025,13 @@ all tools will be included</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Input, Component, OnDestroy, forwardRef } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, forwardRef, Input, OnDestroy } from &#x27;@angular/core&#x27;;
+import { Provider } from &#x27;@angular/core/src/render3/jit/compiler_facade_interface&#x27;;
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
 import { SanitizerConfig } from &#x27;@editorjs/editorjs&#x27;;
+import { Observable, Subject } from &#x27;rxjs&#x27;;
 import { NgxEditorJSService } from &#x27;../../services/editorjs.service&#x27;;
 import { Block } from &#x27;../../types/blocks&#x27;;
-import { Subject, Observable } from &#x27;rxjs&#x27;;
-import { Provider } from &#x27;@angular/core/src/render3/jit/compiler_facade_interface&#x27;;
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from &#x27;@angular/forms&#x27;;
 
 /**
  * This provides the Control Value Accessor for the form component

@@ -8,7 +8,7 @@ import {
   OnDestroy,
   SimpleChanges
 } from '@angular/core';
-import EditorJS, { SanitizerConfig } from '@editorjs/editorjs';
+import EditorJS, { SanitizerConfig, EditorConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
@@ -142,7 +142,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Creates an `EditorJS` instance for this directive
    * @param config Configuration for this instance
    */
-  public createEditor(config?: EditorJSConfig): void {
+  public createEditor(config?: EditorConfig): void {
     this.service.createEditor({
       config,
       includeTools: this.includeTools,
@@ -196,8 +196,8 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   /**
    * Create a configuration for EditorJS
    */
-  private createConfig(): EditorJSConfig {
-    const config: EditorJSConfig = createEditorJSConfig({
+  private createConfig(): EditorConfig {
+    const config: EditorConfig = createEditorJSConfig({
       holder: this.id,
       autofocus: this.autofocus,
       hideToolbar: this.hideToolbar,
