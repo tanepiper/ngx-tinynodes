@@ -94,11 +94,8 @@ export class FormContainerComponent implements AfterContentInit {
   /**
    * Get the page links
    */
-  public get links() {
-    return this.menu$.pipe(
-      filter(data => typeof data !== 'undefined'),
-      pluck('items')
-    );
+  public get menu() {
+    return this.menu$;
   }
 
   /**
@@ -134,8 +131,47 @@ export class FormContainerComponent implements AfterContentInit {
       .getDemoData<NgxEditorJSDemo>('ngx-editorjs-demo')
       .pipe(take(1))
       .subscribe((data: NgxEditorJSDemo) => {
+        const blocks = [
+          ...data.blocks,
+          {
+            type: 'header',
+            data: {
+              text: 'Material Form Component',
+              level: 1
+            }
+          },
+          {
+            type: 'paragraph',
+            data: {
+              text:
+                'This component is provided as a Material form component.  Here is the configuration for this field on this page:'
+            }
+          },
+          {
+            type: 'code',
+            data: {
+              code: `<form [formGroup]="editorForm">
+  <mat-form-field>
+    <ngx-editorjs-mat-field
+      [id]="holder"
+      [holder]="holder"
+      formCotrolName="pageEditor"
+      [blocks]="blocks | async"
+      placeholder="EditorJS for {{ editorForm.value.pageName || 'Page Name' }}">
+    </ngx-editorjs-mat-field>
+  </mat-form-field>
+</form>`
+            }
+          },
+          {
+            type: 'paragraph',
+            data: {
+              text: 'When you save the form, you can see the output below of the form instance values'
+            }
+          }
+        ];
         this.menu$.next(data.links);
-        this.editor.update({ holder: this.holder, blocks: data.blocks });
+        this.editor.update({ holder: this.holder, blocks });
       });
   }
 

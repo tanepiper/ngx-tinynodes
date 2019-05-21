@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { MenuGroup, MenuItem } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { MenuGroup } from '../../types/app';
 
 @Component({
   selector: 'ngx-editorjs-demo-info',
