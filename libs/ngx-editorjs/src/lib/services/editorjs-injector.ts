@@ -83,12 +83,12 @@ export class NgxEditorJSInstanceService {
 
   /**
    * Import the `EditorJS` class
-   * @param EditorJS The `EditorJS` class
+   * @param editorJs The `EditorJS` class
    * @param zone Angular zone to run
    * @param ref The application reference to trigger a tick
    */
   constructor(
-    @Inject(EditorJSInstance) private EditorJS: any,
+    @Inject(EditorJSInstance) private editorJs: any,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
   ) {}
@@ -102,10 +102,14 @@ export class NgxEditorJSInstanceService {
     const editorConfig = {
       ...config.editorConfig
     };
-    editorConfig.onChange = (config.onChange ? config.onChange : this.onChange(editorConfig.holder as string)) as any;
-    editorConfig.onReady = (config.onReady ? config.onReady : this.onReady(editorConfig.holder as string)) as any;
+    editorConfig.onChange = (config.onChange && typeof config.onChange === 'function'
+      ? config.onChange
+      : this.onChange.bind(this, editorConfig.holder as string)) as any;
+    editorConfig.onReady = (config.onReady && typeof config.onReady === 'function'
+      ? config.onReady
+      : this.onReady.bind(this, editorConfig.holder as string)) as any;
     return this.zone.runOutsideAngular(() => {
-      const editor = new (this.EditorJS as any)(editorConfig);
+      const editor = new (this.editorJs as any)(editorConfig);
       const holder = editorConfig.holder as string;
       return editor.isReady.then(() => {
         return this.zone.run(() => {
@@ -138,7 +142,9 @@ export class NgxEditorJSInstanceService {
    * @param holder The holder ID of the `EditorJS` instance
    */
   public save(holder: string) {
-    this.eventMap[holder].next({ type: 'save' });
+    if (!this.eventMap[holder]) {
+      this.eventMap[holder].next({ type: 'save' });
+    }
   }
 
   /**
@@ -358,7 +364,7 @@ export class NgxEditorJSInstanceService {
     this.zone.runOutsideAngular(() => {
       editor.blocks.render({
         time: Date.now(),
-        version: EditorJS.version,
+        version: this.editorJs.version,
         blocks
       });
       this.zone.run(() => {

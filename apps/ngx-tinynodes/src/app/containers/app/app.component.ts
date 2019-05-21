@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, Input, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { AppService } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -40,7 +40,11 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
    */
   private mobileView: MediaQueryList;
 
-  constructor(private readonly app: AppService, private readonly matcher: MediaMatcher) {
+  constructor(
+    private readonly app: AppService,
+    private readonly matcher: MediaMatcher,
+    private readonly render: Renderer2
+  ) {
     this.mobileView = this.matcher.matchMedia('(max-width: 768px)');
     this.mobileView.addListener(this.matchView.bind(this));
 

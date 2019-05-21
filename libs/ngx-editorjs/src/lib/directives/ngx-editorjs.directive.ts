@@ -2,15 +2,14 @@ import {
   AfterContentInit,
   Directive,
   ElementRef,
+  HostListener,
   Input,
   OnChanges,
   OnDestroy,
-  SimpleChanges,
-  Renderer2,
-  HostListener
+  SimpleChanges
 } from '@angular/core';
 import EditorJS, { SanitizerConfig } from '@editorjs/editorjs';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
@@ -99,7 +98,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   /**
    * Host click listener
    */
-  @HostListener('click', ['$event'])
+  @HostListener('click')
   onclick() {
     this.touched$.next(true);
   }
@@ -109,7 +108,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * @param el The element the directive is attached to
    * @param editorService The editor service
    */
-  constructor(private readonly el: ElementRef, private readonly editorService: NgxEditorJSService) {}
+  constructor(private readonly el: ElementRef, protected readonly editorService: NgxEditorJSService) {}
 
   /**
    * Get the `EditorJS` instance for this directive

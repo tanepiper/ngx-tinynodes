@@ -64,7 +64,7 @@ export class AppService {
       distinctUntilChanged(),
       filter(menus => menus !== undefined && menus.length > 0),
       map(menus => {
-        return menus.find(menu => menu.key == key);
+        return menus.find(menu => menu.key === key);
       })
     ) as Observable<MenuGroup<T>>;
   }

@@ -4,22 +4,22 @@ import {
   AfterContentInit,
   Component,
   DoCheck,
+  EventEmitter,
   forwardRef,
   HostBinding,
   Input,
   OnDestroy,
   OnInit,
   Optional,
+  Output,
   Provider,
   Self,
-  ViewChild,
-  Output,
-  EventEmitter
+  ViewChild
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material';
-import { Subject, Subscription, timer, BehaviorSubject, Observable } from 'rxjs';
-import { pluck, tap, timeInterval, map } from 'rxjs/operators';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { map, tap, timeInterval } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { EditorJSBaseComponent } from '../base/container.class';
@@ -187,6 +187,35 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
   }
 
   /**
+   * Material empty state
+   */
+  private _empty: boolean;
+  /**
+   * Get the Material empty state
+   */
+  public get empty() {
+    return this._empty;
+  }
+  /**
+   * Set the Material empty state
+   * @param empty The empty value
+   */
+  public set empty(empty: boolean) {
+    this._empty = empty;
+  }
+
+  /**
+   * Internal Subscription for the timer subscription
+   */
+  private timerSubscription$: Subscription;
+
+  /**
+   * Get the current saved state
+   */
+  @Output()
+  public isSaved = new EventEmitter<boolean>();
+
+  /**
    * Access to the underlying {NgxEditorJSDirective}
    */
   @ViewChild(NgxEditorJSDirective) public editorEl: NgxEditorJSDirective;
@@ -216,24 +245,6 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
    */
   public setDescribedByIds(ids: string[]) {
     this.describedBy = ids.join(' ');
-  }
-
-  /**
-   * Material empty state
-   */
-  private _empty = true;
-  /**
-   * Get the Material empty state
-   */
-  public get empty() {
-    return this._empty;
-  }
-  /**
-   * Set the Material empty state
-   * @param empty The empty value
-   */
-  public set empty(empty: boolean) {
-    this._empty = empty;
   }
 
   /**
@@ -286,17 +297,6 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
   }
 
   /**
-   * Internal Subscription for the timer subscription
-   */
-  private timerSubscription$: Subscription;
-
-  /**
-   * Get the current saved state
-   */
-  @Output()
-  public isSaved = new EventEmitter<boolean>();
-
-  /**
    * Inside the AfterContentInit life-cycle we set up a listener for focus
    * and trigger focus autosave subscribe and unsubscribe
    */
@@ -307,7 +307,9 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
         if (!this.autosave) {
           this.isSaved.emit(false);
         }
-        this.timerSubscription$ && this.timerSubscription$.unsubscribe();
+        if (this.timerSubscription$) {
+          this.timerSubscription$.unsubscribe();
+        }
       }
       this.isSaved.emit(false);
       if (this.autosave > 0) {

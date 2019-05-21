@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MenuGroup } from '@tinynodes/ngx-tinynodes-core/src';
+import { MenuGroup } from '@tinynodes/ngx-tinynodes-core';
 
 /**
  * Internal NavBar component for the Tinynodes application, provides

@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { EditorJSBaseComponent } from '../base/container.class';

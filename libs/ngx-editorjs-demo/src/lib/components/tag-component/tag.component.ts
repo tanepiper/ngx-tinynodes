@@ -1,21 +1,11 @@
-import {
-  Component,
-  Input,
-  forwardRef,
-  HostBinding,
-  Optional,
-  Self,
-  ViewChild,
-  ElementRef,
-  Injector
-} from '@angular/core';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { MatChipInputEvent, MatFormFieldControl, MatChipList } from '@angular/material';
-import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, NgControl } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, forwardRef, HostBinding, Injector, Input, ViewChild } from '@angular/core';
+import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
+import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MatChipInputEvent, MatFormFieldControl } from '@angular/material';
+import { Subject } from 'rxjs';
 
 export const TAG_COMPONENT_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,

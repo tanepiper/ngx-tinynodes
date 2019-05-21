@@ -1,20 +1,16 @@
-import { Component, DebugElement, NgZone, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, NgZone, ViewChild } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
 import { MockNgZone } from '@tinynodes/ngx-editorjs/src/testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '@tinynodes/ngx-editorjs/src/testing/shared';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
+import { EditorJSInstance, EDITORJS_MODULE_IMPORT } from '../../services/editorjs-injector';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { NgxEditorJSPluginService } from '../../services/plugins.service';
-import { EDITIOR_JS_INSTANCE, NGX_EDITORJS_CONFIG } from '../../types/config';
+import { NGX_EDITORJS_CONFIG } from '../../types/config';
 import { UserPlugins } from '../../types/plugins';
 import { NgxEditorJSComponent } from './editorjs.component';
 
 describe('NgxEditorJSComponent', () => {
-  let fixture: ComponentFixture<NgxEditorJSComponent>;
-  let componentInstance: NgxEditorJSComponent;
-  let componentEl: DebugElement;
-  let component: NgxEditorJSComponent;
-
   @Component({
     template: `
       <ngx-editorjs></ngx-editorjs>
@@ -53,8 +49,15 @@ describe('NgxEditorJSComponent', () => {
           useClass: NgxEditorJSService
         },
         {
-          provide: EDITIOR_JS_INSTANCE,
+          provide: EDITORJS_MODULE_IMPORT,
           useValue: MockEditorJS
+        },
+        {
+          provide: EditorJSInstance,
+          useFactory: function create(editorjs: any) {
+            return editorjs;
+          },
+          deps: [EDITORJS_MODULE_IMPORT]
         }
       ]
     }).compileComponents();

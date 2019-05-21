@@ -1,10 +1,10 @@
-import { Injectable, Input, Component, OnDestroy, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input, OnDestroy } from '@angular/core';
+import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SanitizerConfig } from '@editorjs/editorjs';
+import { Observable, Subject } from 'rxjs';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
-import { Subject, Observable } from 'rxjs';
-import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 /**
  * This provides the Control Value Accessor for the form component

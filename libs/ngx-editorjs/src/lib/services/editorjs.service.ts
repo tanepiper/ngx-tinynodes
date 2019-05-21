@@ -1,6 +1,6 @@
-import { Inject, Injectable, NgZone } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Block } from '../types/blocks';
 import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
@@ -97,19 +97,22 @@ export class NgxEditorJSService {
     this.editorActions.pipe(takeUntil(this.onDestroy$)).subscribe(editorAction => {
       switch (editorAction.action) {
         case EditorJSActionTypes.CreateEditor: {
-          this.createEditor(editorAction.payload);
+          return this.createEditor(editorAction.payload);
         }
         case EditorJSActionTypes.ClearEditor: {
-          this.clear(editorAction.payload);
+          return this.clear(editorAction.payload);
         }
         case EditorJSActionTypes.DestroyEditor: {
-          this.destroy(editorAction.payload);
+          return this.destroy(editorAction.payload);
         }
         case EditorJSActionTypes.SaveEditor: {
-          this.save(editorAction.payload);
+          return this.save(editorAction.payload);
         }
         case EditorJSActionTypes.UpdateEditor: {
-          this.update(editorAction.payload);
+          return this.update(editorAction.payload);
+        }
+        default: {
+          return;
         }
       }
     });
@@ -167,6 +170,10 @@ export class NgxEditorJSService {
     return this.editorService.getChanged(holder);
   }
 
+  /**
+   * Check to see if the `EditorJS` instance has changed
+   * @param holder The ID of the holder of the instance
+   */
   public hasChanged(holder: string) {
     this.editorService.onChange(holder);
   }

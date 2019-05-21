@@ -1,14 +1,13 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppContainerComponent } from './app.component';
+import { APP_BASE_HREF } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { async, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ApplicationDataModule } from '@tinynodes/ngx-tinynodes-core';
 import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
 import { SidebarComponent } from '../../components/sidebar-component/sidebar.component';
-import { MatSidenavModule, MatIconModule, MatToolbarModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../../material.module';
-import { ApplicationDataModule } from '../../store/app/application.module';
-import { HttpClientModule } from '@angular/common/http';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { APP_BASE_HREF } from '@angular/common';
+import { AppContainerComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

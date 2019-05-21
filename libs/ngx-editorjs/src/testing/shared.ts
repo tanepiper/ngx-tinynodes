@@ -24,8 +24,12 @@ export class MockEditorJS {
   version: string;
   destroy: () => void;
 
+  isReady: Promise<void>;
+
   constructor(private config: EditorJSConfig) {
     this.version = 'test';
+
+    this.isReady = Promise.resolve();
 
     this.destroy = () => {};
 

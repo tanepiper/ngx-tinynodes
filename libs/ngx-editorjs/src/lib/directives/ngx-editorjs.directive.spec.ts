@@ -3,16 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockNgZone } from '../../testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '../../testing/shared';
+import { EditorJSInstance, EDITORJS_MODULE_IMPORT, NgxEditorJSInstanceService } from '../services/editorjs-injector';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { NgxEditorJSPluginService } from '../services/plugins.service';
 import { Block } from '../types/blocks';
-import { EDITIOR_JS_INSTANCE, NGX_EDITORJS_CONFIG } from '../types/config';
+import { NGX_EDITORJS_CONFIG } from '../types/config';
 import { UserPlugins } from '../types/plugins';
 import { NgxEditorJSDirective } from './ngx-editorjs.directive';
 
 describe('NgxEditorJSDirective', () => {
   @Component({
-    selector: 'mock-component',
+    selector: 'ngx-mock-component',
     template: `
       <div id="my-editor" ngxEditorJS></div>
     `
@@ -55,6 +56,10 @@ describe('NgxEditorJSDirective', () => {
           useClass: NgxEditorJSPluginService
         },
         {
+          provide: NgxEditorJSInstanceService,
+          useClass: NgxEditorJSInstanceService
+        },
+        {
           provide: NgZone,
           useClass: MockNgZone
         },
@@ -63,8 +68,15 @@ describe('NgxEditorJSDirective', () => {
           useClass: NgxEditorJSService
         },
         {
-          provide: EDITIOR_JS_INSTANCE,
+          provide: EDITORJS_MODULE_IMPORT,
           useValue: MockEditorJS
+        },
+        {
+          provide: EditorJSInstance,
+          useFactory: function create(editorjs: any) {
+            return editorjs;
+          },
+          deps: [EDITORJS_MODULE_IMPORT]
         }
       ]
     }).compileComponents();
@@ -80,8 +92,11 @@ describe('NgxEditorJSDirective', () => {
     expect(directive).toBeDefined();
   });
 
-  it('should provide the editor instance', () => {
-    expect(directive.editor).toBeInstanceOf(MockEditorJS);
+  it('should provide the editor instance', done => {
+    directive.editor.subscribe(editor => {
+      expect(editor).toBeInstanceOf(MockEditorJS);
+      done();
+    });
   });
 
   it('should provide the service instance', () => {
@@ -100,7 +115,7 @@ describe('NgxEditorJSDirective', () => {
       }
     };
     directive.ngOnChanges(changes);
-    expect(directive.service.update).toHaveBeenCalledWith('my-editor', blocks);
+    expect(directive.service.update).toHaveBeenCalled();
   });
 
   it('should create a new instance when another property is changed', () => {
