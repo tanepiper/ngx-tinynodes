@@ -11,4 +11,8 @@
   [blockPlaceholder]="blockPlaceholder"
   [sanitizer]="sanitizer"
   [blocks]="blocks"
+  (isSaved)="isSaved.emit($event)"
+  (isTouched)="isTouched.emit($event)"
+  (isFocused)="isFocused.emit($event)"
+  (hasChanged)="hasChanged.emit($event)"
 ></div>

@@ -1,4 +1,4 @@
-import EditorJS from '@editorjs/editorjs';
+import EditorJS, { OutputData } from '@editorjs/editorjs';
 import { BehaviorSubject } from 'rxjs';
 import { Block } from './blocks';
 
@@ -51,11 +51,25 @@ export interface ReadyMap {
 }
 
 /**
+ * An EditorJS change event
+ */
+export interface EditorJSChange {
+  /**
+   * Time of the change
+   */
+  time: number;
+  /**
+   * Blocks in the change
+   */
+  blocks: Block[];
+}
+
+/**
  * A map containing `BehaviorSubject` of `number` which is the timestamp of the last `EditorJS` change
  */
 export interface ChangeMap {
   /**
    * A map key containing a {BehaviorSubject} of {number}
    */
-  [key: string]: BehaviorSubject<Block[]>;
+  [key: string]: BehaviorSubject<OutputData>;
 }

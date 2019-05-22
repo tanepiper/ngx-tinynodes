@@ -67,8 +67,8 @@
           <mat-card-title>Output</mat-card-title>
           <mat-card-subtitle>Data from the <code>EditorJS</code> instance</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
-          <pre id="output" style="width: 100%; overflow: scroll; word-wrap: break-word;">{{ editorForm.valueChanges | async | json }}</pre>
+        <mat-card-content *ngIf="(editorForm.valueChanges | async); let changes">
+          <pre id="output" style="width: 100%; overflow: scroll; word-wrap: break-word;">{{ changes | json }}</pre>
         </mat-card-content>
       </mat-card>
     </mat-card-content>

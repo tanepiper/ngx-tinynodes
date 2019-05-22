@@ -1,10 +1,9 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
-import EditorJS from '@editorjs/editorjs';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import EditorJS, { OutputData } from '@editorjs/editorjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
-import { Block } from '../types/blocks';
 import { EditorJSInstance, EditorJSInstanceConfig, InjectorMethodOption, MAP_DEFAULTS } from '../types/injector';
-import { BlocksMap, ChangeMap, EditorMap, EventMap, EventType, ReadyMap } from '../types/maps';
+import { ChangeMap, EditorJSChange, EditorMap, ReadyMap } from '../types/maps';
 
 /**
  * EditorJS factory service, call `createInstance` with an `EditorConfig` to
@@ -32,24 +31,14 @@ export class NgxEditorJSInstanceService {
   private editorMap: EditorMap = {};
 
   /**
-   * Internal map of all Block `BehaviorSubject` instances
-   */
-  private blocksMap: BlocksMap = {};
-
-  /**
    * Internal map of all EditorJS ready states
    */
-  private readyMap: ReadyMap = {};
+  private isReadyMap: ReadyMap = {};
 
   /**
    * Internal map of all EditorJS change states
    */
-  private changeMap: ChangeMap = {};
-
-  /**
-   * The Event map is used to trigger events
-   */
-  private eventMap: EventMap = {};
+  private hasChangedMap: ChangeMap = {};
 
   /**
    * Import the `EditorJS` class
@@ -68,138 +57,169 @@ export class NgxEditorJSInstanceService {
    * then adds it to the editor instances
    * @param config The {EditorConfig} configuration to create
    */
-  public createInstance(config: EditorJSInstanceConfig): Promise<void> {
+  public async createInstance(config: EditorJSInstanceConfig): Promise<void> {
     const editorConfig = {
       ...config.editorConfig
     };
     editorConfig.onChange = (config.onChange && typeof config.onChange === 'function'
       ? config.onChange
-      : this.onChange.bind(this, editorConfig.holder as string)) as any;
+      : this.onChange.bind(this, { holder: editorConfig.holder as string })) as any;
     editorConfig.onReady = (config.onReady && typeof config.onReady === 'function'
       ? config.onReady
-      : this.onReady.bind(this, editorConfig.holder as string)) as any;
+      : this.onReady.bind(this, { holder: editorConfig.holder as string })) as any;
+
     return this.zone.runOutsideAngular(() => {
       const editor = new (this.editorJs as any)(editorConfig);
       const holder = editorConfig.holder as string;
       return editor.isReady.then(() => {
         return this.zone.run(() => {
           this.setupSubjects({ holder, editor });
-          this.setupEvents({ holder });
-          this.readyMap[holder].next(true);
+          this.isReadyMap[holder].next(true);
           this.ref.tick();
         });
       });
     });
   }
 
-  public onChange({ holder }: InjectorMethodOption): void {
-    if (!this.changeMap[holder]) {
-      this.changeMap[holder] = new BehaviorSubject<Block[]>([]);
-    }
-    this.getBlocks({ holder })
-      .pipe(take(1))
-      .subscribe(blocks => {
-        this.changeMap[holder].next(blocks);
+  /**
+   * Default onChange method for the `EditorJS` instance
+   * @param options The InjectorMethodOption for this request
+   */
+  public onChange(options: InjectorMethodOption): () => void {
+    return () => {
+      if (!this.hasChangedMap[options.holder]) {
+        this.hasChangedMap[options.holder] = new BehaviorSubject<EditorJSChange>({ time: 0, blocks: [] });
+      }
+      this.hasChangedMap[options.holder].next({
+        time: Date.now(),
+        blocks: options.blocks || []
       });
-  }
-
-  public onReady({ holder }: InjectorMethodOption) {
-    if (!this.readyMap[holder]) {
-      this.readyMap[holder] = new BehaviorSubject<boolean>(false);
-    }
-    this.readyMap[holder].next(true);
+    };
   }
 
   /**
-   * Calls the save method on an editor
+   * The default onReady method for the `EditorJS` instance
+   * @param Options The InjectorMethodOption for this request
+   */
+  public onReady(options: InjectorMethodOption): () => void {
+    return () => {
+      if (!this.isReadyMap[options.holder]) {
+        this.isReadyMap[options.holder] = new BehaviorSubject<boolean>(false);
+      }
+      this.isReadyMap[options.holder].next(true);
+    };
+  }
+
+  /**
+   * Calls the save method on the `EditorJS` instance and updates the blocks map
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public save({ holder }: InjectorMethodOption) {
-    if (this.eventMap[holder]) {
-      this.eventMap[holder].next({ type: 'save' });
-    }
+  public save(options: InjectorMethodOption) {
+    this.getEditor(options)
+      .pipe(take(1))
+      .subscribe(editor => {
+        this.zone.runOutsideAngular(() => {
+          editor.saver.save().then(data => {
+            this.zone.run(() => {
+              this.hasChangedMap[options.holder].next(data);
+            });
+          });
+        });
+      });
   }
 
   /**
    * Calls a clear method on an editor
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public clear({ holder }: InjectorMethodOption) {
-    this.eventMap[holder].next({ type: 'clear' });
+  public clear(options: InjectorMethodOption) {
+    this.getEditor(options)
+      .pipe(take(1))
+      .subscribe(editor => {
+        this.zone.runOutsideAngular(() => {
+          editor.blocks.clear();
+          this.zone.run(() => {
+            this.hasChangedMap[options.holder].next({ time: Date.now(), blocks: [] });
+          });
+        });
+      });
   }
 
   /**
    * Updates the editor with new blocks
-   * @param holder The holder ID of the `EditorJS` instance
-   * @param blocks The blocks to update the editor with
+   * @param options The options to update
+   * @param triggerUpdate If set to false the hasChanged observable won't be updated
    */
-  public update({ holder, blocks }: InjectorMethodOption) {
-    if (!this.eventMap[holder]) {
-      this.eventMap[holder] = new BehaviorSubject<EventType>({ type: '' });
+  public update(options: InjectorMethodOption, triggerUpdate = true) {
+    if (!options.blocks) {
+      return;
     }
-    this.eventMap[holder].next({ type: 'update', payload: { blocks } });
+    this.getEditor(options)
+      .pipe(take(1))
+      .subscribe(editor => {
+        this.zone.runOutsideAngular(() => {
+          const time = Date.now();
+          const data = {
+            time,
+            version: this.editorJs.version,
+            blocks: options.blocks
+          };
+          editor.blocks.render(data);
+          if (triggerUpdate) {
+            this.zone.run(() => {
+              this.hasChangedMap[options.holder].next(data);
+            });
+          }
+        });
+      });
   }
 
   /**
    * Returns an Observable value of an `EditorJS` instance
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public getInstance({ holder }: InjectorMethodOption): Observable<EditorJS> {
-    if (!this.editorMap[holder]) {
-      this.editorMap[holder] = new BehaviorSubject<EditorJS | undefined>(undefined);
+  public getEditor(options: InjectorMethodOption): Observable<EditorJS> {
+    if (!this.editorMap[options.holder]) {
+      this.editorMap[options.holder] = new BehaviorSubject<EditorJS | undefined>(undefined);
     }
-    return this.editorMap[holder].asObservable();
+    return this.editorMap[options.holder].pipe(filter(editor => typeof editor !== 'undefined'));
   }
 
   /**
    * Returns an Observable value of an `EditorJS` instance
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public getReady({ holder }: InjectorMethodOption): Observable<boolean> {
-    if (!this.readyMap[holder]) {
-      this.readyMap[holder] = new BehaviorSubject<boolean>(false);
+  public isReady(options: InjectorMethodOption): Observable<boolean> {
+    if (!this.isReadyMap[options.holder]) {
+      this.isReadyMap[options.holder] = new BehaviorSubject<boolean>(false);
     }
-    return this.readyMap[holder].asObservable();
+    return this.isReadyMap[options.holder].asObservable();
   }
 
   /**
    * Returns an Observable value of an `EditorJS` instance
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public getChanged({ holder }: InjectorMethodOption): Observable<Block[]> {
-    if (!this.changeMap[holder]) {
-      this.changeMap[holder] = new BehaviorSubject<Block[]>([]);
+  public hasChanged(options: InjectorMethodOption): Observable<OutputData> {
+    if (!this.hasChangedMap[options.holder]) {
+      this.hasChangedMap[options.holder] = new BehaviorSubject<OutputData>({ time: 0, blocks: [] });
     }
-    return this.changeMap[holder].asObservable();
-  }
-
-  /**
-   * Returns an Observable value of an `EditorJS` instance
-   * @param holder The holder ID of the `EditorJS` instance
-   */
-  public getBlocks({ holder }: InjectorMethodOption): Observable<Block[]> {
-    if (!this.blocksMap[holder]) {
-      this.blocksMap[holder] = new BehaviorSubject<Block[]>([]);
-    }
-    return this.blocksMap[holder].asObservable();
+    return this.hasChangedMap[options.holder].asObservable();
   }
 
   /**
    * Destroys an instance of an editor and cleans up all Observable values
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public destroyInstance({ holder }: InjectorMethodOption): void {
+  public destroyInstance(options: InjectorMethodOption): void {
     const instanceDestroyed = new Subject<boolean>();
-    this.editorMap[holder]
-      .pipe(
-        filter(editor => typeof editor !== 'undefined'),
-        takeUntil(instanceDestroyed)
-      )
+    this.getEditor(options)
+      .pipe(takeUntil(instanceDestroyed))
       .subscribe(editor => {
         this.zone.runOutsideAngular(() => {
           editor.destroy();
           this.zone.run(() => {
-            this.cleanupSubjects({ holder });
+            this.cleanupSubjects({ holder: options.holder });
             instanceDestroyed.next(true);
             instanceDestroyed.complete();
             this.ref.tick();
@@ -225,35 +245,6 @@ export class NgxEditorJSInstanceService {
       }
       this[mapKay][holder].next(value);
     });
-    if (!this.eventMap[holder]) {
-      this.eventMap[holder] = new BehaviorSubject<EventType>({ type: '' });
-    }
-  }
-
-  /**
-   * Sets up a listener for the event map and provides the editor and blocks to handle
-   * updates
-   * @param holder The holder ID of the `EditorJS` instance
-   */
-  private setupEvents({ holder }: InjectorMethodOption) {
-    combineLatest([this.eventMap[holder], this.editorMap[holder]])
-      .pipe(
-        filter(([event, editor]) => event.type && typeof editor !== 'undefined'),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(([event, editor]) => {
-        if (event.type === 'save') {
-          this.saveHandler({ holder, editor });
-        }
-        if (event.type === 'clear') {
-          this.clearHandler({ holder, editor });
-        }
-        if (event.type === 'update') {
-          this.updateHandler({ holder, editor, blocks: event.payload.blocks });
-        }
-        this.eventMap[holder].next({ type: '' });
-      });
-    this.ref.tick();
   }
 
   /**
@@ -261,21 +252,17 @@ export class NgxEditorJSInstanceService {
    * destroyed
    * @param holder The holder ID for the `EditorJS` instance
    */
-  private cleanupSubjects({ holder }: InjectorMethodOption) {
+  private cleanupSubjects(options: InjectorMethodOption) {
     MAP_DEFAULTS.forEach(([mapKay, value]: [string, any]) => {
-      if (this[mapKay][holder]) {
-        this[mapKay][holder].next(value);
-        this[mapKay][holder].complete();
-        this[mapKay][holder] = null;
-        delete this[mapKay][holder];
+      if (this[mapKay][options.holder]) {
+        this[mapKay][options.holder].next(value);
+        this[mapKay][options.holder].complete();
+        this[mapKay][options.holder] = null;
+        delete this[mapKay][options.holder];
       }
     });
-    this.eventMap[holder].next({ type: '' });
-    this.eventMap[holder].complete();
-    this.eventMap[holder] = null;
-    delete this.eventMap[holder];
-    this.editorMap[holder] = null;
-    delete this.editorMap[holder];
+    this.editorMap[options.holder] = null;
+    delete this.editorMap[options.holder];
   }
 
   /**
@@ -287,63 +274,5 @@ export class NgxEditorJSInstanceService {
     });
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
-  }
-
-  /**
-   * This internal handler calls the `EditorJS` instance save outside of the
-   * Angular zone, this means it will not trigger change detection
-   * @param holder The holder ID for the `EditorJS` instance
-   * @param editor The `EditorJS` instance
-   * @param blocks The {Block} items to render
-   */
-  private saveHandler({ holder, editor }: InjectorMethodOption) {
-    this.zone.runOutsideAngular(() => {
-      editor.saver.save().then(data => {
-        this.zone.run(() => {
-          this.blocksMap[holder].next(data.blocks);
-        });
-      });
-    });
-  }
-
-  /**
-   * This internal handler calls the `EditorJS` instance clear outside of the
-   * Angular zone, this means it will not trigger change detection
-   * @param holder The holder ID for the `EditorJS` instance
-   * @param editor The `EditorJS` instance
-   * @param blocks The {Block} items to render
-   */
-  private clearHandler({ holder, editor }: InjectorMethodOption) {
-    this.zone.runOutsideAngular(() => {
-      editor.blocks.clear();
-      this.zone.run(() => {
-        this.blocksMap[holder].next([]);
-        this.changeMap[holder].next([]);
-      });
-    });
-  }
-
-  /**
-   * This internal handler calls the `EditorJS` instance render outside of the
-   * Angular zone, this means it will not trigger change detection
-   * @param holder The holder ID for the `EditorJS` instance
-   * @param editor The `EditorJS` instance
-   * @param blocks The {Block} items to render
-   */
-  private updateHandler({ holder, editor, blocks }: InjectorMethodOption) {
-    if (!blocks) {
-      return;
-    }
-    this.zone.runOutsideAngular(() => {
-      editor.blocks.render({
-        time: Date.now(),
-        version: this.editorJs.version,
-        blocks
-      });
-      this.zone.run(() => {
-        this.blocksMap[holder].next(blocks);
-        this.changeMap[holder].next(blocks);
-      });
-    });
   }
 }

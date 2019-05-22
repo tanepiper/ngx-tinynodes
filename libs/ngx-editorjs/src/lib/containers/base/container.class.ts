@@ -2,11 +2,12 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { AfterContentInit, Component, EventEmitter, forwardRef, Input, OnDestroy, Output } from '@angular/core';
 import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SanitizerConfig } from '@editorjs/editorjs';
+import { SanitizerConfig, OutputData } from '@editorjs/editorjs';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map, takeUntil, tap, timeInterval } from 'rxjs/operators';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
+import { EditorJSChange } from '../../types/maps';
 
 /**
  * The `NgxEditorJSBaseComponent` Provider for `NG_VALUE_ACCESSOR`
@@ -121,7 +122,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
    * Emits if the `EditorJS` content has changed when `save` is called
    */
   @Output()
-  public hasChanged = new EventEmitter<Block[]>();
+  public hasChanged = new EventEmitter<OutputData>();
 
   /**
    * Emits if the `EditorJS` component is ready
@@ -172,8 +173,8 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   /**
    * Field onChange method
    */
-  public onChange = (blocks: Block[]) => {
-    this.hasChanged.emit(blocks);
+  public onChange = (change: EditorJSChange) => {
+    this.hasChanged.emit(change);
   };
 
   /**
@@ -182,12 +183,13 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
    */
   public writeValue(blocks: Block[]) {
     this._value = blocks;
+    this.hasChanged.emit({ time: Date.now(), blocks });
   }
 
   /**
    * Angular Forms registerOnChange
    */
-  public registerOnChange(fn: (blocks: Block[]) => void): void {
+  public registerOnChange(fn: (change: EditorJSChange) => void): void {
     this.onChange = fn;
   }
 
@@ -220,7 +222,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
           this.isFocused.emit(true);
           this.isSaved.emit(false);
           if (this.autosave > 0) {
-            this.timerSubscription$ = this.getTimer(this.autosave, this.autosave).subscribe();
+            this.timerSubscription$ = this.getTimer(this.autosave, 0).subscribe();
           }
         }
         return focused;
@@ -240,10 +242,10 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
       });
 
     this.service
-      .getChanged({ holder: this.holder })
+      .hasChanged({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(blocks => {
-        this.hasChanged.emit(blocks);
+      .subscribe(change => {
+        this.hasChanged.emit(change);
       });
   }
 

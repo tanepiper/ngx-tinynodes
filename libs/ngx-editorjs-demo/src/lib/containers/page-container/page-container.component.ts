@@ -1,5 +1,5 @@
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { Block, NgxEditorJSService, NgxEditorJSComponent } from '@tinynodes/ngx-editorjs/src';
 import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil, tap, pluck, filter, take } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
 import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
+import { OutputData } from '@editorjs/editorjs';
 
 /**
  * The Page Container component provides the main routable page for loading
@@ -34,6 +35,8 @@ export class PageContainerComponent implements AfterContentInit {
    */
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
 
+  @ViewChild('ngxEditorJS', { read: NgxEditorJSComponent }) ngxEditorJS: NgxEditorJSComponent;
+
   /**
    * The constructor sets up the blocks to the initial demo data
    * @param pagesService The pages service
@@ -48,11 +51,11 @@ export class PageContainerComponent implements AfterContentInit {
     private readonly cd: ChangeDetectorRef
   ) {}
 
-  /**
-   * Get the blocks for the page
-   */
   public get blocks() {
-    return this.editor.getBlocks({ holder: this.holder });
+    return this.editor.hasChanged({ holder: this.holder }).pipe(
+      pluck<OutputData, Block[]>('blocks'),
+      takeUntil(this.onDestroy$)
+    );
   }
 
   /**
@@ -100,9 +103,9 @@ export class PageContainerComponent implements AfterContentInit {
    * Get the blocks data as formatted JSON
    */
   public get asJSON() {
-    return this.blocks.pipe(
-      map(blocks => {
-        return JSON.stringify(blocks, null, 4);
+    return this.editor.hasChanged({ holder: this.holder }).pipe(
+      map(data => {
+        return JSON.stringify(data.blocks, null, 4);
       }),
       tap(() => this.cd.markForCheck())
     );

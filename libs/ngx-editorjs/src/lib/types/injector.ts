@@ -23,7 +23,7 @@ export interface EditorJSInstanceConfig {
 /**
  * Default values for each internal map
  */
-export const MAP_DEFAULTS = [['blocksMap', []], ['changeMap', 0], ['readyMap', false]];
+export const MAP_DEFAULTS = [['hasChangedMap', { time: 0, blocks: [] }], ['isReadyMap', false]];
 
 /**
  * Injection token for the EditorJS class

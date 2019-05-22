@@ -15,7 +15,20 @@
         <button mat-raised-button (click)="clear()">Clear</button>
         <button mat-raised-button *ngIf="(blocks | async); let b" (click)="reset(b)">Reset</button>
       </mat-card-actions>
-      <ngx-editorjs [holder]="holder"></ngx-editorjs>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>Ready: {{ ngxEditorJS.isReady | async }}</mat-list-item>
+          <mat-list-item
+            >Has Changed:
+            <span *ngIf="(ngxEditorJS.hasChanged | async); let change">{{ change.time }}</span>
+            <span *ngIf="!(ngxEditorJS.hasChanged | async)">0</span>
+          </mat-list-item>
+          <mat-list-item>Touched: {{ ngxEditorJS.isTouched | async }}</mat-list-item>
+          <mat-list-item>Focused: {{ ngxEditorJS.isFocused | async }}</mat-list-item>
+          <mat-list-item>Saved: {{ ngxEditorJS.isSaved | async }}</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <ngx-editorjs #ngxEditorJS [holder]="holder"></ngx-editorjs>
     </mat-card-content>
     <mat-card-content>
       <mat-card class="output-card">

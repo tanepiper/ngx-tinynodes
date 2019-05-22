@@ -10,12 +10,13 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import EditorJS, { EditorConfig, SanitizerConfig } from '@editorjs/editorjs';
+import EditorJS, { EditorConfig, SanitizerConfig, OutputData } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
+import { EditorJSChange } from '../types/maps';
 
 /**
  * The main directive of `ngx-editorjs` provides a way to attach
@@ -132,7 +133,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Emits if the `EditorJS` content has changed when `save` is called
    */
   @Output()
-  public hasChanged = new EventEmitter<Block[]>();
+  public hasChanged = new EventEmitter<OutputData>();
 
   /**
    * Emits if the `EditorJS` component is ready
@@ -206,7 +207,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
-      this.hasChanged.emit(changes.blocks.currentValue);
       return this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
     }
     const changesKeys = Object.keys(changes);
@@ -249,10 +249,10 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       });
 
     this.service
-      .getChanged({ holder: this.holder })
+      .hasChanged({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(blocks => {
-        this.hasChanged.emit(blocks);
+      .subscribe(change => {
+        this.hasChanged.emit(change);
       });
   }
 

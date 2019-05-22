@@ -1,13 +1,21 @@
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
 import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
 import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
 import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, take, takeUntil, pluck, tap, withLatestFrom, filter } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
+import { OutputData } from '@editorjs/editorjs';
 
 /**
  * The Page Container component provides the main routable page for loading
@@ -16,8 +24,7 @@ import { PagesService } from '../../store/pages/pages.service';
 @Component({
   selector: 'ngx-form-container',
   templateUrl: 'form-container.component.html',
-  styleUrls: ['form-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['form-container.component.scss']
 })
 export class FormContainerComponent implements AfterContentInit {
   /**
@@ -35,33 +42,14 @@ export class FormContainerComponent implements AfterContentInit {
   public holder = 'ngx-editorjs-demo';
 
   /**
-   * The blocks on the page
-   */
-  private blocks$: Observable<Block[]>;
-
-  /**
-   * If the panel is open or not
+   * Panel open state
    */
   private panelOpen$ = new BehaviorSubject<boolean>(true);
 
   /**
-   * Links for the page
+   * Menu state for the component
    */
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
-
-  /**
-   * Gets if the panel is open or not
-   */
-  public get panelOpen() {
-    return this.panelOpen$.asObservable();
-  }
-
-  /**
-   * Toggles the panel state
-   */
-  public togglePanel(value: boolean) {
-    this.panelOpen$.next(value);
-  }
 
   /**
    * Autosave state
@@ -114,27 +102,25 @@ export class FormContainerComponent implements AfterContentInit {
    * The constructor sets up the blocks to the initial demo data
    * @param pagesService The pages service
    * @param app The application service
-   * @param editor The Editor service
+   * @param editorService The Editor service
    * @param cd The change detection ref
    * @param fb The form builder
    */
   constructor(
     private readonly pagesService: PagesService,
     private app: AppService,
-    private readonly editor: NgxEditorJSService,
+    private readonly editorService: NgxEditorJSService,
     private readonly cd: ChangeDetectorRef,
     private readonly fb: FormBuilder
   ) {
-    this.editor
-      .getBlocks({ holder: this.holder })
-      .pipe(
-        distinctUntilChanged(),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(blocks => {
+    this.editorService
+      .hasChanged({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(hasChanged => {
         this.editorForm.patchValue({
-          pageEditor: blocks
+          pageEditor: hasChanged.blocks
         });
+        this.setIsSaved(true);
         this.cd.markForCheck();
       });
   }
@@ -162,29 +148,33 @@ export class FormContainerComponent implements AfterContentInit {
     return this.pagesService.pages;
   }
 
-  /**
-   * Get the blocks for the container
-   */
-  get blocks(): Observable<Block[]> {
-    return this.blocks$;
+  public get blocks() {
+    return this.editorService.hasChanged({ holder: this.holder }).pipe(
+      pluck<OutputData, Block[]>('blocks'),
+      takeUntil(this.onDestroy$)
+    );
   }
 
   /**
    * Call the editor save method
    */
   public save() {
-    this.editor.save({ holder: this.holder });
-    this.setIsSaved(true);
-    this.cd.markForCheck();
+    this.editorService.save({ holder: this.holder });
   }
 
   /**
    * Clear the editor
    */
   public clear() {
-    this.editor.clear({ holder: this.holder });
-    this.setIsSaved(true);
-    this.cd.markForCheck();
+    this.editorService.clear({ holder: this.holder });
+  }
+
+  /**
+   * Update the component
+   * @param blocks
+   */
+  public update(blocks: Block[]) {
+    this.editorService.update({ holder: this.holder, blocks });
   }
 
   /**
@@ -194,7 +184,7 @@ export class FormContainerComponent implements AfterContentInit {
     this.app
       .getDemoData<NgxEditorJSDemo>('ngx-editorjs-demo')
       .pipe(take(1))
-      .subscribe((data: NgxEditorJSDemo) => {
+      .subscribe(data => {
         const blocks = [
           ...data.blocks,
           {
@@ -235,7 +225,7 @@ export class FormContainerComponent implements AfterContentInit {
           }
         ];
         this.menu$.next(data.links);
-        this.editor.update({ holder: this.holder, blocks });
+        this.editorService.update({ holder: this.holder, blocks }, false);
         this.setIsSaved(true);
         this.cd.markForCheck();
       });
@@ -245,6 +235,10 @@ export class FormContainerComponent implements AfterContentInit {
    * After the content has init overide the blocks with blocks from the service
    */
   ngAfterContentInit() {
-    this.reset();
+    this.editorService.isReady({ holder: this.holder }).subscribe(isReady => {
+      if (isReady) {
+        this.reset();
+      }
+    });
   }
 }
