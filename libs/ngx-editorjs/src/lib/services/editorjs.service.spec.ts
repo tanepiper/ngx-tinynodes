@@ -6,9 +6,10 @@ import { MockNgZone } from '../../testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '../../testing/shared';
 import { NGX_EDITORJS_CONFIG } from '../types/config';
 import { UserPlugins } from '../types/plugins';
-import { EditorJSInstance, EDITORJS_MODULE_IMPORT, NgxEditorJSInstanceService } from './editorjs-injector';
+import { NgxEditorJSInstanceService } from './editorjs-injector';
 import { NgxEditorJSService } from './editorjs.service';
 import { NgxEditorJSPluginService } from './plugins.service';
+import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
 
 describe('NgxEditorJSService', () => {
   let service: NgxEditorJSService;
@@ -71,13 +72,13 @@ describe('NgxEditorJSService', () => {
   });
 
   it('should create an instance of EditorJS', () => {
-    const editor = service.getEditor(holder);
+    const editor = service.getEditor({ holder });
     expect(editor).toBeDefined();
   });
 
   it('should create a ready instance', done => {
     service
-      .isReady(holder)
+      .isReady({ holder })
       .pipe(
         distinctUntilChanged(),
         filter(isReady => isReady),
@@ -93,7 +94,7 @@ describe('NgxEditorJSService', () => {
 
   it('should trigger a change on update', done => {
     service
-      .getChanged(holder)
+      .getChanged({ holder })
       .pipe(
         distinctUntilChanged(),
         filter(hasChanged => hasChanged !== 0),
@@ -110,7 +111,7 @@ describe('NgxEditorJSService', () => {
 
   it('should trigger a change on save', done => {
     service
-      .getChanged(holder)
+      .getChanged({ holder })
       .pipe(takeUntil(onDestroy$))
       .subscribe(hasChanged => {
         expect(hasChanged).toBeDefined();

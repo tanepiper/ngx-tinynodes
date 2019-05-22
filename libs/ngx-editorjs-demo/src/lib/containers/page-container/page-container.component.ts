@@ -52,7 +52,7 @@ export class PageContainerComponent implements AfterContentInit {
    * Get the blocks for the page
    */
   public get blocks() {
-    return this.editor.getBlocks(this.holder);
+    return this.editor.getBlocks({ holder: this.holder });
   }
 
   /**

@@ -1,7 +1,9 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { Component, ViewChild } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
-import { EditorJSBaseComponent } from '../base/container.class';
+import { NgxEditorJSBaseComponent } from '../base/container.class';
 
 /**
  * This component is provided as a shortcut to using EditorJS in your
@@ -16,17 +18,34 @@ import { EditorJSBaseComponent } from '../base/container.class';
   templateUrl: 'editorjs.component.html',
   styleUrls: ['editorjs.component.scss']
 })
-export class NgxEditorJSComponent extends EditorJSBaseComponent {
+export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
   /**
    * Access to the underlying editor directive
    */
-  @ViewChild(NgxEditorJSDirective) public editor: NgxEditorJSDirective;
+  @ViewChild(NgxEditorJSDirective) public editorEl: NgxEditorJSDirective;
 
   /**
    * Constructs the Editor component
    * @param service The NgxEditorJSService instance
    */
-  constructor(public readonly service: NgxEditorJSService) {
-    super(service);
+  constructor(protected readonly service: NgxEditorJSService, protected readonly fm: FocusMonitor) {
+    super(service, fm);
+  }
+
+  ngAfterContentInit() {
+    this.getFocusMonitor(this.editorEl.element)
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(focused => {
+        this.onTouch();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.fm.stopMonitoring(this.editorEl.element);
+    if (this.timerSubscription$ && !this.timerSubscription$.closed) {
+      this.timerSubscription$.unsubscribe();
+    }
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
   }
 }

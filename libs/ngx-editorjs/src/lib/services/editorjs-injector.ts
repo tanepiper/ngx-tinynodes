@@ -1,40 +1,10 @@
-import { ApplicationRef, Inject, Injectable, InjectionToken, NgZone } from '@angular/core';
-import EditorJS, { EditorConfig } from '@editorjs/editorjs';
+import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
+import EditorJS from '@editorjs/editorjs';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Block } from '../types/blocks';
+import { EditorJSInstance, EditorJSInstanceConfig, MAP_DEFAULTS, InjectorMethodOption } from '../types/injector';
 import { BlocksMap, ChangeMap, EditorMap, EventMap, EventType, ReadyMap } from '../types/maps';
-
-/**
- * Configuration for creating an EditorJS instance
- */
-export interface EditorJSInstanceConfig {
-  /**
-   * The editor configuration, this is required with at least the `holder` property
-   */
-  editorConfig: EditorConfig;
-  /**
-   * The method to call when the editor makes a change
-   */
-  onChange?: (holder?: string) => void;
-
-  /**
-   * The method to call with an editor is ready
-   */
-  onReady?: (holder?: string) => void;
-}
-
-/**
- * Default values for each internal map
- */
-const MAP_DEFAULTS = [['blocksMap', []], ['changeMap', 0], ['readyMap', false]];
-
-/**
- * Injection token for the EditorJS class
- */
-export const EDITORJS_MODULE_IMPORT = new InjectionToken<any>('EDITORJS_MODULE_IMPORT');
-
-export const EditorJSInstance = new InjectionToken<any>('EditorJSInstance');
 
 /**
  * EditorJS factory service, call `createInstance` with an `EditorConfig` to
@@ -113,8 +83,8 @@ export class NgxEditorJSInstanceService {
       const holder = editorConfig.holder as string;
       return editor.isReady.then(() => {
         return this.zone.run(() => {
-          this.setupSubjects(holder, editor);
-          this.setupEvents(holder);
+          this.setupSubjects({ holder, editor });
+          this.setupEvents({ holder });
           this.readyMap[holder].next(true);
           this.ref.tick();
         });
@@ -122,7 +92,7 @@ export class NgxEditorJSInstanceService {
     });
   }
 
-  public onChange(holder: string): void {
+  public onChange({ holder }: InjectorMethodOption): void {
     const d = Date.now();
     if (!this.changeMap[holder]) {
       this.changeMap[holder] = new BehaviorSubject<number>(d);
@@ -130,7 +100,7 @@ export class NgxEditorJSInstanceService {
     this.changeMap[holder].next(d);
   }
 
-  public onReady(holder: string) {
+  public onReady({ holder }: InjectorMethodOption) {
     if (!this.readyMap[holder]) {
       this.readyMap[holder] = new BehaviorSubject<boolean>(false);
     }
@@ -141,8 +111,8 @@ export class NgxEditorJSInstanceService {
    * Calls the save method on an editor
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public save(holder: string) {
-    if (!this.eventMap[holder]) {
+  public save({ holder }: InjectorMethodOption) {
+    if (this.eventMap[holder]) {
       this.eventMap[holder].next({ type: 'save' });
     }
   }
@@ -151,7 +121,7 @@ export class NgxEditorJSInstanceService {
    * Calls a clear method on an editor
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public clear(holder: string) {
+  public clear({ holder }: InjectorMethodOption) {
     this.eventMap[holder].next({ type: 'clear' });
   }
 
@@ -160,7 +130,7 @@ export class NgxEditorJSInstanceService {
    * @param holder The holder ID of the `EditorJS` instance
    * @param blocks The blocks to update the editor with
    */
-  public update(holder: string, blocks: Block[]) {
+  public update({ holder, blocks }: InjectorMethodOption) {
     if (!this.eventMap[holder]) {
       this.eventMap[holder] = new BehaviorSubject<EventType>({ type: '' });
     }
@@ -171,7 +141,7 @@ export class NgxEditorJSInstanceService {
    * Returns an Observable value of an `EditorJS` instance
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public getInstance(holder: string): Observable<EditorJS> {
+  public getInstance({ holder }: InjectorMethodOption): Observable<EditorJS> {
     if (!this.editorMap[holder]) {
       this.editorMap[holder] = new BehaviorSubject<EditorJS | undefined>(undefined);
     }
@@ -182,7 +152,7 @@ export class NgxEditorJSInstanceService {
    * Returns an Observable value of an `EditorJS` instance
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public getReady(holder: string): Observable<boolean> {
+  public getReady({ holder }: InjectorMethodOption): Observable<boolean> {
     if (!this.readyMap[holder]) {
       this.readyMap[holder] = new BehaviorSubject<boolean>(false);
     }
@@ -193,7 +163,7 @@ export class NgxEditorJSInstanceService {
    * Returns an Observable value of an `EditorJS` instance
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public getChanged(holder: string): Observable<number> {
+  public getChanged({ holder }: InjectorMethodOption): Observable<number> {
     if (!this.changeMap[holder]) {
       this.changeMap[holder] = new BehaviorSubject<number>(0);
     }
@@ -204,7 +174,7 @@ export class NgxEditorJSInstanceService {
    * Returns an Observable value of an `EditorJS` instance
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public getBlocks(holder: string): Observable<Block[]> {
+  public getBlocks({ holder }: InjectorMethodOption): Observable<Block[]> {
     if (!this.blocksMap[holder]) {
       this.blocksMap[holder] = new BehaviorSubject<Block[]>([]);
     }
@@ -215,7 +185,7 @@ export class NgxEditorJSInstanceService {
    * Destroys an instance of an editor and cleans up all Observable values
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public destroyInstance(holder: string): void {
+  public destroyInstance({ holder }: InjectorMethodOption): void {
     const instanceDestroyed = new Subject<boolean>();
     this.editorMap[holder]
       .pipe(
@@ -226,7 +196,7 @@ export class NgxEditorJSInstanceService {
         this.zone.runOutsideAngular(() => {
           editor.destroy();
           this.zone.run(() => {
-            this.cleanupSubjects(holder);
+            this.cleanupSubjects({ holder });
             instanceDestroyed.next(true);
             instanceDestroyed.complete();
             this.ref.tick();
@@ -240,7 +210,7 @@ export class NgxEditorJSInstanceService {
    * @param holder The holder to set up the subjects for
    * @param editor The Editor instance created outside of Angular
    */
-  private setupSubjects(holder: string, editor: EditorJS): void {
+  private setupSubjects({ holder, editor }: InjectorMethodOption): void {
     if (this.editorMap[holder]) {
       this.editorMap[holder].next(editor);
     } else {
@@ -262,7 +232,7 @@ export class NgxEditorJSInstanceService {
    * updates
    * @param holder The holder ID of the `EditorJS` instance
    */
-  private setupEvents(holder: string) {
+  private setupEvents({ holder }: InjectorMethodOption) {
     combineLatest([this.eventMap[holder], this.editorMap[holder]])
       .pipe(
         filter(([event, editor]) => event.type && typeof editor !== 'undefined'),
@@ -270,13 +240,13 @@ export class NgxEditorJSInstanceService {
       )
       .subscribe(([event, editor]) => {
         if (event.type === 'save') {
-          this.saveHandler(holder, editor);
+          this.saveHandler({ holder, editor });
         }
         if (event.type === 'clear') {
-          this.clearHandler(holder, editor);
+          this.clearHandler({ holder, editor });
         }
         if (event.type === 'update') {
-          this.updateHandler(holder, editor, event.payload.blocks);
+          this.updateHandler({ holder, editor, blocks: event.payload.blocks });
         }
         this.eventMap[holder].next({ type: '' });
       });
@@ -288,7 +258,7 @@ export class NgxEditorJSInstanceService {
    * destroyed
    * @param holder The holder ID for the `EditorJS` instance
    */
-  private cleanupSubjects(holder: string) {
+  private cleanupSubjects({ holder }: InjectorMethodOption) {
     MAP_DEFAULTS.forEach(([mapKay, value]: [string, any]) => {
       if (this[mapKay][holder]) {
         this[mapKay][holder].next(value);
@@ -309,8 +279,8 @@ export class NgxEditorJSInstanceService {
    * Call this to destroy all subscriptions within the service
    */
   public destroy() {
-    Object.keys(this.editorMap).forEach(key => {
-      this.destroyInstance(key);
+    Object.keys(this.editorMap).forEach(holder => {
+      this.destroyInstance({ holder });
     });
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
@@ -323,7 +293,7 @@ export class NgxEditorJSInstanceService {
    * @param editor The `EditorJS` instance
    * @param blocks The {Block} items to render
    */
-  private saveHandler(holder: string, editor: EditorJS) {
+  private saveHandler({ holder, editor }: InjectorMethodOption) {
     this.zone.runOutsideAngular(() => {
       editor.saver.save().then(data => {
         this.zone.run(() => {
@@ -340,7 +310,7 @@ export class NgxEditorJSInstanceService {
    * @param editor The `EditorJS` instance
    * @param blocks The {Block} items to render
    */
-  private clearHandler(holder: string, editor: EditorJS) {
+  private clearHandler({ holder, editor }: InjectorMethodOption) {
     this.zone.runOutsideAngular(() => {
       editor.blocks.clear();
       this.zone.run(() => {
@@ -357,7 +327,7 @@ export class NgxEditorJSInstanceService {
    * @param editor The `EditorJS` instance
    * @param blocks The {Block} items to render
    */
-  private updateHandler(holder: string, editor: EditorJS, blocks: Block[]) {
+  private updateHandler({ holder, editor, blocks }: InjectorMethodOption) {
     if (!blocks) {
       return;
     }

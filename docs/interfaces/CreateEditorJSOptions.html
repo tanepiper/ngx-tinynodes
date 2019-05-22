@@ -62,7 +62,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/services/editorjs.service.ts</code>
+            <code>libs/ngx-editorjs/src/lib/types/editorjs-service.ts</code>
         </p>
 
             <p class="comment">
@@ -228,15 +228,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable } from &#x27;@angular/core&#x27;;
-import EditorJS, { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
-import { BehaviorSubject, Observable, Subject } from &#x27;rxjs&#x27;;
-import { filter, takeUntil } from &#x27;rxjs/operators&#x27;;
-import { Block } from &#x27;../types/blocks&#x27;;
-import { EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;../types/config&#x27;;
-import { NgxEditorJSInstanceService } from &#x27;./editorjs-injector&#x27;;
-import { NgxEditorJSPluginService } from &#x27;./plugins.service&#x27;;
-
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
 /**
  * Interface describing an action to trigger EditorJS
  */
@@ -296,156 +288,6 @@ export interface CreateEditorJSOptions {
    */
   autoSave?: boolean;
 }
-
-/**
- * The NgxEditorJSService provides control EditorJS instances via Angular.
- */
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
-export class NgxEditorJSService {
-  private onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
-  /**
-   * Internal editor action state
-   */
-  private readonly editorActions$ &#x3D; new BehaviorSubject&lt;EditorJSAction&gt;({
-    action: &#x27;&#x27;
-  });
-
-  /**
-   * Editor action stream
-   */
-  public get editorActions() {
-    return this.editorActions$.pipe(filter(action &#x3D;&gt; action.action !&#x3D;&#x3D; &#x27;&#x27;));
-  }
-
-  constructor(
-    @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
-    private readonly editorService: NgxEditorJSInstanceService,
-    private readonly plugins: NgxEditorJSPluginService
-  ) {
-    this.editorActions.pipe(takeUntil(this.onDestroy$)).subscribe(editorAction &#x3D;&gt; {
-      switch (editorAction.action) {
-        case EditorJSActionTypes.CreateEditor: {
-          return this.createEditor(editorAction.payload);
-        }
-        case EditorJSActionTypes.ClearEditor: {
-          return this.clear(editorAction.payload);
-        }
-        case EditorJSActionTypes.DestroyEditor: {
-          return this.destroy(editorAction.payload);
-        }
-        case EditorJSActionTypes.SaveEditor: {
-          return this.save(editorAction.payload);
-        }
-        case EditorJSActionTypes.UpdateEditor: {
-          return this.update(editorAction.payload);
-        }
-        default: {
-          return;
-        }
-      }
-    });
-  }
-
-  /**
-   * This method creates a new EditorJS instance
-   * @param holder The ID of the holder of the instance
-   * @param blocks Optional initial set of blocks to render in the editor
-   * @param excludeTools String array of keys to not include with this editor
-   * @param autoSave When an instance changes we update the block map, set to false if you want to disable
-   */
-  public async createEditor(options: CreateEditorJSOptions): Promise&lt;void&gt; {
-    const editorConfig: EditorConfig &#x3D; {
-      ...this.config.editorjs,
-      ...options.config,
-      tools: this.plugins.getTools(options.includeTools)
-    };
-
-    await this.editorService.createInstance({ editorConfig });
-  }
-
-  /**
-   * Get an &#x60;EditorJS&#x60; instance
-   * See the [EditorJS API](https://editorjs.io/api) docs for more details
-   * @param holder The ID of the holder of the instance
-   */
-  public getEditor(holder: string): Observable&lt;EditorJS&gt; {
-    return this.editorService.getInstance(holder).pipe(filter(editor &#x3D;&gt; typeof editor !&#x3D;&#x3D; &#x27;undefined&#x27;));
-  }
-
-  /**
-   * Get an observable of the blocks for an &#x60;EditorJS&#x60; instance
-   * @param holder The ID of the holder of the instance
-   */
-  public getBlocks(holder: string): Observable&lt;Block[]&gt; {
-    return this.editorService.getBlocks(holder);
-  }
-
-  /**
-   * Returns an &#x60;Observable&lt;boolean&gt;&#x60; of the current ready state, this can be subscribed to before calling
-   * the &#x60;createEditor&#x60; method
-   * @param holder
-   */
-  public isReady(holder: string): Observable&lt;boolean&gt; {
-    return this.editorService.getReady(holder);
-  }
-
-  /**
-   * Returns an &#x60;Observable&lt;number&gt;&#x60; of the current timestamp of the last change
-   * this can be subscribed to before calling the &#x60;createEditor&#x60; method
-   * @param holder
-   */
-  public getChanged(holder: string): Observable&lt;number&gt; {
-    return this.editorService.getChanged(holder);
-  }
-
-  /**
-   * Check to see if the &#x60;EditorJS&#x60; instance has changed
-   * @param holder The ID of the holder of the instance
-   */
-  public hasChanged(holder: string) {
-    this.editorService.onChange(holder);
-  }
-
-  /**
-   * This method updates the blocks within the &#x60;EditorJS&#x60; instance.
-   * If there is no instance of that name it will throw an error.
-   * @param holder The ID of the holder of the instance
-   * @param blocks The array of &#x60;Block&#x60; elements to render
-   */
-  public update({ holder, blocks }: { holder: string; blocks: Block[] }) {
-    this.editorService.update(holder, blocks);
-  }
-
-  /**
-   * Calls the &#x60;EditorJS&#x60; save method which returns an &#x60;OutputData&#x60; object.
-   * From this the service updates the blocks map and change map values
-   * If there is no instance of that name it will throw an error.
-   * @param holder The ID of the holder of the instance
-   */
-  public save({ holder }: { holder: string }): void {
-    this.editorService.save(holder);
-  }
-
-  /**
-   * Clears all blocks from an &#x60;EditorJS instance&#x60;
-   * @param holder The ID of the holder of the instance
-   */
-  public clear({ holder }: { holder: string }): void {
-    this.editorService.clear(holder);
-  }
-
-  /**
-   * Destroy the &#x60;EditorJS&#x60; instance
-   * It also calls the maps and sets their values back to their defaults and then
-   * completes and destroys them
-   * @param holder The ID of the holder of the instance
-   */
-  public destroy({ holder }: { holder: string }): void {
-    this.editorService.destroyInstance(holder);
-  }
-}
 </code></pre>
     </div>
 </div>
@@ -472,7 +314,7 @@ export class NgxEditorJSService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'CreateEditorJSOptions.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

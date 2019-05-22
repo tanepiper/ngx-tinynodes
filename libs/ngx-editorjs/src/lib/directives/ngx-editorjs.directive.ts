@@ -6,14 +6,15 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  SimpleChanges
+  SimpleChanges,
+  Output,
+  EventEmitter
 } from '@angular/core';
-import EditorJS, { SanitizerConfig, EditorConfig } from '@editorjs/editorjs';
+import EditorJS, { EditorConfig, SanitizerConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
-import { EditorJSConfig } from '../types/config';
 
 /**
  * The main directive of `ngx-editorjs` provides a way to attach
@@ -29,8 +30,14 @@ import { EditorJSConfig } from '../types/config';
   selector: '[ngxEditorJS]'
 })
 export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentInit {
+  /**
+   * Form touched state
+   */
   private touched$ = new BehaviorSubject<boolean>(false);
 
+  /**
+   * Component ID
+   */
   private id: string;
 
   /**
@@ -101,7 +108,20 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   @HostListener('click')
   onclick() {
     this.touched$.next(true);
+    this.isTouched.emit(true);
   }
+
+  /**
+   * If the component has been touched
+   */
+  @Output()
+  isTouched = new EventEmitter<boolean>();
+
+  /**
+   * Returns if the element has changed
+   */
+  @Output()
+  hasChanged = new EventEmitter<Block[]>();
 
   /**
    * Creates the directive instance
@@ -114,7 +134,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Get the `EditorJS` instance for this directive
    */
   public get editor(): Observable<EditorJS> {
-    return this.service.getEditor(this.id);
+    return this.service.getEditor({ holder: this.id });
   }
 
   /**
@@ -160,6 +180,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
+      this.hasChanged.emit(changes.blocks.currentValue);
       return this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
     }
     const changesKeys = Object.keys(changes);
@@ -212,6 +233,9 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
         version: EditorJS.version,
         blocks: this.blocks
       };
+      this.hasChanged.emit(this.blocks);
+    } else {
+      this.hasChanged.emit([]);
     }
     return config;
   }

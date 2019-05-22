@@ -62,15 +62,15 @@
 </g>
 <g id="clust39" class="cluster">
 <title>cluster_NgxEditorJSModule</title>
-<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="573,-138 573,-206 2776,-206 2776,-138 573,-138"/>
+<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="573,-138 573,-206 2824,-206 2824,-138 573,-138"/>
 </g>
 <g id="clust40" class="cluster">
 <title>cluster_NgxEditorJSModule_declarations</title>
-<polygon fill="none" stroke="#000000" points="2043,-146 2043,-198 2768,-198 2768,-146 2043,-146"/>
+<polygon fill="none" stroke="#000000" points="2067,-146 2067,-198 2816,-198 2816,-146 2067,-146"/>
 </g>
 <g id="clust46" class="cluster">
 <title>cluster_NgxEditorJSModule_exports</title>
-<polygon fill="none" stroke="#000000" points="1295,-146 1295,-198 2035,-198 2035,-146 1295,-146"/>
+<polygon fill="none" stroke="#000000" points="1295,-146 1295,-198 2059,-198 2059,-146 1295,-146"/>
 </g>
 <g id="clust48" class="cluster">
 <title>cluster_NgxEditorJSModule_providers</title>
@@ -384,17 +384,17 @@
 <path fill="none" stroke="#000000" d="M1635.9695,-266.0109C1635.9695,-288.4852 1635.9695,-324 1635.9695,-324 1635.9695,-324 1767.85,-324 1767.85,-324"/>
 <polygon fill="#000000" stroke="#000000" points="1767.85,-327.5001 1777.85,-324 1767.8499,-320.5001 1767.85,-327.5001"/>
 </g>
-<!-- EditorJSBaseComponent  -->
+<!-- NgxEditorJSBaseComponent  -->
 <g id="node35" class="node">
-<title>EditorJSBaseComponent </title>
-<polygon fill="#fb8072" stroke="#000000" points="1801.2646,-190 1640.7354,-190 1640.7354,-154 1801.2646,-154 1801.2646,-190"/>
-<text text-anchor="middle" x="1721" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">EditorJSBaseComponent </text>
+<title>NgxEditorJSBaseComponent </title>
+<polygon fill="#fb8072" stroke="#000000" points="1825.3714,-190 1640.6286,-190 1640.6286,-154 1825.3714,-154 1825.3714,-190"/>
+<text text-anchor="middle" x="1733" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSBaseComponent </text>
 </g>
-<!-- NgxEditorJSModule&#45;&gt;EditorJSBaseComponent  -->
+<!-- NgxEditorJSModule&#45;&gt;NgxEditorJSBaseComponent  -->
 <g id="edge40" class="edge">
-<title>NgxEditorJSModule&#45;&gt;EditorJSBaseComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1644.878,-229.9891C1644.878,-229.9891 1644.878,-200.145 1644.878,-200.145"/>
-<polygon fill="#000000" stroke="#000000" points="1648.3781,-200.145 1644.878,-190.145 1641.3781,-200.1451 1648.3781,-200.145"/>
+<title>NgxEditorJSModule&#45;&gt;NgxEditorJSBaseComponent </title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1644.8323,-229.9891C1644.8323,-229.9891 1644.8323,-200.145 1644.8323,-200.145"/>
+<polygon fill="#000000" stroke="#000000" points="1648.3324,-200.145 1644.8323,-190.145 1641.3324,-200.1451 1648.3324,-200.145"/>
 </g>
 <!-- NgxEditorJSComponent  -->
 <g id="node36" class="node">
@@ -423,14 +423,14 @@
 <!-- NgxEditorJSMatFieldComponent  -->
 <g id="node38" class="node">
 <title>NgxEditorJSMatFieldComponent </title>
-<polygon fill="#fb8072" stroke="#000000" points="2027.4894,-190 1818.5106,-190 1818.5106,-154 2027.4894,-154 2027.4894,-190"/>
-<text text-anchor="middle" x="1923" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSMatFieldComponent </text>
+<polygon fill="#fb8072" stroke="#000000" points="2051.4894,-190 1842.5106,-190 1842.5106,-154 2051.4894,-154 2051.4894,-190"/>
+<text text-anchor="middle" x="1947" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSMatFieldComponent </text>
 </g>
 <!-- NgxEditorJSModule&#45;&gt;NgxEditorJSMatFieldComponent  -->
 <g id="edge43" class="edge">
 <title>NgxEditorJSModule&#45;&gt;NgxEditorJSMatFieldComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1664.9288,-229.7181C1664.9288,-214.0522 1664.9288,-194 1664.9288,-194 1664.9288,-194 1826.1352,-194 1826.1352,-194 1826.1352,-194 1826.1352,-193.6168 1826.1352,-193.6168"/>
-<polygon fill="#000000" stroke="#000000" points="1829.6354,-200.1678 1826.1352,-190.1679 1822.6354,-200.168 1829.6354,-200.1678"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1664.9212,-229.7181C1664.9212,-214.0522 1664.9212,-194 1664.9212,-194 1664.9212,-194 1891.6205,-194 1891.6205,-194 1891.6205,-194 1891.6205,-193.6168 1891.6205,-193.6168"/>
+<polygon fill="#000000" stroke="#000000" points="1895.1207,-200.1678 1891.6205,-190.1679 1888.1207,-200.168 1895.1207,-200.1678"/>
 </g>
 <!-- NgxEditorjsNgrxModule -->
 <g id="node42" class="node">
@@ -732,53 +732,53 @@
 <path fill="none" stroke="#000000" d="M5173.5947,-248C5200.9947,-248 5224.3761,-248 5224.3761,-248 5224.3761,-248 5224.3761,-295.9891 5224.3761,-295.9891"/>
 <polygon fill="#000000" stroke="#000000" points="5220.8762,-295.989 5224.3761,-305.9891 5227.8762,-295.9891 5220.8762,-295.989"/>
 </g>
-<!-- EditorJSBaseComponent -->
+<!-- NgxEditorJSBaseComponent -->
 <g id="node31" class="node">
-<title>EditorJSBaseComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2537.2646,-190 2380.7354,-190 2380.7354,-154 2537.2646,-154 2537.2646,-190"/>
-<text text-anchor="middle" x="2459" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">EditorJSBaseComponent</text>
+<title>NgxEditorJSBaseComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="2585.371,-190 2404.629,-190 2404.629,-154 2585.371,-154 2585.371,-190"/>
+<text text-anchor="middle" x="2495" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSBaseComponent</text>
 </g>
-<!-- EditorJSBaseComponent&#45;&gt;NgxEditorJSModule -->
+<!-- NgxEditorJSBaseComponent&#45;&gt;NgxEditorJSModule -->
 <g id="edge36" class="edge">
-<title>EditorJSBaseComponent&#45;&gt;NgxEditorJSModule</title>
-<path fill="none" stroke="#000000" d="M2394.5252,-190.2434C2394.5252,-197.4297 2394.5252,-204 2394.5252,-204 2394.5252,-204 1656.9085,-204 1656.9085,-204 1656.9085,-204 1656.9085,-219.8495 1656.9085,-219.8495"/>
-<polygon fill="#000000" stroke="#000000" points="1653.4086,-219.8494 1656.9085,-229.8495 1660.4086,-219.8495 1653.4086,-219.8494"/>
+<title>NgxEditorJSBaseComponent&#45;&gt;NgxEditorJSModule</title>
+<path fill="none" stroke="#000000" d="M2417.5274,-190.2434C2417.5274,-197.4297 2417.5274,-204 2417.5274,-204 2417.5274,-204 1656.8856,-204 1656.8856,-204 1656.8856,-204 1656.8856,-219.8495 1656.8856,-219.8495"/>
+<polygon fill="#000000" stroke="#000000" points="1653.3857,-219.8494 1656.8856,-229.8495 1660.3857,-219.8495 1653.3857,-219.8494"/>
 </g>
 <!-- NgxEditorJSComponent -->
 <g id="node32" class="node">
 <title>NgxEditorJSComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2362.661,-190 2209.339,-190 2209.339,-154 2362.661,-154 2362.661,-190"/>
-<text text-anchor="middle" x="2286" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSComponent</text>
+<polygon fill="#ffffb3" stroke="#000000" points="2386.661,-190 2233.339,-190 2233.339,-154 2386.661,-154 2386.661,-190"/>
+<text text-anchor="middle" x="2310" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSComponent</text>
 </g>
 <!-- NgxEditorJSComponent&#45;&gt;NgxEditorJSModule -->
 <g id="edge37" class="edge">
 <title>NgxEditorJSComponent&#45;&gt;NgxEditorJSModule</title>
-<path fill="none" stroke="#000000" d="M2237.6087,-190.207C2237.6087,-195.5549 2237.6087,-200 2237.6087,-200 2237.6087,-200 1652.8983,-200 1652.8983,-200 1652.8983,-200 1652.8983,-219.8533 1652.8983,-219.8533"/>
-<polygon fill="#000000" stroke="#000000" points="1649.3984,-219.8532 1652.8983,-229.8533 1656.3984,-219.8533 1649.3984,-219.8532"/>
+<path fill="none" stroke="#000000" d="M2249.6087,-190.207C2249.6087,-195.5549 2249.6087,-200 2249.6087,-200 2249.6087,-200 1652.8679,-200 1652.8679,-200 1652.8679,-200 1652.8679,-219.8533 1652.8679,-219.8533"/>
+<polygon fill="#000000" stroke="#000000" points="1649.368,-219.8532 1652.8679,-229.8533 1656.368,-219.8533 1649.368,-219.8532"/>
 </g>
 <!-- NgxEditorJSDirective -->
 <g id="node33" class="node">
 <title>NgxEditorJSDirective</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2191.4116,-190 2050.5884,-190 2050.5884,-154 2191.4116,-154 2191.4116,-190"/>
-<text text-anchor="middle" x="2121" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSDirective</text>
+<polygon fill="#ffffb3" stroke="#000000" points="2215.4116,-190 2074.5884,-190 2074.5884,-154 2215.4116,-154 2215.4116,-190"/>
+<text text-anchor="middle" x="2145" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSDirective</text>
 </g>
 <!-- NgxEditorJSDirective&#45;&gt;NgxEditorJSModule -->
 <g id="edge38" class="edge">
 <title>NgxEditorJSDirective&#45;&gt;NgxEditorJSModule</title>
-<path fill="none" stroke="#000000" d="M2087.5589,-190.1686C2087.5589,-194.0459 2087.5589,-197 2087.5589,-197 2087.5589,-197 1648.8881,-197 1648.8881,-197 1648.8881,-197 1648.8881,-219.8757 1648.8881,-219.8757"/>
-<polygon fill="#000000" stroke="#000000" points="1645.3882,-219.8757 1648.8881,-229.8757 1652.3882,-219.8757 1645.3882,-219.8757"/>
+<path fill="none" stroke="#000000" d="M2099.5589,-190.1686C2099.5589,-194.0459 2099.5589,-197 2099.5589,-197 2099.5589,-197 1648.8501,-197 1648.8501,-197 1648.8501,-197 1648.8501,-219.8757 1648.8501,-219.8757"/>
+<polygon fill="#000000" stroke="#000000" points="1645.3502,-219.8757 1648.8501,-229.8757 1652.3502,-219.8757 1645.3502,-219.8757"/>
 </g>
 <!-- NgxEditorJSMatFieldComponent -->
 <g id="node34" class="node">
 <title>NgxEditorJSMatFieldComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2760.4888,-190 2555.5112,-190 2555.5112,-154 2760.4888,-154 2760.4888,-190"/>
-<text text-anchor="middle" x="2658" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSMatFieldComponent</text>
+<polygon fill="#ffffb3" stroke="#000000" points="2808.4888,-190 2603.5112,-190 2603.5112,-154 2808.4888,-154 2808.4888,-190"/>
+<text text-anchor="middle" x="2706" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSMatFieldComponent</text>
 </g>
 <!-- NgxEditorJSMatFieldComponent&#45;&gt;NgxEditorJSModule -->
 <g id="edge39" class="edge">
 <title>NgxEditorJSMatFieldComponent&#45;&gt;NgxEditorJSModule</title>
-<path fill="none" stroke="#000000" d="M2562.4418,-190.32C2562.4418,-198.7883 2562.4418,-207 2562.4418,-207 2562.4418,-207 1660.9187,-207 1660.9187,-207 1660.9187,-207 1660.9187,-219.8975 1660.9187,-219.8975"/>
-<polygon fill="#000000" stroke="#000000" points="1657.4188,-219.8974 1660.9187,-229.8975 1664.4188,-219.8975 1657.4188,-219.8974"/>
+<path fill="none" stroke="#000000" d="M2669,-190.32C2669,-198.7883 2669,-207 2669,-207 2669,-207 1660.9034,-207 1660.9034,-207 1660.9034,-207 1660.9034,-219.8975 1660.9034,-219.8975"/>
+<polygon fill="#000000" stroke="#000000" points="1657.4035,-219.8974 1660.9034,-229.8975 1664.4035,-219.8975 1657.4035,-219.8974"/>
 </g>
 <!-- NgxEditorJSInstanceService -->
 <g id="node39" class="node">

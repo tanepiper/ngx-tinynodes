@@ -62,7 +62,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/services/editorjs-injector.ts</code>
+            <code>libs/ngx-editorjs/src/lib/types/injector.ts</code>
         </p>
 
             <p class="comment">
@@ -228,13 +228,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApplicationRef, Inject, Injectable, InjectionToken, NgZone } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
 import EditorJS, { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
-import { BehaviorSubject, combineLatest, Observable, Subject } from &#x27;rxjs&#x27;;
-import { filter, takeUntil } from &#x27;rxjs/operators&#x27;;
-import { Block } from &#x27;../types/blocks&#x27;;
-import { BlocksMap, ChangeMap, EditorMap, EventMap, EventType, ReadyMap } from &#x27;../types/maps&#x27;;
-
+import { Block } from &#x27;./blocks&#x27;;
 /**
  * Configuration for creating an EditorJS instance
  */
@@ -257,7 +253,7 @@ export interface EditorJSInstanceConfig {
 /**
  * Default values for each internal map
  */
-const MAP_DEFAULTS &#x3D; [[&#x27;blocksMap&#x27;, []], [&#x27;changeMap&#x27;, 0], [&#x27;readyMap&#x27;, false]];
+export const MAP_DEFAULTS &#x3D; [[&#x27;blocksMap&#x27;, []], [&#x27;changeMap&#x27;, 0], [&#x27;readyMap&#x27;, false]];
 
 /**
  * Injection token for the EditorJS class
@@ -267,342 +263,21 @@ export const EDITORJS_MODULE_IMPORT &#x3D; new InjectionToken&lt;any&gt;(&#x27;E
 export const EditorJSInstance &#x3D; new InjectionToken&lt;any&gt;(&#x27;EditorJSInstance&#x27;);
 
 /**
- * EditorJS factory service, call &#x60;createInstance&#x60; with an &#x60;EditorConfig&#x60; to
- * return an instance after the DOM element is ready, this is stored in a subject to
- * be retrieved when ready.
+ * Options for a Injector method
  */
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
-export class NgxEditorJSInstanceService {
-  static nextIdValue &#x3D; 0;
-
-  get idValue() {
-    NgxEditorJSInstanceService.nextIdValue++;
-    return NgxEditorJSInstanceService.nextIdValue;
-  }
+export interface InjectorMethodOption {
   /**
-   * Internal destroy method for the service
+   * The holder for the option
    */
-  private onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
-
+  holder: string;
   /**
-   * Internal map of all EditorJS instances
+   * Optional blocks
    */
-  private editorMap: EditorMap &#x3D; {};
-
+  blocks?: Block[];
   /**
-   * Internal map of all Block &#x60;BehaviorSubject&#x60; instances
+   * Optional editor
    */
-  private blocksMap: BlocksMap &#x3D; {};
-
-  /**
-   * Internal map of all EditorJS ready states
-   */
-  private readyMap: ReadyMap &#x3D; {};
-
-  /**
-   * Internal map of all EditorJS change states
-   */
-  private changeMap: ChangeMap &#x3D; {};
-
-  /**
-   * The Event map is used to trigger events
-   */
-  private eventMap: EventMap &#x3D; {};
-
-  /**
-   * Import the &#x60;EditorJS&#x60; class
-   * @param editorJs The &#x60;EditorJS&#x60; class
-   * @param zone Angular zone to run
-   * @param ref The application reference to trigger a tick
-   */
-  constructor(
-    @Inject(EditorJSInstance) private editorJs: any,
-    private readonly zone: NgZone,
-    private readonly ref: ApplicationRef
-  ) {}
-
-  /**
-   * Creates a new &#x60;EditorJS&#x60; instance outside of the Angular zone and
-   * then adds it to the editor instances
-   * @param config The {EditorConfig} configuration to create
-   */
-  public createInstance(config: EditorJSInstanceConfig): Promise&lt;void&gt; {
-    const editorConfig &#x3D; {
-      ...config.editorConfig
-    };
-    editorConfig.onChange &#x3D; (config.onChange &amp;&amp; typeof config.onChange &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
-      ? config.onChange
-      : this.onChange.bind(this, editorConfig.holder as string)) as any;
-    editorConfig.onReady &#x3D; (config.onReady &amp;&amp; typeof config.onReady &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
-      ? config.onReady
-      : this.onReady.bind(this, editorConfig.holder as string)) as any;
-    return this.zone.runOutsideAngular(() &#x3D;&gt; {
-      const editor &#x3D; new (this.editorJs as any)(editorConfig);
-      const holder &#x3D; editorConfig.holder as string;
-      return editor.isReady.then(() &#x3D;&gt; {
-        return this.zone.run(() &#x3D;&gt; {
-          this.setupSubjects(holder, editor);
-          this.setupEvents(holder);
-          this.readyMap[holder].next(true);
-          this.ref.tick();
-        });
-      });
-    });
-  }
-
-  public onChange(holder: string): void {
-    const d &#x3D; Date.now();
-    if (!this.changeMap[holder]) {
-      this.changeMap[holder] &#x3D; new BehaviorSubject&lt;number&gt;(d);
-    }
-    this.changeMap[holder].next(d);
-  }
-
-  public onReady(holder: string) {
-    if (!this.readyMap[holder]) {
-      this.readyMap[holder] &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
-    }
-    this.readyMap[holder].next(true);
-  }
-
-  /**
-   * Calls the save method on an editor
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   */
-  public save(holder: string) {
-    if (!this.eventMap[holder]) {
-      this.eventMap[holder].next({ type: &#x27;save&#x27; });
-    }
-  }
-
-  /**
-   * Calls a clear method on an editor
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   */
-  public clear(holder: string) {
-    this.eventMap[holder].next({ type: &#x27;clear&#x27; });
-  }
-
-  /**
-   * Updates the editor with new blocks
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   * @param blocks The blocks to update the editor with
-   */
-  public update(holder: string, blocks: Block[]) {
-    if (!this.eventMap[holder]) {
-      this.eventMap[holder] &#x3D; new BehaviorSubject&lt;EventType&gt;({ type: &#x27;&#x27; });
-    }
-    this.eventMap[holder].next({ type: &#x27;update&#x27;, payload: { blocks } });
-  }
-
-  /**
-   * Returns an Observable value of an &#x60;EditorJS&#x60; instance
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   */
-  public getInstance(holder: string): Observable&lt;EditorJS&gt; {
-    if (!this.editorMap[holder]) {
-      this.editorMap[holder] &#x3D; new BehaviorSubject&lt;EditorJS | undefined&gt;(undefined);
-    }
-    return this.editorMap[holder].asObservable();
-  }
-
-  /**
-   * Returns an Observable value of an &#x60;EditorJS&#x60; instance
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   */
-  public getReady(holder: string): Observable&lt;boolean&gt; {
-    if (!this.readyMap[holder]) {
-      this.readyMap[holder] &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
-    }
-    return this.readyMap[holder].asObservable();
-  }
-
-  /**
-   * Returns an Observable value of an &#x60;EditorJS&#x60; instance
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   */
-  public getChanged(holder: string): Observable&lt;number&gt; {
-    if (!this.changeMap[holder]) {
-      this.changeMap[holder] &#x3D; new BehaviorSubject&lt;number&gt;(0);
-    }
-    return this.changeMap[holder].asObservable();
-  }
-
-  /**
-   * Returns an Observable value of an &#x60;EditorJS&#x60; instance
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   */
-  public getBlocks(holder: string): Observable&lt;Block[]&gt; {
-    if (!this.blocksMap[holder]) {
-      this.blocksMap[holder] &#x3D; new BehaviorSubject&lt;Block[]&gt;([]);
-    }
-    return this.blocksMap[holder].asObservable();
-  }
-
-  /**
-   * Destroys an instance of an editor and cleans up all Observable values
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   */
-  public destroyInstance(holder: string): void {
-    const instanceDestroyed &#x3D; new Subject&lt;boolean&gt;();
-    this.editorMap[holder]
-      .pipe(
-        filter(editor &#x3D;&gt; typeof editor !&#x3D;&#x3D; &#x27;undefined&#x27;),
-        takeUntil(instanceDestroyed)
-      )
-      .subscribe(editor &#x3D;&gt; {
-        this.zone.runOutsideAngular(() &#x3D;&gt; {
-          editor.destroy();
-          this.zone.run(() &#x3D;&gt; {
-            this.cleanupSubjects(holder);
-            instanceDestroyed.next(true);
-            instanceDestroyed.complete();
-            this.ref.tick();
-          });
-        });
-      });
-  }
-
-  /**
-   * Sets up the Subjects provided by this service
-   * @param holder The holder to set up the subjects for
-   * @param editor The Editor instance created outside of Angular
-   */
-  private setupSubjects(holder: string, editor: EditorJS): void {
-    if (this.editorMap[holder]) {
-      this.editorMap[holder].next(editor);
-    } else {
-      this.editorMap[holder] &#x3D; new BehaviorSubject&lt;EditorJS&gt;(editor);
-    }
-    MAP_DEFAULTS.forEach(([mapKay, value]: [string, typeof value]) &#x3D;&gt; {
-      if (!this[mapKay][holder]) {
-        this[mapKay][holder] &#x3D; new BehaviorSubject&lt;typeof value&gt;(value);
-      }
-      this[mapKay][holder].next(value);
-    });
-    if (!this.eventMap[holder]) {
-      this.eventMap[holder] &#x3D; new BehaviorSubject&lt;EventType&gt;({ type: &#x27;&#x27; });
-    }
-  }
-
-  /**
-   * Sets up a listener for the event map and provides the editor and blocks to handle
-   * updates
-   * @param holder The holder ID of the &#x60;EditorJS&#x60; instance
-   */
-  private setupEvents(holder: string) {
-    combineLatest([this.eventMap[holder], this.editorMap[holder]])
-      .pipe(
-        filter(([event, editor]) &#x3D;&gt; event.type &amp;&amp; typeof editor !&#x3D;&#x3D; &#x27;undefined&#x27;),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(([event, editor]) &#x3D;&gt; {
-        if (event.type &#x3D;&#x3D;&#x3D; &#x27;save&#x27;) {
-          this.saveHandler(holder, editor);
-        }
-        if (event.type &#x3D;&#x3D;&#x3D; &#x27;clear&#x27;) {
-          this.clearHandler(holder, editor);
-        }
-        if (event.type &#x3D;&#x3D;&#x3D; &#x27;update&#x27;) {
-          this.updateHandler(holder, editor, event.payload.blocks);
-        }
-        this.eventMap[holder].next({ type: &#x27;&#x27; });
-      });
-    this.ref.tick();
-  }
-
-  /**
-   * Handles cleaning up all the subjects once an &#x60;EditorJS&#x60; instance has been
-   * destroyed
-   * @param holder The holder ID for the &#x60;EditorJS&#x60; instance
-   */
-  private cleanupSubjects(holder: string) {
-    MAP_DEFAULTS.forEach(([mapKay, value]: [string, any]) &#x3D;&gt; {
-      if (this[mapKay][holder]) {
-        this[mapKay][holder].next(value);
-        this[mapKay][holder].complete();
-        this[mapKay][holder] &#x3D; null;
-        delete this[mapKay][holder];
-      }
-    });
-    this.eventMap[holder].next({ type: &#x27;&#x27; });
-    this.eventMap[holder].complete();
-    this.eventMap[holder] &#x3D; null;
-    delete this.eventMap[holder];
-    this.editorMap[holder] &#x3D; null;
-    delete this.editorMap[holder];
-  }
-
-  /**
-   * Call this to destroy all subscriptions within the service
-   */
-  public destroy() {
-    Object.keys(this.editorMap).forEach(key &#x3D;&gt; {
-      this.destroyInstance(key);
-    });
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
-  }
-
-  /**
-   * This internal handler calls the &#x60;EditorJS&#x60; instance save outside of the
-   * Angular zone, this means it will not trigger change detection
-   * @param holder The holder ID for the &#x60;EditorJS&#x60; instance
-   * @param editor The &#x60;EditorJS&#x60; instance
-   * @param blocks The {Block} items to render
-   */
-  private saveHandler(holder: string, editor: EditorJS) {
-    this.zone.runOutsideAngular(() &#x3D;&gt; {
-      editor.saver.save().then(data &#x3D;&gt; {
-        this.zone.run(() &#x3D;&gt; {
-          this.blocksMap[holder].next(data.blocks);
-        });
-      });
-    });
-  }
-
-  /**
-   * This internal handler calls the &#x60;EditorJS&#x60; instance clear outside of the
-   * Angular zone, this means it will not trigger change detection
-   * @param holder The holder ID for the &#x60;EditorJS&#x60; instance
-   * @param editor The &#x60;EditorJS&#x60; instance
-   * @param blocks The {Block} items to render
-   */
-  private clearHandler(holder: string, editor: EditorJS) {
-    this.zone.runOutsideAngular(() &#x3D;&gt; {
-      editor.blocks.clear();
-      this.zone.run(() &#x3D;&gt; {
-        this.blocksMap[holder].next([]);
-        this.changeMap[holder].next(Date.now());
-      });
-    });
-  }
-
-  /**
-   * This internal handler calls the &#x60;EditorJS&#x60; instance render outside of the
-   * Angular zone, this means it will not trigger change detection
-   * @param holder The holder ID for the &#x60;EditorJS&#x60; instance
-   * @param editor The &#x60;EditorJS&#x60; instance
-   * @param blocks The {Block} items to render
-   */
-  private updateHandler(holder: string, editor: EditorJS, blocks: Block[]) {
-    if (!blocks) {
-      return;
-    }
-    this.zone.runOutsideAngular(() &#x3D;&gt; {
-      editor.blocks.render({
-        time: Date.now(),
-        version: this.editorJs.version,
-        blocks
-      });
-      this.zone.run(() &#x3D;&gt; {
-        this.blocksMap[holder].next(blocks);
-        this.changeMap[holder].next(Date.now());
-      });
-    });
-  }
+  editor?: EditorJS;
 }
 </code></pre>
     </div>
@@ -630,7 +305,7 @@ export class NgxEditorJSInstanceService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'EditorJSInstanceConfig.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

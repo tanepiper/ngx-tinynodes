@@ -3,12 +3,12 @@ import { async, TestBed } from '@angular/core/testing';
 import { MockNgZone } from '@tinynodes/ngx-editorjs/src/testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '@tinynodes/ngx-editorjs/src/testing/shared';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
-import { EditorJSInstance, EDITORJS_MODULE_IMPORT } from '../../services/editorjs-injector';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { NgxEditorJSPluginService } from '../../services/plugins.service';
 import { NGX_EDITORJS_CONFIG } from '../../types/config';
 import { UserPlugins } from '../../types/plugins';
 import { NgxEditorJSComponent } from './editorjs.component';
+import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../../types/injector';
 
 describe('NgxEditorJSComponent', () => {
   @Component({

@@ -126,7 +126,7 @@ export class FormContainerComponent implements AfterContentInit {
     private readonly fb: FormBuilder
   ) {
     this.editor
-      .getBlocks(this.holder)
+      .getBlocks({ holder: this.holder })
       .pipe(
         distinctUntilChanged(),
         takeUntil(this.onDestroy$)

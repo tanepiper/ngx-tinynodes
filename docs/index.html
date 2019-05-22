@@ -44,13 +44,15 @@
 </ul>
 <h2 id="libraries">Libraries</h2>
 <h3 id="ngx-editorjs"><code>ngx-editorjs</code></h3>
-<p>The <code>ngx-editorjs</code> module provides an <a href="https://editorjs.io">EditorJS</a> instance within an Angular application and provides several features to use it:</p>
+<p>This library provides Angular support for <a href="https://editorjs.io">EditorJS</a>. Inside the module you will find:</p>
 <ul>
-<li>A Directive to attach to and block element</li>
-<li>An out-of-the-box component to use within any Angular application or Angular form</li>
-<li>A Material Form Field component</li>
-<li>A Service to interact with <code>EditorJS</code> instances.</li>
+<li><code>NgxEditorJSDirective</code> - An Angular Directive used to attach an <code>EditorJS</code> instance to any block DOM element</li>
+<li><code>NgxEditorJSComponent</code> - An <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-component">out-of-the-box Angular component</a> that is Reactive Forms compatible</li>
+<li><code>NgxEditorJSMaterialFieldComponent</code> An <a href="https://material.angular.io">Angular Material</a> Form Field component that provides all the required properties and life-cycle events required. See the <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form">Form Demo</a> on an example usage</li>
+<li><code>NgxEditorJSBaseComponent</code> - A base Angular component that is Reactive form compatible but with no template, can be used to create custom UI framework containers</li>
+<li><code>NgxEditorJSService</code> - A Service that can be injected into an application to provide a interface to interact with <code>EditorJS</code> instances. Underneath are the private <code>NgxEditorJSPluginService</code> and <code>NgxEditorJSInstanceService</code> services. These are private but can be imported via <code>ɵNgxEditorJSPluginService</code> and <code>ɵNgxEditorJSInstanceService</code> from the library if you want to use them.</li>
 </ul>
+<p>Within these components you will be able to access the underlying <code>EditorJS</code> instance, for use see the <a href="https://editorjs.io/api">EditorJS API Docs</a></p>
 <p>Below are the dependencies to use the features.</p>
 <h4 id="tinynodesngx-editorjs"><code>@tinynodes/ngx-editorjs</code></h4>
 <p>This project provides a set of features for using <a href="https://editorjs.io">EditorJS</a> within Angular 7+</p>
@@ -104,7 +106,7 @@
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
-            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="./js/libs/custom-elements.min.js"></script>

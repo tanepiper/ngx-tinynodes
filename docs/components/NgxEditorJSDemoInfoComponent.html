@@ -122,6 +122,21 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#panelOpen$">panelOpen$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -415,6 +430,45 @@
         </tbody>
     </table>
 </section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="panelOpen$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            panelOpen$</b>
+                            <a href="#panelOpen$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(true)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">libs/ngx-tinynodes-core/src/lib/components/demo-info/demo-info.component.ts:14</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>If the panel is open or not</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
 
     <section>
     <h3 id="accessors">
@@ -606,7 +660,7 @@ export class NgxEditorJSDemoInfoComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><mat-expansion-panel [expanded]="isPanelOpen | async" (opened)="togglePanel(true)" (closed)="togglePanel(false)">  <mat-expansion-panel-header>    <mat-panel-title>{{ title }}</mat-panel-title>    <mat-panel-description      >Details on usage and links - {{ (isPanelOpen | async) ? \'Click To Close\' : \'Click To View\' }}</mat-panel-description    >  </mat-expansion-panel-header>  <mat-grid-list cols="2" rowHeight="300px">    <mat-grid-tile>      <mat-card>        <mat-card-header>          <mat-card-title>How To Use...</mat-card-title>          <mat-card-subtitle>Instructions on the demo below</mat-card-subtitle>        </mat-card-header>        <mat-card-content class="demo-info">          <ng-content *ngTemplateOutlet="body ? body : defaultInfoTemplate"></ng-content>        </mat-card-content>      </mat-card>    </mat-grid-tile>    <mat-grid-tile>      <mat-card>        <mat-card-header>          <mat-card-title>Links</mat-card-title>          <mat-card-subtitle            >Links for all things related to <code>@tinynodes/{{ title }}</code></mat-card-subtitle          >        </mat-card-header>        <mat-card-content>          <mat-list *ngIf="menu">            <mat-list-item *ngFor="let link of menu.items">              <a mat-raised-button color="primary" [href]="link.link" target="_new">{{ link.label }}</a>            </mat-list-item>          </mat-list>        </mat-card-content>      </mat-card>    </mat-grid-tile>  </mat-grid-list></mat-expansion-panel><ng-template #defaultInfoTemplate>  <p>This is where some demo information goes</p></ng-template></div>'
-    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'EditorJSBaseComponent', 'selector': ''},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSBaseComponent', 'selector': ''},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NgxEditorJSDemoInfoComponent'};
 </script>
@@ -642,7 +696,7 @@ export class NgxEditorJSDemoInfoComponent implements OnInit {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSDemoInfoComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -4,25 +4,23 @@ import {
   AfterContentInit,
   Component,
   DoCheck,
-  EventEmitter,
   forwardRef,
   HostBinding,
   Input,
   OnDestroy,
   OnInit,
   Optional,
-  Output,
   Provider,
   Self,
   ViewChild
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material';
-import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { map, tap, timeInterval } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
-import { EditorJSBaseComponent } from '../base/container.class';
+import { NgxEditorJSBaseComponent } from '../base/container.class';
 
 /**
  * Provider for the EditorJS Material Field Component
@@ -37,16 +35,15 @@ export const EDITORJS_MATERIAL_FIELD_CONTROL: Provider = {
  * Single interface for EditorJSMaterialForm
  */
 export interface EditorJSMaterialForm
-  extends OnInit,
+  extends MatFormFieldControl<NgxEditorJSMatFieldComponent>,
+    OnInit,
     AfterContentInit,
     OnDestroy,
-    DoCheck,
-    MatFormFieldControl<NgxEditorJSMatFieldComponent> {}
+    DoCheck {}
 
 /**
- * This component is provided as a shortcut to using EditorJS in your
- * application. The attributes are optional and without a default component
- * will be created
+ * This component provides a [Material](https://material.angular.io) compatible `<mat-form-field>` component.
+ * It provides a full implementation of all the required properties of a Material component
  *
  * @example
  * <mat-form-field>
@@ -63,7 +60,7 @@ export interface EditorJSMaterialForm
   },
   providers: [EDITORJS_MATERIAL_FIELD_CONTROL]
 })
-export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implements EditorJSMaterialForm {
+export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent implements EditorJSMaterialForm {
   /**
    * Internal Static ID for Material for each editor instance
    */
@@ -205,17 +202,6 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
   }
 
   /**
-   * Internal Subscription for the timer subscription
-   */
-  private timerSubscription$: Subscription;
-
-  /**
-   * Get the current saved state
-   */
-  @Output()
-  public isSaved = new EventEmitter<boolean>();
-
-  /**
    * Access to the underlying {NgxEditorJSDirective}
    */
   @ViewChild(NgxEditorJSDirective) public editorEl: NgxEditorJSDirective;
@@ -265,10 +251,10 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
    */
   constructor(
     protected readonly service: NgxEditorJSService,
-    private readonly fm: FocusMonitor,
+    protected fm: FocusMonitor,
     @Optional() @Self() public ngControl: NgControl
   ) {
-    super(service);
+    super(service, fm);
   }
 
   /**
@@ -281,42 +267,16 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
   }
 
   /**
-   * Internal method to return a new timer for the autosave support
-   * @param time Time to do with autosave
-   * @param timeStart When to trigger the first autosave
-   */
-  private getTimer(time: number, timeStart = 0): Observable<number> {
-    return timer(timeStart, time).pipe(
-      timeInterval(),
-      map(interval => interval.interval),
-      tap(() => {
-        this.service.save({ holder: this.holder });
-        this.isSaved.emit(true);
-      })
-    );
-  }
-
-  /**
    * Inside the AfterContentInit life-cycle we set up a listener for focus
    * and trigger focus autosave subscribe and unsubscribe
    */
   ngAfterContentInit(): void {
-    this.fm.monitor(this.editorEl.element, true).subscribe(origin => {
-      this.focused = !!origin;
-      if (!this.focused) {
-        if (!this.autosave) {
-          this.isSaved.emit(false);
-        }
-        if (this.timerSubscription$) {
-          this.timerSubscription$.unsubscribe();
-        }
-      }
-      this.isSaved.emit(false);
-      if (this.autosave > 0) {
-        this.timerSubscription$ = this.getTimer(this.autosave).subscribe();
-      }
-      this.stateChanges.next();
-    });
+    this.getFocusMonitor(this.editorEl.element)
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(focused => {
+        this.focused = focused;
+        this.stateChanges.next();
+      });
   }
 
   /**
@@ -330,12 +290,14 @@ export class NgxEditorJSMatFieldComponent extends EditorJSBaseComponent implemen
   }
 
   /**
-   * Destroy the focus monitoring
+   * Destroy the focus monitoring and any remaining timer subcription
    */
   ngOnDestroy(): void {
     this.fm.stopMonitoring(this.editorEl.element);
     if (this.timerSubscription$ && !this.timerSubscription$.closed) {
       this.timerSubscription$.unsubscribe();
     }
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
   }
 }
