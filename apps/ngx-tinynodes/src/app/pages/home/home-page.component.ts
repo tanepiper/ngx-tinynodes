@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
+import { AppService } from '@tinynodes/ngx-tinynodes-core';
 
 @Component({
   selector: 'tinynodes-home-page',

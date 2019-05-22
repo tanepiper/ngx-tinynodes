@@ -542,7 +542,7 @@ export class AppService {
       distinctUntilChanged(),
       filter(menus &#x3D;&gt; menus !&#x3D;&#x3D; undefined &amp;&amp; menus.length &gt; 0),
       map(menus &#x3D;&gt; {
-        return menus.find(menu &#x3D;&gt; menu.key &#x3D;&#x3D; key);
+        return menus.find(menu &#x3D;&gt; menu.key &#x3D;&#x3D;&#x3D; key);
       })
     ) as Observable&lt;MenuGroup&lt;T&gt;&gt;;
   }

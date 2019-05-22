@@ -4,14 +4,18 @@ import { Subject } from 'rxjs';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { MockNgZone } from '../../testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '../../testing/shared';
-import { EDITIOR_JS_INSTANCE, NGX_EDITORJS_CONFIG } from '../types/config';
+import { NGX_EDITORJS_CONFIG } from '../types/config';
 import { UserPlugins } from '../types/plugins';
+import { NgxEditorJSInstanceService } from './editorjs-injector';
 import { NgxEditorJSService } from './editorjs.service';
 import { NgxEditorJSPluginService } from './plugins.service';
+import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
 
 describe('NgxEditorJSService', () => {
   let service: NgxEditorJSService;
   let onDestroy$: Subject<boolean>;
+
+  const holder = 'test-holder';
 
   beforeEach(async(() => {
     onDestroy$ = new Subject<boolean>();
@@ -34,6 +38,10 @@ describe('NgxEditorJSService', () => {
           useClass: NgxEditorJSPluginService
         },
         {
+          provide: NgxEditorJSInstanceService,
+          useClass: NgxEditorJSInstanceService
+        },
+        {
           provide: NgZone,
           useClass: MockNgZone
         },
@@ -42,13 +50,21 @@ describe('NgxEditorJSService', () => {
           useClass: NgxEditorJSService
         },
         {
-          provide: EDITIOR_JS_INSTANCE,
+          provide: EDITORJS_MODULE_IMPORT,
           useValue: MockEditorJS
+        },
+        {
+          provide: EditorJSInstance,
+          useFactory: function create(editorjs: any) {
+            return editorjs;
+          },
+          deps: [EDITORJS_MODULE_IMPORT]
         }
       ]
     }).compileComponents();
 
     service = TestBed.get(NgxEditorJSService);
+    service.createEditor({ config: { holder } });
   }));
 
   it('should create an instance of the EditorJS service', () => {
@@ -56,17 +72,13 @@ describe('NgxEditorJSService', () => {
   });
 
   it('should create an instance of EditorJS', () => {
-    const holder = 'test-editor';
-    service.createEditor({ holder });
-    const editor = service.getEditor(holder);
+    const editor = service.getEditor({ holder });
     expect(editor).toBeDefined();
   });
 
   it('should create a ready instance', done => {
-    const holder = 'test-editor';
-
     service
-      .isReady(holder)
+      .isReady({ holder })
       .pipe(
         distinctUntilChanged(),
         filter(isReady => isReady),
@@ -77,17 +89,15 @@ describe('NgxEditorJSService', () => {
         done();
       });
 
-    service.createEditor({ holder });
+    service.createEditor({ config: { holder } });
   });
 
   it('should trigger a change on update', done => {
-    const holder = 'test-editor';
-
     service
-      .hasChanged(holder)
+      .hasChanged({ holder })
       .pipe(
         distinctUntilChanged(),
-        filter(hasChanged => hasChanged !== 0),
+        filter(hasChanged => hasChanged.time !== 0),
         takeUntil(onDestroy$)
       )
       .subscribe(hasChanged => {
@@ -95,26 +105,20 @@ describe('NgxEditorJSService', () => {
         done();
       });
 
-    service.createEditor({ holder });
-    service.update(holder, [{ type: 'test', data: { text: 'Test' } }]);
+    service.createEditor({ config: { holder } });
+    service.update({ holder, blocks: [{ type: 'test', data: { text: 'Test' } }] });
   });
 
   it('should trigger a change on save', done => {
-    const holder = 'test-editor';
-
     service
-      .hasChanged(holder)
-      .pipe(
-        distinctUntilChanged(),
-        filter(hasChanged => hasChanged !== 0),
-        takeUntil(onDestroy$)
-      )
+      .hasChanged({ holder })
+      .pipe(takeUntil(onDestroy$))
       .subscribe(hasChanged => {
-        expect(hasChanged).toBeTruthy();
+        expect(hasChanged).toBeDefined();
         done();
       });
 
-    service.createEditor({ holder });
-    service.save(holder);
+    service.createEditor({ config: { holder } });
+    service.save({ holder });
   });
 });

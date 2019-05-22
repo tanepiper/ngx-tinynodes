@@ -88,7 +88,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">libs/ngx-editorjs/src/lib/types/maps.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">libs/ngx-editorjs/src/lib/types/maps.ts:28</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -105,27 +105,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import EditorJS from &#x27;@editorjs/editorjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import EditorJS, { OutputData } from &#x27;@editorjs/editorjs&#x27;;
 import { BehaviorSubject } from &#x27;rxjs&#x27;;
 import { Block } from &#x27;./blocks&#x27;;
-
-/**
- * An event type for calling &#x60;EditorJS&#x60;
- */
-export interface EventType&lt;T &#x3D; any&gt; {
-  type: string;
-  payload?: T;
-}
-
-/**
- * A map containing an event subject for an &#x60;EditorJS&#x60; instance
- */
-export interface EventMap {
-  /**
-   * A map key containing a {BehaviorSubject} of {EventType}
-   */
-  [key: string]: BehaviorSubject&lt;EventType&gt;;
-}
 
 /**
  * A map containing instances of &#x60;EditorJS&#x60;
@@ -158,13 +140,37 @@ export interface ReadyMap {
 }
 
 /**
+ * A map containing &#x60;BehaviorSubject&#x60; of &#x60;boolean&#x60; values of the save state of &#x60;EditorJS&#x60;
+ */
+export interface SavedMap {
+  /**
+   * A map key containing a {BehaviorSubject} of {boolean}
+   */
+  [key: string]: BehaviorSubject&lt;boolean&gt;;
+}
+
+/**
+ * An EditorJS change event
+ */
+export interface EditorJSChange {
+  /**
+   * Time of the change
+   */
+  time: number;
+  /**
+   * Blocks in the change
+   */
+  blocks: Block[];
+}
+
+/**
  * A map containing &#x60;BehaviorSubject&#x60; of &#x60;number&#x60; which is the timestamp of the last &#x60;EditorJS&#x60; change
  */
 export interface ChangeMap {
   /**
    * A map key containing a {BehaviorSubject} of {number}
    */
-  [key: string]: BehaviorSubject&lt;number&gt;;
+  [key: string]: BehaviorSubject&lt;OutputData&gt;;
 }
 </code></pre>
     </div>

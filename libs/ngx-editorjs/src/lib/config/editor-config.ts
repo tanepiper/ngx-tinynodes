@@ -1,4 +1,4 @@
-import { EditorJSConfig } from '../types/config';
+import { EditorConfig } from '@editorjs/editorjs';
 
 /**
  * The default holder ID to attach `EditorJS` to
@@ -9,13 +9,13 @@ export const DEFAULT_HOLDER_ID = 'editor-js';
  * Creates an EditorJS config
  * @param inputConfig The config to merge
  */
-export function createEditorJSConfig(inputConfig?: EditorJSConfig): EditorJSConfig {
+export function createEditorJSConfig(inputConfig?: EditorConfig): EditorConfig {
   if (!inputConfig) {
     return {
       holder: DEFAULT_HOLDER_ID
     };
   }
-  const editorJsConfig: EditorJSConfig = {};
+  const editorJsConfig: EditorConfig = {};
   if (inputConfig.autofocus) {
     editorJsConfig.autofocus = inputConfig.autofocus;
   }

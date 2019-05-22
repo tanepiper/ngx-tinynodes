@@ -69,7 +69,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>The configuration option that can be passed to the <code>NgxEditorJSModule.forRoot</code> method</p>
+                <p>Configuration for the EditorJS instance</p>
 
             </p>
 
@@ -88,7 +88,35 @@
                             <ul class="index-list">
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#editorjs">editorjs</a>
+                                        <a href="#autofocus">autofocus</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#blockPlaceholder">blockPlaceholder</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#data">data</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#hideToolbar">hideToolbar</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#holder">holder</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#initialBlock">initialBlock</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#minHeight">minHeight</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#sanitizer">sanitizer</a>
                                 </li>
                             </ul>
                         </td>
@@ -105,13 +133,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="editorjs"></a>
-                                        <span class="name"><b>editorjs</b><a href="#editorjs"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="autofocus"></a>
+                                        <span class="name"><b>autofocus</b><a href="#autofocus"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>editorjs:         <code><a href="../interfaces/EditorJSConfig.html" target="_self" >EditorJSConfig</a></code>
+                                        <code>autofocus:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -119,7 +147,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="../interfaces/EditorJSConfig.html" target="_self" >EditorJSConfig</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
@@ -135,7 +163,287 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Configuration options for <code>EditorJS</code></p>
+                                    <div class="io-description"><p>If the EditorJS is autofocused on creation (default: false)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="blockPlaceholder"></a>
+                                        <span class="name"><b>blockPlaceholder</b><a href="#blockPlaceholder"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>blockPlaceholder:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>First Block placeholder</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="data"></a>
+                                        <span class="name"><b>data</b><a href="#data"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>data:     <code>OutputData</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>OutputData</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Any initial output data to render</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="hideToolbar"></a>
+                                        <span class="name"><b>hideToolbar</b><a href="#hideToolbar"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>hideToolbar:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>If true, toolbar won&#39;t be shown</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="holder"></a>
+                                        <span class="name"><b>holder</b><a href="#holder"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>holder:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID of the element to hold the config</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="initialBlock"></a>
+                                        <span class="name"><b>initialBlock</b><a href="#initialBlock"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>initialBlock:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The name of the initial block (default &quot;paragraph&quot;)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="minHeight"></a>
+                                        <span class="name"><b>minHeight</b><a href="#minHeight"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>minHeight:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Height of Editor&#39;s bottom area that allows to set focus on the last Block</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sanitizer"></a>
+                                        <span class="name"><b>sanitizer</b><a href="#sanitizer"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sanitizer:     <code>SanitizerConfig</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>SanitizerConfig</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Define default sanitizer configuration</p>
 </div>
                                 </td>
                             </tr>
@@ -147,12 +455,12 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import EditorJS, { OutputData, SanitizerConfig } from &#x27;@editorjs/editorjs&#x27;;
+import EditorJS, { OutputData, SanitizerConfig, EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
  * Configuration for the EditorJS instance
  */
-export interface EditorJSConfig {
+export interface NgxEditorJSConfig {
   /**
    * If the EditorJS is autofocused on creation (default: false)
    */
@@ -186,7 +494,7 @@ export interface EditorJSConfig {
   /**
    * First Block placeholder
    */
-  placeholder?: string;
+  blockPlaceholder?: string;
 
   /**
    * Define default sanitizer configuration
@@ -197,22 +505,22 @@ export interface EditorJSConfig {
 /**
  * The configuration option that can be passed to the &#x60;NgxEditorJSModule.forRoot&#x60; method
  */
-export interface NgxEditorJSConfig {
+export interface NgxEditorJSModuleConfig {
   /**
    * Configuration options for &#x60;EditorJS&#x60;
    */
-  editorjs?: EditorJSConfig;
+  editorjs?: EditorConfig;
 }
 
 /**
  * Injection token provied for &#x60;NgxEditorJSConfig&#x60;
  */
-export const NGX_EDITORJS_CONFIG &#x3D; new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;);
+export const NGX_EDITORJS_CONFIG &#x3D; new InjectionToken&lt;NgxEditorJSModuleConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;);
 
 /**
  * Internal token for injecting the &#x60;NgxEditorJSConfig&#x60; into the config factory
  */
-export const FOR_ROOT_OPTIONS_TOKEN &#x3D; new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;FOR_ROOT_OPTIONS_TOKEN&#x27;);
+export const FOR_ROOT_OPTIONS_TOKEN &#x3D; new InjectionToken&lt;NgxEditorJSModuleConfig&gt;(&#x27;FOR_ROOT_OPTIONS_TOKEN&#x27;);
 
 /**
  * Get the EditorJS instance injected into the app

@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 /**
  * A menu item in the Tinynodes app
  */
-export interface MenuItem<T> {
+export interface MenuItem<T = any> {
   /**
    * The display label for the app
    */

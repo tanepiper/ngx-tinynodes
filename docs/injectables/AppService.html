@@ -239,8 +239,8 @@ it to the store, from here the main state can be updated and queried.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:52</a></div>
                 </td>
             </tr>
 
@@ -326,8 +326,8 @@ it to the store, from here the main state can be updated and queried.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="66"
-                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:66</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">libs/ngx-tinynodes-core/src/lib/stores/app/application.service.ts:65</a></div>
                 </td>
             </tr>
 
@@ -548,7 +548,6 @@ export class AppService {
    * Toggles the sidebar state
    */
   public toggleSidebar(value?: boolean) {
-    console.log(value);
     this.store.update({
       [ApplicationStateKeys.Hidden]:
         typeof value !&#x3D;&#x3D; &#x27;undefined&#x27; ? value : !this.store._value()[ApplicationStateKeys.Hidden]

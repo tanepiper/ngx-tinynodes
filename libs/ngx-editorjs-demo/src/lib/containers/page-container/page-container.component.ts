@@ -1,5 +1,5 @@
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { Block, NgxEditorJSService, NgxEditorJSComponent } from '@tinynodes/ngx-editorjs/src';
 import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil, tap, pluck, filter, take } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
 import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
+import { OutputData } from '@editorjs/editorjs';
 
 /**
  * The Page Container component provides the main routable page for loading
@@ -30,68 +31,41 @@ export class PageContainerComponent implements AfterContentInit {
   public holder = 'ngx-editorjs-demo';
 
   /**
-   * The blocks on the page
-   */
-  private blocks$: Observable<Block[]>;
-
-  /**
-   * If the panel is open or not
-   */
-  private panelOpen$ = new BehaviorSubject<boolean>(true);
-
-  /**
    * Links for the page
    */
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
 
-  /**
-   * Gets if the panel is open or not
-   */
-  public get panelOpen() {
-    return this.panelOpen$.asObservable();
-  }
-
-  /**
-   * Toggles the panel state
-   */
-  public togglePanel(value: boolean) {
-    this.panelOpen$.next(value);
-  }
+  @ViewChild('ngxEditorJS', { read: NgxEditorJSComponent }) ngxEditorJS: NgxEditorJSComponent;
 
   /**
    * The constructor sets up the blocks to the initial demo data
    * @param pagesService The pages service
    * @param app The application service
-   * @param editor The Editor service
+   * @param editorService The Editor service
    * @param cd The change detection ref
    */
   constructor(
     private readonly pagesService: PagesService,
     private app: AppService,
-    private readonly editor: NgxEditorJSService,
+    private readonly editorService: NgxEditorJSService,
     private readonly cd: ChangeDetectorRef
-  ) {
-    this.blocks$ = this.editor.getBlocks(this.holder).pipe(
-      distinctUntilChanged(),
+  ) {}
+
+  /**
+   * Get the blocks from the last change
+   */
+  public get blocks() {
+    return this.editorService.hasChanged({ holder: this.holder }).pipe(
+      pluck<OutputData, Block[]>('blocks'),
       takeUntil(this.onDestroy$)
     );
   }
 
   /**
-   * Get the blocks for the page
-   */
-  public get blocks() {
-    return this.blocks$;
-  }
-
-  /**
    * Get the page links
    */
-  public get links() {
-    return this.menu$.pipe(
-      filter(data => typeof data !== 'undefined'),
-      pluck('items')
-    );
+  public get menu() {
+    return this.menu$;
   }
 
   /**
@@ -105,14 +79,14 @@ export class PageContainerComponent implements AfterContentInit {
    * Call the editor save method
    */
   public save() {
-    this.editor.save(this.holder);
+    this.editorService.save({ holder: this.holder });
   }
 
   /**
    * Clear the editor
    */
   public clear() {
-    this.editor.clear(this.holder);
+    this.editorService.clear({ holder: this.holder });
   }
 
   /**
@@ -124,7 +98,7 @@ export class PageContainerComponent implements AfterContentInit {
       .pipe(take(1))
       .subscribe((data: NgxEditorJSDemo) => {
         this.menu$.next(data.links);
-        this.editor.update(this.holder, data.blocks);
+        this.editorService.update({ holder: this.holder, blocks: data.blocks });
       });
   }
 
@@ -133,6 +107,7 @@ export class PageContainerComponent implements AfterContentInit {
    */
   public get asJSON() {
     return this.blocks.pipe(
+      take(1),
       map(blocks => {
         return JSON.stringify(blocks, null, 4);
       }),
@@ -141,7 +116,7 @@ export class PageContainerComponent implements AfterContentInit {
   }
 
   /**
-   * After the content has init overide the blocks with blocks from the service
+   * After the content has init override the blocks with blocks from the service
    */
   ngAfterContentInit() {
     this.reset();

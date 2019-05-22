@@ -49,9 +49,17 @@
 
 
 <h1 id="ngx-editorjs">Ngx-EditorJS</h1>
-<p>This library provides Angular support for <a href="https://editorjs.io">EditorJS</a> via a directive, component and service.</p>
+<p>This library provides Angular support for <a href="https://editorjs.io">EditorJS</a>. Inside the module you will find:</p>
+<ul>
+<li><code>NgxEditorJSDirective</code> - An Angular Directive used to attach an <code>EditorJS</code> instance to any block DOM element</li>
+<li><code>NgxEditorJSComponent</code> - An <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-component">out-of-the-box Angular component</a> that is Reactive Forms compatible</li>
+<li><code>NgxEditorJSMaterialFieldComponent</code> An <a href="https://material.angular.io/">Angular Material</a> Form Field component that provides all the required properties and life-cycle events required. See the <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form">Form Demo</a> on an example usage</li>
+<li><code>NgxEditorJSBaseComponent</code> - A base Angular component that is Reactive form compatible but with no template, can be used to create custom UI framework containers</li>
+<li><code>NgxEditorJSService</code> - A Service that can be injected into an application to provide a interface to interact with <code>EditorJS</code> instances. Underneath are the private <code>NgxEditorJSPluginService</code> and <code>NgxEditorJSInstanceService</code> services. These are private but can be imported via <code>ɵNgxEditorJSPluginService</code> and <code>ɵNgxEditorJSInstanceService</code> from the library if you want to use them.</li>
+</ul>
+<p>Within these components you will be able to access the underlying <code>EditorJS</code> instance, for use see the <a href="https://editorjs.io/api">EditorJS API Docs</a></p>
 <p>You can see a <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo">demo in action</a> or download it
-<a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs">on GitHub</a> to see how it was implemented.</p>
+<a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs-demo">on GitHub</a> to see how it was implemented.</p>
 <p>For changes see the <a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/CHANGELOG.md">CHANGELOG</a></p>
 <h2 id="installing-and-usage">Installing and usage</h2>
 <p>Install the library via <code>npm</code> along with the plugins module and <code>EditorJS</code> module. For each plugin you want to use you also need to install it&#39;s dependency - see the <a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs-plugins">Plugin Docs</a> for more information.</p>
@@ -114,25 +122,19 @@ export class AppModule {}
 <h3 id="editorjs-config">EditorJS Config</h3>
 <p>The configuration is deigned to be extendable in the future, so each potential feature has a key. For configuring EditorJS pass the options below into a <code>editorjs</code> key in the config.</p>
 <p>The module configuration allows EditorJS to be provided with a set of options for use. See the <a href="https://editorjs.io/configuration">EditorJS docs</a> for more details.</p>
-<p>| Configuration Key | Description                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------- |
-| <code>autofocus</code>       | Sets the EditorJS instance to autofocus on load                                                   |
-| <code>data</code>            | Initial data to load into the editor, this is an <code>OutputData</code> object from EditorJS                |
-| <code>hideToolbar</code>     | Hides the toolbar by default                                                                      |
-| <code>holder</code>          | The element ID of the holder, this will set all instances in this module to use this as a default |
-| <code>initialBlock</code>    | The default block type to use in the editor                                                       |
-| <code>minHeight</code>       | Height of Editor&#39;s bottom area that allows to set focus on the last Block                         |
-| <code>placeholder</code>     | Placeholder of the first block                                                                    |
-| <code>sanitizer</code>       | Content sanitizer configurations                                                                  |</p>
+<p>| Configuration Key  | Description                                                                                                                                                     |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <code>autofocus</code>        | Sets the EditorJS instance to autofocus on load                                                                                                                 |
+| <code>autosave</code>         | Value of time for the the autosave of EditorJS content to the service when the component when focused, this is used for Reactive forms. Default is 0 to disable |
+| <code>data</code>             | Initial data to load into the editor, this is an <code>OutputData</code> object from EditorJS                                                                              |
+| <code>hideToolbar</code>      | Hides the toolbar by default                                                                                                                                    |
+| <code>holder</code>           | The element ID of the holder, this will set all instances in this module to use this as a default                                                               |
+| <code>initialBlock</code>     | The default block type to use in the editor                                                                                                                     |
+| <code>minHeight</code>        | Height of Editor&#39;s bottom area that allows to set focus on the last Block                                                                                       |
+| <code>blockPlaceholder</code> | Placeholder of the first block                                                                                                                                  |
+| <code>sanitizer</code>        | Content sanitizer configurations                                                                                                                                |</p>
 <h3 id="adding-custom-tools">Adding custom tools</h3>
 <p>See <a href="https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/docs/adding-custom-tools.md">Adding Custom Tools</a></p>
-<h2 id="whats-in-the-library">What&#39;s in the library</h2>
-<h3 id="ngxeditorjsdirective"><code>NgxEditorJSDirective</code></h3>
-<p>This is the main directive which can be used on any element with the <code>[ngxEditorJS]</code>. It has one input which is <code>blocks</code> and this takes an array of EditorJS blocks.</p>
-<h3 id="ngxeditorjscomponent"><code>NgxEditorJSComponent</code></h3>
-<p>This component can be used in any Angular component using the <code>&lt;ngx-editorjs&gt;</code> tag. Again this component can take a set of blocks, it also provides a <code>holder</code> input for overriding the ID.</p>
-<h3 id="ngxeditorjsservice"><code>NgxEditorJSService</code></h3>
-<p>This service provides handling the life-cycle of the EditorJS instance, and exposes the underlying <code>EditorJS</code> instance.<a href="https://editorjs.io/api">API</a> - in future releases more of the API will be exposed via service methods to make controlling the container easier.</p>
 <h2 id="links">Links</h2>
 <ul>
 <li><a href="https://tanepiper.github.io/ngx-tinynodes/">Documentation</a></li>

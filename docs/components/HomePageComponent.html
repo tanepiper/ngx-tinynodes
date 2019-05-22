@@ -227,7 +227,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { AppService } from &#x27;@tinynodes/ngx-tinynodes-core/src&#x27;;
+import { AppService } from &#x27;@tinynodes/ngx-tinynodes-core&#x27;;
 
 @Component({
   selector: &#x27;tinynodes-home-page&#x27;,
@@ -252,7 +252,10 @@ export class HomePageComponent {
       &lt;mat-card-subtitle&gt;A collection of Angular and TypeScript libraries for the web&lt;/mat-card-subtitle&gt;
     &lt;/mat-card-header&gt;
     &lt;mat-card-content&gt;
-      &lt;p&gt;This site contains demos of components released under &lt;code&gt;@tinynodes&lt;/code&gt; on &lt;code&gt;npm&lt;/code&gt;, you can find a list of them on the menu to the left.&lt;/p&gt;
+      &lt;p&gt;
+        This site contains demos of components released under &lt;code&gt;@tinynodes&lt;/code&gt; on &lt;code&gt;npm&lt;/code&gt;, you can find a list of them on
+        the menu to the left.
+      &lt;/p&gt;
       &lt;p&gt;You can also visit the sites below for additional documentation and code:&lt;/p&gt;
       &lt;mat-list *ngIf&#x3D;&quot;(menu | async); let menuItems&quot;&gt;
         &lt;mat-list-item *ngFor&#x3D;&quot;let menu of menuItems.items&quot;&gt;
@@ -299,8 +302,8 @@ export class HomePageComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">  <mat-card class="homepage-card">    <mat-card-header>      <mat-card-title>Welcome to the Tinynodes Demo Site</mat-card-title>      <mat-card-subtitle>A collection of Angular and TypeScript libraries for the web</mat-card-subtitle>    </mat-card-header>    <mat-card-content>      <p>This site contains demos of components released under <code>@tinynodes</code> on <code>npm</code>, you can find a list of them on the menu to the left.</p>      <p>You can also visit the sites below for additional documentation and code:</p>      <mat-list *ngIf="(menu | async); let menuItems">        <mat-list-item *ngFor="let menu of menuItems.items">          <a mat-raised-button color="primary" href="{{ menu.link }}" target="_new">            <span class="label">{{ menu.label }}</span>          </a>        </mat-list-item>      </mat-list>    </mat-card-content>  </mat-card></div></div>'
-    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container">  <mat-card class="homepage-card">    <mat-card-header>      <mat-card-title>Welcome to the Tinynodes Demo Site</mat-card-title>      <mat-card-subtitle>A collection of Angular and TypeScript libraries for the web</mat-card-subtitle>    </mat-card-header>    <mat-card-content>      <p>        This site contains demos of components released under <code>@tinynodes</code> on <code>npm</code>, you can find a list of them on        the menu to the left.      </p>      <p>You can also visit the sites below for additional documentation and code:</p>      <mat-list *ngIf="(menu | async); let menuItems">        <mat-list-item *ngFor="let menu of menuItems.items">          <a mat-raised-button color="primary" href="{{ menu.link }}" target="_new">            <span class="label">{{ menu.label }}</span>          </a>        </mat-list-item>      </mat-list>    </mat-card-content>  </mat-card></div></div>'
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSBaseComponent', 'selector': ''},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'HomePageComponent'};
 </script>

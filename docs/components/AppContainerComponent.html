@@ -218,7 +218,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(app: <a href="../injectables/AppService.html">AppService</a>, matcher: MediaMatcher)</code>
+<code>constructor(app: <a href="../injectables/AppService.html">AppService</a>, matcher: MediaMatcher, render: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -257,6 +257,18 @@
                                                   
                                                         <td>
                                                                     <code>MediaMatcher</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>render</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -332,8 +344,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:82</a></div>
                 </td>
             </tr>
 
@@ -373,8 +385,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="90"
-                            class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:90</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:94</a></div>
                 </td>
             </tr>
 
@@ -416,8 +428,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:75</a></div>
                 </td>
             </tr>
 
@@ -536,7 +548,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:55</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:59</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -569,7 +581,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:99</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:103</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -598,7 +610,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:106</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:110</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -627,7 +639,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:113</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">apps/ngx-tinynodes/src/app/containers/app/app.component.ts:117</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -645,7 +657,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterContentInit, Component, Input, OnDestroy, ViewChild } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterContentInit, Component, Input, OnDestroy, ViewChild, Renderer2 } from &#x27;@angular/core&#x27;;
 import { MatSidenav } from &#x27;@angular/material&#x27;;
 import { AppService } from &#x27;@tinynodes/ngx-tinynodes-core&#x27;;
 import { BehaviorSubject, Observable, Subject } from &#x27;rxjs&#x27;;
@@ -687,7 +699,11 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
    */
   private mobileView: MediaQueryList;
 
-  constructor(private readonly app: AppService, private readonly matcher: MediaMatcher) {
+  constructor(
+    private readonly app: AppService,
+    private readonly matcher: MediaMatcher,
+    private readonly render: Renderer2
+  ) {
     this.mobileView &#x3D; this.matcher.matchMedia(&#x27;(max-width: 768px)&#x27;);
     this.mobileView.addListener(this.matchView.bind(this));
 
@@ -855,7 +871,7 @@ a:active {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><tinynodes-nav-bar title="Tinynodes Angular Demos" [menu]="mainMenu | async" (toggleSidebar)="toggleSidebar()"></tinynodes-nav-bar><mat-sidenav-container class="application">  <mat-sidenav #sidenav role="navigation" mode="side" opened>    <tinynodes-sidebar [projectsMenu]="projectsMenu | async" [openSourceMenu]="openSourceMenu | async"></tinynodes-sidebar>  </mat-sidenav>  <mat-sidenav-content>    <main>      <router-outlet></router-outlet>    </main>  </mat-sidenav-content></mat-sidenav-container></div>'
-    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSBaseComponent', 'selector': ''},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'AppContainerComponent'};
 </script>

@@ -1,7 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatGridListModule, MatExpansionModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatGridListModule,
+  MatExpansionModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatChipsModule,
+  MatBadgeModule,
+  MatIconModule
+} from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
 import {
@@ -20,6 +30,9 @@ import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
 import { MaterialModule } from 'apps/ngx-tinynodes/src/app/material.module';
 import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core/src';
+import { FormContainerComponent } from './containers/form-container/form-container.component';
+import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-container.component';
+import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.component';
 
 @NgModule({
   imports: [
@@ -41,7 +54,12 @@ import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core/src';
     MatButtonModule,
     NgxTinynodesCoreModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatIconModule
   ],
   providers: [
     {
@@ -49,8 +67,13 @@ import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core/src';
       useFactory: createNgxEditorJSDemoTools
     }
   ],
-  declarations: [PageContainerComponent],
-  exports: [PageStoreModule, PageContainerComponent],
-  entryComponents: [PageContainerComponent]
+  declarations: [
+    PageContainerComponent,
+    FormContainerComponent,
+    NgxEditorJSDemoHomeComponent,
+    NgxEditorJSDemoTagComponent
+  ],
+  exports: [PageStoreModule, PageContainerComponent, FormContainerComponent],
+  entryComponents: [PageContainerComponent, FormContainerComponent]
 })
 export class NgxEditorjsDemoModule {}

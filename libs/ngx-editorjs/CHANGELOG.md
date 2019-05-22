@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2019-05-22
+
+This release is the first big changes to the module and also includes new Material component.
+
+## Added
+
+- `NgxEditorJSComponent` can be used in Angular Forms via it's `ControlValueAccessor`
+- `EditorJSBaseComponent` exported and can be used to create custom components
+- `NgxEditorJSMatFieldComponent` provided as a [Material](https://material.angular.io/) field component.
+- `autosave` support now added to both components
+- `apiCall` method for calling any `EditorJS` API method
+
+## Changed
+
+- `placeholder` property of `EditorJS` config is now `blockPlaceholder` so it does not clash with the Material property
+- `EditorJS` instance service refactored, available as a private import
+- All public methods now take a `InjectorMethodOption` object as it's parameter
+
 ## [1.3.2] - 2019-05-15
 
 ### Changed

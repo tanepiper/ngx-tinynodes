@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ToolSettings, ToolConstructable } from '@editorjs/editorjs';
+import { ToolConstructable, ToolSettings } from '@editorjs/editorjs';
 
 /**
  * A Module plugin configuration
@@ -36,11 +36,6 @@ export interface BasePlugin {
    */
   shortcut?: () => string;
 }
-
-/**
- * The Injection token for initial plugins as defined in the ngx-editorjs module
- */
-export const InitialPlugins = new InjectionToken<PluginConfig>('InitialPlugins');
 
 /**
  * The injection token for adding plugins via your own application

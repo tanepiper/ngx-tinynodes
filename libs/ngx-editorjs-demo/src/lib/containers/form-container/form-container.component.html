@@ -1,0 +1,97 @@
+<div class="container">
+  <mat-card class="application-card">
+    <mat-card-header>
+      <mat-card-title><code>@tinynodes/ngx-editor</code> Material Field Demo</mat-card-title>
+      <mat-card-subtitle>A single page demo of the <code>EditorJS</code> Material Field component</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <ngx-editorjs-demo-info [title]="title" [menu]="menu | async" [body]="infoTemplate"></ngx-editorjs-demo-info>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <h3 mat-card-title>Demo</h3>
+      <button mat-raised-button color="primary" (click)="save()">Save</button>
+      <button mat-raised-button color="primary" (click)="clear()">Clear</button>
+      <button mat-raised-button *ngIf="(blocks | async); let b" (click)="reset(b)">Reset</button>
+      <button mat-raised-button color="primary" *ngIf="(autosave | async) === 0" (click)="enableAutosave(autosaveTime.value * 1000)">
+        Enable Autosave
+      </button>
+      <button mat-raised-button color="secondary" *ngIf="(autosave | async) > 0" (click)="disableAutosave()">Disable Autosave</button>
+      <ng-template #saveStateBadge let-hasSaved="hasSaved">
+        <mat-icon [matBadgeHidden]="hasSaved" matBadge="1" [matBadgeColor]="hasSaved ? 'accent' : 'warn'" matBadgePosition="above before"
+          >save</mat-icon
+        >
+      </ng-template>
+      <ng-container *ngTemplateOutlet="saveStateBadge; context: { hasSaved: hasSaved | async }"></ng-container>
+
+      <mat-form-field>
+        <mat-label>Autosave Time</mat-label>
+        <input matInput #autosaveTime type="number" id="autosaveTime" placeholder="Enter a value for the autosave" value="10" />
+        <span matSuffix>seconds</span>
+        <mat-hint *ngIf="(autosave | async) > 0">
+          EditorJS Autosave is enabled, now when you focus on the component the reactive form value will be updated - You still need to call
+          save to save all the form data.</mat-hint
+        >
+      </mat-form-field>
+    </mat-card-actions>
+    <mat-card-content class="form-content">
+      <form [formGroup]="editorForm">
+        <mat-form-field>
+          <mat-label>Page Name</mat-label>
+          <input matInput id="pageName" formControlName="pageName" type="text" placeholder="Enter a Page Name" />
+          <mat-hint>Enter the name for this page</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="page-tags-list">
+          <mat-label>Page Tags</mat-label>
+          <ngx-editorjs-tag-component formControlName="pageTags" placeholder="Enter some page tags..."></ngx-editorjs-tag-component>
+          <mat-hint>Press <code>Enter</code> or <code>, (comma)</code> to add tags</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Content Editor for {{ editorForm.value.pageName || 'Page Name' }}</mat-label>
+          <mat-hint>Click on the editor to active it</mat-hint>
+          <ngx-editorjs-mat-field
+            [id]="holder"
+            [holder]="holder"
+            formCotrolName="pageEditor"
+            [blocks]="blocks | async"
+            [autosave]="autosave | async"
+            placeholder="EditorJS for {{ editorForm.value.pageName || 'Page Name' }}"
+          ></ngx-editorjs-mat-field>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-card class="output-card">
+        <mat-card-header>
+          <mat-card-title>Output</mat-card-title>
+          <mat-card-subtitle>Data from the <code>EditorJS</code> instance</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content *ngIf="(editorForm.valueChanges | async); let changes">
+          <pre id="output" style="width: 100%; overflow: scroll; word-wrap: break-word;">{{ changes | json }}</pre>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+    <mat-card-footer> </mat-card-footer>
+  </mat-card>
+</div>
+
+<ng-template #infoTemplate>
+  <p>
+    Below is an instance of an {{ title }} <code>EditorJS</code> Materia; component. Click on the area and the block tool will appear, or
+    you can just start typing.
+  </p>
+  <p>
+    The default block is a <code>&lt;p></code> paragraph, you can also add header <code>&lt;h1> - &lt;h6></code> blocks, list with
+    <code>&lt;ol> / &lt;li></code> and <code>&lt;code></code> blocks.
+  </p>
+
+  <p>
+    You can also paste in an <code>&lt;img></code> url into the editor and it will start the <code>SimpleImage</code> plugin which provides
+    an <code>&lt;img></code> tag pointing to the image, and with some additional controls.
+  </p>
+  <p>
+    When saving check the output panel below to see the data results. The Autosave feature enables the `EditorJS` instance to update the
+    form value on a regular basis, but to save the data to a service the form would still need submission.
+  </p>
+</ng-template>

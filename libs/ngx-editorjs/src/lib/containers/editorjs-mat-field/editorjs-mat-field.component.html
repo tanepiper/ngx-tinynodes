@@ -8,7 +8,12 @@
   [hideToolbar]="hideToolbar"
   [initialBlock]="initialBlock"
   [minHeight]="minHeight"
-  [placeholder]="placeholder"
+  [blockPlaceholder]="blockPlaceholder"
   [sanitizer]="sanitizer"
   [blocks]="blocks"
+  (hasSaved)="hasSaved.emit($event)"
+  (isTouched)="isTouched.emit($event)"
+  (isFocused)="isFocused.emit($event)"
+  (hasChanged)="hasChanged.emit($event)"
+  (isReady)="isReady.emit($event)"
 ></div>

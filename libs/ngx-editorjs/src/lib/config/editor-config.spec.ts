@@ -1,4 +1,4 @@
-import { EditorJSConfig } from '../types/config';
+import { NgxEditorJSConfig } from '../types/config';
 import { createEditorJSConfig, DEFAULT_HOLDER_ID } from './editor-config';
 
 describe('createEditorJSConfig', () => {
@@ -12,7 +12,7 @@ describe('createEditorJSConfig', () => {
 
   it('should return a full config', () => {
     const time = Date.now();
-    const inputConfig: EditorJSConfig = {
+    const inputConfig: NgxEditorJSConfig = {
       autofocus: true,
       data: {
         blocks: [],
@@ -23,7 +23,7 @@ describe('createEditorJSConfig', () => {
       holder: 'test-holder',
       initialBlock: 'paragraph',
       minHeight: 300,
-      placeholder: 'Test',
+      blockPlaceholder: 'Test',
       sanitizer: {}
     };
     const config = createEditorJSConfig(inputConfig);
@@ -33,7 +33,7 @@ describe('createEditorJSConfig', () => {
 
   it('should return a full config with default holder', () => {
     const time = Date.now();
-    const inputConfig: EditorJSConfig = {
+    const inputConfig: NgxEditorJSConfig = {
       autofocus: true,
       data: {
         blocks: [],
@@ -43,7 +43,7 @@ describe('createEditorJSConfig', () => {
       hideToolbar: true,
       initialBlock: 'paragraph',
       minHeight: 300,
-      placeholder: 'Test',
+      blockPlaceholder: 'Test',
       sanitizer: {}
     };
     const config = createEditorJSConfig(inputConfig);
