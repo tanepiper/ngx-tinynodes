@@ -253,7 +253,7 @@ export interface EditorJSInstanceConfig {
 /**
  * Default values for each internal map
  */
-export const MAP_DEFAULTS &#x3D; [[&#x27;blocksMap&#x27;, []], [&#x27;changeMap&#x27;, 0], [&#x27;readyMap&#x27;, false]];
+export const MAP_DEFAULTS &#x3D; [[&#x27;hasChangedMap&#x27;, { time: 0, blocks: [] }], [&#x27;isReadyMap&#x27;, false], [&#x27;hasSavedMap&#x27;, false]];
 
 /**
  * Injection token for the EditorJS class
@@ -278,6 +278,32 @@ export interface InjectorMethodOption {
    * Optional editor
    */
   editor?: EditorJS;
+}
+
+/**
+ * Options to pass when calling the &#x60;EditorJS&#x60; instance API
+ */
+export interface InjectorApiCallOptions {
+  /**
+   * Holder for the &#x60;EditorJS&#x60; instance
+   */
+  holder: string;
+
+  /**
+   * The method to call
+   */
+  method: string;
+  /**
+   * The optional namespace for the API call
+   */
+  namespace?: string;
+}
+
+/**
+ * A response from the &#x60;EditorJS&#x60; api
+ */
+export interface InjectorApiCallResponse&lt;T &#x3D; any&gt; extends InjectorApiCallOptions {
+  result: T;
 }
 </code></pre>
     </div>
@@ -305,7 +331,7 @@ export interface InjectorMethodOption {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'InjectorMethodOption.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

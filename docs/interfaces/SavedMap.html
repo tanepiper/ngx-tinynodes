@@ -28,7 +28,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content interface">
                    <div class="content-data">
 
 
@@ -37,9 +37,14 @@
 
 
 
+
+
+
+
+
 <ol class="breadcrumb">
-  <li>Injectables</li>
-  <li>PluginParagraph</li>
+  <li>Interfaces</li>
+  <li>SavedMap</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -57,129 +62,119 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-plugins/src/lib/plugins/paragraph/paragraph.plugin.ts</code>
+            <code>libs/ngx-editorjs/src/lib/types/maps.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>This plugin returns the tool settings for a <code>&lt;p&gt;</code> block tool for <code>EditorJS</code></p>
+                <p>A map containing <code>BehaviorSubject</code> of <code>boolean</code> values of the save state of <code>EditorJS</code></p>
 
             </p>
 
 
 
-            <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#plugin">plugin</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
 
             <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="plugin"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            plugin
-                        </b>
-                        <a href="#plugin"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>plugin()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/plugins/paragraph/paragraph.plugin.ts:14</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Returns the plugin settings</p>
+    <h3 id="inputs">Indexable</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <code>[key: string]:    <code>BehaviorSubject&lt;boolean&gt;</code>
+</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">libs/ngx-editorjs/src/lib/types/maps.ts:38</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>A map key containing a {BehaviorSubject} of {boolean}</p>
 </div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>ToolSettings</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 </section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import Paragraph from &#x27;@editorjs/paragraph&#x27;;
-import { ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
-import { BasePlugin } from &#x27;../../types/plugins&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import EditorJS, { OutputData } from &#x27;@editorjs/editorjs&#x27;;
+import { BehaviorSubject } from &#x27;rxjs&#x27;;
+import { Block } from &#x27;./blocks&#x27;;
 
 /**
- * This plugin returns the tool settings for a &#x60;&lt;p&gt;&#x60; block tool for &#x60;EditorJS&#x60;
+ * A map containing instances of &#x60;EditorJS&#x60;
  */
-@Injectable()
-export class PluginParagraph implements BasePlugin {
+export interface EditorMap {
   /**
-   * Returns the plugin settings
+   * A map key containing a {BehaviorSubject} of {EditorJS}
    */
-  public plugin(): ToolSettings {
-    return Paragraph;
-  }
+  [key: string]: BehaviorSubject&lt;EditorJS&gt;;
+}
+
+/**
+ * A map containing &#x60;BehaviorSubject&#x60; of &#x60;Block&#x60; elements from &#x60;EditorJS&#x60;
+ */
+export interface BlocksMap {
+  /**
+   * A map key containing a {BehaviorSubject} of {Block[]}
+   */
+  [key: string]: BehaviorSubject&lt;Block[]&gt;;
+}
+
+/**
+ * A map containing &#x60;BehaviorSubject&#x60; of &#x60;boolean&#x60; values of the ready state of &#x60;EditorJS&#x60;
+ */
+export interface ReadyMap {
+  /**
+   * A map key containing a {BehaviorSubject} of {boolean}
+   */
+  [key: string]: BehaviorSubject&lt;boolean&gt;;
+}
+
+/**
+ * A map containing &#x60;BehaviorSubject&#x60; of &#x60;boolean&#x60; values of the save state of &#x60;EditorJS&#x60;
+ */
+export interface SavedMap {
+  /**
+   * A map key containing a {BehaviorSubject} of {boolean}
+   */
+  [key: string]: BehaviorSubject&lt;boolean&gt;;
+}
+
+/**
+ * An EditorJS change event
+ */
+export interface EditorJSChange {
+  /**
+   * Time of the change
+   */
+  time: number;
+  /**
+   * Blocks in the change
+   */
+  blocks: Block[];
+}
+
+/**
+ * A map containing &#x60;BehaviorSubject&#x60; of &#x60;number&#x60; which is the timestamp of the last &#x60;EditorJS&#x60; change
+ */
+export interface ChangeMap {
+  /**
+   * A map key containing a {BehaviorSubject} of {number}
+   */
+  [key: string]: BehaviorSubject&lt;OutputData&gt;;
 }
 </code></pre>
     </div>
-
 </div>
-
-
-
-
-
 
 
 
@@ -202,8 +197,8 @@ export class PluginParagraph implements BasePlugin {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginParagraph.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'SavedMap.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

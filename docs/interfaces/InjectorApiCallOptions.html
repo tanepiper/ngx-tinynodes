@@ -44,7 +44,7 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>EditorJSAction</li>
+  <li>InjectorApiCallOptions</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,14 +62,14 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/types/editorjs-service.ts</code>
+            <code>libs/ngx-editorjs/src/lib/types/injector.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Interface describing an action to trigger EditorJS</p>
+                <p>Options to pass when calling the <code>EditorJS</code> instance API</p>
 
             </p>
 
@@ -87,11 +87,14 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#action">action</a>
+                                        <a href="#holder">holder</a>
+                                </li>
+                                <li>
+                                        <a href="#method">method</a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#payload">payload</a>
+                                        <a href="#namespace">namespace</a>
                                 </li>
                             </ul>
                         </td>
@@ -108,13 +111,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="action"></a>
-                                        <span class="name"><b>action</b><a href="#action"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="holder"></a>
+                                        <span class="name"><b>holder</b><a href="#holder"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>action:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>holder:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -133,7 +136,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The name of the action to trigger</p>
+                                    <div class="io-description"><p>Holder for the <code>EditorJS</code> instance</p>
 </div>
                                 </td>
                             </tr>
@@ -143,13 +146,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="payload"></a>
-                                        <span class="name"><b>payload</b><a href="#payload"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="method"></a>
+                                        <span class="name"><b>method</b><a href="#method"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>payload:     <code>T</code>
+                                        <code>method:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -157,7 +160,42 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>T</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The method to call</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="namespace"></a>
+                                        <span class="name"><b>namespace</b><a href="#namespace"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>namespace:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -173,7 +211,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The payload for the action <T></p>
+                                    <div class="io-description"><p>The optional namespace for the API call</p>
 </div>
                                 </td>
                             </tr>
@@ -184,65 +222,82 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
+import EditorJS, { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
+import { Block } from &#x27;./blocks&#x27;;
 /**
- * Interface describing an action to trigger EditorJS
+ * Configuration for creating an EditorJS instance
  */
-export interface EditorJSAction&lt;T &#x3D; any&gt; {
+export interface EditorJSInstanceConfig {
   /**
-   * The name of the action to trigger
+   * The editor configuration, this is required with at least the &#x60;holder&#x60; property
    */
-  action: string;
+  editorConfig: EditorConfig;
+  /**
+   * The method to call when the editor makes a change
+   */
+  onChange?: (holder?: string) &#x3D;&gt; void;
 
   /**
-   * The payload for the action &lt;T&gt;
+   * The method to call with an editor is ready
    */
-  payload?: T;
+  onReady?: (holder?: string) &#x3D;&gt; void;
 }
 
 /**
- * Supported actions by the API
+ * Default values for each internal map
  */
-export enum EditorJSActionTypes {
-  /**
-   * Create a new editor
-   */
-  CreateEditor &#x3D; &#x27;createEditor&#x27;,
+export const MAP_DEFAULTS &#x3D; [[&#x27;hasChangedMap&#x27;, { time: 0, blocks: [] }], [&#x27;isReadyMap&#x27;, false], [&#x27;hasSavedMap&#x27;, false]];
 
+/**
+ * Injection token for the EditorJS class
+ */
+export const EDITORJS_MODULE_IMPORT &#x3D; new InjectionToken&lt;any&gt;(&#x27;EDITORJS_MODULE_IMPORT&#x27;);
+
+export const EditorJSInstance &#x3D; new InjectionToken&lt;any&gt;(&#x27;EditorJSInstance&#x27;);
+
+/**
+ * Options for a Injector method
+ */
+export interface InjectorMethodOption {
   /**
-   * Update an editor instance
+   * The holder for the option
    */
-  UpdateEditor &#x3D; &#x27;updateEditor&#x27;,
+  holder: string;
   /**
-   * Clear a editor instance
+   * Optional blocks
    */
-  ClearEditor &#x3D; &#x27;clearEditor&#x27;,
+  blocks?: Block[];
   /**
-   * Destroy an Editor instance
+   * Optional editor
    */
-  DestroyEditor &#x3D; &#x27;destroyEditor&#x27;,
-  /**
-   * Save the blocks in an editor instance
-   */
-  SaveEditor &#x3D; &#x27;saveEditor&#x27;
+  editor?: EditorJS;
 }
 
 /**
- * EditorJS options
+ * Options to pass when calling the &#x60;EditorJS&#x60; instance API
  */
-export interface CreateEditorJSOptions {
+export interface InjectorApiCallOptions {
   /**
-   * Configuration
+   * Holder for the &#x60;EditorJS&#x60; instance
    */
-  config: EditorConfig;
+  holder: string;
+
   /**
-   * Tools to include, Optional - if not set all tools will be used
+   * The method to call
    */
-  includeTools?: string[];
+  method: string;
   /**
-   * Autosave on change, is set to false
+   * The optional namespace for the API call
    */
-  autoSave?: boolean;
+  namespace?: string;
+}
+
+/**
+ * A response from the &#x60;EditorJS&#x60; api
+ */
+export interface InjectorApiCallResponse&lt;T &#x3D; any&gt; extends InjectorApiCallOptions {
+  result: T;
 }
 </code></pre>
     </div>
@@ -270,7 +325,7 @@ export interface CreateEditorJSOptions {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'InjectorApiCallOptions.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

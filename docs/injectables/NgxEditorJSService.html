@@ -74,26 +74,6 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#editorActions$">editorActions$</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#onDestroy$">onDestroy$</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -103,6 +83,10 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#apiCall">apiCall</a>
+                            </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#clear">clear</a>
@@ -118,19 +102,15 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getBlocks">getBlocks</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#getChanged">getChanged</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#getEditor">getEditor</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#hasChanged">hasChanged</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#hasSaved">hasSaved</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -152,20 +132,6 @@
 
 
 
-                    <tr>
-                        <td class="col-md-4">
-                            <h6><b>Accessors</b></h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                    <a href="#editorActions">editorActions</a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
         </tbody>
     </table>
 </section>
@@ -176,12 +142,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(config: <a href="../interfaces/NgxEditorJSConfig.html">NgxEditorJSConfig</a>, editorService: <a href="../injectables/NgxEditorJSInstanceService.html">NgxEditorJSInstanceService</a>, plugins: <a href="../injectables/NgxEditorJSPluginService.html">NgxEditorJSPluginService</a>)</code>
+<code>constructor(config: <a href="../interfaces/NgxEditorJSModuleConfig.html">NgxEditorJSModuleConfig</a>, instanceService: <a href="../injectables/NgxEditorJSInstanceService.html">NgxEditorJSInstanceService</a>, plugins: <a href="../injectables/NgxEditorJSPluginService.html">NgxEditorJSPluginService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -202,7 +168,7 @@
                                                         <td>config</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../interfaces/NgxEditorJSConfig.html" target="_self" >NgxEditorJSConfig</a></code>
+                                                                        <code><a href="../interfaces/NgxEditorJSModuleConfig.html" target="_self" >NgxEditorJSModuleConfig</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -211,7 +177,7 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>editorService</td>
+                                                        <td>instanceService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/NgxEditorJSInstanceService.html" target="_self" >NgxEditorJSInstanceService</a></code>
@@ -252,6 +218,114 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="apiCall"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            apiCall
+                        </b>
+                        <a href="#apiCall"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>apiCall(options: <a href="../interfaces/InjectorApiCallOptions.html">InjectorApiCallOptions</a>, ...args: any[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="84"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:84</a></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>A helper method to make calls to any <code>EditorJS</code> API (see <a href="https://editorjs.io/api">API Docs</a>)
+The first argument should container the holder and method name, and namespace if required
+The second argument is any additional arguments as required by the API.
+The response of this method if a <code>Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt;</code> which contains
+the options passed and an extra <code>result</code> property. If the result is a Promise<T> it will
+resolve the value</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                                <code><a href="../interfaces/InjectorApiCallOptions.html" target="_self" >InjectorApiCallOptions</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Options to pass to the API request</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>args</td>
+                                    <td>
+                                            <code>any[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Additional arguments to pass to the API request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/InjectorApiCallResponse.html" target="_self" >Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="clear"></a>
                     <span class="name">
                         <b>
@@ -265,15 +339,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>clear(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                    <code>clear(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="147"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:147</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="112"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:112</a></div>
                 </td>
             </tr>
 
@@ -295,6 +369,7 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>options</td>
                                     <td>
                                                 <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
                                     </td>
@@ -346,8 +421,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="70"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:70</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:28</a></div>
                 </td>
             </tr>
 
@@ -365,6 +440,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -379,6 +455,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>The instance options</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -413,15 +493,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>destroy(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                    <code>destroy(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="157"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:157</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="122"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:122</a></div>
                 </td>
             </tr>
 
@@ -445,6 +525,7 @@ completes and destroys them</p>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>options</td>
                                     <td>
                                                 <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
                                     </td>
@@ -475,153 +556,6 @@ completes and destroys them</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getBlocks"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getBlocks
-                        </b>
-                        <a href="#getBlocks"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getBlocks(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="93"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:93</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Get an observable of the blocks for an <code>EditorJS</code> instance</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                                <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/Block.html" target="_self" >Observable&lt;Block[]&gt;</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getChanged"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getChanged
-                        </b>
-                        <a href="#getChanged"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getChanged(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="111"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:111</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Returns an <code>Observable&lt;number&gt;</code> of the current timestamp of the last change
-this can be subscribed to before calling the <code>createEditor</code> method</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                                <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;number&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getEditor"></a>
                     <span class="name">
                         <b>
@@ -635,15 +569,15 @@ this can be subscribed to before calling the <code>createEditor</code> method</p
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getEditor(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                    <code>getEditor(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="85"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:85</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:43</a></div>
                 </td>
             </tr>
 
@@ -666,6 +600,7 @@ See the <a href="https://editorjs.io/api">EditorJS API</a> docs for more details
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>options</td>
                                     <td>
                                                 <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
                                     </td>
@@ -709,22 +644,23 @@ See the <a href="https://editorjs.io/api">EditorJS API</a> docs for more details
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>hasChanged(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                    <code>hasChanged(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="119"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:119</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:61</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Check to see if the <code>EditorJS</code> instance has changed</p>
+                    <div class="io-description"><p>Returns an <code>Observable&lt;number&gt;</code> of the current timestamp of the last change
+this can be subscribed to before calling the <code>createEditor</code> method</p>
 </div>
 
                     <div class="io-description">
@@ -739,6 +675,7 @@ See the <a href="https://editorjs.io/api">EditorJS API</a> docs for more details
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>options</td>
                                     <td>
                                                 <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
                                     </td>
@@ -755,7 +692,82 @@ See the <a href="https://editorjs.io/api">EditorJS API</a> docs for more details
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;OutputData&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasSaved"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            hasSaved
+                        </b>
+                        <a href="#hasSaved"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>hasSaved(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:70</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns an <code>Observable&lt;number&gt;</code> of the current timestamp of the last change
+this can be subscribed to before calling the <code>createEditor</code> method</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                                <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -782,15 +794,15 @@ See the <a href="https://editorjs.io/api">EditorJS API</a> docs for more details
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>isReady(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                    <code>isReady(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="102"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:102</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:52</a></div>
                 </td>
             </tr>
 
@@ -813,6 +825,7 @@ the <code>createEditor</code> method</p>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>options</td>
                                     <td>
                                                 <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
                                     </td>
@@ -856,15 +869,15 @@ the <code>createEditor</code> method</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>save(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                    <code>save(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="139"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:139</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="104"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:104</a></div>
                 </td>
             </tr>
 
@@ -888,6 +901,7 @@ If there is no instance of that name it will throw an error.</p>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>options</td>
                                     <td>
                                                 <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
                                     </td>
@@ -931,15 +945,15 @@ If there is no instance of that name it will throw an error.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>update(undefined: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                    <code>update(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>, triggerUpdate)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="129"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:129</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:94</a></div>
                 </td>
             </tr>
 
@@ -958,10 +972,13 @@ If there is no instance of that name it will throw an error.</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Default value</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>options</td>
                                     <td>
                                                 <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
                                     </td>
@@ -970,7 +987,31 @@ If there is no instance of that name it will throw an error.</p>
                                         No
                                     </td>
 
+                                    <td>
+                                    </td>
 
+                                    <td>
+                                        <p>The options to update</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>triggerUpdate</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>true</code>
+                                    </td>
+
+                                    <td>
+                                        <p>If set to false the hasChanged observable won&#39;t be updated</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -989,124 +1030,20 @@ If there is no instance of that name it will throw an error.</p>
         </tbody>
     </table>
 </section>
-            <section>
-    
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="editorActions$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            editorActions$</b>
-                            <a href="#editorActions$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;EditorJSAction&gt;({
-    action: &#x27;&#x27;
-  })</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:23</a></div>
-                            </td>
-                        </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Internal editor action state</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="onDestroy$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            onDestroy$</b>
-                            <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:19</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-</section>
-
-            <section>
-    <h3 id="accessors">
-        Accessors
-    </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="editorActions"></a>
-                        <span class="name"><b>editorActions</b><a href="#editorActions"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>editorActions()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:30</a></div>
-                                </td>
-                            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Editor action stream</p>
-</div>
-
-                        </td>
-                    </tr>
-
-            </tbody>
-        </table>
-</section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable } from &#x27;@angular/core&#x27;;
-import EditorJS, { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
-import { BehaviorSubject, Observable, Subject } from &#x27;rxjs&#x27;;
-import { filter, takeUntil } from &#x27;rxjs/operators&#x27;;
-import { Block } from &#x27;../types/blocks&#x27;;
-import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;../types/config&#x27;;
-import { CreateEditorJSOptions, EditorJSAction, EditorJSActionTypes } from &#x27;../types/editorjs-service&#x27;;
+import EditorJS, { EditorConfig, OutputData } from &#x27;@editorjs/editorjs&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { filter } from &#x27;rxjs/operators&#x27;;
+import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from &#x27;../types/config&#x27;;
+import { CreateEditorJSOptions } from &#x27;../types/editorjs-service&#x27;;
+import { InjectorApiCallOptions, InjectorApiCallResponse, InjectorMethodOption } from &#x27;../types/injector&#x27;;
 import { NgxEditorJSInstanceService } from &#x27;./editorjs-injector&#x27;;
 import { NgxEditorJSPluginService } from &#x27;./plugins.service&#x27;;
-import { InjectorMethodOption } from &#x27;../types/injector&#x27;;
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
@@ -1115,56 +1052,15 @@ import { InjectorMethodOption } from &#x27;../types/injector&#x27;;
   providedIn: &#x27;root&#x27;
 })
 export class NgxEditorJSService {
-  private onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
-  /**
-   * Internal editor action state
-   */
-  private readonly editorActions$ &#x3D; new BehaviorSubject&lt;EditorJSAction&gt;({
-    action: &#x27;&#x27;
-  });
-
-  /**
-   * Editor action stream
-   */
-  public get editorActions() {
-    return this.editorActions$.pipe(filter(action &#x3D;&gt; action.action !&#x3D;&#x3D; &#x27;&#x27;));
-  }
-
   constructor(
-    @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
-    private readonly editorService: NgxEditorJSInstanceService,
+    @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSModuleConfig,
+    private readonly instanceService: NgxEditorJSInstanceService,
     private readonly plugins: NgxEditorJSPluginService
-  ) {
-    this.editorActions.pipe(takeUntil(this.onDestroy$)).subscribe(editorAction &#x3D;&gt; {
-      switch (editorAction.action) {
-        case EditorJSActionTypes.CreateEditor: {
-          return this.createEditor(editorAction.payload);
-        }
-        case EditorJSActionTypes.ClearEditor: {
-          return this.clear(editorAction.payload);
-        }
-        case EditorJSActionTypes.DestroyEditor: {
-          return this.destroy(editorAction.payload);
-        }
-        case EditorJSActionTypes.SaveEditor: {
-          return this.save(editorAction.payload);
-        }
-        case EditorJSActionTypes.UpdateEditor: {
-          return this.update(editorAction.payload);
-        }
-        default: {
-          return;
-        }
-      }
-    });
-  }
+  ) {}
 
   /**
    * This method creates a new EditorJS instance
-   * @param holder The ID of the holder of the instance
-   * @param blocks Optional initial set of blocks to render in the editor
-   * @param excludeTools String array of keys to not include with this editor
-   * @param autoSave When an instance changes we update the block map, set to false if you want to disable
+   * @param options The instance options
    */
   public async createEditor(options: CreateEditorJSOptions): Promise&lt;void&gt; {
     const editorConfig: EditorConfig &#x3D; {
@@ -1173,7 +1069,7 @@ export class NgxEditorJSService {
       tools: this.plugins.getTools(options.includeTools)
     };
 
-    await this.editorService.createInstance({ editorConfig });
+    await this.instanceService.createInstance({ editorConfig });
   }
 
   /**
@@ -1181,16 +1077,8 @@ export class NgxEditorJSService {
    * See the [EditorJS API](https://editorjs.io/api) docs for more details
    * @param holder The ID of the holder of the instance
    */
-  public getEditor({ holder }: InjectorMethodOption): Observable&lt;EditorJS&gt; {
-    return this.editorService.getInstance({ holder }).pipe(filter(editor &#x3D;&gt; typeof editor !&#x3D;&#x3D; &#x27;undefined&#x27;));
-  }
-
-  /**
-   * Get an observable of the blocks for an &#x60;EditorJS&#x60; instance
-   * @param holder The ID of the holder of the instance
-   */
-  public getBlocks({ holder }: InjectorMethodOption): Observable&lt;Block[]&gt; {
-    return this.editorService.getBlocks({ holder });
+  public getEditor(options: InjectorMethodOption): Observable&lt;EditorJS&gt; {
+    return this.instanceService.getEditor(options).pipe(filter(editor &#x3D;&gt; typeof editor !&#x3D;&#x3D; &#x27;undefined&#x27;));
   }
 
   /**
@@ -1198,8 +1086,8 @@ export class NgxEditorJSService {
    * the &#x60;createEditor&#x60; method
    * @param holder
    */
-  public isReady({ holder }: InjectorMethodOption): Observable&lt;boolean&gt; {
-    return this.editorService.getReady({ holder });
+  public isReady(options: InjectorMethodOption): Observable&lt;boolean&gt; {
+    return this.instanceService.isReady(options);
   }
 
   /**
@@ -1207,26 +1095,41 @@ export class NgxEditorJSService {
    * this can be subscribed to before calling the &#x60;createEditor&#x60; method
    * @param holder
    */
-  public getChanged({ holder }: InjectorMethodOption): Observable&lt;number&gt; {
-    return this.editorService.getChanged({ holder });
+  public hasChanged(options: InjectorMethodOption): Observable&lt;OutputData&gt; {
+    return this.instanceService.hasChanged(options);
   }
 
   /**
-   * Check to see if the &#x60;EditorJS&#x60; instance has changed
-   * @param holder The ID of the holder of the instance
+   * Returns an &#x60;Observable&lt;number&gt;&#x60; of the current timestamp of the last change
+   * this can be subscribed to before calling the &#x60;createEditor&#x60; method
+   * @param holder
    */
-  public hasChanged({ holder }: InjectorMethodOption) {
-    this.editorService.onChange({ holder });
+  public hasSaved(options: InjectorMethodOption): Observable&lt;boolean&gt; {
+    return this.instanceService.hasSaved(options);
+  }
+
+  /**
+   * A helper method to make calls to any &#x60;EditorJS&#x60; API (see [API Docs](https://editorjs.io/api))
+   * The first argument should container the holder and method name, and namespace if required
+   * The second argument is any additional arguments as required by the API.
+   * The response of this method if a &#x60;Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt;&#x60; which contains
+   * the options passed and an extra &#x60;result&#x60; property. If the result is a Promise&lt;T&gt; it will
+   * resolve the value
+   * @param options Options to pass to the API request
+   * @param args Additional arguments to pass to the API request
+   */
+  public apiCall&lt;T&gt;(options: InjectorApiCallOptions, ...args): Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt; {
+    return this.instanceService.apiCall&lt;T&gt;(options, ...args);
   }
 
   /**
    * This method updates the blocks within the &#x60;EditorJS&#x60; instance.
    * If there is no instance of that name it will throw an error.
-   * @param holder The ID of the holder of the instance
-   * @param blocks The array of &#x60;Block&#x60; elements to render
+   * @param options The options to update
+   * @param triggerUpdate If set to false the hasChanged observable won&#x27;t be updated
    */
-  public update({ holder, blocks }: InjectorMethodOption) {
-    this.editorService.update({ holder, blocks });
+  public update(options: InjectorMethodOption, triggerUpdate &#x3D; true) {
+    this.instanceService.update(options, triggerUpdate);
   }
 
   /**
@@ -1235,16 +1138,16 @@ export class NgxEditorJSService {
    * If there is no instance of that name it will throw an error.
    * @param holder The ID of the holder of the instance
    */
-  public save({ holder }: InjectorMethodOption): void {
-    this.editorService.save({ holder });
+  public save(options: InjectorMethodOption): void {
+    this.instanceService.save(options);
   }
 
   /**
    * Clears all blocks from an &#x60;EditorJS instance&#x60;
    * @param holder The ID of the holder of the instance
    */
-  public clear({ holder }: InjectorMethodOption): void {
-    this.editorService.clear({ holder });
+  public clear(options: InjectorMethodOption): void {
+    this.instanceService.clear(options);
   }
 
   /**
@@ -1253,8 +1156,8 @@ export class NgxEditorJSService {
    * completes and destroys them
    * @param holder The ID of the holder of the instance
    */
-  public destroy({ holder }: InjectorMethodOption): void {
-    this.editorService.destroyInstance({ holder });
+  public destroy(options: InjectorMethodOption): void {
+    this.instanceService.destroyInstance(options);
   }
 }
 </code></pre>
@@ -1289,7 +1192,7 @@ export class NgxEditorJSService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSService.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

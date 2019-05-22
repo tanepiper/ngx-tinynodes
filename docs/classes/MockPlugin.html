@@ -205,7 +205,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
 import { BasePlugin } from &#x27;../lib/types/plugins&#x27;;
-import { EditorJSConfig } from &#x27;../lib/types/config&#x27;;
+import { NgxEditorJSModuleConfig } from &#x27;../lib/types/config&#x27;;
 
 export class TestClass {
   constructor() {}
@@ -231,7 +231,7 @@ export class MockEditorJS {
 
   isReady: Promise&lt;void&gt;;
 
-  constructor(private config: EditorJSConfig) {
+  constructor(private config: NgxEditorJSModuleConfig) {
     this.version &#x3D; &#x27;test&#x27;;
 
     this.isReady &#x3D; Promise.resolve();
@@ -282,7 +282,7 @@ export class MockEditorJS {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'MockPlugin.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

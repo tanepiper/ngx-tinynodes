@@ -91,9 +91,6 @@
                             <a href="#getGreeting" title="apps/ngx-tinynodes-e2e/src/support/app.po.ts"><b>getGreeting</b>&nbsp;&nbsp;&nbsp;(apps/.../app.po.ts)</a>
                         </li>
                         <li>
-                            <a href="#InitialPlugins" title="libs/ngx-editorjs/src/lib/types/plugins.ts"><b>InitialPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
-                        </li>
-                        <li>
                             <a href="#InitialPlugins" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>InitialPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
                         </li>
                         <li>
@@ -252,7 +249,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;FOR_ROOT_OPTIONS_TOKEN&#x27;)</code>
+                            <i>Default value : </i><code>new InjectionToken&lt;NgxEditorJSModuleConfig&gt;(&#x27;FOR_ROOT_OPTIONS_TOKEN&#x27;)</code>
                         </td>
                     </tr>
 
@@ -279,7 +276,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;NgxEditorJSConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;)</code>
+                            <i>Default value : </i><code>new InjectionToken&lt;NgxEditorJSModuleConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;)</code>
                         </td>
                     </tr>
 
@@ -443,7 +440,7 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>[[&#x27;blocksMap&#x27;, []], [&#x27;changeMap&#x27;, 0], [&#x27;readyMap&#x27;, false]]</code>
+                            <i>Default value : </i><code>[[&#x27;hasChangedMap&#x27;, { time: 0, blocks: [] }], [&#x27;isReadyMap&#x27;, false], [&#x27;hasSavedMap&#x27;, false]]</code>
                         </td>
                     </tr>
 
@@ -541,63 +538,6 @@
                         </td>
                     </tr>
 
-
-            </tbody>
-        </table>
-</section>
-    <h3>libs/ngx-editorjs/src/lib/types/plugins.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="InitialPlugins"></a>
-                        <span class="name">
-                            <b>
-                            InitialPlugins</b>
-                            <a href="#InitialPlugins"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;)</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The Injection token for initial plugins as defined in the ngx-editorjs module</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="UserPlugins"></a>
-                        <span class="name">
-                            <b>
-                            UserPlugins</b>
-                            <a href="#UserPlugins"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;)</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The injection token for adding plugins via your own application</p>
-</div>
-                    </td>
-                </tr>
 
             </tbody>
         </table>
@@ -799,6 +739,42 @@
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Tag Value Accessor</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+    <h3>libs/ngx-editorjs/src/lib/types/plugins.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="UserPlugins"></a>
+                        <span class="name">
+                            <b>
+                            UserPlugins</b>
+                            <a href="#UserPlugins"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The injection token for adding plugins via your own application</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -823,7 +799,7 @@
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

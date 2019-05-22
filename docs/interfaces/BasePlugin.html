@@ -186,7 +186,7 @@ These methods allow a plugin to return a EditorJS plugin and an optional shortcu
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import { ToolSettings, ToolConstructable } from &#x27;@editorjs/editorjs&#x27;;
+import { ToolConstructable, ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
  * A Module plugin configuration
@@ -225,11 +225,6 @@ export interface BasePlugin {
 }
 
 /**
- * The Injection token for initial plugins as defined in the ngx-editorjs module
- */
-export const InitialPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;);
-
-/**
  * The injection token for adding plugins via your own application
  */
 export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;);
@@ -259,7 +254,7 @@ export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;Use
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'BasePlugin.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

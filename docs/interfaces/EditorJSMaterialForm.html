@@ -91,6 +91,7 @@
 import { coerceBooleanProperty } from &#x27;@angular/cdk/coercion&#x27;;
 import {
   AfterContentInit,
+  ChangeDetectorRef,
   Component,
   DoCheck,
   forwardRef,
@@ -328,7 +329,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
    */
   public onContainerClick(event: MouseEvent) {
     this.onTouch(event);
-    this.isSaved.emit(false);
+    this.hasSaved.emit(false);
     this.stateChanges.next();
   }
 
@@ -341,9 +342,10 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
   constructor(
     protected readonly service: NgxEditorJSService,
     protected fm: FocusMonitor,
+    protected readonly cd: ChangeDetectorRef,
     @Optional() @Self() public ngControl: NgControl
   ) {
-    super(service, fm);
+    super(service, fm, cd);
   }
 
   /**
@@ -364,7 +366,9 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused &#x3D;&gt; {
         this.focused &#x3D; focused;
+        this.isTouched.emit(true);
         this.stateChanges.next();
+        this.cd.markForCheck();
       });
   }
 
@@ -375,6 +379,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     if (this.ngControl) {
       this.errorState &#x3D; this.ngControl.invalid &amp;&amp; this.ngControl.touched;
       this.stateChanges.next();
+      this.cd.markForCheck();
     }
   }
 
@@ -386,8 +391,10 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     if (this.timerSubscription$ &amp;&amp; !this.timerSubscription$.closed) {
       this.timerSubscription$.unsubscribe();
     }
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
+    if (!this.onDestroy$.closed) {
+      this.onDestroy$.next(true);
+      this.onDestroy$.complete();
+    }
   }
 }
 </code></pre>
@@ -416,7 +423,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'EditorJSMaterialForm.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -44,7 +44,7 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>EventType</li>
+  <li>NgxEditorJSModuleConfig</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,14 +62,14 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/types/maps.ts</code>
+            <code>libs/ngx-editorjs/src/lib/types/config.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>An event type for calling <code>EditorJS</code></p>
+                <p>The configuration option that can be passed to the <code>NgxEditorJSModule.forRoot</code> method</p>
 
             </p>
 
@@ -88,10 +88,7 @@
                             <ul class="index-list">
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#payload">payload</a>
-                                </li>
-                                <li>
-                                        <a href="#type">type</a>
+                                        <a href="#editorjs">editorjs</a>
                                 </li>
                             </ul>
                         </td>
@@ -108,13 +105,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="payload"></a>
-                                        <span class="name"><b>payload</b><a href="#payload"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="editorjs"></a>
+                                        <span class="name"><b>editorjs</b><a href="#editorjs"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>payload:     <code>T</code>
+                                        <code>editorjs:     <code>EditorConfig</code>
 </code>
                                     </td>
                                 </tr>
@@ -122,7 +119,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>T</code>
+                                            <i>Type : </i>    <code>EditorConfig</code>
 
                                         </td>
                                     </tr>
@@ -136,35 +133,12 @@
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="type"></a>
-                                        <span class="name"><b>type</b><a href="#type"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>type:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Configuration options for <code>EditorJS</code></p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -172,67 +146,78 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import EditorJS from &#x27;@editorjs/editorjs&#x27;;
-import { BehaviorSubject } from &#x27;rxjs&#x27;;
-import { Block } from &#x27;./blocks&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
+import EditorJS, { OutputData, SanitizerConfig, EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
- * An event type for calling &#x60;EditorJS&#x60;
+ * Configuration for the EditorJS instance
  */
-export interface EventType&lt;T &#x3D; any&gt; {
-  type: string;
-  payload?: T;
-}
-
-/**
- * A map containing an event subject for an &#x60;EditorJS&#x60; instance
- */
-export interface EventMap {
+export interface NgxEditorJSConfig {
   /**
-   * A map key containing a {BehaviorSubject} of {EventType}
+   * If the EditorJS is autofocused on creation (default: false)
    */
-  [key: string]: BehaviorSubject&lt;EventType&gt;;
+  autofocus?: boolean;
+
+  /**
+   * Any initial output data to render
+   */
+  data?: OutputData;
+
+  /**
+   * If true, toolbar won&#x27;t be shown
+   */
+  hideToolbar?: boolean;
+
+  /**
+   * ID of the element to hold the config
+   */
+  holder?: string;
+
+  /**
+   * The name of the initial block (default &quot;paragraph&quot;)
+   */
+  initialBlock?: string;
+
+  /**
+   * Height of Editor&#x27;s bottom area that allows to set focus on the last Block
+   */
+  minHeight?: number;
+
+  /**
+   * First Block placeholder
+   */
+  blockPlaceholder?: string;
+
+  /**
+   * Define default sanitizer configuration
+   */
+  sanitizer?: SanitizerConfig;
 }
 
 /**
- * A map containing instances of &#x60;EditorJS&#x60;
+ * The configuration option that can be passed to the &#x60;NgxEditorJSModule.forRoot&#x60; method
  */
-export interface EditorMap {
+export interface NgxEditorJSModuleConfig {
   /**
-   * A map key containing a {BehaviorSubject} of {EditorJS}
+   * Configuration options for &#x60;EditorJS&#x60;
    */
-  [key: string]: BehaviorSubject&lt;EditorJS&gt;;
+  editorjs?: EditorConfig;
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;Block&#x60; elements from &#x60;EditorJS&#x60;
+ * Injection token provied for &#x60;NgxEditorJSConfig&#x60;
  */
-export interface BlocksMap {
-  /**
-   * A map key containing a {BehaviorSubject} of {Block[]}
-   */
-  [key: string]: BehaviorSubject&lt;Block[]&gt;;
-}
+export const NGX_EDITORJS_CONFIG &#x3D; new InjectionToken&lt;NgxEditorJSModuleConfig&gt;(&#x27;NGX_EDITORJS_CONFIG&#x27;);
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;boolean&#x60; values of the ready state of &#x60;EditorJS&#x60;
+ * Internal token for injecting the &#x60;NgxEditorJSConfig&#x60; into the config factory
  */
-export interface ReadyMap {
-  /**
-   * A map key containing a {BehaviorSubject} of {boolean}
-   */
-  [key: string]: BehaviorSubject&lt;boolean&gt;;
-}
+export const FOR_ROOT_OPTIONS_TOKEN &#x3D; new InjectionToken&lt;NgxEditorJSModuleConfig&gt;(&#x27;FOR_ROOT_OPTIONS_TOKEN&#x27;);
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;number&#x60; which is the timestamp of the last &#x60;EditorJS&#x60; change
+ * Get the EditorJS instance injected into the app
  */
-export interface ChangeMap {
-  /**
-   * A map key containing a {BehaviorSubject} of {number}
-   */
-  [key: string]: BehaviorSubject&lt;number&gt;;
-}
+export const EDITIOR_JS_INSTANCE &#x3D; new InjectionToken&lt;EditorJS&gt;(&#x27;EDITIOR_JS_INSTANCE&#x27;);
 </code></pre>
     </div>
 </div>
@@ -259,7 +244,7 @@ export interface ChangeMap {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSModuleConfig.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

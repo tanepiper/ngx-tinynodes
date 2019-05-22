@@ -97,6 +97,10 @@ will be created</p>
     <table class="table table-sm table-hover">
         <tbody>
 
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
 
 
 
@@ -190,10 +194,6 @@ will be created</p>
                                 <a href="#ngOnDestroy">ngOnDestroy</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#getChanged">getChanged</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Protected</span>
                                 <a href="#getFocusMonitor">getFocusMonitor</a>
                             </li>
@@ -277,7 +277,13 @@ will be created</p>
                                 <a href="#hasChanged">hasChanged</a>
                             </li>
                             <li>
-                                <a href="#isSaved">isSaved</a>
+                                <a href="#hasSaved">hasSaved</a>
+                            </li>
+                            <li>
+                                <a href="#isFocused">isFocused</a>
+                            </li>
+                            <li>
+                                <a href="#isReady">isReady</a>
                             </li>
                             <li>
                                 <a href="#isTouched">isTouched</a>
@@ -298,12 +304,12 @@ will be created</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(service: <a href="../injectables/NgxEditorJSService.html">NgxEditorJSService</a>, fm: FocusMonitor)</code>
+<code>constructor(service: <a href="../injectables/NgxEditorJSService.html">NgxEditorJSService</a>, fm: FocusMonitor, cd: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -353,6 +359,20 @@ will be created</p>
                                                         <td>
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>cd</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -386,13 +406,13 @@ will be created</p>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:36</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:53</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Sets if the <code>EditorJS</code> component will request autofocus in the browser</p>
+                        <div class="io-description"><p>Boolean, If set to true the <code>EditorJS</code> instance gets autofocus when initialized</p>
 </div>
                     </td>
                 </tr>
@@ -420,14 +440,16 @@ will be created</p>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:86</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:106</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>If set, when the <code>EditorJS</code> save is called the <code>Observable</code> of blocks will be updated,
-if set to <code>false</code> on the change <code>Observable</code> will be updated</p>
+                        <div class="io-description"><p>Number, Used with Angular Forms this sets an autosave timer active that calls the <code>EditorJS</code> save
+method. This patches the <code>FormControl</code> value with every block change and focus and blur, it also autosaves after
+a set time
+Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
 </div>
                     </td>
                 </tr>
@@ -455,13 +477,13 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:66</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:84</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>First Block placeholder</p>
+                        <div class="io-description"><p>String, The text to display as the placeholder text in the first block before content is added</p>
 </div>
                     </td>
                 </tr>
@@ -489,13 +511,13 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:92</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:112</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>An initial set of blocks to render in the component</p>
+                        <div class="io-description"><p>Blocks, An initial set of block data to render inside the component</p>
 </div>
                     </td>
                 </tr>
@@ -523,13 +545,13 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:42</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:59</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Sets if the toolbar will be shown in <code>EditorJS</code></p>
+                        <div class="io-description"><p>Boolean, If set to true the toolbar will not show in the <code>EditorJS</code> instance</p>
 </div>
                     </td>
                 </tr>
@@ -557,13 +579,13 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:48</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:65</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>The ID of the dom element that will hold the editor</p>
+                        <div class="io-description"><p>String, the ID property of the element that the <code>EditorJS</code> instance will be attached to</p>
 </div>
                     </td>
                 </tr>
@@ -596,14 +618,14 @@ if set to <code>false</code> on the change <code>Observable</code> will be updat
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:79</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:97</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>A string array of tools that will be included in this instance, if empty
-all tools will be included</p>
+                        <div class="io-description"><p>String Array, If empty all tools available via the plugin service will be added.  If a string
+array is set only the tools with the provided keys will be added</p>
 </div>
                     </td>
                 </tr>
@@ -631,13 +653,14 @@ all tools will be included</p>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:54</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:72</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>The name of the initial block (default &quot;paragraph&quot;)</p>
+                        <div class="io-description"><p>String, The type of block to set as the initial block type. This needs to match a name in the <code>UserPlugins</code> object.
+The default value is &quot;paragraph&quot;</p>
 </div>
                     </td>
                 </tr>
@@ -665,13 +688,13 @@ all tools will be included</p>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:60</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:78</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Height of Editor&#39;s bottom area that allows to set focus on the last Block</p>
+                        <div class="io-description"><p>Number, The minimum height of the <code>EditorJS</code> instance bottom after the last block</p>
 </div>
                     </td>
                 </tr>
@@ -699,13 +722,13 @@ all tools will be included</p>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:72</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:90</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Define default sanitizer configuration</p>
+                        <div class="io-description"><p>SanitizerConfig, The configuration for the HTML sanitizer</p>
 </div>
                     </td>
                 </tr>
@@ -736,13 +759,13 @@ all tools will be included</p>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:150</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:136</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Returns if the element has changed</p>
+                        <div class="io-description"><p>Emits if the <code>EditorJS</code> content has changed when <code>save</code> is called</p>
 </div>
                     </td>
                 </tr>
@@ -752,8 +775,8 @@ all tools will be included</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="isSaved"></a>
-                        <b>isSaved</b>
+                        <a name="hasSaved"></a>
+                        <b>hasSaved</b>
                     </td>
                 </tr>
                 <tr>
@@ -770,13 +793,81 @@ all tools will be included</p>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:110</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:118</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Get the current saved state</p>
+                        <div class="io-description"><p>Emits if the content from the <code>EditorJS</code> instance has been saved to the component value</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isFocused"></a>
+                        <b>isFocused</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:130</a></code>
+</div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits if the component is focused</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isReady"></a>
+                        <b>isReady</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4" colspan="2">
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:142</a></code>
+</div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits if the <code>EditorJS</code> component is ready</p>
 </div>
                     </td>
                 </tr>
@@ -804,13 +895,13 @@ all tools will be included</p>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:137</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:124</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Returns if the element has been touched</p>
+                        <div class="io-description"><p>Emits if the component has been touched</p>
 </div>
                     </td>
                 </tr>
@@ -846,14 +937,16 @@ all tools will be included</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:43</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Set up the focus monitor for the editor touch status</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -885,66 +978,19 @@ all tools will be included</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:56</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Destroy the monitor and subscription and call the onDestroy$ subject</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getChanged"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getChanged
-                        </b>
-                        <a href="#getChanged"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getChanged()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:229</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Get the changed status for the <code>EditorJS</code> instance</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;number&gt;</code>
 
                     </div>
                 </td>
@@ -981,7 +1027,7 @@ all tools will be included</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:188</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:230</a></code>
 </div>
                 </td>
             </tr>
@@ -1089,7 +1135,7 @@ start any autosave timers</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:117</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:172</a></code>
 </div>
                 </td>
             </tr>
@@ -1194,7 +1240,7 @@ start any autosave timers</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:210</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:260</a></code>
 </div>
                 </td>
             </tr>
@@ -1202,6 +1248,8 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Set up listeners for ready and change events</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1239,7 +1287,7 @@ start any autosave timers</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:212</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:289</a></code>
 </div>
                 </td>
             </tr>
@@ -1247,6 +1295,8 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>If the onDestroy$ subject is not stopped, do it here</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1273,7 +1323,7 @@ start any autosave timers</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>registerOnChange(fn: (blocks: <a href="../interfaces/Block.html">Block[]</a>) => void)</code>
+                    <code>registerOnChange(fn: (change: <a href="../interfaces/EditorJSChange.html">EditorJSChange</a>) => void)</code>
                 </td>
             </tr>
 
@@ -1286,7 +1336,7 @@ start any autosave timers</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:170</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:212</a></code>
 </div>
                 </td>
             </tr>
@@ -1294,7 +1344,7 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Register on Change for forms</p>
+                    <div class="io-description"><p>Angular Forms registerOnChange</p>
 </div>
 
                     <div class="io-description">
@@ -1366,7 +1416,7 @@ start any autosave timers</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:177</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:219</a></code>
 </div>
                 </td>
             </tr>
@@ -1374,7 +1424,7 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>registerOnTouched for forms</p>
+                    <div class="io-description"><p>Angular Forms registerOnTouched</p>
 </div>
 
                     <div class="io-description">
@@ -1446,7 +1496,7 @@ start any autosave timers</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:163</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:203</a></code>
 </div>
                 </td>
             </tr>
@@ -1454,7 +1504,7 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Form Write Values</p>
+                    <div class="io-description"><p>Angular Forms value writer</p>
 </div>
 
                     <div class="io-description">
@@ -1532,7 +1582,7 @@ start any autosave timers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -1572,7 +1622,7 @@ start any autosave timers</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:131</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:147</a></code>
 </div>
                             </td>
                         </tr>
@@ -1612,7 +1662,7 @@ start any autosave timers</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:155</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:194</a></code>
 </div>
                             </td>
                         </tr>
@@ -1652,14 +1702,15 @@ start any autosave timers</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:31</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:48</a></code>
 </div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Component Destroy subject</p>
+                        <div class="io-description"><p>Component Destroy subject, in your component <code>ngOnDestroy</code> method call <code>.next(true)</code>
+and then <code>.complete()</code> on the <code>this.onDestroy$</code> subject</p>
 </div>
                     </td>
                 </tr>
@@ -1692,7 +1743,7 @@ start any autosave timers</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:142</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:186</a></code>
 </div>
                             </td>
                         </tr>
@@ -1733,14 +1784,14 @@ start any autosave timers</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:104</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:152</a></code>
 </div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Internal Subscription for the timer subscription</p>
+                        <div class="io-description"><p>Subscription holder for the autosave timer subscription</p>
 </div>
                     </td>
                 </tr>
@@ -1754,7 +1805,7 @@ start any autosave timers</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { FocusMonitor } from &#x27;@angular/cdk/a11y&#x27;;
-import { Component, ViewChild } from &#x27;@angular/core&#x27;;
+import { Component, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from &#x27;@angular/core&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
 import { NgxEditorJSDirective } from &#x27;../../directives/ngx-editorjs.directive&#x27;;
 import { NgxEditorJSService } from &#x27;../../services/editorjs.service&#x27;;
@@ -1771,7 +1822,8 @@ import { NgxEditorJSBaseComponent } from &#x27;../base/container.class&#x27;;
 @Component({
   selector: &#x27;ngx-editorjs&#x27;,
   templateUrl: &#x27;editorjs.component.html&#x27;,
-  styleUrls: [&#x27;editorjs.component.scss&#x27;]
+  styleUrls: [&#x27;editorjs.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
   /**
@@ -1783,25 +1835,39 @@ export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
    * Constructs the Editor component
    * @param service The NgxEditorJSService instance
    */
-  constructor(protected readonly service: NgxEditorJSService, protected readonly fm: FocusMonitor) {
-    super(service, fm);
+  constructor(
+    protected readonly service: NgxEditorJSService,
+    protected readonly fm: FocusMonitor,
+    protected readonly cd: ChangeDetectorRef
+  ) {
+    super(service, fm, cd);
   }
 
+  /**
+   * Set up the focus monitor for the editor touch status
+   */
   ngAfterContentInit() {
     this.getFocusMonitor(this.editorEl.element)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused &#x3D;&gt; {
+        this.isTouched.emit(true);
         this.onTouch();
+        this.cd.markForCheck();
       });
   }
 
+  /**
+   * Destroy the monitor and subscription and call the onDestroy$ subject
+   */
   ngOnDestroy(): void {
     this.fm.stopMonitoring(this.editorEl.element);
     if (this.timerSubscription$ &amp;&amp; !this.timerSubscription$.closed) {
       this.timerSubscription$.unsubscribe();
     }
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
+    if (!this.onDestroy$.closed) {
+      this.onDestroy$.next(true);
+      this.onDestroy$.complete();
+    }
   }
 }
 </code></pre>
@@ -1821,6 +1887,11 @@ export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
   [blockPlaceholder]&#x3D;&quot;blockPlaceholder&quot;
   [sanitizer]&#x3D;&quot;sanitizer&quot;
   [blocks]&#x3D;&quot;blocks&quot;
+  (hasSaved)&#x3D;&quot;hasSaved.emit($event)&quot;
+  (isTouched)&#x3D;&quot;isTouched.emit($event)&quot;
+  (isFocused)&#x3D;&quot;isFocused.emit($event)&quot;
+  (hasChanged)&#x3D;&quot;hasChanged.emit($event)&quot;
+  (isReady)&#x3D;&quot;isReady.emit($event)&quot;
 &gt;&lt;/div&gt;
 </code></pre>
     </div>
@@ -1874,7 +1945,7 @@ export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div  class="editor"  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div  class="editor"  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"  (hasSaved)="hasSaved.emit($event)"  (isTouched)="isTouched.emit($event)"  (isFocused)="isFocused.emit($event)"  (hasChanged)="hasChanged.emit($event)"  (isReady)="isReady.emit($event)"></div></div>'
     var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSBaseComponent', 'selector': ''},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NgxEditorJSComponent'};
@@ -1911,7 +1982,7 @@ export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSComponent.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

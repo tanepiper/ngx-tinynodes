@@ -257,7 +257,7 @@
             <p>The <code>@tinynodes/ngx-editorjs</code> module provides a collection of features to allow
 any Angular app to use and control an <a href="http://editorjs.io">EditorJS</a> instance</p>
 <p>To use import the module <code>NgxEditorJSModule.forRoot()</code> into the root of your application.
-The <code>forRoot</code> method takes an optional <code>NgxEditorJSConfig</code> config, this will provide a
+The <code>forRoot</code> method takes an optional <code>NgxEditorJSModuleConfig</code> config, this will provide a
 default instance.</p>
 
         </p>
@@ -341,7 +341,7 @@ default instance.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>forRoot(config?: <a href="../interfaces/NgxEditorJSConfig.html">NgxEditorJSConfig</a>)</code>
+                    <code>forRoot(config?: <a href="../interfaces/NgxEditorJSModuleConfig.html">NgxEditorJSModuleConfig</a>)</code>
                 </td>
             </tr>
 
@@ -375,7 +375,7 @@ which sets some defaults, or use the provided defaults.</p>
                                 <tr>
                                     <td>config</td>
                                     <td>
-                                                <code><a href="../interfaces/NgxEditorJSConfig.html" target="_self" >NgxEditorJSConfig</a></code>
+                                                <code><a href="../interfaces/NgxEditorJSModuleConfig.html" target="_self" >NgxEditorJSModuleConfig</a></code>
                                     </td>
 
                                     <td>
@@ -422,8 +422,8 @@ import { NgxEditorJSDirective } from &#x27;./directives/ngx-editorjs.directive&#
 import { NgxEditorJSInstanceService } from &#x27;./services/editorjs-injector&#x27;;
 import { NgxEditorJSService } from &#x27;./services/editorjs.service&#x27;;
 import { NgxEditorJSPluginService } from &#x27;./services/plugins.service&#x27;;
-import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from &#x27;./types/config&#x27;;
-import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from &#x27;./types/injector&#x27;;
+import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from &#x27;./types/config&#x27;;
+import { EditorJSInstance, EDITORJS_MODULE_IMPORT } from &#x27;./types/injector&#x27;;
 
 /**
  * Factory function to return the EditorJS base class
@@ -437,7 +437,7 @@ export function createEditorJSInstance(editorjs: any) {
  * any Angular app to use and control an [EditorJS](http://editorjs.io) instance
  *
  * To use import the module &#x60;NgxEditorJSModule.forRoot()&#x60; into the root of your application.
- * The &#x60;forRoot&#x60; method takes an optional &#x60;NgxEditorJSConfig&#x60; config, this will provide a
+ * The &#x60;forRoot&#x60; method takes an optional &#x60;NgxEditorJSModuleConfig&#x60; config, this will provide a
  * default instance.
  */
 @NgModule({
@@ -471,7 +471,7 @@ export class NgxEditorJSModule {
    * which sets some defaults, or use the provided defaults.
    * @param config The optional configuration to pass
    */
-  static forRoot(@Optional() config?: NgxEditorJSConfig): ModuleWithProviders {
+  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders {
     return {
       ngModule: NgxEditorJSModule,
       providers: [
@@ -522,7 +522,7 @@ export class NgxEditorJSModule {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSModule.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

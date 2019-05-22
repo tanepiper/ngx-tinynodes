@@ -1,4 +1,5 @@
 export { createEditorJSConfig } from './lib/config/editor-config';
+export { createModuleConfig } from './lib/config/module-config';
 export {
   EDITORJS_FORM_VALUE_ACCESSOR,
   NgxEditorJSBaseComponent as EditorJSBaseComponent
@@ -16,13 +17,13 @@ export { NgxEditorJSPluginService as ɵNgxEditorJSPluginService } from './lib/se
 export { Block, HeaderBlock, ImageBlock, ListBlock, ListStyle, ParagraphBlock } from './lib/types/blocks';
 export {
   EDITIOR_JS_INSTANCE,
-  NgxEditorJSModuleConfig,
   NgxEditorJSConfig,
+  NgxEditorJSModuleConfig,
   NGX_EDITORJS_CONFIG
 } from './lib/types/config';
+export { CreateEditorJSOptions } from './lib/types/editorjs-service';
 export {
   EditorJSInstanceConfig as ɵEditorJSInstanceConfig,
   EDITORJS_MODULE_IMPORT as ɵEDITORJS_MODULE_IMPORT
 } from './lib/types/injector';
 export { BasePlugin, PluginConfig, UserPlugins } from './lib/types/plugins';
-export { CreateEditorJSOptions } from './lib/types/editorjs-service';
