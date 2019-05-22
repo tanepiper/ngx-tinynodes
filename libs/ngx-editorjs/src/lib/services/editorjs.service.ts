@@ -2,9 +2,9 @@ import { Inject, Injectable } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
+import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
-import { InjectorMethodOption } from '../types/injector';
+import { InjectorApiCallOptions, InjectorApiCallResponse, InjectorMethodOption } from '../types/injector';
 import { NgxEditorJSInstanceService } from './editorjs-injector';
 import { NgxEditorJSPluginService } from './plugins.service';
 
@@ -16,7 +16,7 @@ import { NgxEditorJSPluginService } from './plugins.service';
 })
 export class NgxEditorJSService {
   constructor(
-    @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSConfig,
+    @Inject(NGX_EDITORJS_CONFIG) private config: NgxEditorJSModuleConfig,
     private readonly instanceService: NgxEditorJSInstanceService,
     private readonly plugins: NgxEditorJSPluginService
   ) {}
@@ -60,6 +60,29 @@ export class NgxEditorJSService {
    */
   public hasChanged(options: InjectorMethodOption): Observable<OutputData> {
     return this.instanceService.hasChanged(options);
+  }
+
+  /**
+   * Returns an `Observable<number>` of the current timestamp of the last change
+   * this can be subscribed to before calling the `createEditor` method
+   * @param holder
+   */
+  public hasSaved(options: InjectorMethodOption): Observable<boolean> {
+    return this.instanceService.hasSaved(options);
+  }
+
+  /**
+   * A helper method to make calls to any `EditorJS` API (see [API Docs](https://editorjs.io/api))
+   * The first argument should container the holder and method name, and namespace if required
+   * The second argument is any additional arguments as required by the API.
+   * The response of this method if a `Observable<InjectorApiCallResponse<T>>` which contains
+   * the options passed and an extra `result` property. If the result is a Promise<T> it will
+   * resolve the value
+   * @param options Options to pass to the API request
+   * @param args Additional arguments to pass to the API request
+   */
+  public apiCall<T>(options: InjectorApiCallOptions, ...args): Observable<InjectorApiCallResponse<T>> {
+    return this.instanceService.apiCall<T>(options, ...args);
   }
 
   /**

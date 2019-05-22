@@ -23,7 +23,7 @@ export interface EditorJSInstanceConfig {
 /**
  * Default values for each internal map
  */
-export const MAP_DEFAULTS = [['hasChangedMap', { time: 0, blocks: [] }], ['isReadyMap', false]];
+export const MAP_DEFAULTS = [['hasChangedMap', { time: 0, blocks: [] }], ['isReadyMap', false], ['hasSavedMap', false]];
 
 /**
  * Injection token for the EditorJS class
@@ -48,4 +48,30 @@ export interface InjectorMethodOption {
    * Optional editor
    */
   editor?: EditorJS;
+}
+
+/**
+ * Options to pass when calling the `EditorJS` instance API
+ */
+export interface InjectorApiCallOptions {
+  /**
+   * Holder for the `EditorJS` instance
+   */
+  holder: string;
+
+  /**
+   * The method to call
+   */
+  method: string;
+  /**
+   * The optional namespace for the API call
+   */
+  namespace?: string;
+}
+
+/**
+ * A response from the `EditorJS` api
+ */
+export interface InjectorApiCallResponse<T = any> extends InjectorApiCallOptions {
+  result: T;
 }

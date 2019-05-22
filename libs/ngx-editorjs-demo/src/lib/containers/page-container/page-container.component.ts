@@ -41,18 +41,21 @@ export class PageContainerComponent implements AfterContentInit {
    * The constructor sets up the blocks to the initial demo data
    * @param pagesService The pages service
    * @param app The application service
-   * @param editor The Editor service
+   * @param editorService The Editor service
    * @param cd The change detection ref
    */
   constructor(
     private readonly pagesService: PagesService,
     private app: AppService,
-    private readonly editor: NgxEditorJSService,
+    private readonly editorService: NgxEditorJSService,
     private readonly cd: ChangeDetectorRef
   ) {}
 
+  /**
+   * Get the blocks from the last change
+   */
   public get blocks() {
-    return this.editor.hasChanged({ holder: this.holder }).pipe(
+    return this.editorService.hasChanged({ holder: this.holder }).pipe(
       pluck<OutputData, Block[]>('blocks'),
       takeUntil(this.onDestroy$)
     );
@@ -76,14 +79,14 @@ export class PageContainerComponent implements AfterContentInit {
    * Call the editor save method
    */
   public save() {
-    this.editor.save({ holder: this.holder });
+    this.editorService.save({ holder: this.holder });
   }
 
   /**
    * Clear the editor
    */
   public clear() {
-    this.editor.clear({ holder: this.holder });
+    this.editorService.clear({ holder: this.holder });
   }
 
   /**
@@ -95,7 +98,7 @@ export class PageContainerComponent implements AfterContentInit {
       .pipe(take(1))
       .subscribe((data: NgxEditorJSDemo) => {
         this.menu$.next(data.links);
-        this.editor.update({ holder: this.holder, blocks: data.blocks });
+        this.editorService.update({ holder: this.holder, blocks: data.blocks });
       });
   }
 
@@ -103,16 +106,17 @@ export class PageContainerComponent implements AfterContentInit {
    * Get the blocks data as formatted JSON
    */
   public get asJSON() {
-    return this.editor.hasChanged({ holder: this.holder }).pipe(
-      map(data => {
-        return JSON.stringify(data.blocks, null, 4);
+    return this.blocks.pipe(
+      take(1),
+      map(blocks => {
+        return JSON.stringify(blocks, null, 4);
       }),
       tap(() => this.cd.markForCheck())
     );
   }
 
   /**
-   * After the content has init overide the blocks with blocks from the service
+   * After the content has init override the blocks with blocks from the service
    */
   ngAfterContentInit() {
     this.reset();

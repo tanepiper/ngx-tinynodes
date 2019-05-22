@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  ChangeDetectorRef,
   Directive,
   ElementRef,
   EventEmitter,
@@ -10,13 +11,12 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import EditorJS, { EditorConfig, SanitizerConfig, OutputData } from '@editorjs/editorjs';
+import EditorJS, { EditorConfig, OutputData, SanitizerConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
-import { EditorJSChange } from '../types/maps';
 
 /**
  * The main directive of `ngx-editorjs` provides a way to attach
@@ -115,7 +115,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Emits if the content from the `EditorJS` instance has been saved to the component value
    */
   @Output()
-  public isSaved = new EventEmitter<boolean>();
+  public hasSaved = new EventEmitter<boolean>();
 
   /**
    * Emits if the component has been touched
@@ -148,6 +148,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   onclick() {
     this.touched$.next(true);
     this.isTouched.emit(true);
+    this.cd.markForCheck();
   }
 
   /**
@@ -155,7 +156,11 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * @param el The element the directive is attached to
    * @param editorService The editor service
    */
-  constructor(private readonly el: ElementRef, protected readonly editorService: NgxEditorJSService) {}
+  constructor(
+    protected readonly el: ElementRef,
+    protected readonly editorService: NgxEditorJSService,
+    protected readonly cd: ChangeDetectorRef
+  ) {}
 
   /**
    * Get the `EditorJS` instance for this directive
@@ -195,6 +200,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       includeTools: this.includeTools,
       autoSave: this.autosave || 0
     });
+    this.cd.markForCheck();
   }
 
   /**
@@ -207,7 +213,9 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.blocks && !changes.blocks.firstChange) {
-      return this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
+      this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
+      this.cd.markForCheck();
+      return;
     }
     const changesKeys = Object.keys(changes);
     if (
@@ -227,6 +235,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       })
     ) {
       this.createEditor(this.createConfig());
+      this.cd.markForCheck();
     }
   }
 
@@ -246,6 +255,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(isReady => {
         this.isReady.emit(isReady);
+        this.cd.markForCheck();
       });
 
     this.service
@@ -253,6 +263,15 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
+        this.cd.markForCheck();
+      });
+
+    this.service
+      .hasSaved({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(saved => {
+        this.hasSaved.next(saved);
+        this.cd.markForCheck();
       });
   }
 

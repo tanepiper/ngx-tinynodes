@@ -3,24 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Block } from './blocks';
 
 /**
- * An event type for calling `EditorJS`
- */
-export interface EventType<T = any> {
-  type: string;
-  payload?: T;
-}
-
-/**
- * A map containing an event subject for an `EditorJS` instance
- */
-export interface EventMap {
-  /**
-   * A map key containing a {BehaviorSubject} of {EventType}
-   */
-  [key: string]: BehaviorSubject<EventType>;
-}
-
-/**
  * A map containing instances of `EditorJS`
  */
 export interface EditorMap {
@@ -44,6 +26,16 @@ export interface BlocksMap {
  * A map containing `BehaviorSubject` of `boolean` values of the ready state of `EditorJS`
  */
 export interface ReadyMap {
+  /**
+   * A map key containing a {BehaviorSubject} of {boolean}
+   */
+  [key: string]: BehaviorSubject<boolean>;
+}
+
+/**
+ * A map containing `BehaviorSubject` of `boolean` values of the save state of `EditorJS`
+ */
+export interface SavedMap {
   /**
    * A map key containing a {BehaviorSubject} of {boolean}
    */

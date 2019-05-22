@@ -17,7 +17,6 @@ export class NgxEditorJSPluginService {
   /**
    * When the class is initialized the initial plugins and any user plugins
    * will be passed in and merged and stored in the config map
-   * @param initialPlugins Default plugins produced by the module
    * @param userPlugins User plugins injected into the application
    */
   constructor(@Inject(UserPlugins) userPlugins: PluginConfig) {

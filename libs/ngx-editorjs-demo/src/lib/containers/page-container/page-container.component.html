@@ -25,7 +25,7 @@
           </mat-list-item>
           <mat-list-item>Touched: {{ ngxEditorJS.isTouched | async }}</mat-list-item>
           <mat-list-item>Focused: {{ ngxEditorJS.isFocused | async }}</mat-list-item>
-          <mat-list-item>Saved: {{ ngxEditorJS.isSaved | async }}</mat-list-item>
+          <mat-list-item>Saved: {{ ngxEditorJS.hasSaved | async }}</mat-list-item>
         </mat-list>
       </mat-card-content>
       <ngx-editorjs #ngxEditorJS [holder]="holder"></ngx-editorjs>

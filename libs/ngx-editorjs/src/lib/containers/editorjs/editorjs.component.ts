@@ -1,5 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
@@ -16,7 +16,8 @@ import { NgxEditorJSBaseComponent } from '../base/container.class';
 @Component({
   selector: 'ngx-editorjs',
   templateUrl: 'editorjs.component.html',
-  styleUrls: ['editorjs.component.scss']
+  styleUrls: ['editorjs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
   /**
@@ -28,8 +29,12 @@ export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
    * Constructs the Editor component
    * @param service The NgxEditorJSService instance
    */
-  constructor(protected readonly service: NgxEditorJSService, protected readonly fm: FocusMonitor) {
-    super(service, fm);
+  constructor(
+    protected readonly service: NgxEditorJSService,
+    protected readonly fm: FocusMonitor,
+    protected readonly cd: ChangeDetectorRef
+  ) {
+    super(service, fm, cd);
   }
 
   /**
@@ -41,6 +46,7 @@ export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
       .subscribe(focused => {
         this.isTouched.emit(true);
         this.onTouch();
+        this.cd.markForCheck();
       });
   }
 

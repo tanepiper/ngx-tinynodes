@@ -14,9 +14,15 @@ export { NgxEditorJSInstanceService as ɵNgxEditorJSInstanceService } from './li
 export { NgxEditorJSService } from './lib/services/editorjs.service';
 export { NgxEditorJSPluginService as ɵNgxEditorJSPluginService } from './lib/services/plugins.service';
 export { Block, HeaderBlock, ImageBlock, ListBlock, ListStyle, ParagraphBlock } from './lib/types/blocks';
-export { EDITIOR_JS_INSTANCE, EditorJSConfig, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './lib/types/config';
+export {
+  EDITIOR_JS_INSTANCE,
+  NgxEditorJSModuleConfig,
+  NgxEditorJSConfig,
+  NGX_EDITORJS_CONFIG
+} from './lib/types/config';
 export {
   EditorJSInstanceConfig as ɵEditorJSInstanceConfig,
   EDITORJS_MODULE_IMPORT as ɵEDITORJS_MODULE_IMPORT
 } from './lib/types/injector';
 export { BasePlugin, PluginConfig, UserPlugins } from './lib/types/plugins';
+export { CreateEditorJSOptions } from './lib/types/editorjs-service';

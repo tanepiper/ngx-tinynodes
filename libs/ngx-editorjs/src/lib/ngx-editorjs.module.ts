@@ -11,7 +11,7 @@ import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSInstanceService } from './services/editorjs-injector';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
-import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
+import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from './types/config';
 import { EditorJSInstance, EDITORJS_MODULE_IMPORT } from './types/injector';
 
 /**
@@ -26,7 +26,7 @@ export function createEditorJSInstance(editorjs: any) {
  * any Angular app to use and control an [EditorJS](http://editorjs.io) instance
  *
  * To use import the module `NgxEditorJSModule.forRoot()` into the root of your application.
- * The `forRoot` method takes an optional `NgxEditorJSConfig` config, this will provide a
+ * The `forRoot` method takes an optional `NgxEditorJSModuleConfig` config, this will provide a
  * default instance.
  */
 @NgModule({
@@ -60,7 +60,7 @@ export class NgxEditorJSModule {
    * which sets some defaults, or use the provided defaults.
    * @param config The optional configuration to pass
    */
-  static forRoot(@Optional() config?: NgxEditorJSConfig): ModuleWithProviders {
+  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders {
     return {
       ngModule: NgxEditorJSModule,
       providers: [

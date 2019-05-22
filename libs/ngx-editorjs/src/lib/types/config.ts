@@ -4,7 +4,7 @@ import EditorJS, { OutputData, SanitizerConfig, EditorConfig } from '@editorjs/e
 /**
  * Configuration for the EditorJS instance
  */
-export interface EditorJSConfig {
+export interface NgxEditorJSConfig {
   /**
    * If the EditorJS is autofocused on creation (default: false)
    */
@@ -49,7 +49,7 @@ export interface EditorJSConfig {
 /**
  * The configuration option that can be passed to the `NgxEditorJSModule.forRoot` method
  */
-export interface NgxEditorJSConfig {
+export interface NgxEditorJSModuleConfig {
   /**
    * Configuration options for `EditorJS`
    */
@@ -59,12 +59,12 @@ export interface NgxEditorJSConfig {
 /**
  * Injection token provied for `NgxEditorJSConfig`
  */
-export const NGX_EDITORJS_CONFIG = new InjectionToken<NgxEditorJSConfig>('NGX_EDITORJS_CONFIG');
+export const NGX_EDITORJS_CONFIG = new InjectionToken<NgxEditorJSModuleConfig>('NGX_EDITORJS_CONFIG');
 
 /**
  * Internal token for injecting the `NgxEditorJSConfig` into the config factory
  */
-export const FOR_ROOT_OPTIONS_TOKEN = new InjectionToken<NgxEditorJSConfig>('FOR_ROOT_OPTIONS_TOKEN');
+export const FOR_ROOT_OPTIONS_TOKEN = new InjectionToken<NgxEditorJSModuleConfig>('FOR_ROOT_OPTIONS_TOKEN');
 
 /**
  * Get the EditorJS instance injected into the app

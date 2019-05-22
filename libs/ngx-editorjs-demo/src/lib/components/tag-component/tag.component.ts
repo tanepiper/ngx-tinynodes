@@ -7,6 +7,9 @@ import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/for
 import { MatChipInputEvent, MatFormFieldControl } from '@angular/material';
 import { Subject } from 'rxjs';
 
+/**
+ * Tag Value Accessor
+ */
 export const TAG_COMPONENT_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => NgxEditorJSDemoTagComponent),

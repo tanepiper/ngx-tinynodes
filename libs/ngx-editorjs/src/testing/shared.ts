@@ -1,6 +1,6 @@
 import { ToolSettings } from '@editorjs/editorjs';
 import { BasePlugin } from '../lib/types/plugins';
-import { EditorJSConfig } from '../lib/types/config';
+import { NgxEditorJSModuleConfig } from '../lib/types/config';
 
 export class TestClass {
   constructor() {}
@@ -26,7 +26,7 @@ export class MockEditorJS {
 
   isReady: Promise<void>;
 
-  constructor(private config: EditorJSConfig) {
+  constructor(private config: NgxEditorJSModuleConfig) {
     this.version = 'test';
 
     this.isReady = Promise.resolve();

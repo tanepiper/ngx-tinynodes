@@ -24,7 +24,8 @@ import { OutputData } from '@editorjs/editorjs';
 @Component({
   selector: 'ngx-form-container',
   templateUrl: 'form-container.component.html',
-  styleUrls: ['form-container.component.scss']
+  styleUrls: ['form-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormContainerComponent implements AfterContentInit {
   /**
@@ -57,24 +58,10 @@ export class FormContainerComponent implements AfterContentInit {
   private autoSave$ = new BehaviorSubject<number>(0);
 
   /**
-   * Is saved state
+   * Get `hasSaved` state
    */
-  private isSaved$ = new BehaviorSubject<boolean>(true);
-
-  /**
-   * Get `isSaved` state
-   */
-  public get isSaved(): Observable<boolean> {
-    return this.isSaved$.asObservable();
-  }
-
-  /**
-   * Set the current saved state
-   * @param isSaved The current saved state
-   */
-  public setIsSaved(isSaved: boolean) {
-    this.isSaved$.next(isSaved);
-  }
+  @Output()
+  public hasSaved = new EventEmitter<boolean>();
 
   /**
    * Enable autosave, set the value from the autosaveTime
@@ -120,7 +107,14 @@ export class FormContainerComponent implements AfterContentInit {
         this.editorForm.patchValue({
           pageEditor: hasChanged.blocks
         });
-        this.setIsSaved(true);
+        this.cd.markForCheck();
+      });
+
+    this.editorService
+      .hasSaved({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(hasSaved => {
+        this.hasSaved.next(hasSaved);
         this.cd.markForCheck();
       });
   }
@@ -160,6 +154,7 @@ export class FormContainerComponent implements AfterContentInit {
    */
   public save() {
     this.editorService.save({ holder: this.holder });
+    this.cd.markForCheck();
   }
 
   /**
@@ -167,6 +162,7 @@ export class FormContainerComponent implements AfterContentInit {
    */
   public clear() {
     this.editorService.clear({ holder: this.holder });
+    this.cd.markForCheck();
   }
 
   /**
@@ -175,6 +171,7 @@ export class FormContainerComponent implements AfterContentInit {
    */
   public update(blocks: Block[]) {
     this.editorService.update({ holder: this.holder, blocks });
+    this.cd.markForCheck();
   }
 
   /**
@@ -226,7 +223,6 @@ export class FormContainerComponent implements AfterContentInit {
         ];
         this.menu$.next(data.links);
         this.editorService.update({ holder: this.holder, blocks }, false);
-        this.setIsSaved(true);
         this.cd.markForCheck();
       });
   }

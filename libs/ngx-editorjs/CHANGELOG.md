@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.0] - 2019-05-22
+## [2.0.0] - 2019-05-22
+
+This release is the first big changes to the module and also includes new Material component.
 
 ## Added
 
@@ -13,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `EditorJSBaseComponent` exported and can be used to create custom components
 - `NgxEditorJSMatFieldComponent` provided as a [Material](https://material.angular.io/) field component.
 - `autosave` support now added to both components
+- `apiCall` method for calling any `EditorJS` API method
 
 ## Changed
 

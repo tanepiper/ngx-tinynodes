@@ -2,6 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
+  ChangeDetectorRef,
   Component,
   DoCheck,
   forwardRef,
@@ -239,7 +240,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
    */
   public onContainerClick(event: MouseEvent) {
     this.onTouch(event);
-    this.isSaved.emit(false);
+    this.hasSaved.emit(false);
     this.stateChanges.next();
   }
 
@@ -252,9 +253,10 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
   constructor(
     protected readonly service: NgxEditorJSService,
     protected fm: FocusMonitor,
+    protected readonly cd: ChangeDetectorRef,
     @Optional() @Self() public ngControl: NgControl
   ) {
-    super(service, fm);
+    super(service, fm, cd);
   }
 
   /**
@@ -277,6 +279,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
         this.focused = focused;
         this.isTouched.emit(true);
         this.stateChanges.next();
+        this.cd.markForCheck();
       });
   }
 
@@ -287,6 +290,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;
       this.stateChanges.next();
+      this.cd.markForCheck();
     }
   }
 

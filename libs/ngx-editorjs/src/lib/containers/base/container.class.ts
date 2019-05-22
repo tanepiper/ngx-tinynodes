@@ -1,8 +1,18 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { AfterContentInit, Component, EventEmitter, forwardRef, Input, OnDestroy, Output } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnDestroy,
+  Output
+} from '@angular/core';
 import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SanitizerConfig, OutputData } from '@editorjs/editorjs';
+import { OutputData, SanitizerConfig } from '@editorjs/editorjs';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map, takeUntil, tap, timeInterval } from 'rxjs/operators';
 import { NgxEditorJSService } from '../../services/editorjs.service';
@@ -27,7 +37,8 @@ export const EDITORJS_FORM_VALUE_ACCESSOR: Provider = {
  */
 @Component({
   template: '',
-  providers: [EDITORJS_FORM_VALUE_ACCESSOR]
+  providers: [EDITORJS_FORM_VALUE_ACCESSOR],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, ControlValueAccessor {
   /**
@@ -104,7 +115,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
    * Emits if the content from the `EditorJS` instance has been saved to the component value
    */
   @Output()
-  public isSaved = new EventEmitter<boolean>();
+  public hasSaved = new EventEmitter<boolean>();
 
   /**
    * Emits if the component has been touched
@@ -131,16 +142,27 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public isReady = new EventEmitter<boolean>();
 
   /**
-   * When created an instance of the service is available as
-   * a public interface
-   * @param service The editor service
+   * Form field value if used as a field component
    */
-  constructor(protected readonly service: NgxEditorJSService, protected readonly fm: FocusMonitor) {}
+  protected _value: any;
 
   /**
    * Subscription holder for the autosave timer subscription
    */
   protected timerSubscription$: Subscription;
+
+  /**
+   * When created an instance of the service is available as
+   * a public interface
+   * @param service The `EditorJS service
+   * @param fm The Focus Monitor
+   * @param cd The Change Detection Ref
+   */
+  constructor(
+    protected readonly service: NgxEditorJSService,
+    protected readonly fm: FocusMonitor,
+    protected readonly cd: ChangeDetectorRef
+  ) {}
 
   /**
    * Internal method to return a new timer for the autosave support
@@ -153,21 +175,17 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
       map(interval => interval.interval),
       tap(() => {
         this.service.save({ holder: this.holder });
-        this.isSaved.emit(true);
+        this.cd.markForCheck();
       })
     );
   }
-
-  /**
-   * Form field value if used as a field component
-   */
-  protected _value: any;
 
   /**
    * Field on touch method
    */
   public onTouch = (event?: MouseEvent) => {
     this.isTouched.emit(true);
+    this.cd.markForCheck();
   };
 
   /**
@@ -175,15 +193,17 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
    */
   public onChange = (change: EditorJSChange) => {
     this.hasChanged.emit(change);
+    this.cd.markForCheck();
   };
 
   /**
-   * Form Write Values
+   * Angular Forms value writer
    * @param blocks
    */
   public writeValue(blocks: Block[]) {
     this._value = blocks;
-    this.hasChanged.emit({ time: Date.now(), blocks });
+    this.service.save({ holder: this.holder, blocks });
+    this.cd.markForCheck();
   }
 
   /**
@@ -212,20 +232,24 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
       map(origin => !!origin),
       tap(focused => {
         if (!focused) {
+          this.isFocused.emit(false);
           if (!this.autosave) {
-            this.isSaved.emit(false);
+            this.hasSaved.emit(false);
           }
           if (this.timerSubscription$) {
             this.timerSubscription$.unsubscribe();
           }
         } else {
           this.isFocused.emit(true);
-          this.isSaved.emit(false);
+          this.hasSaved.emit(false);
           if (this.autosave > 0) {
             this.timerSubscription$ = this.getTimer(this.autosave, 0).subscribe();
           }
         }
         return focused;
+      }),
+      tap(() => {
+        this.cd.markForCheck();
       })
     );
   }
@@ -239,6 +263,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(isReady => {
         this.isReady.emit(isReady);
+        this.cd.markForCheck();
       });
 
     this.service
@@ -246,6 +271,15 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
+        this.cd.markForCheck();
+      });
+
+    this.service
+      .hasSaved({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(saved => {
+        this.hasSaved.next(saved);
+        this.cd.markForCheck();
       });
   }
 
