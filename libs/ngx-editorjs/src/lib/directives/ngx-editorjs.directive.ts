@@ -2,16 +2,17 @@ import {
   AfterContentInit,
   Directive,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
   OnChanges,
   OnDestroy,
-  SimpleChanges,
   Output,
-  EventEmitter
+  SimpleChanges
 } from '@angular/core';
 import EditorJS, { EditorConfig, SanitizerConfig } from '@editorjs/editorjs';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { createEditorJSConfig } from '../config/editor-config';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { Block } from '../types/blocks';
@@ -31,76 +32,113 @@ import { Block } from '../types/blocks';
 })
 export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentInit {
   /**
+   * On Destroyed subject
+   */
+  private readonly onDestroy$ = new Subject<boolean>();
+  /**
    * Form touched state
    */
   private touched$ = new BehaviorSubject<boolean>(false);
 
   /**
-   * Component ID
+   * The DOM element ID, it will use the Directive DOM element ID or falls back to the provided `holder` property
    */
   private id: string;
 
   /**
-   * The ID of the dom element that will hold the editor
-   */
-  @Input()
-  public holder: string;
-
-  /**
-   * Sets if the `EditorJS` component will request autofocus in the browser
+   * Boolean, If set to true the `EditorJS` instance gets autofocus when initialized
    */
   @Input()
   public autofocus: boolean;
 
   /**
-   * Sets if the toolbar will be shown in `EditorJS`
+   * Boolean, If set to true the toolbar will not show in the `EditorJS` instance
    */
   @Input()
   public hideToolbar: boolean;
 
   /**
-   * The name of the initial block (default "paragraph")
+   * String, the ID property of the element that the `EditorJS` instance will be attached to
    */
   @Input()
-  public initialBlock: string;
+  public holder: string;
 
   /**
-   * Height of Editor's bottom area that allows to set focus on the last Block
+   * String, The type of block to set as the initial block type. This needs to match a name in the `UserPlugins` object.
+   * The default value is "paragraph"
+   */
+  @Input()
+  public initialBlock?: string;
+
+  /**
+   * Number, The minimum height of the `EditorJS` instance bottom after the last block
    */
   @Input()
   public minHeight: number;
 
   /**
-   * First Block placeholder
+   * String, The text to display as the placeholder text in the first block before content is added
    */
   @Input()
   public blockPlaceholder: string;
 
   /**
-   * Define default sanitizer configuration
+   * SanitizerConfig, The configuration for the HTML sanitizer
    */
   @Input()
   public sanitizer: SanitizerConfig;
 
   /**
-   * A string array of tools that will be included in this instance, if empty
-   * all tools will be included
+   * String Array, If empty all tools available via the plugin service will be added.  If a string
+   * array is set only the tools with the provided keys will be added
    */
   @Input()
   public includeTools: string[] = [];
 
   /**
-   * If set, when the `EditorJS` save is called the `Observable` of blocks will be updated,
-   * if set to `false` on the change `Observable` will be updated
+   * Number, Used with Angular Forms this sets an autosave timer active that calls the `EditorJS` save
+   * method. This patches the `FormControl` value with every block change and focus and blur, it also autosaves after
+   * a set time
+   * Set to 0 to disable or pass a value in `ms` of the autosave time
    */
   @Input()
-  public autosave: boolean;
+  public autosave: number;
 
   /**
-   * An initial set of blocks to render in the component
+   * Blocks, An initial set of block data to render inside the component
    */
   @Input()
-  public blocks: Block[] = [];
+  public blocks: Block[];
+
+  /**
+   * Emits if the content from the `EditorJS` instance has been saved to the component value
+   */
+  @Output()
+  public isSaved = new EventEmitter<boolean>();
+
+  /**
+   * Emits if the component has been touched
+   */
+  @Output()
+  public isTouched = new EventEmitter<boolean>();
+
+  /**
+   * Emits if the component is focused
+   */
+  @Output()
+  public isFocused = new EventEmitter<boolean>();
+
+  /**
+   * Emits if the `EditorJS` content has changed when `save` is called
+   */
+  @Output()
+  public hasChanged = new EventEmitter<Block[]>();
+
+  /**
+   * Emits if the `EditorJS` component is ready
+   */
+  @Output()
+  public isReady = new EventEmitter<boolean>();
 
   /**
    * Host click listener
@@ -110,18 +148,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     this.touched$.next(true);
     this.isTouched.emit(true);
   }
-
-  /**
-   * If the component has been touched
-   */
-  @Output()
-  isTouched = new EventEmitter<boolean>();
-
-  /**
-   * Returns if the element has changed
-   */
-  @Output()
-  hasChanged = new EventEmitter<Block[]>();
 
   /**
    * Creates the directive instance
@@ -166,7 +192,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     this.service.createEditor({
       config,
       includeTools: this.includeTools,
-      autoSave: this.autosave
+      autoSave: this.autosave || 0
     });
   }
 
@@ -186,8 +212,17 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     const changesKeys = Object.keys(changes);
     if (
       this.id &&
-      // Ignore placeholder change
-      ['autofocus', 'holder', 'hideToolbar', 'initialBlock', 'minHeight'].find(key => {
+      // Ignore changes for values not related to `EditorJS`
+      [
+        'autofocus',
+        'holder',
+        'hideToolbar',
+        'initialBlock',
+        'minHeight',
+        'blockPlaceholder',
+        'sanitizer',
+        'includeTools'
+      ].find(key => {
         return changesKeys.includes(key);
       })
     ) {
@@ -196,7 +231,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   }
 
   /**
-   * After content is created, we create the editor instance
+   * After content is created, we create the editor instance and set up listners
    */
   ngAfterContentInit() {
     this.id = this.el.nativeElement.id || this.holder;
@@ -205,6 +240,20 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       throw new Error('Error in NgxEditorJSDirective::ngAfterContentInit - Directive element has no ID');
     }
     this.createEditor(this.createConfig());
+
+    this.service
+      .isReady({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(isReady => {
+        this.isReady.emit(isReady);
+      });
+
+    this.service
+      .getChanged({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(blocks => {
+        this.hasChanged.emit(blocks);
+      });
   }
 
   /**
@@ -233,9 +282,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
         version: EditorJS.version,
         blocks: this.blocks
       };
-      this.hasChanged.emit(this.blocks);
-    } else {
-      this.hasChanged.emit([]);
     }
     return config;
   }

@@ -4,7 +4,7 @@ import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interfac
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SanitizerConfig } from '@editorjs/editorjs';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { map, tap, timeInterval } from 'rxjs/operators';
+import { map, takeUntil, tap, timeInterval } from 'rxjs/operators';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
 
@@ -21,7 +21,7 @@ export const EDITORJS_FORM_VALUE_ACCESSOR: Provider = {
  * The `NgxEditorJSBaseComponent` is a fully implemented Angular component for creating `EditorJS` instances
  * within an Angular application or Angular Reactive Form.
  * The component provides `@Input` properties for all the configuration options of
- * a `EditorJS` instance.
+ * a `EditorJS` instance and `@Output` Event Emitters to listen to changes
  * The instance also provides an Autosave feature by providing an autosave time in `ms` or `0` to disable.
  */
 @Component({
@@ -100,6 +100,36 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public blocks: Block[];
 
   /**
+   * Emits if the content from the `EditorJS` instance has been saved to the component value
+   */
+  @Output()
+  public isSaved = new EventEmitter<boolean>();
+
+  /**
+   * Emits if the component has been touched
+   */
+  @Output()
+  public isTouched = new EventEmitter<boolean>();
+
+  /**
+   * Emits if the component is focused
+   */
+  @Output()
+  public isFocused = new EventEmitter<boolean>();
+
+  /**
+   * Emits if the `EditorJS` content has changed when `save` is called
+   */
+  @Output()
+  public hasChanged = new EventEmitter<Block[]>();
+
+  /**
+   * Emits if the `EditorJS` component is ready
+   */
+  @Output()
+  public isReady = new EventEmitter<boolean>();
+
+  /**
    * When created an instance of the service is available as
    * a public interface
    * @param service The editor service
@@ -107,15 +137,9 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   constructor(protected readonly service: NgxEditorJSService, protected readonly fm: FocusMonitor) {}
 
   /**
-   * Internal Subscription for the timer subscription
+   * Subscription holder for the autosave timer subscription
    */
   protected timerSubscription$: Subscription;
-
-  /**
-   * Get the current saved state
-   */
-  @Output()
-  public isSaved = new EventEmitter<boolean>();
 
   /**
    * Internal method to return a new timer for the autosave support
@@ -139,23 +163,11 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   protected _value: any;
 
   /**
-   * Returns if the element has been touched
-   */
-  @Output()
-  isTouched = new EventEmitter<boolean>();
-
-  /**
    * Field on touch method
    */
   public onTouch = (event?: MouseEvent) => {
     this.isTouched.emit(true);
   };
-
-  /**
-   * Returns if the element has changed
-   */
-  @Output()
-  hasChanged = new EventEmitter<Block[]>();
 
   /**
    * Field onChange method
@@ -173,14 +185,14 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   }
 
   /**
-   * Register on Change for forms
+   * Angular Forms registerOnChange
    */
   public registerOnChange(fn: (blocks: Block[]) => void): void {
     this.onChange = fn;
   }
 
   /**
-   * registerOnTouched for forms
+   * Angular Forms registerOnTouched
    */
   public registerOnTouched(fn: (event?: MouseEvent) => void): void {
     this.onTouch = fn;
@@ -205,6 +217,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
             this.timerSubscription$.unsubscribe();
           }
         } else {
+          this.isFocused.emit(true);
           this.isSaved.emit(false);
           if (this.autosave > 0) {
             this.timerSubscription$ = this.getTimer(this.autosave, this.autosave).subscribe();
@@ -215,26 +228,32 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
     );
   }
 
-  ngAfterContentInit() {}
+  /**
+   * Set up listeners for ready and change events
+   */
+  ngAfterContentInit() {
+    this.service
+      .isReady({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(isReady => {
+        this.isReady.emit(isReady);
+      });
 
+    this.service
+      .getChanged({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(blocks => {
+        this.hasChanged.emit(blocks);
+      });
+  }
+
+  /**
+   * If the onDestroy$ subject is not stopped, do it here
+   */
   ngOnDestroy() {
-    if (!this.onDestroy$.isStopped) {
+    if (!this.onDestroy$.closed) {
       this.onDestroy$.next(true);
       this.onDestroy$.complete();
     }
-  }
-
-  /**
-   * Get the ready status for the `EditorJS` instance
-   */
-  public get isReady(): Observable<boolean> {
-    return this.service.isReady({ holder: this.holder });
-  }
-
-  /**
-   * Get the changed status for the `EditorJS` instance
-   */
-  public getChanged(): Observable<number> {
-    return this.service.getChanged({ holder: this.holder });
   }
 }

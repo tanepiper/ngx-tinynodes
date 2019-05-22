@@ -275,6 +275,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused => {
         this.focused = focused;
+        this.isTouched.emit(true);
         this.stateChanges.next();
       });
   }
@@ -297,7 +298,9 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     if (this.timerSubscription$ && !this.timerSubscription$.closed) {
       this.timerSubscription$.unsubscribe();
     }
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
+    if (!this.onDestroy$.closed) {
+      this.onDestroy$.next(true);
+      this.onDestroy$.complete();
+    }
   }
 }

@@ -1,9 +1,9 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, take, takeUntil } from 'rxjs/operators';
 import { Block } from '../types/blocks';
-import { EditorJSInstance, EditorJSInstanceConfig, MAP_DEFAULTS, InjectorMethodOption } from '../types/injector';
+import { EditorJSInstance, EditorJSInstanceConfig, InjectorMethodOption, MAP_DEFAULTS } from '../types/injector';
 import { BlocksMap, ChangeMap, EditorMap, EventMap, EventType, ReadyMap } from '../types/maps';
 
 /**
@@ -93,11 +93,14 @@ export class NgxEditorJSInstanceService {
   }
 
   public onChange({ holder }: InjectorMethodOption): void {
-    const d = Date.now();
     if (!this.changeMap[holder]) {
-      this.changeMap[holder] = new BehaviorSubject<number>(d);
+      this.changeMap[holder] = new BehaviorSubject<Block[]>([]);
     }
-    this.changeMap[holder].next(d);
+    this.getBlocks({ holder })
+      .pipe(take(1))
+      .subscribe(blocks => {
+        this.changeMap[holder].next(blocks);
+      });
   }
 
   public onReady({ holder }: InjectorMethodOption) {
@@ -163,9 +166,9 @@ export class NgxEditorJSInstanceService {
    * Returns an Observable value of an `EditorJS` instance
    * @param holder The holder ID of the `EditorJS` instance
    */
-  public getChanged({ holder }: InjectorMethodOption): Observable<number> {
+  public getChanged({ holder }: InjectorMethodOption): Observable<Block[]> {
     if (!this.changeMap[holder]) {
-      this.changeMap[holder] = new BehaviorSubject<number>(0);
+      this.changeMap[holder] = new BehaviorSubject<Block[]>([]);
     }
     return this.changeMap[holder].asObservable();
   }
@@ -315,7 +318,7 @@ export class NgxEditorJSInstanceService {
       editor.blocks.clear();
       this.zone.run(() => {
         this.blocksMap[holder].next([]);
-        this.changeMap[holder].next(Date.now());
+        this.changeMap[holder].next([]);
       });
     });
   }
@@ -339,7 +342,7 @@ export class NgxEditorJSInstanceService {
       });
       this.zone.run(() => {
         this.blocksMap[holder].next(blocks);
-        this.changeMap[holder].next(Date.now());
+        this.changeMap[holder].next(blocks);
       });
     });
   }

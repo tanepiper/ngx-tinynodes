@@ -56,5 +56,5 @@ export interface CreateEditorJSOptions {
   /**
    * Autosave on change, is set to false
    */
-  autoSave?: boolean;
+  autoSave?: number;
 }

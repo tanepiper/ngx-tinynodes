@@ -5,9 +5,9 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { Block } from '../types/blocks';
 import { NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { CreateEditorJSOptions, EditorJSAction, EditorJSActionTypes } from '../types/editorjs-service';
+import { InjectorMethodOption } from '../types/injector';
 import { NgxEditorJSInstanceService } from './editorjs-injector';
 import { NgxEditorJSPluginService } from './plugins.service';
-import { InjectorMethodOption } from '../types/injector';
 
 /**
  * The NgxEditorJSService provides control EditorJS instances via Angular.
@@ -108,7 +108,7 @@ export class NgxEditorJSService {
    * this can be subscribed to before calling the `createEditor` method
    * @param holder
    */
-  public getChanged({ holder }: InjectorMethodOption): Observable<number> {
+  public getChanged({ holder }: InjectorMethodOption): Observable<Block[]> {
     return this.editorService.getChanged({ holder });
   }
 

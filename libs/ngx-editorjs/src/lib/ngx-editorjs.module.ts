@@ -12,7 +12,7 @@ import { NgxEditorJSInstanceService } from './services/editorjs-injector';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSConfig, NGX_EDITORJS_CONFIG } from './types/config';
-import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from './types/injector';
+import { EditorJSInstance, EDITORJS_MODULE_IMPORT } from './types/injector';
 
 /**
  * Factory function to return the EditorJS base class

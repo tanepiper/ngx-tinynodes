@@ -32,20 +32,29 @@ export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
     super(service, fm);
   }
 
+  /**
+   * Set up the focus monitor for the editor touch status
+   */
   ngAfterContentInit() {
     this.getFocusMonitor(this.editorEl.element)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused => {
+        this.isTouched.emit(true);
         this.onTouch();
       });
   }
 
+  /**
+   * Destroy the monitor and subscription and call the onDestroy$ subject
+   */
   ngOnDestroy(): void {
     this.fm.stopMonitoring(this.editorEl.element);
     if (this.timerSubscription$ && !this.timerSubscription$.closed) {
       this.timerSubscription$.unsubscribe();
     }
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
+    if (!this.onDestroy$.closed) {
+      this.onDestroy$.next(true);
+      this.onDestroy$.complete();
+    }
   }
 }

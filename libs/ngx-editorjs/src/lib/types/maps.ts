@@ -57,5 +57,5 @@ export interface ChangeMap {
   /**
    * A map key containing a {BehaviorSubject} of {number}
    */
-  [key: string]: BehaviorSubject<number>;
+  [key: string]: BehaviorSubject<Block[]>;
 }
