@@ -11,7 +11,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { Block, NgxEditorJSService, NgxEditorJSMatFieldComponent } from '@tinynodes/ngx-editorjs';
 import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { pluck, take, takeUntil, tap, distinctUntilChanged } from 'rxjs/operators';
+import { pluck, take, takeUntil, tap, distinctUntilChanged, filter } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
@@ -123,19 +123,21 @@ export class FormContainerComponent implements AfterContentInit {
     return this.menu$;
   }
 
-  /**
-   * Get a list of pages
-   */
-  get pages(): Observable<Page[]> {
-    return this.pagesService.pages;
-  }
-
   get hasSaved() {
     return this.editorService.hasSaved({ holder: this.holder });
   }
 
   public get blocks() {
     return this.editorService.hasChanged({ holder: this.holder }).pipe(
+      filter(data => {
+        if (typeof data === 'undefined') {
+          return false;
+        }
+        if (data.time === 0) {
+          return false;
+        }
+        return true;
+      }),
       pluck<OutputData, Block[]>('blocks'),
       distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
       takeUntil(this.onDestroy$)
@@ -162,11 +164,9 @@ export class FormContainerComponent implements AfterContentInit {
    * Update the component
    * @param blocks
    */
-  public update(blocks: Block[]) {
-    if (!this.ngxEditorJS) {
-      return;
-    }
-    this.editorService.update({ holder: this.holder, blocks });
+  public update(data: OutputData, triggerUpdate = true) {
+    console.log('update', data);
+    this.editorService.update({ holder: this.holder, data }, triggerUpdate);
     this.cd.markForCheck();
   }
 
@@ -218,7 +218,7 @@ export class FormContainerComponent implements AfterContentInit {
           }
         ];
         this.menu$.next(data.links);
-        this.editorService.update({ holder: this.holder, blocks }, false);
+        this.update({ blocks }, false);
         this.cd.markForCheck();
       });
   }
@@ -227,10 +227,6 @@ export class FormContainerComponent implements AfterContentInit {
    * After the content has init overide the blocks with blocks from the service
    */
   ngAfterContentInit() {
-    this.editorService.isReady({ holder: this.holder }).subscribe(isReady => {
-      if (isReady) {
-        this.reset();
-      }
-    });
+    this.reset();
   }
 }

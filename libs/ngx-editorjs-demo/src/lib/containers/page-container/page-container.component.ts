@@ -54,6 +54,7 @@ export class PageContainerComponent implements AfterContentInit {
    */
   public get blocks() {
     return this.editorService.hasChanged({ holder: this.holder }).pipe(
+      tap(data => console.log('data 1', data)),
       pluck<OutputData, Block[]>('blocks'),
       takeUntil(this.onDestroy$)
     );
@@ -96,7 +97,7 @@ export class PageContainerComponent implements AfterContentInit {
       .pipe(take(1))
       .subscribe((data: NgxEditorJSDemo) => {
         this.menu$.next(data.links);
-        this.editorService.update({ holder: this.holder, blocks: data.blocks });
+        this.editorService.update({ holder: this.holder, data: { blocks: data.blocks } });
       });
   }
 

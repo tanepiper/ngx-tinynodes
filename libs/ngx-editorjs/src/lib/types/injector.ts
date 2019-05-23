@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import EditorJS, { EditorConfig } from '@editorjs/editorjs';
+import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { Block } from './blocks';
 
 /**
@@ -47,7 +47,7 @@ export interface InjectorMethodOption {
   /**
    * Optional blocks
    */
-  blocks?: Block[];
+  data?: OutputData;
   /**
    * Optional editor
    */

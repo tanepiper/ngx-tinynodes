@@ -2,6 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   DoCheck,
@@ -13,8 +14,7 @@ import {
   Optional,
   Provider,
   Self,
-  ViewChild,
-  ChangeDetectionStrategy
+  ViewChild
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material';
@@ -22,7 +22,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
-import { NgxEditorJSBaseComponent } from '../base/container.class';
+import { NgxEditorJSComponent } from '../editorjs/editorjs.component';
 
 /**
  * Provider for the EditorJS Material Field Component
@@ -63,7 +63,7 @@ export interface EditorJSMaterialForm
   providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent implements EditorJSMaterialForm {
+export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implements EditorJSMaterialForm {
   /**
    * Internal Static ID for Material for each editor instance
    */
@@ -277,6 +277,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     this.getFocusMonitor(this.editorEl.element)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused => {
+        this.onTouch();
         this.focused = focused;
         this.stateChanges.next();
       });

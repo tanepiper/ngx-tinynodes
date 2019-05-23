@@ -217,9 +217,8 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       !changes.blocks.firstChange &&
       JSON.stringify(changes.blocks.previousValue) !== JSON.stringify(changes.blocks.currentValue)
     ) {
-      this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
+      this.service.save({ holder: this.holder });
       this.cd.markForCheck();
-      return;
     }
     const changesKeys = Object.keys(changes);
     if (
@@ -259,7 +258,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(isReady => {
         this.isReady.emit(isReady);
-        this.cd.markForCheck();
       });
 
     this.service
@@ -267,7 +265,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
-        this.cd.markForCheck();
       });
 
     this.service
@@ -275,7 +272,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(saved => {
         this.hasSaved.next(saved);
-        this.cd.markForCheck();
       });
   }
 
