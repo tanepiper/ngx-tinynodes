@@ -1,0 +1,33 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "module": "es2015",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tinynodes/ngx-editorjs": ["libs/ngx-editorjs/src/index.ts"],
+      "@tinynodes/ngx-editorjs-plugins": ["libs/ngx-editorjs-plugins/src/index.ts"]
+    },
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "apps/**/*",
+    "libs/ngx-editorjs/src/testing/**/*",
+    "libs/ngx-editorjs-demo/**/*",
+    "libs/ngx-editorjs-ngrx/**/*",
+    "libs/ngx-hideable-header-demo/**/*",
+    "libs/ngx-tinynodes-core/**/*"
+  ]
+}
