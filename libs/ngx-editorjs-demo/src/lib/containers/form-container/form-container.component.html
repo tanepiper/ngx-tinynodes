@@ -18,12 +18,16 @@
         Enable Autosave
       </button>
       <button mat-raised-button color="secondary" *ngIf="(autosave | async) > 0" (click)="disableAutosave()">Disable Autosave</button>
-      <ng-template #saveStateBadge let-hasSaved="hasSaved">
-        <mat-icon [matBadgeHidden]="hasSaved" matBadge="1" [matBadgeColor]="hasSaved ? 'accent' : 'warn'" matBadgePosition="above before"
-          >save</mat-icon
-        >
-      </ng-template>
-      <ng-container *ngTemplateOutlet="saveStateBadge; context: { hasSaved: hasSaved | async }"></ng-container>
+      <!-- <ng-template #saveStateBadge let-hasSaved="hasSaved"> -->
+      <mat-icon
+        [matBadgeHidden]="hasSaved | async"
+        matBadge="1"
+        [matBadgeColor]="hasSaved ? 'accent' : 'warn'"
+        matBadgePosition="above before"
+        >save</mat-icon
+      >
+      <!-- </ng-template> -->
+      <!-- <ng-container *ngTemplateOutlet="saveStateBadge; context: { hasSaved: hasSaved }"></ng-container> -->
 
       <mat-form-field>
         <mat-label>Autosave Time</mat-label>

@@ -8,7 +8,6 @@ import { NgxEditorJSBaseComponent } from './containers/base/container.class';
 import { NgxEditorJSMatFieldComponent } from './containers/editorjs-mat-field/editorjs-mat-field.component';
 import { NgxEditorJSComponent } from './containers/editorjs/editorjs.component';
 import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
-import { NgxEditorJSInstanceService } from './services/editorjs-instance.service';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { NgxEditorJSPluginService } from './services/plugins.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from './types/config';
@@ -36,7 +35,6 @@ export function createEditorJSInstance(editorjs: any) {
   providers: [
     NgxEditorJSService,
     NgxEditorJSPluginService,
-    NgxEditorJSInstanceService,
     {
       provide: EDITORJS_MODULE_IMPORT,
       useValue: EditorJS

@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { Block } from './blocks';
+
 /**
  * Configuration for creating an EditorJS instance
  */

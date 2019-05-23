@@ -175,6 +175,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
       map(interval => interval.interval),
       tap(() => {
         this.service.save({ holder: this.holder });
+        this.hasSaved.emit(true);
         this.cd.markForCheck();
       })
     );
@@ -203,6 +204,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public writeValue(blocks: Block[]): void {
     this._value = blocks;
     this.service.save({ holder: this.holder, blocks });
+    this.hasSaved.emit(true);
     this.cd.markForCheck();
   }
 

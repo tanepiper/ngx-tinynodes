@@ -11,7 +11,6 @@ export {
 export { NgxEditorJSComponent } from './lib/containers/editorjs/editorjs.component';
 export { NgxEditorJSDirective } from './lib/directives/ngx-editorjs.directive';
 export { NgxEditorJSModule } from './lib/ngx-editorjs.module';
-export { NgxEditorJSInstanceService as ɵNgxEditorJSInstanceService } from './lib/services/editorjs-instance.service';
 export { NgxEditorJSService } from './lib/services/editorjs.service';
 export { NgxEditorJSPluginService as ɵNgxEditorJSPluginService } from './lib/services/plugins.service';
 export { Block, HeaderBlock, ImageBlock, ListBlock, ListStyle, ParagraphBlock } from './lib/types/blocks';
