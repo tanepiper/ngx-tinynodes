@@ -141,8 +141,9 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import EditorJS, { EditorConfig } from &#x27;@editorjs/editorjs&#x27;;
+import EditorJS, { EditorConfig, OutputData } from &#x27;@editorjs/editorjs&#x27;;
 import { Block } from &#x27;./blocks&#x27;;
+
 /**
  * Configuration for creating an EditorJS instance
  */
@@ -188,7 +189,7 @@ export interface InjectorMethodOption {
   /**
    * Optional blocks
    */
-  blocks?: Block[];
+  data?: OutputData;
   /**
    * Optional editor
    */
@@ -259,7 +260,7 @@ export interface EditorJSClass&lt;T &#x3D; EditorJS&gt; extends Function {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'InjectorApiCallResponse.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

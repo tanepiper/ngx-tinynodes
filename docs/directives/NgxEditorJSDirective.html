@@ -106,30 +106,6 @@ Angular services and components</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#id">id</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#onDestroy$">onDestroy$</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#touched$">touched$</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -140,11 +116,8 @@ Angular services and components</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#createConfig">createConfig</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#createEditor">createEditor</a>
                             </li>
                             <li>
@@ -828,53 +801,11 @@ The default value is &quot;paragraph&quot;</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createConfig"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            createConfig
-                        </b>
-                        <a href="#createConfig"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createConfig()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="288"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:288</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Create a configuration for EditorJS</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>EditorConfig</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="createEditor"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
                             createEditor
                         </b>
                         <a href="#createEditor"><span class="icon ion-ios-link"></span></a>
@@ -936,7 +867,7 @@ The default value is &quot;paragraph&quot;</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -968,8 +899,8 @@ The default value is &quot;paragraph&quot;</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="245"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:245</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="248"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:248</a></div>
                 </td>
             </tr>
 
@@ -1109,113 +1040,6 @@ to be ready</p>
             </tr>
         </tbody>
     </table>
-</section>
-            <section>
-    
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="id"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            id</b>
-                            <a href="#id"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:47</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The DOM element ID, it will use the Directive DOM element ID or falls back to the provided <code>holder</code> property</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="onDestroy$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            onDestroy$</b>
-                            <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:38</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>On Destroyed subject</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="touched$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            touched$</b>
-                            <a href="#touched$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(false)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:42</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Form touched state</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
 </section>
 
             <section>
@@ -1548,8 +1372,8 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Creates an EditorJS instance for this directive
    * @param config Configuration for this instance
    */
-  public createEditor(config?: EditorConfig): void {
-    this.service.createEditor({
+  public async createEditor(config?: EditorConfig): Promise&lt;void&gt; {
+    await this.service.createInstance({
       config,
       includeTools: this.includeTools,
       autoSave: this.autosave || 0
@@ -1566,10 +1390,13 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * @param changes Changes on the component
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.blocks &amp;&amp; !changes.blocks.firstChange) {
-      this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
+    if (
+      changes.blocks &amp;&amp;
+      !changes.blocks.firstChange &amp;&amp;
+      JSON.stringify(changes.blocks.previousValue) !&#x3D;&#x3D; JSON.stringify(changes.blocks.currentValue)
+    ) {
+      this.service.update({ holder: this.holder });
       this.cd.markForCheck();
-      return;
     }
     const changesKeys &#x3D; Object.keys(changes);
     if (
@@ -1609,7 +1436,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(isReady &#x3D;&gt; {
         this.isReady.emit(isReady);
-        this.cd.markForCheck();
       });
 
     this.service
@@ -1617,7 +1443,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change &#x3D;&gt; {
         this.hasChanged.emit(change);
-        this.cd.markForCheck();
       });
 
     this.service
@@ -1625,7 +1450,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(saved &#x3D;&gt; {
         this.hasSaved.next(saved);
-        this.cd.markForCheck();
       });
   }
 
@@ -1633,7 +1457,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Destroy the editor and subjects for this service
    */
   ngOnDestroy() {
-    this.service.destroy({ holder: this.id });
+    this.service.destroyInstance({ holder: this.id });
   }
 
   /**
@@ -1692,7 +1516,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'directive';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSDirective.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

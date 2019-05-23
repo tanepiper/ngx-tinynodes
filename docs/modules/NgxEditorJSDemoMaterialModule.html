@@ -28,134 +28,101 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content interface">
+               <div class="content module">
                    <div class="content-data">
 
 
 
-
-
-
-
-
-
-
-
-
 <ol class="breadcrumb">
-  <li>Interfaces</li>
-  <li>PluginConfig</li>
+    <li>Modules</li>
+    <li>NgxEditorJSDemoMaterialModule</li>
 </ol>
 
+
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
+    <li  class="active" >
+        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    </li>
+    <li >
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
 </ul>
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="c-info">
+
         <p class="comment">
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-plugins/src/lib/types/plugins.ts</code>
+            <code>libs/ngx-editorjs-demo/src/lib/ngx-editorjs-demo.material.module.ts</code>
         </p>
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>A Module plugin configuration</p>
-
-            </p>
 
 
 
+        <div class="container-fluid module">
+            <div class="row">
+            </div>
+        </div>
 
-            <section>
-    <h3 id="inputs">Indexable</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <code>[key: string]:        <code><a href="../interfaces/BasePlugin.html" target="_self" >BasePlugin</a></code>
-</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/types/plugins.ts:7</a></div>
-                            </td>
-                        </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The key of the plugin and the plugin class extending <code>BasePlugin</code></p>
-</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import { ToolSettings, ToolConstructable } from &#x27;@editorjs/editorjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatGridListModule,
+  MatExpansionModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatChipsModule,
+  MatBadgeModule,
+  MatIconModule,
+  MatListModule
+} from &#x27;@angular/material&#x27;;
 
-/**
- * A Module plugin configuration
- */
-export interface PluginConfig {
-  /**
-   * The key of the plugin and the plugin class extending &#x60;BasePlugin&#x60;
-   */
-  [key: string]: BasePlugin;
-}
-
-/**
- * A map of all the tools settings
- */
-export interface ToolSettingsMap {
-  /**
-   * The key of the plugin and the plugin exported tool settings
-   */
-  [key: string]: ToolConstructable | ToolSettings;
-}
-
-/**
- * Defines the interface for required and optional plugin methods.
- * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
- */
-export interface BasePlugin {
-  /**
-   * The plugin settings to be returned
-   */
-  plugin: () &#x3D;&gt; ToolConstructable | ToolSettings;
-
-  /**
-   * Optional shortcut for the plugin
-   */
-  shortcut?: () &#x3D;&gt; string;
-}
-
-/**
- * The Injection token for initial plugins as defined in the ngx-editorjs module
- */
-export const InitialPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;);
-
-/**
- * The injection token for adding plugins via your own application
- */
-export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;);
+@NgModule({
+  imports: [
+    MatGridListModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule
+  ],
+  exports: [
+    MatGridListModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule
+  ]
+})
+export class NgxEditorJSDemoMaterialModule {}
 </code></pre>
     </div>
 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -178,8 +145,8 @@ export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;Use
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSDemoMaterialModule.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

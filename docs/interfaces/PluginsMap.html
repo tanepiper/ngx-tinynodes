@@ -44,7 +44,7 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>BlocksMap</li>
+  <li>PluginsMap</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,14 +62,14 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/types/maps.ts</code>
+            <code>libs/ngx-editorjs/src/lib/types/plugins.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>A map containing <code>BehaviorSubject</code> of <code>Block</code> elements from <code>EditorJS</code></p>
+                <p>A Module plugin configuration</p>
 
             </p>
 
@@ -82,18 +82,18 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <code>[key: string]:        <code><a href="../interfaces/Block.html" target="_self" >BehaviorSubject&lt;Block[]&gt;</a></code>
+                        <code>[key: string]:        <code><a href="../interfaces/BasePlugin.html" target="_self" >BasePlugin</a></code>
 </code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">libs/ngx-editorjs/src/lib/types/maps.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">libs/ngx-editorjs/src/lib/types/plugins.ts:7</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>A map key containing a {BehaviorSubject} of {Block[]}</p>
+                        <div class="io-description"><p>The key of the plugin and the plugin class extending <code>BasePlugin</code></p>
 </div>
                     </td>
                 </tr>
@@ -105,73 +105,49 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import EditorJS, { OutputData } from &#x27;@editorjs/editorjs&#x27;;
-import { BehaviorSubject } from &#x27;rxjs&#x27;;
-import { Block } from &#x27;./blocks&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
+import { ToolConstructable, ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
- * A map containing instances of &#x60;EditorJS&#x60;
+ * A Module plugin configuration
  */
-export interface EditorMap {
+export interface PluginsMap {
   /**
-   * A map key containing a {BehaviorSubject} of {EditorJS}
+   * The key of the plugin and the plugin class extending &#x60;BasePlugin&#x60;
    */
-  [key: string]: BehaviorSubject&lt;EditorJS&gt;;
+  [key: string]: BasePlugin;
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;Block&#x60; elements from &#x60;EditorJS&#x60;
+ * A map of all the tools settings
  */
-export interface BlocksMap {
+export interface ToolSettingsMap {
   /**
-   * A map key containing a {BehaviorSubject} of {Block[]}
+   * The key of the plugin and the plugin exported tool settings
    */
-  [key: string]: BehaviorSubject&lt;Block[]&gt;;
+  [key: string]: ToolConstructable | ToolSettings;
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&lt;boolean&gt;&#x60; values of the ready state of &#x60;EditorJS&#x60;
+ * Defines the interface for required and optional plugin methods.
+ * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
  */
-export interface ReadyMap {
+export interface BasePlugin {
   /**
-   * A map key containing a &#x60;BehaviorSubject&lt;boolean&gt;&#x60;
+   * The plugin settings to be returned
    */
-  [key: string]: BehaviorSubject&lt;boolean&gt;;
+  plugin: () &#x3D;&gt; ToolConstructable | ToolSettings;
+
+  /**
+   * Optional shortcut for the plugin
+   */
+  shortcut?: () &#x3D;&gt; string;
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&lt;boolean&gt;&#x60; values of the save state of &#x60;EditorJS&#x60;
+ * The injection token for adding plugins via your own application
  */
-export interface SavedMap {
-  /**
-   * A map key containing a &#x60;BehaviorSubject&lt;boolean&gt;&#x60;
-   */
-  [key: string]: BehaviorSubject&lt;boolean&gt;;
-}
-
-/**
- * An EditorJS change event
- */
-export interface EditorJSChange {
-  /**
-   * Time of the change
-   */
-  time: number;
-  /**
-   * Blocks in the change
-   */
-  blocks: Block[];
-}
-
-/**
- * A map containing &#x60;BehaviorSubject&lt;OutputData&gt;&#x60; which is the last save from the &#x60;EditorJS&#x60; instance
- */
-export interface ChangeMap {
-  /**
-   * A map key containing a &#x60;BehaviorSubject&lt;OutputData&gt;&#x60;
-   */
-  [key: string]: BehaviorSubject&lt;OutputData&gt;;
-}
+export const UserPlugins &#x3D; new InjectionToken&lt;PluginsMap&gt;(&#x27;UserPlugins&#x27;);
 </code></pre>
     </div>
 </div>
@@ -198,7 +174,7 @@ export interface ChangeMap {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'PluginsMap.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

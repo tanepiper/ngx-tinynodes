@@ -78,7 +78,7 @@ It provides a full implementation of all the required properties of a Material c
         <h3>Extends</h3>
     </p>
     <p class="comment">
-                <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
     </p>
 
     <p class="comment">
@@ -169,32 +169,13 @@ It provides a full implementation of all the required properties of a Material c
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#_disabled">_disabled</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#_empty">_empty</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#_focused">_focused</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#_placeholder">_placeholder</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#_required">_required</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#controlType">controlType</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#editorEl">editorEl</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#editorInstance">editorInstance</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -218,10 +199,16 @@ It provides a full implementation of all the required properties of a Material c
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#editorInstance">editorInstance</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#onChange">onChange</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#onDestroy$">onDestroy$</a>
                             </li>
                             <li>
@@ -245,15 +232,14 @@ It provides a full implementation of all the required properties of a Material c
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#ngAfterContentInit">ngAfterContentInit</a>
                             </li>
                             <li>
                                 <a href="#ngDoCheck">ngDoCheck</a>
                             </li>
                             <li>
-                                <a href="#ngOnDestroy">ngOnDestroy</a>
-                            </li>
-                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
@@ -285,6 +271,10 @@ It provides a full implementation of all the required properties of a Material c
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#registerOnTouched">registerOnTouched</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#setupServiceSubscriptions">setupServiceSubscriptions</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -439,18 +429,19 @@ It provides a full implementation of all the required properties of a Material c
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(service: <a href="../injectables/NgxEditorJSService.html">NgxEditorJSService</a>, fm: FocusMonitor, cd: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>, ngControl: <a href="https://angular.io/api/forms/NgControl" target="_blank">NgControl</a>)</code>
+<code>constructor(editorService: <a href="../injectables/NgxEditorJSService.html">NgxEditorJSService</a>, focusMonitor: FocusMonitor, changeDetection: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>, ngControl: <a href="https://angular.io/api/forms/NgControl" target="_blank">NgControl</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="247" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:247</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:246</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Creates the Material field</p>
+                            <div class="io-description"><p>Constructor for the Material field, as this extends the <code>NgxEditorJSComponent</code> component
+we call <code>super()</code> to get all the properties of that component</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -465,7 +456,7 @@ It provides a full implementation of all the required properties of a Material c
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>service</td>
+                                                        <td>editorService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/NgxEditorJSService.html" target="_self" >NgxEditorJSService</a></code>
@@ -476,12 +467,12 @@ It provides a full implementation of all the required properties of a Material c
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>The {NgxEditorJSService} instance</p>
+                                                                <code><p>The NgxEditorJSService instance</p>
 </code>
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>fm</td>
+                                                        <td>focusMonitor</td>
                                                   
                                                         <td>
                                                                     <code>FocusMonitor</code>
@@ -497,7 +488,7 @@ It provides a full implementation of all the required properties of a Material c
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>cd</td>
+                                                        <td>changeDetection</td>
                                                   
                                                         <td>
                                                                         <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
@@ -688,19 +679,19 @@ It provides a full implementation of all the required properties of a Material c
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:53</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:62</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Boolean, If set to true the <code>EditorJS</code> instance gets autofocus when initialized</p>
+                        <div class="io-description"><p>Boolean, If set to true the EditorJS instance gets autofocus when initialized</p>
 </div>
                     </td>
                 </tr>
@@ -722,19 +713,19 @@ It provides a full implementation of all the required properties of a Material c
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:106</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:115</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Number, Used with Angular Forms this sets an autosave timer active that calls the <code>EditorJS</code> save
+                        <div class="io-description"><p>Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
 method. This patches the <code>FormControl</code> value with every block change and focus and blur, it also autosaves after
 a set time
 Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
@@ -759,13 +750,13 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:84</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:93</a></code>
 </div>
                             </td>
                         </tr>
@@ -793,13 +784,13 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:112</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:121</a></code>
 </div>
                             </td>
                         </tr>
@@ -827,19 +818,19 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:59</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:68</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Boolean, If set to true the toolbar will not show in the <code>EditorJS</code> instance</p>
+                        <div class="io-description"><p>Boolean, If set to true the toolbar will not show in the EditorJS instance</p>
 </div>
                     </td>
                 </tr>
@@ -861,19 +852,19 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:65</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:74</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>String, the ID property of the element that the <code>EditorJS</code> instance will be attached to</p>
+                        <div class="io-description"><p>String, the ID property of the element that the EditorJS instance will be attached to</p>
 </div>
                     </td>
                 </tr>
@@ -900,13 +891,13 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:97</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:106</a></code>
 </div>
                             </td>
                         </tr>
@@ -935,13 +926,13 @@ array is set only the tools with the provided keys will be added</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:72</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:81</a></code>
 </div>
                             </td>
                         </tr>
@@ -970,19 +961,19 @@ The default value is &quot;paragraph&quot;</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:78</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:87</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Number, The minimum height of the <code>EditorJS</code> instance bottom after the last block</p>
+                        <div class="io-description"><p>Number, The minimum height of the EditorJS instance bottom after the last block</p>
 </div>
                     </td>
                 </tr>
@@ -1004,13 +995,13 @@ The default value is &quot;paragraph&quot;</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:90</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:99</a></code>
 </div>
                             </td>
                         </tr>
@@ -1041,19 +1032,19 @@ The default value is &quot;paragraph&quot;</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:136</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:145</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the <code>EditorJS</code> content has changed when <code>save</code> is called</p>
+                        <div class="io-description"><p>Emits if the EditorJS content has changed when <code>save</code> is called</p>
 </div>
                     </td>
                 </tr>
@@ -1075,19 +1066,19 @@ The default value is &quot;paragraph&quot;</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:118</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:127</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the content from the <code>EditorJS</code> instance has been saved to the component value</p>
+                        <div class="io-description"><p>Emits if the content from the EditorJS instance has been saved to the component value</p>
 </div>
                     </td>
                 </tr>
@@ -1109,13 +1100,13 @@ The default value is &quot;paragraph&quot;</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:130</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:139</a></code>
 </div>
                             </td>
                         </tr>
@@ -1143,19 +1134,19 @@ The default value is &quot;paragraph&quot;</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:142</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:151</a></code>
 </div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the <code>EditorJS</code> component is ready</p>
+                        <div class="io-description"><p>Emits if the EditorJS component is ready</p>
 </div>
                     </td>
                 </tr>
@@ -1177,13 +1168,13 @@ The default value is &quot;paragraph&quot;</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4" colspan="2">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:124</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:133</a></code>
 </div>
                             </td>
                         </tr>
@@ -1303,6 +1294,7 @@ The default value is &quot;paragraph&quot;</p>
                     <a name="ngAfterContentInit"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Public</span>
                             ngAfterContentInit
                         </b>
                         <a href="#ngAfterContentInit"><span class="icon ion-ios-link"></span></a>
@@ -1311,15 +1303,16 @@ The default value is &quot;paragraph&quot;</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngAfterContentInit()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngAfterContentInit()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="277"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:277</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="278"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:278</a></div>
                 </td>
             </tr>
 
@@ -1360,8 +1353,8 @@ and trigger focus autosave subscribe and unsubscribe</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="290"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:290</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="292"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:292</a></div>
                 </td>
             </tr>
 
@@ -1383,50 +1376,10 @@ and trigger focus autosave subscribe and unsubscribe</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
-                    <span class="name">
-                        <b>
-                            ngOnDestroy
-                        </b>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnDestroy()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="301"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:301</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Destroy the focus monitoring and any remaining timer subcription</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Public</span>
                             ngOnInit
                         </b>
                         <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
@@ -1435,15 +1388,16 @@ and trigger focus autosave subscribe and unsubscribe</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnInit()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="267"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:267</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="268"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:268</a></div>
                 </td>
             </tr>
 
@@ -1641,13 +1595,13 @@ and trigger focus autosave subscribe and unsubscribe</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:230</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:237</a></code>
 </div>
                 </td>
             </tr>
@@ -1655,8 +1609,8 @@ and trigger focus autosave subscribe and unsubscribe</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Returns a focus monitor observable with the focus value,
-the side effect of this monitor is to update the saved state and
+                    <div class="io-description"><p>Returns a focus monitor observable with the focus value.
+The side effect of this monitor is to update the saved state and
 start any autosave timers</p>
 </div>
 
@@ -1715,7 +1669,7 @@ start any autosave timers</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -1749,13 +1703,13 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:172</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:180</a></code>
 </div>
                 </td>
             </tr>
@@ -1812,7 +1766,7 @@ start any autosave timers</p>
                                     </td>
 
                                     <td>
-                                        <p>When to trigger the first autosave</p>
+                                        <p>When to trigger the first autosave, default is 0 which triggers an immediate save</p>
 
                                     </td>
                                 </tr>
@@ -1854,13 +1808,13 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:260</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:292</a></code>
 </div>
                 </td>
             </tr>
@@ -1868,7 +1822,7 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Set up listeners for ready and change events</p>
+                    <div class="io-description"><p>Set up the focus monitor and subscriptions to editor service observables</p>
 </div>
 
                     <div class="io-description">
@@ -1901,13 +1855,13 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:289</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:306</a></code>
 </div>
                 </td>
             </tr>
@@ -1915,7 +1869,8 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>If the onDestroy$ subject is not stopped, do it here</p>
+                    <div class="io-description"><p>Called when the component is destroyed, the focus monitor is destroyed
+as well as the editor service, also the onDestroy$ subject is completed</p>
 </div>
 
                     <div class="io-description">
@@ -1943,20 +1898,20 @@ start any autosave timers</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>registerOnChange(fn: (change: <a href="../interfaces/EditorJSChange.html">EditorJSChange</a>) => void)</code>
+                    <code>registerOnChange(fn: (change: OutputData) => void)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:212</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:219</a></code>
 </div>
                 </td>
             </tr>
@@ -2030,13 +1985,13 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:219</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:226</a></code>
 </div>
                 </td>
             </tr>
@@ -2090,6 +2045,55 @@ start any autosave timers</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="setupServiceSubscriptions"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Protected</span>
+                            setupServiceSubscriptions
+                        </b>
+                        <a href="#setupServiceSubscriptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setupServiceSubscriptions()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:266</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Sets up the service subscriptions to @Output value</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="writeValue"></a>
                     <span class="name">
                         <b>
@@ -2103,20 +2107,20 @@ start any autosave timers</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>writeValue(blocks: <a href="../interfaces/Block.html">Block[]</a>)</code>
+                    <code>writeValue(data: OutputData)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:203</a></code>
+                        <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:210</a></code>
 </div>
                 </td>
             </tr>
@@ -2124,7 +2128,7 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Angular Forms value writer</p>
+                    <div class="io-description"><p>Angular Forms value writer, updates the editor</p>
 </div>
 
                     <div class="io-description">
@@ -2135,13 +2139,14 @@ start any autosave timers</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>blocks</td>
+                                    <td>data</td>
                                     <td>
-                                                <code><a href="../interfaces/Block.html" target="_self" >Block[]</a></code>
+                                            <code>OutputData</code>
                                     </td>
 
                                     <td>
@@ -2149,6 +2154,10 @@ start any autosave timers</p>
                                     </td>
 
 
+                                    <td>
+                                        <p>The data to write</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -2172,174 +2181,6 @@ start any autosave timers</p>
         <h3 id="inputs">
             Properties
         </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_disabled"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _disabled</b>
-                            <a href="#_disabled"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:171</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Material disabled state</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_empty"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _empty</b>
-                            <a href="#_empty"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:192</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Material empty state</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_focused"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _focused</b>
-                            <a href="#_focused"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:127</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Material focused state</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_placeholder"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _placeholder</b>
-                            <a href="#_placeholder"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:106</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Material placeholder value</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_required"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _required</b>
-                            <a href="#_required"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:150</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Material Required Value</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -2383,12 +2224,13 @@ start any autosave timers</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="editorEl"></a>
+                        <a name="editorInstance"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            editorEl</b>
-                            <a href="#editorEl"><span class="icon ion-ios-link"></span></a>
+                                <span class="modifier">Readonly</span>
+                            editorInstance</b>
+                            <a href="#editorInstance"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -2403,7 +2245,7 @@ start any autosave timers</p>
                             <b>Decorators : </b>
                             <br />
                             <code>
-                                @ViewChild(NgxEditorJSDirective)<br />
+                                @ViewChild(&#x27;editorInstance&#x27;, {read: NgxEditorJSDirective})<br />
                             </code>
                         </td>
                     </tr>
@@ -2524,7 +2366,7 @@ start any autosave timers</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="259" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:259</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="260" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts:260</a></div>
                             </td>
                         </tr>
 
@@ -2590,13 +2432,13 @@ start any autosave timers</p>
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:147</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:156</a></code>
 </div>
                             </td>
                         </tr>
@@ -2604,6 +2446,57 @@ start any autosave timers</p>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Form field value if used as a field component</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="editorInstance"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                                <span class="modifier">Readonly</span>
+                            editorInstance</b>
+                            <a href="#editorInstance"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>NgxEditorJSDirective</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;editorInstance&#x27;, {read: NgxEditorJSDirective})<br />
+                            </code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:52</a></code>
+</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The directive used in this component</p>
 </div>
                     </td>
                 </tr>
@@ -2630,24 +2523,49 @@ start any autosave timers</p>
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:194</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:201</a></code>
 </div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Field onChange method</p>
+                        <div class="io-description"><p>Angular Form onChange method, this is a default method that updates the
+editor instance with blocks on change</p>
 </div>
                     </td>
                 </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>data</td>
+                                                        <td>
+                                                                <code><p>The data to write</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -2658,6 +2576,7 @@ start any autosave timers</p>
                         <span class="name">
                             <b>
                                 <span class="modifier">Protected</span>
+                                <span class="modifier">Readonly</span>
                             onDestroy$</b>
                             <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
                         </span>
@@ -2670,13 +2589,13 @@ start any autosave timers</p>
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:48</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:57</a></code>
 </div>
                             </td>
                         </tr>
@@ -2711,24 +2630,49 @@ and then <code>.complete()</code> on the <code>this.onDestroy$</code> subject</p
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:186</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:192</a></code>
 </div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Field on touch method</p>
+                        <div class="io-description"><p>Angular Form onTouch method, this is a default method that updates
+the touch status on the component</p>
 </div>
                     </td>
                 </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>event</td>
+                                                        <td>
+                                                                <code><p>The mouse event from the touch</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -2752,13 +2696,13 @@ and then <code>.complete()</code> on the <code>this.onDestroy$</code> subject</p
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSBaseComponent.html" target="_self" >NgxEditorJSBaseComponent</a></code>
+                                    <div class="io-line">Inherited from         <code><a href="../components/NgxEditorJSComponent.html" target="_self" >NgxEditorJSComponent</a></code>
 </div>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSBaseComponent.html#source" target="_self" >NgxEditorJSBaseComponent:152</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../components/NgxEditorJSComponent.html#source" target="_self" >NgxEditorJSComponent:161</a></code>
 </div>
                             </td>
                         </tr>
@@ -3284,6 +3228,7 @@ and then <code>.complete()</code> on the <code>this.onDestroy$</code> subject</p
 import { coerceBooleanProperty } from &#x27;@angular/cdk/coercion&#x27;;
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   DoCheck,
@@ -3295,8 +3240,7 @@ import {
   Optional,
   Provider,
   Self,
-  ViewChild,
-  ChangeDetectionStrategy
+  ViewChild
 } from &#x27;@angular/core&#x27;;
 import { NgControl } from &#x27;@angular/forms&#x27;;
 import { MatFormFieldControl } from &#x27;@angular/material&#x27;;
@@ -3304,7 +3248,7 @@ import { Subject } from &#x27;rxjs&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
 import { NgxEditorJSDirective } from &#x27;../../directives/ngx-editorjs.directive&#x27;;
 import { NgxEditorJSService } from &#x27;../../services/editorjs.service&#x27;;
-import { NgxEditorJSBaseComponent } from &#x27;../base/container.class&#x27;;
+import { NgxEditorJSComponent } from &#x27;../editorjs/editorjs.component&#x27;;
 
 /**
  * Provider for the EditorJS Material Field Component
@@ -3345,7 +3289,7 @@ export interface EditorJSMaterialForm
   providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent implements EditorJSMaterialForm {
+export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implements EditorJSMaterialForm {
   /**
    * Internal Static ID for Material for each editor instance
    */
@@ -3489,7 +3433,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
   /**
    * Access to the underlying {NgxEditorJSDirective}
    */
-  @ViewChild(NgxEditorJSDirective) public editorEl: NgxEditorJSDirective;
+  @ViewChild(&#x27;editorInstance&#x27;, { read: NgxEditorJSDirective }) public readonly editorInstance: NgxEditorJSDirective;
 
   /**
    * Host binding to the unique ID for this editor for material
@@ -3524,29 +3468,30 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
    */
   public onContainerClick(event: MouseEvent) {
     this.onTouch(event);
-    this.hasSaved.emit(false);
     this.stateChanges.next();
   }
 
   /**
-   * Creates the Material field
-   * @param service The {NgxEditorJSService} instance
-   * @param fm Focus monitor for the Material element
+   * Constructor for the Material field, as this extends the &#x60;NgxEditorJSComponent&#x60; component
+   * we call &#x60;super()&#x60; to get all the properties of that component
+   * @param editorService The NgxEditorJSService instance
+   * @param focusMonitor Focus monitor for the Material element
+   * @parma cd The Change detection ref
    * @param ngControl The Angular control base class
    */
   constructor(
-    protected readonly service: NgxEditorJSService,
-    protected fm: FocusMonitor,
-    protected readonly cd: ChangeDetectorRef,
+    protected readonly editorService: NgxEditorJSService,
+    protected focusMonitor: FocusMonitor,
+    protected readonly changeDetection: ChangeDetectorRef,
     @Optional() @Self() public ngControl: NgControl
   ) {
-    super(service, fm, cd);
+    super(editorService, focusMonitor, changeDetection);
   }
 
   /**
    * Called on OnInit
    */
-  ngOnInit(): void {
+  public ngOnInit(): void {
     if (this.ngControl !&#x3D;&#x3D; null) {
       this.ngControl.valueAccessor &#x3D; this;
     }
@@ -3556,13 +3501,14 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
    * Inside the AfterContentInit life-cycle we set up a listener for focus
    * and trigger focus autosave subscribe and unsubscribe
    */
-  ngAfterContentInit(): void {
-    this.getFocusMonitor(this.editorEl.element)
+  public ngAfterContentInit(): void {
+    this.setupServiceSubscriptions();
+    this.getFocusMonitor(this.editorInstance.element)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused &#x3D;&gt; {
+        this.onTouch();
         this.focused &#x3D; focused;
         this.stateChanges.next();
-        this.cd.markForCheck();
       });
   }
 
@@ -3573,21 +3519,6 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     if (this.ngControl) {
       this.errorState &#x3D; this.ngControl.invalid &amp;&amp; this.ngControl.touched;
       this.stateChanges.next();
-      this.cd.markForCheck();
-    }
-  }
-
-  /**
-   * Destroy the focus monitoring and any remaining timer subcription
-   */
-  ngOnDestroy(): void {
-    this.fm.stopMonitoring(this.editorEl.element);
-    if (this.timerSubscription$ &amp;&amp; !this.timerSubscription$.closed) {
-      this.timerSubscription$.unsubscribe();
-    }
-    if (!this.onDestroy$.closed) {
-      this.onDestroy$.next(true);
-      this.onDestroy$.complete();
     }
   }
 }
@@ -3597,6 +3528,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div
   class&#x3D;&quot;editor&quot;
+  #editorInstance
   ngxEditorJS
   [id]&#x3D;&quot;holder&quot;
   [holder]&#x3D;&quot;holder&quot;
@@ -3649,8 +3581,8 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div  class="editor"  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"  (hasSaved)="hasSaved.emit($event)"  (isTouched)="isTouched.emit($event)"  (isFocused)="isFocused.emit($event)"  (hasChanged)="hasChanged.emit($event)"  (isReady)="isReady.emit($event)"></div></div>'
-    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSBaseComponent', 'selector': ''},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
+        var COMPONENT_TEMPLATE = '<div><div  class="editor"  #editorInstance  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"  (hasSaved)="hasSaved.emit($event)"  (isTouched)="isTouched.emit($event)"  (isFocused)="isFocused.emit($event)"  (hasChanged)="hasChanged.emit($event)"  (isReady)="isReady.emit($event)"></div></div>'
+    var COMPONENTS = [{'name': 'AppContainerComponent', 'selector': 'tinynodes-root'},{'name': 'FormContainerComponent', 'selector': 'ngx-form-container'},{'name': 'HomePageComponent', 'selector': 'tinynodes-home-page'},{'name': 'NavBarComponent', 'selector': 'tinynodes-nav-bar'},{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSDemoHomeComponent', 'selector': 'ngx-editorjs-demo-home'},{'name': 'NgxEditorJSDemoInfoComponent', 'selector': 'ngx-editorjs-demo-info'},{'name': 'NgxEditorJSDemoTagComponent', 'selector': 'ngx-editorjs-tag-component'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'},{'name': 'PageContainerComponent', 'selector': 'ngx-page-container'},{'name': 'SidebarComponent', 'selector': 'tinynodes-sidebar'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NgxEditorJSMatFieldComponent'};
 </script>
@@ -3686,7 +3618,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSMatFieldComponent.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

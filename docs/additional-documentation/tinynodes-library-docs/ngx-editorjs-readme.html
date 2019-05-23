@@ -49,13 +49,15 @@
 
 
 <h1 id="ngx-editorjs">Ngx-EditorJS</h1>
-<p>This library provides Angular support for <a href="https://editorjs.io">EditorJS</a>. Inside the module you will find:</p>
+<p>This library provides Angular support for <a href="https://editorjs.io">EditorJS</a>.</p>
+<p><a href="https://badge.fury.io/js/%40tinynodes%2Fngx-editorjs"><img src="https://badge.fury.io/js/%40tinynodes%2Fngx-editorjs.svg" alt="npm version" class="img-responsive"></a></p>
+<p>Inside the module you will find:</p>
 <ul>
 <li><code>NgxEditorJSDirective</code> - An Angular Directive used to attach an <code>EditorJS</code> instance to any block DOM element</li>
 <li><code>NgxEditorJSComponent</code> - An <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-component">out-of-the-box Angular component</a> that is Reactive Forms compatible</li>
 <li><code>NgxEditorJSMaterialFieldComponent</code> An <a href="https://material.angular.io/">Angular Material</a> Form Field component that provides all the required properties and life-cycle events required. See the <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form">Form Demo</a> on an example usage</li>
 <li><code>NgxEditorJSBaseComponent</code> - A base Angular component that is Reactive form compatible but with no template, can be used to create custom UI framework containers</li>
-<li><code>NgxEditorJSService</code> - A Service that can be injected into an application to provide a interface to interact with <code>EditorJS</code> instances. Underneath are the private <code>NgxEditorJSPluginService</code> and <code>NgxEditorJSInstanceService</code> services. These are private but can be imported via <code>ɵNgxEditorJSPluginService</code> and <code>ɵNgxEditorJSInstanceService</code> from the library if you want to use them.</li>
+<li><code>NgxEditorJSService</code> - A Service that can be injected into an application to provide a interface to interact with <code>EditorJS</code> instances and manage plugins.</li>
 </ul>
 <p>Within these components you will be able to access the underlying <code>EditorJS</code> instance, for use see the <a href="https://editorjs.io/api">EditorJS API Docs</a></p>
 <p>You can see a <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo">demo in action</a> or download it
