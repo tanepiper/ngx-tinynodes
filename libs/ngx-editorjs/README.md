@@ -1,12 +1,16 @@
 # Ngx-EditorJS
 
-This library provides Angular support for [EditorJS](https://editorjs.io). Inside the module you will find:
+This library provides Angular support for [EditorJS](https://editorjs.io).
+
+[![npm version](https://badge.fury.io/js/%40tinynodes%2Fngx-editorjs.svg)](https://badge.fury.io/js/%40tinynodes%2Fngx-editorjs)
+
+Inside the module you will find:
 
 - `NgxEditorJSDirective` - An Angular Directive used to attach an `EditorJS` instance to any block DOM element
 - `NgxEditorJSComponent` - An [out-of-the-box Angular component](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-component) that is Reactive Forms compatible
 - `NgxEditorJSMaterialFieldComponent` An [Angular Material](https://material.angular.io/) Form Field component that provides all the required properties and life-cycle events required. See the [Form Demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form) on an example usage
 - `NgxEditorJSBaseComponent` - A base Angular component that is Reactive form compatible but with no template, can be used to create custom UI framework containers
-- `NgxEditorJSService` - A Service that can be injected into an application to provide a interface to interact with `EditorJS` instances. Underneath are the private `NgxEditorJSPluginService` and `NgxEditorJSInstanceService` services. These are private but can be imported via `ɵNgxEditorJSPluginService` and `ɵNgxEditorJSInstanceService` from the library if you want to use them.
+- `NgxEditorJSService` - A Service that can be injected into an application to provide a interface to interact with `EditorJS` instances and manage plugins.
 
 Within these components you will be able to access the underlying `EditorJS` instance, for use see the [EditorJS API Docs](https://editorjs.io/api)
 
