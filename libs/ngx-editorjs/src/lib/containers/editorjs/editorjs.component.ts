@@ -187,6 +187,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   /**
    * Angular Form onTouch method, this is a default method that updates
    * the touch status on the component
+   * @param event The mouse event from the touch
    */
   public onTouch = (event?: MouseEvent): void => {
     this.isTouched.emit(true);
@@ -195,6 +196,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   /**
    * Angular Form onChange method, this is a default method that updates the
    * editor instance with blocks on change
+   * @param data The data to write
    */
   public onChange = (data: OutputData): void => {
     this.editorService.update({ holder: this.holder, data });
@@ -203,7 +205,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
 
   /**
    * Angular Forms value writer, updates the editor
-   * @param blocks
+   * @param data The data to write
    */
   public writeValue(data: OutputData): void {
     this._value = data;
@@ -259,16 +261,9 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   }
 
   /**
-   * Set up the focus monitor and subscriptions to editor service observables
+   * Sets up the service subscriptions to @Output value
    */
-  ngAfterContentInit(): void {
-    this.getFocusMonitor(this.editorInstance.element)
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(() => {
-        this.onTouch();
-        this.changeDetection.markForCheck();
-      });
-
+  protected setupServiceSubscriptions() {
     this.editorService
       .isReady({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
@@ -292,11 +287,23 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   }
 
   /**
+   * Set up the focus monitor and subscriptions to editor service observables
+   */
+  ngAfterContentInit(): void {
+    this.setupServiceSubscriptions();
+    this.getFocusMonitor(this.editorInstance.element)
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(() => {
+        this.onTouch();
+        this.changeDetection.markForCheck();
+      });
+  }
+
+  /**
    * Called when the component is destroyed, the focus monitor is destroyed
    * as well as the editor service, also the onDestroy$ subject is completed
    */
   ngOnDestroy(): void {
-    console.log('called');
     this.focusMonitor.stopMonitoring(this.editorInstance.element);
     if (this.timerSubscription$ && !this.timerSubscription$.closed) {
       this.timerSubscription$.unsubscribe();

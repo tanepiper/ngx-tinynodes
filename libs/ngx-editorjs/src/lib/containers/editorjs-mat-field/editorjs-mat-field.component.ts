@@ -276,33 +276,13 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
    * and trigger focus autosave subscribe and unsubscribe
    */
   public ngAfterContentInit(): void {
+    this.setupServiceSubscriptions();
     this.getFocusMonitor(this.editorInstance.element)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused => {
         this.onTouch();
         this.focused = focused;
         this.stateChanges.next();
-      });
-
-    this.editorService
-      .isReady({ holder: this.holder })
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(isReady => {
-        this.isReady.emit(isReady);
-      });
-
-    this.editorService
-      .hasChanged({ holder: this.holder })
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(change => {
-        this.hasChanged.emit(change);
-      });
-
-    this.editorService
-      .hasSaved({ holder: this.holder })
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(saved => {
-        this.hasSaved.next(saved);
       });
   }
 
@@ -315,18 +295,4 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
       this.stateChanges.next();
     }
   }
-
-  /**
-   * Destroy the focus monitoring and any remaining timer subscriptions
-   */
-  // public ngOnDestroy(): void {
-  //   this.focusMonitor.stopMonitoring(this.editorInstance.element);
-  //   if (this.timerSubscription$ && !this.timerSubscription$.closed) {
-  //     this.timerSubscription$.unsubscribe();
-  //   }
-  //   if (!this.onDestroy$.closed) {
-  //     this.onDestroy$.next(true);
-  //     this.onDestroy$.complete();
-  //   }
-  // }
 }
