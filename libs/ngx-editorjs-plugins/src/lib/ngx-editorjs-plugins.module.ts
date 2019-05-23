@@ -11,7 +11,7 @@ import { PluginSimpleImageModule } from './plugins/simple-image/simple-image.mod
 
 /**
  * The `NgxEditorjsPluginsModule` provides several additional modules
- * that provide a way to easily plug in block and inline tools for `EditorJS`.
+ * that provide a way to easily plug in block and inline tools for EditorJS.
  *
  * Importing `NgxEditorjsPluginsModule` will include all modules, while it
  * is also possible to import each individual module as required.

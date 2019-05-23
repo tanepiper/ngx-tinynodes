@@ -27,7 +27,9 @@ export class NgxEditorJSComponent extends NgxEditorJSBaseComponent {
 
   /**
    * Constructs the Editor component
-   * @param service The NgxEditorJSService instance
+   * @param service The `EditorJS service
+   * @param fm The Focus Monitor
+   * @param cd The Change Detection Ref
    */
   constructor(
     protected readonly service: NgxEditorJSService,

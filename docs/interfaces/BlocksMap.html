@@ -130,21 +130,21 @@ export interface BlocksMap {
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;boolean&#x60; values of the ready state of &#x60;EditorJS&#x60;
+ * A map containing &#x60;BehaviorSubject&lt;boolean&gt;&#x60; values of the ready state of &#x60;EditorJS&#x60;
  */
 export interface ReadyMap {
   /**
-   * A map key containing a {BehaviorSubject} of {boolean}
+   * A map key containing a &#x60;BehaviorSubject&lt;boolean&gt;&#x60;
    */
   [key: string]: BehaviorSubject&lt;boolean&gt;;
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;boolean&#x60; values of the save state of &#x60;EditorJS&#x60;
+ * A map containing &#x60;BehaviorSubject&lt;boolean&gt;&#x60; values of the save state of &#x60;EditorJS&#x60;
  */
 export interface SavedMap {
   /**
-   * A map key containing a {BehaviorSubject} of {boolean}
+   * A map key containing a &#x60;BehaviorSubject&lt;boolean&gt;&#x60;
    */
   [key: string]: BehaviorSubject&lt;boolean&gt;;
 }
@@ -164,11 +164,11 @@ export interface EditorJSChange {
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;number&#x60; which is the timestamp of the last &#x60;EditorJS&#x60; change
+ * A map containing &#x60;BehaviorSubject&lt;OutputData&gt;&#x60; which is the last save from the &#x60;EditorJS&#x60; instance
  */
 export interface ChangeMap {
   /**
-   * A map key containing a {BehaviorSubject} of {number}
+   * A map key containing a &#x60;BehaviorSubject&lt;OutputData&gt;&#x60;
    */
   [key: string]: BehaviorSubject&lt;OutputData&gt;;
 }
@@ -198,7 +198,7 @@ export interface ChangeMap {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'BlocksMap.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

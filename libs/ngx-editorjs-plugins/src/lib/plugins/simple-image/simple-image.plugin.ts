@@ -4,7 +4,7 @@ import SimpleImage from '@editorjs/simple-image';
 import { BasePlugin } from '../../types/plugins';
 
 /**
- * This plugin returns the simple image tool for `<img>` block editor `EditorJS`
+ * This plugin returns the simple image tool for `<img>` block editor EditorJS
  */
 @Injectable()
 export class PluginSimpleImage implements BasePlugin {

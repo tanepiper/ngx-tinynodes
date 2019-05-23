@@ -4,7 +4,7 @@ import Link from '@editorjs/link';
 import { BasePlugin } from '../../types/plugins';
 
 /**
- * This plugin returns the tool settings for a `<a>` block tool for `EditorJS`
+ * This plugin returns the tool settings for a `<a>` block tool for EditorJS
  */
 @Injectable()
 export class PluginLink implements BasePlugin {

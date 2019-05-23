@@ -2,7 +2,7 @@ import { NgxEditorJSModuleConfig } from '../types/config';
 import { createEditorJSConfig } from './editor-config';
 
 /**
- * Creates the configuration from the module config
+ * Method to return an module configuration
  * @param config Optional module configurations
  */
 export function createModuleConfig(config?: NgxEditorJSModuleConfig): NgxEditorJSModuleConfig {

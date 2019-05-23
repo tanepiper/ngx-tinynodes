@@ -3,41 +3,31 @@ import { BehaviorSubject } from 'rxjs';
 import { Block } from './blocks';
 
 /**
- * A map containing instances of `EditorJS`
+ * A map containing instances of `BehaviorSubject<EditorJS>`
  */
 export interface EditorMap {
   /**
-   * A map key containing a {BehaviorSubject} of {EditorJS}
+   * A map key containing `BehaviorSubject<EditorJS>`
    */
   [key: string]: BehaviorSubject<EditorJS>;
 }
 
 /**
- * A map containing `BehaviorSubject` of `Block` elements from `EditorJS`
- */
-export interface BlocksMap {
-  /**
-   * A map key containing a {BehaviorSubject} of {Block[]}
-   */
-  [key: string]: BehaviorSubject<Block[]>;
-}
-
-/**
- * A map containing `BehaviorSubject` of `boolean` values of the ready state of `EditorJS`
+ * A map containing `BehaviorSubject<boolean>` values of the ready state of EditorJS
  */
 export interface ReadyMap {
   /**
-   * A map key containing a {BehaviorSubject} of {boolean}
+   * A map key containing a `BehaviorSubject<boolean>`
    */
   [key: string]: BehaviorSubject<boolean>;
 }
 
 /**
- * A map containing `BehaviorSubject` of `boolean` values of the save state of `EditorJS`
+ * A map containing `BehaviorSubject<boolean>` values of the save state of EditorJS
  */
 export interface SavedMap {
   /**
-   * A map key containing a {BehaviorSubject} of {boolean}
+   * A map key containing a `BehaviorSubject<boolean>`
    */
   [key: string]: BehaviorSubject<boolean>;
 }
@@ -57,11 +47,11 @@ export interface EditorJSChange {
 }
 
 /**
- * A map containing `BehaviorSubject` of `number` which is the timestamp of the last `EditorJS` change
+ * A map containing `BehaviorSubject<OutputData>` which is the last save from the EditorJS instance
  */
 export interface ChangeMap {
   /**
-   * A map key containing a {BehaviorSubject} of {number}
+   * A map key containing a `BehaviorSubject<OutputData>`
    */
   [key: string]: BehaviorSubject<OutputData>;
 }

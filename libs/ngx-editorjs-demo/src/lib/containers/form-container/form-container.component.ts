@@ -3,16 +3,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Output,
-  EventEmitter
+  ViewChild
 } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
-import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
-import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
-import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, take, takeUntil, pluck, tap, withLatestFrom, filter } from 'rxjs/operators';
+import { Block, NgxEditorJSService, NgxEditorJSMatFieldComponent } from '@tinynodes/ngx-editorjs';
+import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { pluck, take, takeUntil } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
@@ -28,6 +27,9 @@ import { OutputData } from '@editorjs/editorjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormContainerComponent implements AfterContentInit {
+  @ViewChild('ngxEditorJS', { read: NgxEditorJSMatFieldComponent })
+  public readonly ngxEditorJS: NgxEditorJSMatFieldComponent;
+
   /**
    * Title of the page
    */
@@ -56,12 +58,6 @@ export class FormContainerComponent implements AfterContentInit {
    * Autosave state
    */
   private autoSave$ = new BehaviorSubject<number>(0);
-
-  /**
-   * Get `hasSaved` state
-   */
-  @Output()
-  public hasSaved = new EventEmitter<boolean>();
 
   /**
    * Enable autosave, set the value from the autosaveTime
@@ -109,14 +105,6 @@ export class FormContainerComponent implements AfterContentInit {
         });
         this.cd.markForCheck();
       });
-
-    this.editorService
-      .hasSaved({ holder: this.holder })
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(hasSaved => {
-        this.hasSaved.next(hasSaved);
-        this.cd.markForCheck();
-      });
   }
 
   /**
@@ -143,7 +131,10 @@ export class FormContainerComponent implements AfterContentInit {
   }
 
   public get blocks() {
-    return this.editorService.hasChanged({ holder: this.holder }).pipe(
+    if (!this.ngxEditorJS) {
+      return of([]);
+    }
+    return this.ngxEditorJS.editorEl.service.hasChanged({ holder: this.holder }).pipe(
       pluck<OutputData, Block[]>('blocks'),
       takeUntil(this.onDestroy$)
     );
@@ -153,7 +144,10 @@ export class FormContainerComponent implements AfterContentInit {
    * Call the editor save method
    */
   public save() {
-    this.editorService.save({ holder: this.holder });
+    if (!this.ngxEditorJS) {
+      return;
+    }
+    this.ngxEditorJS.editorEl.service.save({ holder: this.holder });
     this.cd.markForCheck();
   }
 
@@ -161,7 +155,10 @@ export class FormContainerComponent implements AfterContentInit {
    * Clear the editor
    */
   public clear() {
-    this.editorService.clear({ holder: this.holder });
+    if (!this.ngxEditorJS) {
+      return;
+    }
+    this.ngxEditorJS.editorEl.service.clear({ holder: this.holder });
     this.cd.markForCheck();
   }
 
@@ -170,7 +167,10 @@ export class FormContainerComponent implements AfterContentInit {
    * @param blocks
    */
   public update(blocks: Block[]) {
-    this.editorService.update({ holder: this.holder, blocks });
+    if (!this.ngxEditorJS) {
+      return;
+    }
+    this.ngxEditorJS.editorEl.service.update({ holder: this.holder, blocks });
     this.cd.markForCheck();
   }
 
@@ -222,7 +222,11 @@ export class FormContainerComponent implements AfterContentInit {
           }
         ];
         this.menu$.next(data.links);
-        this.editorService.update({ holder: this.holder, blocks }, false);
+        if (!this.ngxEditorJS) {
+          this.cd.markForCheck();
+          return;
+        }
+        this.ngxEditorJS.editorEl.service.update({ holder: this.holder, blocks }, false);
         this.cd.markForCheck();
       });
   }

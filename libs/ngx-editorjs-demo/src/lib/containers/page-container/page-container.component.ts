@@ -1,12 +1,10 @@
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { Block, NgxEditorJSService, NgxEditorJSComponent } from '@tinynodes/ngx-editorjs/src';
-import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
+import { Block, NgxEditorJSComponent, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
+import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, takeUntil, tap, pluck, filter, take } from 'rxjs/operators';
+import { map, pluck, take, takeUntil, tap } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
-import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
-import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
 import { OutputData } from '@editorjs/editorjs';
 
 /**
@@ -23,7 +21,7 @@ export class PageContainerComponent implements AfterContentInit {
   /**
    * Internal onDestroy$ subject
    */
-  private onDestroy$ = new Subject<boolean>();
+  private readonly onDestroy$ = new Subject<boolean>();
 
   /**
    * The holder ID for this demo
@@ -46,7 +44,7 @@ export class PageContainerComponent implements AfterContentInit {
    */
   constructor(
     private readonly pagesService: PagesService,
-    private app: AppService,
+    private readonly app: AppService,
     private readonly editorService: NgxEditorJSService,
     private readonly cd: ChangeDetectorRef
   ) {}

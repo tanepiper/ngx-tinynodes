@@ -260,7 +260,10 @@ export const MAP_DEFAULTS &#x3D; [[&#x27;hasChangedMap&#x27;, { time: 0, blocks:
  */
 export const EDITORJS_MODULE_IMPORT &#x3D; new InjectionToken&lt;any&gt;(&#x27;EDITORJS_MODULE_IMPORT&#x27;);
 
-export const EditorJSInstance &#x3D; new InjectionToken&lt;any&gt;(&#x27;EditorJSInstance&#x27;);
+/**
+ * The EditorJS class injector
+ */
+export const EditorJSInstance &#x3D; new InjectionToken&lt;EditorJSClass&gt;(&#x27;EditorJSInstance&#x27;);
 
 /**
  * Options for a Injector method
@@ -281,11 +284,11 @@ export interface InjectorMethodOption {
 }
 
 /**
- * Options to pass when calling the &#x60;EditorJS&#x60; instance API
+ * Options to pass when calling the EditorJS instance API
  */
 export interface InjectorApiCallOptions {
   /**
-   * Holder for the &#x60;EditorJS&#x60; instance
+   * Holder for the EditorJS instance
    */
   holder: string;
 
@@ -300,10 +303,23 @@ export interface InjectorApiCallOptions {
 }
 
 /**
- * A response from the &#x60;EditorJS&#x60; api
+ * A response from the EditorJS api
  */
 export interface InjectorApiCallResponse&lt;T &#x3D; any&gt; extends InjectorApiCallOptions {
   result: T;
+}
+
+/**
+ * Interface for the injected EditorJS class, returns the static
+ * class of EditorJS with the version and that creates the instance and provides
+ * the Typescript parse with type information
+ */
+export interface EditorJSClass&lt;T &#x3D; EditorJS&gt; extends Function {
+  new (...args: any[]): T;
+  /**
+   * EditorJS version
+   */
+  version: string;
 }
 </code></pre>
     </div>
@@ -331,7 +347,7 @@ export interface InjectorApiCallResponse&lt;T &#x3D; any&gt; extends InjectorApi
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'EditorJSInstanceConfig.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

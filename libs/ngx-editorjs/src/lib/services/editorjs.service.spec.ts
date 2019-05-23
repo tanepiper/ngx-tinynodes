@@ -6,7 +6,7 @@ import { MockNgZone } from '../../testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '../../testing/shared';
 import { NGX_EDITORJS_CONFIG } from '../types/config';
 import { UserPlugins } from '../types/plugins';
-import { NgxEditorJSInstanceService } from './editorjs-injector';
+import { NgxEditorJSInstanceService } from './editorjs-instance.service';
 import { NgxEditorJSService } from './editorjs.service';
 import { NgxEditorJSPluginService } from './plugins.service';
 import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';

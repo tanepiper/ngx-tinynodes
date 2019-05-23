@@ -1,13 +1,13 @@
 import { EditorConfig } from '@editorjs/editorjs';
 
 /**
- * The default holder ID to attach `EditorJS` to
+ * The default holder ID to attach EditorJS to
  */
 export const DEFAULT_HOLDER_ID = 'editor-js';
 
 /**
- * Creates an EditorJS config
- * @param inputConfig The config to merge
+ * Creates an EditorJS configuration, only returning keys that are set
+ * @param inputConfig Optional config to use to set values
  */
 export function createEditorJSConfig(inputConfig?: EditorConfig): EditorConfig {
   if (!inputConfig) {

@@ -254,7 +254,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>A helper method to make calls to any <code>EditorJS</code> API (see <a href="https://editorjs.io/api">API Docs</a>)
+                    <div class="io-description"><p>A helper method to make calls to any EditorJS API (see <a href="https://editorjs.io/api">API Docs</a>)
 The first argument should container the holder and method name, and namespace if required
 The second argument is any additional arguments as required by the API.
 The response of this method if a <code>Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt;</code> which contains
@@ -508,7 +508,7 @@ resolve the value</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Destroy the <code>EditorJS</code> instance
+                    <div class="io-description"><p>Destroy the EditorJS instance
 It also calls the maps and sets their values back to their defaults and then
 completes and destroys them</p>
 </div>
@@ -584,7 +584,7 @@ completes and destroys them</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Get an <code>EditorJS</code> instance
+                    <div class="io-description"><p>Get an EditorJS instance
 See the <a href="https://editorjs.io/api">EditorJS API</a> docs for more details</p>
 </div>
 
@@ -884,7 +884,7 @@ the <code>createEditor</code> method</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Calls the <code>EditorJS</code> save method which returns an <code>OutputData</code> object.
+                    <div class="io-description"><p>Calls the EditorJS save method which returns an <code>OutputData</code> object.
 From this the service updates the blocks map and change map values
 If there is no instance of that name it will throw an error.</p>
 </div>
@@ -960,7 +960,7 @@ If there is no instance of that name it will throw an error.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>This method updates the blocks within the <code>EditorJS</code> instance.
+                    <div class="io-description"><p>This method updates the blocks within the EditorJS instance.
 If there is no instance of that name it will throw an error.</p>
 </div>
 
@@ -1042,7 +1042,7 @@ import { filter } from &#x27;rxjs/operators&#x27;;
 import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from &#x27;../types/config&#x27;;
 import { CreateEditorJSOptions } from &#x27;../types/editorjs-service&#x27;;
 import { InjectorApiCallOptions, InjectorApiCallResponse, InjectorMethodOption } from &#x27;../types/injector&#x27;;
-import { NgxEditorJSInstanceService } from &#x27;./editorjs-injector&#x27;;
+import { NgxEditorJSInstanceService } from &#x27;./editorjs-instance.service&#x27;;
 import { NgxEditorJSPluginService } from &#x27;./plugins.service&#x27;;
 
 /**
@@ -1073,7 +1073,7 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Get an &#x60;EditorJS&#x60; instance
+   * Get an EditorJS instance
    * See the [EditorJS API](https://editorjs.io/api) docs for more details
    * @param holder The ID of the holder of the instance
    */
@@ -1109,7 +1109,7 @@ export class NgxEditorJSService {
   }
 
   /**
-   * A helper method to make calls to any &#x60;EditorJS&#x60; API (see [API Docs](https://editorjs.io/api))
+   * A helper method to make calls to any EditorJS API (see [API Docs](https://editorjs.io/api))
    * The first argument should container the holder and method name, and namespace if required
    * The second argument is any additional arguments as required by the API.
    * The response of this method if a &#x60;Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt;&#x60; which contains
@@ -1118,12 +1118,12 @@ export class NgxEditorJSService {
    * @param options Options to pass to the API request
    * @param args Additional arguments to pass to the API request
    */
-  public apiCall&lt;T&gt;(options: InjectorApiCallOptions, ...args): Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt; {
+  public apiCall&lt;T&gt;(options: InjectorApiCallOptions, ...args: any[]): Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt; {
     return this.instanceService.apiCall&lt;T&gt;(options, ...args);
   }
 
   /**
-   * This method updates the blocks within the &#x60;EditorJS&#x60; instance.
+   * This method updates the blocks within the EditorJS instance.
    * If there is no instance of that name it will throw an error.
    * @param options The options to update
    * @param triggerUpdate If set to false the hasChanged observable won&#x27;t be updated
@@ -1133,7 +1133,7 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Calls the &#x60;EditorJS&#x60; save method which returns an &#x60;OutputData&#x60; object.
+   * Calls the EditorJS save method which returns an &#x60;OutputData&#x60; object.
    * From this the service updates the blocks map and change map values
    * If there is no instance of that name it will throw an error.
    * @param holder The ID of the holder of the instance
@@ -1151,7 +1151,7 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Destroy the &#x60;EditorJS&#x60; instance
+   * Destroy the EditorJS instance
    * It also calls the maps and sets their values back to their defaults and then
    * completes and destroys them
    * @param holder The ID of the holder of the instance
@@ -1192,7 +1192,7 @@ export class NgxEditorJSService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

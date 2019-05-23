@@ -102,7 +102,8 @@ import {
   Optional,
   Provider,
   Self,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from &#x27;@angular/core&#x27;;
 import { NgControl } from &#x27;@angular/forms&#x27;;
 import { MatFormFieldControl } from &#x27;@angular/material&#x27;;
@@ -148,7 +149,8 @@ export interface EditorJSMaterialForm
     &#x27;[id]&#x27;: &#x27;id&#x27;,
     &#x27;[attr.aria-describedby]&#x27;: &#x27;describedBy&#x27;
   },
-  providers: [EDITORJS_MATERIAL_FIELD_CONTROL]
+  providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent implements EditorJSMaterialForm {
   /**
@@ -366,7 +368,6 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused &#x3D;&gt; {
         this.focused &#x3D; focused;
-        this.isTouched.emit(true);
         this.stateChanges.next();
         this.cd.markForCheck();
       });
@@ -423,7 +424,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'EditorJSMaterialForm.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

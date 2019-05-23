@@ -29,10 +29,10 @@ export const EDITORJS_FORM_VALUE_ACCESSOR: Provider = {
 };
 
 /**
- * The `NgxEditorJSBaseComponent` is a fully implemented Angular component for creating `EditorJS` instances
+ * The `NgxEditorJSBaseComponent` is a fully implemented Angular component for creating EditorJS instances
  * within an Angular application or Angular Reactive Form.
  * The component provides `@Input` properties for all the configuration options of
- * a `EditorJS` instance and `@Output` Event Emitters to listen to changes
+ * a EditorJS instance and `@Output` Event Emitters to listen to changes
  * The instance also provides an Autosave feature by providing an autosave time in `ms` or `0` to disable.
  */
 @Component({
@@ -45,21 +45,21 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
    * Component Destroy subject, in your component `ngOnDestroy` method call `.next(true)`
    * and then `.complete()` on the `this.onDestroy$` subject
    */
-  protected onDestroy$ = new Subject<boolean>();
+  protected readonly onDestroy$ = new Subject<boolean>();
   /**
-   * Boolean, If set to true the `EditorJS` instance gets autofocus when initialized
+   * Boolean, If set to true the EditorJS instance gets autofocus when initialized
    */
   @Input()
   public autofocus: boolean;
 
   /**
-   * Boolean, If set to true the toolbar will not show in the `EditorJS` instance
+   * Boolean, If set to true the toolbar will not show in the EditorJS instance
    */
   @Input()
   public hideToolbar: boolean;
 
   /**
-   * String, the ID property of the element that the `EditorJS` instance will be attached to
+   * String, the ID property of the element that the EditorJS instance will be attached to
    */
   @Input()
   public holder: string;
@@ -72,7 +72,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public initialBlock?: string;
 
   /**
-   * Number, The minimum height of the `EditorJS` instance bottom after the last block
+   * Number, The minimum height of the EditorJS instance bottom after the last block
    */
   @Input()
   public minHeight: number;
@@ -97,7 +97,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public includeTools: string[] = [];
 
   /**
-   * Number, Used with Angular Forms this sets an autosave timer active that calls the `EditorJS` save
+   * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
    * method. This patches the `FormControl` value with every block change and focus and blur, it also autosaves after
    * a set time
    * Set to 0 to disable or pass a value in `ms` of the autosave time
@@ -112,7 +112,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public blocks: Block[];
 
   /**
-   * Emits if the content from the `EditorJS` instance has been saved to the component value
+   * Emits if the content from the EditorJS instance has been saved to the component value
    */
   @Output()
   public hasSaved = new EventEmitter<boolean>();
@@ -130,13 +130,13 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public isFocused = new EventEmitter<boolean>();
 
   /**
-   * Emits if the `EditorJS` content has changed when `save` is called
+   * Emits if the EditorJS content has changed when `save` is called
    */
   @Output()
   public hasChanged = new EventEmitter<OutputData>();
 
   /**
-   * Emits if the `EditorJS` component is ready
+   * Emits if the EditorJS component is ready
    */
   @Output()
   public isReady = new EventEmitter<boolean>();
@@ -183,7 +183,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   /**
    * Field on touch method
    */
-  public onTouch = (event?: MouseEvent) => {
+  public onTouch = (event?: MouseEvent): void => {
     this.isTouched.emit(true);
     this.cd.markForCheck();
   };
@@ -191,7 +191,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   /**
    * Field onChange method
    */
-  public onChange = (change: EditorJSChange) => {
+  public onChange = (change: EditorJSChange): void => {
     this.hasChanged.emit(change);
     this.cd.markForCheck();
   };
@@ -200,7 +200,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
    * Angular Forms value writer
    * @param blocks
    */
-  public writeValue(blocks: Block[]) {
+  public writeValue(blocks: Block[]): void {
     this._value = blocks;
     this.service.save({ holder: this.holder, blocks });
     this.cd.markForCheck();
@@ -227,7 +227,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
    * @param element The element to monitor
    * @param checkChildren If the children should be checked
    */
-  protected getFocusMonitor(element: HTMLElement, checkChildren = true) {
+  protected getFocusMonitor(element: HTMLElement, checkChildren = true): Observable<boolean> {
     return this.fm.monitor(element, checkChildren).pipe(
       map(origin => !!origin),
       tap(focused => {
@@ -246,7 +246,6 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
             this.timerSubscription$ = this.getTimer(this.autosave, 0).subscribe();
           }
         }
-        return focused;
       }),
       tap(() => {
         this.cd.markForCheck();
@@ -257,7 +256,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   /**
    * Set up listeners for ready and change events
    */
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
     this.service
       .isReady({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
@@ -286,7 +285,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   /**
    * If the onDestroy$ subject is not stopped, do it here
    */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (!this.onDestroy$.closed) {
       this.onDestroy$.next(true);
       this.onDestroy$.complete();

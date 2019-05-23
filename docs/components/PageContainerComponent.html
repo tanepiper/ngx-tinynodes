@@ -147,7 +147,15 @@ the <code>ngx-editorjs-demo</code></p>
                                 <a href="#holder">holder</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#menu$">menu$</a>
+                            </li>
+                            <li>
                                 <a href="#ngxEditorJS">ngxEditorJS</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#onDestroy$">onDestroy$</a>
                             </li>
                         </ul>
                     </td>
@@ -543,6 +551,39 @@ the <code>ngx-editorjs-demo</code></p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="menu$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            menu$</b>
+                            <a href="#menu$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new BehaviorSubject&lt;MenuGroup&gt;(undefined)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/page-container/page-container.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Links for the page</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="ngxEditorJS"></a>
                         <span class="name">
                             <b>
@@ -572,6 +613,39 @@ the <code>ngx-editorjs-demo</code></p>
                             </td>
                         </tr>
 
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onDestroy$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            onDestroy$</b>
+                            <a href="#onDestroy$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Subject&lt;boolean&gt;()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">libs/ngx-editorjs-demo/src/lib/containers/page-container/page-container.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Internal onDestroy$ subject</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -982,7 +1056,7 @@ export class PageContainerComponent implements AfterContentInit {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'PageContainerComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -13,7 +13,8 @@ import {
   Optional,
   Provider,
   Self,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material';
@@ -59,7 +60,8 @@ export interface EditorJSMaterialForm
     '[id]': 'id',
     '[attr.aria-describedby]': 'describedBy'
   },
-  providers: [EDITORJS_MATERIAL_FIELD_CONTROL]
+  providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent implements EditorJSMaterialForm {
   /**
@@ -205,7 +207,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
   /**
    * Access to the underlying {NgxEditorJSDirective}
    */
-  @ViewChild(NgxEditorJSDirective) public editorEl: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective }) public readonly editorEl: NgxEditorJSDirective;
 
   /**
    * Host binding to the unique ID for this editor for material
@@ -240,7 +242,6 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
    */
   public onContainerClick(event: MouseEvent) {
     this.onTouch(event);
-    this.hasSaved.emit(false);
     this.stateChanges.next();
   }
 
@@ -277,9 +278,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused => {
         this.focused = focused;
-        this.isTouched.emit(true);
         this.stateChanges.next();
-        this.cd.markForCheck();
       });
   }
 
@@ -290,12 +289,11 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;
       this.stateChanges.next();
-      this.cd.markForCheck();
     }
   }
 
   /**
-   * Destroy the focus monitoring and any remaining timer subcription
+   * Destroy the focus monitoring and any remaining timer subscriptions
    */
   ngOnDestroy(): void {
     this.fm.stopMonitoring(this.editorEl.element);

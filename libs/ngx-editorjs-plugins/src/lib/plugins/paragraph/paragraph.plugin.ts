@@ -4,7 +4,7 @@ import { ToolSettings } from '@editorjs/editorjs';
 import { BasePlugin } from '../../types/plugins';
 
 /**
- * This plugin returns the tool settings for a `<p>` block tool for `EditorJS`
+ * This plugin returns the tool settings for a `<p>` block tool for EditorJS
  */
 @Injectable()
 export class PluginParagraph implements BasePlugin {

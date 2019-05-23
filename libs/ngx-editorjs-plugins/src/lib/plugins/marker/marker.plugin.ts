@@ -4,7 +4,7 @@ import Marker from '@editorjs/marker';
 import { BasePlugin } from '../../types/plugins';
 
 /**
- * This plugin returns the tool settings for a inline marker tool for `EditorJS`
+ * This plugin returns the tool settings for a inline marker tool for EditorJS
  */
 @Injectable()
 export class PluginMarker implements BasePlugin {

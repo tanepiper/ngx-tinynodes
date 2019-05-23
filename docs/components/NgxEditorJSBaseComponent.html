@@ -63,10 +63,10 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>The <code>NgxEditorJSBaseComponent</code> is a fully implemented Angular component for creating <code>EditorJS</code> instances
+        <p>The <code>NgxEditorJSBaseComponent</code> is a fully implemented Angular component for creating EditorJS instances
 within an Angular application or Angular Reactive Form.
 The component provides <code>@Input</code> properties for all the configuration options of
-a <code>EditorJS</code> instance and <code>@Output</code> Event Emitters to listen to changes
+a EditorJS instance and <code>@Output</code> Event Emitters to listen to changes
 The instance also provides an Autosave feature by providing an autosave time in <code>ms</code> or <code>0</code> to disable.</p>
 
     </p>
@@ -383,7 +383,7 @@ a public interface</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Boolean, If set to true the <code>EditorJS</code> instance gets autofocus when initialized</p>
+                        <div class="io-description"><p>Boolean, If set to true the EditorJS instance gets autofocus when initialized</p>
 </div>
                     </td>
                 </tr>
@@ -410,7 +410,7 @@ a public interface</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Number, Used with Angular Forms this sets an autosave timer active that calls the <code>EditorJS</code> save
+                        <div class="io-description"><p>Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
 method. This patches the <code>FormControl</code> value with every block change and focus and blur, it also autosaves after
 a set time
 Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
@@ -494,7 +494,7 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Boolean, If set to true the toolbar will not show in the <code>EditorJS</code> instance</p>
+                        <div class="io-description"><p>Boolean, If set to true the toolbar will not show in the EditorJS instance</p>
 </div>
                     </td>
                 </tr>
@@ -521,7 +521,7 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>String, the ID property of the element that the <code>EditorJS</code> instance will be attached to</p>
+                        <div class="io-description"><p>String, the ID property of the element that the EditorJS instance will be attached to</p>
 </div>
                     </td>
                 </tr>
@@ -609,7 +609,7 @@ The default value is &quot;paragraph&quot;</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Number, The minimum height of the <code>EditorJS</code> instance bottom after the last block</p>
+                        <div class="io-description"><p>Number, The minimum height of the EditorJS instance bottom after the last block</p>
 </div>
                     </td>
                 </tr>
@@ -666,7 +666,7 @@ The default value is &quot;paragraph&quot;</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the <code>EditorJS</code> content has changed when <code>save</code> is called</p>
+                        <div class="io-description"><p>Emits if the EditorJS content has changed when <code>save</code> is called</p>
 </div>
                     </td>
                 </tr>
@@ -693,7 +693,7 @@ The default value is &quot;paragraph&quot;</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the content from the <code>EditorJS</code> instance has been saved to the component value</p>
+                        <div class="io-description"><p>Emits if the content from the EditorJS instance has been saved to the component value</p>
 </div>
                     </td>
                 </tr>
@@ -747,7 +747,7 @@ The default value is &quot;paragraph&quot;</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the <code>EditorJS</code> component is ready</p>
+                        <div class="io-description"><p>Emits if the EditorJS component is ready</p>
 </div>
                     </td>
                 </tr>
@@ -1506,10 +1506,10 @@ export const EDITORJS_FORM_VALUE_ACCESSOR: Provider &#x3D; {
 };
 
 /**
- * The &#x60;NgxEditorJSBaseComponent&#x60; is a fully implemented Angular component for creating &#x60;EditorJS&#x60; instances
+ * The &#x60;NgxEditorJSBaseComponent&#x60; is a fully implemented Angular component for creating EditorJS instances
  * within an Angular application or Angular Reactive Form.
  * The component provides &#x60;@Input&#x60; properties for all the configuration options of
- * a &#x60;EditorJS&#x60; instance and &#x60;@Output&#x60; Event Emitters to listen to changes
+ * a EditorJS instance and &#x60;@Output&#x60; Event Emitters to listen to changes
  * The instance also provides an Autosave feature by providing an autosave time in &#x60;ms&#x60; or &#x60;0&#x60; to disable.
  */
 @Component({
@@ -1524,19 +1524,19 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
    */
   protected onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
   /**
-   * Boolean, If set to true the &#x60;EditorJS&#x60; instance gets autofocus when initialized
+   * Boolean, If set to true the EditorJS instance gets autofocus when initialized
    */
   @Input()
   public autofocus: boolean;
 
   /**
-   * Boolean, If set to true the toolbar will not show in the &#x60;EditorJS&#x60; instance
+   * Boolean, If set to true the toolbar will not show in the EditorJS instance
    */
   @Input()
   public hideToolbar: boolean;
 
   /**
-   * String, the ID property of the element that the &#x60;EditorJS&#x60; instance will be attached to
+   * String, the ID property of the element that the EditorJS instance will be attached to
    */
   @Input()
   public holder: string;
@@ -1549,7 +1549,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public initialBlock?: string;
 
   /**
-   * Number, The minimum height of the &#x60;EditorJS&#x60; instance bottom after the last block
+   * Number, The minimum height of the EditorJS instance bottom after the last block
    */
   @Input()
   public minHeight: number;
@@ -1574,7 +1574,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public includeTools: string[] &#x3D; [];
 
   /**
-   * Number, Used with Angular Forms this sets an autosave timer active that calls the &#x60;EditorJS&#x60; save
+   * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
    * method. This patches the &#x60;FormControl&#x60; value with every block change and focus and blur, it also autosaves after
    * a set time
    * Set to 0 to disable or pass a value in &#x60;ms&#x60; of the autosave time
@@ -1589,7 +1589,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public blocks: Block[];
 
   /**
-   * Emits if the content from the &#x60;EditorJS&#x60; instance has been saved to the component value
+   * Emits if the content from the EditorJS instance has been saved to the component value
    */
   @Output()
   public hasSaved &#x3D; new EventEmitter&lt;boolean&gt;();
@@ -1607,13 +1607,13 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public isFocused &#x3D; new EventEmitter&lt;boolean&gt;();
 
   /**
-   * Emits if the &#x60;EditorJS&#x60; content has changed when &#x60;save&#x60; is called
+   * Emits if the EditorJS content has changed when &#x60;save&#x60; is called
    */
   @Output()
   public hasChanged &#x3D; new EventEmitter&lt;OutputData&gt;();
 
   /**
-   * Emits if the &#x60;EditorJS&#x60; component is ready
+   * Emits if the EditorJS component is ready
    */
   @Output()
   public isReady &#x3D; new EventEmitter&lt;boolean&gt;();
@@ -1837,7 +1837,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSBaseComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

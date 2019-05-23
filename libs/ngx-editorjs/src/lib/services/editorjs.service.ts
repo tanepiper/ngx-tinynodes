@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import { InjectorApiCallOptions, InjectorApiCallResponse, InjectorMethodOption } from '../types/injector';
-import { NgxEditorJSInstanceService } from './editorjs-injector';
+import { NgxEditorJSInstanceService } from './editorjs-instance.service';
 import { NgxEditorJSPluginService } from './plugins.service';
 
 /**
@@ -36,7 +36,7 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Get an `EditorJS` instance
+   * Get an EditorJS instance
    * See the [EditorJS API](https://editorjs.io/api) docs for more details
    * @param holder The ID of the holder of the instance
    */
@@ -72,7 +72,7 @@ export class NgxEditorJSService {
   }
 
   /**
-   * A helper method to make calls to any `EditorJS` API (see [API Docs](https://editorjs.io/api))
+   * A helper method to make calls to any EditorJS API (see [API Docs](https://editorjs.io/api))
    * The first argument should container the holder and method name, and namespace if required
    * The second argument is any additional arguments as required by the API.
    * The response of this method if a `Observable<InjectorApiCallResponse<T>>` which contains
@@ -81,12 +81,12 @@ export class NgxEditorJSService {
    * @param options Options to pass to the API request
    * @param args Additional arguments to pass to the API request
    */
-  public apiCall<T>(options: InjectorApiCallOptions, ...args): Observable<InjectorApiCallResponse<T>> {
+  public apiCall<T>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
     return this.instanceService.apiCall<T>(options, ...args);
   }
 
   /**
-   * This method updates the blocks within the `EditorJS` instance.
+   * This method updates the blocks within the EditorJS instance.
    * If there is no instance of that name it will throw an error.
    * @param options The options to update
    * @param triggerUpdate If set to false the hasChanged observable won't be updated
@@ -96,7 +96,7 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Calls the `EditorJS` save method which returns an `OutputData` object.
+   * Calls the EditorJS save method which returns an `OutputData` object.
    * From this the service updates the blocks map and change map values
    * If there is no instance of that name it will throw an error.
    * @param holder The ID of the holder of the instance
@@ -114,7 +114,7 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Destroy the `EditorJS` instance
+   * Destroy the EditorJS instance
    * It also calls the maps and sets their values back to their defaults and then
    * completes and destroys them
    * @param holder The ID of the holder of the instance
