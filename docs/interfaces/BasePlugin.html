@@ -191,7 +191,7 @@ import { ToolConstructable, ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
 /**
  * A Module plugin configuration
  */
-export interface PluginConfig {
+export interface PluginsMap {
   /**
    * The key of the plugin and the plugin class extending &#x60;BasePlugin&#x60;
    */
@@ -227,7 +227,7 @@ export interface BasePlugin {
 /**
  * The injection token for adding plugins via your own application
  */
-export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;);
+export const UserPlugins &#x3D; new InjectionToken&lt;PluginsMap&gt;(&#x27;UserPlugins&#x27;);
 </code></pre>
     </div>
 </div>

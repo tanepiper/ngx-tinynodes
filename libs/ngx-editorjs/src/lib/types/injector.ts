@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
-import EditorJS, { EditorConfig } from '@editorjs/editorjs';
+import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { Block } from './blocks';
+
 /**
  * Configuration for creating an EditorJS instance
  */
@@ -30,7 +31,10 @@ export const MAP_DEFAULTS = [['hasChangedMap', { time: 0, blocks: [] }], ['isRea
  */
 export const EDITORJS_MODULE_IMPORT = new InjectionToken<any>('EDITORJS_MODULE_IMPORT');
 
-export const EditorJSInstance = new InjectionToken<any>('EditorJSInstance');
+/**
+ * The EditorJS class injector
+ */
+export const EditorJSInstance = new InjectionToken<EditorJSClass>('EditorJSInstance');
 
 /**
  * Options for a Injector method
@@ -43,7 +47,7 @@ export interface InjectorMethodOption {
   /**
    * Optional blocks
    */
-  blocks?: Block[];
+  data?: OutputData;
   /**
    * Optional editor
    */
@@ -51,11 +55,11 @@ export interface InjectorMethodOption {
 }
 
 /**
- * Options to pass when calling the `EditorJS` instance API
+ * Options to pass when calling the EditorJS instance API
  */
 export interface InjectorApiCallOptions {
   /**
-   * Holder for the `EditorJS` instance
+   * Holder for the EditorJS instance
    */
   holder: string;
 
@@ -70,8 +74,21 @@ export interface InjectorApiCallOptions {
 }
 
 /**
- * A response from the `EditorJS` api
+ * A response from the EditorJS api
  */
 export interface InjectorApiCallResponse<T = any> extends InjectorApiCallOptions {
   result: T;
+}
+
+/**
+ * Interface for the injected EditorJS class, returns the static
+ * class of EditorJS with the version and that creates the instance and provides
+ * the Typescript parse with type information
+ */
+export interface EditorJSClass<T = EditorJS> extends Function {
+  new (...args: any[]): T;
+  /**
+   * EditorJS version
+   */
+  version: string;
 }

@@ -6,9 +6,7 @@ import { MockNgZone } from '../../testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '../../testing/shared';
 import { NGX_EDITORJS_CONFIG } from '../types/config';
 import { UserPlugins } from '../types/plugins';
-import { NgxEditorJSInstanceService } from './editorjs-injector';
 import { NgxEditorJSService } from './editorjs.service';
-import { NgxEditorJSPluginService } from './plugins.service';
 import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
 
 describe('NgxEditorJSService', () => {
@@ -34,14 +32,6 @@ describe('NgxEditorJSService', () => {
           }
         },
         {
-          provide: NgxEditorJSPluginService,
-          useClass: NgxEditorJSPluginService
-        },
-        {
-          provide: NgxEditorJSInstanceService,
-          useClass: NgxEditorJSInstanceService
-        },
-        {
           provide: NgZone,
           useClass: MockNgZone
         },
@@ -64,7 +54,7 @@ describe('NgxEditorJSService', () => {
     }).compileComponents();
 
     service = TestBed.get(NgxEditorJSService);
-    service.createEditor({ config: { holder } });
+    service.createInstance({ config: { holder } });
   }));
 
   it('should create an instance of the EditorJS service', () => {
@@ -89,7 +79,7 @@ describe('NgxEditorJSService', () => {
         done();
       });
 
-    service.createEditor({ config: { holder } });
+    service.createInstance({ config: { holder } });
   });
 
   it('should trigger a change on update', done => {
@@ -105,8 +95,8 @@ describe('NgxEditorJSService', () => {
         done();
       });
 
-    service.createEditor({ config: { holder } });
-    service.update({ holder, blocks: [{ type: 'test', data: { text: 'Test' } }] });
+    service.createInstance({ config: { holder } });
+    service.update({ holder, data: { blocks: [{ type: 'test', data: { text: 'Test' } }] } });
   });
 
   it('should trigger a change on save', done => {
@@ -118,7 +108,7 @@ describe('NgxEditorJSService', () => {
         done();
       });
 
-    service.createEditor({ config: { holder } });
+    service.createInstance({ config: { holder } });
     service.save({ holder });
   });
 });

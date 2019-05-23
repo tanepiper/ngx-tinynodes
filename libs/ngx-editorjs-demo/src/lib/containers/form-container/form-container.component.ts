@@ -3,16 +3,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Output,
-  EventEmitter
+  ViewChild
 } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs/src';
-import { AppService } from '@tinynodes/ngx-tinynodes-core/src';
-import { NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core/src/lib/stores/app/application.model';
-import { MenuGroup } from 'apps/ngx-tinynodes/src/app/core/types/app';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, take, takeUntil, pluck, tap, withLatestFrom, filter } from 'rxjs/operators';
+import { Block, NgxEditorJSService, NgxEditorJSMatFieldComponent } from '@tinynodes/ngx-editorjs';
+import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { pluck, take, takeUntil, tap, distinctUntilChanged, filter } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
@@ -28,6 +27,9 @@ import { OutputData } from '@editorjs/editorjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormContainerComponent implements AfterContentInit {
+  @ViewChild('ngxEditorJS', { read: NgxEditorJSMatFieldComponent })
+  public readonly ngxEditorJS: NgxEditorJSMatFieldComponent;
+
   /**
    * Title of the page
    */
@@ -56,12 +58,6 @@ export class FormContainerComponent implements AfterContentInit {
    * Autosave state
    */
   private autoSave$ = new BehaviorSubject<number>(0);
-
-  /**
-   * Get `hasSaved` state
-   */
-  @Output()
-  public hasSaved = new EventEmitter<boolean>();
 
   /**
    * Enable autosave, set the value from the autosaveTime
@@ -109,14 +105,6 @@ export class FormContainerComponent implements AfterContentInit {
         });
         this.cd.markForCheck();
       });
-
-    this.editorService
-      .hasSaved({ holder: this.holder })
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(hasSaved => {
-        this.hasSaved.next(hasSaved);
-        this.cd.markForCheck();
-      });
   }
 
   /**
@@ -135,16 +123,23 @@ export class FormContainerComponent implements AfterContentInit {
     return this.menu$;
   }
 
-  /**
-   * Get a list of pages
-   */
-  get pages(): Observable<Page[]> {
-    return this.pagesService.pages;
+  get hasSaved() {
+    return this.editorService.hasSaved({ holder: this.holder });
   }
 
   public get blocks() {
     return this.editorService.hasChanged({ holder: this.holder }).pipe(
+      filter(data => {
+        if (typeof data === 'undefined') {
+          return false;
+        }
+        if (data.time === 0) {
+          return false;
+        }
+        return true;
+      }),
       pluck<OutputData, Block[]>('blocks'),
+      distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
       takeUntil(this.onDestroy$)
     );
   }
@@ -169,8 +164,8 @@ export class FormContainerComponent implements AfterContentInit {
    * Update the component
    * @param blocks
    */
-  public update(blocks: Block[]) {
-    this.editorService.update({ holder: this.holder, blocks });
+  public update(data: OutputData, triggerUpdate = true) {
+    this.editorService.update({ holder: this.holder, data }, triggerUpdate);
     this.cd.markForCheck();
   }
 
@@ -222,7 +217,7 @@ export class FormContainerComponent implements AfterContentInit {
           }
         ];
         this.menu$.next(data.links);
-        this.editorService.update({ holder: this.holder, blocks }, false);
+        this.update({ blocks }, false);
         this.cd.markForCheck();
       });
   }
@@ -231,10 +226,6 @@ export class FormContainerComponent implements AfterContentInit {
    * After the content has init overide the blocks with blocks from the service
    */
   ngAfterContentInit() {
-    this.editorService.isReady({ holder: this.holder }).subscribe(isReady => {
-      if (isReady) {
-        this.reset();
-      }
-    });
+    this.reset();
   }
 }

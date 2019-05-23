@@ -183,41 +183,31 @@ import { BehaviorSubject } from &#x27;rxjs&#x27;;
 import { Block } from &#x27;./blocks&#x27;;
 
 /**
- * A map containing instances of &#x60;EditorJS&#x60;
+ * A map containing instances of &#x60;BehaviorSubject&lt;EditorJS&gt;&#x60;
  */
 export interface EditorMap {
   /**
-   * A map key containing a {BehaviorSubject} of {EditorJS}
+   * A map key containing &#x60;BehaviorSubject&lt;EditorJS&gt;&#x60;
    */
   [key: string]: BehaviorSubject&lt;EditorJS&gt;;
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;Block&#x60; elements from &#x60;EditorJS&#x60;
- */
-export interface BlocksMap {
-  /**
-   * A map key containing a {BehaviorSubject} of {Block[]}
-   */
-  [key: string]: BehaviorSubject&lt;Block[]&gt;;
-}
-
-/**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;boolean&#x60; values of the ready state of &#x60;EditorJS&#x60;
+ * A map containing &#x60;BehaviorSubject&lt;boolean&gt;&#x60; values of the ready state of EditorJS
  */
 export interface ReadyMap {
   /**
-   * A map key containing a {BehaviorSubject} of {boolean}
+   * A map key containing a &#x60;BehaviorSubject&lt;boolean&gt;&#x60;
    */
   [key: string]: BehaviorSubject&lt;boolean&gt;;
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;boolean&#x60; values of the save state of &#x60;EditorJS&#x60;
+ * A map containing &#x60;BehaviorSubject&lt;boolean&gt;&#x60; values of the save state of EditorJS
  */
 export interface SavedMap {
   /**
-   * A map key containing a {BehaviorSubject} of {boolean}
+   * A map key containing a &#x60;BehaviorSubject&lt;boolean&gt;&#x60;
    */
   [key: string]: BehaviorSubject&lt;boolean&gt;;
 }
@@ -237,11 +227,11 @@ export interface EditorJSChange {
 }
 
 /**
- * A map containing &#x60;BehaviorSubject&#x60; of &#x60;number&#x60; which is the timestamp of the last &#x60;EditorJS&#x60; change
+ * A map containing &#x60;BehaviorSubject&lt;OutputData&gt;&#x60; which is the last save from the EditorJS instance
  */
 export interface ChangeMap {
   /**
-   * A map key containing a {BehaviorSubject} of {number}
+   * A map key containing a &#x60;BehaviorSubject&lt;OutputData&gt;&#x60;
    */
   [key: string]: BehaviorSubject&lt;OutputData&gt;;
 }

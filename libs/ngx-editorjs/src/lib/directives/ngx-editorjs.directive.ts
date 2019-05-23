@@ -47,19 +47,19 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   private id: string;
 
   /**
-   * Boolean, If set to true the `EditorJS` instance gets autofocus when initialized
+   * Boolean, If set to true the EditorJS instance gets autofocus when initialized
    */
   @Input()
   public autofocus: boolean;
 
   /**
-   * Boolean, If set to true the toolbar will not show in the `EditorJS` instance
+   * Boolean, If set to true the toolbar will not show in the EditorJS instance
    */
   @Input()
   public hideToolbar: boolean;
 
   /**
-   * String, the ID property of the element that the `EditorJS` instance will be attached to
+   * String, the ID property of the element that the EditorJS instance will be attached to
    */
   @Input()
   public holder: string;
@@ -72,7 +72,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   public initialBlock?: string;
 
   /**
-   * Number, The minimum height of the `EditorJS` instance bottom after the last block
+   * Number, The minimum height of the EditorJS instance bottom after the last block
    */
   @Input()
   public minHeight: number;
@@ -97,7 +97,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   public includeTools: string[] = [];
 
   /**
-   * Number, Used with Angular Forms this sets an autosave timer active that calls the `EditorJS` save
+   * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
    * method. This patches the `FormControl` value with every block change and focus and blur, it also autosaves after
    * a set time
    * Set to 0 to disable or pass a value in `ms` of the autosave time
@@ -112,7 +112,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   public blocks: Block[];
 
   /**
-   * Emits if the content from the `EditorJS` instance has been saved to the component value
+   * Emits if the content from the EditorJS instance has been saved to the component value
    */
   @Output()
   public hasSaved = new EventEmitter<boolean>();
@@ -130,13 +130,13 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   public isFocused = new EventEmitter<boolean>();
 
   /**
-   * Emits if the `EditorJS` content has changed when `save` is called
+   * Emits if the EditorJS content has changed when `save` is called
    */
   @Output()
   public hasChanged = new EventEmitter<OutputData>();
 
   /**
-   * Emits if the `EditorJS` component is ready
+   * Emits if the EditorJS component is ready
    */
   @Output()
   public isReady = new EventEmitter<boolean>();
@@ -163,7 +163,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   ) {}
 
   /**
-   * Get the `EditorJS` instance for this directive
+   * Get the EditorJS instance for this directive
    */
   public get editor(): Observable<EditorJS> {
     return this.service.getEditor({ holder: this.id });
@@ -191,11 +191,11 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   }
 
   /**
-   * Creates an `EditorJS` instance for this directive
+   * Creates an EditorJS instance for this directive
    * @param config Configuration for this instance
    */
-  public createEditor(config?: EditorConfig): void {
-    this.service.createEditor({
+  public async createEditor(config?: EditorConfig): Promise<void> {
+    await this.service.createInstance({
       config,
       includeTools: this.includeTools,
       autoSave: this.autosave || 0
@@ -212,15 +212,18 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * @param changes Changes on the component
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.blocks && !changes.blocks.firstChange) {
-      this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
+    if (
+      changes.blocks &&
+      !changes.blocks.firstChange &&
+      JSON.stringify(changes.blocks.previousValue) !== JSON.stringify(changes.blocks.currentValue)
+    ) {
+      this.service.update({ holder: this.holder });
       this.cd.markForCheck();
-      return;
     }
     const changesKeys = Object.keys(changes);
     if (
       this.id &&
-      // Ignore changes for values not related to `EditorJS`
+      // Ignore changes for values not related to EditorJS
       [
         'autofocus',
         'holder',
@@ -255,7 +258,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(isReady => {
         this.isReady.emit(isReady);
-        this.cd.markForCheck();
       });
 
     this.service
@@ -263,7 +265,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
-        this.cd.markForCheck();
       });
 
     this.service
@@ -271,7 +272,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(saved => {
         this.hasSaved.next(saved);
-        this.cd.markForCheck();
       });
   }
 
@@ -279,7 +279,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Destroy the editor and subjects for this service
    */
   ngOnDestroy() {
-    this.service.destroy({ holder: this.id });
+    this.service.destroyInstance({ holder: this.id });
   }
 
   /**

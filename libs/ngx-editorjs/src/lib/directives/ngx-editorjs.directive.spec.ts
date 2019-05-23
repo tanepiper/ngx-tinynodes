@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockNgZone } from '../../testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '../../testing/shared';
-import { NgxEditorJSInstanceService } from '../services/editorjs-injector';
+import { NgxEditorJSInstanceService } from '../services/editorjs-instance.service';
 import { NgxEditorJSService } from '../services/editorjs.service';
 import { NgxEditorJSPluginService } from '../services/plugins.service';
 import { Block } from '../types/blocks';

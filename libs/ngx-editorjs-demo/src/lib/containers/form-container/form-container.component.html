@@ -13,17 +13,21 @@
       <h3 mat-card-title>Demo</h3>
       <button mat-raised-button color="primary" (click)="save()">Save</button>
       <button mat-raised-button color="primary" (click)="clear()">Clear</button>
-      <button mat-raised-button *ngIf="(blocks | async); let b" (click)="reset(b)">Reset</button>
+      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
       <button mat-raised-button color="primary" *ngIf="(autosave | async) === 0" (click)="enableAutosave(autosaveTime.value * 1000)">
         Enable Autosave
       </button>
       <button mat-raised-button color="secondary" *ngIf="(autosave | async) > 0" (click)="disableAutosave()">Disable Autosave</button>
-      <ng-template #saveStateBadge let-hasSaved="hasSaved">
-        <mat-icon [matBadgeHidden]="hasSaved" matBadge="1" [matBadgeColor]="hasSaved ? 'accent' : 'warn'" matBadgePosition="above before"
-          >save</mat-icon
-        >
-      </ng-template>
-      <ng-container *ngTemplateOutlet="saveStateBadge; context: { hasSaved: hasSaved | async }"></ng-container>
+      <!-- <ng-template #saveStateBadge let-hasSaved="hasSaved"> -->
+      <mat-icon
+        [matBadgeHidden]="hasSaved | async"
+        matBadge="1"
+        [matBadgeColor]="hasSaved ? 'accent' : 'warn'"
+        matBadgePosition="above before"
+        >save</mat-icon
+      >
+      <!-- </ng-template> -->
+      <!-- <ng-container *ngTemplateOutlet="saveStateBadge; context: { hasSaved: hasSaved }"></ng-container> -->
 
       <mat-form-field>
         <mat-label>Autosave Time</mat-label>

@@ -28,150 +28,101 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content interface">
+               <div class="content module">
                    <div class="content-data">
 
 
 
-
-
-
-
-
-
-
-
-
 <ol class="breadcrumb">
-  <li>Interfaces</li>
-  <li>NgxEditorJSDemoData</li>
+    <li>Modules</li>
+    <li>NgxEditorJSDemoMaterialModule</li>
 </ol>
 
+
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
+    <li  class="active" >
+        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    </li>
+    <li >
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
 </ul>
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="c-info">
+
         <p class="comment">
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/ngx-tinynodes/src/app/core/stores/app/application.model.ts</code>
+            <code>libs/ngx-editorjs-demo/src/lib/ngx-editorjs-demo.material.module.ts</code>
         </p>
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>The demo data for <code>ngx-editorjs-demo</code></p>
-
-            </p>
-
-            <p class="comment">
-                <h3>Extends</h3>
-            </p>
-            <p class="comment">
-                        <code><a href="../interfaces/DemoData.html" target="_self" >DemoData</a></code>
-            </p>
 
 
+
+        <div class="container-fluid module">
+            <div class="row">
+            </div>
+        </div>
 
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Block } from &#x27;@tinynodes/ngx-editorjs&#x27;;
-import { MenuGroup } from &#x27;../../types/app&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatGridListModule,
+  MatExpansionModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatChipsModule,
+  MatBadgeModule,
+  MatIconModule,
+  MatListModule
+} from &#x27;@angular/material&#x27;;
 
-/**
- * An Enum of the keys in the application state
- */
-export enum ApplicationStateKeys {
-  /**
-   * The hidden state key
-   */
-  Hidden &#x3D; &#x27;hidden&#x27;,
-
-  /**
-   * The menus key
-   */
-  Menus &#x3D; &#x27;menus&#x27;,
-
-  /**
-   * The demo data key
-   */
-  DemoData &#x3D; &#x27;demoData&#x27;
-}
-
-/**
- * Interface for a demo data object
- */
-export interface DemoData&lt;T &#x3D; any&gt; {
-  /**
-   * The name of the demo (e.g. &#x60;ngx-editorjs-demo&#x60;)
-   */
-  name: string;
-  /**
-   * The data for the demo as &#x60;&lt;T&gt;&#x60;
-   */
-  data: T;
-}
-
-/**
- * Interface for &#x60;ngx-editorjs-demo&#x60; data
- * TODO: This should be moved
- */
-export interface NgxEditorJSDemo {
-  /**
-   * The initial blocks for the demo
-   */
-  blocks: Block[];
-}
-
-/**
- * The demo data for &#x60;ngx-editorjs-demo&#x60;
- */
-export interface NgxEditorJSDemoData extends DemoData&lt;NgxEditorJSDemo&gt; {}
-
-/**
- * The demos on tinynodes
- */
-export interface TinynodeDemos {
-  /**
-   * The &#x60;ngx-editorjs-demo&#x60; data
-   */
-  &#x27;ngx-editorjs-demo&#x27;: NgxEditorJSDemoData;
-}
-
-/**
- * A representation of the application state
- */
-export interface ApplicationState {
-  /**
-   * If the side menu is hidden
-   */
-  hidden: boolean;
-
-  /**
-   * A set of menus loaded from application data
-   */
-  menus: MenuGroup[];
-
-  /**
-   * Data for demos
-   */
-  demoData: DemoData[];
-}
+@NgModule({
+  imports: [
+    MatGridListModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule
+  ],
+  exports: [
+    MatGridListModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule
+  ]
+})
+export class NgxEditorJSDemoMaterialModule {}
 </code></pre>
     </div>
 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -194,8 +145,8 @@ export interface ApplicationState {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSDemoData-1.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSDemoMaterialModule.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

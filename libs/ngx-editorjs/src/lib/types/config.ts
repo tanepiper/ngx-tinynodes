@@ -51,7 +51,7 @@ export interface NgxEditorJSConfig {
  */
 export interface NgxEditorJSModuleConfig {
   /**
-   * Configuration options for `EditorJS`
+   * Configuration options for EditorJS
    */
   editorjs?: EditorConfig;
 }

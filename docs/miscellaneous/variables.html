@@ -67,7 +67,7 @@
                             <a href="#EDITIOR_JS_INSTANCE" title="libs/ngx-editorjs/src/lib/types/config.ts"><b>EDITIOR_JS_INSTANCE</b>&nbsp;&nbsp;&nbsp;(libs/.../config.ts)</a>
                         </li>
                         <li>
-                            <a href="#EDITORJS_FORM_VALUE_ACCESSOR" title="libs/ngx-editorjs/src/lib/containers/base/container.class.ts"><b>EDITORJS_FORM_VALUE_ACCESSOR</b>&nbsp;&nbsp;&nbsp;(libs/.../container.class.ts)</a>
+                            <a href="#EDITORJS_FORM_VALUE_ACCESSOR" title="libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts"><b>EDITORJS_FORM_VALUE_ACCESSOR</b>&nbsp;&nbsp;&nbsp;(libs/.../editorjs.component.ts)</a>
                         </li>
                         <li>
                             <a href="#EDITORJS_MATERIAL_FIELD_CONTROL" title="libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts"><b>EDITORJS_MATERIAL_FIELD_CONTROL</b>&nbsp;&nbsp;&nbsp;(libs/.../editorjs-mat-field.component.ts)</a>
@@ -198,7 +198,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>The default holder ID to attach <code>EditorJS</code> to</p>
+                        <div class="io-description"><p>The default holder ID to attach EditorJS to</p>
 </div>
                     </td>
                 </tr>
@@ -290,7 +290,7 @@
             </tbody>
         </table>
 </section>
-    <h3>libs/ngx-editorjs/src/lib/containers/base/container.class.ts</h3>
+    <h3>libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
             <tbody>
@@ -314,7 +314,7 @@
                         <td class="col-md-4">
                             <i>Default value : </i><code>{
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() &#x3D;&gt; NgxEditorJSBaseComponent),
+  useExisting: forwardRef(() &#x3D;&gt; NgxEditorJSComponent),
   multi: true
 }</code>
                         </td>
@@ -413,10 +413,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;any&gt;(&#x27;EditorJSInstance&#x27;)</code>
+                            <i>Default value : </i><code>new InjectionToken&lt;EditorJSClass&gt;(&#x27;EditorJSInstance&#x27;)</code>
                         </td>
                     </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The EditorJS class injector</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -765,7 +771,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;)</code>
+                            <i>Default value : </i><code>new InjectionToken&lt;PluginsMap&gt;(&#x27;UserPlugins&#x27;)</code>
                         </td>
                     </tr>
 

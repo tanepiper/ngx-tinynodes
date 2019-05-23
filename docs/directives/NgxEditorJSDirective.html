@@ -117,6 +117,7 @@ Angular services and components</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#createEditor">createEditor</a>
                             </li>
                             <li>
@@ -353,7 +354,7 @@ Angular services and components</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Boolean, If set to true the <code>EditorJS</code> instance gets autofocus when initialized</p>
+                        <div class="io-description"><p>Boolean, If set to true the EditorJS instance gets autofocus when initialized</p>
 </div>
                     </td>
                 </tr>
@@ -380,7 +381,7 @@ Angular services and components</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Number, Used with Angular Forms this sets an autosave timer active that calls the <code>EditorJS</code> save
+                        <div class="io-description"><p>Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
 method. This patches the <code>FormControl</code> value with every block change and focus and blur, it also autosaves after
 a set time
 Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
@@ -464,7 +465,7 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Boolean, If set to true the toolbar will not show in the <code>EditorJS</code> instance</p>
+                        <div class="io-description"><p>Boolean, If set to true the toolbar will not show in the EditorJS instance</p>
 </div>
                     </td>
                 </tr>
@@ -491,7 +492,7 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>String, the ID property of the element that the <code>EditorJS</code> instance will be attached to</p>
+                        <div class="io-description"><p>String, the ID property of the element that the EditorJS instance will be attached to</p>
 </div>
                     </td>
                 </tr>
@@ -579,7 +580,7 @@ The default value is &quot;paragraph&quot;</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Number, The minimum height of the <code>EditorJS</code> instance bottom after the last block</p>
+                        <div class="io-description"><p>Number, The minimum height of the EditorJS instance bottom after the last block</p>
 </div>
                     </td>
                 </tr>
@@ -636,7 +637,7 @@ The default value is &quot;paragraph&quot;</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the <code>EditorJS</code> content has changed when <code>save</code> is called</p>
+                        <div class="io-description"><p>Emits if the EditorJS content has changed when <code>save</code> is called</p>
 </div>
                     </td>
                 </tr>
@@ -663,7 +664,7 @@ The default value is &quot;paragraph&quot;</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the content from the <code>EditorJS</code> instance has been saved to the component value</p>
+                        <div class="io-description"><p>Emits if the content from the EditorJS instance has been saved to the component value</p>
 </div>
                     </td>
                 </tr>
@@ -717,7 +718,7 @@ The default value is &quot;paragraph&quot;</p>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits if the <code>EditorJS</code> component is ready</p>
+                        <div class="io-description"><p>Emits if the EditorJS component is ready</p>
 </div>
                     </td>
                 </tr>
@@ -804,6 +805,7 @@ The default value is &quot;paragraph&quot;</p>
                     <span class="name">
                         <b>
                             <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
                             createEditor
                         </b>
                         <a href="#createEditor"><span class="icon ion-ios-link"></span></a>
@@ -828,7 +830,7 @@ The default value is &quot;paragraph&quot;</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Creates an <code>EditorJS</code> instance for this directive</p>
+                    <div class="io-description"><p>Creates an EditorJS instance for this directive</p>
 </div>
 
                     <div class="io-description">
@@ -865,7 +867,7 @@ The default value is &quot;paragraph&quot;</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -897,8 +899,8 @@ The default value is &quot;paragraph&quot;</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="245"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:245</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="248"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:248</a></div>
                 </td>
             </tr>
 
@@ -1065,7 +1067,7 @@ to be ready</p>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Get the <code>EditorJS</code> instance for this directive</p>
+                                <div class="io-description"><p>Get the EditorJS instance for this directive</p>
 </div>
 
                                 <div class="io-description">
@@ -1223,19 +1225,19 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   private id: string;
 
   /**
-   * Boolean, If set to true the &#x60;EditorJS&#x60; instance gets autofocus when initialized
+   * Boolean, If set to true the EditorJS instance gets autofocus when initialized
    */
   @Input()
   public autofocus: boolean;
 
   /**
-   * Boolean, If set to true the toolbar will not show in the &#x60;EditorJS&#x60; instance
+   * Boolean, If set to true the toolbar will not show in the EditorJS instance
    */
   @Input()
   public hideToolbar: boolean;
 
   /**
-   * String, the ID property of the element that the &#x60;EditorJS&#x60; instance will be attached to
+   * String, the ID property of the element that the EditorJS instance will be attached to
    */
   @Input()
   public holder: string;
@@ -1248,7 +1250,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   public initialBlock?: string;
 
   /**
-   * Number, The minimum height of the &#x60;EditorJS&#x60; instance bottom after the last block
+   * Number, The minimum height of the EditorJS instance bottom after the last block
    */
   @Input()
   public minHeight: number;
@@ -1273,7 +1275,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   public includeTools: string[] &#x3D; [];
 
   /**
-   * Number, Used with Angular Forms this sets an autosave timer active that calls the &#x60;EditorJS&#x60; save
+   * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
    * method. This patches the &#x60;FormControl&#x60; value with every block change and focus and blur, it also autosaves after
    * a set time
    * Set to 0 to disable or pass a value in &#x60;ms&#x60; of the autosave time
@@ -1288,7 +1290,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   public blocks: Block[];
 
   /**
-   * Emits if the content from the &#x60;EditorJS&#x60; instance has been saved to the component value
+   * Emits if the content from the EditorJS instance has been saved to the component value
    */
   @Output()
   public hasSaved &#x3D; new EventEmitter&lt;boolean&gt;();
@@ -1306,13 +1308,13 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   public isFocused &#x3D; new EventEmitter&lt;boolean&gt;();
 
   /**
-   * Emits if the &#x60;EditorJS&#x60; content has changed when &#x60;save&#x60; is called
+   * Emits if the EditorJS content has changed when &#x60;save&#x60; is called
    */
   @Output()
   public hasChanged &#x3D; new EventEmitter&lt;OutputData&gt;();
 
   /**
-   * Emits if the &#x60;EditorJS&#x60; component is ready
+   * Emits if the EditorJS component is ready
    */
   @Output()
   public isReady &#x3D; new EventEmitter&lt;boolean&gt;();
@@ -1339,7 +1341,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   ) {}
 
   /**
-   * Get the &#x60;EditorJS&#x60; instance for this directive
+   * Get the EditorJS instance for this directive
    */
   public get editor(): Observable&lt;EditorJS&gt; {
     return this.service.getEditor({ holder: this.id });
@@ -1367,11 +1369,11 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   }
 
   /**
-   * Creates an &#x60;EditorJS&#x60; instance for this directive
+   * Creates an EditorJS instance for this directive
    * @param config Configuration for this instance
    */
-  public createEditor(config?: EditorConfig): void {
-    this.service.createEditor({
+  public async createEditor(config?: EditorConfig): Promise&lt;void&gt; {
+    await this.service.createInstance({
       config,
       includeTools: this.includeTools,
       autoSave: this.autosave || 0
@@ -1388,15 +1390,18 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * @param changes Changes on the component
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.blocks &amp;&amp; !changes.blocks.firstChange) {
-      this.service.update({ holder: this.id, blocks: changes.blocks.currentValue });
+    if (
+      changes.blocks &amp;&amp;
+      !changes.blocks.firstChange &amp;&amp;
+      JSON.stringify(changes.blocks.previousValue) !&#x3D;&#x3D; JSON.stringify(changes.blocks.currentValue)
+    ) {
+      this.service.update({ holder: this.holder });
       this.cd.markForCheck();
-      return;
     }
     const changesKeys &#x3D; Object.keys(changes);
     if (
       this.id &amp;&amp;
-      // Ignore changes for values not related to &#x60;EditorJS&#x60;
+      // Ignore changes for values not related to EditorJS
       [
         &#x27;autofocus&#x27;,
         &#x27;holder&#x27;,
@@ -1431,7 +1436,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(isReady &#x3D;&gt; {
         this.isReady.emit(isReady);
-        this.cd.markForCheck();
       });
 
     this.service
@@ -1439,7 +1443,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change &#x3D;&gt; {
         this.hasChanged.emit(change);
-        this.cd.markForCheck();
       });
 
     this.service
@@ -1447,7 +1450,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(saved &#x3D;&gt; {
         this.hasSaved.next(saved);
-        this.cd.markForCheck();
       });
   }
 
@@ -1455,7 +1457,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Destroy the editor and subjects for this service
    */
   ngOnDestroy() {
-    this.service.destroy({ holder: this.id });
+    this.service.destroyInstance({ holder: this.id });
   }
 
   /**

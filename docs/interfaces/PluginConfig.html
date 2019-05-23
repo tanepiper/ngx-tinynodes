@@ -62,7 +62,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/types/plugins.ts</code>
+            <code>libs/ngx-editorjs-plugins/src/lib/types/plugins.ts</code>
         </p>
 
             <p class="comment">
@@ -88,7 +88,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">libs/ngx-editorjs/src/lib/types/plugins.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/types/plugins.ts:7</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -106,7 +106,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import { ToolConstructable, ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
+import { ToolSettings, ToolConstructable } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
  * A Module plugin configuration
@@ -143,6 +143,11 @@ export interface BasePlugin {
    */
   shortcut?: () &#x3D;&gt; string;
 }
+
+/**
+ * The Injection token for initial plugins as defined in the ngx-editorjs module
+ */
+export const InitialPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;);
 
 /**
  * The injection token for adding plugins via your own application

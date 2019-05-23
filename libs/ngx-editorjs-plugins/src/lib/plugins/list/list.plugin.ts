@@ -4,7 +4,7 @@ import List from '@editorjs/list';
 import { BasePlugin } from '../../types/plugins';
 
 /**
- * This plugin returns the tool settings for a `<li>` and `<ol>` block tool for `EditorJS`
+ * This plugin returns the tool settings for a `<li>` and `<ol>` block tool for EditorJS
  */
 @Injectable()
 export class PluginList implements BasePlugin {

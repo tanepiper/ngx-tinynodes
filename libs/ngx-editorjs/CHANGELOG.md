@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2019-05-23
+
+## Added
+
+- `NgxEditorJSService.apiCall` method added to service to provide a way to call any method in `EditorJS`
+
+## Removed
+
+- Private services for `EditorJS` instance and plugins removed, `NgxEditorJSService` is now a single service that handles all the Editor and plugin life-cycles
+- `EditorJSBaseComponent` removed and using `NgxEditorJSComponent` as base component
+
+## Changed
+
+- Various internal improvements to state management and saving
+
 ## [2.0.0] - 2019-05-22
 
 This release is the first big changes to the module and also includes new Material component.

@@ -2,6 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   DoCheck,
@@ -21,7 +22,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
-import { NgxEditorJSBaseComponent } from '../base/container.class';
+import { NgxEditorJSComponent } from '../editorjs/editorjs.component';
 
 /**
  * Provider for the EditorJS Material Field Component
@@ -59,9 +60,10 @@ export interface EditorJSMaterialForm
     '[id]': 'id',
     '[attr.aria-describedby]': 'describedBy'
   },
-  providers: [EDITORJS_MATERIAL_FIELD_CONTROL]
+  providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent implements EditorJSMaterialForm {
+export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implements EditorJSMaterialForm {
   /**
    * Internal Static ID for Material for each editor instance
    */
@@ -205,7 +207,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
   /**
    * Access to the underlying {NgxEditorJSDirective}
    */
-  @ViewChild(NgxEditorJSDirective) public editorEl: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective }) public readonly editorInstance: NgxEditorJSDirective;
 
   /**
    * Host binding to the unique ID for this editor for material
@@ -240,29 +242,30 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
    */
   public onContainerClick(event: MouseEvent) {
     this.onTouch(event);
-    this.hasSaved.emit(false);
     this.stateChanges.next();
   }
 
   /**
-   * Creates the Material field
-   * @param service The {NgxEditorJSService} instance
-   * @param fm Focus monitor for the Material element
+   * Constructor for the Material field, as this extends the `NgxEditorJSComponent` component
+   * we call `super()` to get all the properties of that component
+   * @param editorService The NgxEditorJSService instance
+   * @param focusMonitor Focus monitor for the Material element
+   * @parma cd The Change detection ref
    * @param ngControl The Angular control base class
    */
   constructor(
-    protected readonly service: NgxEditorJSService,
-    protected fm: FocusMonitor,
-    protected readonly cd: ChangeDetectorRef,
+    protected readonly editorService: NgxEditorJSService,
+    protected focusMonitor: FocusMonitor,
+    protected readonly changeDetection: ChangeDetectorRef,
     @Optional() @Self() public ngControl: NgControl
   ) {
-    super(service, fm, cd);
+    super(editorService, focusMonitor, changeDetection);
   }
 
   /**
    * Called on OnInit
    */
-  ngOnInit(): void {
+  public ngOnInit(): void {
     if (this.ngControl !== null) {
       this.ngControl.valueAccessor = this;
     }
@@ -272,14 +275,14 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
    * Inside the AfterContentInit life-cycle we set up a listener for focus
    * and trigger focus autosave subscribe and unsubscribe
    */
-  ngAfterContentInit(): void {
-    this.getFocusMonitor(this.editorEl.element)
+  public ngAfterContentInit(): void {
+    this.setupServiceSubscriptions();
+    this.getFocusMonitor(this.editorInstance.element)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused => {
+        this.onTouch();
         this.focused = focused;
-        this.isTouched.emit(true);
         this.stateChanges.next();
-        this.cd.markForCheck();
       });
   }
 
@@ -290,21 +293,6 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSBaseComponent imple
     if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;
       this.stateChanges.next();
-      this.cd.markForCheck();
-    }
-  }
-
-  /**
-   * Destroy the focus monitoring and any remaining timer subcription
-   */
-  ngOnDestroy(): void {
-    this.fm.stopMonitoring(this.editorEl.element);
-    if (this.timerSubscription$ && !this.timerSubscription$.closed) {
-      this.timerSubscription$.unsubscribe();
-    }
-    if (!this.onDestroy$.closed) {
-      this.onDestroy$.next(true);
-      this.onDestroy$.complete();
     }
   }
 }

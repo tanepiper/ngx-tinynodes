@@ -321,7 +321,8 @@ To view the application visit <a href="https://tinynodes-ngx.firebaseapp.com/">t
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient, HttpClientModule } from &#x27;@angular/common/http&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { LayoutModule } from &#x27;@angular/cdk/layout&#x27;;
+import { HttpClient, HttpClientModule } from &#x27;@angular/common/http&#x27;;
 import { NgModule } from &#x27;@angular/core&#x27;;
 import { FlexLayoutModule } from &#x27;@angular/flex-layout&#x27;;
 import { BrowserModule } from &#x27;@angular/platform-browser&#x27;;
@@ -330,17 +331,15 @@ import { AkitaNgRouterStoreModule } from &#x27;@datorama/akita-ng-router-store&#
 import { AkitaNgDevtools } from &#x27;@datorama/akita-ngdevtools&#x27;;
 import { NgxEditorJSModule } from &#x27;@tinynodes/ngx-editorjs&#x27;;
 import { NgxEditorjsDemoModule } from &#x27;@tinynodes/ngx-editorjs-demo&#x27;;
+import { ApplicationDataModule, NgxTinynodesCoreModule } from &#x27;@tinynodes/ngx-tinynodes-core&#x27;;
 import { MarkdownModule } from &#x27;ngx-markdown&#x27;;
 import { environment } from &#x27;../environments/environment&#x27;;
 import { AppRoutingModule } from &#x27;./app-routing.module&#x27;;
-import { AppContainerComponent } from &#x27;./containers/app/app.component&#x27;;
 import { NavBarComponent } from &#x27;./components/nav-bar/nav-bar.component&#x27;;
 import { SidebarComponent } from &#x27;./components/sidebar-component/sidebar.component&#x27;;
+import { AppContainerComponent } from &#x27;./containers/app/app.component&#x27;;
 import { MaterialModule } from &#x27;./material.module&#x27;;
 import { HomePageComponent } from &#x27;./pages/home/home-page.component&#x27;;
-import { MatButtonModule } from &#x27;@angular/material&#x27;;
-import { ApplicationDataModule, NgxTinynodesCoreModule } from &#x27;@tinynodes/ngx-tinynodes-core&#x27;;
-import { LayoutModule } from &#x27;@angular/cdk/layout&#x27;;
 
 /**
  * The main &#x60;ngx-tinynodes&#x60; module that builds the core single page application.
