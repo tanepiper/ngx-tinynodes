@@ -165,7 +165,6 @@ export class FormContainerComponent implements AfterContentInit {
    * @param blocks
    */
   public update(data: OutputData, triggerUpdate = true) {
-    console.log('update', data);
     this.editorService.update({ holder: this.holder, data }, triggerUpdate);
     this.cd.markForCheck();
   }

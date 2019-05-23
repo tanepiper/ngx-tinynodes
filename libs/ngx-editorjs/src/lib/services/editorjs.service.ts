@@ -1,7 +1,7 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { filter, map, take, takeUntil } from 'rxjs/operators';
+import { filter, map, take, takeUntil, tap, switchMap } from 'rxjs/operators';
 import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import {
@@ -165,8 +165,10 @@ export class NgxEditorJSService {
   public apiCall<T>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
     return this.getEditor(options).pipe(
       take(1),
-      map(editor => {
-        return this.zone.runOutsideAngular(() => {
+      switchMap(editor => {
+        const apiResult = new BehaviorSubject<InjectorApiCallResponse<T>>({ ...options, result: {} as T });
+
+        this.zone.runOutsideAngular(() => {
           let method: any;
           if (!options.namespace) {
             method = editor[options.method];
@@ -177,16 +179,20 @@ export class NgxEditorJSService {
             throw new Error(`No method ${options.method} ${options.namespace ? 'in ' + options.namespace : ''}`);
           }
           const result = method.call(editor, ...args);
-          return this.zone.run(() => {
+          this.zone.run(() => {
             if (!result || (result && !result.then)) {
-              return {
+              apiResult.next({
                 ...options,
-                result
-              };
+                result: typeof result === 'undefined' ? {} : result
+              });
+            } else {
+              result.then((r: T) => {
+                apiResult.next({ ...options, result: r });
+              });
             }
-            return result.then(r => ({ ...options, result: r }));
           });
         });
+        return apiResult.asObservable();
       })
     );
   }
@@ -196,13 +202,15 @@ export class NgxEditorJSService {
    * to get the `OutputData` of the editor. This data is stored in the change subject
    * for that instance and the `hasSaved` value updated
    * @param options Options to configure a method call against the EditorJS core API
+   * @param triggerUpdate If set to false the `hasChanged` Observable won't be updated
    */
-  public save(options: InjectorMethodOption): void {
+  public save(options: InjectorMethodOption, triggerUpdate = true): void {
     this.apiCall({ holder: options.holder, namespace: 'saver', method: 'save' }, options.data).subscribe(
-      async (response: InjectorApiCallResponse<OutputData>) => {
-        const data = (await response) as any;
+      (response: InjectorApiCallResponse<OutputData>) => {
         this.hasSavedMap[options.holder].next(true);
-        this.hasChangedMap[options.holder].next(data.result);
+        if (triggerUpdate) {
+          this.hasChangedMap[options.holder].next(response.result);
+        }
       }
     );
   }
@@ -210,15 +218,21 @@ export class NgxEditorJSService {
   /**
    * Gets the EditorJS instance for the passed holder and calls the `clear` method.
    * @param options Options to configure a method call against the EditorJS core API
+   * @param triggerUpdate If set to false the `hasChanged` Observable won't be updated
    */
-  public clear(options: InjectorMethodOption): void {
-    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' }).subscribe(
-      async (response: InjectorApiCallResponse<OutputData>) => {
-        await response.result;
-        this.hasSavedMap[options.holder].next(true);
-        this.hasChangedMap[options.holder].next({ time: Date.now(), blocks: [] });
-      }
-    );
+  public clear(options: InjectorMethodOption, triggerUpdate = true): void {
+    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' })
+      .pipe(take(1))
+      .subscribe((response: InjectorApiCallResponse<OutputData>) => {
+        this.hasSavedMap[options.holder].next(false);
+        if (triggerUpdate) {
+          this.hasChangedMap[options.holder].next({
+            time: Date.now(),
+            blocks: [],
+            version: this.editorJs.version
+          });
+        }
+      });
   }
 
   /**
@@ -233,17 +247,16 @@ export class NgxEditorJSService {
       this.hasSavedMap[options.holder].next(false);
       return;
     }
+    this.hasSavedMap[options.holder].next(false);
     const data = {
       time: Date.now(),
       version: this.editorJs.version,
       blocks: [],
       ...options.data
     };
-    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).subscribe(response => {
+    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).subscribe(() => {
       if (triggerUpdate) {
-        (response as any).then(data => {
-          this.hasChangedMap[options.holder].next(data);
-        });
+        this.hasChangedMap[options.holder].next(data);
       }
     });
   }

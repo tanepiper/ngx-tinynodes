@@ -8,8 +8,7 @@ import { PagesService } from '../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
 
 /**
- * The Page Container component provides the main routable page for loading
- * the `ngx-editorjs-demo`
+ * The Page Container provided the basic demo for the `ngx-editorjs` component
  */
 @Component({
   selector: 'ngx-page-container',
@@ -54,7 +53,6 @@ export class PageContainerComponent implements AfterContentInit {
    */
   public get blocks() {
     return this.editorService.hasChanged({ holder: this.holder }).pipe(
-      tap(data => console.log('data 1', data)),
       pluck<OutputData, Block[]>('blocks'),
       takeUntil(this.onDestroy$)
     );
