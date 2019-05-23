@@ -175,7 +175,6 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
       map(interval => interval.interval),
       tap(() => {
         this.service.save({ holder: this.holder });
-        this.hasSaved.emit(true);
         this.cd.markForCheck();
       })
     );
@@ -192,7 +191,7 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   /**
    * Field onChange method
    */
-  public onChange = (change: EditorJSChange): void => {
+  public onChange = (change: OutputData): void => {
     this.hasChanged.emit(change);
     this.cd.markForCheck();
   };
@@ -204,14 +203,13 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
   public writeValue(blocks: Block[]): void {
     this._value = blocks;
     this.service.save({ holder: this.holder, blocks });
-    this.hasSaved.emit(true);
     this.cd.markForCheck();
   }
 
   /**
    * Angular Forms registerOnChange
    */
-  public registerOnChange(fn: (change: EditorJSChange) => void): void {
+  public registerOnChange(fn: (change: OutputData) => void): void {
     this.onChange = fn;
   }
 
@@ -233,20 +231,20 @@ export class NgxEditorJSBaseComponent implements OnDestroy, AfterContentInit, Co
     return this.fm.monitor(element, checkChildren).pipe(
       map(origin => !!origin),
       tap(focused => {
-        if (!focused) {
-          this.isFocused.emit(false);
-          if (!this.autosave) {
-            this.hasSaved.emit(false);
-          }
-          if (this.timerSubscription$) {
-            this.timerSubscription$.unsubscribe();
-          }
-        } else {
+        if (focused) {
           this.isFocused.emit(true);
           this.hasSaved.emit(false);
           if (this.autosave > 0) {
             this.timerSubscription$ = this.getTimer(this.autosave, 0).subscribe();
           }
+          return;
+        }
+        this.isFocused.emit(false);
+        if (!this.autosave) {
+          this.hasSaved.emit(false);
+        }
+        if (this.timerSubscription$) {
+          this.timerSubscription$.unsubscribe();
         }
       }),
       tap(() => {

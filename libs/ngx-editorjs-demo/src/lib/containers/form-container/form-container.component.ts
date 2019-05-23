@@ -154,9 +154,6 @@ export class FormContainerComponent implements AfterContentInit {
    * Clear the editor
    */
   public clear() {
-    if (!this.ngxEditorJS) {
-      return;
-    }
     this.editorService.clear({ holder: this.holder });
     this.cd.markForCheck();
   }
