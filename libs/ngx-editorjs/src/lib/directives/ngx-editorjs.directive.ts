@@ -217,7 +217,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       !changes.blocks.firstChange &&
       JSON.stringify(changes.blocks.previousValue) !== JSON.stringify(changes.blocks.currentValue)
     ) {
-      this.service.save({ holder: this.holder });
+      this.service.update({ holder: this.holder });
       this.cd.markForCheck();
     }
     const changesKeys = Object.keys(changes);

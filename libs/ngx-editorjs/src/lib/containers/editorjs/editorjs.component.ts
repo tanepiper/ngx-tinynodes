@@ -47,9 +47,9 @@ export const EDITORJS_FORM_VALUE_ACCESSOR: Provider = {
 })
 export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, ControlValueAccessor {
   /**
-   * Access to the underlying editor directive
+   * The directive used in this component
    */
-  @ViewChild(NgxEditorJSDirective) public readonly editorEl: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective }) public readonly editorInstance: NgxEditorJSDirective;
   /**
    * Component Destroy subject, in your component `ngOnDestroy` method call `.next(true)`
    * and then `.complete()` on the `this.onDestroy$` subject
@@ -161,54 +161,54 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   protected timerSubscription$: Subscription;
 
   /**
-   * When created an instance of the service is available as
-   * a public interface
-   * @param service The `EditorJS service
-   * @param fm The Focus Monitor
-   * @param cd The Change Detection Ref
+   * Creates an instance of the NgxEditorJSComponent which provides a Angular Forms-compatible component
+   * @param editorService The EditorJS service
+   * @param focusMonitor The Focus Monitor
+   * @param changeDetection The Change Detection Ref
    */
   constructor(
-    protected readonly service: NgxEditorJSService,
-    protected readonly fm: FocusMonitor,
-    protected readonly cd: ChangeDetectorRef
+    protected readonly editorService: NgxEditorJSService,
+    protected readonly focusMonitor: FocusMonitor,
+    protected readonly changeDetection: ChangeDetectorRef
   ) {}
 
   /**
    * Internal method to return a new timer for the autosave support
    * @param time Time to do with autosave
-   * @param timeStart When to trigger the first autosave, default is 0 which triggers a save
+   * @param timeStart When to trigger the first autosave, default is 0 which triggers an immediate save
    */
   protected getTimer(time: number, timeStart = 0): Observable<number> {
     return timer(timeStart, time).pipe(
       timeInterval(),
-      map(interval => interval.interval),
-      tap(() => {
-        this.service.save({ holder: this.holder });
-      })
+      map(interval => interval.interval)
     );
   }
 
   /**
-   * Field on touch method
+   * Angular Form onTouch method, this is a default method that updates
+   * the touch status on the component
    */
   public onTouch = (event?: MouseEvent): void => {
     this.isTouched.emit(true);
   };
 
   /**
-   * Field onChange method
+   * Angular Form onChange method, this is a default method that updates the
+   * editor instance with blocks on change
    */
   public onChange = (data: OutputData): void => {
-    this.service.save({ holder: this.holder, data });
+    this.editorService.update({ holder: this.holder, data });
+    this.changeDetection.markForCheck();
   };
 
   /**
-   * Angular Forms value writer
+   * Angular Forms value writer, updates the editor
    * @param blocks
    */
   public writeValue(data: OutputData): void {
     this._value = data;
-    this.service.save({ holder: this.holder, data });
+    this.editorService.update({ holder: this.holder, data });
+    this.changeDetection.markForCheck();
   }
 
   /**
@@ -226,8 +226,8 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   }
 
   /**
-   * Returns a focus monitor observable with the focus value,
-   * the side effect of this monitor is to update the saved state and
+   * Returns a focus monitor observable with the focus value.
+   * The side effect of this monitor is to update the saved state and
    * start any autosave timers
    * @param element The element to monitor
    * @param checkChildren If the children should be checked
@@ -235,53 +235,55 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   protected getFocusMonitor(element: HTMLElement, checkChildren = true): Observable<boolean> {
     this.hasSaved.emit(false);
 
-    return this.fm.monitor(element, checkChildren).pipe(
+    return this.focusMonitor.monitor(element, checkChildren).pipe(
       map(origin => !!origin),
       tap(focused => {
         if (focused) {
           this.isFocused.emit(true);
           if (this.autosave > 0) {
-            this.timerSubscription$ = this.getTimer(this.autosave, 0).subscribe();
+            this.timerSubscription$ = this.getTimer(this.autosave, 0)
+              .pipe(tap(() => this.editorService.save({ holder: this.holder })))
+              .subscribe();
           }
-          return;
-        }
-        this.isFocused.emit(false);
-        if (this.timerSubscription$) {
-          this.timerSubscription$.unsubscribe();
+        } else {
+          this.isFocused.emit(false);
+          if (this.timerSubscription$) {
+            this.timerSubscription$.unsubscribe();
+          }
         }
       }),
       tap(() => {
-        this.cd.markForCheck();
+        this.changeDetection.markForCheck();
       })
     );
   }
 
   /**
-   * Set up listeners for ready and change events
+   * Set up the focus monitor and subscriptions to editor service observables
    */
   ngAfterContentInit(): void {
-    this.getFocusMonitor(this.editorEl.element)
+    this.getFocusMonitor(this.editorInstance.element)
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(focused => {
+      .subscribe(() => {
         this.onTouch();
-        this.cd.markForCheck();
+        this.changeDetection.markForCheck();
       });
 
-    this.service
+    this.editorService
       .isReady({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(isReady => {
         this.isReady.emit(isReady);
       });
 
-    this.service
+    this.editorService
       .hasChanged({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
       });
 
-    this.service
+    this.editorService
       .hasSaved({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(saved => {
@@ -290,9 +292,12 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   }
 
   /**
-   * If the onDestroy$ subject is not stopped, do it here
+   * Called when the component is destroyed, the focus monitor is destroyed
+   * as well as the editor service, also the onDestroy$ subject is completed
    */
   ngOnDestroy(): void {
+    console.log('called');
+    this.focusMonitor.stopMonitoring(this.editorInstance.element);
     if (this.timerSubscription$ && !this.timerSubscription$.closed) {
       this.timerSubscription$.unsubscribe();
     }
@@ -300,5 +305,11 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       this.onDestroy$.next(true);
       this.onDestroy$.complete();
     }
+    this.hasChanged.complete();
+    this.hasSaved.complete();
+    this.isFocused.complete();
+    this.isTouched.complete();
+    this.isReady.complete();
+    this.editorService.destroy();
   }
 }

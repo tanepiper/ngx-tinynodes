@@ -1,7 +1,7 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { filter, map, take, takeUntil, tap, switchMap } from 'rxjs/operators';
+import { filter, switchMap, take, takeUntil } from 'rxjs/operators';
 import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import {
@@ -244,10 +244,8 @@ export class NgxEditorJSService {
    */
   public update(options: InjectorMethodOption, triggerUpdate = true): void {
     if (!options.data) {
-      this.hasSavedMap[options.holder].next(false);
       return;
     }
-    this.hasSavedMap[options.holder].next(false);
     const data = {
       time: Date.now(),
       version: this.editorJs.version,
@@ -313,10 +311,10 @@ export class NgxEditorJSService {
     const instanceDestroyed = new Subject<boolean>();
     this.getEditor(options)
       .pipe(takeUntil(instanceDestroyed))
-      .subscribe(async editor => {
-        await this.zone.runOutsideAngular(async () => {
+      .subscribe(editor => {
+        this.zone.runOutsideAngular(() => {
           editor.destroy();
-          await this.zone.run(() => {
+          this.zone.run(() => {
             this.cleanupSubjects({ holder: options.holder });
             instanceDestroyed.next(true);
             instanceDestroyed.complete();

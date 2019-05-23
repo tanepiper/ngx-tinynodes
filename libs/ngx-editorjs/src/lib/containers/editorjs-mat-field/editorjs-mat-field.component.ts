@@ -207,7 +207,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   /**
    * Access to the underlying {NgxEditorJSDirective}
    */
-  @ViewChild('editorInstance', { read: NgxEditorJSDirective }) public readonly editorEl: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective }) public readonly editorInstance: NgxEditorJSDirective;
 
   /**
    * Host binding to the unique ID for this editor for material
@@ -246,24 +246,26 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   }
 
   /**
-   * Creates the Material field
-   * @param service The {NgxEditorJSService} instance
-   * @param fm Focus monitor for the Material element
+   * Constructor for the Material field, as this extends the `NgxEditorJSComponent` component
+   * we call `super()` to get all the properties of that component
+   * @param editorService The NgxEditorJSService instance
+   * @param focusMonitor Focus monitor for the Material element
+   * @parma cd The Change detection ref
    * @param ngControl The Angular control base class
    */
   constructor(
-    protected readonly service: NgxEditorJSService,
-    protected fm: FocusMonitor,
-    protected readonly cd: ChangeDetectorRef,
+    protected readonly editorService: NgxEditorJSService,
+    protected focusMonitor: FocusMonitor,
+    protected readonly changeDetection: ChangeDetectorRef,
     @Optional() @Self() public ngControl: NgControl
   ) {
-    super(service, fm, cd);
+    super(editorService, focusMonitor, changeDetection);
   }
 
   /**
    * Called on OnInit
    */
-  ngOnInit(): void {
+  public ngOnInit(): void {
     if (this.ngControl !== null) {
       this.ngControl.valueAccessor = this;
     }
@@ -273,13 +275,34 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
    * Inside the AfterContentInit life-cycle we set up a listener for focus
    * and trigger focus autosave subscribe and unsubscribe
    */
-  ngAfterContentInit(): void {
-    this.getFocusMonitor(this.editorEl.element)
+  public ngAfterContentInit(): void {
+    this.getFocusMonitor(this.editorInstance.element)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(focused => {
         this.onTouch();
         this.focused = focused;
         this.stateChanges.next();
+      });
+
+    this.editorService
+      .isReady({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(isReady => {
+        this.isReady.emit(isReady);
+      });
+
+    this.editorService
+      .hasChanged({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(change => {
+        this.hasChanged.emit(change);
+      });
+
+    this.editorService
+      .hasSaved({ holder: this.holder })
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(saved => {
+        this.hasSaved.next(saved);
       });
   }
 
@@ -296,14 +319,14 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   /**
    * Destroy the focus monitoring and any remaining timer subscriptions
    */
-  ngOnDestroy(): void {
-    this.fm.stopMonitoring(this.editorEl.element);
-    if (this.timerSubscription$ && !this.timerSubscription$.closed) {
-      this.timerSubscription$.unsubscribe();
-    }
-    if (!this.onDestroy$.closed) {
-      this.onDestroy$.next(true);
-      this.onDestroy$.complete();
-    }
-  }
+  // public ngOnDestroy(): void {
+  //   this.focusMonitor.stopMonitoring(this.editorInstance.element);
+  //   if (this.timerSubscription$ && !this.timerSubscription$.closed) {
+  //     this.timerSubscription$.unsubscribe();
+  //   }
+  //   if (!this.onDestroy$.closed) {
+  //     this.onDestroy$.next(true);
+  //     this.onDestroy$.complete();
+  //   }
+  // }
 }
