@@ -247,10 +247,10 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
 
   /**
    * Constructor for the Material field, as this extends the `NgxEditorJSComponent` component
-   * we call `super()` to get all the properties of that component
+   * we call `super()` to get all the properties and providers of that component
    * @param editorService The NgxEditorJSService instance
    * @param focusMonitor Focus monitor for the Material element
-   * @parma cd The Change detection ref
+   * @param changeDetection The Change detection ref
    * @param ngControl The Angular control base class
    */
   constructor(
@@ -263,7 +263,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   }
 
   /**
-   * Called on OnInit
+   * When the component initializes, set the control valueAccessor to this component
    */
   public ngOnInit(): void {
     if (this.ngControl !== null) {
@@ -272,8 +272,8 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   }
 
   /**
-   * Inside the AfterContentInit life-cycle we set up a listener for focus
-   * and trigger focus autosave subscribe and unsubscribe
+   * After the content initializes we override the base one and set Material properties
+   * for focus and call state change
    */
   public ngAfterContentInit(): void {
     this.setupServiceSubscriptions();

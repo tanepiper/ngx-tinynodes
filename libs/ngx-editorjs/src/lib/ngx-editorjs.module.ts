@@ -10,6 +10,7 @@ import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from './types/config';
 import { EditorJSInstance, EDITORJS_MODULE_IMPORT } from './types/injector';
+import { NgxEditorJSToolbarModule } from './components/editorjs-toolbar/editorjs-toolbar.module';
 
 /**
  * Factory function to return the EditorJS base class
@@ -27,9 +28,9 @@ export function createEditorJSInstance(editorjs: any) {
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule],
+  imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule, NgxEditorJSToolbarModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective],
-  exports: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective],
+  exports: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective, NgxEditorJSToolbarModule],
   providers: [
     NgxEditorJSService,
     {

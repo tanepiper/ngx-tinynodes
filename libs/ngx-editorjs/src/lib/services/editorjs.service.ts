@@ -228,7 +228,15 @@ export class NgxEditorJSService {
         if (triggerUpdate) {
           this.hasChangedMap[options.holder].next({
             time: Date.now(),
-            blocks: [],
+            blocks: [
+              {
+                type: 'paragraph',
+                data: {
+                  text: '',
+                  level: 1
+                }
+              }
+            ],
             version: this.editorJs.version
           });
         }
@@ -308,16 +316,13 @@ export class NgxEditorJSService {
    * @param options Options to configure a method call against the EditorJS core API
    */
   public destroyInstance(options: InjectorMethodOption): void {
-    const instanceDestroyed = new Subject<boolean>();
     this.getEditor(options)
-      .pipe(takeUntil(instanceDestroyed))
+      .pipe(take(1))
       .subscribe(editor => {
         this.zone.runOutsideAngular(() => {
           editor.destroy();
           this.zone.run(() => {
             this.cleanupSubjects({ holder: options.holder });
-            instanceDestroyed.next(true);
-            instanceDestroyed.complete();
             this.ref.tick();
           });
         });

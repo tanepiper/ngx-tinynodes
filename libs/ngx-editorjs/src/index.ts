@@ -21,3 +21,5 @@ export {
   EDITORJS_MODULE_IMPORT as ɵEDITORJS_MODULE_IMPORT
 } from './lib/types/injector';
 export { BasePlugin, PluginsMap as PluginConfig, UserPlugins } from './lib/types/plugins';
+export { NgxEditorJSToolbarModule } from './lib/components/editorjs-toolbar/editorjs-toolbar.module';
+export { NgxEditorJSToolbarComponent } from './lib/components/editorjs-toolbar/editorjs-toolbar.component';
