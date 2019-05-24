@@ -1,0 +1,6 @@
+<button mat-button color="secondary" (click)="toggleBlockOutlines()">Toggle Block Outlines</button>
+{{ blockPlugins | async | json }}
+<button mat-button [matMenuTriggerFor]="blockMenu">Add Block</button>
+<mat-menu #blockMenu="matMenu" xPosition="after">
+  <button *ngFor="let plugin of (blockPlugins | async)" mat-menu-item>Add {{ plugin.pluginName }}</button>
+</mat-menu>

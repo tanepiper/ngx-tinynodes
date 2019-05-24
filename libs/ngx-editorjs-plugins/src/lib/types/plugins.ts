@@ -2,13 +2,41 @@ import { InjectionToken } from '@angular/core';
 import { ToolSettings, ToolConstructable } from '@editorjs/editorjs';
 
 /**
+ * The types of plugins supported via the plugin `type` property
+ */
+export type PluginType = 'block' | 'inline' | string;
+
+/**
+ * A Plugin Property, this is a string but can also be passed methods that return strings
+ * for dynamic generation, this method is passed the original string
+ */
+export type PluginProperty = ((property?: string) => string) | string;
+
+/**
+ * The EditorJS tool settings for this plugin
+ */
+export type EditorJSPlugin = ToolConstructable | ToolSettings;
+
+/**
+ * Defines the interface for required and optional plugin methods.
+ * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
+ */
+export interface NgxEditorJSPlugin {
+  /**
+   * The plugin settings to be returned, for dependency injection this should be
+   * a function that returns the plugin class
+   */
+  plugin: () => EditorJSPlugin;
+}
+
+/**
  * A Module plugin configuration
  */
 export interface PluginConfig {
   /**
    * The key of the plugin and the plugin class extending `BasePlugin`
    */
-  [key: string]: BasePlugin;
+  [key: string]: PluginClass;
 }
 
 /**
@@ -22,19 +50,36 @@ export interface ToolSettingsMap {
 }
 
 /**
- * Defines the interface for required and optional plugin methods.
- * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
+ * Interface for the injected EditorJS class, returns the static
+ * class of EditorJS with the version and that creates the instance and provides
+ * the Typescript parse with type information
  */
-export interface BasePlugin {
+export interface PluginClass<T = NgxEditorJSPlugin> extends Function {
   /**
-   * The plugin settings to be returned
+   * Specifies the type of plugin for the plugin provider
    */
-  plugin: () => ToolConstructable | ToolSettings;
+  type: PluginProperty;
+  /**
+   * The key to use for the plugin
+   */
+  key: PluginProperty;
+  /**
+   * Label for displaying the plugin name
+   */
+  pluginName: PluginProperty;
 
+  /**
+   * Optional description for the plugin
+   */
+  description?: PluginProperty;
   /**
    * Optional shortcut for the plugin
    */
-  shortcut?: () => string;
+  shortcut?: PluginProperty;
+  /**
+   * Constructor
+   */
+  new (...args: any[]): T;
 }
 
 /**

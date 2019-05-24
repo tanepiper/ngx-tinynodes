@@ -7,7 +7,7 @@ import { MockEditorJS, MockPlugin } from '../../testing/shared';
 import { NGX_EDITORJS_CONFIG } from '../types/config';
 import { UserPlugins } from '../types/plugins';
 import { NgxEditorJSService } from './editorjs.service';
-import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
+import { EDITORJS_MODULE_IMPORT, EDITORJS_INSTANCE } from '../types/injector';
 
 describe('NgxEditorJSService', () => {
   let service: NgxEditorJSService;
@@ -44,7 +44,7 @@ describe('NgxEditorJSService', () => {
           useValue: MockEditorJS
         },
         {
-          provide: EditorJSInstance,
+          provide: EDITORJS_INSTANCE,
           useFactory: function create(editorjs: any) {
             return editorjs;
           },

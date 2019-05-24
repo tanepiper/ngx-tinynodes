@@ -163,13 +163,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   ) {}
 
   /**
-   * Get the EditorJS instance for this directive
-   */
-  public get editor(): Observable<EditorJS> {
-    return this.service.getEditor({ holder: this.id });
-  }
-
-  /**
    * Get the element for the directive
    */
   public get element() {
@@ -261,18 +254,18 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       });
 
     this.service
-      .hasChanged({ holder: this.holder })
+      .lastChange({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
       });
 
-    this.service
-      .hasSaved({ holder: this.holder })
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(saved => {
-        this.hasSaved.next(saved);
-      });
+    // this.service
+    //   .hasSaved({ holder: this.holder })
+    //   .pipe(takeUntil(this.onDestroy$))
+    //   .subscribe(saved => {
+    //     this.hasSaved.next(saved);
+    //   });
   }
 
   /**

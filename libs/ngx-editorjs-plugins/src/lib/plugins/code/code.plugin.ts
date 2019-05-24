@@ -1,17 +1,35 @@
 import { Injectable } from '@angular/core';
 import Code from '@editorjs/code';
-import { ToolSettings } from '@editorjs/editorjs';
-import { BasePlugin } from '../../types/plugins';
+import { EditorJSPlugin, NgxEditorJSPlugin } from '../../types/plugins';
 
 /**
  * This plugin returns the tool settings for a `<code>` block tool for EditorJS
  */
 @Injectable()
-export class PluginCode implements BasePlugin {
+export class PluginCode implements NgxEditorJSPlugin {
   /**
-   * Returns the `ToolSettings` for this plugin
+   * The plugin type
    */
-  public plugin(): ToolSettings {
+  static type = 'block';
+
+  /**
+   * The plugin key
+   */
+  static key = 'code';
+
+  /**
+   * The plugin Name
+   */
+  static pluginName = 'Code Block';
+
+  /**
+   * The plugin description
+   */
+  static description = 'Provides a &lt;code> block for EditorJS';
+  /**
+   * Returns the required class for the plugin
+   */
+  public plugin(): EditorJSPlugin {
     return Code;
   }
 }

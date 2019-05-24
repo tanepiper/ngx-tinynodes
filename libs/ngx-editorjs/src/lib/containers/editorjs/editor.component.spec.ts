@@ -8,7 +8,7 @@ import { NgxEditorJSPluginService } from '../../services/plugins.service';
 import { NGX_EDITORJS_CONFIG } from '../../types/config';
 import { UserPlugins } from '../../types/plugins';
 import { NgxEditorJSComponent } from './editorjs.component';
-import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../../types/injector';
+import { EDITORJS_MODULE_IMPORT, EDITORJS_INSTANCE } from '../../types/injector';
 
 describe('NgxEditorJSComponent', () => {
   @Component({
@@ -53,7 +53,7 @@ describe('NgxEditorJSComponent', () => {
           useValue: MockEditorJS
         },
         {
-          provide: EditorJSInstance,
+          provide: EDITORJS_INSTANCE,
           useFactory: function create(editorjs: any) {
             return editorjs;
           },

@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { Block } from './blocks';
+import { EditorJSInstance } from '../models/editorjs-instance';
 
 /**
  * Configuration for creating an EditorJS instance
@@ -34,7 +35,7 @@ export const EDITORJS_MODULE_IMPORT = new InjectionToken<any>('EDITORJS_MODULE_I
 /**
  * The EditorJS class injector
  */
-export const EditorJSInstance = new InjectionToken<EditorJSClass>('EditorJSInstance');
+export const EDITORJS_INSTANCE = new InjectionToken<EditorJSClass>('EDITORJS_INSTANCE');
 
 /**
  * Options for a Injector method

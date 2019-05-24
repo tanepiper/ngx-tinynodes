@@ -97,7 +97,7 @@ export class FormContainerComponent implements AfterContentInit {
     private readonly fb: FormBuilder
   ) {
     this.editorService
-      .hasChanged({ holder: this.holder })
+      .lastChange({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(hasChanged => {
         this.editorForm.patchValue({
@@ -106,6 +106,8 @@ export class FormContainerComponent implements AfterContentInit {
         this.cd.markForCheck();
       });
   }
+
+  public showBlocks = false;
 
   /**
    * Editor form group
@@ -124,11 +126,11 @@ export class FormContainerComponent implements AfterContentInit {
   }
 
   get hasSaved() {
-    return this.editorService.hasSaved({ holder: this.holder });
+    return this.editorService.lastChange({ holder: this.holder });
   }
 
   public get blocks() {
-    return this.editorService.hasChanged({ holder: this.holder }).pipe(
+    return this.editorService.lastChange({ holder: this.holder }).pipe(
       filter(data => {
         if (typeof data === 'undefined') {
           return false;

@@ -10,7 +10,7 @@ import { Block } from '../types/blocks';
 import { NGX_EDITORJS_CONFIG } from '../types/config';
 import { UserPlugins } from '../types/plugins';
 import { NgxEditorJSDirective } from './ngx-editorjs.directive';
-import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
+import { EDITORJS_MODULE_IMPORT, EDITORJS_INSTANCE } from '../types/injector';
 
 describe('NgxEditorJSDirective', () => {
   @Component({
@@ -73,7 +73,7 @@ describe('NgxEditorJSDirective', () => {
           useValue: MockEditorJS
         },
         {
-          provide: EditorJSInstance,
+          provide: EDITORJS_INSTANCE,
           useFactory: function create(editorjs: any) {
             return editorjs;
           },

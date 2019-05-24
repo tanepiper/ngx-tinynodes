@@ -54,7 +54,9 @@
         <mat-form-field>
           <mat-label>Content Editor for {{ editorForm.value.pageName || 'Page Name' }}</mat-label>
           <mat-hint>Click on the editor to active it</mat-hint>
+          <ngx-editorjs-toolbar [holder]="holder" (showBlocks)="showBlocks = $event"></ngx-editorjs-toolbar>
           <ngx-editorjs-mat-field
+            [ngClass]="{ 'show-blocks': showBlocks }"
             [id]="holder"
             [holder]="holder"
             formCotrolName="pageEditor"

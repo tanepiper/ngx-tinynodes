@@ -272,18 +272,18 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       });
 
     this.editorService
-      .hasChanged({ holder: this.holder })
+      .lastChange({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
       });
 
-    this.editorService
-      .hasSaved({ holder: this.holder })
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(saved => {
-        this.hasSaved.next(saved);
-      });
+    // this.editorService
+    //   .hasSaved({ holder: this.holder })
+    //   .pipe(takeUntil(this.onDestroy$))
+    //   .subscribe(saved => {
+    //     this.hasSaved.next(saved);
+    //   });
   }
 
   /**

@@ -1,4 +1,3 @@
-import { PluginConfig } from '@tinynodes/ngx-editorjs';
 import {
   PluginCode,
   PluginHeader,
@@ -6,7 +5,8 @@ import {
   PluginList,
   PluginMarker,
   PluginParagraph,
-  PluginSimpleImage
+  PluginSimpleImage,
+  PluginConfig
 } from '@tinynodes/ngx-editorjs-plugins';
 
 /**
@@ -14,12 +14,12 @@ import {
  */
 export function createNgxEditorJSDemoTools(): PluginConfig {
   return {
-    parargraph: new PluginParagraph(),
-    header: new PluginHeader(),
-    list: new PluginList(),
-    code: new PluginCode(),
-    image: new PluginSimpleImage(),
-    link: new PluginLink(),
-    marker: new PluginMarker()
+    [PluginParagraph.key]: PluginParagraph,
+    [PluginHeader.key]: PluginHeader,
+    [PluginList.key]: PluginList,
+    [PluginCode.key]: PluginCode,
+    [PluginSimpleImage.key]: PluginSimpleImage,
+    [PluginLink.key]: PluginLink,
+    [PluginMarker.key]: PluginMarker
   };
 }

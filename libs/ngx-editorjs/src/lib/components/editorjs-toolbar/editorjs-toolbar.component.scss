@@ -1,0 +1,14 @@
+::ng-deep .show-blocks .ce-block {
+  border: 1px dashed lightgray;
+  margin: 5px auto;
+  transition: margin 700ms ease-in-out;
+}
+
+ngx-editorjs-toolbar {
+  display: flex;
+  flex-direction: column;
+}
+
+ngx-editorjs-toolbar {
+  flex: 1;
+}
