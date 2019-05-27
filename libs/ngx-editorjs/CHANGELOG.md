@@ -16,6 +16,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Private services for `EditorJS` instance and plugins removed, `NgxEditorJSService` is now a single service that handles all the Editor and plugin life-cycles
 - `EditorJSBaseComponent` removed and using `NgxEditorJSComponent` as base component
 
+### [Unreleased]
+
+## Added
+
+- New `EditorJSInstance` class added as a way to hold the `EditorJS` instance. This class provides access to the instance via an public `apiCall` method, and also provides Observable states of the current ready and content status.
+- `ngx-editorjs-toolbar` Provides a toolbar for Angular apps to control the instance. Functionality includes:
+  - Calling the `save`, and `clear methods` of the instance
+  - Provide a configurable `reset` button for setting the content instance
+  - Enable and disable the `autosave` feature and set the autosave time
+  - Toggle `show-blocks` in the editor, a feature to show the outline of all blocks on the page in editing mode
+  - Add Block button which supports adding a block to the editor at the end, beginning, or a specific position within the editor
+  - In a future release this will also support the ability to control inline content controls
+
+### Changed
+
+- `NgxEditorJSService` delegates to the new class for `EditorJS`. The service provides public APIs to the instance, also provides a saved state of the instance, which is a state of the `EditorJS` save being called so the state can be applied to autosave.
+
 ## Changed
 
 - Various internal improvements to state management and saving
