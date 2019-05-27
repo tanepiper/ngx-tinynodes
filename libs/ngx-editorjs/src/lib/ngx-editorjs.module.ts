@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf, NgZone, ApplicationRef, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import EditorJS from '@editorjs/editorjs';
 import { NgxEditorJSToolbarComponent } from './components/editorjs-toolbar/editorjs-toolbar.component';
@@ -10,13 +10,18 @@ import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSMaterialModule } from './ngx-editorjs.material.module';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from './types/config';
-import { EDITORJS_INSTANCE, EDITORJS_MODULE_IMPORT } from './types/injector';
+import { EDITORJS_INSTANCE, EDITORJS_MODULE_IMPORT, EditorJSClass } from './types/injector';
+import { EditorJSInstanceService } from './services/editorjs-instance';
 
 /**
  * Factory function to return the EditorJS base class
  */
-export function createEditorJSInstance(editorjs: any) {
+export function createEditorJSImport(editorjs: any) {
   return editorjs;
+}
+
+export function createEditorJSInstance(editorJs: EditorJSClass, zone: NgZone, ref: ApplicationRef) {
+  return new EditorJSInstanceService(editorJs, zone, ref);
 }
 
 /**
@@ -38,6 +43,7 @@ export function createEditorJSInstance(editorjs: any) {
     NgxEditorJSMaterialModule
   ],
   providers: [
+    EditorJSInstanceService,
     NgxEditorJSService,
     {
       provide: EDITORJS_MODULE_IMPORT,
@@ -45,7 +51,7 @@ export function createEditorJSInstance(editorjs: any) {
     },
     {
       provide: EDITORJS_INSTANCE,
-      useFactory: createEditorJSInstance,
+      useFactory: createEditorJSImport,
       deps: [EDITORJS_MODULE_IMPORT]
     }
   ]

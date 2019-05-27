@@ -93,9 +93,10 @@ export class FormContainerComponent implements OnInit {
     private readonly fb: FormBuilder
   ) {
     this.editorService
-      .lastChange({ holder: this.holder })
+      .hasChanged({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(hasChanged => {
+        console.log(hasChanged);
         this.editorForm.patchValue({
           pageEditor: hasChanged.blocks
         });
@@ -122,11 +123,11 @@ export class FormContainerComponent implements OnInit {
   }
 
   get hasSaved() {
-    return this.editorService.lastChange({ holder: this.holder });
+    return this.editorService.hasChanged({ holder: this.holder });
   }
 
   public get blocks() {
-    return this.editorService.lastChange({ holder: this.holder }).pipe(
+    return this.editorService.hasChanged({ holder: this.holder }).pipe(
       filter(data => {
         if (typeof data === 'undefined') {
           return false;
@@ -163,7 +164,7 @@ export class FormContainerComponent implements OnInit {
    * @param blocks
    */
   public update(data: OutputData, triggerUpdate = true) {
-    this.editorService.update({ holder: this.holder, data }, triggerUpdate);
+    this.editorService.update({ holder: this.holder, data });
     this.cd.markForCheck();
   }
 
@@ -212,16 +213,13 @@ export class FormContainerComponent implements OnInit {
             text: 'When you save the form, you can see the output below of the form instance values'
           }
         }
-      ]),
-      tap(() => this.cd.markForCheck())
+      ])
     );
   }
 
   ngOnInit() {
     this.resetData()
       .pipe(take(1))
-      .subscribe(blocks => {
-        this.update({ blocks });
-      });
+      .subscribe(blocks => this.update({ blocks }));
   }
 }

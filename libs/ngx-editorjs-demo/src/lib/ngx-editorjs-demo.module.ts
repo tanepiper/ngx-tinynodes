@@ -23,6 +23,7 @@ import { FormContainerComponent } from './containers/form-container/form-contain
 import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-container.component';
 import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.component';
 import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.module';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.modu
     PluginLinkModule,
     PluginMarkerModule,
     NgxTinynodesCoreModule,
-    NgxEditorJSDemoMaterialModule
+    NgxEditorJSDemoMaterialModule,
+    NgxJsonViewerModule
   ],
   providers: [
     {

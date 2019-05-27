@@ -101,10 +101,6 @@ export interface PluginDefaults {
   constructor: PluginClass;
 }
 
-export interface PluginDefaultsMaps {
-  [key: string]: PluginDefaults;
-}
-
 /**
  * Interface for the injected EditorJS class, returns the static
  * class of EditorJS with the version and that creates the instance and provides

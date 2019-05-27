@@ -26,6 +26,15 @@ export class PluginHeader implements NgxEditorJSPlugin {
    * The plugin description
    */
   static description = 'Provides &lt;h1> - &lt;h6> header blocks';
+
+  /**
+   * The default block data
+   */
+  static blockData = {
+    text: '',
+    level: 1
+  };
+
   /**
    * Returns the required class for the plugin
    */

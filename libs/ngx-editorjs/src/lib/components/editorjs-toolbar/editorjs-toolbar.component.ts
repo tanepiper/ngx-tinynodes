@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { map, take } from 'rxjs/operators';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
-import { PluginDefaultsMaps } from '../../types/plugins';
+import { PluginMap } from '../../types/plugins';
 
 @Component({
   selector: 'ngx-editorjs-toolbar',
@@ -62,7 +62,7 @@ export class NgxEditorJSToolbarComponent {
 
   public get blockPlugins() {
     return this.editorService.plugins.pipe(
-      map((pluginMap: PluginDefaultsMaps) =>
+      map((pluginMap: PluginMap) =>
         Object.entries(pluginMap).reduce((plugins, [key, pluginDefaults]) => {
           if (pluginDefaults.type === 'block') {
             plugins.push(pluginDefaults);
@@ -75,7 +75,7 @@ export class NgxEditorJSToolbarComponent {
 
   public addBlock(blockType: string, blockPosition?: number) {
     this.editorService
-      .lastChange({ holder: this.holder })
+      .hasChanged({ holder: this.holder })
       .pipe(take(1))
       .subscribe(outputData => {
         if (typeof blockPosition === 'undefined') {
@@ -85,7 +85,6 @@ export class NgxEditorJSToolbarComponent {
             data: this.generateBlockData(blockType)
           });
         }
-        this.editorService.update({ holder: this.holder, data: outputData });
       });
   }
 
@@ -109,6 +108,7 @@ export class NgxEditorJSToolbarComponent {
   }
 
   public reset(blocks: Block[]) {
+    console.log(blocks);
     this.editorService.update({
       holder: this.holder,
       data: {

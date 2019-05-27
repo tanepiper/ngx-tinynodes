@@ -1,8 +1,8 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
 import { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { filter, map, switchMap, take, takeUntil } from 'rxjs/operators';
-import { EditorJSInstance } from '../models/editorjs-instance';
+import { filter, map, switchMap, take, takeUntil, tap, distinctUntilChanged } from 'rxjs/operators';
+import { EditorJSInstanceService } from './editorjs-instance';
 import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import {
@@ -12,7 +12,9 @@ import {
   InjectorApiCallResponse,
   InjectorMethodOption
 } from '../types/injector';
-import { PluginDefaultsMaps, PluginMap, ToolSettingsMap, UserPlugins } from '../types/plugins';
+import { PluginMap, ToolSettingsMap, UserPlugins } from '../types/plugins';
+import { Block } from '../types/blocks';
+import { ReadyMap, ChangeMap } from '../types/maps';
 
 /**
  * The NgxEditorJSService handles the management of EditorJS instances, plugins and lifecycle observables
@@ -32,46 +34,15 @@ import { PluginDefaultsMaps, PluginMap, ToolSettingsMap, UserPlugins } from '../
 })
 export class NgxEditorJSService {
   /**
-   * Internal map of plugins available
-   */
-  private pluginsMap: PluginMap = {};
-
-  /**
    * Internal cache of all the available plugins
    */
-  private plugins$ = new BehaviorSubject<PluginDefaultsMaps>({});
+  private plugins$ = new BehaviorSubject<PluginMap>({});
 
   /**
    * Get the plugin defaults, which includes the constructor
    */
   public get plugins() {
     return this.plugins$.asObservable();
-  }
-
-  /**
-   * State of if the editor save has been called since the last change
-   */
-  private readonly savedMap: { [key: string]: BehaviorSubject<boolean> } = {};
-
-  /**
-   * The internal instance map of editors
-   */
-  private instances: { [key: string]: BehaviorSubject<EditorJSInstance | undefined> } = {};
-
-  /**
-   * Get an instance of an editor, pass an optional subject that will be
-   * used to destroy the instance
-   * @param holder The holder string of the instance
-   * @param destroyOn Optional subject to use to destroy the instance
-   */
-  private getInstance(holder: string, destroyOn?: Subject<boolean>): Observable<EditorJSInstance> {
-    if (!this.instances[holder]) {
-      this.instances[holder] = new BehaviorSubject<EditorJSInstance | undefined>(undefined);
-    }
-    return this.instances[holder].pipe(
-      filter(instance => typeof instance !== 'undefined'),
-      destroyOn ? takeUntil(destroyOn) : take(1)
-    );
   }
 
   /**
@@ -87,27 +58,9 @@ export class NgxEditorJSService {
     @Inject(EDITORJS_INSTANCE) private readonly editorJs: EditorJSClass,
     @Inject(NGX_EDITORJS_CONFIG) private readonly config: NgxEditorJSModuleConfig,
     @Inject(UserPlugins) private readonly userPlugins: PluginMap,
-    private readonly zone: NgZone,
-    private readonly ref: ApplicationRef
+    private readonly editorInstance: EditorJSInstanceService
   ) {
-    // Assign the plugin classes to the key from the user plugin map
-    const plugins: PluginDefaultsMaps = Object.entries({ ...this.userPlugins }).reduce((pluginMap, [key, Plugin]) => {
-      // Update the Plugin Map
-      this.pluginsMap[key] = Plugin;
-
-      return {
-        ...pluginMap,
-        [key]: {
-          type: Plugin.type,
-          key: Plugin.key,
-          pluginName: Plugin.pluginName,
-          description: Plugin.description || '',
-          shortcut: Plugin.shortcut || '',
-          constructor: Plugin
-        }
-      };
-    }, {});
-    this.plugins$.next(plugins);
+    this.plugins$.next(this.userPlugins);
   }
 
   /**
@@ -115,9 +68,7 @@ export class NgxEditorJSService {
    * This method should be called with `await` to ensure the editor is fully initialized
    * @param options The options to pass to the method for creating an EditorJS instance
    */
-  public async createInstance(options: CreateEditorJSOptions): Promise<void> {
-    const newInstance = new EditorJSInstance();
-
+  public createInstance(options: CreateEditorJSOptions): void {
     this.getTools(options.includeTools)
       .pipe(take(1))
       .subscribe(async tools => {
@@ -134,19 +85,12 @@ export class NgxEditorJSService {
             ? editorConfig.onReady
             : this.createOnReady.call(this, { holder: editorConfig.holder as string });
 
-        await this.zone.runOutsideAngular(async () => {
-          const editor = new this.editorJs(editorConfig);
-          const holder = editorConfig.holder as string;
-          await editor.isReady;
-          await this.zone.run(async () => {
-            newInstance.setEditor(editor);
-            newInstance.setIsReady(true);
-            this.savedMap[holder] = new BehaviorSubject<boolean>(false);
-            this.instances[holder].next(newInstance);
-            this.ref.tick();
-          });
-        });
+        await this.editorInstance.createInstance(editorConfig);
       });
+
+    this.editorInstance.apiCallStream(options.config.holder as string).subscribe(apiResponse => {
+      console.log(apiResponse);
+    });
   }
 
   /**
@@ -154,16 +98,11 @@ export class NgxEditorJSService {
    * @param options The InjectorMethodOption for this request
    */
   private createOnChange(options: InjectorMethodOption): (change: OutputData) => void {
-    const onChange = (change: OutputData) => {
-      if (!change) {
+    const onChange = (data: OutputData) => {
+      if (!data) {
         return;
       }
-      this.getInstance(options.holder)
-        .pipe(take(1))
-        .subscribe(instance => {
-          instance.setLastChange(change);
-          this.setHasSaved(options, false);
-        });
+      this.update({ ...options, data });
     };
     return onChange;
   }
@@ -174,11 +113,7 @@ export class NgxEditorJSService {
    */
   private createOnReady(options: InjectorMethodOption): () => void {
     const onReady = () => {
-      this.getInstance(options.holder)
-        .pipe(take(1))
-        .subscribe(instance => {
-          instance.setIsReady(true);
-        });
+      this.setIsReady(options.holder, true);
     };
     return onReady;
   }
@@ -195,23 +130,8 @@ export class NgxEditorJSService {
    * @param options EditorJS API call options
    * @param args Additional arguments to pass to the API request
    */
-  public apiCall<T>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
-    const { holder } = options;
-    return this.getInstance(holder).pipe(
-      take(1),
-      switchMap(instance => {
-        return this.zone.runOutsideAngular(async () => {
-          const result = await instance.apiCall(options, ...args);
-          return this.zone.run(() => {
-            return {
-              ...options,
-              instance,
-              result: typeof result === 'undefined' ? {} : result
-            } as InjectorApiCallResponse<T>;
-          });
-        });
-      })
-    );
+  public apiCall<T>(options: InjectorApiCallOptions, ...args: any[]): void {
+    this.editorInstance.apiCall(options, ...args);
   }
 
   /**
@@ -222,9 +142,7 @@ export class NgxEditorJSService {
    * @param triggerUpdate If set to false the `hasChanged` Observable won't be updated
    */
   public save(options: InjectorMethodOption, triggerUpdate = true): void {
-    this.apiCall({ holder: options.holder, namespace: 'saver', method: 'save' }).subscribe(() => {
-      this.setHasSaved(options, true);
-    });
+    this.editorInstance.save(options);
   }
 
   /**
@@ -233,23 +151,7 @@ export class NgxEditorJSService {
    * @param triggerUpdate If set to false the `hasChanged` Observable won't be updated
    */
   public clear(options: InjectorMethodOption, triggerUpdate = true): void {
-    this.setHasSaved(options, false);
-
-    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' }).subscribe(
-      (response: InjectorApiCallResponse<OutputData>) =>
-        response.instance.setLastChange({
-          time: Date.now(),
-          version: this.editorJs.version,
-          blocks: [
-            {
-              type: 'paragraph',
-              data: {
-                text: ''
-              }
-            }
-          ]
-        })
-    );
+    this.editorInstance.clear(options);
   }
 
   /**
@@ -259,7 +161,7 @@ export class NgxEditorJSService {
    * @param options Options to configure a method call against the EditorJS core API
    * @param triggerUpdate If set to false the `hasChanged` Observable won't be updated
    */
-  public update(options: InjectorMethodOption, triggerUpdate = true): void {
+  public async update(options: InjectorMethodOption, triggerUpdate = true): Promise<void> {
     if (!options.data) {
       return;
     }
@@ -269,10 +171,39 @@ export class NgxEditorJSService {
       blocks: [],
       ...options.data
     };
-    this.setHasSaved(options, false);
-    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).subscribe(response => {
-      response.instance.setLastChange(data);
-    });
+    this.editorInstance.update(options, data);
+  }
+
+  /**
+   * A map of ready states
+   */
+  private readyMap: ReadyMap = {};
+
+  /**
+   * A map of changes when the Editor was saved
+   */
+  private changeMap: ChangeMap = {};
+
+  /**
+   * Set the isReady state
+   * @param readyState
+   */
+  public setIsReady(holder: string, readyState: boolean): void {
+    if (!this.readyMap[holder]) {
+      this.readyMap[holder] = new BehaviorSubject<boolean>(false);
+    }
+    this.readyMap[holder].next(readyState);
+  }
+
+  /**
+   * Set the hasChanged state
+   * @param readyState
+   */
+  public setHasChanged(holder: string, data: OutputData): void {
+    if (!this.changeMap[holder]) {
+      this.changeMap[holder] = new BehaviorSubject<OutputData>(data);
+    }
+    this.changeMap[holder].next(data);
   }
 
   /**
@@ -280,62 +211,44 @@ export class NgxEditorJSService {
    * @param options Options to configure a method call against the EditorJS core API
    */
   public isReady(options: InjectorMethodOption): Observable<boolean> {
-    return this.getInstance(options.holder).pipe(switchMap(instance => instance.isReady));
+    if (!this.readyMap[options.holder]) {
+      this.readyMap[options.holder] = new BehaviorSubject<boolean>(false);
+    }
+    return this.readyMap[options.holder].pipe(filter(ready => typeof ready !== 'undefined' && ready));
   }
 
   /**
    * Subscribe to the `lastChange` state change for the editor passed in the options
    * @param options Options to configure a method call against the EditorJS core API
    */
-  public lastChange(options: InjectorMethodOption): Observable<OutputData> {
-    return this.getInstance(options.holder).pipe(switchMap(instance => instance.lastChange));
-  }
-
-  /**
-   * Get if the editor save has been called since the last change
-   */
-  public hasSaved(options: InjectorMethodOption): Observable<boolean> {
-    if (!this.savedMap[options.holder]) {
-      this.savedMap[options.holder] = new BehaviorSubject<boolean>(false);
+  public hasChanged(options: InjectorMethodOption): Observable<OutputData> {
+    if (!this.changeMap[options.holder]) {
+      this.changeMap[options.holder] = new BehaviorSubject<OutputData>({
+        time: 0,
+        blocks: [],
+        version: this.editorJs.version
+      });
     }
-    return this.savedMap[options.holder].asObservable();
-  }
-
-  /**
-   * Set the last save state
-   */
-  public setHasSaved(options: InjectorMethodOption, hasSaved: boolean) {
-    if (!this.savedMap[options.holder]) {
-      this.savedMap[options.holder] = new BehaviorSubject<boolean>(false);
-    }
-    this.savedMap[options.holder].next(hasSaved);
+    return this.changeMap[options.holder].pipe(
+      filter(data => typeof data !== 'undefined'),
+      distinctUntilChanged((a, b) => a.time === b.time)
+    );
   }
 
   /**
    * Destroys a single instance of EditorJS and all the subject values created for it
    * @param options Options to configure a method call against the EditorJS core API
    */
-  public destroyInstance(options: InjectorMethodOption): Observable<void> {
-    return this.getInstance(options.holder).pipe(
-      take(1),
-      switchMap(instance =>
-        this.zone.runOutsideAngular(() =>
-          Promise.resolve(instance.destroy()).then(() =>
-            this.zone.run(() => {
-              this.instances[options.holder].complete();
-              this.ref.tick();
-            })
-          )
-        )
-      )
-    );
+  public destroyInstance(options: InjectorMethodOption): void {
+    this.editorInstance.destroy(options.holder);
+    this.readyMap[options.holder].complete();
   }
 
   /**
    * Call this to destroy all subscriptions within the service
    */
   public destroy() {
-    Object.keys(this.instances).forEach(holder => this.destroyInstance({ holder }));
+    this.editorInstance.destroyAll();
   }
 
   /**
@@ -348,14 +261,14 @@ export class NgxEditorJSService {
       map(pluginsMap => {
         return Object.entries(pluginsMap)
           .filter(([key]) => !excludeTools.includes(key))
-          .reduce((finalTools, [key, plugin]) => {
-            const pluginKey = useDefaultKey ? plugin.key : key;
-            const instance = new plugin.constructor();
-            return plugin.shortcut
+          .reduce((finalTools, [key, Plugin]) => {
+            const pluginKey = useDefaultKey ? Plugin.key : key;
+            const instance = new Plugin();
+            return Plugin.shortcut
               ? {
                   [pluginKey]: {
                     class: instance.plugin(),
-                    shortcut: plugin.shortcut
+                    shortcut: Plugin.shortcut
                   },
                   ...finalTools
                 }

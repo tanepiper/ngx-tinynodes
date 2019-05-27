@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { MockEditorJS } from '../testing/shared';
-import { createEditorJSInstance, NgxEditorJSModule } from './ngx-editorjs.module';
+import { createEditorJSImport, NgxEditorJSModule } from './ngx-editorjs.module';
 
 describe('NgxEditorJSModule', () => {
   let module;
@@ -24,7 +24,7 @@ describe('NgxEditorJSModule', () => {
   });
 
   it('should return EditorJS when calling the factory function', () => {
-    const editor = createEditorJSInstance(MockEditorJS);
+    const editor = createEditorJSImport(MockEditorJS);
     expect(editor).toBe(MockEditorJS);
   });
 });

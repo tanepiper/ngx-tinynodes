@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { Block } from './blocks';
-import { EditorJSInstance } from '../models/editorjs-instance';
+import { EditorJSInstanceService } from '../services/editorjs-instance';
 
 /**
  * Configuration for creating an EditorJS instance
@@ -80,7 +80,7 @@ export interface InjectorApiCallOptions {
 export interface InjectorApiCallResponse<T = any> extends InjectorApiCallOptions {
   result?: T;
 
-  instance?: EditorJSInstance;
+  instance?: EditorJSInstanceService;
 }
 
 /**

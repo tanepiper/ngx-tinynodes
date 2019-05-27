@@ -3,11 +3,11 @@ import { BehaviorSubject } from 'rxjs';
 import { Block } from './blocks';
 
 /**
- * A map containing instances of `BehaviorSubject<EditorJS>`
+ * A map of Editor instances
  */
 export interface EditorMap {
   /**
-   * A map key containing `BehaviorSubject<EditorJS>`
+   * A EditorJS instance mapped to a key
    */
   [key: string]: BehaviorSubject<EditorJS>;
 }

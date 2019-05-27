@@ -52,7 +52,7 @@ export class PageContainerComponent implements AfterContentInit {
    * Get the blocks from the last change
    */
   public get blocks() {
-    return this.editorService.lastChange({ holder: this.holder }).pipe(
+    return this.editorService.hasChanged({ holder: this.holder }).pipe(
       pluck<OutputData, Block[]>('blocks'),
       takeUntil(this.onDestroy$)
     );

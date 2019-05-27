@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { ToolSettings, ToolConstructable } from '@editorjs/editorjs';
+import { BlockData } from './blocks';
 
 /**
  * The types of plugins supported via the plugin `type` property
@@ -35,7 +36,7 @@ export interface PluginConfig {
   /**
    * The key of the plugin and the plugin class extending `BasePlugin`
    */
-  [key: string]: PluginClass;
+  [key: string]: PluginClass<BlockData>;
 }
 
 /**
@@ -53,7 +54,7 @@ export interface ToolSettingsMap {
  * class of EditorJS with the version and that creates the instance and provides
  * the Typescript parse with type information
  */
-export interface PluginClass<T = NgxEditorJSPlugin> extends Function {
+export interface PluginClass<K = BlockData, T = NgxEditorJSPlugin> extends Function {
   /**
    * Specifies the type of plugin for the plugin provider
    */
@@ -75,6 +76,12 @@ export interface PluginClass<T = NgxEditorJSPlugin> extends Function {
    * Optional shortcut for the plugin
    */
   shortcut?: PluginProperty;
+
+  /**
+   * Optional block data, used to define the block data for this type
+   * and used as a default
+   */
+  blockData?: K;
   /**
    * Constructor
    */

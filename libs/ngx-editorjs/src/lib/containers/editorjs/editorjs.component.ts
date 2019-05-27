@@ -121,12 +121,6 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   public blocks: Block[];
 
   /**
-   * Emits if the content from the EditorJS instance has been saved to the component value
-   */
-  @Output()
-  public hasSaved = new EventEmitter<boolean>();
-
-  /**
    * Emits if the component has been touched
    */
   @Output()
@@ -190,7 +184,6 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * @param event The mouse event from the touch
    */
   public onTouch = (event?: MouseEvent): void => {
-    this.editorService.setHasSaved({ holder: this.holder }, false);
     this.isTouched.emit(event);
   };
 
@@ -200,8 +193,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * @param data The data to write
    */
   public onChange = (data: OutputData): void => {
-    this.editorService.update({ holder: this.holder, data });
-    this.changeDetection.markForCheck();
+    this.writeValue(data);
   };
 
   /**
@@ -210,7 +202,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    */
   public writeValue(data: OutputData): void {
     this._value = data;
-    this.editorService.update({ holder: this.holder, data });
+    this.editorService.save({ holder: this.holder });
     this.changeDetection.markForCheck();
   }
 
@@ -239,8 +231,6 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
     return this.focusMonitor.monitor(element, checkChildren).pipe(
       map(origin => !!origin),
       tap(focused => {
-        this.hasSaved.emit(false);
-
         if (!focused) {
           if (this.timerSubscription$ && !this.timerSubscription$.closed) {
             this.timerSubscription$.unsubscribe();
@@ -273,10 +263,11 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       });
 
     this.editorService
-      .lastChange({ holder: this.holder })
+      .hasChanged({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(change => {
-        this.hasChanged.emit(change);
+      .subscribe(outputData => {
+        this.writeValue(outputData);
+        this.changeDetection.markForCheck();
       });
   }
 
@@ -304,7 +295,6 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       this.onDestroy$.complete();
     }
     this.hasChanged.complete();
-    this.hasSaved.complete();
     this.isFocused.complete();
     this.isTouched.complete();
     this.isReady.complete();

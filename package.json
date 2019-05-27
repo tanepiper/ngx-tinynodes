@@ -53,6 +53,7 @@
     "hammerjs": "^2.0.8",
     "install": "^0.12.2",
     "ngx-hideable-header": "0.0.5",
+    "ngx-json-viewer": "^2.4.0",
     "ngx-markdown": "^7.1.5",
     "npm": "^6.9.0",
     "rxjs": "^6.5.2",
