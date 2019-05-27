@@ -7,10 +7,9 @@ import { ToolSettings, ToolConstructable } from '@editorjs/editorjs';
 export type PluginType = 'block' | 'inline' | string;
 
 /**
- * A Plugin Property, this is a string but can also be passed methods that return strings
- * for dynamic generation, this method is passed the original string
+ * A plugin property
  */
-export type PluginProperty = ((property?: string) => string) | string;
+export type PluginProperty = string;
 
 /**
  * The EditorJS tool settings for this plugin
