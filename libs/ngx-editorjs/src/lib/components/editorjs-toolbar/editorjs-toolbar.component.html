@@ -2,7 +2,7 @@
 
 <button mat-button color="secondary" (click)="save()">Save</button>
 <button mat-button color="secondary" (click)="clear()">Clear</button>
-<button mat-button color="secondary" (click)="reset(this.resetBlocks)">Reset</button>
+<button mat-button *ngIf="resetBlocks && resetBlocks.length > 0" color="secondary" (click)="reset(this.resetBlocks)">Reset</button>
 
 <button mat-button color="secondary" [matMenuTriggerFor]="blockMenu">Add Block</button>
 <mat-menu #blockMenu="matMenu" xPosition="after">

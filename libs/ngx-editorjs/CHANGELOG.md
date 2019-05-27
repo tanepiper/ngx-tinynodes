@@ -5,17 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.1.0] - 2019-05-23
-
-## Added
-
-- `NgxEditorJSService.apiCall` method added to service to provide a way to call any method in `EditorJS`
-
-## Removed
-
-- Private services for `EditorJS` instance and plugins removed, `NgxEditorJSService` is now a single service that handles all the Editor and plugin life-cycles
-- `EditorJSBaseComponent` removed and using `NgxEditorJSComponent` as base component
-
 ### [Unreleased]
 
 ## Added
@@ -31,7 +20,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `NgxEditorJSService` delegates to the new class for `EditorJS`. The service provides public APIs to the instance, also provides a saved state of the instance, which is a state of the `EditorJS` save being called so the state can be applied to autosave.
+- `NgxEditorJSService` delegates to the new class for `EditorJS` but still handles running calls within the `NgZone` outside Angular. The service role is clarified as providing public APIs to the instance, also provides additional state not related to the instance. The first state is :
+  - `hasSaved` state of the instance, which is a state of the `EditorJS` save being called. Calling save does not make any changes but returns the content, this state is useful for editors to have for knowing the current state of last returned state vs any updated state. This is also useful for the auto-save feature.
+
+## [2.1.0] - 2019-05-23
+
+## Added
+
+- `NgxEditorJSService.apiCall` method added to service to provide a way to call any method in `EditorJS`
+
+## Removed
+
+- Private services for `EditorJS` instance and plugins removed, `NgxEditorJSService` is now a single service that handles all the Editor and plugin life-cycles
+- `EditorJSBaseComponent` removed and using `NgxEditorJSComponent` as base component
 
 ## Changed
 

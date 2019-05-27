@@ -16,6 +16,10 @@ export class NgxEditorJSToolbarComponent {
   @Input()
   holder: string;
 
+  /**
+   * Provide the blocks that will be used when the reset button is called.
+   * If not set the button won't render
+   */
   @Input()
   resetBlocks: Block[];
 
@@ -23,6 +27,9 @@ export class NgxEditorJSToolbarComponent {
 
   @Output()
   public showBlocks = new EventEmitter<boolean>();
+
+  @Output()
+  public autosave = new EventEmitter<boolean>();
 
   constructor(private readonly editorService: NgxEditorJSService) {}
 

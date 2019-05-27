@@ -130,7 +130,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * Emits if the component has been touched
    */
   @Output()
-  public isTouched = new EventEmitter<boolean>();
+  public isTouched = new EventEmitter<MouseEvent>();
 
   /**
    * Emits if the component is focused
@@ -190,7 +190,8 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * @param event The mouse event from the touch
    */
   public onTouch = (event?: MouseEvent): void => {
-    this.isTouched.emit(true);
+    this.editorService.setHasSaved({ holder: this.holder }, false);
+    this.isTouched.emit(event);
   };
 
   /**

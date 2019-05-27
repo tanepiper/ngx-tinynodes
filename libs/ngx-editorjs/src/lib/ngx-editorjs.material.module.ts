@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
-import { MatInputModule, MatFormFieldModule, MatMenuModule, MatButtonModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatFormFieldModule,
+  MatMenuModule,
+  MatButtonModule,
+  MatDividerModule
+} from '@angular/material';
 
 @NgModule({
-  imports: [MatInputModule, MatFormFieldModule, MatMenuModule, MatButtonModule],
-  exports: [MatInputModule, MatFormFieldModule, MatMenuModule, MatButtonModule]
+  imports: [MatInputModule, MatFormFieldModule, MatMenuModule, MatButtonModule, MatDividerModule],
+  exports: [MatInputModule, MatFormFieldModule, MatMenuModule, MatButtonModule, MatDividerModule]
 })
 export class NgxEditorJSMaterialModule {}
