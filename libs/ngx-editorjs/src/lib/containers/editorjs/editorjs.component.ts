@@ -235,27 +235,27 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * @param checkChildren If the children should be checked
    */
   protected getFocusMonitor(element: HTMLElement, checkChildren = true): Observable<boolean> {
-    this.hasSaved.emit(false);
-
     return this.focusMonitor.monitor(element, checkChildren).pipe(
       map(origin => !!origin),
       tap(focused => {
-        if (focused) {
-          this.isFocused.emit(true);
-          if (this.autosave > 0) {
-            this.timerSubscription$ = this.getTimer(this.autosave, 0)
-              .pipe(tap(() => this.editorService.save({ holder: this.holder })))
-              .subscribe();
-          }
-        } else {
-          this.isFocused.emit(false);
-          if (this.timerSubscription$) {
+        this.hasSaved.emit(false);
+
+        if (!focused) {
+          if (this.timerSubscription$ && !this.timerSubscription$.closed) {
             this.timerSubscription$.unsubscribe();
           }
+          return this.isFocused.emit(false);
         }
-      }),
-      tap(() => {
-        this.changeDetection.markForCheck();
+        this.onTouch();
+        this.isFocused.emit(true);
+        if (
+          this.autosave > 0 &&
+          (!this.timerSubscription$ || (this.timerSubscription$ && this.timerSubscription$.closed))
+        ) {
+          this.timerSubscription$ = this.getTimer(this.autosave, 0)
+            .pipe(tap(() => this.editorService.save({ holder: this.holder })))
+            .subscribe();
+        }
       })
     );
   }
@@ -277,13 +277,6 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       .subscribe(change => {
         this.hasChanged.emit(change);
       });
-
-    // this.editorService
-    //   .hasSaved({ holder: this.holder })
-    //   .pipe(takeUntil(this.onDestroy$))
-    //   .subscribe(saved => {
-    //     this.hasSaved.next(saved);
-    //   });
   }
 
   /**
@@ -293,10 +286,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
     this.setupServiceSubscriptions();
     this.getFocusMonitor(this.editorInstance.element)
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(() => {
-        this.onTouch();
-        this.changeDetection.markForCheck();
-      });
+      .subscribe();
   }
 
   /**

@@ -13,7 +13,6 @@
       <h3 mat-card-title>Demo</h3>
       <button mat-raised-button color="primary" (click)="save()">Save</button>
       <button mat-raised-button color="primary" (click)="clear()">Clear</button>
-      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
       <button mat-raised-button color="primary" *ngIf="(autosave | async) === 0" (click)="enableAutosave(autosaveTime.value * 1000)">
         Enable Autosave
       </button>
@@ -54,7 +53,11 @@
         <mat-form-field>
           <mat-label>Content Editor for {{ editorForm.value.pageName || 'Page Name' }}</mat-label>
           <mat-hint>Click on the editor to active it</mat-hint>
-          <ngx-editorjs-toolbar [holder]="holder" (showBlocks)="showBlocks = $event"></ngx-editorjs-toolbar>
+          <ngx-editorjs-toolbar
+            [holder]="holder"
+            (showBlocks)="showBlocks = $event"
+            [resetBlocks]="resetData() | async"
+          ></ngx-editorjs-toolbar>
           <ngx-editorjs-mat-field
             [ngClass]="{ 'show-blocks': showBlocks }"
             [id]="holder"

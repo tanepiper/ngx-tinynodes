@@ -5,13 +5,14 @@ import {
   Component,
   EventEmitter,
   Output,
-  ViewChild
+  ViewChild,
+  OnInit
 } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Block, NgxEditorJSService, NgxEditorJSMatFieldComponent } from '@tinynodes/ngx-editorjs';
 import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { pluck, take, takeUntil, tap, distinctUntilChanged, filter } from 'rxjs/operators';
+import { pluck, take, takeUntil, tap, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
@@ -26,7 +27,7 @@ import { OutputData } from '@editorjs/editorjs';
   styleUrls: ['form-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormContainerComponent implements AfterContentInit {
+export class FormContainerComponent implements OnInit {
   @ViewChild('ngxEditorJS', { read: NgxEditorJSMatFieldComponent })
   public readonly ngxEditorJS: NgxEditorJSMatFieldComponent;
 
@@ -45,17 +46,12 @@ export class FormContainerComponent implements AfterContentInit {
   public holder = 'ngx-editorjs-demo';
 
   /**
-   * Panel open state
-   */
-  private panelOpen$ = new BehaviorSubject<boolean>(true);
-
-  /**
    * Menu state for the component
    */
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
 
   /**
-   * Autosave state
+   * The autosave state, if set to 0 autosave is disabled
    */
   private autoSave$ = new BehaviorSubject<number>(0);
 
@@ -63,21 +59,21 @@ export class FormContainerComponent implements AfterContentInit {
    * Enable autosave, set the value from the autosaveTime
    * @param autosaveTime Time to set for autosave
    */
-  public enableAutosave(autosaveTime: number) {
+  public enableAutosave(autosaveTime: number): void {
     this.autoSave$.next(autosaveTime);
   }
 
   /**
    * Disable autosave
    */
-  public disableAutosave() {
+  public disableAutosave(): void {
     this.autoSave$.next(0);
   }
 
   /**
    * Get the current autosave value
    */
-  public get autosave() {
+  public get autosave(): Observable<number> {
     return this.autoSave$.asObservable();
   }
 
@@ -174,31 +170,30 @@ export class FormContainerComponent implements AfterContentInit {
   /**
    * Reset the editor with demo data
    */
-  public reset() {
-    this.app
-      .getDemoData<NgxEditorJSDemo>('ngx-editorjs-demo')
-      .pipe(take(1))
-      .subscribe(data => {
-        const blocks = [
-          ...data.blocks,
-          {
-            type: 'header',
-            data: {
-              text: 'Material Form Component',
-              level: 1
-            }
-          },
-          {
-            type: 'paragraph',
-            data: {
-              text:
-                'This component is provided as a Material form component.  Here is the configuration for this field on this page:'
-            }
-          },
-          {
-            type: 'code',
-            data: {
-              code: `<form [formGroup]="editorForm">
+  public resetData() {
+    return this.app.getDemoData<NgxEditorJSDemo>('ngx-editorjs-demo').pipe(
+      take(1),
+      tap(data => this.menu$.next(data.links)),
+      map(data => [
+        ...data.blocks,
+        {
+          type: 'header',
+          data: {
+            text: 'Material Form Component',
+            level: 1
+          }
+        },
+        {
+          type: 'paragraph',
+          data: {
+            text:
+              'This component is provided as a Material form component.  Here is the configuration for this field on this page:'
+          }
+        },
+        {
+          type: 'code',
+          data: {
+            code: `<form [formGroup]="editorForm">
   <mat-form-field>
     <ngx-editorjs-mat-field
       [id]="holder"
@@ -209,25 +204,24 @@ export class FormContainerComponent implements AfterContentInit {
     </ngx-editorjs-mat-field>
   </mat-form-field>
 </form>`
-            }
-          },
-          {
-            type: 'paragraph',
-            data: {
-              text: 'When you save the form, you can see the output below of the form instance values'
-            }
           }
-        ];
-        this.menu$.next(data.links);
-        this.update({ blocks }, false);
-        this.cd.markForCheck();
-      });
+        },
+        {
+          type: 'paragraph',
+          data: {
+            text: 'When you save the form, you can see the output below of the form instance values'
+          }
+        }
+      ]),
+      tap(() => this.cd.markForCheck())
+    );
   }
 
-  /**
-   * After the content has init overide the blocks with blocks from the service
-   */
-  ngAfterContentInit() {
-    this.reset();
+  ngOnInit() {
+    this.resetData()
+      .pipe(take(1))
+      .subscribe(blocks => {
+        this.update({ blocks });
+      });
   }
 }

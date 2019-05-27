@@ -259,13 +259,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       .subscribe(change => {
         this.hasChanged.emit(change);
       });
-
-    // this.service
-    //   .hasSaved({ holder: this.holder })
-    //   .pipe(takeUntil(this.onDestroy$))
-    //   .subscribe(saved => {
-    //     this.hasSaved.next(saved);
-    //   });
   }
 
   /**

@@ -1,8 +1,8 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { map, take } from 'rxjs/operators';
 import { NgxEditorJSService } from '../../services/editorjs.service';
-import { take, filter, map, tap } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
-import { PluginDefaults } from '../../types/plugins';
+import { Block } from '../../types/blocks';
+import { PluginDefaultsMaps } from '../../types/plugins';
 
 @Component({
   selector: 'ngx-editorjs-toolbar',
@@ -15,6 +15,9 @@ export class NgxEditorJSToolbarComponent {
    */
   @Input()
   holder: string;
+
+  @Input()
+  resetBlocks: Block[];
 
   private showBlocksValue = false;
 
@@ -52,21 +55,14 @@ export class NgxEditorJSToolbarComponent {
 
   public get blockPlugins() {
     return this.editorService.plugins.pipe(
-      map(pluginMap => {
-        const blockPlugins = [];
+      map((pluginMap: PluginDefaultsMaps) =>
         Object.entries(pluginMap).reduce((plugins, [key, pluginDefaults]) => {
-          console.log(pluginDefaults);
           if (pluginDefaults.type === 'block') {
-            return {
-              ...plugins,
-              [key]: Plugin
-            };
+            plugins.push(pluginDefaults);
           }
           return plugins;
-        }, blockPlugins);
-        return blockPlugins;
-      }),
-      tap(console.log)
+        }, [])
+      )
     );
   }
 
@@ -89,5 +85,29 @@ export class NgxEditorJSToolbarComponent {
   public toggleBlockOutlines() {
     this.showBlocksValue = !this.showBlocksValue;
     this.showBlocks.emit(this.showBlocksValue);
+  }
+  /**
+   * Call the editor save method
+   */
+
+  public save() {
+    this.editorService.save({ holder: this.holder });
+  }
+
+  /**
+   * Clear the editor
+   */
+  public clear() {
+    this.editorService.clear({ holder: this.holder });
+  }
+
+  public reset(blocks: Block[]) {
+    this.editorService.update({
+      holder: this.holder,
+      data: {
+        time: Date.now(),
+        blocks
+      }
+    });
   }
 }

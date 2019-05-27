@@ -78,7 +78,9 @@ export interface InjectorApiCallOptions {
  * A response from the EditorJS api
  */
 export interface InjectorApiCallResponse<T = any> extends InjectorApiCallOptions {
-  result: T;
+  result?: T;
+
+  instance?: EditorJSInstance;
 }
 
 /**
