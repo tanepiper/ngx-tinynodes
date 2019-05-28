@@ -14,11 +14,10 @@ import {
   PluginSimpleImageModule
 } from '@tinynodes/ngx-editorjs-plugins';
 import { MarkdownModule } from 'ngx-markdown';
-import { createNgxEditorJSDemoTools } from './config';
 import { PageContainerComponent } from './containers/page-container/page-container.component';
 import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
-import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core/src';
+import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
 import { FormContainerComponent } from './containers/form-container/form-container.component';
 import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-container.component';
 import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.component';
@@ -41,12 +40,6 @@ import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.modu
     PluginMarkerModule,
     NgxTinynodesCoreModule,
     NgxEditorJSDemoMaterialModule
-  ],
-  providers: [
-    {
-      provide: UserPlugins,
-      useFactory: createNgxEditorJSDemoTools
-    }
   ],
   declarations: [
     PageContainerComponent,

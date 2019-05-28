@@ -14,6 +14,7 @@ import {
 } from '../types/injector';
 import { ChangeMap, EditorMap, ReadyMap, SavedMap } from '../types/maps';
 import { PluginsMap, ToolSettingsMap, UserPlugins } from '../types/plugins';
+import { NgxEditorJSPluginService } from '@tinynodes/ngx-editorjs-plugins';
 
 /**
  * The NgxEditorJSService handles the management of EditorJS instances, plugins and lifecycle observables
@@ -75,11 +76,12 @@ export class NgxEditorJSService {
   constructor(
     @Inject(EditorJSInstance) private readonly editorJs: EditorJSClass,
     @Inject(NGX_EDITORJS_CONFIG) private readonly config: NgxEditorJSModuleConfig,
-    @Inject(UserPlugins) private readonly userPlugins: PluginsMap,
+    private readonly plugins: NgxEditorJSPluginService,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
   ) {
-    Object.entries({ ...this.userPlugins }).forEach(([key, tool]) => (this.pluginsMap[key] = tool));
+    console.log(this.plugins.getPlugin('header'))
+    //Object.entries({ ...this.userPlugins }).forEach(([key, tool]: [string, any]) => (this.pluginsMap[key] = new tool()));
   }
 
   /**
@@ -370,19 +372,20 @@ export class NgxEditorJSService {
    * @param exclude Optional array of keys to exclude from the map
    */
   private getTools(exclude: string[] = []): ToolSettingsMap {
-    return Object.entries(this.pluginsMap)
+
+    return Object.entries(this.plugins.getPlugins())
       .filter(([key]) => !exclude.includes(key))
       .reduce(
         (finalTools, [key, plugin]) =>
           plugin.shortcut
             ? {
                 [key]: {
-                  class: plugin.plugin(),
-                  shortcut: plugin.shortcut()
+                  class: plugin.plugin,
+                  shortcut: plugin.shortcut
                 },
                 ...finalTools
               }
-            : { [key]: plugin.plugin(), ...finalTools },
+            : { [key]: plugin.plugin, ...finalTools },
         {}
       );
   }

@@ -8,6 +8,9 @@ import { PluginListModule } from './plugins/list/list.module';
 import { PluginMarkerModule } from './plugins/marker/marker.module';
 import { PluginParagraphModule } from './plugins/paragraph/paragraph.module';
 import { PluginSimpleImageModule } from './plugins/simple-image/simple-image.module';
+import { NgxEditorJSPluginService } from './services/plugin-service.service';
+
+import Paragraph from '@editorjs/paragraph';
 
 /**
  * The `NgxEditorjsPluginsModule` provides several additional modules
@@ -17,6 +20,8 @@ import { PluginSimpleImageModule } from './plugins/simple-image/simple-image.mod
  * is also possible to import each individual module as required.
  */
 @NgModule({
+  providers: [NgxEditorJSPluginService],
+
   imports: [
     CommonModule,
     PluginCodeModule,
@@ -39,4 +44,5 @@ import { PluginSimpleImageModule } from './plugins/simple-image/simple-image.mod
     PluginSimpleImageModule
   ]
 })
-export class NgxEditorjsPluginsModule {}
+export class NgxEditorjsPluginsModule {
+}
