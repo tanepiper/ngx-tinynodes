@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import {
-  createPluginConfig,
   EDITOR_JS_TOOL_INJECTOR,
   PLUGIN_CONFIG,
   PluginClasses,
   PluginTypes
 } from '../../types/plugins';
 import Paragraph from '@editorjs/paragraph';
+import { createPluginConfig } from '../../util/plugin';
 
 
 /**

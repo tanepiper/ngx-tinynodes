@@ -64,6 +64,9 @@
                             <a href="#EDITIOR_JS_INSTANCE" title="libs/ngx-editorjs/src/lib/types/config.ts"><b>EDITIOR_JS_INSTANCE</b>&nbsp;&nbsp;&nbsp;(libs/.../config.ts)</a>
                         </li>
                         <li>
+                            <a href="#EDITOR_JS_TOOL_INJECTOR" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>EDITOR_JS_TOOL_INJECTOR</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
+                        </li>
+                        <li>
                             <a href="#EDITORJS_FORM_VALUE_ACCESSOR" title="libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts"><b>EDITORJS_FORM_VALUE_ACCESSOR</b>&nbsp;&nbsp;&nbsp;(libs/.../editorjs.component.ts)</a>
                         </li>
                         <li>
@@ -79,19 +82,16 @@
                             <a href="#FOR_ROOT_OPTIONS_TOKEN" title="libs/ngx-editorjs/src/lib/types/config.ts"><b>FOR_ROOT_OPTIONS_TOKEN</b>&nbsp;&nbsp;&nbsp;(libs/.../config.ts)</a>
                         </li>
                         <li>
-                            <a href="#InitialPlugins" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>InitialPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
-                        </li>
-                        <li>
                             <a href="#MAP_DEFAULTS" title="libs/ngx-editorjs/src/lib/types/injector.ts"><b>MAP_DEFAULTS</b>&nbsp;&nbsp;&nbsp;(libs/.../injector.ts)</a>
                         </li>
                         <li>
                             <a href="#NGX_EDITORJS_CONFIG" title="libs/ngx-editorjs/src/lib/types/config.ts"><b>NGX_EDITORJS_CONFIG</b>&nbsp;&nbsp;&nbsp;(libs/.../config.ts)</a>
                         </li>
                         <li>
-                            <a href="#UserPlugins" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>UserPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
+                            <a href="#PLUGIN_CONFIG" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>PLUGIN_CONFIG</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
                         </li>
                         <li>
-                            <a href="#UserPlugins" title="libs/ngx-editorjs/src/lib/types/plugins.ts"><b>UserPlugins</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
+                            <a href="#PluginClasses" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>PluginClasses</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -213,6 +213,90 @@
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Injection token provied for <code>NgxEditorJSConfig</code></p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+    <h3>libs/ngx-editorjs-plugins/src/lib/types/plugins.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="EDITOR_JS_TOOL_INJECTOR"></a>
+                        <span class="name">
+                            <b>
+                            EDITOR_JS_TOOL_INJECTOR</b>
+                            <a href="#EDITOR_JS_TOOL_INJECTOR"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new InjectionToken&lt;EditorJSPlugin&gt;(&#x27;EDITOR_JS_TOOL_INJECTOR&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The Injection token for initial plugins as defined in the ngx-editorjs module</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="PLUGIN_CONFIG"></a>
+                        <span class="name">
+                            <b>
+                            PLUGIN_CONFIG</b>
+                            <a href="#PLUGIN_CONFIG"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;PLUGIN_CONFIG&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Injection token for a plugin config</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="PluginClasses"></a>
+                        <span class="name">
+                            <b>
+                            PluginClasses</b>
+                            <a href="#PluginClasses"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfigMap&gt;(&#x27;PluginClasses&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Injection token for the plugin config map</p>
 </div>
                     </td>
                 </tr>
@@ -383,93 +467,6 @@
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Default values for each internal map</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
-    <h3>libs/ngx-editorjs-plugins/src/lib/types/plugins.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="InitialPlugins"></a>
-                        <span class="name">
-                            <b>
-                            InitialPlugins</b>
-                            <a href="#InitialPlugins"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;)</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The Injection token for initial plugins as defined in the ngx-editorjs module</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="UserPlugins"></a>
-                        <span class="name">
-                            <b>
-                            UserPlugins</b>
-                            <a href="#UserPlugins"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;)</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The injection token for adding plugins via your own application</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
-    <h3>libs/ngx-editorjs/src/lib/types/plugins.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="UserPlugins"></a>
-                        <span class="name">
-                            <b>
-                            UserPlugins</b>
-                            <a href="#UserPlugins"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new InjectionToken&lt;PluginsMap&gt;(&#x27;UserPlugins&#x27;)</code>
-                        </td>
-                    </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The injection token for adding plugins via your own application</p>
 </div>
                     </td>
                 </tr>

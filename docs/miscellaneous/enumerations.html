@@ -28,7 +28,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content interface">
+               <div class="content miscellaneous-enumerations">
                    <div class="content-data">
 
 
@@ -42,118 +42,70 @@
 
 
 
+
+
+
 <ol class="breadcrumb">
-  <li>Interfaces</li>
-  <li>PluginsMap</li>
+  <li>Miscellaneous</li>
+  <li>Enumerations</li>
 </ol>
 
-<ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
-</ul>
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#PluginTypes" title="libs/ngx-editorjs-plugins/src/lib/types/plugins.ts"><b>PluginTypes</b>&nbsp;&nbsp;&nbsp;(libs/.../plugins.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
-<div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
-        <p class="comment">
-            <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/types/plugins.ts</code>
-        </p>
-
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>A Module plugin configuration</p>
-
-            </p>
-
-
-
-
-            <section>
-    <h3 id="inputs">Indexable</h3>
+    <h3>libs/ngx-editorjs-plugins/src/lib/types/plugins.ts</h3>
+    <section>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <code>[key: string]:        <code><a href="../interfaces/BasePlugin.html" target="_self" >BasePlugin</a></code>
-</code>
+                        <a name="PluginTypes"></a>
+                        <span class="name"><b>PluginTypes</b><a href="#PluginTypes"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>The types of plugins supported, currently block and inline</p>
+</div>
+                        </td>
+                    </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">libs/ngx-editorjs/src/lib/types/plugins.ts:7</a></div>
+                                &nbsp;Block
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The key of the plugin and the plugin class extending <code>BasePlugin</code></p>
-</div>
-                    </td>
-                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>block</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;Inline
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Value : </i><code>inline</code>
+                            </td>
+                        </tr>
             </tbody>
         </table>
 </section>
-
-    </div>
-
-
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import { ToolConstructable, ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
-
-/**
- * A Module plugin configuration
- */
-export interface PluginsMap {
-  /**
-   * The key of the plugin and the plugin class extending &#x60;BasePlugin&#x60;
-   */
-  [key: string]: BasePlugin;
-}
-
-/**
- * A map of all the tools settings
- */
-export interface ToolSettingsMap {
-  /**
-   * The key of the plugin and the plugin exported tool settings
-   */
-  [key: string]: ToolConstructable | ToolSettings;
-}
-
-/**
- * Defines the interface for required and optional plugin methods.
- * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
- */
-export interface BasePlugin {
-  /**
-   * The plugin settings to be returned
-   */
-  plugin: () &#x3D;&gt; ToolConstructable | ToolSettings;
-
-  /**
-   * Optional shortcut for the plugin
-   */
-  shortcut?: () &#x3D;&gt; string;
-}
-
-/**
- * The injection token for adding plugins via your own application
- */
-export const UserPlugins &#x3D; new InjectionToken&lt;PluginsMap&gt;(&#x27;UserPlugins&#x27;);
-</code></pre>
-    </div>
-</div>
-
-
-
 
 
 
@@ -173,8 +125,8 @@ export const UserPlugins &#x3D; new InjectionToken&lt;PluginsMap&gt;(&#x27;UserP
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginsMap.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-enumerations';
+            var COMPODOC_CURRENT_PAGE_URL = 'enumerations.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

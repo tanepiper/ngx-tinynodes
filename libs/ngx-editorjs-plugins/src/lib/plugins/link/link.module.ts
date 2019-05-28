@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import {
-  createPluginConfig,
   EDITOR_JS_TOOL_INJECTOR,
   PLUGIN_CONFIG,
   PluginClasses,
@@ -8,6 +7,7 @@ import {
 } from '../../types/plugins';
 
 import Link from '@editorjs/link';
+import { createPluginConfig } from '../../util/plugin';
 
 
 /**

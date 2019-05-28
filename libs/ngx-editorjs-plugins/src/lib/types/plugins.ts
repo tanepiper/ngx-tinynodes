@@ -1,19 +1,31 @@
 import { InjectionToken } from '@angular/core';
 import { ToolSettings, ToolConstructable } from '@editorjs/editorjs';
 
+/**
+ * Block Data interface
+ */
 export interface BlockData {
   [key: string]: any;
 }
 
+/**
+ * The types of plugins supported, currently block and inline
+ */
 export enum PluginTypes {
+  /**
+   * A EditorJS block plugin
+   */
   Block = 'block',
+  /**
+   * A EditorJS inline plugin
+   */
   Inline = 'inline'
 }
 
 /**
  * The types of plugins supported via the plugin `type` property
  */
-export type PluginType = 'block' | 'inline' | string;
+export type PluginType = PluginTypes.Block | PluginTypes.Inline | string;
 
 /**
  * A plugin property
@@ -26,106 +38,48 @@ export type PluginProperty = string;
 export type EditorJSPlugin = ToolConstructable | ToolSettings;
 
 /**
- * Defines the interface for required and optional plugin methods.
- * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
- */
-export interface NgxEditorJSPlugin {
-  /**
-   * Specifies the type of plugin for the plugin provider
-   */
-   type: PluginProperty;
-  /**
-   * The key to use for the plugin
-   */
-   key: PluginProperty;
-  /**
-   * Label for displaying the plugin name
-   */
-   pluginName: PluginProperty;
-
-  /**
-   * Optional description for the plugin
-   */
-   description?: PluginProperty;
-  /**
-   * Optional shortcut for the plugin
-   */
-   shortcut?: PluginProperty;
-
-  /**
-   * Optional block data, used to define the block data for this type
-   * and used as a default
-   */
-   blockData?: BlockData;
-  /**
-   * The plugin settings to be returned, for dependency injection this should be
-   * a function that returns the plugin class
-   */
-  plugin: () => EditorJSPlugin;
-}
-
-// /**
-//  * A Module plugin configuration
-//  */
-// export interface PluginConfig {
-//   /**
-//    * The key of the plugin and the plugin class extending `BasePlugin`
-//    */
-//   [key: string]: PluginClass;
-// }
-
-/**
  * A map of all the tools settings
  */
 export interface ToolSettingsMap {
   /**
    * The key of the plugin and the plugin exported tool settings
    */
-  [key: string]: ToolConstructable | ToolSettings;
+  [key: string]: EditorJSPlugin;
 }
 
 /**
- * Interface for the injected EditorJS class, returns the static
- * class of EditorJS with the version and that creates the instance and provides
- * the Typescript parse with type information
+ * A plugin configuration object
  */
-export interface PluginClass<T = NgxEditorJSPlugin> extends Function {
-  /**
-   * Constructor
-   */
-  new (...args: any[]): T;
-}
-
 export interface PluginConfig {
   /**
    * Specifies the type of plugin for the plugin provider
    */
-   type: PluginProperty;
+  type: PluginProperty;
   /**
    * The key to use for the plugin
    */
-   key: PluginProperty;
+  key: PluginProperty;
   /**
    * Label for displaying the plugin name
    */
-   pluginName: PluginProperty;
-
+  pluginName: PluginProperty;
   /**
    * Optional description for the plugin
    */
-   description?: PluginProperty;
+  description?: PluginProperty;
   /**
    * Optional shortcut for the plugin
    */
-   shortcut?: PluginProperty;
-
+  shortcut?: PluginProperty;
   /**
    * Optional block data, used to define the block data for this type
    * and used as a default
    */
-   blockData?: BlockData;
-
-   plugin: EditorJSPlugin;
+  blockData?: BlockData;
+  /**
+   * The plugin for the editor
+   */
+  plugin: EditorJSPlugin | undefined;
 }
 
 /**
@@ -133,24 +87,23 @@ export interface PluginConfig {
  */
 export const EDITOR_JS_TOOL_INJECTOR = new InjectionToken<EditorJSPlugin>('EDITOR_JS_TOOL_INJECTOR');
 
+/**
+ * Injection token for a plugin config
+ */
 export const PLUGIN_CONFIG = new InjectionToken<PluginConfig>('PLUGIN_CONFIG');
 
-export function createPluginConfig(pluginConfigs: PluginConfig[], plugins: EditorJSPlugin[]) {
-  const result =  Object.entries(pluginConfigs).reduce((pluginConfig, [index, config]) => {
-    console.log(config)
-    return {...pluginConfig, [config.key]: {...config, plugin: plugins[index]}}
-  }, {});
-  console.log(result);
-  return result;
-}
 
 /**
- * The injection token for adding plugins via your own application
+ * A map of plugin configs
  */
-export const UserPlugins = new InjectionToken<PluginConfig>('UserPlugins');
-
-export interface PluginClassesMap {
+export interface PluginConfigMap {
+  /**
+   * A plugin config per key
+   */
   [key: string]: PluginConfig
 }
 
-export const PluginClasses = new InjectionToken<PluginClassesMap>('PluginClasses');
+/**
+ * Injection token for the plugin config map
+ */
+export const PluginClasses = new InjectionToken<PluginConfigMap>('PluginClasses');

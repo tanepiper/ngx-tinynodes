@@ -28,7 +28,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content interface">
                    <div class="content-data">
 
 
@@ -37,9 +37,14 @@
 
 
 
+
+
+
+
+
 <ol class="breadcrumb">
-  <li>Injectables</li>
-  <li>PluginHeader</li>
+  <li>Interfaces</li>
+  <li>PluginConfigMap</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -57,129 +62,161 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-plugins/src/lib/plugins/header/header.plugin.ts</code>
+            <code>libs/ngx-editorjs-plugins/src/lib/types/plugins.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>This plugin returns the tool settings for a <code>&lt;h1&gt; - &lt;h6&gt;</code> block tool for EditorJS</p>
+                <p>A map of plugin configs</p>
 
             </p>
 
 
 
-            <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#plugin">plugin</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
 
             <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="plugin"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            plugin
-                        </b>
-                        <a href="#plugin"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>plugin()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/plugins/header/header.plugin.ts:14</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Returns the plugin settings</p>
+    <h3 id="inputs">Indexable</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <code>[key: string]:        <code><a href="../interfaces/PluginConfig.html" target="_self" >PluginConfig</a></code>
+</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/types/plugins.ts:99</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>A plugin config per key</p>
 </div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>ToolSettings</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 </section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { ToolSettings } from &#x27;@editorjs/editorjs&#x27;;
-import Header from &#x27;@editorjs/header&#x27;;
-import { BasePlugin } from &#x27;../../types/plugins&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
+import { ToolSettings, ToolConstructable } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
- * This plugin returns the tool settings for a &#x60;&lt;h1&gt; - &lt;h6&gt;&#x60; block tool for EditorJS
+ * Block Data interface
  */
-@Injectable()
-export class PluginHeader implements BasePlugin {
-  /**
-   * Returns the plugin settings
-   */
-  public plugin(): ToolSettings {
-    return Header;
-  }
+export interface BlockData {
+  [key: string]: any;
 }
+
+/**
+ * The types of plugins supported, currently block and inline
+ */
+export enum PluginTypes {
+  /**
+   * A EditorJS block plugin
+   */
+  Block &#x3D; &#x27;block&#x27;,
+  /**
+   * A EditorJS inline plugin
+   */
+  Inline &#x3D; &#x27;inline&#x27;
+}
+
+/**
+ * The types of plugins supported via the plugin &#x60;type&#x60; property
+ */
+export type PluginType &#x3D; PluginTypes.Block | PluginTypes.Inline | string;
+
+/**
+ * A plugin property
+ */
+export type PluginProperty &#x3D; string;
+
+/**
+ * The EditorJS tool settings for this plugin
+ */
+export type EditorJSPlugin &#x3D; ToolConstructable | ToolSettings;
+
+/**
+ * A map of all the tools settings
+ */
+export interface ToolSettingsMap {
+  /**
+   * The key of the plugin and the plugin exported tool settings
+   */
+  [key: string]: EditorJSPlugin;
+}
+
+/**
+ * A plugin configuration object
+ */
+export interface PluginConfig {
+  /**
+   * Specifies the type of plugin for the plugin provider
+   */
+  type: PluginProperty;
+  /**
+   * The key to use for the plugin
+   */
+  key: PluginProperty;
+  /**
+   * Label for displaying the plugin name
+   */
+  pluginName: PluginProperty;
+  /**
+   * Optional description for the plugin
+   */
+  description?: PluginProperty;
+  /**
+   * Optional shortcut for the plugin
+   */
+  shortcut?: PluginProperty;
+  /**
+   * Optional block data, used to define the block data for this type
+   * and used as a default
+   */
+  blockData?: BlockData;
+  /**
+   * The plugin for the editor
+   */
+  plugin: EditorJSPlugin | undefined;
+}
+
+/**
+ * The Injection token for initial plugins as defined in the ngx-editorjs module
+ */
+export const EDITOR_JS_TOOL_INJECTOR &#x3D; new InjectionToken&lt;EditorJSPlugin&gt;(&#x27;EDITOR_JS_TOOL_INJECTOR&#x27;);
+
+/**
+ * Injection token for a plugin config
+ */
+export const PLUGIN_CONFIG &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;PLUGIN_CONFIG&#x27;);
+
+
+/**
+ * A map of plugin configs
+ */
+export interface PluginConfigMap {
+  /**
+   * A plugin config per key
+   */
+  [key: string]: PluginConfig
+}
+
+/**
+ * Injection token for the plugin config map
+ */
+export const PluginClasses &#x3D; new InjectionToken&lt;PluginConfigMap&gt;(&#x27;PluginClasses&#x27;);
 </code></pre>
     </div>
-
 </div>
-
-
-
-
-
 
 
 
@@ -202,8 +239,8 @@ export class PluginHeader implements BasePlugin {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginHeader.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'PluginConfigMap.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

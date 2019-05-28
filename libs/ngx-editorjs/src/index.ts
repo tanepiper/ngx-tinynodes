@@ -16,8 +16,3 @@ export {
   NGX_EDITORJS_CONFIG
 } from './lib/types/config';
 export { CreateEditorJSOptions } from './lib/types/editorjs-service';
-export {
-  EditorJSInstanceConfig as ɵEditorJSInstanceConfig,
-  EDITORJS_MODULE_IMPORT as ɵEDITORJS_MODULE_IMPORT
-} from './lib/types/injector';
-export { BasePlugin, PluginsMap as PluginConfig, UserPlugins } from './lib/types/plugins';

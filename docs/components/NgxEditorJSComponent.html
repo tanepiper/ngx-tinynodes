@@ -171,17 +171,9 @@ The instance also provides an Autosave feature by providing an autosave time in 
                                 <a href="#editorInstance">editorInstance</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#onChange">onChange</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#onDestroy$">onDestroy$</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#onTouch">onTouch</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
@@ -212,6 +204,14 @@ The instance also provides an Autosave feature by providing an autosave time in 
                             </li>
                             <li>
                                 <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onChange">onChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onTouch">onTouch</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -1049,8 +1049,8 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="292"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:292</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="289"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:289</a></div>
                 </td>
             </tr>
 
@@ -1090,8 +1090,8 @@ start any autosave timers</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="306"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:306</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="302"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:302</a></div>
                 </td>
             </tr>
 
@@ -1105,6 +1105,166 @@ as well as the editor service, also the onDestroy$ subject is completed</p>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onChange"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            onChange
+                        </b>
+                        <a href="#onChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onChange(data: OutputData)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="201"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:201</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Angular Form onChange method, this is a default method that updates the
+editor instance with blocks on change</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>OutputData</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The data to write</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onTouch"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            onTouch
+                        </b>
+                        <a href="#onTouch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onTouch(event?: MouseEvent)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="192"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:192</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Angular Form onTouch method, this is a default method that updates
+the touch status on the component</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                            <code>MouseEvent</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>The mouse event from the touch</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -1282,8 +1442,8 @@ as well as the editor service, also the onDestroy$ subject is completed</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="266"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:266</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="263"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:263</a></div>
                 </td>
             </tr>
 
@@ -1468,64 +1628,6 @@ as well as the editor service, also the onDestroy$ subject is completed</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="onChange"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            onChange</b>
-                            <a href="#onChange"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:201</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Angular Form onChange method, this is a default method that updates the
-editor instance with blocks on change</p>
-</div>
-                    </td>
-                </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                          <div class="io-description">
-                                  <b>Parameters :</b>
-                                  <table class="params">
-                                      <thead>
-                                          <tr>
-                                                <td>Name</td>
-                                                    <td>Description</td>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                                <tr>
-                                                        <td>data</td>
-                                                        <td>
-                                                                <code><p>The data to write</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                      </tbody>
-                                  </table>
-                          </div>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="onDestroy$"></a>
                         <span class="name">
                             <b>
@@ -1555,64 +1657,6 @@ and then <code>.complete()</code> on the <code>this.onDestroy$</code> subject</p
                     </td>
                 </tr>
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="onTouch"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            onTouch</b>
-                            <a href="#onTouch"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">libs/ngx-editorjs/src/lib/containers/editorjs/editorjs.component.ts:192</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Angular Form onTouch method, this is a default method that updates
-the touch status on the component</p>
-</div>
-                    </td>
-                </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                          <div class="io-description">
-                                  <b>Parameters :</b>
-                                  <table class="params">
-                                      <thead>
-                                          <tr>
-                                                <td>Name</td>
-                                                    <td>Description</td>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                                <tr>
-                                                        <td>event</td>
-                                                        <td>
-                                                                <code><p>The mouse event from the touch</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                      </tbody>
-                                  </table>
-                          </div>
-                        </td>
-                    </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -1846,7 +1890,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * the touch status on the component
    * @param event The mouse event from the touch
    */
-  public onTouch &#x3D; (event?: MouseEvent): void &#x3D;&gt; {
+  public onTouch (event?: MouseEvent): void {
     this.isTouched.emit(true);
   };
 
@@ -1855,10 +1899,10 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * editor instance with blocks on change
    * @param data The data to write
    */
-  public onChange &#x3D; (data: OutputData): void &#x3D;&gt; {
-    this.editorService.update({ holder: this.holder, data });
-    this.changeDetection.markForCheck();
+  public onChange (data: OutputData): void  {
+    this.writeValue(data);
   };
+
 
   /**
    * Angular Forms value writer, updates the editor
@@ -1905,14 +1949,11 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
               .subscribe();
           }
         } else {
-          this.isFocused.emit(false);
           if (this.timerSubscription$) {
             this.timerSubscription$.unsubscribe();
           }
+          this.isFocused.emit(false);
         }
-      }),
-      tap(() &#x3D;&gt; {
-        this.changeDetection.markForCheck();
       })
     );
   }
@@ -1952,7 +1993,6 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() &#x3D;&gt; {
         this.onTouch();
-        this.changeDetection.markForCheck();
       });
   }
 

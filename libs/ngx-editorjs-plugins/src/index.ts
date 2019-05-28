@@ -7,5 +7,18 @@ export { PluginListModule } from './lib/plugins/list/list.module';
 export { PluginMarkerModule } from './lib/plugins/marker/marker.module';
 export { PluginParagraphModule } from './lib/plugins/paragraph/paragraph.module';
 export { PluginSimpleImageModule } from './lib/plugins/simple-image/simple-image.module';
-export * from './lib/types/plugins';
+export {
+  EditorJSPlugin,
+  PluginConfig,
+  PLUGIN_CONFIG,
+  PluginTypes,
+  PluginConfigMap,
+  PluginClasses,
+  BlockData,
+  EDITOR_JS_TOOL_INJECTOR,
+  PluginProperty,
+  PluginType,
+  ToolSettingsMap,
+} from './lib/types/plugins';
 export { NgxEditorJSPluginService } from './lib/services/plugin-service.service';
+export { createPluginConfig } from './lib/util/plugin';

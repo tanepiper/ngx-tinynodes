@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import {
-  createPluginConfig,
   EDITOR_JS_TOOL_INJECTOR,
   PLUGIN_CONFIG,
   PluginClasses,
   PluginTypes
 } from '../../types/plugins';
 import Code from '@editorjs/code';
+import { createPluginConfig } from '../../util/plugin';
 
 /**
  * A module that provides the default EditorJS `<code>` block tool.

@@ -52,8 +52,20 @@
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2 id="111---2019-05-15">[1.1.1] - 2019-05-15</h2>
+<h2 id="unreleased">[Unreleased]</h2>
+<h2 id="added">Added</h2>
+<ul>
+<li>Module has had <code>NgxEditorJSPluginService</code> added back to plugin module, this service now provides a more reliable
+way of handling plugins</li>
+</ul>
 <h2 id="changed">Changed</h2>
+<ul>
+<li>Plugins no longer provide an injectable class, all plugins are modules that provide
+injectable <code>EDITOR_JS_TOOL_INJECTOR</code> and <code>PLUGIN_CONFIG</code>.  These provides are injected in the
+plugin service and made available in the editor.</li>
+</ul>
+<h2 id="111---2019-05-15">[1.1.1] - 2019-05-15</h2>
+<h2 id="changed-1">Changed</h2>
 <ul>
 <li>Documentation updates</li>
 </ul>
@@ -63,7 +75,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Removed the NgxEditorJSPluginService from this module back to core</li>
 </ul>
 <h2 id="100---2019-05-11">[1.0.0] - 2019-05-11</h2>
-<h3 id="added">Added</h3>
+<h3 id="added-1">Added</h3>
 <ul>
 <li>Initial release of module with default plugins - see <a href="&#39;./README.md">README.md</a> for details.</li>
 <li>Moved the internal PluginService to public <code>NgxEditorJSPluginService</code> provided by this module</li>

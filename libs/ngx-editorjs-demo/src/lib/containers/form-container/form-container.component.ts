@@ -1,18 +1,9 @@
-import {
-  AfterContentInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Output,
-  ViewChild
-} from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Block, NgxEditorJSService, NgxEditorJSMatFieldComponent } from '@tinynodes/ngx-editorjs';
+import { Block, NgxEditorJSMatFieldComponent, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
 import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { pluck, take, takeUntil, tap, distinctUntilChanged, filter } from 'rxjs/operators';
-import { Page } from '../../store/pages/pages.models';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, pluck, take, takeUntil } from 'rxjs/operators';
 import { PagesService } from '../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
 
@@ -23,63 +14,39 @@ import { OutputData } from '@editorjs/editorjs';
 @Component({
   selector: 'ngx-form-container',
   templateUrl: 'form-container.component.html',
-  styleUrls: ['form-container.component.scss'],
+  styleUrls: [ 'form-container.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormContainerComponent implements AfterContentInit {
-  @ViewChild('ngxEditorJS', { read: NgxEditorJSMatFieldComponent })
-  public readonly ngxEditorJS: NgxEditorJSMatFieldComponent;
-
   /**
    * Title of the page
    */
   public title = 'ngx-editorjs Material Field';
+  /**
+   * The holder ID for this demo
+   */
+  public holder = 'ngx-editorjs-demo';
+  /**
+   * Editor form group
+   */
+  public editorForm = this.fb.group({
+    pageName: [ '' ],
+    pageTags: new FormControl([]),
+    pageEditor: new FormControl([])
+  });
   /**
    * Internal onDestroy$ subject
    */
   private onDestroy$ = new Subject<boolean>();
 
   /**
-   * The holder ID for this demo
-   */
-  public holder = 'ngx-editorjs-demo';
-
-  /**
-   * Panel open state
-   */
-  private panelOpen$ = new BehaviorSubject<boolean>(true);
-
-  /**
    * Menu state for the component
    */
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
-
   /**
    * Autosave state
    */
   private autoSave$ = new BehaviorSubject<number>(0);
-
-  /**
-   * Enable autosave, set the value from the autosaveTime
-   * @param autosaveTime Time to set for autosave
-   */
-  public enableAutosave(autosaveTime: number) {
-    this.autoSave$.next(autosaveTime);
-  }
-
-  /**
-   * Disable autosave
-   */
-  public disableAutosave() {
-    this.autoSave$.next(0);
-  }
-
-  /**
-   * Get the current autosave value
-   */
-  public get autosave() {
-    return this.autoSave$.asObservable();
-  }
 
   /**
    * The constructor sets up the blocks to the initial demo data
@@ -108,13 +75,11 @@ export class FormContainerComponent implements AfterContentInit {
   }
 
   /**
-   * Editor form group
+   * Get the current autosave value
    */
-  public editorForm = this.fb.group({
-    pageName: [''],
-    pageTags: new FormControl([]),
-    pageEditor: new FormControl([])
-  });
+  public get autosave() {
+    return this.autoSave$.asObservable();
+  }
 
   /**
    * Get the page links
@@ -145,6 +110,21 @@ export class FormContainerComponent implements AfterContentInit {
   }
 
   /**
+   * Enable autosave, set the value from the autosaveTime
+   * @param autosaveTime Time to set for autosave
+   */
+  public enableAutosave(autosaveTime: number) {
+    this.autoSave$.next(autosaveTime);
+  }
+
+  /**
+   * Disable autosave
+   */
+  public disableAutosave() {
+    this.autoSave$.next(0);
+  }
+
+  /**
    * Call the editor save method
    */
   public save() {
@@ -162,10 +142,10 @@ export class FormContainerComponent implements AfterContentInit {
 
   /**
    * Update the component
-   * @param blocks
+   * @param data
    */
-  public update(data: OutputData, triggerUpdate = true) {
-    this.editorService.update({ holder: this.holder, data }, triggerUpdate);
+  public update(data: OutputData) {
+    this.editorService.update({ holder: this.holder, data });
     this.cd.markForCheck();
   }
 
@@ -217,7 +197,7 @@ export class FormContainerComponent implements AfterContentInit {
           }
         ];
         this.menu$.next(data.links);
-        this.update({ blocks }, false);
+        this.update({ blocks });
         this.cd.markForCheck();
       });
   }

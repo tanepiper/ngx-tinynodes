@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
-import { NgxEditorJSModule, UserPlugins } from '@tinynodes/ngx-editorjs';
+import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
 import {
   PluginCodeModule,
   PluginHeaderModule,
@@ -23,9 +23,12 @@ import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-c
 import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.component';
 import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.module';
 
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+
 @NgModule({
   imports: [
     CommonModule,
+    NgxJsonViewerModule,
     RouterModule.forChild(ngxEditorjsDemoRoutes),
     MarkdownModule.forChild(),
     ReactiveFormsModule,
@@ -47,7 +50,8 @@ import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.modu
     NgxEditorJSDemoHomeComponent,
     NgxEditorJSDemoTagComponent
   ],
-  exports: [PageStoreModule, PageContainerComponent, FormContainerComponent],
-  entryComponents: [PageContainerComponent, FormContainerComponent]
+  exports: [ PageStoreModule, PageContainerComponent, FormContainerComponent ],
+  entryComponents: [ PageContainerComponent, FormContainerComponent ]
 })
-export class NgxEditorjsDemoModule {}
+export class NgxEditorjsDemoModule {
+}

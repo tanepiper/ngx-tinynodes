@@ -189,7 +189,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * the touch status on the component
    * @param event The mouse event from the touch
    */
-  public onTouch = (event?: MouseEvent): void => {
+  public onTouch (event?: MouseEvent): void {
     this.isTouched.emit(true);
   };
 
@@ -198,10 +198,10 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * editor instance with blocks on change
    * @param data The data to write
    */
-  public onChange = (data: OutputData): void => {
-    this.editorService.update({ holder: this.holder, data });
-    this.changeDetection.markForCheck();
+  public onChange (data: OutputData): void  {
+    this.writeValue(data);
   };
+
 
   /**
    * Angular Forms value writer, updates the editor
@@ -248,14 +248,11 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
               .subscribe();
           }
         } else {
-          this.isFocused.emit(false);
           if (this.timerSubscription$) {
             this.timerSubscription$.unsubscribe();
           }
+          this.isFocused.emit(false);
         }
-      }),
-      tap(() => {
-        this.changeDetection.markForCheck();
       })
     );
   }
@@ -295,7 +292,6 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => {
         this.onTouch();
-        this.changeDetection.markForCheck();
       });
   }
 
