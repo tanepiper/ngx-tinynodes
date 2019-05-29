@@ -19,15 +19,17 @@ import {
 } from '@tinynodes/ngx-editorjs-plugins';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
-const routes: Routes = [ {
-  path: '',
-  component: NgxTinynodesMaterialFormFieldDemoComponent
-} ];
+const routes: Routes = [
+  {
+    path: '',
+    component: NgxTinynodesMaterialFormFieldDemoComponent
+  }
+];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild((routes)),
+    RouterModule.forChild(routes),
     ReactiveFormsModule,
     NgxJsonViewerModule,
     PageStoreModule,
@@ -42,8 +44,7 @@ const routes: Routes = [ {
     NgxTinynodesCoreModule,
     NgxEditorJSDemoMaterialModule
   ],
-  declarations: [ NgxEditorJSDemoTagComponent, NgxTinynodesMaterialFormFieldDemoComponent ],
-  entryComponents: [ NgxTinynodesMaterialFormFieldDemoComponent ]
+  declarations: [NgxEditorJSDemoTagComponent, NgxTinynodesMaterialFormFieldDemoComponent],
+  entryComponents: [NgxTinynodesMaterialFormFieldDemoComponent]
 })
-export class NgxTinynodesMaterialFormFieldDemo {
-}
+export class NgxTinynodesMaterialFormFieldDemo {}

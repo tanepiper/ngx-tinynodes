@@ -14,8 +14,7 @@ export class NgxEditorJSPluginService {
   /**
    * @param pluginConfigMap The plugin configuration map injected into the application
    */
-  constructor(@Inject(PluginClasses) private readonly pluginConfigMap: PluginConfigMap) {
-  }
+  constructor(@Inject(PluginClasses) private readonly pluginConfigMap: PluginConfigMap) {}
 
   /**
    * Get a map of all plugin configurations
@@ -39,11 +38,13 @@ export class NgxEditorJSPluginService {
    * @param excludeList
    */
   public getPluginsWithExclude(excludeList: string[] = []): PluginConfigMap {
-    return Object.entries(this.pluginConfigMap).filter(([key]) => {
-      return !excludeList.includes(key)
-    }).reduce((pluginMap, [key, plugin]) => {
-      return {...pluginMap, [key]: plugin}
-    }, {});
+    return Object.entries(this.pluginConfigMap)
+      .filter(([key]) => {
+        return !excludeList.includes(key);
+      })
+      .reduce((pluginMap, [key, plugin]) => {
+        return { ...pluginMap, [key]: plugin };
+      }, {});
   }
 
   /**
@@ -51,10 +52,12 @@ export class NgxEditorJSPluginService {
    * @param includeList
    */
   public getPluginsWithInclude(includeList: string[] = []): PluginConfigMap {
-    return Object.entries(this.pluginConfigMap).filter(([key]) => {
-      return includeList.includes(key)
-    }).reduce((pluginMap, [key, plugin]) => {
-      return {...pluginMap, [key]: plugin}
-    }, {});
+    return Object.entries(this.pluginConfigMap)
+      .filter(([key]) => {
+        return includeList.includes(key);
+      })
+      .reduce((pluginMap, [key, plugin]) => {
+        return { ...pluginMap, [key]: plugin };
+      }, {});
   }
 }

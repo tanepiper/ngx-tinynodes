@@ -1,12 +1,12 @@
 # Ngx-EditorJS Plugins
 
-This module provides the core Plugin service for [@tinynodes/ngx-editorjs](https://www.npmjs.com/package/@tinynodes/ngx-editorjs), and also provides a default set of [EditorJS](https://editorjs.io) plugins 
+This module provides the core Plugin service for [@tinynodes/ngx-editorjs](https://www.npmjs.com/package/@tinynodes/ngx-editorjs), and also provides a default set of [EditorJS](https://editorjs.io) plugins
 for using Angular modules and Injection Tokens.
 
 ## Plugin Service
 
-The `NgxEditorJSPluginService` takes all the Plugin provides and creates a single map of the configurations and instances.  These are used within `NgxEditorJS` to set the plugins
-available within the editor.  The plugin service is provided separably to avoid circular dependencies
+The `NgxEditorJSPluginService` takes all the Plugin provides and creates a single map of the configurations and instances. These are used within `NgxEditorJS` to set the plugins
+available within the editor. The plugin service is provided separably to avoid circular dependencies
 within the libraries and is required by `@tinynodes/ngx-editorjs`
 
 ## Creating a Plugin.
@@ -45,22 +45,21 @@ export class PluginParagraphModule {}
 The full configuration object parameters are listed below, please note some are not yet implemented in the application
 but will be used in future releases.
 
-|Param Name|Type|Optional|Description|
-|----------|----|--------|-----------|
-|`key`|`string`|No|The default key of the plugin (e.g. `paragraph`)|
-|`type`|`string`|No|The type of plugin, currently `block` and `inline` are supported|
-|`pluginName`|`string`|No|The descriptive name of the plugin|
-|`shortcut`|`string`|Yes|An optional keyboard shortcut for the plugin|
-|`description`|`string`|Yes|A description of the plugin|
-|`blockData`|`string`|Yes|Optional default block data to use for the plugin|
-
+| Param Name    | Type     | Optional | Description                                                      |
+| ------------- | -------- | -------- | ---------------------------------------------------------------- |
+| `key`         | `string` | No       | The default key of the plugin (e.g. `paragraph`)                 |
+| `type`        | `string` | No       | The type of plugin, currently `block` and `inline` are supported |
+| `pluginName`  | `string` | No       | The descriptive name of the plugin                               |
+| `shortcut`    | `string` | Yes      | An optional keyboard shortcut for the plugin                     |
+| `description` | `string` | Yes      | A description of the plugin                                      |
+| `blockData`   | `string` | Yes      | Optional default block data to use for the plugin                |
 
 Once imported into an application or module the plugin is available in the app with several methods to get plugins on the service.
 
-* `getPlugins` - Get a map of all plugins
-* `getPlugin(key: string)` - Get a specific plugin by map key
-* `getPluginsWithExclude(excludeList: string[])` - Get a map of plugins but exclude ones in the passed list
-* `getPluginsWithInclude(includeList: string[])` - Get a map of plugins but only the ones in the include list
+- `getPlugins` - Get a map of all plugins
+- `getPlugin(key: string)` - Get a specific plugin by map key
+- `getPluginsWithExclude(excludeList: string[])` - Get a map of plugins but exclude ones in the passed list
+- `getPluginsWithInclude(includeList: string[])` - Get a map of plugins but only the ones in the include list
 
 ## Peer Dependencies
 

@@ -207,7 +207,8 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   /**
    * Access to the underlying {NgxEditorJSDirective}
    */
-  @ViewChild('editorInstance', { read: NgxEditorJSDirective, static: true }) public readonly editorInstance: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective, static: true })
+  public readonly editorInstance: NgxEditorJSDirective;
 
   /**
    * Host binding to the unique ID for this editor for material

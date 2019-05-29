@@ -3,12 +3,14 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
-  Component, DoCheck,
+  Component,
+  DoCheck,
   ElementRef,
   forwardRef,
   HostBinding,
   Injector,
-  Input, OnDestroy,
+  Input,
+  OnDestroy,
   OnInit,
   Provider,
   ViewChild
@@ -38,7 +40,7 @@ export const TAG_COMPONENT_FIELD_CONTROL: Provider = {
 
 @Component({
   selector: 'ngx-editorjs-tag-component',
-  providers: [ TAG_COMPONENT_VALUE_ACCESSOR, TAG_COMPONENT_FIELD_CONTROL ],
+  providers: [TAG_COMPONENT_VALUE_ACCESSOR, TAG_COMPONENT_FIELD_CONTROL],
   template: `
     <mat-chip-list #chipList>
       <mat-chip *ngFor="let tag of tags" [selectable]="true" [removable]="true" (removed)="removeTag(tag)">
@@ -57,7 +59,13 @@ export const TAG_COMPONENT_FIELD_CONTROL: Provider = {
   `
 })
 export class NgxEditorJSDemoTagComponent
-  implements ControlValueAccessor, MatFormFieldControl<NgxEditorJSDemoTagComponent>, OnInit, OnDestroy, DoCheck, AfterContentInit {
+  implements
+    ControlValueAccessor,
+    MatFormFieldControl<NgxEditorJSDemoTagComponent>,
+    OnInit,
+    OnDestroy,
+    DoCheck,
+    AfterContentInit {
   /**
    * Internal Static ID for Material
    */
@@ -70,7 +78,7 @@ export class NgxEditorJSDemoTagComponent
   /**
    * The separator keycodes for the tags input
    */
-  readonly separatorKeysCodes: number[] = [ ENTER, COMMA ];
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   /**
    * The tags to display on load
@@ -97,7 +105,7 @@ export class NgxEditorJSDemoTagComponent
    * Host binding to the unique ID for this editor for material
    */
   @HostBinding()
-  id = `ngx-editorjs-mat-field-${ NgxEditorJSDemoTagComponent.nextId++ }`;
+  id = `ngx-editorjs-mat-field-${NgxEditorJSDemoTagComponent.nextId++}`;
 
   /**
    * Host binding for ARIA label
@@ -114,8 +122,7 @@ export class NgxEditorJSDemoTagComponent
    * @param focusMonitor The focus monitor for the component
    * @param injector
    */
-  constructor(private readonly focusMonitor: FocusMonitor, private readonly injector: Injector) {
-  }
+  constructor(private readonly focusMonitor: FocusMonitor, private readonly injector: Injector) {}
 
   /**
    * The value of the component
@@ -244,11 +251,9 @@ export class NgxEditorJSDemoTagComponent
     return this.tags.length === 0;
   }
 
-  onChange = (tags: string[]) => {
-  };
+  onChange = (tags: string[]) => {};
 
-  onTouch = () => {
-  };
+  onTouch = () => {};
 
   public removeTag(tag: string) {
     this.tags = this.tags.filter(t => t !== tag);
@@ -263,7 +268,7 @@ export class NgxEditorJSDemoTagComponent
     }
 
     if ((value || '').trim()) {
-      this.tags = [ ...this.tags, value ];
+      this.tags = [...this.tags, value];
     }
 
     if (input) {

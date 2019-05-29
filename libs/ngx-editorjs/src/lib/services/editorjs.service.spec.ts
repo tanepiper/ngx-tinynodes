@@ -84,7 +84,7 @@ describe('NgxEditorJSService', () => {
 
   it('should trigger a change on update', done => {
     service
-      .hasChanged({ holder })
+      .lastChange({ holder })
       .pipe(
         distinctUntilChanged(),
         filter(hasChanged => hasChanged.time !== 0),
@@ -101,7 +101,7 @@ describe('NgxEditorJSService', () => {
 
   it('should trigger a change on save', done => {
     service
-      .hasChanged({ holder })
+      .lastChange({ holder })
       .pipe(takeUntil(onDestroy$))
       .subscribe(hasChanged => {
         expect(hasChanged).toBeDefined();

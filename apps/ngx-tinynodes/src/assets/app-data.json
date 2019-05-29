@@ -121,16 +121,15 @@
           {
             "type": "paragraph",
             "data": {
-              "text":
-              "This component is provided as a Material form component.  Here is the configuration for this field on this page:"
+              "text": "This component is provided as a Material form component.  Here is the configuration for this field on this page:"
             }
           },
           {
             "type": "code",
             "data": {
               "code": "<form [formGroup]=\"editorForm\">\n\t<mat-form-field>\n\t\t<ngx-editorjs-mat-field [id]=\"holder\" \n\t\t[holder]=\"holder\" \n\t\tformCotrolName=\"pageEditor\" \n\t\t[blocks]=\"blocks | async\" \n\t\tplaceholder=\"EditorJS for {{ editorForm.value.pageName || \"Page Name\" }}\">\n\t\t</ngx-editorjs-mat-field>\n\t</mat-form-field>\n</form>"
-        }
-        },
+            }
+          },
           {
             "type": "paragraph",
             "data": {

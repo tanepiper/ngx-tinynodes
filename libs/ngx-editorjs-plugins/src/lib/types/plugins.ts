@@ -92,7 +92,6 @@ export const EDITOR_JS_TOOL_INJECTOR = new InjectionToken<EditorJSPlugin>('EDITO
  */
 export const PLUGIN_CONFIG = new InjectionToken<PluginConfig>('PLUGIN_CONFIG');
 
-
 /**
  * A map of plugin configs
  */
@@ -100,7 +99,7 @@ export interface PluginConfigMap {
   /**
    * A plugin config per key
    */
-  [key: string]: PluginConfig
+  [key: string]: PluginConfig;
 }
 
 /**

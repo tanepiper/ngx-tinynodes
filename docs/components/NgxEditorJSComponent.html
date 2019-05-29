@@ -2093,7 +2093,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div  class="editor"  #editorInstance  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"  (hasSaved)="hasSaved.emit($event)"  (isTouched)="isTouched.emit($event)"  (isFocused)="isFocused.emit($event)"  (hasChanged)="hasChanged.emit($event)"  (isReady)="isReady.emit($event)"></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div  class="editor"  #editorInstance  ngxEditorJS  [id]="holder"  [holder]="holder"  [autofocus]="autofocus"  [autosave]="autosave"  [hideToolbar]="hideToolbar"  [initialBlock]="initialBlock"  [minHeight]="minHeight"  [blockPlaceholder]="blockPlaceholder"  [sanitizer]="sanitizer"  [blocks]="blocks"  (hasSaved)="hasSaved.emit($event)"  (isTouched)="isTouched.emit($event)"  (isFocused)="isFocused.emit($event)"  (lastChange)="lastChange.emit($event)"  (isReady)="isReady.emit($event)"></div></div>'
     var COMPONENTS = [{'name': 'NgxEditorJSComponent', 'selector': 'ngx-editorjs'},{'name': 'NgxEditorJSMatFieldComponent', 'selector': 'ngx-editorjs-mat-field'}];
     var DIRECTIVES = [{'name': 'NgxEditorJSDirective', 'selector': '[ngxEditorJS]'}];
     var ACTUAL_COMPONENT = {'name': 'NgxEditorJSComponent'};

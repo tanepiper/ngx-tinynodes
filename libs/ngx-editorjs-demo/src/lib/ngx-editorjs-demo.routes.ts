@@ -13,6 +13,7 @@ export const ngxEditorjsDemoRoutes: Route[] = [
   },
   {
     path: 'ngx-editorjs-demo/angular-form',
-    loadChildren: () => import('./demos/material-form-field/material-form-field.module').then(m => m.NgxTinynodesMaterialFormFieldDemo),
+    loadChildren: () =>
+      import('./demos/material-form-field/material-form-field.module').then(m => m.NgxTinynodesMaterialFormFieldDemo)
   }
 ];

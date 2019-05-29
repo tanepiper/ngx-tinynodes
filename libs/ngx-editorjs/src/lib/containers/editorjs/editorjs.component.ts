@@ -49,7 +49,8 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   /**
    * The directive used in this component
    */
-  @ViewChild('editorInstance', { read: NgxEditorJSDirective, static: true }) public readonly editorInstance: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective, static: true })
+  public readonly editorInstance: NgxEditorJSDirective;
   /**
    * Component Destroy subject, in your component `ngOnDestroy` method call `.next(true)`
    * and then `.complete()` on the `this.onDestroy$` subject
@@ -189,19 +190,18 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * the touch status on the component
    * @param event The mouse event from the touch
    */
-  public onTouch (event?: MouseEvent): void {
+  public onTouch(event?: MouseEvent): void {
     this.isTouched.emit(true);
-  };
+  }
 
   /**
    * Angular Form onChange method, this is a default method that updates the
    * editor instance with blocks on change
    * @param data The data to write
    */
-  public onChange (data: OutputData): void  {
+  public onChange(data: OutputData): void {
     this.writeValue(data);
-  };
-
+  }
 
   /**
    * Angular Forms value writer, updates the editor
@@ -269,7 +269,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       });
 
     this.editorService
-      .hasChanged({ holder: this.holder })
+      .lastChange({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);

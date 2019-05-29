@@ -18,7 +18,6 @@ import { NgxPluginServiceModule } from './services/plugin-service.module';
  * is also possible to import each individual module as required.
  */
 @NgModule({
-
   imports: [
     CommonModule,
     NgxPluginServiceModule,
@@ -43,5 +42,4 @@ import { NgxPluginServiceModule } from './services/plugin-service.module';
     PluginSimpleImageModule
   ]
 })
-export class NgxEditorjsPluginsModule {
-}
+export class NgxEditorjsPluginsModule {}

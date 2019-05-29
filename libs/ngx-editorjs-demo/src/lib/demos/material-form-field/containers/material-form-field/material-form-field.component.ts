@@ -4,7 +4,8 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnChanges, SimpleChanges
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
@@ -21,10 +22,10 @@ import { OutputData } from '@editorjs/editorjs';
 @Component({
   selector: 'ngx-tinynodes-mat-form-field-demo',
   templateUrl: 'material-form-field.component.html',
-  styleUrls: [ 'material-form-field.component.scss' ],
+  styleUrls: ['material-form-field.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentInit, OnChanges {
+export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentInit {
   /**
    * Title of the page
    */
@@ -39,7 +40,7 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
    * Editor form group
    */
   public editorForm = this.fb.group({
-    pageName: [ '' ],
+    pageName: [''],
     pageTags: new FormControl([]),
     pageEditor: new FormControl([])
   });
@@ -73,13 +74,19 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
     private readonly fb: FormBuilder
   ) {
     this.editorService
-      .hasChanged({ holder: this.holder })
-      .pipe(distinctUntilChanged((a, b) => b.time && b.time === 0 || a.time && a.time === b.time), takeUntil(this.onDestroy$))
+      .lastChange({ holder: this.holder })
+      .pipe(
+        distinctUntilChanged((a, b) => (b && b.time && b.time === 0) || (a && a.time && a.time === b.time)),
+        filter(hasChanged => typeof hasChanged !== 'undefined'),
+        takeUntil(this.onDestroy$)
+      )
       .subscribe(hasChanged => {
-        this.editorForm.patchValue({
-          pageEditor: hasChanged.blocks
-        });
-        this.cd.markForCheck();
+        if (hasChanged && hasChanged.blocks) {
+          this.editorForm.patchValue({
+            pageEditor: hasChanged.blocks
+          });
+          this.cd.markForCheck();
+        }
       });
   }
 
@@ -102,13 +109,12 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
   }
 
   public get blocks() {
-    return this.editorService.hasChanged({ holder: this.holder }).pipe(
+    return this.editorService.lastChange({ holder: this.holder }).pipe(
       filter(data => {
         if (typeof data === 'undefined') {
           return false;
         }
         return data.time !== 0;
-
       }),
       pluck<OutputData, Block[]>('blocks'),
       distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
@@ -143,7 +149,10 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
    * Clear the editor
    */
   public clear() {
-    this.editorService.clear({ holder: this.holder }).pipe(take(1)).subscribe();
+    this.editorService
+      .clear({ holder: this.holder })
+      .pipe(take(1))
+      .subscribe();
     this.cd.markForCheck();
   }
 
@@ -152,7 +161,10 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
    * @param data
    */
   public update(data: OutputData) {
-    this.editorService.update({ holder: this.holder, data }).pipe(take(1)).subscribe();
+    this.editorService
+      .update({ holder: this.holder, data })
+      .pipe(take(1))
+      .subscribe();
     this.cd.markForCheck();
   }
 
@@ -167,10 +179,6 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
         this.menu$.next(data.links);
         this.update({ time: Date.now(), blocks: data.blocks });
       });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-
   }
 
   /**

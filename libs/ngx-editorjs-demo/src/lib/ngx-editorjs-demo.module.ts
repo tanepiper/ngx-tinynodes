@@ -41,13 +41,8 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     NgxTinynodesCoreModule,
     NgxEditorJSDemoMaterialModule
   ],
-  declarations: [
-    PageContainerComponent,
-    NgxEditorJSDemoHomeComponent,
-    NgxEditorJSDemoTagComponent
-  ],
-  exports: [ PageStoreModule, PageContainerComponent ],
-  entryComponents: [ PageContainerComponent ]
+  declarations: [PageContainerComponent, NgxEditorJSDemoHomeComponent, NgxEditorJSDemoTagComponent],
+  exports: [PageStoreModule, PageContainerComponent],
+  entryComponents: [PageContainerComponent]
 })
-export class NgxEditorjsDemoModule {
-}
+export class NgxEditorjsDemoModule {}
