@@ -15,7 +15,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutputData, SanitizerConfig } from '@editorjs/editorjs';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { map, takeUntil, tap, timeInterval } from 'rxjs/operators';
+import { map, switchMap, take, takeUntil, tap, timeInterval } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
@@ -244,7 +244,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
           this.isFocused.emit(true);
           if (this.autosave > 0) {
             this.timerSubscription$ = this.getTimer(this.autosave, 0)
-              .pipe(tap(() => this.editorService.save({ holder: this.holder })))
+              .pipe(switchMap(() => this.editorService.save({ holder: this.holder }).pipe(take(1))))
               .subscribe();
           }
         } else {

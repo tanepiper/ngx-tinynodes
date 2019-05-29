@@ -214,6 +214,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
     if (
       changes.blocks &&
+      changes.blocks.previousValue !== null &&
       !changes.blocks.firstChange &&
       JSON.stringify(changes.blocks.previousValue) !== JSON.stringify(changes.blocks.currentValue)
     ) {

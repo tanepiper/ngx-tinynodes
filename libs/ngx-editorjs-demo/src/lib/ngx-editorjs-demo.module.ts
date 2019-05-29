@@ -17,7 +17,6 @@ import { PageContainerComponent } from './containers/page-container/page-contain
 import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
 import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
-import { FormContainerComponent } from './containers/form-container/form-container.component';
 import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-container.component';
 import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.component';
 import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.module';
@@ -44,12 +43,11 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
   ],
   declarations: [
     PageContainerComponent,
-    FormContainerComponent,
     NgxEditorJSDemoHomeComponent,
     NgxEditorJSDemoTagComponent
   ],
-  exports: [ PageStoreModule, PageContainerComponent, FormContainerComponent ],
-  entryComponents: [ PageContainerComponent, FormContainerComponent ]
+  exports: [ PageStoreModule, PageContainerComponent ],
+  entryComponents: [ PageContainerComponent ]
 })
 export class NgxEditorjsDemoModule {
 }

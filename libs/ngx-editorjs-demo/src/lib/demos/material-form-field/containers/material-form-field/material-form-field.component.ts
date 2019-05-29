@@ -1,10 +1,17 @@
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges, SimpleChanges
+} from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Block, NgxEditorJSMatFieldComponent, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
+import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
 import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, pluck, take, takeUntil } from 'rxjs/operators';
-import { PagesService } from '../../store/pages/pages.service';
+import { PagesService } from '../../../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
 
 /**
@@ -12,19 +19,21 @@ import { OutputData } from '@editorjs/editorjs';
  * the `ngx-editorjs-demo`
  */
 @Component({
-  selector: 'ngx-form-container',
-  templateUrl: 'form-container.component.html',
-  styleUrls: [ 'form-container.component.scss' ],
+  selector: 'ngx-tinynodes-mat-form-field-demo',
+  templateUrl: 'material-form-field.component.html',
+  styleUrls: [ 'material-form-field.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormContainerComponent implements AfterContentInit {
+export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentInit, OnChanges {
   /**
    * Title of the page
    */
+  @Input()
   public title = 'ngx-editorjs Material Field';
   /**
    * The holder ID for this demo
    */
+  @Input()
   public holder = 'ngx-editorjs-demo';
   /**
    * Editor form group
@@ -75,7 +84,7 @@ export class FormContainerComponent implements AfterContentInit {
   }
 
   /**
-   * Get the current autosave value
+   * Get the current autosave state of the application
    */
   public get autosave() {
     return this.autoSave$.asObservable();
@@ -98,10 +107,8 @@ export class FormContainerComponent implements AfterContentInit {
         if (typeof data === 'undefined') {
           return false;
         }
-        if (data.time === 0) {
-          return false;
-        }
-        return true;
+        return data.time !== 0;
+
       }),
       pluck<OutputData, Block[]>('blocks'),
       distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
@@ -136,7 +143,7 @@ export class FormContainerComponent implements AfterContentInit {
    * Clear the editor
    */
   public clear() {
-    this.editorService.clear({ holder: this.holder }).subscribe();
+    this.editorService.clear({ holder: this.holder }).pipe(take(1)).subscribe();
     this.cd.markForCheck();
   }
 
@@ -145,7 +152,7 @@ export class FormContainerComponent implements AfterContentInit {
    * @param data
    */
   public update(data: OutputData) {
-    this.editorService.update({ holder: this.holder, data }).subscribe();
+    this.editorService.update({ holder: this.holder, data }).pipe(take(1)).subscribe();
     this.cd.markForCheck();
   }
 
@@ -154,56 +161,20 @@ export class FormContainerComponent implements AfterContentInit {
    */
   public reset() {
     this.app
-      .getDemoData<NgxEditorJSDemo>('ngx-editorjs-demo')
+      .getDemoData<NgxEditorJSDemo>('material-form-field-demo')
       .pipe(take(1))
       .subscribe(data => {
-        const blocks = [
-          ...data.blocks,
-          {
-            type: 'header',
-            data: {
-              text: 'Material Form Component',
-              level: 1
-            }
-          },
-          {
-            type: 'paragraph',
-            data: {
-              text:
-                'This component is provided as a Material form component.  Here is the configuration for this field on this page:'
-            }
-          },
-          {
-            type: 'code',
-            data: {
-              code: `<form [formGroup]="editorForm">
-  <mat-form-field>
-    <ngx-editorjs-mat-field
-      [id]="holder"
-      [holder]="holder"
-      formCotrolName="pageEditor"
-      [blocks]="blocks | async"
-      placeholder="EditorJS for {{ editorForm.value.pageName || 'Page Name' }}">
-    </ngx-editorjs-mat-field>
-  </mat-form-field>
-</form>`
-            }
-          },
-          {
-            type: 'paragraph',
-            data: {
-              text: 'When you save the form, you can see the output below of the form instance values'
-            }
-          }
-        ];
         this.menu$.next(data.links);
-        this.update({ blocks });
-        this.cd.markForCheck();
+        this.update({ time: Date.now(), blocks: data.blocks });
       });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
+
   /**
-   * After the content has init overide the blocks with blocks from the service
+   * After the content has init override the blocks with blocks from the service
    */
   ngAfterContentInit() {
     this.reset();

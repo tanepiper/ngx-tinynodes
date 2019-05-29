@@ -1,6 +1,5 @@
 import { Route } from '@angular/router';
 import { PageContainerComponent } from './containers/page-container/page-container.component';
-import { FormContainerComponent } from './containers/form-container/form-container.component';
 import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-container.component';
 
 export const ngxEditorjsDemoRoutes: Route[] = [
@@ -14,6 +13,6 @@ export const ngxEditorjsDemoRoutes: Route[] = [
   },
   {
     path: 'ngx-editorjs-demo/angular-form',
-    component: FormContainerComponent
+    loadChildren: () => import('./demos/material-form-field/material-form-field.module').then(m => m.NgxTinynodesMaterialFormFieldDemo),
   }
 ];
