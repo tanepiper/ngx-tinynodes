@@ -9,14 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Added
 
-- Module has had `NgxEditorJSPluginService` added back to plugin module, this service now provides a more reliable
-way of handling plugins
+- `NgxEditorJSPluginService` returns to the plugin module as a requirement to avoid circular dependencies.
+This service now provides a more reliable way of handling plugins, each plugin is a module with two `multi` providers
+which are turned into a configuration map of plugins.
 
 ## Changed
 
 - Plugins no longer provide an injectable class, all plugins are modules that provide
 injectable `EDITOR_JS_TOOL_INJECTOR` and `PLUGIN_CONFIG`.  These provides are injected in the
-plugin service and made available in the editor.
+plugin service and made available in the editor.  See the [README](./README.md) for details on how
+plugins are created
 
 ## [1.1.1] - 2019-05-15
 

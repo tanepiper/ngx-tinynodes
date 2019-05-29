@@ -65,7 +65,7 @@ export class FormContainerComponent implements AfterContentInit {
   ) {
     this.editorService
       .hasChanged({ holder: this.holder })
-      .pipe(takeUntil(this.onDestroy$))
+      .pipe(distinctUntilChanged((a, b) => b.time && b.time === 0 || a.time && a.time === b.time), takeUntil(this.onDestroy$))
       .subscribe(hasChanged => {
         this.editorForm.patchValue({
           pageEditor: hasChanged.blocks
@@ -128,7 +128,7 @@ export class FormContainerComponent implements AfterContentInit {
    * Call the editor save method
    */
   public save() {
-    this.editorService.save({ holder: this.holder });
+    this.editorService.save({ holder: this.holder }).subscribe();
     this.cd.markForCheck();
   }
 
@@ -136,7 +136,7 @@ export class FormContainerComponent implements AfterContentInit {
    * Clear the editor
    */
   public clear() {
-    this.editorService.clear({ holder: this.holder });
+    this.editorService.clear({ holder: this.holder }).subscribe();
     this.cd.markForCheck();
   }
 
@@ -145,7 +145,7 @@ export class FormContainerComponent implements AfterContentInit {
    * @param data
    */
   public update(data: OutputData) {
-    this.editorService.update({ holder: this.holder, data });
+    this.editorService.update({ holder: this.holder, data }).subscribe();
     this.cd.markForCheck();
   }
 

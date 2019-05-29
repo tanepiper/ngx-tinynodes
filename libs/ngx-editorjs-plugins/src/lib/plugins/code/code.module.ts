@@ -25,10 +25,6 @@ import { createPluginConfig } from '../../util/plugin';
       pluginName: 'EditorJS Code'
     },
     multi: true
-  }, {
-    provide: PluginClasses,
-    useFactory: createPluginConfig,
-    deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR]
   }]
 })
 export class PluginCodeModule {

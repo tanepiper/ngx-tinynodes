@@ -18,7 +18,8 @@ export {
   EDITOR_JS_TOOL_INJECTOR,
   PluginProperty,
   PluginType,
-  ToolSettingsMap,
+  ToolSettingsMap
 } from './lib/types/plugins';
+export { NgxPluginServiceModule } from './lib/services/plugin-service.module';
 export { NgxEditorJSPluginService } from './lib/services/plugin-service.service';
 export { createPluginConfig } from './lib/util/plugin';

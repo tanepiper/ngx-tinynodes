@@ -211,13 +211,13 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * to be ready
    * @param changes Changes on the component
    */
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
     if (
       changes.blocks &&
       !changes.blocks.firstChange &&
       JSON.stringify(changes.blocks.previousValue) !== JSON.stringify(changes.blocks.currentValue)
     ) {
-      this.service.update({ holder: this.holder });
+      this.service.update({ holder: this.holder }).subscribe();
       this.cd.markForCheck();
     }
     const changesKeys = Object.keys(changes);
@@ -237,7 +237,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
         return changesKeys.includes(key);
       })
     ) {
-      this.createEditor(this.createConfig());
+      await this.createEditor(this.createConfig());
       this.cd.markForCheck();
     }
   }
@@ -245,13 +245,13 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   /**
    * After content is created, we create the editor instance and set up listners
    */
-  ngAfterContentInit() {
+  async ngAfterContentInit() {
     this.id = this.el.nativeElement.id || this.holder;
 
     if (!this.id) {
       throw new Error('Error in NgxEditorJSDirective::ngAfterContentInit - Directive element has no ID');
     }
-    this.createEditor(this.createConfig());
+    await this.createEditor(this.createConfig());
 
     this.service
       .isReady({ holder: this.holder })

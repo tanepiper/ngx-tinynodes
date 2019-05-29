@@ -9,9 +9,9 @@ import {
   Input,
   OnDestroy,
   Output,
-  ViewChild
+  ViewChild,
+  Provider
 } from '@angular/core';
-import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutputData, SanitizerConfig } from '@editorjs/editorjs';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
@@ -49,7 +49,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   /**
    * The directive used in this component
    */
-  @ViewChild('editorInstance', { read: NgxEditorJSDirective }) public readonly editorInstance: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective, static: true }) public readonly editorInstance: NgxEditorJSDirective;
   /**
    * Component Destroy subject, in your component `ngOnDestroy` method call `.next(true)`
    * and then `.complete()` on the `this.onDestroy$` subject

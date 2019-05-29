@@ -33,4 +33,28 @@ export class NgxEditorJSPluginService {
   public getPlugin(key: string): PluginConfig {
     return this.pluginConfigMap[key];
   }
+
+  /**
+   * Get a list of plugins, filtering with an exclude list of plugins
+   * @param excludeList
+   */
+  public getPluginsWithExclude(excludeList: string[] = []): PluginConfigMap {
+    return Object.entries(this.pluginConfigMap).filter(([key]) => {
+      return !excludeList.includes(key)
+    }).reduce((pluginMap, [key, plugin]) => {
+      return {...pluginMap, [key]: plugin}
+    }, {});
+  }
+
+  /**
+   * Get a list of plugins, filtering with an include list of plugins
+   * @param includeList
+   */
+  public getPluginsWithInclude(includeList: string[] = []): PluginConfigMap {
+    return Object.entries(this.pluginConfigMap).filter(([key]) => {
+      return includeList.includes(key)
+    }).reduce((pluginMap, [key, plugin]) => {
+      return {...pluginMap, [key]: plugin}
+    }, {});
+  }
 }

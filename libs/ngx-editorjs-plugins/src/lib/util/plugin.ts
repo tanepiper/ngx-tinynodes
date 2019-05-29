@@ -6,7 +6,7 @@ import { EditorJSPlugin, PluginConfig } from '../types/plugins';
  * @param plugins
  */
 export function createPluginConfig(pluginConfigs: PluginConfig[], plugins: EditorJSPlugin[]) {
-  return Object.entries(pluginConfigs).reduce((pluginConfig, [index, config]) => {
-    return {...pluginConfig, [config.key]: {...config, plugin: plugins[index]}}
-  }, {});
+  return pluginConfigs.reduce((pluginConfig, config, index) => (
+    { ...pluginConfig, [config.key]: { ...config, plugin: plugins[index] } }
+  ), {});
 }

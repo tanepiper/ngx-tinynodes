@@ -17,7 +17,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material';
+import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
@@ -207,7 +207,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   /**
    * Access to the underlying {NgxEditorJSDirective}
    */
-  @ViewChild('editorInstance', { read: NgxEditorJSDirective }) public readonly editorInstance: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective, static: true }) public readonly editorInstance: NgxEditorJSDirective;
 
   /**
    * Host binding to the unique ID for this editor for material

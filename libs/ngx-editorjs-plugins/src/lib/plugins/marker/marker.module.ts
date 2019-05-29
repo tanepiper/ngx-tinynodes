@@ -28,10 +28,6 @@ import { createPluginConfig } from '../../util/plugin';
       shortcut: 'CTRL+SHIFT+M'
     },
     multi: true
-  }, {
-    provide: PluginClasses,
-    useFactory: createPluginConfig,
-    deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR],
   }]
 })
 export class PluginMarkerModule {

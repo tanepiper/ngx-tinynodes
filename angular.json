@@ -20,11 +20,7 @@
             "tsConfig": "apps/ngx-tinynodes/tsconfig.app.json",
             "assets": ["apps/ngx-tinynodes/src/favicon.ico", "apps/ngx-tinynodes/src/assets"],
             "styles": ["apps/ngx-tinynodes/src/styles.css"],
-            "scripts": [
-              "node_modules/marked/lib/marked.js",
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-typescript.js"
-            ],
+            "scripts": [],
             "es5BrowserSupport": true
           },
           "configurations": {

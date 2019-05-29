@@ -32,7 +32,7 @@ export class PageContainerComponent implements AfterContentInit {
    */
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
 
-  @ViewChild('ngxEditorJS', { read: NgxEditorJSComponent }) ngxEditorJS: NgxEditorJSComponent;
+  @ViewChild('ngxEditorJS', { read: NgxEditorJSComponent, static: true }) ngxEditorJS: NgxEditorJSComponent;
 
   /**
    * The constructor sets up the blocks to the initial demo data

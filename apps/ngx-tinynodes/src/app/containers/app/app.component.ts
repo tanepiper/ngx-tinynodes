@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, Input, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { AppService } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
@@ -23,7 +23,7 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
   /**
    * The Material sidebar
    */
-  @ViewChild(MatSidenav) sidenav: MatSidenav;
+  @ViewChild(MatSidenav, { static: true }) sidenav: MatSidenav;
 
   /**
    * When the component is destroyed

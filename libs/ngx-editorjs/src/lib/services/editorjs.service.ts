@@ -1,7 +1,7 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { filter, switchMap, take, takeUntil } from 'rxjs/operators';
+import { filter, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { NGX_EDITORJS_CONFIG, NgxEditorJSModuleConfig } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import {
@@ -134,13 +134,12 @@ export class NgxEditorJSService {
    * @param args Any arguments to be passed to the API call
    * @returns An Observable of the API response
    */
-  public apiCall<T = any>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
+  public apiCall<T = any>(options: InjectorApiCallOptions, ...args: any[]): any {
     return this.getEditor(options).pipe(
       take(1),
       switchMap(editor => {
-        const apiResult = new BehaviorSubject<InjectorApiCallResponse<T>>({ ...options, result: {} as T });
 
-        this.zone.runOutsideAngular(() => {
+        return this.zone.runOutsideAngular(() => {
           let method: any;
           if (!options.namespace) {
             method = editor[options.method];
@@ -151,20 +150,20 @@ export class NgxEditorJSService {
             throw new Error(`No method ${ options.method } ${ options.namespace ? 'in ' + options.namespace : '' }`);
           }
           const result = method.call(editor, ...args);
-          this.zone.run(() => {
+          return this.zone.run(() => {
+
             if (!result || (result && !result.then)) {
-              apiResult.next({
+              return Promise.resolve().then(() => ({
                 ...options,
                 result: typeof result === 'undefined' ? {} : result
-              });
+              }));
             } else {
-              result.then((r: T) => {
-                apiResult.next({ ...options, result: r });
+              return result.then((r: T) => {
+                return { ...options, result: r };
               });
             }
           });
         });
-        return apiResult.asObservable();
       })
     );
   }
@@ -173,34 +172,24 @@ export class NgxEditorJSService {
    * Call the `save` method of an `EditorJS` instance and sets the current value of the service to the result
    * @param options Options for the method call
    */
-  public save(options: InjectorMethodOption): void {
-    this.apiCall({ holder: options.holder, namespace: 'saver', method: 'save' }, options.data)
-      .pipe(take(1))
-      .subscribe((response: InjectorApiCallResponse<OutputData>) => {
-          this.hasSavedMap[options.holder].next(true);
-          this.lastChangeMap[options.holder].next(response.result);
-        }
-      );
+  public save(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
+    return this.apiCall({ holder: options.holder, namespace: 'saver', method: 'save' })
+      .pipe(take(1), tap((response: InjectorApiCallResponse<OutputData>) => {
+        this.hasSavedMap[options.holder].next(true);
+        this.lastChangeMap[options.holder].next(response.result);
+      }));
   }
 
   /**
    * Gets the EditorJS instance for the passed holder and calls the `clear` method.
    * @param options Options to configure a method call against the EditorJS core API
    */
-  public clear(options: InjectorMethodOption): void {
-    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' })
-      .pipe(take(1))
-      .subscribe((response: InjectorApiCallResponse<OutputData>) => {
-        this.hasSavedMap[options.holder].next(false);
-        this.lastChangeMap[options.holder].next({
-          time: Date.now(),
-          blocks: [ {
-            type: 'paragraph',
-            data: { text: '' }
-          } ],
-          version: this.editorJs.version
-        });
-      });
+  public clear(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
+    return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' })
+      .pipe(take(1), switchMap(() => {
+        return this.save(options);
+      }));
+
   }
 
   /**
@@ -209,9 +198,9 @@ export class NgxEditorJSService {
    * such as resetting data.
    * @param options Options to configure a method call against the EditorJS core API
    */
-  public update(options: InjectorMethodOption): void {
+  public update(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     if (!options.data) {
-      return;
+      return this.save(options);
     }
     const data = {
       time: Date.now(),
@@ -219,9 +208,10 @@ export class NgxEditorJSService {
       blocks: [],
       ...options.data
     };
-    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).subscribe(() => {
-      this.lastChangeMap[options.holder].next(data);
-    });
+    return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data)
+      .pipe(take(1), switchMap(() => {
+        return this.save(options);
+      }));
   }
 
   /**
@@ -252,7 +242,7 @@ export class NgxEditorJSService {
    */
   public hasChanged(options: InjectorMethodOption): Observable<OutputData> {
     if (!this.lastChangeMap[options.holder]) {
-      this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({ time: 0, blocks: [] });
+      this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({ time: 0, blocks: [], version: this.editorJs.version });
     }
     return this.lastChangeMap[options.holder].asObservable();
   }

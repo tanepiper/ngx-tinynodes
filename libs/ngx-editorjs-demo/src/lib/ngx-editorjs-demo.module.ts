@@ -13,7 +13,6 @@ import {
   PluginParagraphModule,
   PluginSimpleImageModule
 } from '@tinynodes/ngx-editorjs-plugins';
-import { MarkdownModule } from 'ngx-markdown';
 import { PageContainerComponent } from './containers/page-container/page-container.component';
 import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
@@ -30,7 +29,6 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     CommonModule,
     NgxJsonViewerModule,
     RouterModule.forChild(ngxEditorjsDemoRoutes),
-    MarkdownModule.forChild(),
     ReactiveFormsModule,
     PageStoreModule,
     NgxEditorJSModule,
