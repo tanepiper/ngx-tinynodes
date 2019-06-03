@@ -1,5 +1,5 @@
 {
-  "rulesDirectory": ["node_modules/@nrwl/schematics/src/tslint", "node_modules/codelyzer"],
+  "rulesDirectory": ["node_modules/@nrwl/workspace/src/tslint", "node_modules/codelyzer"],
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,

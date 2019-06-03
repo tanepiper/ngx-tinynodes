@@ -75,7 +75,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/ngx-tinynodes/jest.config.js",
             "tsConfig": "apps/ngx-tinynodes/tsconfig.spec.json",
@@ -90,7 +90,7 @@
       "prefix": "",
       "architect": {
         "e2e": {
-          "builder": "@nrwl/builders:cypress",
+          "builder": "@nrwl/cypress:cypress",
           "options": {
             "cypressConfig": "apps/ngx-tinynodes-e2e/cypress.json",
             "tsConfig": "apps/ngx-tinynodes-e2e/tsconfig.e2e.json",
@@ -132,7 +132,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/ngx-editorjs-plugins/jest.config.js",
             "tsConfig": "libs/ngx-editorjs-plugins/tsconfig.spec.json",
@@ -163,7 +163,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/ngx-editorjs/jest.config.js",
             "tsConfig": "libs/ngx-editorjs/tsconfig.spec.json",
@@ -187,7 +187,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/ngx-editorjs-demo/jest.config.js",
             "tsConfig": "libs/ngx-editorjs-demo/tsconfig.spec.json",
@@ -219,7 +219,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/ngx-editorjs-ngrx/jest.config.js",
             "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.spec.json",
@@ -246,7 +246,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/ngx-hideable-header-demo/jest.config.js",
             "tsConfig": "libs/ngx-hideable-header-demo/tsconfig.spec.json",
@@ -270,7 +270,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/ngx-tinynodes-core/jest.config.js",
             "tsConfig": "libs/ngx-tinynodes-core/tsconfig.spec.json",
