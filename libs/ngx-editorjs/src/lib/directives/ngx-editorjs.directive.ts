@@ -220,27 +220,29 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     ) {
       this.service.update({ holder: this.holder }).subscribe();
       this.cd.markForCheck();
+    } else {
+      const changesKeys = Object.keys(changes);
+      if (
+        this.id &&
+        // Ignore changes for values not related to EditorJS
+        [
+          'autofocus',
+          'holder',
+          'hideToolbar',
+          'initialBlock',
+          'minHeight',
+          'blockPlaceholder',
+          'sanitizer',
+          'includeTools'
+        ].find(key => {
+          return changesKeys.includes(key);
+        })
+      ) {
+        await this.createEditor(this.createConfig());
+        this.cd.markForCheck();
+      }
     }
-    const changesKeys = Object.keys(changes);
-    if (
-      this.id &&
-      // Ignore changes for values not related to EditorJS
-      [
-        'autofocus',
-        'holder',
-        'hideToolbar',
-        'initialBlock',
-        'minHeight',
-        'blockPlaceholder',
-        'sanitizer',
-        'includeTools'
-      ].find(key => {
-        return changesKeys.includes(key);
-      })
-    ) {
-      await this.createEditor(this.createConfig());
-      this.cd.markForCheck();
-    }
+
   }
 
   /**
@@ -280,6 +282,8 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Destroy the editor and subjects for this service
    */
   ngOnDestroy() {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
     this.service.destroyInstance({ holder: this.id });
   }
 

@@ -56,6 +56,10 @@ export interface InjectorMethodOption {
    * Optional editor
    */
   editor?: EditorJS;
+  /**
+   * Don't call save
+   */
+  skipSave?: boolean;
 }
 
 /**

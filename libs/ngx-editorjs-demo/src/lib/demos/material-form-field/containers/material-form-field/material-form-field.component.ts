@@ -1,17 +1,9 @@
-import {
-  AfterContentInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges
-} from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
 import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, pluck, take, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, pluck, switchMap, take, takeUntil } from 'rxjs/operators';
 import { PagesService } from '../../../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
 
@@ -22,7 +14,7 @@ import { OutputData } from '@editorjs/editorjs';
 @Component({
   selector: 'ngx-tinynodes-mat-form-field-demo',
   templateUrl: 'material-form-field.component.html',
-  styleUrls: ['material-form-field.component.scss'],
+  styleUrls: [ 'material-form-field.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentInit {
@@ -40,7 +32,7 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
    * Editor form group
    */
   public editorForm = this.fb.group({
-    pageName: [''],
+    pageName: [ '' ],
     pageTags: new FormControl([]),
     pageEditor: new FormControl([])
   });
@@ -76,8 +68,6 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
     this.editorService
       .lastChange({ holder: this.holder })
       .pipe(
-        distinctUntilChanged((a, b) => (b && b.time && b.time === 0) || (a && a.time && a.time === b.time)),
-        filter(hasChanged => typeof hasChanged !== 'undefined'),
         takeUntil(this.onDestroy$)
       )
       .subscribe(hasChanged => {
@@ -104,23 +94,6 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
     return this.menu$;
   }
 
-  get hasSaved() {
-    return this.editorService.hasSaved({ holder: this.holder });
-  }
-
-  public get blocks() {
-    return this.editorService.lastChange({ holder: this.holder }).pipe(
-      filter(data => {
-        if (typeof data === 'undefined') {
-          return false;
-        }
-        return data.time !== 0;
-      }),
-      pluck<OutputData, Block[]>('blocks'),
-      distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
-      takeUntil(this.onDestroy$)
-    );
-  }
 
   /**
    * Enable autosave, set the value from the autosaveTime
@@ -147,22 +120,30 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
 
   /**
    * Clear the editor
+   * @param skipSave Optional parameter, if set to true the save method won't be called
    */
-  public clear() {
+  public clear(skipSave = false) {
+    this.editorForm.reset({
+      pageName: '',
+      pageTags: [],
+    });
+
     this.editorService
-      .clear({ holder: this.holder })
+      .clear({ holder: this.holder, skipSave })
       .pipe(take(1))
       .subscribe();
+
     this.cd.markForCheck();
   }
 
   /**
    * Update the component
-   * @param data
+   * @param data The data to render in the update
+   * @param skipSave Optional parameter, if set to true the save method won't be called
    */
-  public update(data: OutputData) {
+  public update(data: OutputData, skipSave = false) {
     this.editorService
-      .update({ holder: this.holder, data })
+      .update({ holder: this.holder, data, skipSave })
       .pipe(take(1))
       .subscribe();
     this.cd.markForCheck();
@@ -177,6 +158,10 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
       .pipe(take(1))
       .subscribe(data => {
         this.menu$.next(data.links);
+        this.editorForm.patchValue({
+          pageName: 'A test page for the Material EditorJS Component',
+          pageTags: ['Angular', 'Material', 'EditorJS', 'TypeScript', 'Open Source']
+        })
         this.update({ time: Date.now(), blocks: data.blocks });
       });
   }

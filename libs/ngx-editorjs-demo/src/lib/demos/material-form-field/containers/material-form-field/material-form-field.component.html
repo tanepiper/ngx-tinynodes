@@ -10,32 +10,28 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <h3 mat-card-title>Demo</h3>
       <button mat-raised-button color="primary" (click)="save()">Save</button>
       <button mat-raised-button color="primary" (click)="clear()">Clear</button>
       <button mat-raised-button color="primary" (click)="reset()">Reset</button>
-      <button mat-raised-button color="primary" *ngIf="(autosave | async) === 0" (click)="enableAutosave(autosaveTime.value * 1000)">
-        Enable Autosave
+      <button mat-raised-button color="accent" *ngIf="(autosave | async) === 0"
+              (click)="enableAutosave(autosaveTime.value * 1000)">
+        Enable Editor Autosave
       </button>
-      <button mat-raised-button color="secondary" *ngIf="(autosave | async) > 0" (click)="disableAutosave()">Disable Autosave</button>
-      <!-- <ng-template #saveStateBadge let-hasSaved="hasSaved"> -->
-      <mat-icon
-        [matBadgeHidden]="hasSaved | async"
-        matBadge="1"
-        [matBadgeColor]="hasSaved ? 'accent' : 'warn'"
-        matBadgePosition="above before"
-        >save</mat-icon
-      >
-      <!-- </ng-template> -->
-      <!-- <ng-container *ngTemplateOutlet="saveStateBadge; context: { hasSaved: hasSaved }"></ng-container> -->
+      <button mat-raised-button color="warn" *ngIf="(autosave | async) > 0" (click)="disableAutosave()">Disable
+        Editor Autosave
+      </button>
+
 
       <mat-form-field>
         <mat-label>Autosave Time</mat-label>
-        <input matInput #autosaveTime type="number" id="autosaveTime" placeholder="Enter a value for the autosave" value="10" />
+        <input matInput #autosaveTime type="number" id="autosaveTime" placeholder="Enter a value for the autosave"
+               value="10"/>
         <span matSuffix>seconds</span>
         <mat-hint *ngIf="(autosave | async) > 0">
-          EditorJS Autosave is enabled, now when you focus on the component the reactive form value will be updated - You still need to call
-          save to save all the form data.</mat-hint
+          EditorJS Autosave is enabled, now when you focus on the component the reactive form value will be updated -
+          You still need to call
+          save to save all the form data.
+        </mat-hint
         >
       </mat-form-field>
     </mat-card-actions>
@@ -43,12 +39,13 @@
       <form [formGroup]="editorForm">
         <mat-form-field>
           <mat-label>Page Name</mat-label>
-          <input matInput id="pageName" formControlName="pageName" type="text" placeholder="Enter a Page Name" />
+          <input matInput id="pageName" formControlName="pageName" type="text" placeholder="Enter a Page Name"/>
           <mat-hint>Enter the name for this page</mat-hint>
         </mat-form-field>
         <mat-form-field class="page-tags-list">
           <mat-label>Page Tags</mat-label>
-          <ngx-editorjs-tag-component formControlName="pageTags" placeholder="Enter some page tags..."></ngx-editorjs-tag-component>
+          <ngx-editorjs-tag-component formControlName="pageTags"
+                                      placeholder="Enter some page tags..."></ngx-editorjs-tag-component>
           <mat-hint>Press <code>Enter</code> or <code>, (comma)</code> to add tags</mat-hint>
         </mat-form-field>
         <mat-form-field>
@@ -59,42 +56,35 @@
             [holder]="holder"
             formCotrolName="pageEditor"
             [autosave]="autosave | async"
-            placeholder="EditorJS for {{ editorForm.value.pageName || 'Page Name' }}"
+            placeholder="EditorJS for {{ editorForm.value.pageName }}"
           ></ngx-editorjs-mat-field>
         </mat-form-field>
       </form>
     </mat-card-content>
-    <mat-card-content>
-      <mat-card class="output-card">
-        <mat-card-header>
-          <mat-card-title>Output</mat-card-title>
-          <mat-card-subtitle>Data from the <code>EditorJS</code> instance</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content *ngIf="(editorForm.valueChanges | async); let changes">
-          <ngx-json-viewer [json]="changes"></ngx-json-viewer>
-        </mat-card-content>
-      </mat-card>
-    </mat-card-content>
-    <mat-card-footer> </mat-card-footer>
+    <mat-card-footer>
+      <nxg-tinynodes-demo-output *ngIf="(editorForm.valueChanges | async); let changes" [json]="changes"></nxg-tinynodes-demo-output>
+    </mat-card-footer>
   </mat-card>
 </div>
 
 <ng-template #infoTemplate>
   <p>
-    Below is an instance of an {{ title }} <code>EditorJS</code> Materia; component. Click on the area and the block tool will appear, or
-    you can just start typing.
+    Below is an instance of an {{ title }} <code>EditorJS</code> Material component. Click on the area and the block
+    tool will appear, or you can just start typing a paragraph.
   </p>
   <p>
-    The default block is a <code>&lt;p></code> paragraph, you can also add header <code>&lt;h1> - &lt;h6></code> blocks, list with
-    <code>&lt;ol> / &lt;li></code> and <code>&lt;code></code> blocks.
+    The default block is a <code>&lt;p></code> paragraph, you can also add header <code>&lt;h1> - &lt;h6></code> blocks,
+    list with <code>&lt;ol> / &lt;li></code> and <code>&lt;code></code> blocks.
   </p>
 
   <p>
-    You can also paste in an <code>&lt;img></code> url into the editor and it will start the <code>SimpleImage</code> plugin which provides
+    You can also paste in an <code>&lt;img></code> url into the editor and it will start the <code>SimpleImage</code>
+    plugin which provides
     an <code>&lt;img></code> tag pointing to the image, and with some additional controls.
   </p>
   <p>
-    When saving check the output panel below to see the data results. The Autosave feature enables the `EditorJS` instance to update the
-    form value on a regular basis, but to save the data to a service the form would still need submission.
+    When saving check the output panel below to see the data results. The save, clear and reset buttons work on
+    the entire form.  The Autosave feature enables the `EditorJS` instance to update the form value on any changes  It also updates
+    on a regular basis to ensure the content is in the form. With autosave off you need to call save on the form to get the value.
   </p>
 </ng-template>
