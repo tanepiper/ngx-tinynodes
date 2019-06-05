@@ -215,14 +215,6 @@ export class NgxEditorJSService {
     );
   }
 
-  public toggleToolbar(options: InjectorMethodOption) {
-    return this.apiCall({
-      holder: options.holder,
-      namespace: 'toolbar',
-      method: this.toolbarOpen ? 'close' : 'open'
-    }).pipe(take(1)).subscribe();
-  }
-
   /**
    * Returns the underlying {@link https://editorjs.io/api | EditorJS} instance
    * @param options Options to configure a method call against the EditorJS core API
