@@ -1,7 +1,7 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, switchMap, take, tap } from 'rxjs/operators';
 import { NGX_EDITORJS_CONFIG, NgxEditorJSModuleConfig } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import {
@@ -58,6 +58,8 @@ export class NgxEditorJSService {
    */
   private readonly lastChangeMap: ChangeMap = {};
 
+  private toolbarOpen = false;
+
   /**
    * @param editorJs The EditorJS class injected into the application and used to create new editor instances
    * @param config The configuration provided from the NgxEditorJSModule.forRoot method
@@ -71,7 +73,8 @@ export class NgxEditorJSService {
     private readonly plugins: NgxEditorJSPluginService,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
-  ) {}
+  ) {
+  }
 
   /**
    * Creates a new {@link https://editorjs.io/api | EditorJS} instance outside of the Angular zone and then adds it to the editor instances
@@ -86,7 +89,7 @@ export class NgxEditorJSService {
     const editorConfig: EditorConfig = {
       ...this.config.editorjs,
       ...options.config,
-      tools: this.getTools(options.includeTools)
+      tools: this.getTools(options.excludeTools)
     };
 
     // Bind the editor onChange method from the config, otherwise use the local createOnChange method
@@ -137,7 +140,7 @@ export class NgxEditorJSService {
     return this.getEditor(options).pipe(
       take(1),
       switchMap(async editor => {
-        let result: InjectorApiCallResponse<T> = {...options, result: undefined};
+        let result: InjectorApiCallResponse<T> = { ...options, result: undefined };
 
         await this.zone.runOutsideAngular(async () => {
           let method: any;
@@ -147,7 +150,7 @@ export class NgxEditorJSService {
             method = editor[options.namespace][options.method];
           }
           if (!method) {
-            throw new Error(`No method ${options.method} ${options.namespace ? 'in ' + options.namespace : ''}`);
+            throw new Error(`No method ${ options.method } ${ options.namespace ? 'in ' + options.namespace : '' }`);
           }
           const methodCall = method.call(editor, ...args);
           await this.zone.run(async () => {
@@ -189,7 +192,7 @@ export class NgxEditorJSService {
   public clear(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' }).pipe(
       take(1),
-      switchMap((response) =>  options.skipSave ? of(response) : this.save(options))
+      switchMap((response) => options.skipSave ? of(response) : this.save(options))
     );
   }
 
@@ -208,8 +211,16 @@ export class NgxEditorJSService {
     };
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).pipe(
       take(1),
-      switchMap((response) =>  options.skipSave ? of(response) : this.save(options))
+      switchMap((response) => options.skipSave ? of(response) : this.save(options))
     );
+  }
+
+  public toggleToolbar(options: InjectorMethodOption) {
+    return this.apiCall({
+      holder: options.holder,
+      namespace: 'toolbar',
+      method: this.toolbarOpen ? 'close' : 'open'
+    }).pipe(take(1)).subscribe();
   }
 
   /**
@@ -328,7 +339,7 @@ export class NgxEditorJSService {
    * @param options Options to configure a method call against the EditorJS core API
    */
   private async setupSubjects(options: InjectorMethodOption): Promise<void> {
-    MAP_DEFAULTS.forEach(([mapKey, value]: [string, typeof value]) => {
+    MAP_DEFAULTS.forEach(([ mapKey, value ]: [ string, typeof value ]) => {
       if (!this[mapKey][options.holder]) {
         this[mapKey][options.holder] = new BehaviorSubject<typeof value>(value);
       }
@@ -341,7 +352,7 @@ export class NgxEditorJSService {
    * @param options The options to pass to clean up the subjects
    */
   private cleanupSubjects(options: InjectorMethodOption) {
-    MAP_DEFAULTS.forEach(([mapKey]: [string]) => {
+    MAP_DEFAULTS.forEach(([ mapKey ]: [ string ]) => {
       if (this[mapKey][options.holder]) {
         this[mapKey][options.holder].complete();
         this[mapKey][options.holder] = null;
@@ -355,22 +366,28 @@ export class NgxEditorJSService {
 
   /**
    * Returns a map of {@link https://editorjs.io/api | EditorJS} tools to be initialized by the editor
-   * @param includeTools Optional array of tools to include, if not passed all tools
+   * @param excudeTools Optional array of tools to exclude, if not passed all tools
    */
-  private getTools(includeTools: string[] = []): ToolSettingsMap {
-    return Object.entries(this.plugins.getPlugins())
-      .filter(([key]) => (includeTools.length > 0 && includeTools.includes(key)) || true)
+  private getTools(excudeTools: string[] = []): ToolSettingsMap {
+    return Object.entries(this.plugins.getPluginsWithExclude(excudeTools))
       .reduce(
-        (finalTools, [key, plugin]) =>
+        (finalTools, [ key, plugin ]) =>
           plugin.shortcut
             ? {
-                [key]: {
-                  class: plugin.plugin,
-                  shortcut: plugin.shortcut
-                },
-                ...finalTools
-              }
-            : { [key]: plugin.plugin, ...finalTools },
+              [key]: {
+                class: plugin.plugin,
+                shortcut: plugin.shortcut,
+                inlineToolbar: plugin.type === 'inline'
+              },
+              ...finalTools
+            }
+            : {
+              [key]: {
+                class: plugin.plugin,
+                inlineToolbar: plugin.type === 'inline'
+              },
+              ...finalTools
+            },
         {}
       );
   }

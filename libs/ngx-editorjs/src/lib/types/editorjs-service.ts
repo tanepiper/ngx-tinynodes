@@ -11,7 +11,7 @@ export interface CreateEditorJSOptions {
   /**
    * Tools to include, Optional - if not set all tools will be used
    */
-  includeTools?: string[];
+  excludeTools?: string[];
   /**
    * Autosave on change, is set to false
    */

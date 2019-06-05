@@ -110,6 +110,10 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
     this.autoSave$.next(0);
   }
 
+  public toggle() {
+    this.editorService.toggleToolbar({ holder: this.holder});
+  }
+
   /**
    * Call the editor save method
    */

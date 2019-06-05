@@ -9,6 +9,7 @@ import { PluginMarkerModule } from './plugins/marker/marker.module';
 import { PluginParagraphModule } from './plugins/paragraph/paragraph.module';
 import { PluginSimpleImageModule } from './plugins/simple-image/simple-image.module';
 import { NgxPluginServiceModule } from './services/plugin-service.module';
+import { PluginInlineCodeModule } from './plugins/inline-code/inline-code.module';
 
 /**
  * The `NgxEditorjsPluginsModule` provides several additional modules
@@ -28,7 +29,8 @@ import { NgxPluginServiceModule } from './services/plugin-service.module';
     PluginListModule,
     PluginMarkerModule,
     PluginParagraphModule,
-    PluginSimpleImageModule
+    PluginSimpleImageModule,
+    PluginInlineCodeModule
   ],
   exports: [
     NgxPluginServiceModule,
@@ -39,7 +41,8 @@ import { NgxPluginServiceModule } from './services/plugin-service.module';
     PluginListModule,
     PluginMarkerModule,
     PluginParagraphModule,
-    PluginSimpleImageModule
+    PluginSimpleImageModule,
+    PluginInlineCodeModule
   ]
 })
 export class NgxEditorjsPluginsModule {}

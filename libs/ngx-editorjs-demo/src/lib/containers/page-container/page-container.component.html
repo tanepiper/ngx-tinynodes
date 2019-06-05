@@ -13,7 +13,7 @@
         <h3 mat-card-title>Demo</h3>
         <button mat-raised-button (click)="save()">Save</button>
         <button mat-raised-button (click)="clear()">Clear</button>
-        <button mat-raised-button *ngIf="(blocks | async); let b" (click)="reset(b)">Reset</button>
+        <button mat-raised-button *ngIf="(blocks | async); let b" (click)="reset()">Reset</button>
       </mat-card-actions>
       <mat-card-content>
         <mat-list>

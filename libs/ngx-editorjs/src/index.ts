@@ -5,6 +5,7 @@ export {
   NgxEditorJSMatFieldComponent
 } from './lib/containers/editorjs-mat-field/editorjs-mat-field.component';
 export { EDITORJS_FORM_VALUE_ACCESSOR, NgxEditorJSComponent } from './lib/containers/editorjs/editorjs.component';
+
 export { NgxEditorJSDirective } from './lib/directives/ngx-editorjs.directive';
 export { NgxEditorJSModule } from './lib/ngx-editorjs.module';
 export { NgxEditorJSService } from './lib/services/editorjs.service';

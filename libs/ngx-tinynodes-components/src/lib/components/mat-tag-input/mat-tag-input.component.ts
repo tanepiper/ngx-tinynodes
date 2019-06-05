@@ -2,30 +2,29 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
-  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  DoCheck,
   ElementRef,
   forwardRef,
   HostBinding,
   Injector,
   Input,
-  OnDestroy,
-  OnInit,
   Provider,
   ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
+import { NgxTinynodesMatFieldComponent } from '../../types/components';
 
 /**
  * Tag Value Accessor
  */
 export const TAG_COMPONENT_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NgxEditorJSDemoTagComponent),
+  useExisting: forwardRef(() => NgxTinynodesMatTagInputComponent),
   multi: true
 };
 
@@ -34,38 +33,18 @@ export const TAG_COMPONENT_VALUE_ACCESSOR: Provider = {
  */
 export const TAG_COMPONENT_FIELD_CONTROL: Provider = {
   provide: MatFormFieldControl,
-  useExisting: forwardRef(() => NgxEditorJSDemoTagComponent),
+  useExisting: forwardRef(() => NgxTinynodesMatTagInputComponent),
   multi: true
 };
 
 @Component({
-  selector: 'ngx-editorjs-tag-component',
-  providers: [TAG_COMPONENT_VALUE_ACCESSOR, TAG_COMPONENT_FIELD_CONTROL],
-  template: `
-    <mat-chip-list #chipList>
-      <mat-chip *ngFor="let tag of tags" [selectable]="true" [removable]="true" (removed)="removeTag(tag)">
-        {{ tag }}
-        <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
-      </mat-chip>
-      <input
-        #chipListInput
-        placeholder="New Tag..."
-        [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        [matChipInputAddOnBlur]="true"
-        (matChipInputTokenEnd)="addTag($event)"
-      />
-    </mat-chip-list>
-  `
+  selector: 'ngx-tinynodes-mat-tag-input',
+  providers: [ TAG_COMPONENT_VALUE_ACCESSOR, TAG_COMPONENT_FIELD_CONTROL ],
+  templateUrl: 'mat-tag-input.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NgxEditorJSDemoTagComponent
-  implements
-    ControlValueAccessor,
-    MatFormFieldControl<NgxEditorJSDemoTagComponent>,
-    OnInit,
-    OnDestroy,
-    DoCheck,
-    AfterContentInit {
+export class NgxTinynodesMatTagInputComponent
+  implements NgxTinynodesMatFieldComponent<NgxTinynodesMatTagInputComponent> {
   /**
    * Internal Static ID for Material
    */
@@ -78,7 +57,7 @@ export class NgxEditorJSDemoTagComponent
   /**
    * The separator keycodes for the tags input
    */
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [ ENTER, COMMA ];
 
   /**
    * The tags to display on load
@@ -105,12 +84,13 @@ export class NgxEditorJSDemoTagComponent
    * Host binding to the unique ID for this editor for material
    */
   @HostBinding()
-  id = `ngx-editorjs-mat-field-${NgxEditorJSDemoTagComponent.nextId++}`;
+  id = `ngx-editorjs-mat-field-${ NgxTinynodesMatTagInputComponent.nextId++ }`;
 
   /**
    * Host binding for ARIA label
    */
-  @HostBinding('attr.aria-describedby') describedBy = '';
+  @HostBinding('attr.aria-describedby')
+  describedBy = '';
 
   /**
    * The Angular form control
@@ -122,7 +102,8 @@ export class NgxEditorJSDemoTagComponent
    * @param focusMonitor The focus monitor for the component
    * @param injector
    */
-  constructor(private readonly focusMonitor: FocusMonitor, private readonly injector: Injector) {}
+  constructor(private readonly focusMonitor: FocusMonitor, private readonly injector: Injector, private readonly cd: ChangeDetectorRef) {
+  }
 
   /**
    * The value of the component
@@ -138,6 +119,7 @@ export class NgxEditorJSDemoTagComponent
 
   /**
    * Set the value of the material field
+   * @param value The value to set of the field
    */
   @Input('value')
   set value(value: any) {
@@ -161,15 +143,14 @@ export class NgxEditorJSDemoTagComponent
    * Set the Placeholder value
    */
   @Input('placeholder')
-  set placeholder(plh) {
-    this._placeholder = plh;
+  set placeholder(placeholder: string) {
+    this._placeholder = placeholder;
     this.stateChanges.next();
   }
 
   /**
    * Set the focused state of the element
    */
-
   private _focused: boolean;
 
   /**
@@ -251,15 +232,33 @@ export class NgxEditorJSDemoTagComponent
     return this.tags.length === 0;
   }
 
-  onChange = (tags: string[]) => {};
+  /**
+   * Form OnChange method
+   * @param tags Tags to be set
+   */
+  public onChange(tags: string[]) {
+    this.writeValue(tags);
+  }
 
-  onTouch = () => {};
+  /**
+   * Form OnTouch method
+   */
+  public onTouch() {
+  }
 
+  /**
+   * Remove a tag from the component
+   * @param tag The tag to remove
+   */
   public removeTag(tag: string) {
     this.tags = this.tags.filter(t => t !== tag);
     this.onChange(this.tags);
   }
 
+  /**
+   * Add a tag to the
+   * @param event
+   */
   public addTag(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -268,7 +267,7 @@ export class NgxEditorJSDemoTagComponent
     }
 
     if ((value || '').trim()) {
-      this.tags = [...this.tags, value];
+      this.tags = [ ...this.tags, value ];
     }
 
     if (input) {
@@ -279,6 +278,7 @@ export class NgxEditorJSDemoTagComponent
 
   writeValue(tags: string[] = []) {
     this.tags = tags;
+    this.cd.markForCheck();
   }
 
   registerOnChange(fn: (tags: string[]) => void) {
@@ -297,6 +297,15 @@ export class NgxEditorJSDemoTagComponent
     this.describedBy = ids.join(' ');
   }
 
+  /**
+   * Material method for when the container is clicked
+   * @param event
+   */
+  public onContainerClick(event: MouseEvent) {
+    this.onTouch();
+  }
+
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit(): void {
     this.ngControl = this.injector.get(NgControl);
     if (this.ngControl !== null) {
@@ -304,13 +313,16 @@ export class NgxEditorJSDemoTagComponent
     }
   }
 
+  // tslint:disable-next-line:use-lifecycle-interface
   ngAfterContentInit(): void {
     this.focusMonitor.monitor(this.chipListEl.nativeElement, true).subscribe(origin => {
       this.focused = !!origin;
       this.stateChanges.next();
+      this.cd.markForCheck();
     });
   }
 
+  // tslint:disable-next-line:use-lifecycle-interface
   ngDoCheck(): void {
     if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;
@@ -318,10 +330,7 @@ export class NgxEditorJSDemoTagComponent
     }
   }
 
-  onContainerClick(event: MouseEvent) {
-    this.onTouch();
-  }
-
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy() {
     this.focusMonitor.stopMonitoring(this.chipListEl.nativeElement);
   }

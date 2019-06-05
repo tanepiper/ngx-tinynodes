@@ -7,6 +7,7 @@ export { PluginListModule } from './lib/plugins/list/list.module';
 export { PluginMarkerModule } from './lib/plugins/marker/marker.module';
 export { PluginParagraphModule } from './lib/plugins/paragraph/paragraph.module';
 export { PluginSimpleImageModule } from './lib/plugins/simple-image/simple-image.module';
+export {PluginInlineCodeModule} from './lib/plugins/inline-code/inline-code.module';
 export {
   EditorJSPlugin,
   PluginConfig,

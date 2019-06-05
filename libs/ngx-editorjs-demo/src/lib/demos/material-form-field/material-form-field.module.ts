@@ -3,7 +3,6 @@ import { NgxTinynodesMaterialFormFieldDemoComponent } from './containers/materia
 import { RouterModule, Routes } from '@angular/router';
 import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.module';
 import { CommonModule } from '@angular/common';
-import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.component';
 import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PageStoreModule } from '../../store/pages/pages.module';
@@ -18,7 +17,7 @@ import {
   PluginSimpleImageModule
 } from '@tinynodes/ngx-editorjs-plugins';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
-import { NgxTinynodesOutputComponent } from '../../components/output-component/output.component';
+import { NgxTinynodesComponentsModule } from '@tinynodes/ngx-tinynodes-components';
 
 const routes: Routes = [
   {
@@ -30,6 +29,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    NgxTinynodesComponentsModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     NgxJsonViewerModule,
@@ -45,7 +45,7 @@ const routes: Routes = [
     NgxTinynodesCoreModule,
     NgxEditorJSDemoMaterialModule
   ],
-  declarations: [ NgxEditorJSDemoTagComponent, NgxTinynodesMaterialFormFieldDemoComponent, NgxTinynodesOutputComponent ],
+  declarations: [ NgxTinynodesMaterialFormFieldDemoComponent ],
   entryComponents: [ NgxTinynodesMaterialFormFieldDemoComponent ]
 })
 export class NgxTinynodesMaterialFormFieldDemo {

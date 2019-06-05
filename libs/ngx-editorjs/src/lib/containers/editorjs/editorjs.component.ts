@@ -104,7 +104,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * array is set only the tools with the provided keys will be added
    */
   @Input()
-  public includeTools: string[] = [];
+  public excludeTools: string[] = [];
 
   /**
    * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save

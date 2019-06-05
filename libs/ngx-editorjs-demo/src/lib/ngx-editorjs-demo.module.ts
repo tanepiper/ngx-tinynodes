@@ -18,7 +18,6 @@ import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
 import { NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
 import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-container.component';
-import { NgxEditorJSDemoTagComponent } from './components/tag-component/tag.component';
 import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.module';
 
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
@@ -41,7 +40,7 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     NgxTinynodesCoreModule,
     NgxEditorJSDemoMaterialModule
   ],
-  declarations: [PageContainerComponent, NgxEditorJSDemoHomeComponent, NgxEditorJSDemoTagComponent],
+  declarations: [PageContainerComponent, NgxEditorJSDemoHomeComponent],
   exports: [PageStoreModule, PageContainerComponent],
   entryComponents: [PageContainerComponent]
 })

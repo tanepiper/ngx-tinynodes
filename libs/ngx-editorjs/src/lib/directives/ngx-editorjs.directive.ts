@@ -94,7 +94,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * array is set only the tools with the provided keys will be added
    */
   @Input()
-  public includeTools: string[] = [];
+  public excludeTools: string[] = [];
 
   /**
    * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
@@ -193,11 +193,12 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   /**
    * Creates an EditorJS instance for this directive
    * @param config Configuration for this instance
+   * @param excludeTools
    */
-  public async createEditor(config?: EditorConfig): Promise<void> {
+  public async createEditor(config?: EditorConfig, excludeTools = []): Promise<void> {
     await this.service.createInstance({
       config,
-      includeTools: this.includeTools,
+      excludeTools: this.excludeTools || excludeTools,
       autoSave: this.autosave || 0
     });
     this.cd.markForCheck();

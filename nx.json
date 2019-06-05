@@ -31,6 +31,9 @@
     },
     "ngx-tinynodes-core": {
       "tags": []
+    },
+    "ngx-tinynodes-components": {
+      "tags": []
     }
   }
 }

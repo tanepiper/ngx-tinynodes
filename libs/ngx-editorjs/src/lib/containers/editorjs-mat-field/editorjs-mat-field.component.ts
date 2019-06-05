@@ -56,10 +56,6 @@ export interface EditorJSMaterialForm
   selector: 'ngx-editorjs-mat-field',
   templateUrl: 'editorjs-mat-field.component.html',
   styleUrls: ['editorjs-mat-field.component.scss'],
-  host: {
-    '[id]': 'id',
-    '[attr.aria-describedby]': 'describedBy'
-  },
   providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

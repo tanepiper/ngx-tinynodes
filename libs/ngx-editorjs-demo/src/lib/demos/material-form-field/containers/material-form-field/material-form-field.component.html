@@ -13,6 +13,7 @@
       <button mat-raised-button color="primary" (click)="save()">Save</button>
       <button mat-raised-button color="primary" (click)="clear()">Clear</button>
       <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+      <button mat-raised-button color="accent" (click)="toggle()">Toggle Toolbar</button>
       <button mat-raised-button color="accent" *ngIf="(autosave | async) === 0"
               (click)="enableAutosave(autosaveTime.value * 1000)">
         Enable Editor Autosave
@@ -44,9 +45,8 @@
         </mat-form-field>
         <mat-form-field class="page-tags-list">
           <mat-label>Page Tags</mat-label>
-          <ngx-editorjs-tag-component formControlName="pageTags"
-                                      placeholder="Enter some page tags..."></ngx-editorjs-tag-component>
-          <mat-hint>Press <code>Enter</code> or <code>, (comma)</code> to add tags</mat-hint>
+          <ngx-tinynodes-mat-tag-input formControlName="pageTags"
+                                       placeholder="Enter some page tags..."></ngx-tinynodes-mat-tag-input>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Content Editor for {{ editorForm.value.pageName || 'Page Name' }}</mat-label>
@@ -57,12 +57,13 @@
             formCotrolName="pageEditor"
             [autosave]="autosave | async"
             placeholder="EditorJS for {{ editorForm.value.pageName }}"
+            [excludeTools]="['image']"
           ></ngx-editorjs-mat-field>
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-footer>
-      <nxg-tinynodes-demo-output *ngIf="(editorForm.valueChanges | async); let changes" [json]="changes"></nxg-tinynodes-demo-output>
+      <ngx-tinynodes-mat-json-output  *ngIf="(editorForm.valueChanges | async); let changes" [json]="changes"></ngx-tinynodes-mat-json-output>
     </mat-card-footer>
   </mat-card>
 </div>
