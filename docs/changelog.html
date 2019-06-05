@@ -36,6 +36,15 @@
 This changelog is related to the overall site. You can also find changelogs for libraries <a href="additional-documentation/tinynodes-library-docs.html">under the library docs</a>
 </div>
 
+<h2 id="unreleased">UNRELEASED</h2>
+<p>Today <code>@tinynodes/ngx-editorjs@3.0.0</code> has been released, along with <code>@tinynodes/ngx-editorjs-plugins@2.0.0</code></p>
+<p>The plugin architecture of the components has been re-written so that plugins are just <code>NgModule</code> classes
+that provide <code>multi</code> providers for injecting plugins and their configuration.  These are merged into a map
+that the <code>NgxEditorJSPluginService</code> now provides, and provides methods to getting tool options for instances.</p>
+<p>This means the plugin module is now a dependency of the project.</p>
+<p>Internally there is some tidy-up related to this, and better <code>async/await</code> handling of the instance creation
+along with API calls.  The <a href="https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form">Material demo</a> 
+has been updated as well with improvements on using the component in an application.</p>
 <h2 id="wednesday-22nd-may-2019">Wednesday, 22nd May 2019</h2>
 <p>Today <code>@tinynodes/ngx-editorjs@2.0.0</code> has been released. The major bump is due to underlying changes that may be breaking - the entire service has been improved with better control over the <code>EditorJS</code> interface. Also in this release the exiting component has been upgraded to work with Angular Forms, and there is a new Material Form Field component provided too.</p>
 <p>The demo has also been updated to reflect the new features of this, and a new demo added for the Material component.</p>

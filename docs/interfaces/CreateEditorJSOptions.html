@@ -95,7 +95,7 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#includeTools">includeTools</a>
+                                        <a href="#excludeTools">excludeTools</a>
                                 </li>
                             </ul>
                         </td>
@@ -187,13 +187,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="includeTools"></a>
-                                        <span class="name"><b>includeTools</b><a href="#includeTools"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="excludeTools"></a>
+                                        <span class="name"><b>excludeTools</b><a href="#excludeTools"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>includeTools:     <code>string[]</code>
+                                        <code>excludeTools:     <code>string[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -241,7 +241,7 @@ export interface CreateEditorJSOptions {
   /**
    * Tools to include, Optional - if not set all tools will be used
    */
-  includeTools?: string[];
+  excludeTools?: string[];
   /**
    * Autosave on change, is set to false
    */

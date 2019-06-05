@@ -28,97 +28,72 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content module">
+               <div class="content interface">
                    <div class="content-data">
 
 
 
+
+
+
+
+
+
+
+
+
 <ol class="breadcrumb">
-    <li>Modules</li>
-    <li>PluginLinkModule</li>
+  <li>Interfaces</li>
+  <li>NgxTinynodesMatFieldComponent</li>
 </ol>
 
-
 <ul class="nav nav-tabs" role="tablist">
-    <li  class="active" >
-        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-    </li>
-    <li >
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-    </li>
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
 </ul>
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="c-info">
-
         <p class="comment">
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-plugins/src/lib/plugins/link/link.module.ts</code>
+            <code>libs/ngx-tinynodes-components/src/lib/types/components.ts</code>
         </p>
 
 
-        <p class="comment">
-            <h3>Description</h3>
-        </p>
-        <p class="comment">
-            <p>A module that provides the default EditorJS <code>&lt;img&gt;</code> block tool.
-See <a href="https://github.com/editor-js/image">the GitHub repo</a> for API details</p>
-
-        </p>
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+            </p>
 
 
-        <div class="container-fluid module">
-            <div class="row">
-            </div>
-        </div>
 
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginClasses, PluginTypes } from &#x27;../../types/plugins&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ControlValueAccessor } from &#x27;@angular/forms&#x27;;
+import { MatFormFieldControl } from &#x27;@angular/material&#x27;;
+import { AfterContentInit, DoCheck, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
 
-import Link from &#x27;@editorjs/link&#x27;;
-import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
-
-/**
- * A module that provides the default EditorJS &#x60;&lt;img&gt;&#x60; block tool.
- * See [the GitHub repo](https://github.com/editor-js/image) for API details
- */
-@NgModule({
-  providers: [
-    {
-      provide: EDITOR_JS_TOOL_INJECTOR,
-      useValue: Link,
-      multi: true
-    },
-    {
-      provide: PLUGIN_CONFIG,
-      useValue: {
-        key: &#x27;link&#x27;,
-        type: PluginTypes.Block,
-        pluginName: &#x27;EditorJS Link&#x27;
-      },
-      multi: true
-    }
-  ]
-})
-export class PluginLinkModule {}
+export interface NgxTinynodesMatFieldComponent&lt;T&gt; extends ControlValueAccessor,
+  MatFormFieldControl&lt;T&gt;,
+  OnInit,
+  OnDestroy,
+  DoCheck,
+  AfterContentInit {
+}
 </code></pre>
     </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 
@@ -141,8 +116,8 @@ export class PluginLinkModule {}
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginLinkModule.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxTinynodesMatFieldComponent.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

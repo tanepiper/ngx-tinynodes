@@ -5,14 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.0.0] - 2019-06-05
 
+## Changed
 - Upgraded to Angular and Material 8.
+- Simplified API on service and components, [Material demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form) updated to show best
+use of component in a reactive form.
+
+## Fixed
+- Fixed major bug where inline tools did not show [[Issue 6]](https://github.com/tanepiper/ngx-tinynodes/issues/6)
+
+## Removed
 - Plugin responsibility of service and types moved to `@tinynodes/ngx-editorjs-plugins` module
 and is now a required dependency of the project, plugin architecture has been simplified to make it
 easy to add features in an AOT friendly way via Angular's dependency injection
-- Simplified API on service and components, [Material demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form) updated to show best
-use of component in a reactive form.
 
 
 ## [2.1.0] - 2019-05-23

@@ -222,7 +222,7 @@
             <h3>Description</h3>
         </p>
         <p class="comment">
-            <p>The <code>@tinynodes/ngx-editorjs</code> module provides a collection of features to allow
+            <p>The <code>@tinynodes/ngx-editorjs</code> module provides a collection of demos to allow
 any Angular app to use and control an <a href="http://editorjs.io">EditorJS</a> instance</p>
 <p>To use import the module <code>NgxEditorJSModule.forRoot()</code> into the root of your application.
 The <code>forRoot</code> method takes an optional <code>NgxEditorJSModuleConfig</code> config, this will provide a
@@ -313,8 +313,8 @@ default instance.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="59"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts:59</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/ngx-editorjs.module.ts:60</a></div>
                 </td>
             </tr>
 
@@ -377,7 +377,8 @@ which sets some defaults, or use the provided defaults.</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from &#x27;@angular/core&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { MatFormFieldModule, MatInputModule } from &#x27;@angular/material&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import EditorJS from &#x27;@editorjs/editorjs&#x27;;
 import { createModuleConfig } from &#x27;./config/module-config&#x27;;
 import { NgxEditorJSMatFieldComponent } from &#x27;./containers/editorjs-mat-field/editorjs-mat-field.component&#x27;;
@@ -396,7 +397,7 @@ export function createEditorJSInstance(editorjs: any) {
 }
 
 /**
- * The &#x60;@tinynodes/ngx-editorjs&#x60; module provides a collection of features to allow
+ * The &#x60;@tinynodes/ngx-editorjs&#x60; module provides a collection of demos to allow
  * any Angular app to use and control an [EditorJS](http://editorjs.io) instance
  *
  * To use import the module &#x60;NgxEditorJSModule.forRoot()&#x60; into the root of your application.

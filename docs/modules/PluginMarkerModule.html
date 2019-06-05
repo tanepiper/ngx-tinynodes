@@ -80,43 +80,34 @@ See <a href="https://github.com/editor-js/paragraph">the GitHub repo</a> for API
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import {
-
-  EDITOR_JS_TOOL_INJECTOR,
-  PLUGIN_CONFIG,
-  PluginClasses,
-  PluginTypes
-} from &#x27;../../types/plugins&#x27;;
+import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginClasses, PluginTypes } from &#x27;../../types/plugins&#x27;;
 import Marker from &#x27;@editorjs/paragraph&#x27;;
 import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
-
 
 /**
  * A module that provides the default EditorJS &#x60;&lt;p&gt;&#x60; block tool.
  * See [the GitHub repo](https://github.com/editor-js/paragraph) for API details
  */
 @NgModule({
-  providers: [{
-    provide: EDITOR_JS_TOOL_INJECTOR,
-    useValue: Marker,
-    multi: true
-  }, {
-    provide: PLUGIN_CONFIG,
-    useValue: {
-      key: &#x27;paragraph&#x27;,
-      type: PluginTypes.Inline,
-      pluginName: &#x27;EditorJS Marker&#x27;,
-      shortcut: &#x27;CTRL+SHIFT+M&#x27;
+  providers: [
+    {
+      provide: EDITOR_JS_TOOL_INJECTOR,
+      useValue: Marker,
+      multi: true
     },
-    multi: true
-  }, {
-    provide: PluginClasses,
-    useFactory: createPluginConfig,
-    deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR],
-  }]
+    {
+      provide: PLUGIN_CONFIG,
+      useValue: {
+        key: &#x27;paragraph&#x27;,
+        type: PluginTypes.Inline,
+        pluginName: &#x27;EditorJS Marker&#x27;,
+        shortcut: &#x27;CTRL+SHIFT+M&#x27;
+      },
+      multi: true
+    }
+  ]
 })
-export class PluginMarkerModule {
-}
+export class PluginMarkerModule {}
 </code></pre>
     </div>
 </div>

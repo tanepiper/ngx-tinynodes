@@ -80,38 +80,31 @@ See <a href="https://github.com/editor-js/header">the GitHub repo</a> for API de
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import {
-  EDITOR_JS_TOOL_INJECTOR,
-  PLUGIN_CONFIG,
-  PluginClasses,
-  PluginTypes
-} from &#x27;../../types/plugins&#x27;;
+import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginClasses, PluginTypes } from &#x27;../../types/plugins&#x27;;
 import Header from &#x27;@editorjs/header&#x27;;
 import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
-
 
 /**
  * A module that provides the default EditorJS header block tool.
  * See [the GitHub repo](https://github.com/editor-js/header) for API details
  */
 @NgModule({
-  providers: [{
-    provide: EDITOR_JS_TOOL_INJECTOR,
-    useValue: Header,
-    multi: true
-  }, {
-    provide: PLUGIN_CONFIG,
-    useValue: {
-      key: &#x27;header&#x27;,
-      type: PluginTypes.Block,
-      pluginName: &#x27;EditorJS Header&#x27;
+  providers: [
+    {
+      provide: EDITOR_JS_TOOL_INJECTOR,
+      useValue: Header,
+      multi: true
     },
-    multi: true
-  }, {
-    provide: PluginClasses,
-    useFactory: createPluginConfig,
-    deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR],
-  }]
+    {
+      provide: PLUGIN_CONFIG,
+      useValue: {
+        key: &#x27;header&#x27;,
+        type: PluginTypes.Block,
+        pluginName: &#x27;EditorJS Header&#x27;
+      },
+      multi: true
+    }
+  ]
 })
 export class PluginHeaderModule {}
 </code></pre>

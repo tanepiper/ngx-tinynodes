@@ -80,12 +80,7 @@ See <a href="https://github.com/editor-js/code">the GitHub repo</a> for API deta
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import {
-  EDITOR_JS_TOOL_INJECTOR,
-  PLUGIN_CONFIG,
-  PluginClasses,
-  PluginTypes
-} from &#x27;../../types/plugins&#x27;;
+import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginClasses, PluginTypes } from &#x27;../../types/plugins&#x27;;
 import Code from &#x27;@editorjs/code&#x27;;
 import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
 
@@ -94,26 +89,24 @@ import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
  * See [the GitHub repo](https://github.com/editor-js/code) for API details
  */
 @NgModule({
-  providers: [{
-    provide: EDITOR_JS_TOOL_INJECTOR,
-    useValue: Code,
-    multi: true
-  }, {
-    provide: PLUGIN_CONFIG,
-    useValue: {
-      key: &#x27;code&#x27;,
-      type: PluginTypes.Block,
-      pluginName: &#x27;EditorJS Code&#x27;
+  providers: [
+    {
+      provide: EDITOR_JS_TOOL_INJECTOR,
+      useValue: Code,
+      multi: true
     },
-    multi: true
-  }, {
-    provide: PluginClasses,
-    useFactory: createPluginConfig,
-    deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR]
-  }]
+    {
+      provide: PLUGIN_CONFIG,
+      useValue: {
+        key: &#x27;code&#x27;,
+        type: PluginTypes.Block,
+        pluginName: &#x27;EditorJS Code&#x27;
+      },
+      multi: true
+    }
+  ]
 })
-export class PluginCodeModule {
-}
+export class PluginCodeModule {}
 </code></pre>
     </div>
 </div>

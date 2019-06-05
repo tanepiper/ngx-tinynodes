@@ -93,6 +93,14 @@
                                     <span class="modifier">Public</span>
                                 <a href="#getPlugins">getPlugins</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getPluginsWithExclude">getPluginsWithExclude</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getPluginsWithInclude">getPluginsWithInclude</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -188,8 +196,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:32</a></div>
                 </td>
             </tr>
 
@@ -268,8 +276,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -288,6 +296,162 @@
                     <div class="io-description">
                         <p>The map of plugins injected into this plugin</p>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPluginsWithExclude"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getPluginsWithExclude
+                        </b>
+                        <a href="#getPluginsWithExclude"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getPluginsWithExclude(excludeList: string[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:40</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Get a list of plugins, filtering with an exclude list of plugins</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>excludeList</td>
+                                    <td>
+                                            <code>string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>[]</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/PluginConfigMap.html" target="_self" >PluginConfigMap</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPluginsWithInclude"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getPluginsWithInclude
+                        </b>
+                        <a href="#getPluginsWithInclude"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getPluginsWithInclude(includeList: string[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:54</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Get a list of plugins, filtering with an include list of plugins</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>includeList</td>
+                                    <td>
+                                            <code>string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>[]</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/PluginConfigMap.html" target="_self" >PluginConfigMap</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -315,8 +479,7 @@ export class NgxEditorJSPluginService {
   /**
    * @param pluginConfigMap The plugin configuration map injected into the application
    */
-  constructor(@Inject(PluginClasses) private readonly pluginConfigMap: PluginConfigMap) {
-  }
+  constructor(@Inject(PluginClasses) private readonly pluginConfigMap: PluginConfigMap) {}
 
   /**
    * Get a map of all plugin configurations
@@ -333,6 +496,34 @@ export class NgxEditorJSPluginService {
    */
   public getPlugin(key: string): PluginConfig {
     return this.pluginConfigMap[key];
+  }
+
+  /**
+   * Get a list of plugins, filtering with an exclude list of plugins
+   * @param excludeList
+   */
+  public getPluginsWithExclude(excludeList: string[] &#x3D; []): PluginConfigMap {
+    return Object.entries(this.pluginConfigMap)
+      .filter(([key]) &#x3D;&gt; {
+        return !excludeList.includes(key);
+      })
+      .reduce((pluginMap, [key, plugin]) &#x3D;&gt; {
+        return { ...pluginMap, [key]: plugin };
+      }, {});
+  }
+
+  /**
+   * Get a list of plugins, filtering with an include list of plugins
+   * @param includeList
+   */
+  public getPluginsWithInclude(includeList: string[] &#x3D; []): PluginConfigMap {
+    return Object.entries(this.pluginConfigMap)
+      .filter(([key]) &#x3D;&gt; {
+        return includeList.includes(key);
+      })
+      .reduce((pluginMap, [key, plugin]) &#x3D;&gt; {
+        return { ...pluginMap, [key]: plugin };
+      }, {});
   }
 }
 </code></pre>
@@ -367,7 +558,7 @@ export class NgxEditorJSPluginService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'ngx-editorjs-plugins-changelog.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSPluginService.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

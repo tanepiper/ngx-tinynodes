@@ -35,7 +35,7 @@
 
 <ol class="breadcrumb">
     <li>Modules</li>
-    <li>PluginLinkModule</li>
+    <li>PluginInlineCodeModule</li>
 </ol>
 
 
@@ -55,7 +55,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-plugins/src/lib/plugins/link/link.module.ts</code>
+            <code>libs/ngx-editorjs-plugins/src/lib/plugins/inline-code/inline-code.module.ts</code>
         </p>
 
 
@@ -63,8 +63,8 @@
             <h3>Description</h3>
         </p>
         <p class="comment">
-            <p>A module that provides the default EditorJS <code>&lt;img&gt;</code> block tool.
-See <a href="https://github.com/editor-js/image">the GitHub repo</a> for API details</p>
+            <p>A module that provides the default EditorJS <code>&lt;p&gt;</code> block tool.
+See <a href="https://github.com/editor-js/paragraph">the GitHub repo</a> for API details</p>
 
         </p>
 
@@ -80,34 +80,34 @@ See <a href="https://github.com/editor-js/image">the GitHub repo</a> for API det
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginClasses, PluginTypes } from &#x27;../../types/plugins&#x27;;
-
-import Link from &#x27;@editorjs/link&#x27;;
-import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
+import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginTypes } from &#x27;../../types/plugins&#x27;;
+import InlineCode from &#x27;@editorjs/inline-code&#x27;;
 
 /**
- * A module that provides the default EditorJS &#x60;&lt;img&gt;&#x60; block tool.
- * See [the GitHub repo](https://github.com/editor-js/image) for API details
+ * A module that provides the default EditorJS &#x60;&lt;p&gt;&#x60; block tool.
+ * See [the GitHub repo](https://github.com/editor-js/paragraph) for API details
  */
 @NgModule({
   providers: [
     {
       provide: EDITOR_JS_TOOL_INJECTOR,
-      useValue: Link,
+      useValue: InlineCode,
       multi: true
     },
     {
       provide: PLUGIN_CONFIG,
       useValue: {
-        key: &#x27;link&#x27;,
-        type: PluginTypes.Block,
-        pluginName: &#x27;EditorJS Link&#x27;
+        key: &#x27;inline-code&#x27;,
+        type: PluginTypes.Inline,
+        pluginName: &#x27;EditorJS Inline Code&#x27;,
+        shortcut: &#x27;CTRL+SHIFT+C&#x27;
       },
       multi: true
     }
   ]
 })
-export class PluginLinkModule {}
+export class PluginInlineCodeModule {
+}
 </code></pre>
     </div>
 </div>
@@ -142,7 +142,7 @@ export class PluginLinkModule {}
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'PluginLinkModule.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'PluginInlineCodeModule.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

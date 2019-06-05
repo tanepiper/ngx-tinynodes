@@ -52,17 +52,19 @@
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2 id="unreleased">[Unreleased]</h2>
+<h2 id="200">[2.0.0]</h2>
 <h2 id="added">Added</h2>
 <ul>
-<li>Module has had <code>NgxEditorJSPluginService</code> added back to plugin module, this service now provides a more reliable
-way of handling plugins</li>
+<li><code>NgxEditorJSPluginService</code> returns to the plugin module as a requirement to avoid circular dependencies.
+This service now provides a more reliable way of handling plugins, each plugin is a module with two <code>multi</code> providers
+which are turned into a configuration map of plugins.</li>
 </ul>
 <h2 id="changed">Changed</h2>
 <ul>
 <li>Plugins no longer provide an injectable class, all plugins are modules that provide
-injectable <code>EDITOR_JS_TOOL_INJECTOR</code> and <code>PLUGIN_CONFIG</code>.  These provides are injected in the
-plugin service and made available in the editor.</li>
+injectable <code>EDITOR_JS_TOOL_INJECTOR</code> and <code>PLUGIN_CONFIG</code>. These provides are injected in the
+plugin service and made available in the editor. See the <a href="./README.md">README</a> for details on how
+plugins are created</li>
 </ul>
 <h2 id="111---2019-05-15">[1.1.1] - 2019-05-15</h2>
 <h2 id="changed-1">Changed</h2>

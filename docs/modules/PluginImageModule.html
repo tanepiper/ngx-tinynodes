@@ -80,39 +80,32 @@ See <a href="https://github.com/editor-js/image">the GitHub repo</a> for API det
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import {
-  EDITOR_JS_TOOL_INJECTOR,
-  PLUGIN_CONFIG,
-  PluginClasses,
-  PluginTypes
-} from &#x27;../../types/plugins&#x27;;
+import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginClasses, PluginTypes } from &#x27;../../types/plugins&#x27;;
 
 import Image from &#x27;@editorjs/image&#x27;;
 import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
-
 
 /**
  * A module that provides the default EditorJS &#x60;&lt;img&gt;&#x60; block tool.
  * See [the GitHub repo](https://github.com/editor-js/image) for API details
  */
 @NgModule({
-  providers: [{
-    provide: EDITOR_JS_TOOL_INJECTOR,
-    useValue: Image,
-    multi: true
-  }, {
-    provide: PLUGIN_CONFIG,
-    useValue: {
-      key: &#x27;image&#x27;,
-      type: PluginTypes.Block,
-      pluginName: &#x27;EditorJS Image&#x27;
+  providers: [
+    {
+      provide: EDITOR_JS_TOOL_INJECTOR,
+      useValue: Image,
+      multi: true
     },
-    multi: true
-  }, {
-    provide: PluginClasses,
-    useFactory: createPluginConfig,
-    deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR]
-  }]
+    {
+      provide: PLUGIN_CONFIG,
+      useValue: {
+        key: &#x27;image&#x27;,
+        type: PluginTypes.Block,
+        pluginName: &#x27;EditorJS Image&#x27;
+      },
+      multi: true
+    }
+  ]
 })
 export class PluginImageModule {}
 </code></pre>

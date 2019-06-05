@@ -199,7 +199,6 @@ export const EDITOR_JS_TOOL_INJECTOR &#x3D; new InjectionToken&lt;EditorJSPlugin
  */
 export const PLUGIN_CONFIG &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;PLUGIN_CONFIG&#x27;);
 
-
 /**
  * A map of plugin configs
  */
@@ -207,7 +206,7 @@ export interface PluginConfigMap {
   /**
    * A plugin config per key
    */
-  [key: string]: PluginConfig
+  [key: string]: PluginConfig;
 }
 
 /**
