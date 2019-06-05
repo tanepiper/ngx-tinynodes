@@ -101,10 +101,12 @@ The module configuration allows EditorJS to be provided with a set of options fo
 | `minHeight`        | Height of Editor's bottom area that allows to set focus on the last Block                                                                                       |
 | `blockPlaceholder` | Placeholder of the first block                                                                                                                                  |
 | `sanitizer`        | Content sanitizer configurations                                                                                                                                |
+| `excludeTools`     | Excludes tools from the application, if no value or empty list passed all plugins available are added|
 
 ### Adding custom tools
 
-See [Adding Custom Tools](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs/docs/adding-custom-tools.md)
+See [the plugin module](https://github.com/tanepiper/ngx-tinynodes/tree/master/libs/ngx-editorjs-plugins/README.md)
+for docs on how to add custom plugins for `EditorJS`.
 
 ## Links
 

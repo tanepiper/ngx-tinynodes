@@ -82,13 +82,13 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <code>[key: string]:    <code>ToolConstructable | ToolSettings</code>
+                        <code>[key: string]:        <code><a href="../miscellaneous/typealiases.html#EditorJSPlugin" target="_self" >EditorJSPlugin</a></code>
 </code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/types/plugins.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/types/plugins.ts:43</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -109,14 +109,40 @@
 import { ToolSettings, ToolConstructable } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
- * A Module plugin configuration
+ * Block Data interface
  */
-export interface PluginConfig {
-  /**
-   * The key of the plugin and the plugin class extending &#x60;BasePlugin&#x60;
-   */
-  [key: string]: BasePlugin;
+export interface BlockData {
+  [key: string]: any;
 }
+
+/**
+ * The types of plugins supported, currently block and inline
+ */
+export enum PluginTypes {
+  /**
+   * A EditorJS block plugin
+   */
+  Block &#x3D; &#x27;block&#x27;,
+  /**
+   * A EditorJS inline plugin
+   */
+  Inline &#x3D; &#x27;inline&#x27;
+}
+
+/**
+ * The types of plugins supported via the plugin &#x60;type&#x60; property
+ */
+export type PluginType &#x3D; PluginTypes.Block | PluginTypes.Inline | string;
+
+/**
+ * A plugin property
+ */
+export type PluginProperty &#x3D; string;
+
+/**
+ * The EditorJS tool settings for this plugin
+ */
+export type EditorJSPlugin &#x3D; ToolConstructable | ToolSettings;
 
 /**
  * A map of all the tools settings
@@ -125,34 +151,68 @@ export interface ToolSettingsMap {
   /**
    * The key of the plugin and the plugin exported tool settings
    */
-  [key: string]: ToolConstructable | ToolSettings;
+  [key: string]: EditorJSPlugin;
 }
 
 /**
- * Defines the interface for required and optional plugin methods.
- * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
+ * A plugin configuration object
  */
-export interface BasePlugin {
+export interface PluginConfig {
   /**
-   * The plugin settings to be returned
+   * Specifies the type of plugin for the plugin provider
    */
-  plugin: () &#x3D;&gt; ToolConstructable | ToolSettings;
-
+  type: PluginProperty;
+  /**
+   * The key to use for the plugin
+   */
+  key: PluginProperty;
+  /**
+   * Label for displaying the plugin name
+   */
+  pluginName: PluginProperty;
+  /**
+   * Optional description for the plugin
+   */
+  description?: PluginProperty;
   /**
    * Optional shortcut for the plugin
    */
-  shortcut?: () &#x3D;&gt; string;
+  shortcut?: PluginProperty;
+  /**
+   * Optional block data, used to define the block data for this type
+   * and used as a default
+   */
+  blockData?: BlockData;
+  /**
+   * The plugin for the editor
+   */
+  plugin: EditorJSPlugin | undefined;
 }
 
 /**
  * The Injection token for initial plugins as defined in the ngx-editorjs module
  */
-export const InitialPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;);
+export const EDITOR_JS_TOOL_INJECTOR &#x3D; new InjectionToken&lt;EditorJSPlugin&gt;(&#x27;EDITOR_JS_TOOL_INJECTOR&#x27;);
 
 /**
- * The injection token for adding plugins via your own application
+ * Injection token for a plugin config
  */
-export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;);
+export const PLUGIN_CONFIG &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;PLUGIN_CONFIG&#x27;);
+
+/**
+ * A map of plugin configs
+ */
+export interface PluginConfigMap {
+  /**
+   * A plugin config per key
+   */
+  [key: string]: PluginConfig;
+}
+
+/**
+ * Injection token for the plugin config map
+ */
+export const PluginClasses &#x3D; new InjectionToken&lt;PluginConfigMap&gt;(&#x27;PluginClasses&#x27;);
 </code></pre>
     </div>
 </div>

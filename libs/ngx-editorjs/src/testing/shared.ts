@@ -1,20 +1,9 @@
-import { ToolSettings } from '@editorjs/editorjs';
-import { BasePlugin } from '../lib/types/plugins';
 import { NgxEditorJSModuleConfig } from '../lib/types/config';
 
-export class TestClass {
+export class MockPlugin {
   constructor() {}
   render() {
     return document.createElement('div');
-  }
-}
-
-export class MockPlugin implements BasePlugin {
-  public plugin(): ToolSettings {
-    return { class: TestClass };
-  }
-  shortcut() {
-    return 'test-shortcut';
   }
 }
 

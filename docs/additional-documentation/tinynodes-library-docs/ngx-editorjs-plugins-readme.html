@@ -49,7 +49,55 @@
 
 
 <h1 id="ngx-editorjs-plugins">Ngx-EditorJS Plugins</h1>
-<p>This module provides a default set of <a href="https://editorjs.io">EditorJS</a> plugins for <a href="https://www.npmjs.com/package/@tinynodes/ngx-editorjs">@tinynodes/ngx-editorjs</a> via Angular modules.</p>
+<p>This module provides the core Plugin service for <a href="https://www.npmjs.com/package/@tinynodes/ngx-editorjs">@tinynodes/ngx-editorjs</a>, and also provides a default set of <a href="https://editorjs.io">EditorJS</a> plugins
+for using Angular modules and Injection Tokens.</p>
+<h2 id="plugin-service">Plugin Service</h2>
+<p>The <code>NgxEditorJSPluginService</code> takes all the Plugin provides and creates a single map of the configurations and instances. These are used within <code>NgxEditorJS</code> to set the plugins
+available within the editor. The plugin service is provided separably to avoid circular dependencies
+within the libraries and is required by <code>@tinynodes/ngx-editorjs</code></p>
+<h2 id="creating-a-plugin">Creating a Plugin.</h2>
+<p>Creating a plugin is very simple, the module provides some Injection Tokens for use with the module.</p>
+<p>The plugin you want to import should conform to the <a href="https://editorjs.io/creating-a-block-tool">Block</a> or <a href="https://editorjs.io/creating-an-inline-tool">Inline</a> format of <code>EditorJS</code>, alongside a configuration object that provides details about the plugin.</p>
+<p>Both these providers must be set to <code>multi: true</code> - when the plugin service is initialised it will be provided a map of these.</p>
+<p>Here is an example of the <code>PluginParagraph</code>:</p>
+<p>```ts
+import { NgModule } from &#39;@angular/core&#39;;
+import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginTypes from &#39;@tinynodes/ngx-editorjs-plugins&#39;;
+import Paragraph from &#39;@editorjs/paragraph&#39;;</p>
+<p>@NgModule({
+  providers: [{
+    provide: EDITOR_JS_TOOL_INJECTOR,
+    useValue: Paragraph,
+    multi: true // IMPORTANT!
+  }, {
+    provide: PLUGIN_CONFIG,
+    useValue: {
+      key: &#39;paragraph&#39;,
+      type: PluginTypes.Block,
+      pluginName: &#39;EditorJS Paragraph&#39;,
+    },
+    multi: true // IMPORTANT!
+  }]
+})
+export class PluginParagraphModule {}
+```</p>
+<p>The full configuration object parameters are listed below, please note some are not yet implemented in the application
+but will be used in future releases.</p>
+<p>| Param Name    | Type     | Optional | Description                                                      |
+| ------------- | -------- | -------- | ---------------------------------------------------------------- |
+| <code>key</code>         | <code>string</code> | No       | The default key of the plugin (e.g. <code>paragraph</code>)                 |
+| <code>type</code>        | <code>string</code> | No       | The type of plugin, currently <code>block</code> and <code>inline</code> are supported |
+| <code>pluginName</code>  | <code>string</code> | No       | The descriptive name of the plugin                               |
+| <code>shortcut</code>    | <code>string</code> | Yes      | An optional keyboard shortcut for the plugin                     |
+| <code>description</code> | <code>string</code> | Yes      | A description of the plugin                                      |
+| <code>blockData</code>   | <code>string</code> | Yes      | Optional default block data to use for the plugin                |</p>
+<p>Once imported into an application or module the plugin is available in the app with several methods to get plugins on the service.</p>
+<ul>
+<li><code>getPlugins</code> - Get a map of all plugins</li>
+<li><code>getPlugin(key: string)</code> - Get a specific plugin by map key</li>
+<li><code>getPluginsWithExclude(excludeList: string[])</code> - Get a map of plugins but exclude ones in the passed list</li>
+<li><code>getPluginsWithInclude(includeList: string[])</code> - Get a map of plugins but only the ones in the include list</li>
+</ul>
 <h2 id="peer-dependencies">Peer Dependencies</h2>
 <p>All <code>EditorJS</code> plugins are listed as <code>peerDependencies</code> of the project - this is because Angular requires these modules to be in the root. You must manually install these are the root of your Angular application.</p>
 <p>```bash</p>

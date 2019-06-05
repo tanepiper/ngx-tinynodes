@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import EditorJS from '@editorjs/editorjs';
 import { createModuleConfig } from './config/module-config';
 import { NgxEditorJSMatFieldComponent } from './containers/editorjs-mat-field/editorjs-mat-field.component';
@@ -10,6 +11,7 @@ import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from './services/editorjs.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from './types/config';
 import { EditorJSInstance, EDITORJS_MODULE_IMPORT } from './types/injector';
+import { NgxEditorjsPluginsModule } from '@tinynodes/ngx-editorjs-plugins';
 
 /**
  * Factory function to return the EditorJS base class
@@ -19,7 +21,7 @@ export function createEditorJSInstance(editorjs: any) {
 }
 
 /**
- * The `@tinynodes/ngx-editorjs` module provides a collection of features to allow
+ * The `@tinynodes/ngx-editorjs` module provides a collection of demos to allow
  * any Angular app to use and control an [EditorJS](http://editorjs.io) instance
  *
  * To use import the module `NgxEditorJSModule.forRoot()` into the root of your application.
@@ -27,7 +29,7 @@ export function createEditorJSInstance(editorjs: any) {
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule],
+  imports: [CommonModule, FormsModule, NgxEditorjsPluginsModule, MatInputModule, MatFormFieldModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective],
   exports: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective],
   providers: [

@@ -1,8 +1,8 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { filter, switchMap, take, takeUntil } from 'rxjs/operators';
-import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from '../types/config';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, switchMap, take, tap } from 'rxjs/operators';
+import { NGX_EDITORJS_CONFIG, NgxEditorJSModuleConfig } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import {
   EditorJSClass,
@@ -13,89 +13,92 @@ import {
   MAP_DEFAULTS
 } from '../types/injector';
 import { ChangeMap, EditorMap, ReadyMap, SavedMap } from '../types/maps';
-import { PluginsMap, ToolSettingsMap, UserPlugins } from '../types/plugins';
+import { NgxEditorJSPluginService, ToolSettingsMap } from '@tinynodes/ngx-editorjs-plugins';
 
 /**
- * The NgxEditorJSService handles the management of EditorJS instances, plugins and lifecycle observables
- * All EditorJS instances are created outside of Angular using `NgZone` to ensure change detection is not triggered.
- * Once an instance is created, several `Observable` values are also set up:
+ * This handles the management of {@link https://editorjs.io/api | EditorJS} instances and their lifecycle.
  *
- *  - Editor `isReady` state - Set when the editor instance is ready in the DOM
- *  - Editor `hasSaved` state - Set when the editor `.save()` method has been called.
- *  - Editor `hasChanged` state - Set when a change happens, contains the `OutputData` from the Editor.
+ * All `EditorJS` instances are created outside of Angular using {@link https://angular.io/api/core/NgZone | NgZone } to ensure change detection is not triggered.
+ * Once an instance is created, several {@link https://angular.io/guide/observables | Observable} values are also set up:
  *
- * After setup when `isReady` is true the editor can be used within Angular.  There are some methods provided
- * for save, update and clear - and an `apiCall` method which allows for any call to be made to EditorJS that matches
- * it's API.
+ *  - {@link #isReady | isReady } Set when the editor instance is ready in the DOM
+ *  - {@link #hasSaved | hasSaved } Set when the editor `.save()` method has been called.
+ *  - {@link #lastChange | lastChange } Set when a change happens, contains the `OutputData` from the Editor.
+ *
+ * After setup, {@link #isReady | isReady } is set to true and the editor can be used within Angular.  There are some methods provided
+ * for {@link #save | save }, {@link #update | update } and {@link #clear | clear } - and an {@link #apiCall | apiCall } method which allows
+ * for any call to be made to EditorJS that matches it's API.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class NgxEditorJSService {
   /**
-   * Internal destroy method for the service
-   * @internal
+   * Internal destroy subject for the service
    */
   private readonly onDestroy$ = new Subject<boolean>();
 
   /**
-   * Internal map of all EditorJS instances
+   * Internal map of all {@link https://editorjs.io/api | EditorJS} instances
    */
   private readonly editorMap: EditorMap = {};
 
   /**
-   * Internal map of all EditorJS ready states
+   * Internal map of all {@link https://editorjs.io/api | EditorJS} ready states
    */
   private readonly isReadyMap: ReadyMap = {};
 
   /**
-   * Internal map of when EditorJS save is called
+   * Internal map of when {@link https://editorjs.io/api | EditorJS} save is called
    */
   private readonly hasSavedMap: SavedMap = {};
 
   /**
-   * Internal map of all EditorJS change states
+   * Internal map of all {@link https://editorjs.io/api | EditorJS} change states
    */
-  private readonly hasChangedMap: ChangeMap = {};
+  private readonly lastChangeMap: ChangeMap = {};
+
+  private toolbarOpen = false;
 
   /**
-   * Internal map of plugins available
-   */
-  private pluginsMap: PluginsMap = {};
-
-  /**
-   * When the `NgxEditorJSService` is initialized any plugins passed in via the `UserPlugin` are set on the service plugin map
-   *
    * @param editorJs The EditorJS class injected into the application and used to create new editor instances
-   * @param config the Module config
-   * @param userPlugins The Plugin map passed from the module configuration
+   * @param config The configuration provided from the NgxEditorJSModule.forRoot method
+   * @param plugins The plugin service which provides all plugins injected into the application
    * @param zone The Angular Zone service that allows the EditorJS methods to be run outside of Angular
    * @param ref The ApplicationRef provided by Angular, used to trigger an application tick
    */
   constructor(
     @Inject(EditorJSInstance) private readonly editorJs: EditorJSClass,
     @Inject(NGX_EDITORJS_CONFIG) private readonly config: NgxEditorJSModuleConfig,
-    @Inject(UserPlugins) private readonly userPlugins: PluginsMap,
+    private readonly plugins: NgxEditorJSPluginService,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
   ) {
-    Object.entries({ ...this.userPlugins }).forEach(([key, tool]) => (this.pluginsMap[key] = tool));
   }
 
   /**
-   * Creates a new EditorJS instance outside of the Angular zone and then adds it to the editor instances
-   * This method should be called with `await` to ensure the editor is fully initialized
-   * @param options The options to pass to the method for creating an EditorJS instance
+   * Creates a new {@link https://editorjs.io/api | EditorJS} instance outside of the Angular zone and then adds it to the editor instances
+   *
+   * @remark
+   * This method uses `async/await`
+   *
+   * @param options A configuration passed to create an EditorJS instance
+   * @returns A Promise when the editor has been created
    */
   public async createInstance(options: CreateEditorJSOptions): Promise<void> {
     const editorConfig: EditorConfig = {
       ...this.config.editorjs,
       ...options.config,
-      tools: this.getTools(options.includeTools)
+      tools: this.getTools(options.excludeTools)
     };
-    editorConfig.onChange = (editorConfig.onChange && typeof editorConfig.onChange === 'function'
-      ? editorConfig.onChange
-      : this.createOnChange.call(this, { holder: editorConfig.holder as string })) as any;
+
+    // Bind the editor onChange method from the config, otherwise use the local createOnChange method
+    editorConfig.onChange =
+      editorConfig.onChange && typeof editorConfig.onChange === 'function'
+        ? editorConfig.onChange
+        : this.createOnChange.call(this, { holder: editorConfig.holder as string });
+
+    // Bind the editor onReady method from the config, otherwise use the local createOnReady method
     editorConfig.onReady =
       editorConfig.onReady && typeof editorConfig.onReady === 'function'
         ? editorConfig.onReady
@@ -119,56 +122,27 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Internal method to create an default onChange method for `EditorJS`
-   * @param options The InjectorMethodOption for this request
-   */
-  private createOnChange(options: InjectorMethodOption): (change: OutputData) => void {
-    const onChange = (change: OutputData) => {
-      if (!this.hasChangedMap[options.holder]) {
-        this.hasChangedMap[options.holder] = new BehaviorSubject<OutputData>(change);
-      }
-      if (change) {
-        this.hasChangedMap[options.holder].next(change);
-      }
-    };
-    return onChange;
-  }
-
-  /**
-   * Internal method to create an default onReady method for `EditorJS`
-   * @param options The InjectorMethodOption for this request
-   */
-  private createOnReady(options: InjectorMethodOption): () => void {
-    const onReady = () => {
-      if (!this.isReadyMap[options.holder]) {
-        this.isReadyMap[options.holder] = new BehaviorSubject<boolean>(false);
-      }
-      if (!this.isReadyMap[options.holder].value) {
-        this.isReadyMap[options.holder].next(true);
-      }
-    };
-    return onReady;
-  }
-
-  /**
-   * A helper method to make calls to any EditorJS API (see [API Docs](https://editorjs.io/api))
+   * A helper method to make calls to the {@link https://editorjs.io/api | EditorJS API } of any instance.
    * The first argument is an object that you must pass the `method` name, and the `holder` ID of the container.
    * An optional `namespace` can be added for API calls such as `blocks`, `caret`, etc.
+   *
    * The second argument is any additional arguments as required by the API.
    *
+   * @remarks
    * Unlike other methods an API call be made with a `.subscribe`, the result will be an observable value.
    * If the value is a Promise it will be resolved first
    *
-   * @param options EditorJS API call options
-   * @param args Additional arguments to pass to the API request
+   * @param options The options for the API call to be made
+   * @param args Any arguments to be passed to the API call
+   * @returns An Observable of the API response
    */
-  public apiCall<T>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
+  public apiCall<T = any>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
     return this.getEditor(options).pipe(
       take(1),
-      switchMap(editor => {
-        const apiResult = new BehaviorSubject<InjectorApiCallResponse<T>>({ ...options, result: {} as T });
+      switchMap(async editor => {
+        let result: InjectorApiCallResponse<T> = { ...options, result: undefined };
 
-        this.zone.runOutsideAngular(() => {
+        await this.zone.runOutsideAngular(async () => {
           let method: any;
           if (!options.namespace) {
             method = editor[options.method];
@@ -176,91 +150,81 @@ export class NgxEditorJSService {
             method = editor[options.namespace][options.method];
           }
           if (!method) {
-            throw new Error(`No method ${options.method} ${options.namespace ? 'in ' + options.namespace : ''}`);
+            throw new Error(`No method ${ options.method } ${ options.namespace ? 'in ' + options.namespace : '' }`);
           }
-          const result = method.call(editor, ...args);
-          this.zone.run(() => {
-            if (!result || (result && !result.then)) {
-              apiResult.next({
-                ...options,
-                result: typeof result === 'undefined' ? {} : result
-              });
+          const methodCall = method.call(editor, ...args);
+          await this.zone.run(async () => {
+            if (!methodCall || (methodCall && !methodCall.then)) {
+              result = {
+                ...result,
+                result: typeof methodCall === 'undefined' ? {} : methodCall
+              };
             } else {
-              result.then((r: T) => {
-                apiResult.next({ ...options, result: r });
-              });
+              const r = await methodCall;
+              result = { ...result, result: r };
             }
           });
         });
-        return apiResult.asObservable();
+
+        return result;
       })
     );
   }
 
   /**
-   * Gets the EditorJS instance for the passed holder and calls the `save` method
-   * to get the `OutputData` of the editor. This data is stored in the change subject
-   * for that instance and the `hasSaved` value updated
-   * @param options Options to configure a method call against the EditorJS core API
-   * @param triggerUpdate If set to false the `hasChanged` Observable won't be updated
+   * Call the `save` method of an {@link https://editorjs.io/api | EditorJS} instance and sets the current value of the service to the result
+   * @param options Options for the method call
    */
-  public save(options: InjectorMethodOption, triggerUpdate = true): void {
-    this.apiCall({ holder: options.holder, namespace: 'saver', method: 'save' }, options.data).subscribe(
-      (response: InjectorApiCallResponse<OutputData>) => {
+  public save(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
+    return this.apiCall({ holder: options.holder, namespace: 'saver', method: 'save' }).pipe(
+      take(1),
+      tap((response: InjectorApiCallResponse<OutputData>) => {
         this.hasSavedMap[options.holder].next(true);
-        if (triggerUpdate) {
-          this.hasChangedMap[options.holder].next(response.result);
-        }
-      }
+        this.lastChangeMap[options.holder].next(response.result);
+      })
     );
   }
 
   /**
-   * Gets the EditorJS instance for the passed holder and calls the `clear` method.
+   * Gets the {@link https://editorjs.io/api | EditorJS} instance for the passed holder and calls the `clear` method.
    * @param options Options to configure a method call against the EditorJS core API
-   * @param triggerUpdate If set to false the `hasChanged` Observable won't be updated
    */
-  public clear(options: InjectorMethodOption, triggerUpdate = true): void {
-    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' })
-      .pipe(take(1))
-      .subscribe((response: InjectorApiCallResponse<OutputData>) => {
-        this.hasSavedMap[options.holder].next(false);
-        if (triggerUpdate) {
-          this.hasChangedMap[options.holder].next({
-            time: Date.now(),
-            blocks: [],
-            version: this.editorJs.version
-          });
-        }
-      });
+  public clear(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
+    return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' }).pipe(
+      take(1),
+      switchMap((response) => options.skipSave ? of(response) : this.save(options))
+    );
   }
 
   /**
-   * Gets the EditorJS instance for the passed holder and calls the render method if blocks
-   * are passed. Optionally can disable the `hasChanged` update - useful if doing actions
+   * Gets the {@link https://editorjs.io/api | EditorJS} instance for the passed holder and calls the render method if blocks
+   * are passed. Optionally can disable the `lastChange` update - useful if doing actions
    * such as resetting data.
    * @param options Options to configure a method call against the EditorJS core API
-   * @param triggerUpdate If set to false the `hasChanged` Observable won't be updated
    */
-  public update(options: InjectorMethodOption, triggerUpdate = true): void {
-    if (!options.data) {
-      return;
-    }
+  public update(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     const data = {
       time: Date.now(),
       version: this.editorJs.version,
       blocks: [],
       ...options.data
     };
-    this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).subscribe(() => {
-      if (triggerUpdate) {
-        this.hasChangedMap[options.holder].next(data);
-      }
-    });
+    return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).pipe(
+      take(1),
+      switchMap((response) => options.skipSave ? of(response) : this.save(options))
+    );
+  }
+
+  public toggleToolbar(options: InjectorMethodOption) {
+    return this.apiCall({
+      holder: options.holder,
+      namespace: 'toolbar',
+      method: this.toolbarOpen ? 'close' : 'open'
+    }).pipe(take(1)).subscribe();
   }
 
   /**
-   * Returns the underlying EditorJS instance
+   * Returns the underlying {@link https://editorjs.io/api | EditorJS} instance
    * @param options Options to configure a method call against the EditorJS core API
    */
   public getEditor(options: InjectorMethodOption): Observable<EditorJS> {
@@ -282,14 +246,21 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Subscribe to the `hasChanged` state change for the editor passed in the options
+   * Subscribe to the `lastChange` state change for the editor passed in the options
    * @param options Options to configure a method call against the EditorJS core API
    */
-  public hasChanged(options: InjectorMethodOption): Observable<OutputData> {
-    if (!this.hasChangedMap[options.holder]) {
-      this.hasChangedMap[options.holder] = new BehaviorSubject<OutputData>({ time: 0, blocks: [] });
+  public lastChange(options: InjectorMethodOption): Observable<OutputData> {
+    if (!this.lastChangeMap[options.holder]) {
+      this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({
+        time: 0,
+        blocks: [],
+        version: this.editorJs.version
+      });
     }
-    return this.hasChangedMap[options.holder].asObservable();
+    return this.lastChangeMap[options.holder].pipe(
+      distinctUntilChanged((a, b) => (b && b.time && b.time === 0) || (a && b && (a.time && a.time === b.time))),
+      filter(hasChanged => typeof hasChanged !== 'undefined')
+    );
   }
 
   /**
@@ -304,56 +275,21 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Destroys a single instance of EditorJS and all the subject values created for it
+   * Destroys a single instance of {@link https://editorjs.io/api | EditorJS} and all the subject values created for it
    * @param options Options to configure a method call against the EditorJS core API
    */
   public destroyInstance(options: InjectorMethodOption): void {
-    const instanceDestroyed = new Subject<boolean>();
     this.getEditor(options)
-      .pipe(takeUntil(instanceDestroyed))
+      .pipe(take(1))
       .subscribe(editor => {
         this.zone.runOutsideAngular(() => {
           editor.destroy();
           this.zone.run(() => {
             this.cleanupSubjects({ holder: options.holder });
-            instanceDestroyed.next(true);
-            instanceDestroyed.complete();
             this.ref.tick();
           });
         });
       });
-  }
-
-  /**
-   * Sets up the `BehaviorSubject` values when an EditorJS instance is created.  All the subjects are first created and set
-   * to default values.
-   * Once an EditorJS instance is ready these values can provide change and save state information
-   * @param options Options to configure a method call against the EditorJS core API
-   */
-  private async setupSubjects(options: InjectorMethodOption): Promise<void> {
-    MAP_DEFAULTS.forEach(([mapKey, value]: [string, typeof value]) => {
-      if (!this[mapKey][options.holder]) {
-        this[mapKey][options.holder] = new BehaviorSubject<typeof value>(value);
-      }
-      this[mapKey][options.holder].next(value);
-    });
-  }
-
-  /**
-   * Handles cleaning up all the `BehaviorSubject` values once an EditorJS instance has been destroyed
-   * @param holder The holder ID for the EditorJS instance
-   */
-  private cleanupSubjects(options: InjectorMethodOption) {
-    MAP_DEFAULTS.forEach(([mapKey, value]: [string, any]) => {
-      if (this[mapKey][options.holder]) {
-        this[mapKey][options.holder].next(value);
-        this[mapKey][options.holder].complete();
-        this[mapKey][options.holder] = null;
-        delete this[mapKey][options.holder];
-      }
-    });
-    this.editorMap[options.holder] = null;
-    delete this.editorMap[options.holder];
   }
 
   /**
@@ -366,23 +302,92 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Returns a map of tools to be initialized by the editor
-   * @param exclude Optional array of keys to exclude from the map
+   * Internal method to create an default onChange method for {@link https://editorjs.io/api | EditorJS}
+   * @param options The InjectorMethodOption for this request
    */
-  private getTools(exclude: string[] = []): ToolSettingsMap {
-    return Object.entries(this.pluginsMap)
-      .filter(([key]) => !exclude.includes(key))
+  private createOnChange(options: InjectorMethodOption): (change: OutputData) => void {
+    if (!this.lastChangeMap[options.holder]) {
+      this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({ blocks: [] });
+    }
+    return (change: OutputData) => {
+      if (change) {
+        this.lastChangeMap[options.holder].next(change);
+      }
+    };
+  }
+
+  /**
+   * Internal method to create an default onReady method for {@link https://editorjs.io/api | EditorJS}
+   * @param options The InjectorMethodOption for this request
+   */
+  private createOnReady(options: InjectorMethodOption): () => void {
+    if (!this.isReadyMap[options.holder]) {
+      this.isReadyMap[options.holder] = new BehaviorSubject<boolean>(false);
+    }
+
+    return () => {
+      if (!this.isReadyMap[options.holder].value) {
+        this.isReadyMap[options.holder].next(true);
+      }
+    };
+  }
+
+  /**
+   * Sets up the `BehaviorSubject` values when an {@link https://editorjs.io/api | EditorJS} instance is created.  All the subjects are first created and set
+   * to default values.
+   * Once an EditorJS instance is ready these values can provide change and save state information
+   * @param options Options to configure a method call against the EditorJS core API
+   */
+  private async setupSubjects(options: InjectorMethodOption): Promise<void> {
+    MAP_DEFAULTS.forEach(([ mapKey, value ]: [ string, typeof value ]) => {
+      if (!this[mapKey][options.holder]) {
+        this[mapKey][options.holder] = new BehaviorSubject<typeof value>(value);
+      }
+      this[mapKey][options.holder].next(value);
+    });
+  }
+
+  /**
+   * Handles cleaning up all the `BehaviorSubject` values once an {@link https://editorjs.io/api | EditorJS} instance has been destroyed
+   * @param options The options to pass to clean up the subjects
+   */
+  private cleanupSubjects(options: InjectorMethodOption) {
+    MAP_DEFAULTS.forEach(([ mapKey ]: [ string ]) => {
+      if (this[mapKey][options.holder]) {
+        this[mapKey][options.holder].complete();
+        this[mapKey][options.holder] = null;
+        delete this[mapKey][options.holder];
+      }
+    });
+    this.editorMap[options.holder].complete();
+    this.editorMap[options.holder] = null;
+    delete this.editorMap[options.holder];
+  }
+
+  /**
+   * Returns a map of {@link https://editorjs.io/api | EditorJS} tools to be initialized by the editor
+   * @param excudeTools Optional array of tools to exclude, if not passed all tools
+   */
+  private getTools(excudeTools: string[] = []): ToolSettingsMap {
+    return Object.entries(this.plugins.getPluginsWithExclude(excudeTools))
       .reduce(
-        (finalTools, [key, plugin]) =>
+        (finalTools, [ key, plugin ]) =>
           plugin.shortcut
             ? {
-                [key]: {
-                  class: plugin.plugin(),
-                  shortcut: plugin.shortcut()
-                },
-                ...finalTools
-              }
-            : { [key]: plugin.plugin(), ...finalTools },
+              [key]: {
+                class: plugin.plugin,
+                shortcut: plugin.shortcut,
+                inlineToolbar: plugin.type === 'inline'
+              },
+              ...finalTools
+            }
+            : {
+              [key]: {
+                class: plugin.plugin,
+                inlineToolbar: plugin.type === 'inline'
+              },
+              ...finalTools
+            },
         {}
       );
   }

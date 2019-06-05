@@ -64,17 +64,17 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>The NgxEditorJSService handles the management of EditorJS instances, plugins and lifecycle observables
-All EditorJS instances are created outside of Angular using <code>NgZone</code> to ensure change detection is not triggered.
-Once an instance is created, several <code>Observable</code> values are also set up:</p>
+                <p>This handles the management of <a href="https://editorjs.io/api "> EditorJS</a> instances and their lifecycle.</p>
+<p>All <code>EditorJS</code> instances are created outside of Angular using <a href="https://angular.io/api/core/NgZone "> NgZone </a> to ensure change detection is not triggered.
+Once an instance is created, several <a href="https://angular.io/guide/observables "> Observable</a> values are also set up:</p>
 <ul>
-<li>Editor <code>isReady</code> state - Set when the editor instance is ready in the DOM</li>
-<li>Editor <code>hasSaved</code> state - Set when the editor <code>.save()</code> method has been called.</li>
-<li>Editor <code>hasChanged</code> state - Set when a change happens, contains the <code>OutputData</code> from the Editor.</li>
+<li><a href="#isReady "> isReady </a> Set when the editor instance is ready in the DOM</li>
+<li><a href="#hasSaved "> hasSaved </a> Set when the editor <code>.save()</code> method has been called.</li>
+<li><a href="#lastChange "> lastChange </a> Set when a change happens, contains the <code>OutputData</code> from the Editor.</li>
 </ul>
-<p>After setup when <code>isReady</code> is true the editor can be used within Angular.  There are some methods provided
-for save, update and clear - and an <code>apiCall</code> method which allows for any call to be made to EditorJS that matches
-it&#39;s API.</p>
+<p>After setup, <a href="#isReady "> isReady </a> is set to true and the editor can be used within Angular.  There are some methods provided
+for <a href="#save "> save </a>, <a href="#update "> update </a> and <a href="#clear "> clear </a> - and an <a href="#apiCall "> apiCall </a> method which allows
+for any call to be made to EditorJS that matches it&#39;s API.</p>
 
             </p>
 
@@ -120,10 +120,6 @@ it&#39;s API.</p>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#hasChanged">hasChanged</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#hasSaved">hasSaved</a>
                             </li>
                             <li>
@@ -132,7 +128,15 @@ it&#39;s API.</p>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#lastChange">lastChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#save">save</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggleToolbar">toggleToolbar</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -156,19 +160,17 @@ it&#39;s API.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(editorJs: <a href="../interfaces/EditorJSClass.html">EditorJSClass</a>, config: <a href="../interfaces/NgxEditorJSModuleConfig.html">NgxEditorJSModuleConfig</a>, userPlugins: <a href="../interfaces/PluginsMap.html">PluginsMap</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>, ref: <a href="https://angular.io/api/core/ApplicationRef" target="_blank">ApplicationRef</a>)</code>
+<code>constructor(editorJs: <a href="../interfaces/EditorJSClass.html">EditorJSClass</a>, config: <a href="../interfaces/NgxEditorJSModuleConfig.html">NgxEditorJSModuleConfig</a>, plugins: <a href="../injectables/NgxEditorJSPluginService.html">NgxEditorJSPluginService</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>, ref: <a href="https://angular.io/api/core/ApplicationRef" target="_blank">ApplicationRef</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:61</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>When the <code>NgxEditorJSService</code> is initialized any plugins passed in via the <code>UserPlugin</code> are set on the service plugin map</p>
-</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -209,15 +211,15 @@ it&#39;s API.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>the Module config</p>
+                                                                <code><p>The configuration provided from the NgxEditorJSModule.forRoot method</p>
 </code>
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>userPlugins</td>
+                                                        <td>plugins</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../interfaces/PluginsMap.html" target="_self" >PluginsMap</a></code>
+                                                                        <code><a href="../injectables/NgxEditorJSPluginService.html" target="_self" >NgxEditorJSPluginService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -225,7 +227,7 @@ it&#39;s API.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>The Plugin map passed from the module configuration</p>
+                                                                <code><p>The plugin service which provides all plugins injected into the application</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -299,8 +301,8 @@ it&#39;s API.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="165"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:165</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="139"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:139</a></div>
                 </td>
             </tr>
 
@@ -315,12 +317,10 @@ it&#39;s API.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>A helper method to make calls to any EditorJS API (see <a href="https://editorjs.io/api">API Docs</a>)
+                    <div class="io-description"><p>A helper method to make calls to the <a href="https://editorjs.io/api "> EditorJS API </a> of any instance.
 The first argument is an object that you must pass the <code>method</code> name, and the <code>holder</code> ID of the container.
-An optional <code>namespace</code> can be added for API calls such as <code>blocks</code>, <code>caret</code>, etc.
-The second argument is any additional arguments as required by the API.</p>
-<p>Unlike other methods an API call be made with a <code>.subscribe</code>, the result will be an observable value.
-If the value is a Promise it will be resolved first</p>
+An optional <code>namespace</code> can be added for API calls such as <code>blocks</code>, <code>caret</code>, etc.</p>
+<p>The second argument is any additional arguments as required by the API.</p>
 </div>
 
                     <div class="io-description">
@@ -347,7 +347,7 @@ If the value is a Promise it will be resolved first</p>
 
 
                                     <td>
-                                        <p>EditorJS API call options</p>
+                                        <p>The options for the API call to be made</p>
 
                                     </td>
                                 </tr>
@@ -363,7 +363,7 @@ If the value is a Promise it will be resolved first</p>
 
 
                                     <td>
-                                        <p>Additional arguments to pass to the API request</p>
+                                        <p>Any arguments to be passed to the API call</p>
 
                                     </td>
                                 </tr>
@@ -377,7 +377,8 @@ If the value is a Promise it will be resolved first</p>
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>An Observable of the API response</p>
+
                     </div>
                 </td>
             </tr>
@@ -400,22 +401,22 @@ If the value is a Promise it will be resolved first</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>clear(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>, triggerUpdate)</code>
+                    <code>clear(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="223"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:223</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="192"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:192</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Gets the EditorJS instance for the passed holder and calls the <code>clear</code> method.</p>
+                    <div class="io-description"><p>Gets the <a href="https://editorjs.io/api "> EditorJS</a> instance for the passed holder and calls the <code>clear</code> method.</p>
 </div>
 
                     <div class="io-description">
@@ -426,7 +427,6 @@ If the value is a Promise it will be resolved first</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
-                                    <td>Default value</td>
                                     <td>Description</td>
                                 </tr>
                             </thead>
@@ -441,29 +441,9 @@ If the value is a Promise it will be resolved first</p>
                                         No
                                     </td>
 
-                                    <td>
-                                    </td>
 
                                     <td>
                                         <p>Options to configure a method call against the EditorJS core API</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>triggerUpdate</td>
-                                    <td>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-                                    <td>
-                                        <code>true</code>
-                                    </td>
-
-                                    <td>
-                                        <p>If set to false the <code>hasChanged</code> Observable won&#39;t be updated</p>
 
                                     </td>
                                 </tr>
@@ -473,7 +453,7 @@ If the value is a Promise it will be resolved first</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>        <code><a href="../interfaces/InjectorApiCallResponse.html" target="_self" >Observable&lt;InjectorApiCallResponse&lt;OutputData&gt;&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -508,16 +488,15 @@ If the value is a Promise it will be resolved first</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="90"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:90</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:88</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Creates a new EditorJS instance outside of the Angular zone and then adds it to the editor instances
-This method should be called with <code>await</code> to ensure the editor is fully initialized</p>
+                    <div class="io-description"><p>Creates a new <a href="https://editorjs.io/api "> EditorJS</a> instance outside of the Angular zone and then adds it to the editor instances</p>
 </div>
 
                     <div class="io-description">
@@ -544,7 +523,7 @@ This method should be called with <code>await</code> to ensure the editor is ful
 
 
                                     <td>
-                                        <p>The options to pass to the method for creating an EditorJS instance</p>
+                                        <p>A configuration passed to create an EditorJS instance</p>
 
                                     </td>
                                 </tr>
@@ -558,7 +537,8 @@ This method should be called with <code>await</code> to ensure the editor is ful
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>A Promise when the editor has been created</p>
+
                     </div>
                 </td>
             </tr>
@@ -588,8 +568,8 @@ This method should be called with <code>await</code> to ensure the editor is ful
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="362"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:362</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="298"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:298</a></div>
                 </td>
             </tr>
 
@@ -631,15 +611,15 @@ This method should be called with <code>await</code> to ensure the editor is ful
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="310"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:310</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="281"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:281</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Destroys a single instance of EditorJS and all the subject values created for it</p>
+                    <div class="io-description"><p>Destroys a single instance of <a href="https://editorjs.io/api "> EditorJS</a> and all the subject values created for it</p>
 </div>
 
                     <div class="io-description">
@@ -710,15 +690,15 @@ This method should be called with <code>await</code> to ensure the editor is ful
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="266"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:266</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="230"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:230</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Returns the underlying EditorJS instance</p>
+                    <div class="io-description"><p>Returns the underlying <a href="https://editorjs.io/api "> EditorJS</a> instance</p>
 </div>
 
                     <div class="io-description">
@@ -769,85 +749,6 @@ This method should be called with <code>await</code> to ensure the editor is ful
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="hasChanged"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            hasChanged
-                        </b>
-                        <a href="#hasChanged"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>hasChanged(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="288"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:288</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Subscribe to the <code>hasChanged</code> state change for the editor passed in the options</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>options</td>
-                                    <td>
-                                                <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Options to configure a method call against the EditorJS core API</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;OutputData&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="hasSaved"></a>
                     <span class="name">
                         <b>
@@ -868,8 +769,8 @@ This method should be called with <code>await</code> to ensure the editor is ful
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="299"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:299</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="270"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:270</a></div>
                 </td>
             </tr>
 
@@ -947,8 +848,8 @@ This method should be called with <code>await</code> to ensure the editor is ful
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="277"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:277</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="241"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:241</a></div>
                 </td>
             </tr>
 
@@ -1006,37 +907,35 @@ This method should be called with <code>await</code> to ensure the editor is ful
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="save"></a>
+                    <a name="lastChange"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Public</span>
-                            save
+                            lastChange
                         </b>
-                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                        <a href="#lastChange"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>save(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>, triggerUpdate)</code>
+                    <code>lastChange(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="207"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:207</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="252"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:252</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Gets the EditorJS instance for the passed holder and calls the <code>save</code> method
-to get the <code>OutputData</code> of the editor. This data is stored in the change subject
-for that instance and the <code>hasSaved</code> value updated</p>
+                    <div class="io-description"><p>Subscribe to the <code>lastChange</code> state change for the editor passed in the options</p>
 </div>
 
                     <div class="io-description">
@@ -1047,7 +946,6 @@ for that instance and the <code>hasSaved</code> value updated</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
-                                    <td>Default value</td>
                                     <td>Description</td>
                                 </tr>
                             </thead>
@@ -1062,29 +960,9 @@ for that instance and the <code>hasSaved</code> value updated</p>
                                         No
                                     </td>
 
-                                    <td>
-                                    </td>
 
                                     <td>
                                         <p>Options to configure a method call against the EditorJS core API</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>triggerUpdate</td>
-                                    <td>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-                                    <td>
-                                        <code>true</code>
-                                    </td>
-
-                                    <td>
-                                        <p>If set to false the <code>hasChanged</code> Observable won&#39;t be updated</p>
 
                                     </td>
                                 </tr>
@@ -1094,7 +972,158 @@ for that instance and the <code>hasSaved</code> value updated</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;OutputData&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="save"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            save
+                        </b>
+                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>save(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="178"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:178</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Call the <code>save</code> method of an <a href="https://editorjs.io/api "> EditorJS</a> instance and sets the current value of the service to the result</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                                <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Options for the method call</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/InjectorApiCallResponse.html" target="_self" >Observable&lt;InjectorApiCallResponse&lt;OutputData&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleToolbar"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            toggleToolbar
+                        </b>
+                        <a href="#toggleToolbar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggleToolbar(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="218"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:218</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                                <code><a href="../interfaces/InjectorMethodOption.html" target="_self" >InjectorMethodOption</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                     </div>
                     <div class="io-description">
@@ -1121,23 +1150,23 @@ for that instance and the <code>hasSaved</code> value updated</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>update(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>, triggerUpdate)</code>
+                    <code>update(options: <a href="../interfaces/InjectorMethodOption.html">InjectorMethodOption</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="245"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:245</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="205"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/services/editorjs.service.ts:205</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Gets the EditorJS instance for the passed holder and calls the render method if blocks
-are passed. Optionally can disable the <code>hasChanged</code> update - useful if doing actions
+                    <div class="io-description"><p>Gets the <a href="https://editorjs.io/api "> EditorJS</a> instance for the passed holder and calls the render method if blocks
+are passed. Optionally can disable the <code>lastChange</code> update - useful if doing actions
 such as resetting data.</p>
 </div>
 
@@ -1149,7 +1178,6 @@ such as resetting data.</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
-                                    <td>Default value</td>
                                     <td>Description</td>
                                 </tr>
                             </thead>
@@ -1164,29 +1192,9 @@ such as resetting data.</p>
                                         No
                                     </td>
 
-                                    <td>
-                                    </td>
 
                                     <td>
                                         <p>Options to configure a method call against the EditorJS core API</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>triggerUpdate</td>
-                                    <td>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-                                    <td>
-                                        <code>true</code>
-                                    </td>
-
-                                    <td>
-                                        <p>If set to false the <code>hasChanged</code> Observable won&#39;t be updated</p>
 
                                     </td>
                                 </tr>
@@ -1196,7 +1204,7 @@ such as resetting data.</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>        <code><a href="../interfaces/InjectorApiCallResponse.html" target="_self" >Observable&lt;InjectorApiCallResponse&lt;OutputData&gt;&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -1214,9 +1222,9 @@ such as resetting data.</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApplicationRef, Inject, Injectable, NgZone } from &#x27;@angular/core&#x27;;
 import EditorJS, { EditorConfig, OutputData } from &#x27;@editorjs/editorjs&#x27;;
-import { BehaviorSubject, Observable, Subject } from &#x27;rxjs&#x27;;
-import { filter, switchMap, take, takeUntil } from &#x27;rxjs/operators&#x27;;
-import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from &#x27;../types/config&#x27;;
+import { BehaviorSubject, Observable, of, Subject } from &#x27;rxjs&#x27;;
+import { distinctUntilChanged, filter, switchMap, take, tap } from &#x27;rxjs/operators&#x27;;
+import { NGX_EDITORJS_CONFIG, NgxEditorJSModuleConfig } from &#x27;../types/config&#x27;;
 import { CreateEditorJSOptions } from &#x27;../types/editorjs-service&#x27;;
 import {
   EditorJSClass,
@@ -1227,89 +1235,92 @@ import {
   MAP_DEFAULTS
 } from &#x27;../types/injector&#x27;;
 import { ChangeMap, EditorMap, ReadyMap, SavedMap } from &#x27;../types/maps&#x27;;
-import { PluginsMap, ToolSettingsMap, UserPlugins } from &#x27;../types/plugins&#x27;;
+import { NgxEditorJSPluginService, ToolSettingsMap } from &#x27;@tinynodes/ngx-editorjs-plugins&#x27;;
 
 /**
- * The NgxEditorJSService handles the management of EditorJS instances, plugins and lifecycle observables
- * All EditorJS instances are created outside of Angular using &#x60;NgZone&#x60; to ensure change detection is not triggered.
- * Once an instance is created, several &#x60;Observable&#x60; values are also set up:
+ * This handles the management of {@link https://editorjs.io/api | EditorJS} instances and their lifecycle.
  *
- *  - Editor &#x60;isReady&#x60; state - Set when the editor instance is ready in the DOM
- *  - Editor &#x60;hasSaved&#x60; state - Set when the editor &#x60;.save()&#x60; method has been called.
- *  - Editor &#x60;hasChanged&#x60; state - Set when a change happens, contains the &#x60;OutputData&#x60; from the Editor.
+ * All &#x60;EditorJS&#x60; instances are created outside of Angular using {@link https://angular.io/api/core/NgZone | NgZone } to ensure change detection is not triggered.
+ * Once an instance is created, several {@link https://angular.io/guide/observables | Observable} values are also set up:
  *
- * After setup when &#x60;isReady&#x60; is true the editor can be used within Angular.  There are some methods provided
- * for save, update and clear - and an &#x60;apiCall&#x60; method which allows for any call to be made to EditorJS that matches
- * it&#x27;s API.
+ *  - {@link #isReady | isReady } Set when the editor instance is ready in the DOM
+ *  - {@link #hasSaved | hasSaved } Set when the editor &#x60;.save()&#x60; method has been called.
+ *  - {@link #lastChange | lastChange } Set when a change happens, contains the &#x60;OutputData&#x60; from the Editor.
+ *
+ * After setup, {@link #isReady | isReady } is set to true and the editor can be used within Angular.  There are some methods provided
+ * for {@link #save | save }, {@link #update | update } and {@link #clear | clear } - and an {@link #apiCall | apiCall } method which allows
+ * for any call to be made to EditorJS that matches it&#x27;s API.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class NgxEditorJSService {
   /**
-   * Internal destroy method for the service
-   * @internal
+   * Internal destroy subject for the service
    */
   private readonly onDestroy$ &#x3D; new Subject&lt;boolean&gt;();
 
   /**
-   * Internal map of all EditorJS instances
+   * Internal map of all {@link https://editorjs.io/api | EditorJS} instances
    */
   private readonly editorMap: EditorMap &#x3D; {};
 
   /**
-   * Internal map of all EditorJS ready states
+   * Internal map of all {@link https://editorjs.io/api | EditorJS} ready states
    */
   private readonly isReadyMap: ReadyMap &#x3D; {};
 
   /**
-   * Internal map of when EditorJS save is called
+   * Internal map of when {@link https://editorjs.io/api | EditorJS} save is called
    */
   private readonly hasSavedMap: SavedMap &#x3D; {};
 
   /**
-   * Internal map of all EditorJS change states
+   * Internal map of all {@link https://editorjs.io/api | EditorJS} change states
    */
-  private readonly hasChangedMap: ChangeMap &#x3D; {};
+  private readonly lastChangeMap: ChangeMap &#x3D; {};
+
+  private toolbarOpen &#x3D; false;
 
   /**
-   * Internal map of plugins available
-   */
-  private pluginsMap: PluginsMap &#x3D; {};
-
-  /**
-   * When the &#x60;NgxEditorJSService&#x60; is initialized any plugins passed in via the &#x60;UserPlugin&#x60; are set on the service plugin map
-   *
    * @param editorJs The EditorJS class injected into the application and used to create new editor instances
-   * @param config the Module config
-   * @param userPlugins The Plugin map passed from the module configuration
+   * @param config The configuration provided from the NgxEditorJSModule.forRoot method
+   * @param plugins The plugin service which provides all plugins injected into the application
    * @param zone The Angular Zone service that allows the EditorJS methods to be run outside of Angular
    * @param ref The ApplicationRef provided by Angular, used to trigger an application tick
    */
   constructor(
     @Inject(EditorJSInstance) private readonly editorJs: EditorJSClass,
     @Inject(NGX_EDITORJS_CONFIG) private readonly config: NgxEditorJSModuleConfig,
-    @Inject(UserPlugins) private readonly userPlugins: PluginsMap,
+    private readonly plugins: NgxEditorJSPluginService,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
   ) {
-    Object.entries({ ...this.userPlugins }).forEach(([key, tool]) &#x3D;&gt; (this.pluginsMap[key] &#x3D; tool));
   }
 
   /**
-   * Creates a new EditorJS instance outside of the Angular zone and then adds it to the editor instances
-   * This method should be called with &#x60;await&#x60; to ensure the editor is fully initialized
-   * @param options The options to pass to the method for creating an EditorJS instance
+   * Creates a new {@link https://editorjs.io/api | EditorJS} instance outside of the Angular zone and then adds it to the editor instances
+   *
+   * @remark
+   * This method uses &#x60;async/await&#x60;
+   *
+   * @param options A configuration passed to create an EditorJS instance
+   * @returns A Promise when the editor has been created
    */
   public async createInstance(options: CreateEditorJSOptions): Promise&lt;void&gt; {
     const editorConfig: EditorConfig &#x3D; {
       ...this.config.editorjs,
       ...options.config,
-      tools: this.getTools(options.includeTools)
+      tools: this.getTools(options.excludeTools)
     };
-    editorConfig.onChange &#x3D; (editorConfig.onChange &amp;&amp; typeof editorConfig.onChange &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
-      ? editorConfig.onChange
-      : this.createOnChange.call(this, { holder: editorConfig.holder as string })) as any;
+
+    // Bind the editor onChange method from the config, otherwise use the local createOnChange method
+    editorConfig.onChange &#x3D;
+      editorConfig.onChange &amp;&amp; typeof editorConfig.onChange &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
+        ? editorConfig.onChange
+        : this.createOnChange.call(this, { holder: editorConfig.holder as string });
+
+    // Bind the editor onReady method from the config, otherwise use the local createOnReady method
     editorConfig.onReady &#x3D;
       editorConfig.onReady &amp;&amp; typeof editorConfig.onReady &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
         ? editorConfig.onReady
@@ -1333,56 +1344,27 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Internal method to create an default onChange method for &#x60;EditorJS&#x60;
-   * @param options The InjectorMethodOption for this request
-   */
-  private createOnChange(options: InjectorMethodOption): (change: OutputData) &#x3D;&gt; void {
-    const onChange &#x3D; (change: OutputData) &#x3D;&gt; {
-      if (!this.hasChangedMap[options.holder]) {
-        this.hasChangedMap[options.holder] &#x3D; new BehaviorSubject&lt;OutputData&gt;(change);
-      }
-      if (change) {
-        this.hasChangedMap[options.holder].next(change);
-      }
-    };
-    return onChange;
-  }
-
-  /**
-   * Internal method to create an default onReady method for &#x60;EditorJS&#x60;
-   * @param options The InjectorMethodOption for this request
-   */
-  private createOnReady(options: InjectorMethodOption): () &#x3D;&gt; void {
-    const onReady &#x3D; () &#x3D;&gt; {
-      if (!this.isReadyMap[options.holder]) {
-        this.isReadyMap[options.holder] &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
-      }
-      if (!this.isReadyMap[options.holder].value) {
-        this.isReadyMap[options.holder].next(true);
-      }
-    };
-    return onReady;
-  }
-
-  /**
-   * A helper method to make calls to any EditorJS API (see [API Docs](https://editorjs.io/api))
+   * A helper method to make calls to the {@link https://editorjs.io/api | EditorJS API } of any instance.
    * The first argument is an object that you must pass the &#x60;method&#x60; name, and the &#x60;holder&#x60; ID of the container.
    * An optional &#x60;namespace&#x60; can be added for API calls such as &#x60;blocks&#x60;, &#x60;caret&#x60;, etc.
+   *
    * The second argument is any additional arguments as required by the API.
    *
+   * @remarks
    * Unlike other methods an API call be made with a &#x60;.subscribe&#x60;, the result will be an observable value.
    * If the value is a Promise it will be resolved first
    *
-   * @param options EditorJS API call options
-   * @param args Additional arguments to pass to the API request
+   * @param options The options for the API call to be made
+   * @param args Any arguments to be passed to the API call
+   * @returns An Observable of the API response
    */
-  public apiCall&lt;T&gt;(options: InjectorApiCallOptions, ...args: any[]): Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt; {
+  public apiCall&lt;T &#x3D; any&gt;(options: InjectorApiCallOptions, ...args: any[]): Observable&lt;InjectorApiCallResponse&lt;T&gt;&gt; {
     return this.getEditor(options).pipe(
       take(1),
-      switchMap(editor &#x3D;&gt; {
-        const apiResult &#x3D; new BehaviorSubject&lt;InjectorApiCallResponse&lt;T&gt;&gt;({ ...options, result: {} as T });
+      switchMap(async editor &#x3D;&gt; {
+        let result: InjectorApiCallResponse&lt;T&gt; &#x3D; { ...options, result: undefined };
 
-        this.zone.runOutsideAngular(() &#x3D;&gt; {
+        await this.zone.runOutsideAngular(async () &#x3D;&gt; {
           let method: any;
           if (!options.namespace) {
             method &#x3D; editor[options.method];
@@ -1390,91 +1372,81 @@ export class NgxEditorJSService {
             method &#x3D; editor[options.namespace][options.method];
           }
           if (!method) {
-            throw new Error(&#x60;No method ${options.method} ${options.namespace ? &#x27;in &#x27; + options.namespace : &#x27;&#x27;}&#x60;);
+            throw new Error(&#x60;No method ${ options.method } ${ options.namespace ? &#x27;in &#x27; + options.namespace : &#x27;&#x27; }&#x60;);
           }
-          const result &#x3D; method.call(editor, ...args);
-          this.zone.run(() &#x3D;&gt; {
-            if (!result || (result &amp;&amp; !result.then)) {
-              apiResult.next({
-                ...options,
-                result: typeof result &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27; ? {} : result
-              });
+          const methodCall &#x3D; method.call(editor, ...args);
+          await this.zone.run(async () &#x3D;&gt; {
+            if (!methodCall || (methodCall &amp;&amp; !methodCall.then)) {
+              result &#x3D; {
+                ...result,
+                result: typeof methodCall &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27; ? {} : methodCall
+              };
             } else {
-              result.then((r: T) &#x3D;&gt; {
-                apiResult.next({ ...options, result: r });
-              });
+              const r &#x3D; await methodCall;
+              result &#x3D; { ...result, result: r };
             }
           });
         });
-        return apiResult.asObservable();
+
+        return result;
       })
     );
   }
 
   /**
-   * Gets the EditorJS instance for the passed holder and calls the &#x60;save&#x60; method
-   * to get the &#x60;OutputData&#x60; of the editor. This data is stored in the change subject
-   * for that instance and the &#x60;hasSaved&#x60; value updated
-   * @param options Options to configure a method call against the EditorJS core API
-   * @param triggerUpdate If set to false the &#x60;hasChanged&#x60; Observable won&#x27;t be updated
+   * Call the &#x60;save&#x60; method of an {@link https://editorjs.io/api | EditorJS} instance and sets the current value of the service to the result
+   * @param options Options for the method call
    */
-  public save(options: InjectorMethodOption, triggerUpdate &#x3D; true): void {
-    this.apiCall({ holder: options.holder, namespace: &#x27;saver&#x27;, method: &#x27;save&#x27; }, options.data).subscribe(
-      (response: InjectorApiCallResponse&lt;OutputData&gt;) &#x3D;&gt; {
+  public save(options: InjectorMethodOption): Observable&lt;InjectorApiCallResponse&lt;OutputData&gt;&gt; {
+    return this.apiCall({ holder: options.holder, namespace: &#x27;saver&#x27;, method: &#x27;save&#x27; }).pipe(
+      take(1),
+      tap((response: InjectorApiCallResponse&lt;OutputData&gt;) &#x3D;&gt; {
         this.hasSavedMap[options.holder].next(true);
-        if (triggerUpdate) {
-          this.hasChangedMap[options.holder].next(response.result);
-        }
-      }
+        this.lastChangeMap[options.holder].next(response.result);
+      })
     );
   }
 
   /**
-   * Gets the EditorJS instance for the passed holder and calls the &#x60;clear&#x60; method.
+   * Gets the {@link https://editorjs.io/api | EditorJS} instance for the passed holder and calls the &#x60;clear&#x60; method.
    * @param options Options to configure a method call against the EditorJS core API
-   * @param triggerUpdate If set to false the &#x60;hasChanged&#x60; Observable won&#x27;t be updated
    */
-  public clear(options: InjectorMethodOption, triggerUpdate &#x3D; true): void {
-    this.apiCall({ holder: options.holder, namespace: &#x27;blocks&#x27;, method: &#x27;clear&#x27; })
-      .pipe(take(1))
-      .subscribe((response: InjectorApiCallResponse&lt;OutputData&gt;) &#x3D;&gt; {
-        this.hasSavedMap[options.holder].next(false);
-        if (triggerUpdate) {
-          this.hasChangedMap[options.holder].next({
-            time: Date.now(),
-            blocks: [],
-            version: this.editorJs.version
-          });
-        }
-      });
+  public clear(options: InjectorMethodOption): Observable&lt;InjectorApiCallResponse&lt;OutputData&gt;&gt; {
+    return this.apiCall({ holder: options.holder, namespace: &#x27;blocks&#x27;, method: &#x27;clear&#x27; }).pipe(
+      take(1),
+      switchMap((response) &#x3D;&gt; options.skipSave ? of(response) : this.save(options))
+    );
   }
 
   /**
-   * Gets the EditorJS instance for the passed holder and calls the render method if blocks
-   * are passed. Optionally can disable the &#x60;hasChanged&#x60; update - useful if doing actions
+   * Gets the {@link https://editorjs.io/api | EditorJS} instance for the passed holder and calls the render method if blocks
+   * are passed. Optionally can disable the &#x60;lastChange&#x60; update - useful if doing actions
    * such as resetting data.
    * @param options Options to configure a method call against the EditorJS core API
-   * @param triggerUpdate If set to false the &#x60;hasChanged&#x60; Observable won&#x27;t be updated
    */
-  public update(options: InjectorMethodOption, triggerUpdate &#x3D; true): void {
-    if (!options.data) {
-      return;
-    }
+  public update(options: InjectorMethodOption): Observable&lt;InjectorApiCallResponse&lt;OutputData&gt;&gt; {
     const data &#x3D; {
       time: Date.now(),
       version: this.editorJs.version,
       blocks: [],
       ...options.data
     };
-    this.apiCall({ holder: options.holder, namespace: &#x27;blocks&#x27;, method: &#x27;render&#x27; }, data).subscribe(() &#x3D;&gt; {
-      if (triggerUpdate) {
-        this.hasChangedMap[options.holder].next(data);
-      }
-    });
+    return this.apiCall({ holder: options.holder, namespace: &#x27;blocks&#x27;, method: &#x27;render&#x27; }, data).pipe(
+      take(1),
+      switchMap((response) &#x3D;&gt; options.skipSave ? of(response) : this.save(options))
+    );
+  }
+
+  public toggleToolbar(options: InjectorMethodOption) {
+    return this.apiCall({
+      holder: options.holder,
+      namespace: &#x27;toolbar&#x27;,
+      method: this.toolbarOpen ? &#x27;close&#x27; : &#x27;open&#x27;
+    }).pipe(take(1)).subscribe();
   }
 
   /**
-   * Returns the underlying EditorJS instance
+   * Returns the underlying {@link https://editorjs.io/api | EditorJS} instance
    * @param options Options to configure a method call against the EditorJS core API
    */
   public getEditor(options: InjectorMethodOption): Observable&lt;EditorJS&gt; {
@@ -1496,14 +1468,21 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Subscribe to the &#x60;hasChanged&#x60; state change for the editor passed in the options
+   * Subscribe to the &#x60;lastChange&#x60; state change for the editor passed in the options
    * @param options Options to configure a method call against the EditorJS core API
    */
-  public hasChanged(options: InjectorMethodOption): Observable&lt;OutputData&gt; {
-    if (!this.hasChangedMap[options.holder]) {
-      this.hasChangedMap[options.holder] &#x3D; new BehaviorSubject&lt;OutputData&gt;({ time: 0, blocks: [] });
+  public lastChange(options: InjectorMethodOption): Observable&lt;OutputData&gt; {
+    if (!this.lastChangeMap[options.holder]) {
+      this.lastChangeMap[options.holder] &#x3D; new BehaviorSubject&lt;OutputData&gt;({
+        time: 0,
+        blocks: [],
+        version: this.editorJs.version
+      });
     }
-    return this.hasChangedMap[options.holder].asObservable();
+    return this.lastChangeMap[options.holder].pipe(
+      distinctUntilChanged((a, b) &#x3D;&gt; (b &amp;&amp; b.time &amp;&amp; b.time &#x3D;&#x3D;&#x3D; 0) || (a &amp;&amp; b &amp;&amp; (a.time &amp;&amp; a.time &#x3D;&#x3D;&#x3D; b.time))),
+      filter(hasChanged &#x3D;&gt; typeof hasChanged !&#x3D;&#x3D; &#x27;undefined&#x27;)
+    );
   }
 
   /**
@@ -1518,56 +1497,21 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Destroys a single instance of EditorJS and all the subject values created for it
+   * Destroys a single instance of {@link https://editorjs.io/api | EditorJS} and all the subject values created for it
    * @param options Options to configure a method call against the EditorJS core API
    */
   public destroyInstance(options: InjectorMethodOption): void {
-    const instanceDestroyed &#x3D; new Subject&lt;boolean&gt;();
     this.getEditor(options)
-      .pipe(takeUntil(instanceDestroyed))
+      .pipe(take(1))
       .subscribe(editor &#x3D;&gt; {
         this.zone.runOutsideAngular(() &#x3D;&gt; {
           editor.destroy();
           this.zone.run(() &#x3D;&gt; {
             this.cleanupSubjects({ holder: options.holder });
-            instanceDestroyed.next(true);
-            instanceDestroyed.complete();
             this.ref.tick();
           });
         });
       });
-  }
-
-  /**
-   * Sets up the &#x60;BehaviorSubject&#x60; values when an EditorJS instance is created.  All the subjects are first created and set
-   * to default values.
-   * Once an EditorJS instance is ready these values can provide change and save state information
-   * @param options Options to configure a method call against the EditorJS core API
-   */
-  private async setupSubjects(options: InjectorMethodOption): Promise&lt;void&gt; {
-    MAP_DEFAULTS.forEach(([mapKey, value]: [string, typeof value]) &#x3D;&gt; {
-      if (!this[mapKey][options.holder]) {
-        this[mapKey][options.holder] &#x3D; new BehaviorSubject&lt;typeof value&gt;(value);
-      }
-      this[mapKey][options.holder].next(value);
-    });
-  }
-
-  /**
-   * Handles cleaning up all the &#x60;BehaviorSubject&#x60; values once an EditorJS instance has been destroyed
-   * @param holder The holder ID for the EditorJS instance
-   */
-  private cleanupSubjects(options: InjectorMethodOption) {
-    MAP_DEFAULTS.forEach(([mapKey, value]: [string, any]) &#x3D;&gt; {
-      if (this[mapKey][options.holder]) {
-        this[mapKey][options.holder].next(value);
-        this[mapKey][options.holder].complete();
-        this[mapKey][options.holder] &#x3D; null;
-        delete this[mapKey][options.holder];
-      }
-    });
-    this.editorMap[options.holder] &#x3D; null;
-    delete this.editorMap[options.holder];
   }
 
   /**
@@ -1580,23 +1524,92 @@ export class NgxEditorJSService {
   }
 
   /**
-   * Returns a map of tools to be initialized by the editor
-   * @param exclude Optional array of keys to exclude from the map
+   * Internal method to create an default onChange method for {@link https://editorjs.io/api | EditorJS}
+   * @param options The InjectorMethodOption for this request
    */
-  private getTools(exclude: string[] &#x3D; []): ToolSettingsMap {
-    return Object.entries(this.pluginsMap)
-      .filter(([key]) &#x3D;&gt; !exclude.includes(key))
+  private createOnChange(options: InjectorMethodOption): (change: OutputData) &#x3D;&gt; void {
+    if (!this.lastChangeMap[options.holder]) {
+      this.lastChangeMap[options.holder] &#x3D; new BehaviorSubject&lt;OutputData&gt;({ blocks: [] });
+    }
+    return (change: OutputData) &#x3D;&gt; {
+      if (change) {
+        this.lastChangeMap[options.holder].next(change);
+      }
+    };
+  }
+
+  /**
+   * Internal method to create an default onReady method for {@link https://editorjs.io/api | EditorJS}
+   * @param options The InjectorMethodOption for this request
+   */
+  private createOnReady(options: InjectorMethodOption): () &#x3D;&gt; void {
+    if (!this.isReadyMap[options.holder]) {
+      this.isReadyMap[options.holder] &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+    }
+
+    return () &#x3D;&gt; {
+      if (!this.isReadyMap[options.holder].value) {
+        this.isReadyMap[options.holder].next(true);
+      }
+    };
+  }
+
+  /**
+   * Sets up the &#x60;BehaviorSubject&#x60; values when an {@link https://editorjs.io/api | EditorJS} instance is created.  All the subjects are first created and set
+   * to default values.
+   * Once an EditorJS instance is ready these values can provide change and save state information
+   * @param options Options to configure a method call against the EditorJS core API
+   */
+  private async setupSubjects(options: InjectorMethodOption): Promise&lt;void&gt; {
+    MAP_DEFAULTS.forEach(([ mapKey, value ]: [ string, typeof value ]) &#x3D;&gt; {
+      if (!this[mapKey][options.holder]) {
+        this[mapKey][options.holder] &#x3D; new BehaviorSubject&lt;typeof value&gt;(value);
+      }
+      this[mapKey][options.holder].next(value);
+    });
+  }
+
+  /**
+   * Handles cleaning up all the &#x60;BehaviorSubject&#x60; values once an {@link https://editorjs.io/api | EditorJS} instance has been destroyed
+   * @param options The options to pass to clean up the subjects
+   */
+  private cleanupSubjects(options: InjectorMethodOption) {
+    MAP_DEFAULTS.forEach(([ mapKey ]: [ string ]) &#x3D;&gt; {
+      if (this[mapKey][options.holder]) {
+        this[mapKey][options.holder].complete();
+        this[mapKey][options.holder] &#x3D; null;
+        delete this[mapKey][options.holder];
+      }
+    });
+    this.editorMap[options.holder].complete();
+    this.editorMap[options.holder] &#x3D; null;
+    delete this.editorMap[options.holder];
+  }
+
+  /**
+   * Returns a map of {@link https://editorjs.io/api | EditorJS} tools to be initialized by the editor
+   * @param excudeTools Optional array of tools to exclude, if not passed all tools
+   */
+  private getTools(excudeTools: string[] &#x3D; []): ToolSettingsMap {
+    return Object.entries(this.plugins.getPluginsWithExclude(excudeTools))
       .reduce(
-        (finalTools, [key, plugin]) &#x3D;&gt;
+        (finalTools, [ key, plugin ]) &#x3D;&gt;
           plugin.shortcut
             ? {
-                [key]: {
-                  class: plugin.plugin(),
-                  shortcut: plugin.shortcut()
-                },
-                ...finalTools
-              }
-            : { [key]: plugin.plugin(), ...finalTools },
+              [key]: {
+                class: plugin.plugin,
+                shortcut: plugin.shortcut,
+                inlineToolbar: plugin.type &#x3D;&#x3D;&#x3D; &#x27;inline&#x27;
+              },
+              ...finalTools
+            }
+            : {
+              [key]: {
+                class: plugin.plugin,
+                inlineToolbar: plugin.type &#x3D;&#x3D;&#x3D; &#x27;inline&#x27;
+              },
+              ...finalTools
+            },
         {}
       );
   }

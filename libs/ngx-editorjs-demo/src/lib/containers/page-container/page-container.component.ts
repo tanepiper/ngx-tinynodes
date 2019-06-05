@@ -32,7 +32,7 @@ export class PageContainerComponent implements AfterContentInit {
    */
   private menu$ = new BehaviorSubject<MenuGroup>(undefined);
 
-  @ViewChild('ngxEditorJS', { read: NgxEditorJSComponent }) ngxEditorJS: NgxEditorJSComponent;
+  @ViewChild('ngxEditorJS', { read: NgxEditorJSComponent, static: true }) ngxEditorJS: NgxEditorJSComponent;
 
   /**
    * The constructor sets up the blocks to the initial demo data
@@ -52,7 +52,7 @@ export class PageContainerComponent implements AfterContentInit {
    * Get the blocks from the last change
    */
   public get blocks() {
-    return this.editorService.hasChanged({ holder: this.holder }).pipe(
+    return this.editorService.lastChange({ holder: this.holder }).pipe(
       pluck<OutputData, Block[]>('blocks'),
       takeUntil(this.onDestroy$)
     );

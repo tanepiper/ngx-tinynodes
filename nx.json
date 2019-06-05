@@ -14,13 +14,13 @@
     "ngx-tinynodes-e2e": {
       "tags": []
     },
+    "ngx-editorjs-plugins": {
+      "tags": []
+    },
     "ngx-editorjs": {
       "tags": []
     },
     "ngx-editorjs-demo": {
-      "tags": []
-    },
-    "ngx-editorjs-plugins": {
       "tags": []
     },
     "ngx-editorjs-ngrx": {
@@ -30,6 +30,9 @@
       "tags": []
     },
     "ngx-tinynodes-core": {
+      "tags": []
+    },
+    "ngx-tinynodes-components": {
       "tags": []
     }
   }

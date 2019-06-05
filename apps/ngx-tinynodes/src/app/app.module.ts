@@ -9,7 +9,6 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
 import { NgxEditorjsDemoModule } from '@tinynodes/ngx-editorjs-demo';
 import { ApplicationDataModule, NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
-import { MarkdownModule } from 'ngx-markdown';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -36,7 +35,6 @@ import { HomePageComponent } from './pages/home/home-page.component';
     NgxTinynodesCoreModule,
     NgxEditorJSModule.forRoot(),
     NgxEditorjsDemoModule,
-    MarkdownModule.forRoot({ loader: HttpClient }),
     environment.production ? [] : [AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule.forRoot()]
   ],
   bootstrap: [AppContainerComponent]

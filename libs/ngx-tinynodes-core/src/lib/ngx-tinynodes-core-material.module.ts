@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import {
-  MatGridListModule,
-  MatCardModule,
-  MatExpansionModule,
-  MatListModule,
-  MatButtonModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 
 @NgModule({

@@ -9,13 +9,13 @@ import {
   Input,
   OnDestroy,
   Output,
-  ViewChild
+  ViewChild,
+  Provider
 } from '@angular/core';
-import { Provider } from '@angular/core/src/render3/jit/compiler_facade_interface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutputData, SanitizerConfig } from '@editorjs/editorjs';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { map, takeUntil, tap, timeInterval } from 'rxjs/operators';
+import { map, switchMap, take, takeUntil, tap, timeInterval } from 'rxjs/operators';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { Block } from '../../types/blocks';
@@ -49,7 +49,8 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
   /**
    * The directive used in this component
    */
-  @ViewChild('editorInstance', { read: NgxEditorJSDirective }) public readonly editorInstance: NgxEditorJSDirective;
+  @ViewChild('editorInstance', { read: NgxEditorJSDirective, static: true })
+  public readonly editorInstance: NgxEditorJSDirective;
   /**
    * Component Destroy subject, in your component `ngOnDestroy` method call `.next(true)`
    * and then `.complete()` on the `this.onDestroy$` subject
@@ -103,7 +104,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * array is set only the tools with the provided keys will be added
    */
   @Input()
-  public includeTools: string[] = [];
+  public excludeTools: string[] = [];
 
   /**
    * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
@@ -189,19 +190,18 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * the touch status on the component
    * @param event The mouse event from the touch
    */
-  public onTouch = (event?: MouseEvent): void => {
+  public onTouch(event?: MouseEvent): void {
     this.isTouched.emit(true);
-  };
+  }
 
   /**
    * Angular Form onChange method, this is a default method that updates the
    * editor instance with blocks on change
    * @param data The data to write
    */
-  public onChange = (data: OutputData): void => {
-    this.editorService.update({ holder: this.holder, data });
-    this.changeDetection.markForCheck();
-  };
+  public onChange(data: OutputData): void {
+    this.writeValue(data);
+  }
 
   /**
    * Angular Forms value writer, updates the editor
@@ -244,18 +244,15 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
           this.isFocused.emit(true);
           if (this.autosave > 0) {
             this.timerSubscription$ = this.getTimer(this.autosave, 0)
-              .pipe(tap(() => this.editorService.save({ holder: this.holder })))
+              .pipe(switchMap(() => this.editorService.save({ holder: this.holder }).pipe(take(1))))
               .subscribe();
           }
         } else {
-          this.isFocused.emit(false);
           if (this.timerSubscription$) {
             this.timerSubscription$.unsubscribe();
           }
+          this.isFocused.emit(false);
         }
-      }),
-      tap(() => {
-        this.changeDetection.markForCheck();
       })
     );
   }
@@ -272,7 +269,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       });
 
     this.editorService
-      .hasChanged({ holder: this.holder })
+      .lastChange({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
@@ -295,7 +292,6 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => {
         this.onTouch();
-        this.changeDetection.markForCheck();
       });
   }
 

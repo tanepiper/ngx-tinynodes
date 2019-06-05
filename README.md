@@ -2,7 +2,8 @@
 
 This repository is a collection of Angular components and demos with full documentation.
 
-See the [Changelog](https://github.com/tanepiper/ngx-tinynodes/blob/master/CHANGELOG.md) for the development diary of this site, or visit [the documentation of libraries](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/README.md).
+See the [Changelog](https://github.com/tanepiper/ngx-tinynodes/blob/master/CHANGELOG.md) for the
+development diary of this site, or visit [the documentation of libraries](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/README.md).
 
 You can also find a fully searchable API documentation for all `@tinynode` components.
 
@@ -22,7 +23,6 @@ This library provides Angular support for [EditorJS](https://editorjs.io). Insid
 - `NgxEditorJSDirective` - An Angular Directive used to attach an `EditorJS` instance to any block DOM element
 - `NgxEditorJSComponent` - An [out-of-the-box Angular component](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-component) that is Reactive Forms compatible
 - `NgxEditorJSMaterialFieldComponent` An [Angular Material](https://material.angular.io) Form Field component that provides all the required properties and life-cycle events required. See the [Form Demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form) on an example usage
-- `NgxEditorJSBaseComponent` - A base Angular component that is Reactive form compatible but with no template, can be used to create custom UI framework containers
 - `NgxEditorJSService` - A Service that can be injected into an application to provide a interface to interact with `EditorJS` instances. Underneath are the private `NgxEditorJSPluginService` and `NgxEditorJSInstanceService` services. These are private but can be imported via `ɵNgxEditorJSPluginService` and `ɵNgxEditorJSInstanceService` from the library if you want to use them.
 
 Within these components you will be able to access the underlying `EditorJS` instance, for use see the [EditorJS API Docs](https://editorjs.io/api)
@@ -40,7 +40,9 @@ This project provides a set of features for using [EditorJS](https://editorjs.io
 
 #### `@tinynodes/ngx-editorjs-plugins`
 
-This project provides a module that exports a set of default plugins for `@tinynodes/ngx-editorjs`.
+This project provides the plugin service module that exports handles
+ plugins for `@tinynodes/ngx-editorjs`. The module also ships a set of default
+ plugins and documentation on how to add new ones easily.
 
 - [Readme](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-plugins/README.md)
 - [Changelog](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-plugins/CHANGELOG.md)

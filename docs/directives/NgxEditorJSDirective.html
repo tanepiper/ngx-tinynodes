@@ -121,9 +121,11 @@ Angular services and components</p>
                                 <a href="#createEditor">createEditor</a>
                             </li>
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#ngAfterContentInit">ngAfterContentInit</a>
                             </li>
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#ngOnChanges">ngOnChanges</a>
                             </li>
                             <li>
@@ -154,13 +156,13 @@ Angular services and components</p>
                                 <a href="#blocks">blocks</a>
                             </li>
                             <li>
+                                <a href="#excludeTools">excludeTools</a>
+                            </li>
+                            <li>
                                 <a href="#hideToolbar">hideToolbar</a>
                             </li>
                             <li>
                                 <a href="#holder">holder</a>
-                            </li>
-                            <li>
-                                <a href="#includeTools">includeTools</a>
                             </li>
                             <li>
                                 <a href="#initialBlock">initialBlock</a>
@@ -448,6 +450,39 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="excludeTools"></a>
+                        <b>excludeTools</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:97</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>String Array, If empty all tools available via the plugin service will be added.  If a string
+array is set only the tools with the provided keys will be added</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="hideToolbar"></a>
                         <b>hideToolbar</b>
                     </td>
@@ -493,39 +528,6 @@ Set to 0 to disable or pass a value in <code>ms</code> of the autosave time</p>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>String, the ID property of the element that the EditorJS instance will be attached to</p>
-</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="includeTools"></a>
-                        <b>includeTools</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>string[]</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:97</a></div>
-                            </td>
-                        </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>String Array, If empty all tools available via the plugin service will be added.  If a string
-array is set only the tools with the provided keys will be added</p>
 </div>
                     </td>
                 </tr>
@@ -815,15 +817,15 @@ The default value is &quot;paragraph&quot;</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createEditor(config?: EditorConfig)</code>
+                    <code>createEditor(config?: EditorConfig, excludeTools: [])</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="197"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:197</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="198"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:198</a></div>
                 </td>
             </tr>
 
@@ -841,6 +843,7 @@ The default value is &quot;paragraph&quot;</p>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Default value</td>
                                     <td>Description</td>
                                 </tr>
                             </thead>
@@ -855,10 +858,29 @@ The default value is &quot;paragraph&quot;</p>
                                         Yes
                                     </td>
 
+                                    <td>
+                                    </td>
 
                                     <td>
                                         <p>Configuration for this instance</p>
 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>excludeTools</td>
+                                    <td>
+                                            <code>[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>[]</code>
+                                    </td>
+
+                                    <td>
                                     </td>
                                 </tr>
                             </tbody>
@@ -884,6 +906,7 @@ The default value is &quot;paragraph&quot;</p>
                     <a name="ngAfterContentInit"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Async</span>
                             ngAfterContentInit
                         </b>
                         <a href="#ngAfterContentInit"><span class="icon ion-ios-link"></span></a>
@@ -892,15 +915,16 @@ The default value is &quot;paragraph&quot;</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngAfterContentInit()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngAfterContentInit()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="248"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:248</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="252"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:252</a></div>
                 </td>
             </tr>
 
@@ -911,7 +935,7 @@ The default value is &quot;paragraph&quot;</p>
 </div>
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                     </div>
                 </td>
@@ -925,6 +949,7 @@ The default value is &quot;paragraph&quot;</p>
                     <a name="ngOnChanges"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Async</span>
                             ngOnChanges
                         </b>
                         <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
@@ -933,15 +958,16 @@ The default value is &quot;paragraph&quot;</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="214"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:214</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="215"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:215</a></div>
                 </td>
             </tr>
 
@@ -989,7 +1015,7 @@ to be ready</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -1021,8 +1047,8 @@ to be ready</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="281"
-                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:281</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="285"
+                            class="link-to-prism">libs/ngx-editorjs/src/lib/directives/ngx-editorjs.directive.ts:285</a></div>
                 </td>
             </tr>
 
@@ -1272,7 +1298,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * array is set only the tools with the provided keys will be added
    */
   @Input()
-  public includeTools: string[] &#x3D; [];
+  public excludeTools: string[] &#x3D; [];
 
   /**
    * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
@@ -1371,11 +1397,12 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   /**
    * Creates an EditorJS instance for this directive
    * @param config Configuration for this instance
+   * @param excludeTools
    */
-  public async createEditor(config?: EditorConfig): Promise&lt;void&gt; {
+  public async createEditor(config?: EditorConfig, excludeTools &#x3D; []): Promise&lt;void&gt; {
     await this.service.createInstance({
       config,
-      includeTools: this.includeTools,
+      excludeTools: this.excludeTools || excludeTools,
       autoSave: this.autosave || 0
     });
     this.cd.markForCheck();
@@ -1389,47 +1416,50 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * to be ready
    * @param changes Changes on the component
    */
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges): Promise&lt;void&gt; {
     if (
       changes.blocks &amp;&amp;
+      changes.blocks.previousValue !&#x3D;&#x3D; null &amp;&amp;
       !changes.blocks.firstChange &amp;&amp;
       JSON.stringify(changes.blocks.previousValue) !&#x3D;&#x3D; JSON.stringify(changes.blocks.currentValue)
     ) {
-      this.service.update({ holder: this.holder });
+      this.service.update({ holder: this.holder }).subscribe();
       this.cd.markForCheck();
+    } else {
+      const changesKeys &#x3D; Object.keys(changes);
+      if (
+        this.id &amp;&amp;
+        // Ignore changes for values not related to EditorJS
+        [
+          &#x27;autofocus&#x27;,
+          &#x27;holder&#x27;,
+          &#x27;hideToolbar&#x27;,
+          &#x27;initialBlock&#x27;,
+          &#x27;minHeight&#x27;,
+          &#x27;blockPlaceholder&#x27;,
+          &#x27;sanitizer&#x27;,
+          &#x27;includeTools&#x27;
+        ].find(key &#x3D;&gt; {
+          return changesKeys.includes(key);
+        })
+      ) {
+        await this.createEditor(this.createConfig());
+        this.cd.markForCheck();
+      }
     }
-    const changesKeys &#x3D; Object.keys(changes);
-    if (
-      this.id &amp;&amp;
-      // Ignore changes for values not related to EditorJS
-      [
-        &#x27;autofocus&#x27;,
-        &#x27;holder&#x27;,
-        &#x27;hideToolbar&#x27;,
-        &#x27;initialBlock&#x27;,
-        &#x27;minHeight&#x27;,
-        &#x27;blockPlaceholder&#x27;,
-        &#x27;sanitizer&#x27;,
-        &#x27;includeTools&#x27;
-      ].find(key &#x3D;&gt; {
-        return changesKeys.includes(key);
-      })
-    ) {
-      this.createEditor(this.createConfig());
-      this.cd.markForCheck();
-    }
+
   }
 
   /**
    * After content is created, we create the editor instance and set up listners
    */
-  ngAfterContentInit() {
+  async ngAfterContentInit() {
     this.id &#x3D; this.el.nativeElement.id || this.holder;
 
     if (!this.id) {
       throw new Error(&#x27;Error in NgxEditorJSDirective::ngAfterContentInit - Directive element has no ID&#x27;);
     }
-    this.createEditor(this.createConfig());
+    await this.createEditor(this.createConfig());
 
     this.service
       .isReady({ holder: this.holder })
@@ -1439,7 +1469,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       });
 
     this.service
-      .hasChanged({ holder: this.holder })
+      .lastChange({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change &#x3D;&gt; {
         this.hasChanged.emit(change);
@@ -1457,6 +1487,8 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Destroy the editor and subjects for this service
    */
   ngOnDestroy() {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
     this.service.destroyInstance({ holder: this.id });
   }
 

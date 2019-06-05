@@ -69,38 +69,320 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>A Module plugin configuration</p>
+                <p>A plugin configuration object</p>
 
             </p>
 
 
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#blockData">blockData</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#description">description</a>
+                                </li>
+                                <li>
+                                        <a href="#key">key</a>
+                                </li>
+                                <li>
+                                        <a href="#plugin">plugin</a>
+                                </li>
+                                <li>
+                                        <a href="#pluginName">pluginName</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#shortcut">shortcut</a>
+                                </li>
+                                <li>
+                                        <a href="#type">type</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
 
 
             <section>
-    <h3 id="inputs">Indexable</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <code>[key: string]:        <code><a href="../interfaces/BasePlugin.html" target="_self" >BasePlugin</a></code>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="blockData"></a>
+                                        <span class="name"><b>blockData</b><a href="#blockData"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>blockData:         <code><a href="../interfaces/BlockData.html" target="_self" >BlockData</a></code>
 </code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/types/plugins.ts:7</a></div>
-                            </td>
-                        </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The key of the plugin and the plugin class extending <code>BasePlugin</code></p>
-</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
+                                    </td>
+                                </tr>
 
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/BlockData.html" target="_self" >BlockData</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Optional block data, used to define the block data for this type
+and used as a default</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="description"></a>
+                                        <span class="name"><b>description</b><a href="#description"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>description:         <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Optional description for the plugin</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="key"></a>
+                                        <span class="name"><b>key</b><a href="#key"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>key:         <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The key to use for the plugin</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="plugin"></a>
+                                        <span class="name"><b>plugin</b><a href="#plugin"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>plugin:         <code><a href="../miscellaneous/typealiases.html#EditorJSPlugin" target="_self" >EditorJSPlugin | undefined</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#EditorJSPlugin" target="_self" >EditorJSPlugin | undefined</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The plugin for the editor</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="pluginName"></a>
+                                        <span class="name"><b>pluginName</b><a href="#pluginName"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>pluginName:         <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Label for displaying the plugin name</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="shortcut"></a>
+                                        <span class="name"><b>shortcut</b><a href="#shortcut"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>shortcut:         <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Optional shortcut for the plugin</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="type"></a>
+                                        <span class="name"><b>type</b><a href="#type"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>type:         <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#PluginProperty" target="_self" >PluginProperty</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Specifies the type of plugin for the plugin provider</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
     </div>
 
 
@@ -109,14 +391,40 @@
 import { ToolSettings, ToolConstructable } from &#x27;@editorjs/editorjs&#x27;;
 
 /**
- * A Module plugin configuration
+ * Block Data interface
  */
-export interface PluginConfig {
-  /**
-   * The key of the plugin and the plugin class extending &#x60;BasePlugin&#x60;
-   */
-  [key: string]: BasePlugin;
+export interface BlockData {
+  [key: string]: any;
 }
+
+/**
+ * The types of plugins supported, currently block and inline
+ */
+export enum PluginTypes {
+  /**
+   * A EditorJS block plugin
+   */
+  Block &#x3D; &#x27;block&#x27;,
+  /**
+   * A EditorJS inline plugin
+   */
+  Inline &#x3D; &#x27;inline&#x27;
+}
+
+/**
+ * The types of plugins supported via the plugin &#x60;type&#x60; property
+ */
+export type PluginType &#x3D; PluginTypes.Block | PluginTypes.Inline | string;
+
+/**
+ * A plugin property
+ */
+export type PluginProperty &#x3D; string;
+
+/**
+ * The EditorJS tool settings for this plugin
+ */
+export type EditorJSPlugin &#x3D; ToolConstructable | ToolSettings;
 
 /**
  * A map of all the tools settings
@@ -125,34 +433,68 @@ export interface ToolSettingsMap {
   /**
    * The key of the plugin and the plugin exported tool settings
    */
-  [key: string]: ToolConstructable | ToolSettings;
+  [key: string]: EditorJSPlugin;
 }
 
 /**
- * Defines the interface for required and optional plugin methods.
- * These methods allow a plugin to return a EditorJS plugin and an optional shortcut
+ * A plugin configuration object
  */
-export interface BasePlugin {
+export interface PluginConfig {
   /**
-   * The plugin settings to be returned
+   * Specifies the type of plugin for the plugin provider
    */
-  plugin: () &#x3D;&gt; ToolConstructable | ToolSettings;
-
+  type: PluginProperty;
+  /**
+   * The key to use for the plugin
+   */
+  key: PluginProperty;
+  /**
+   * Label for displaying the plugin name
+   */
+  pluginName: PluginProperty;
+  /**
+   * Optional description for the plugin
+   */
+  description?: PluginProperty;
   /**
    * Optional shortcut for the plugin
    */
-  shortcut?: () &#x3D;&gt; string;
+  shortcut?: PluginProperty;
+  /**
+   * Optional block data, used to define the block data for this type
+   * and used as a default
+   */
+  blockData?: BlockData;
+  /**
+   * The plugin for the editor
+   */
+  plugin: EditorJSPlugin | undefined;
 }
 
 /**
  * The Injection token for initial plugins as defined in the ngx-editorjs module
  */
-export const InitialPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;InitialPlugins&#x27;);
+export const EDITOR_JS_TOOL_INJECTOR &#x3D; new InjectionToken&lt;EditorJSPlugin&gt;(&#x27;EDITOR_JS_TOOL_INJECTOR&#x27;);
 
 /**
- * The injection token for adding plugins via your own application
+ * Injection token for a plugin config
  */
-export const UserPlugins &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;UserPlugins&#x27;);
+export const PLUGIN_CONFIG &#x3D; new InjectionToken&lt;PluginConfig&gt;(&#x27;PLUGIN_CONFIG&#x27;);
+
+/**
+ * A map of plugin configs
+ */
+export interface PluginConfigMap {
+  /**
+   * A plugin config per key
+   */
+  [key: string]: PluginConfig;
+}
+
+/**
+ * Injection token for the plugin config map
+ */
+export const PluginClasses &#x3D; new InjectionToken&lt;PluginConfigMap&gt;(&#x27;PluginClasses&#x27;);
 </code></pre>
     </div>
 </div>

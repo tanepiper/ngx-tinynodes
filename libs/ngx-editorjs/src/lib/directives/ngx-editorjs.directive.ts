@@ -94,7 +94,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * array is set only the tools with the provided keys will be added
    */
   @Input()
-  public includeTools: string[] = [];
+  public excludeTools: string[] = [];
 
   /**
    * Number, Used with Angular Forms this sets an autosave timer active that calls the EditorJS save
@@ -193,11 +193,12 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
   /**
    * Creates an EditorJS instance for this directive
    * @param config Configuration for this instance
+   * @param excludeTools
    */
-  public async createEditor(config?: EditorConfig): Promise<void> {
+  public async createEditor(config?: EditorConfig, excludeTools = []): Promise<void> {
     await this.service.createInstance({
       config,
-      includeTools: this.includeTools,
+      excludeTools: this.excludeTools || excludeTools,
       autoSave: this.autosave || 0
     });
     this.cd.markForCheck();
@@ -211,47 +212,50 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * to be ready
    * @param changes Changes on the component
    */
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
     if (
       changes.blocks &&
+      changes.blocks.previousValue !== null &&
       !changes.blocks.firstChange &&
       JSON.stringify(changes.blocks.previousValue) !== JSON.stringify(changes.blocks.currentValue)
     ) {
-      this.service.update({ holder: this.holder });
+      this.service.update({ holder: this.holder }).subscribe();
       this.cd.markForCheck();
+    } else {
+      const changesKeys = Object.keys(changes);
+      if (
+        this.id &&
+        // Ignore changes for values not related to EditorJS
+        [
+          'autofocus',
+          'holder',
+          'hideToolbar',
+          'initialBlock',
+          'minHeight',
+          'blockPlaceholder',
+          'sanitizer',
+          'includeTools'
+        ].find(key => {
+          return changesKeys.includes(key);
+        })
+      ) {
+        await this.createEditor(this.createConfig());
+        this.cd.markForCheck();
+      }
     }
-    const changesKeys = Object.keys(changes);
-    if (
-      this.id &&
-      // Ignore changes for values not related to EditorJS
-      [
-        'autofocus',
-        'holder',
-        'hideToolbar',
-        'initialBlock',
-        'minHeight',
-        'blockPlaceholder',
-        'sanitizer',
-        'includeTools'
-      ].find(key => {
-        return changesKeys.includes(key);
-      })
-    ) {
-      this.createEditor(this.createConfig());
-      this.cd.markForCheck();
-    }
+
   }
 
   /**
    * After content is created, we create the editor instance and set up listners
    */
-  ngAfterContentInit() {
+  async ngAfterContentInit() {
     this.id = this.el.nativeElement.id || this.holder;
 
     if (!this.id) {
       throw new Error('Error in NgxEditorJSDirective::ngAfterContentInit - Directive element has no ID');
     }
-    this.createEditor(this.createConfig());
+    await this.createEditor(this.createConfig());
 
     this.service
       .isReady({ holder: this.holder })
@@ -261,7 +265,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       });
 
     this.service
-      .hasChanged({ holder: this.holder })
+      .lastChange({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(change => {
         this.hasChanged.emit(change);
@@ -279,6 +283,8 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
    * Destroy the editor and subjects for this service
    */
   ngOnDestroy() {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
     this.service.destroyInstance({ holder: this.id });
   }
 

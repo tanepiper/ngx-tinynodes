@@ -248,7 +248,11 @@ export interface EditorJSInstanceConfig {
 /**
  * Default values for each internal map
  */
-export const MAP_DEFAULTS &#x3D; [[&#x27;hasChangedMap&#x27;, { time: 0, blocks: [] }], [&#x27;isReadyMap&#x27;, false], [&#x27;hasSavedMap&#x27;, false]];
+export const MAP_DEFAULTS &#x3D; [
+  [&#x27;lastChangeMap&#x27;, { time: 0, blocks: [], version: EditorJS.version }],
+  [&#x27;isReadyMap&#x27;, false],
+  [&#x27;hasSavedMap&#x27;, false]
+];
 
 /**
  * Injection token for the EditorJS class
@@ -276,6 +280,10 @@ export interface InjectorMethodOption {
    * Optional editor
    */
   editor?: EditorJS;
+  /**
+   * Don&#x27;t call save
+   */
+  skipSave?: boolean;
 }
 
 /**
