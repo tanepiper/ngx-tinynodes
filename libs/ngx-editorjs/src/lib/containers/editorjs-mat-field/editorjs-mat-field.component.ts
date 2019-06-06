@@ -41,7 +41,8 @@ export interface EditorJSMaterialForm
     OnInit,
     AfterContentInit,
     OnDestroy,
-    DoCheck {}
+    DoCheck {
+}
 
 /**
  * This component provides a [Material](https://material.angular.io) compatible `<mat-form-field>` component.
@@ -55,8 +56,8 @@ export interface EditorJSMaterialForm
 @Component({
   selector: 'ngx-editorjs-mat-field',
   templateUrl: 'editorjs-mat-field.component.html',
-  styleUrls: ['editorjs-mat-field.component.scss'],
-  providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
+  styleUrls: [ 'editorjs-mat-field.component.scss' ],
+  providers: [ EDITORJS_MATERIAL_FIELD_CONTROL ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implements EditorJSMaterialForm {
@@ -107,6 +108,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   get placeholder() {
     return this._placeholder;
   }
+
   /**
    * Set the material Placeholder value
    * @input placeholder The placeholder state to set
@@ -127,6 +129,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   get focused() {
     return this._focused;
   }
+
   /**
    * Set the Material focused state
    * @param focused The focused state to set
@@ -151,6 +154,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   get required() {
     return this._required;
   }
+
   /**
    * Set the Material requied state
    * @param required The required state to set
@@ -172,6 +176,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   get disabled() {
     return this._disabled;
   }
+
   /**
    * Set the Material disabled state
    * @param disabled The disabled state to set
@@ -192,6 +197,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   public get empty() {
     return this._empty;
   }
+
   /**
    * Set the Material empty state
    * @param empty The empty value
@@ -210,7 +216,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
    * Host binding to the unique ID for this editor for material
    */
   @HostBinding()
-  id = `ngx-editorjs-mat-field-${NgxEditorJSMatFieldComponent.nextId++}`;
+  id = `ngx-editorjs-mat-field-${ NgxEditorJSMatFieldComponent.nextId++ }`;
 
   /**
    * Gets if the Material label should float
@@ -247,7 +253,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
    * we call `super()` to get all the properties of that component
    * @param editorService The NgxEditorJSService instance
    * @param focusMonitor Focus monitor for the Material element
-   * @parma cd The Change detection ref
+   * @param changeDetection The Change detection ref
    * @param ngControl The Angular control base class
    */
   constructor(
@@ -262,6 +268,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   /**
    * Called on OnInit
    */
+  // tslint:disable-next-line:use-lifecycle-interface
   public ngOnInit(): void {
     if (this.ngControl !== null) {
       this.ngControl.valueAccessor = this;
@@ -272,6 +279,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
    * Inside the AfterContentInit life-cycle we set up a listener for focus
    * and trigger focus autosave subscribe and unsubscribe
    */
+  // tslint:disable-next-line:use-lifecycle-interface
   public ngAfterContentInit(): void {
     this.setupServiceSubscriptions();
     this.getFocusMonitor(this.editorInstance.element)
@@ -286,6 +294,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
   /**
    * Set the error state based on the underlying control state
    */
+  // tslint:disable-next-line:use-lifecycle-interface
   ngDoCheck(): void {
     if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;

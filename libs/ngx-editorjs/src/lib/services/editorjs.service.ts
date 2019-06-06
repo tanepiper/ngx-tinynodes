@@ -13,7 +13,7 @@ import {
   MAP_DEFAULTS
 } from '../types/injector';
 import { ChangeMap, EditorMap, ReadyMap, SavedMap } from '../types/maps';
-import { NgxEditorJSPluginService, ToolSettingsMap } from '@tinynodes/ngx-editorjs-plugins';
+import { NgxEditorJSPluginService, ToolSettingsMap, PluginConfig } from '@tinynodes/ngx-editorjs-plugins';
 
 /**
  * This handles the management of {@link https://editorjs.io/api | EditorJS} instances and their lifecycle.
@@ -357,17 +357,18 @@ export class NgxEditorJSService {
 
   /**
    * Returns a map of {@link https://editorjs.io/api | EditorJS} tools to be initialized by the editor
-   * @param excudeTools Optional array of tools to exclude, if not passed all tools
+   * @param excludeTools Optional array of tools to exclude, if not passed all tools
    */
-  private getTools(excudeTools: string[] = []): ToolSettingsMap {
-    return Object.entries(this.plugins.getPluginsWithExclude(excudeTools))
+  private getTools(excludeTools: string[] = []): ToolSettingsMap {
+    return Object.entries(this.plugins.getPluginsWithExclude(excludeTools))
       .reduce(
-        (finalTools, [ key, plugin ]) => {
+        (finalTools, [ key, plugin ]: [string, PluginConfig]) => {
           const tool: any = {
             class: plugin.plugin
           };
           if (plugin.shortcut) tool.shortcut = plugin.shortcut;
           if (plugin.type === 'inline') tool.inlineToolbar = true;
+          if (plugin.config) tool.config = plugin.config;
 
           return { ...finalTools, [key]: tool };
         },
