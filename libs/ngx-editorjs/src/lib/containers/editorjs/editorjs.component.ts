@@ -209,7 +209,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    */
   public writeValue(data: OutputData): void {
     this._value = data;
-    this.editorService.update({ holder: this.holder, data });
+    this.editorService.update({ holder: this.holder, data }).pipe(take(1)).subscribe();
     this.changeDetection.markForCheck();
   }
 

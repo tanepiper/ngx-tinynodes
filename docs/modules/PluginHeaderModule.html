@@ -80,9 +80,29 @@ See <a href="https://github.com/editor-js/header">the GitHub repo</a> for API de
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginClasses, PluginTypes } from &#x27;../../types/plugins&#x27;;
+import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginTypes } from &#x27;../../types/plugins&#x27;;
 import Header from &#x27;@editorjs/header&#x27;;
-import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
+
+
+//TODO: Remove once Header plugin has been fixed
+
+export class FixedHeader extends Header {
+  constructor(config: any) {
+    super(config);
+  }
+
+  /**
+   * Fixed version of the function to normalize input data
+   * @param data The data for the header
+   * @returns The new header data
+   */
+  normalizeData(data: any &#x3D; {}) {
+    const newData: any &#x3D; {};
+    newData.text &#x3D; data.text || &#x27;&#x27;;
+    newData.level &#x3D; parseInt(data.level, 10) || (this as any).defaultLevel.number;
+    return newData;
+  }
+}
 
 /**
  * A module that provides the default EditorJS header block tool.
@@ -92,7 +112,7 @@ import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
   providers: [
     {
       provide: EDITOR_JS_TOOL_INJECTOR,
-      useValue: Header,
+      useValue: FixedHeader,
       multi: true
     },
     {
@@ -106,7 +126,8 @@ import { createPluginConfig } from &#x27;../../util/plugin&#x27;;
     }
   ]
 })
-export class PluginHeaderModule {}
+export class PluginHeaderModule {
+}
 </code></pre>
     </div>
 </div>

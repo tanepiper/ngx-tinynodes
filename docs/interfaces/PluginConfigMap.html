@@ -88,7 +88,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/types/plugins.ts:98</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/types/plugins.ts:102</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -178,6 +178,10 @@ export interface PluginConfig {
    * Optional shortcut for the plugin
    */
   shortcut?: PluginProperty;
+  /**
+   * Optional {@link https://editorjs.io/provide-custom-configuration | custom configuration} to pass to EditorJS
+   */
+  config?: any;
   /**
    * Optional block data, used to define the block data for this type
    * and used as a default

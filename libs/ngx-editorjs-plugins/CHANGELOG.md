@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0]
+## [2.0.1] 2019-05-06
+
+## Changed
+
+- There is a [known issue](https://github.com/editor-js/header/pull/25) since upgrading to Angular 8 with the EditorJS Header Module.
+This causes the Header module to fail rendering when data is passed to it on initial setup.  The Header itself still works
+when added via the block toolbar. A temporary fix has been provided in the module by extending the Header
+and fixing the method.
+- Fixed `peerDependencies`
+
+## [2.0.0] 2019-05-05
 
 ## Added
 
