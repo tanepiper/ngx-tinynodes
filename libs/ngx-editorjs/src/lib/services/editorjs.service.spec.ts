@@ -3,17 +3,18 @@ import { async, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { MockNgZone } from '../../testing/ng-zone-mock';
-import { MockEditorJS, MockPlugin } from '../../testing/shared';
+import { MockPlugin } from '../../testing/shared';
 import { NGX_EDITORJS_CONFIG } from '../types/config';
 import { NgxEditorJSService } from './editorjs.service';
-import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
 import {
   createPluginConfig,
-  EDITOR_JS_TOOL_INJECTOR, NgxEditorJSPluginService,
+  EDITOR_JS_TOOL_INJECTOR,
+  NgxEditorJSPluginService,
   NgxPluginServiceModule,
-  PLUGIN_CONFIG, PluginClasses,
+  PLUGIN_CONFIG,
+  PluginClasses,
   PluginTypes
-} from '../../../../ngx-editorjs-plugins/src';
+} from '@tinynodes/ngx-editorjs-plugins';
 
 describe('NgxEditorJSService', () => {
   let service: NgxEditorJSService;
@@ -25,7 +26,7 @@ describe('NgxEditorJSService', () => {
     onDestroy$ = new Subject<boolean>();
 
     TestBed.configureTestingModule({
-      imports: [NgxPluginServiceModule],
+      imports: [ NgxPluginServiceModule ],
       providers: [
         {
           provide: NGX_EDITORJS_CONFIG,
@@ -48,7 +49,7 @@ describe('NgxEditorJSService', () => {
         {
           provide: PluginClasses,
           useFactory: createPluginConfig,
-          deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR]
+          deps: [ PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR ]
         },
         {
           provide: NgxEditorJSPluginService,
@@ -61,7 +62,7 @@ describe('NgxEditorJSService', () => {
         {
           provide: NgxEditorJSService,
           useClass: NgxEditorJSService
-        },
+        }
       ]
     }).compileComponents();
 
@@ -108,7 +109,7 @@ describe('NgxEditorJSService', () => {
       });
 
     service.createInstance({ config: { holder } });
-    service.update({ holder, data: { blocks: [{ type: 'test', data: { text: 'Test' } }] } });
+    service.update({ holder, data: { blocks: [ { type: 'test', data: { text: 'Test' } } ] } }).subscribe();
   });
 
   it('should trigger a change on save', done => {

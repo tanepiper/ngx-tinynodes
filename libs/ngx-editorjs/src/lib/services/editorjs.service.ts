@@ -204,10 +204,9 @@ export class NgxEditorJSService {
    */
   public update(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     const data = {
-      time: Date.now(),
-      version: this.editorJs.version,
-      blocks: [],
-      ...options.data
+      time: options.data && options.data.time || Date.now(),
+      version: options.data && options.data.version || this.editorJs.version,
+      blocks: [...options.data.blocks],
     };
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).pipe(
       take(1),
@@ -363,23 +362,15 @@ export class NgxEditorJSService {
   private getTools(excudeTools: string[] = []): ToolSettingsMap {
     return Object.entries(this.plugins.getPluginsWithExclude(excudeTools))
       .reduce(
-        (finalTools, [ key, plugin ]) =>
-          plugin.shortcut
-            ? {
-              [key]: {
-                class: plugin.plugin,
-                shortcut: plugin.shortcut,
-                inlineToolbar: plugin.type === 'inline'
-              },
-              ...finalTools
-            }
-            : {
-              [key]: {
-                class: plugin.plugin,
-                inlineToolbar: plugin.type === 'inline'
-              },
-              ...finalTools
-            },
+        (finalTools, [ key, plugin ]) => {
+          const tool: any = {
+            class: plugin.plugin
+          };
+          if (plugin.shortcut) tool.shortcut = plugin.shortcut;
+          if (plugin.type === 'inline') tool.inlineToolbar = true;
+
+          return { ...finalTools, [key]: tool };
+        },
         {}
       );
   }

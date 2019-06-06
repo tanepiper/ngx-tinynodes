@@ -2,7 +2,7 @@ import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component
 import { Block, NgxEditorJSComponent, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
 import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, pluck, take, takeUntil, tap } from 'rxjs/operators';
+import { map, pluck, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { Page } from '../../store/pages/pages.models';
 import { PagesService } from '../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
@@ -13,7 +13,7 @@ import { OutputData } from '@editorjs/editorjs';
 @Component({
   selector: 'ngx-page-container',
   templateUrl: 'page-container.component.html',
-  styleUrls: ['page-container.component.scss'],
+  styleUrls: [ 'page-container.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageContainerComponent implements AfterContentInit {
@@ -46,7 +46,8 @@ export class PageContainerComponent implements AfterContentInit {
     private readonly app: AppService,
     private readonly editorService: NgxEditorJSService,
     private readonly cd: ChangeDetectorRef
-  ) {}
+  ) {
+  }
 
   /**
    * Get the blocks from the last change
@@ -92,11 +93,11 @@ export class PageContainerComponent implements AfterContentInit {
   public reset() {
     this.app
       .getDemoData<NgxEditorJSDemo>('ngx-editorjs-demo')
-      .pipe(take(1))
-      .subscribe((data: NgxEditorJSDemo) => {
+      .pipe(take(1), switchMap((data: NgxEditorJSDemo) => {
         this.menu$.next(data.links);
-        this.editorService.update({ holder: this.holder, data: { blocks: data.blocks } });
-      });
+        return this.editorService.update({ holder: this.holder, data: { blocks: data.blocks } }).pipe(take(1));
+      }))
+      .subscribe();
   }
 
   /**
