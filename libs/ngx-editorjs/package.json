@@ -1,17 +1,17 @@
 {
   "name": "@tinynodes/ngx-editorjs",
   "description": "A library for using EditorJS in any Angular application",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": {
     "name": "Tane Piper",
     "email": "me@tane.dev",
     "url": "https://tane.dev"
   },
   "peerDependencies": {
-    "@angular/common": "~7.2.15",
-    "@angular/core": "~7.2.15",
+    "@angular/common": "~8.0.0",
+    "@angular/core": "~8.0.0",
     "@editorjs/editorjs": "~2.13.0",
-    "@tinynodes/ngx-editorjs-plugins": "~2.0.0"
+    "@tinynodes/ngx-editorjs-plugins": "~2.0.1"
   },
   "license": "MIT",
   "readme": "README.md",
