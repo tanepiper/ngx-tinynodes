@@ -178,7 +178,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    * @param time Time to do with autosave
    * @param timeStart When to trigger the first autosave, default is 0 which triggers an immediate save
    */
-  protected static getTimer(time: number, timeStart = 0): Observable<number> {
+  protected getTimer(time: number, timeStart = 0): Observable<number> {
     return timer(timeStart, time).pipe(
       timeInterval(),
       map(interval => interval.interval)
@@ -243,7 +243,7 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
         if (focused) {
           this.isFocused.emit(true);
           if (this.autosave > 0) {
-            this.timerSubscription$ = NgxEditorJSComponent.getTimer(this.autosave, 0)
+            this.timerSubscription$ = this.getTimer(this.autosave, 0)
               .pipe(switchMap(() => this.editorService.save({ holder: this.holder }).pipe(take(1))))
               .subscribe();
           }
