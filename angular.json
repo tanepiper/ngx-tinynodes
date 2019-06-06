@@ -21,7 +21,7 @@
             "assets": ["apps/ngx-tinynodes/src/favicon.ico", "apps/ngx-tinynodes/src/assets"],
             "styles": ["apps/ngx-tinynodes/src/styles.css"],
             "scripts": [],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": false
           },
           "configurations": {
             "production": {
@@ -33,12 +33,12 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [
                 {

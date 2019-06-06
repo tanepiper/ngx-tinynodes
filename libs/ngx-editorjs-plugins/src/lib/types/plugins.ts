@@ -72,6 +72,10 @@ export interface PluginConfig {
    */
   shortcut?: PluginProperty;
   /**
+   * Optional {@link https://editorjs.io/provide-custom-configuration | custom configuration} to pass to EditorJS
+   */
+  config?: any;
+  /**
    * Optional block data, used to define the block data for this type
    * and used as a default
    */
