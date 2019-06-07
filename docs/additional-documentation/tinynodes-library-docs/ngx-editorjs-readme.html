@@ -76,28 +76,13 @@
 import { NgModule } from &#39;@angular/core&#39;;
 import { BrowserModule } from &#39;@angular/platform-browser&#39;;
 import { NgxEditorJSModule } from &#39;@tinynodes/ngx-editorjs&#39;;
-import { AppComponent } from &#39;./app.component&#39;;
-import EditorJS from &#39;@editorjs/editorjs&#39;;
-import {
-  PluginParagraphModule,
-  PluginParagraph,
-  PluginHeaderModule,
-  PluginHeader,
-  PluginListModule,
-  PluginList
-} from &#39;@tinynodes/ngx-editorjs-plugins&#39;;</p>
-<p>export function createTools() {
-  return {
-    paragraph: new PluginParagraph(),
-    header: new PluginHeader(),
-    list: new PluginList()
-  };
-}</p>
+import { AppComponent } from &#39;./app.component&#39;;</p>
 <p>@NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     NgxEditorJSModule.forRoot({
+      // Optional Configuration, see all keys below
       editorjs: {
         autofocus: false,
         holder: &#39;editor&#39;,
@@ -108,13 +93,7 @@ import {
           blocks: []
         }
       }
-    })
-  ],
-  providers: [
-    {
-      provide: UserPlugins,
-      useFactory: createTools
-    }
+    }),
   ],
   bootstrap: [AppComponent]
 })
