@@ -4,15 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
-import {
-  PluginCodeModule,
-  PluginHeaderModule,
-  PluginLinkModule,
-  PluginListModule,
-  PluginMarkerModule,
-  PluginParagraphModule,
-  PluginSimpleImageModule
-} from '@tinynodes/ngx-editorjs-plugins';
 import { PageContainerComponent } from './containers/page-container/page-container.component';
 import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
@@ -30,18 +21,13 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     ReactiveFormsModule,
     PageStoreModule,
     NgxEditorJSModule,
-    PluginHeaderModule,
-    PluginParagraphModule,
-    PluginListModule,
-    PluginCodeModule,
-    PluginSimpleImageModule,
-    PluginLinkModule,
-    PluginMarkerModule,
     NgxTinynodesCoreModule,
+    NgxEditorJSModule.forRoot(),
     NgxEditorJSDemoMaterialModule
   ],
-  declarations: [PageContainerComponent, NgxEditorJSDemoHomeComponent],
-  exports: [PageStoreModule, PageContainerComponent],
-  entryComponents: [PageContainerComponent]
+  declarations: [ PageContainerComponent, NgxEditorJSDemoHomeComponent ],
+  exports: [ PageStoreModule, PageContainerComponent ],
+  entryComponents: [ PageContainerComponent ]
 })
-export class NgxEditorjsDemoModule {}
+export class NgxEditorjsDemoModule {
+}
