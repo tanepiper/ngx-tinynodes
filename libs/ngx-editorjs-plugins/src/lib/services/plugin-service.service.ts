@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { PluginClasses, PluginConfig, PluginConfigMap } from '../types/plugins';
+import { PluginClasses, PluginConfig, PluginConfigMap, ToolSettingsMap } from '../types/plugins';
 
 /**
  * The `NgxEditorJSPluginService` is provided as a root service for handling {@link https://github.com/editor-js | EditorJS plugins}.
@@ -59,5 +59,25 @@ export class NgxEditorJSPluginService {
       .reduce((pluginMap, [key, plugin]) => {
         return { ...pluginMap, [key]: plugin };
       }, {});
+  }
+
+  /**
+   * Returns a map of {@link https://editorjs.io/api | EditorJS} tools to be initialized by the editor
+   * @param excludeTools Optional array of tools to exclude, if not passed all tools
+   */
+  public getTools(excludeTools: string[] = []): ToolSettingsMap {
+    return Object.entries(this.getPluginsWithExclude(excludeTools))
+      .reduce(
+        (finalTools, [ key, plugin ]: [string, PluginConfig]) => {
+          const tool: any = {
+            class: plugin.plugin
+          };
+          if (plugin.shortcut) tool.shortcut = plugin.shortcut;
+          if (plugin.type === 'inline' || plugin.inlineToolbar) tool.inlineToolbar = true;
+          if (plugin.config) tool.config = plugin.config;
+          return { ...finalTools, [key]: tool };
+        },
+        {}
+      );
   }
 }

@@ -75,6 +75,11 @@ export interface PluginConfig {
    * Optional {@link https://editorjs.io/provide-custom-configuration | custom configuration} to pass to EditorJS
    */
   config?: any;
+
+  /**
+   * If a block tool, you can also set this to true if it contains inline tool support
+   */
+  inlineToolbar?: boolean;
   /**
    * Optional block data, used to define the block data for this type
    * and used as a default
