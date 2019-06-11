@@ -16,6 +16,7 @@ import { SidebarComponent } from './components/sidebar-component/sidebar.compone
 import { AppContainerComponent } from './containers/app/app.component';
 import { MaterialModule } from './material.module';
 import { HomePageComponent } from './pages/home/home-page.component';
+import { NgxHidableHeaderDemoModule } from '@tinynodes/ngx-hideable-header-demo';
 
 /**
  * The main `ngx-tinynodes` module that builds the core single page application.
@@ -34,6 +35,7 @@ import { HomePageComponent } from './pages/home/home-page.component';
     AppRoutingModule,
     NgxTinynodesCoreModule,
     NgxEditorjsDemoModule,
+    NgxHidableHeaderDemoModule,
     environment.production ? [] : [ AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule.forRoot() ]
   ],
   bootstrap: [ AppContainerComponent ]
