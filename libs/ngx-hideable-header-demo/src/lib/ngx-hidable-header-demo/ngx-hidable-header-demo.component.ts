@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { HideableHeaderDirective } from 'ngx-hideable-header';
+import { NgxHidableHeaderDirective } from '@tinynodes/ngx-hidable-header';
 import { FormBuilder } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ export class NgxHidableHeaderDemoComponent implements AfterViewInit, OnDestroy {
 
   private onDestroy$ = new Subject<boolean>();
 
-  @ViewChild(HideableHeaderDirective, { static: true }) hidableElement: HideableHeaderDirective;
+  @ViewChild(NgxHidableHeaderDirective, { static: true }) hidableElement: NgxHidableHeaderDirective;
 
   public demoControls = this.fb.group({
     disable: [ false ],

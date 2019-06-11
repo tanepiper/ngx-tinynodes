@@ -1,131 +1,173 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
-     hideableHeader
-     [disable]="demoControls.value.disable"
-     [reverse]="demoControls.value.reverse"
-     [scrollAt]="demoControls.value.scrollAt"
-     [transition]="transition">
-  <a class="navbar-brand"
-     href="#">Angular Hidable Header</a>
-  <button class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div id="header-container" class="container">
+  <mat-toolbar color="accent" ngxHidableHeader
+               position="absolute"
+               container="content-container"
+               [disable]="demoControls.value.disable"
+               [reverse]="demoControls.value.reverse"
+               [scrollAt]="demoControls.value.scrollAt"
+               [transition]="transition">
+    <mat-toolbar-row>
+      <span>Ngx Hidable Header</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-  <div class="collapse navbar-collapse"
-       id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link"
-           href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"
-           href="#">Link</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  <mat-card id="content-container" class="application-card">
+    <mat-card-header>
+      <mat-card-title><code>@tinynodes/ngx-editor</code> Material Field Demo</mat-card-title>
+      <mat-card-subtitle>A single page demo of the <code>EditorJS</code> Material Field component</mat-card-subtitle>
+    </mat-card-header>
 
-<main role="main"
-      class="container content">
-  <div class="card-group">
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title">Control Panel</h2>
-        <h4 class="card-subtitle mb-2 text-muted">Select options to control the demo
-          header
-        </h4>
-        <form [formGroup]="demoControls">
+    <mat-card-content>
+      <ngx-editorjs-demo-info [title]="title" [menu]="menu | async" [body]="infoTemplate"></ngx-editorjs-demo-info>
+    </mat-card-content>
 
-          <div class="form-group">
-            <div class="form-check form-check-inline">
-              <input id="inlineCheckbox1" formControlName="disable"
-                     id="disable"
-                     class="form-check-input"
-                     type="checkbox">
-              <label class="form-check-label"
-                     for="inlineCheckbox1">Disable Hidable Header?</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input formControlName="reverse"
-                     id="reverse"
-                     class="form-check-input"
-                     type="checkbox">
-              <label class="form-check-label"
-                     for="inlineCheckbox2">Reverse Hiding?</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="transition">Scroll At Height (px)</label>
-            <input type="number"
-                   min="0"
-                   step="1"
-                   class="form-control"
-                   formControlName="scrollAt"
-                   id="scrollAt" />
-          </div>
-          <div class="form-group">
-            <label for="hideTransition">Hide Transition</label>
-            <div class="input-group">
-              <input type="number"
-                     min="0"
-                     step="0.1"
-                     class="form-control"
-                     formControlName="hideTransitionTime"
-                     id="hideTransitionTime" />
-              <div class="input-group-append">
-                <select formControlName="hideTransition"
-                        id="hideTransition">
-                  <option *ngFor="let option of transitions"
-                          [value]="option[0]"
-                          [selected]="option[0] === demoControls.value.hideTransition">{{option[1]}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="showTransition">Show Transition</label>
-            <div class="input-group">
-              <input type="number"
-                     min="0"
-                     step="0.1"
-                     class="form-control"
-                     formControlName="showTransitionTime"
-                     id="showTransitionTime" />
-              <div class="input-group-append">
-                <select formControlName="showTransition"
-                        id="showTransition">
-                  <option *ngFor="let option of transitions"
-                          [value]="option[0]"
-                          [selected]="option[0] === demoControls.value.showTransition">{{option[1]}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </form>
+    <mat-card-content [formGroup]="demoControls" class="flex-form">
+
+      <div class="checkbox-section">
+        <mat-checkbox class="flex-form-item" id="disable" formControlName="disable">
+          <mat-label>Disable Header?</mat-label>
+        </mat-checkbox>
+        <mat-checkbox class="flex-form-item" id="reverse" formControlName="reverse">
+          <mat-label>Reverse Header?</mat-label>
+        </mat-checkbox>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title">Header API</h2>
-        <h4 class="card-subtitle mb-2 text-muted">Control the header via it's API
-        </h4>
-        <button (click)="hide()"
-                class="btn"
-                [ngClass]="{'btn-primary': !(hidableElement.isHidden | async)}"
-        >Hide
-          Header</button>
-        <button (click)="show()"
-                class="btn"
-                [ngClass]="{'btn-primary': (hidableElement.isHidden | async)}">Show
-          Header</button>
+      <div class="input-section">
+
+        <mat-form-field class="flex-form-item">
+          <mat-label>Scroll At Height?</mat-label>
+          <input matInput id="scrollAt" formControlName="scrollAt" type="number" placeholder="Enter the height to trigger the scroll at"/>
+          <span matSuffix>px</span>
+          <mat-hint>Enter the height to trigger the scroll at</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="flex-form-item flex-form-item-inline">
+          <mat-label>Hide Transition (seconds)</mat-label>
+          <input  matInput id="hideTransitionTime" formControlName="hideTransitionTime" type="number" placeholder="Transition Time"/>
+          <select matNativeControl formControlName="hideTransition" id="hideTransition">
+                                <option *ngFor="let option of transitions"
+                                        [value]="option[0]"
+                                        [selected]="option[0] === demoControls.value.hideTransition">{{option[1]}}</option>
+          </select>
+          <mat-hint>Hide Transition is the animation played on hide</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="flex-form-item">
+          <mat-label>Show Transition</mat-label>
+          <input matInput id="showTransitionTime" formControlName="showTransitionTime" type="number" placeholder="Transition Time"/>
+          <select matNativeControl formControlName="showTransition" id="showTransition">
+            <option *ngFor="let option of transitions"
+                    [value]="option[0]"
+                    [selected]="option[0] === demoControls.value.showTransition">{{option[1]}}</option>
+          </select>
+          <mat-hint>Show Transition is the animation played on hide</mat-hint>
+        </mat-form-field>
       </div>
-    </div>
-  </div>
-</main>
+
+    </mat-card-content>
+
+    <mat-card-content class="high-container"></mat-card-content>
+  </mat-card>
+</div>
+
+<!--  <main role="main"-->
+<!--        class="container content">-->
+<!--    <div class="card-group">-->
+<!--      <div class="card">-->
+<!--        <div class="card-body">-->
+<!--          <h2 class="card-title">Control Panel</h2>-->
+<!--          <h4 class="card-subtitle mb-2 text-muted">Select options to control the demo-->
+<!--            header-->
+<!--          </h4>-->
+<!--          <form [formGroup]="demoControls">-->
+
+<!--            <div class="form-group">-->
+<!--              <div class="form-check form-check-inline">-->
+<!--                <input id="inlineCheckbox1" formControlName="disable"-->
+<!--                       id="disable"-->
+<!--                       class="form-check-input"-->
+<!--                       type="checkbox">-->
+<!--                <label class="form-check-label"-->
+<!--                       for="inlineCheckbox1">Disable Hidable Header?</label>-->
+<!--              </div>-->
+<!--              <div class="form-check form-check-inline">-->
+<!--                <input formControlName="reverse"-->
+<!--                       id="reverse"-->
+<!--                       class="form-check-input"-->
+<!--                       type="checkbox">-->
+<!--                <label class="form-check-label"-->
+<!--                       for="inlineCheckbox2">Reverse Hiding?</label>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--              <label for="transition">Scroll At Height (px)</label>-->
+<!--              <input type="number"-->
+<!--                     min="0"-->
+<!--                     step="1"-->
+<!--                     class="form-control"-->
+<!--                     formControlName="scrollAt"-->
+<!--                     id="scrollAt" />-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--              <label for="hideTransition">Hide Transition</label>-->
+<!--              <div class="input-group">-->
+<!--                <input type="number"-->
+<!--                       min="0"-->
+<!--                       step="0.1"-->
+<!--                       class="form-control"-->
+<!--                       formControlName="hideTransitionTime"-->
+<!--                       id="hideTransitionTime" />-->
+<!--                <div class="input-group-append">-->
+<!--                  <select formControlName="hideTransition"-->
+<!--                          id="hideTransition">-->
+<!--                    <option *ngFor="let option of transitions"-->
+<!--                            [value]="option[0]"-->
+<!--                            [selected]="option[0] === demoControls.value.hideTransition">{{option[1]}}</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--              <label for="showTransition">Show Transition</label>-->
+<!--              <div class="input-group">-->
+<!--                <input type="number"-->
+<!--                       min="0"-->
+<!--                       step="0.1"-->
+<!--                       class="form-control"-->
+<!--                       formControlName="showTransitionTime"-->
+<!--                       id="showTransitionTime" />-->
+<!--                <div class="input-group-append">-->
+<!--                  <select formControlName="showTransition"-->
+<!--                          id="showTransition">-->
+<!--                    <option *ngFor="let option of transitions"-->
+<!--                            [value]="option[0]"-->
+<!--                            [selected]="option[0] === demoControls.value.showTransition">{{option[1]}}</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="card">-->
+<!--        <div class="card-body">-->
+<!--          <h2 class="card-title">Header API</h2>-->
+<!--          <h4 class="card-subtitle mb-2 text-muted">Control the header via it's API-->
+<!--          </h4>-->
+<!--          <button (click)="hide()"-->
+<!--                  class="btn"-->
+<!--                  [ngClass]="{'btn-primary': !(hidableElement.isHidden | async)}"-->
+<!--          >Hide-->
+<!--            Header</button>-->
+<!--          <button (click)="show()"-->
+<!--                  class="btn"-->
+<!--                  [ngClass]="{'btn-primary': (hidableElement.isHidden | async)}">Show-->
+<!--            Header</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </main>-->
+<!--</div>-->

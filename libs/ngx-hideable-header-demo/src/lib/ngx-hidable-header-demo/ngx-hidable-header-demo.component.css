@@ -1,4 +1,4 @@
-.container {
+.high-container {
   height: 3000px;
 }
 
@@ -10,3 +10,42 @@
 .content {
   margin-top: 80px;
 }
+
+#header-container, #content-container {
+  width: 100%;
+  height: 100vh;
+}
+
+#content-container {
+  overflow: scroll;
+}
+
+.application-card {
+  margin-top: 65px;
+}
+
+
+.flex-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.input-section {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+}
+
+.checkbox-section mat-checkbox {
+  flex: 1;
+  max-width: 300px;
+  padding: 0 10px;
+  vertical-align: middle;
+}
+

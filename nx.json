@@ -34,6 +34,9 @@
     },
     "ngx-tinynodes-components": {
       "tags": []
+    },
+    "ngx-hidable-header": {
+      "tags": []
     }
   }
 }

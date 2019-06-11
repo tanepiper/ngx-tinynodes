@@ -22,7 +22,8 @@
       "@tinynodes/ngx-editorjs-ngrx": ["libs/ngx-editorjs-ngrx/src/index.ts"],
       "@tinynodes/ngx-hideable-header-demo": ["libs/ngx-hideable-header-demo/src/index.ts"],
       "@tinynodes/ngx-tinynodes-core": ["libs/ngx-tinynodes-core/src/index.ts"],
-      "@tinynodes/ngx-tinynodes-components": ["libs/ngx-tinynodes-components/src/index.ts"]
+      "@tinynodes/ngx-tinynodes-components": ["libs/ngx-tinynodes-components/src/index.ts"],
+      "@tinynodes/ngx-hidable-header": ["libs/ngx-hidable-header/src/index.ts"]
     },
     "downlevelIteration": true
   },
