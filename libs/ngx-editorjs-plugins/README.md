@@ -53,6 +53,7 @@ but will be used in future releases.
 | `key`         | `string` | No       | The default key of the plugin (e.g. `paragraph`)                 |
 | `type`        | `string` | No       | The type of plugin, currently `block` and `inline` are supported |
 | `pluginName`  | `string` | No       | The descriptive name of the plugin                               |
+| `config`      | `object` | Yes      | Optional configuration to pass to the plugin                     |
 | `shortcut`    | `string` | Yes      | An optional keyboard shortcut for the plugin                     |
 | `description` | `string` | Yes      | A description of the plugin                                      |
 | `blockData`   | `string` | Yes      | Optional default block data to use for the plugin                |
