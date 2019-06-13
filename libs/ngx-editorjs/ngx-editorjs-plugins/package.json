@@ -1,7 +1,7 @@
 {
   "name": "@tinynodes/ngx-editorjs-plugins",
   "description": "Plugin service and default plugin modules for @tinynodes/ngx-editorjs",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": {
     "name": "Tane Piper",
     "email": "me@tane.dev",
