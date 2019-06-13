@@ -1,0 +1,36 @@
+{
+  "name": "@tinynodes/ngx-editorjs-plugins",
+  "description": "Plugin service and default plugin modules for @tinynodes/ngx-editorjs",
+  "version": "2.0.3",
+  "author": {
+    "name": "Tane Piper",
+    "email": "me@tane.dev",
+    "url": "https://tane.dev"
+  },
+  "license": "MIT",
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tanepiper/ngx-tinynodes.git"
+  },
+  "keywords": [
+    "angular",
+    "ngx",
+    "typescript",
+    "editorjs",
+    "plugins"
+  ],
+  "peerDependencies": {
+    "@angular/common": "~8.0.1",
+    "@angular/core": "~8.0.1",
+    "@editorjs/code": "~2.4.1",
+    "@editorjs/header": "~2.2.4",
+    "@editorjs/image": "~2.3.1",
+    "@editorjs/link": "~2.1.3",
+    "@editorjs/list": "~1.3.4",
+    "@editorjs/paragraph": "~2.5.1",
+    "@editorjs/marker": "~1.2.0",
+    "@editorjs/simple-image": "~1.3.2",
+    "@editorjs/inline-code": "~1.3.0"
+  }
+}

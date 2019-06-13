@@ -57,7 +57,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts</code>
+            <code>libs/ngx-editorjs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts</code>
         </p>
 
             <p class="comment">
@@ -101,6 +101,10 @@
                                     <span class="modifier">Public</span>
                                 <a href="#getPluginsWithInclude">getPluginsWithInclude</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getTools">getTools</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -124,7 +128,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">libs/ngx-editorjs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -197,7 +201,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:32</a></div>
+                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:32</a></div>
                 </td>
             </tr>
 
@@ -277,7 +281,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:23</a></div>
+                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -326,7 +330,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:40</a></div>
+                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:40</a></div>
                 </td>
             </tr>
 
@@ -404,7 +408,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">libs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:54</a></div>
+                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:54</a></div>
                 </td>
             </tr>
 
@@ -457,6 +461,89 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTools"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getTools
+                        </b>
+                        <a href="#getTools"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTools(excludeTools: string[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs-plugins/src/lib/services/plugin-service.service.ts:68</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns a map of <a href="https://editorjs.io/api "> EditorJS</a> tools to be initialized by the editor</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>excludeTools</td>
+                                    <td>
+                                            <code>string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>[]</code>
+                                    </td>
+
+                                    <td>
+                                        <p>Optional array of tools to exclude, if not passed all tools</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/ToolSettingsMap.html" target="_self" >ToolSettingsMap</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -464,7 +551,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable } from &#x27;@angular/core&#x27;;
-import { PluginClasses, PluginConfig, PluginConfigMap } from &#x27;../types/plugins&#x27;;
+import { PluginClasses, PluginConfig, PluginConfigMap, ToolSettingsMap } from &#x27;../types/plugins&#x27;;
 
 /**
  * The &#x60;NgxEditorJSPluginService&#x60; is provided as a root service for handling {@link https://github.com/editor-js | EditorJS plugins}.
@@ -524,6 +611,25 @@ export class NgxEditorJSPluginService {
       .reduce((pluginMap, [key, plugin]) &#x3D;&gt; {
         return { ...pluginMap, [key]: plugin };
       }, {});
+  }
+
+  /**
+   * Returns a map of {@link https://editorjs.io/api | EditorJS} tools to be initialized by the editor
+   * @param excludeTools Optional array of tools to exclude, if not passed all tools
+   */
+  public getTools(excludeTools: string[] &#x3D; []): ToolSettingsMap {
+    return Object.entries(this.getPluginsWithExclude(excludeTools)).reduce(
+      (finalTools, [key, plugin]: [string, PluginConfig]) &#x3D;&gt; {
+        const tool: any &#x3D; {
+          class: plugin.plugin
+        };
+        if (plugin.shortcut) tool.shortcut &#x3D; plugin.shortcut;
+        if (plugin.type &#x3D;&#x3D;&#x3D; &#x27;inline&#x27; || plugin.inlineToolbar) tool.inlineToolbar &#x3D; true;
+        if (plugin.config) tool.config &#x3D; plugin.config;
+        return { ...finalTools, [key]: tool };
+      },
+      {}
+    );
   }
 }
 </code></pre>

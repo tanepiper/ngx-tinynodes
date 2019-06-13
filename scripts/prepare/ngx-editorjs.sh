@@ -5,8 +5,8 @@
 set -o errexit -o noclobber -o nounset -o pipefail
 
 ng build ngx-editorjs
-cp libs/ngx-editorjs/CHANGELOG.md dist/libs/ngx-editorjs
-cp libs/ngx-editorjs/.npmignore dist/libs/ngx-editorjs
+cp libs/ngx-editorjs/ngx-editorjs/CHANGELOG.md dist/libs/ngx-editorjs
+cp libs/ngx-editorjs/ngx-editorjs/.npmignore dist/libs/ngx-editorjs
 
 cd dist/libs/ngx-editorjs
 

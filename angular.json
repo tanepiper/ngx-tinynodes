@@ -112,86 +112,89 @@
       }
     },
     "ngx-editorjs-plugins": {
-      "root": "libs/ngx-editorjs-plugins",
-      "sourceRoot": "libs/ngx-editorjs-plugins/src",
+      "root": "libs/ngx-editorjs/ngx-editorjs-plugins",
+      "sourceRoot": "libs/ngx-editorjs/ngx-editorjs-plugins/src",
       "projectType": "library",
       "prefix": "tinynodes",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "libs/ngx-editorjs-plugins/tsconfig.lib.json",
-            "project": "libs/ngx-editorjs-plugins/ng-package.json"
+            "tsConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.lib.json",
+            "project": "libs/ngx-editorjs/ngx-editorjs-plugins/ng-package.json"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/ngx-editorjs-plugins/tsconfig.lib.json", "libs/ngx-editorjs-plugins/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.lib.json",
+              "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ngx-editorjs-plugins/jest.config.js",
-            "tsConfig": "libs/ngx-editorjs-plugins/tsconfig.spec.json",
-            "setupFile": "libs/ngx-editorjs-plugins/src/test-setup.ts"
+            "jestConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/jest.config.js",
+            "tsConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.spec.json",
+            "setupFile": "libs/ngx-editorjs/ngx-editorjs-plugins/src/test-setup.ts"
           }
         }
       },
       "schematics": {}
     },
     "ngx-editorjs": {
-      "root": "libs/ngx-editorjs",
-      "sourceRoot": "libs/ngx-editorjs/src",
+      "root": "libs/ngx-editorjs/ngx-editorjs",
+      "sourceRoot": "libs/ngx-editorjs/ngx-editorjs/src",
       "projectType": "library",
       "prefix": "tinynodes",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "libs/ngx-editorjs/tsconfig.lib.json",
-            "project": "libs/ngx-editorjs/ng-package.json"
+            "tsConfig": "libs/ngx-editorjs/ngx-editorjs/tsconfig.lib.json",
+            "project": "libs/ngx-editorjs/ngx-editorjs/ng-package.json"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/ngx-editorjs/tsconfig.lib.json", "libs/ngx-editorjs/tsconfig.spec.json"],
+            "tsConfig": ["libs/ngx-editorjs/ngx-editorjs/tsconfig.lib.json", "libs/ngx-editorjs/ngx-editorjs/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ngx-editorjs/jest.config.js",
-            "tsConfig": "libs/ngx-editorjs/tsconfig.spec.json",
-            "setupFile": "libs/ngx-editorjs/src/test-setup.ts"
+            "jestConfig": "libs/ngx-editorjs/ngx-editorjs/jest.config.js",
+            "tsConfig": "libs/ngx-editorjs/ngx-editorjs/tsconfig.spec.json",
+            "setupFile": "libs/ngx-editorjs/ngx-editorjs/src/test-setup.ts"
           }
         }
       },
       "schematics": {}
     },
     "ngx-editorjs-demo": {
-      "root": "libs/ngx-editorjs-demo",
-      "sourceRoot": "libs/ngx-editorjs-demo/src",
+      "root": "libs/ngx-editorjs/ngx-editorjs-demo",
+      "sourceRoot": "libs/ngx-editorjs/ngx-editorjs-demo/src",
       "projectType": "library",
       "prefix": "tinynodes",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/ngx-editorjs-demo/tsconfig.lib.json", "libs/ngx-editorjs-demo/tsconfig.spec.json"],
+            "tsConfig": ["libs/ngx-editorjs/ngx-editorjs-demo/tsconfig.lib.json", "libs/ngx-editorjs/ngx-editorjs-demo/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ngx-editorjs-demo/jest.config.js",
-            "tsConfig": "libs/ngx-editorjs-demo/tsconfig.spec.json",
-            "setupFile": "libs/ngx-editorjs-demo/src/test-setup.ts"
+            "jestConfig": "libs/ngx-editorjs/ngx-editorjs-demo/jest.config.js",
+            "tsConfig": "libs/ngx-editorjs/ngx-editorjs-demo/tsconfig.spec.json",
+            "setupFile": "libs/ngx-editorjs/ngx-editorjs-demo/src/test-setup.ts"
           }
         }
       },

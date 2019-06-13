@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc/libs/ngx-editorjs-plugins",
+    "module": "commonjs",
+    "types": ["jest", "node"]
+  },
+  "files": [
+    "src/test-setup.ts"
+  ],
+  "include": ["**/*.spec.ts", "**/*.d.ts"]
+}

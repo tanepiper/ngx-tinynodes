@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
-import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
 import { NgxEditorjsDemoModule } from '@tinynodes/ngx-editorjs-demo';
 import { ApplicationDataModule, NgxTinynodesCoreModule } from '@tinynodes/ngx-tinynodes-core';
 import { environment } from '../environments/environment';
@@ -17,26 +16,27 @@ import { AppContainerComponent } from './containers/app/app.component';
 import { MaterialModule } from './material.module';
 import { HomePageComponent } from './pages/home/home-page.component';
 
+const PLATFORM_IMPORTS = [BrowserModule, HttpClientModule];
+
+const PRESENTATION_IMPORTS = [LayoutModule, MaterialModule, FlexLayoutModule, BrowserAnimationsModule];
+
+const DEV_IMPORTS = [AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule.forRoot()];
+
 /**
  * The main `ngx-tinynodes` module that builds the core single page application.
  * To view the application visit [the demo](https://tinynodes-ngx.firebaseapp.com/)
  */
 @NgModule({
-  declarations: [ AppContainerComponent, NavBarComponent, SidebarComponent, HomePageComponent ],
+  declarations: [AppContainerComponent, NavBarComponent, SidebarComponent, HomePageComponent],
   imports: [
-    BrowserModule,
-    LayoutModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FlexLayoutModule,
+    ...PLATFORM_IMPORTS,
+    ...PRESENTATION_IMPORTS,
     ApplicationDataModule,
     AppRoutingModule,
     NgxTinynodesCoreModule,
     NgxEditorjsDemoModule,
-    environment.production ? [] : [ AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule.forRoot() ]
+    environment.production ? [] : DEV_IMPORTS
   ],
-  bootstrap: [ AppContainerComponent ]
+  bootstrap: [AppContainerComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

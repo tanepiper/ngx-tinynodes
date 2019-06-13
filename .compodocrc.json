@@ -3,6 +3,5 @@
   "name": "Tinynodes Angular Documentation",
   "output": "./docs/",
   "tsconfig": "./tsconfig.docs.json",
-  "includes": "./libs",
   "theme": "readthedocs"
 }
