@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.2] 2019-06-13
 
+## Added
+
+- Support for block tools `inlineToolbar` option which displays in inline toolbar within blocks
+- Additional plugins added: Inline Code, Quote, Warning
+
 ## Changed
 
 - Updated dependencies for new [EditorJS Release](https://github.com/codex-team/editor.js/blob/master/docs/CHANGELOG.md)
