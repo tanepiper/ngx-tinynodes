@@ -12,6 +12,7 @@ import { NgxEditorJSDemoHomeComponent } from './containers/home-container/home-c
 import { NgxEditorJSDemoMaterialModule } from './ngx-editorjs-demo.material.module';
 
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { NgxEditorjsPluginsModule } from '@tinynodes/ngx-editorjs-plugins';
 
 @NgModule({
   imports: [
@@ -20,14 +21,13 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     RouterModule.forChild(ngxEditorjsDemoRoutes),
     ReactiveFormsModule,
     PageStoreModule,
-    NgxEditorJSModule,
     NgxTinynodesCoreModule,
-    NgxEditorJSModule.forRoot(),
+    NgxEditorJSModule,
+    NgxEditorjsPluginsModule,
     NgxEditorJSDemoMaterialModule
   ],
-  declarations: [ PageContainerComponent, NgxEditorJSDemoHomeComponent ],
-  exports: [ PageStoreModule, PageContainerComponent ],
-  entryComponents: [ PageContainerComponent ]
+  declarations: [PageContainerComponent, NgxEditorJSDemoHomeComponent],
+  exports: [PageStoreModule, PageContainerComponent],
+  entryComponents: [PageContainerComponent]
 })
-export class NgxEditorjsDemoModule {
-}
+export class NgxEditorjsDemoModule {}

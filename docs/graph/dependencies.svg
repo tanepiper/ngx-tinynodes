@@ -190,15 +190,15 @@
 <path fill="none" stroke="#000000" d="M872,-122.1532C872,-145.7566 872,-184 872,-184 872,-184 597.0204,-184 597.0204,-184"/>
 <polygon fill="#000000" stroke="#000000" points="597.0205,-180.5001 587.0204,-184 597.0204,-187.5001 597.0205,-180.5001"/>
 </g>
-<!-- NgxPluginServiceModule  -->
+<!-- NgxEditorJSPluginServiceModule  -->
 <g id="node20" class="node">
-<title>NgxPluginServiceModule </title>
+<title>NgxEditorJSPluginServiceModule </title>
 <polygon fill="#fb8072" stroke="#000000" points="2608.6981,-198 2443.3019,-198 2443.3019,-162 2608.6981,-162 2608.6981,-198"/>
-<text text-anchor="middle" x="2526" y="-175.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxPluginServiceModule </text>
+<text text-anchor="middle" x="2526" y="-175.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSPluginServiceModule </text>
 </g>
-<!-- NgxEditorjsPluginsModule&#45;&gt;NgxPluginServiceModule  -->
+<!-- NgxEditorjsPluginsModule&#45;&gt;NgxEditorJSPluginServiceModule  -->
 <g id="edge19" class="edge">
-<title>NgxEditorjsPluginsModule&#45;&gt;NgxPluginServiceModule </title>
+<title>NgxEditorjsPluginsModule&#45;&gt;NgxEditorJSPluginServiceModule </title>
 <path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M957.1558,-105C1295.4397,-105 2526,-105 2526,-105 2526,-105 2526,-151.8446 2526,-151.8446"/>
 <polygon fill="#000000" stroke="#000000" points="2522.5001,-151.8446 2526,-161.8446 2529.5001,-151.8446 2522.5001,-151.8446"/>
 </g>
@@ -322,15 +322,15 @@
 <path fill="none" stroke="#000000" d="M114,-122.0109C114,-144.4852 114,-180 114,-180 114,-180 444.7026,-180 444.7026,-180"/>
 <polygon fill="#000000" stroke="#000000" points="444.7026,-183.5001 454.7026,-180 444.7026,-176.5001 444.7026,-183.5001"/>
 </g>
-<!-- NgxPluginServiceModule -->
+<!-- NgxEditorJSPluginServiceModule -->
 <g id="node10" class="node">
-<title>NgxPluginServiceModule</title>
+<title>NgxEditorJSPluginServiceModule</title>
 <polygon fill="#8dd3c7" stroke="#000000" points="4210.1979,-198 4207.1979,-202 4186.1979,-202 4183.1979,-198 4047.8021,-198 4047.8021,-162 4210.1979,-162 4210.1979,-198"/>
-<text text-anchor="middle" x="4129" y="-175.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxPluginServiceModule</text>
+<text text-anchor="middle" x="4129" y="-175.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSPluginServiceModule</text>
 </g>
-<!-- NgxPluginServiceModule&#45;&gt;NgxEditorjsPluginsModule -->
+<!-- NgxEditorJSPluginServiceModule&#45;&gt;NgxEditorjsPluginsModule -->
 <g id="edge9" class="edge">
-<title>NgxPluginServiceModule&#45;&gt;NgxEditorjsPluginsModule</title>
+<title>NgxEditorJSPluginServiceModule&#45;&gt;NgxEditorjsPluginsModule</title>
 <path fill="none" stroke="#000000" d="M4101.967,-161.8903C4101.967,-152.103 4101.967,-142 4101.967,-142 4101.967,-142 829.5014,-142 829.5014,-142 829.5014,-142 829.5014,-132.1097 829.5014,-132.1097"/>
 <polygon fill="#000000" stroke="#000000" points="833.0015,-132.1096 829.5014,-122.1097 826.0015,-132.1097 833.0015,-132.1096"/>
 </g>
@@ -448,9 +448,9 @@
 <ellipse fill="#fdb462" stroke="#000000" cx="4129" cy="-104" rx="115.2073" ry="18"/>
 <text text-anchor="middle" x="4129" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSPluginService</text>
 </g>
-<!-- NgxEditorJSPluginService&#45;&gt;NgxPluginServiceModule -->
+<!-- NgxEditorJSPluginService&#45;&gt;NgxEditorJSPluginServiceModule -->
 <g id="edge29" class="edge">
-<title>NgxEditorJSPluginService&#45;&gt;NgxPluginServiceModule</title>
+<title>NgxEditorJSPluginService&#45;&gt;NgxEditorJSPluginServiceModule</title>
 <path fill="none" stroke="#000000" d="M4156.033,-121.627C4156.033,-121.627 4156.033,-151.9409 4156.033,-151.9409"/>
 <polygon fill="#000000" stroke="#000000" points="4152.5331,-151.9408 4156.033,-161.9409 4159.5331,-151.9409 4152.5331,-151.9408"/>
 </g>

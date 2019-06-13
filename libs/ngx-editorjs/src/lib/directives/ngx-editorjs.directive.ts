@@ -243,7 +243,6 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
         this.cd.markForCheck();
       }
     }
-
   }
 
   /**

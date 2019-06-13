@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PluginCodeModule } from './plugins/code/code.module';
+import { PluginEmbedModule } from './plugins/embed/embed.module';
 import { PluginHeaderModule } from './plugins/header/header.module';
 import { PluginImageModule } from './plugins/image/image.module';
+import { PluginInlineCodeModule } from './plugins/inline-code/inline-code.module';
 import { PluginLinkModule } from './plugins/link/link.module';
 import { PluginListModule } from './plugins/list/list.module';
 import { PluginMarkerModule } from './plugins/marker/marker.module';
 import { PluginParagraphModule } from './plugins/paragraph/paragraph.module';
-import { PluginSimpleImageModule } from './plugins/simple-image/simple-image.module';
-import { NgxPluginServiceModule } from './services/plugin-service.module';
-import { PluginInlineCodeModule } from './plugins/inline-code/inline-code.module';
-import { PluginWarningModule } from './plugins/warning/warning.module';
 import { PluginQuoteModule } from './plugins/quote/quote.module';
-import { PluginEmbedModule } from './plugins/embed/embed.module';
+import { PluginSimpleImageModule } from './plugins/simple-image/simple-image.module';
+import { PluginWarningModule } from './plugins/warning/warning.module';
+import { NgxEditorJSPluginServiceModule } from './services/plugin-service.module';
 
 /**
  * The `NgxEditorjsPluginsModule` provides several additional modules
@@ -24,7 +24,7 @@ import { PluginEmbedModule } from './plugins/embed/embed.module';
 @NgModule({
   imports: [
     CommonModule,
-    NgxPluginServiceModule,
+    NgxEditorJSPluginServiceModule,
     PluginCodeModule,
     PluginHeaderModule,
     PluginImageModule,
@@ -39,7 +39,7 @@ import { PluginEmbedModule } from './plugins/embed/embed.module';
     PluginEmbedModule
   ],
   exports: [
-    NgxPluginServiceModule,
+    NgxEditorJSPluginServiceModule,
     PluginCodeModule,
     PluginHeaderModule,
     PluginImageModule,

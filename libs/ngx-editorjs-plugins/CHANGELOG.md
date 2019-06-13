@@ -21,9 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 
 - There is a [known issue](https://github.com/editor-js/header/pull/25) since upgrading to Angular 8 with the EditorJS Header Module.
-This causes the Header module to fail rendering when data is passed to it on initial setup.  The Header itself still works
-when added via the block toolbar. A temporary fix has been provided in the module by extending the Header
-and fixing the method.
+  This causes the Header module to fail rendering when data is passed to it on initial setup. The Header itself still works
+  when added via the block toolbar. A temporary fix has been provided in the module by extending the Header
+  and fixing the method.
 - Fixed `peerDependencies`
 
 ## [2.0.0] 2019-06-05

@@ -41,8 +41,7 @@ export interface EditorJSMaterialForm
     OnInit,
     AfterContentInit,
     OnDestroy,
-    DoCheck {
-}
+    DoCheck {}
 
 /**
  * This component provides a [Material](https://material.angular.io) compatible `<mat-form-field>` component.
@@ -56,8 +55,8 @@ export interface EditorJSMaterialForm
 @Component({
   selector: 'ngx-editorjs-mat-field',
   templateUrl: 'editorjs-mat-field.component.html',
-  styleUrls: [ 'editorjs-mat-field.component.scss' ],
-  providers: [ EDITORJS_MATERIAL_FIELD_CONTROL ],
+  styleUrls: ['editorjs-mat-field.component.scss'],
+  providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implements EditorJSMaterialForm {
@@ -216,7 +215,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
    * Host binding to the unique ID for this editor for material
    */
   @HostBinding()
-  id = `ngx-editorjs-mat-field-${ NgxEditorJSMatFieldComponent.nextId++ }`;
+  id = `ngx-editorjs-mat-field-${NgxEditorJSMatFieldComponent.nextId++}`;
 
   /**
    * Gets if the Material label should float

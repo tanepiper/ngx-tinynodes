@@ -66,18 +66,17 @@ export class NgxEditorJSPluginService {
    * @param excludeTools Optional array of tools to exclude, if not passed all tools
    */
   public getTools(excludeTools: string[] = []): ToolSettingsMap {
-    return Object.entries(this.getPluginsWithExclude(excludeTools))
-      .reduce(
-        (finalTools, [ key, plugin ]: [string, PluginConfig]) => {
-          const tool: any = {
-            class: plugin.plugin
-          };
-          if (plugin.shortcut) tool.shortcut = plugin.shortcut;
-          if (plugin.type === 'inline' || plugin.inlineToolbar) tool.inlineToolbar = true;
-          if (plugin.config) tool.config = plugin.config;
-          return { ...finalTools, [key]: tool };
-        },
-        {}
-      );
+    return Object.entries(this.getPluginsWithExclude(excludeTools)).reduce(
+      (finalTools, [key, plugin]: [string, PluginConfig]) => {
+        const tool: any = {
+          class: plugin.plugin
+        };
+        if (plugin.shortcut) tool.shortcut = plugin.shortcut;
+        if (plugin.type === 'inline' || plugin.inlineToolbar) tool.inlineToolbar = true;
+        if (plugin.config) tool.config = plugin.config;
+        return { ...finalTools, [key]: tool };
+      },
+      {}
+    );
   }
 }

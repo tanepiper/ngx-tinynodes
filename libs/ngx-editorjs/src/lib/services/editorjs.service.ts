@@ -1,8 +1,9 @@
 import { ApplicationRef, Inject, Injectable, NgZone } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
+import { NgxEditorJSPluginService, ToolSettingsMap } from '@tinynodes/ngx-editorjs-plugins';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, switchMap, take, tap } from 'rxjs/operators';
-import { NGX_EDITORJS_CONFIG, NgxEditorJSModuleConfig } from '../types/config';
+import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import {
   EditorJSClass,
@@ -13,7 +14,6 @@ import {
   MAP_DEFAULTS
 } from '../types/injector';
 import { ChangeMap, EditorMap, ReadyMap, SavedMap } from '../types/maps';
-import { NgxEditorJSPluginService, ToolSettingsMap, PluginConfig } from '@tinynodes/ngx-editorjs-plugins';
 
 /**
  * This handles the management of {@link https://editorjs.io/api | EditorJS} instances and their lifecycle.
@@ -73,8 +73,7 @@ export class NgxEditorJSService {
     private readonly plugins: NgxEditorJSPluginService,
     private readonly zone: NgZone,
     private readonly ref: ApplicationRef
-  ) {
-  }
+  ) {}
 
   /**
    * Creates a new {@link https://editorjs.io/api | EditorJS} instance outside of the Angular zone and then adds it to the editor instances
@@ -150,7 +149,7 @@ export class NgxEditorJSService {
             method = editor[options.namespace][options.method];
           }
           if (!method) {
-            throw new Error(`No method ${ options.method } ${ options.namespace ? 'in ' + options.namespace : '' }`);
+            throw new Error(`No method ${options.method} ${options.namespace ? 'in ' + options.namespace : ''}`);
           }
           const methodCall = method.call(editor, ...args);
           await this.zone.run(async () => {
@@ -192,7 +191,7 @@ export class NgxEditorJSService {
   public clear(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' }).pipe(
       take(1),
-      switchMap((response) => options.skipSave ? of(response) : this.save(options))
+      switchMap(response => (options.skipSave ? of(response) : this.save(options)))
     );
   }
 
@@ -204,13 +203,13 @@ export class NgxEditorJSService {
    */
   public update(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     const data = {
-      time: options.data && options.data.time || Date.now(),
-      version: options.data && options.data.version || this.editorJs.version,
-      blocks: [...options.data.blocks],
+      time: (options.data && options.data.time) || Date.now(),
+      version: (options.data && options.data.version) || this.editorJs.version,
+      blocks: [...options.data.blocks]
     };
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).pipe(
       take(1),
-      switchMap((response) => options.skipSave ? of(response) : this.save(options))
+      switchMap(response => (options.skipSave ? of(response) : this.save(options)))
     );
   }
 
@@ -330,7 +329,7 @@ export class NgxEditorJSService {
    * @param options Options to configure a method call against the EditorJS core API
    */
   private async setupSubjects(options: InjectorMethodOption): Promise<void> {
-    MAP_DEFAULTS.forEach(([ mapKey, value ]: [ string, typeof value ]) => {
+    MAP_DEFAULTS.forEach(([mapKey, value]: [string, typeof value]) => {
       if (!this[mapKey][options.holder]) {
         this[mapKey][options.holder] = new BehaviorSubject<typeof value>(value);
       }
@@ -343,7 +342,7 @@ export class NgxEditorJSService {
    * @param options The options to pass to clean up the subjects
    */
   private cleanupSubjects(options: InjectorMethodOption) {
-    MAP_DEFAULTS.forEach(([ mapKey ]: [ string ]) => {
+    MAP_DEFAULTS.forEach(([mapKey]: [string]) => {
       if (this[mapKey][options.holder]) {
         this[mapKey][options.holder].complete();
         this[mapKey][options.holder] = null;
@@ -360,6 +359,6 @@ export class NgxEditorJSService {
    * @param excludeTools Optional array of tools to exclude, if not passed all tools
    */
   private getTools(excludeTools: string[] = []): ToolSettingsMap {
-    return this.plugins.getTools(excludeTools)
+    return this.plugins.getTools(excludeTools);
   }
 }

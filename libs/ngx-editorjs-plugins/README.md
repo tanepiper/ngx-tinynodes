@@ -2,7 +2,6 @@
 
 [![npm version](https://badge.fury.io/js/%40tinynodes%2Fngx-editorjs-plugins.svg)](https://badge.fury.io/js/%40tinynodes%2Fngx-editorjs-plugins)
 
-
 This module provides the core Plugin service for [@tinynodes/ngx-editorjs](https://www.npmjs.com/package/@tinynodes/ngx-editorjs), and also provides a default set of [EditorJS](https://editorjs.io) plugins
 for using Angular modules and Injection Tokens.
 

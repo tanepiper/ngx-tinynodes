@@ -9,8 +9,8 @@ import {
   Input,
   OnDestroy,
   Output,
-  ViewChild,
-  Provider
+  Provider,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OutputData, SanitizerConfig } from '@editorjs/editorjs';
@@ -209,7 +209,10 @@ export class NgxEditorJSComponent implements OnDestroy, AfterContentInit, Contro
    */
   public writeValue(data: OutputData): void {
     this._value = data;
-    this.editorService.update({ holder: this.holder, data }).pipe(take(1)).subscribe();
+    this.editorService
+      .update({ holder: this.holder, data })
+      .pipe(take(1))
+      .subscribe();
     this.changeDetection.markForCheck();
   }
 

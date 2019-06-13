@@ -7,7 +7,10 @@ import { EditorJSPlugin, PluginConfig } from '../types/plugins';
  */
 export function createPluginConfig(pluginConfigs: PluginConfig[], plugins: EditorJSPlugin[]) {
   return pluginConfigs.reduce(
-    (pluginConfig, config, index) => ({ ...pluginConfig, [config.key]: { ...config, plugin: plugins[index] } }),
+    (pluginConfig, config, index) =>
+      typeof config === 'undefined'
+        ? pluginConfig
+        : { ...pluginConfig, [config.key]: { ...config, plugin: plugins[index] } },
     {}
   );
 }

@@ -1,11 +1,20 @@
 import { NgModule } from '@angular/core';
-import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginClasses } from '../types/plugins';
+import { EDITOR_JS_TOOL_INJECTOR, PluginClasses, PLUGIN_CONFIG } from '../types/plugins';
 import { createPluginConfig } from '../util/plugin';
-
 import { NgxEditorJSPluginService } from './plugin-service.service';
 
 @NgModule({
   providers: [
+    {
+      provide: PLUGIN_CONFIG,
+      useValue: undefined,
+      multi: true
+    },
+    {
+      provide: EDITOR_JS_TOOL_INJECTOR,
+      useValue: undefined,
+      multi: true
+    },
     {
       provide: PluginClasses,
       useFactory: createPluginConfig,
@@ -14,4 +23,4 @@ import { NgxEditorJSPluginService } from './plugin-service.service';
     NgxEditorJSPluginService
   ]
 })
-export class NgxPluginServiceModule {}
+export class NgxEditorJSPluginServiceModule {}
