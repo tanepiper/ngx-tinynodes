@@ -57,8 +57,8 @@ describe('PluginServiceService', () => {
 
   it('should have a plugin called test', () => {
     const service: NgxEditorJSPluginService = TestBed.get(NgxEditorJSPluginService);
-    const plugin = service.getPlugin('test');
+    const plugin = service.getPlugin('test-1');
     expect(plugin).toBeDefined();
-    expect(plugin.key).toBe('test');
+    expect(plugin.key).toBe('test-1');
   });
 });
