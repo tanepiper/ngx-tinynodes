@@ -28,31 +28,101 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content additional-page">
+               <div class="content module">
                    <div class="content-data">
 
 
 
+<ol class="breadcrumb">
+    <li>Modules</li>
+    <li>PluginEmbedModule</li>
+</ol>
 
 
+<ul class="nav nav-tabs" role="tablist">
+    <li  class="active" >
+        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    </li>
+    <li >
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>libs/ngx-editorjs/ngx-editorjs-plugins/src/lib/plugins/embed/embed.module.ts</code>
+        </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>A module that provides the default EditorJS <code>&lt;p&gt;</code> block tool.
+See <a href="https://github.com/editor-js/paragraph">the GitHub repo</a> for API details</p>
+
+        </p>
 
 
+        <div class="container-fluid module">
+            <div class="row">
+            </div>
+        </div>
 
 
+    </div>
 
 
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+import { EDITOR_JS_TOOL_INJECTOR, PLUGIN_CONFIG, PluginTypes } from &#x27;../../types/plugins&#x27;;
+import Embed from &#x27;@editorjs/embed&#x27;;
 
-
-
-
-
-<h1 id="ngx-tinynodes-libraries">Ngx-Tinynodes Libraries</h1>
-<p>Here you can find all the <code>README</code> and <code>CHANGELOG</code> details of all projects released to NPM</p>
-<div class="alert alert-warning">
-Please note due to a bug in <a href="https://github.com/compodoc/compodoc">CompoDoc</a> the `README.md` files are currently not generated correctly - these are rendered correctly on GitHub and NPM.
+/**
+ * A module that provides the default EditorJS &#x60;&lt;p&gt;&#x60; block tool.
+ * See [the GitHub repo](https://github.com/editor-js/paragraph) for API details
+ */
+@NgModule({
+  providers: [
+    {
+      provide: EDITOR_JS_TOOL_INJECTOR,
+      useValue: Embed,
+      multi: true
+    },
+    {
+      provide: PLUGIN_CONFIG,
+      useValue: {
+        key: &#x27;embed&#x27;,
+        type: PluginTypes.Block,
+        pluginName: &#x27;EditorJS Embed Block&#x27;,
+        inlineToolbar: true
+      },
+      multi: true
+    }
+  ]
+})
+export class PluginEmbedModule {}
+</code></pre>
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                    </div><div class="search-results">
     <div class="has-results">
@@ -70,8 +140,8 @@ Please note due to a bug in <a href="https://github.com/compodoc/compodoc">Compo
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
-            var COMPODOC_CURRENT_PAGE_URL = 'tinynodes-library-docs.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'PluginEmbedModule.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

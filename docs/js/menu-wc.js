@@ -1,19 +1,18 @@
 'use strict';
 
-customElements.define(
-  'compodoc-menu',
-  class extends HTMLElement {
+
+customElements.define('compodoc-menu', class extends HTMLElement {
     constructor() {
-      super();
-      this.isNormalMode = this.getAttribute('mode') === 'normal';
+        super();
+        this.isNormalMode = this.getAttribute('mode') === 'normal';
     }
 
     connectedCallback() {
-      this.render(this.isNormalMode);
+        this.render(this.isNormalMode);
     }
 
     render(isNormalMode) {
-      let tp = lithtml.html(`
+        let tp = lithtml.html(`
         <nav>
             <ul class="list">
                 <li class="title">
@@ -21,11 +20,7 @@ customElements.define(
                 </li>
 
                 <li class="divider"></li>
-                ${
-                  isNormalMode
-                    ? `<div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>`
-                    : ''
-                }
+                ${ isNormalMode ? `<div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>` : '' }
                 <li class="chapter">
                     <a data-type="chapter-link" href="index.html"><span class="icon ion-ios-home"></span>Getting started</a>
                     <ul class="links">
@@ -66,77 +61,55 @@ customElements.define(
                         </li>
                     </ul>
                 </li>
-                    <li class="chapter additional">
-                        <div class="simple menu-toggler" data-toggle="collapse" ${
-                          isNormalMode ? 'data-target="#additional-pages"' : 'data-target="#xs-additional-pages"'
-                        }>
-                            <span class="icon ion-ios-book"></span>
-                            <span>Additional documentation</span>
-                            <span class="icon ion-ios-arrow-down"></span>
-                        </div>
-                        <ul class="links collapse" ${
-                          isNormalMode ? 'id="additional-pages"' : 'id="xs-additional-pages"'
-                        }>
-                                    <li class="chapter inner">
-                                        <a data-type="chapter-link" href="additional-documentation/tinynodes-library-docs.html" data-context-id="additional">
-                                            <div class="menu-toggler linked" data-toggle="collapse" ${
-                                              isNormalMode
-                                                ? 'data-target="#additional-page-ca88ec7b85d4d30c1ba6341c020a7464"'
-                                                : 'data-target="#xs-additional-page-ca88ec7b85d4d30c1ba6341c020a7464"'
-                                            }>
-                                                <span class="link-name">Tinynodes Library Docs</span>
-                                                <span class="icon ion-ios-arrow-down"></span>
-                                            </div>
-                                        </a>
-                                        <ul class="links collapse" ${
-                                          isNormalMode
-                                            ? 'id="additional-page-ca88ec7b85d4d30c1ba6341c020a7464"'
-                                            : 'id="xs-additional-page-ca88ec7b85d4d30c1ba6341c020a7464"'
-                                        }>
-                                            <li class="link for-chapter2">
-                                                <a href="additional-documentation/tinynodes-library-docs/ngx-editorjs-readme.html" data-type="entity-link" data-context="sub-entity" data-context-id="additional">ngx-editorjs Readme</a>
-                                            </li>
-                                            <li class="link for-chapter3">
-                                                <a href="additional-documentation/tinynodes-library-docs/ngx-editorjs-readme/ngx-editorjs-changelog.html" data-type="entity-link" data-context="sub-entity" data-context-id="additional">ngx-editorjs Changelog</a>
-                                            </li>
-                                            <li class="link for-chapter2">
-                                                <a href="additional-documentation/tinynodes-library-docs/ngx-editorjs-plugins-readme.html" data-type="entity-link" data-context="sub-entity" data-context-id="additional">ngx-editorjs-plugins Readme</a>
-                                            </li>
-                                            <li class="link for-chapter3">
-                                                <a href="additional-documentation/tinynodes-library-docs/ngx-editorjs-plugins-readme/ngx-editorjs-plugins-changelog.html" data-type="entity-link" data-context="sub-entity" data-context-id="additional">ngx-editorjs-plugins Changelog</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                        </ul>
-                    </li>
                     <li class="chapter modules">
                         <a data-type="chapter-link" href="modules.html">
-                            <div class="menu-toggler linked" data-toggle="collapse" ${
-                              isNormalMode ? 'data-target="#modules-links"' : 'data-target="#xs-modules-links"'
-                            }>
+                            <div class="menu-toggler linked" data-toggle="collapse" ${ isNormalMode ?
+                                'data-target="#modules-links"' : 'data-target="#xs-modules-links"' }>
                                 <span class="icon ion-ios-archive"></span>
                                 <span class="link-name">Modules</span>
                                 <span class="icon ion-ios-arrow-down"></span>
                             </div>
                         </a>
-                        <ul class="links collapse" ${isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"'}>
+                        <ul class="links collapse" ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
                             <li class="link">
-                                <a href="modules/NgxEditorJSModule.html" data-type="entity-link">NgxEditorJSModule</a>
+                                <a href="modules/NgxEditorJSDemoMaterialModule.html" data-type="entity-link">NgxEditorJSDemoMaterialModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/NgxEditorJSDemoMaterialModule.html" data-type="entity-link">NgxEditorJSDemoMaterialModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/NgxEditorjsDemoModule.html" data-type="entity-link">NgxEditorjsDemoModule</a>
                                     <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${
-                                          isNormalMode
-                                            ? 'data-target="#components-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                            : 'data-target="#xs-components-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                        }>
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#components-links-module-NgxEditorjsDemoModule-0145b093977ad8e9e17dfbe7a700ad00"' : 'data-target="#xs-components-links-module-NgxEditorjsDemoModule-0145b093977ad8e9e17dfbe7a700ad00"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${
-                                          isNormalMode
-                                            ? 'id="components-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                            : 'id="xs-components-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                        }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxEditorjsDemoModule-0145b093977ad8e9e17dfbe7a700ad00"' :
+                                            'id="xs-components-links-module-NgxEditorjsDemoModule-0145b093977ad8e9e17dfbe7a700ad00"' }>
+                                            <li class="link">
+                                                <a href="components/NgxEditorJSDemoHomeComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxEditorJSDemoHomeComponent</a>
+                                            </li>
+                                            <li class="link">
+                                                <a href="components/PageContainerComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">PageContainerComponent</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/NgxEditorJSModule.html" data-type="entity-link">NgxEditorJSModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#components-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' : 'data-target="#xs-components-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' }>
+                                            <span class="icon ion-md-cog"></span>
+                                            <span>Components</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' :
+                                            'id="xs-components-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' }>
                                             <li class="link">
                                                 <a href="components/NgxEditorJSComponent.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxEditorJSComponent</a>
@@ -148,20 +121,14 @@ customElements.define(
                                         </ul>
                                     </li>
                                 <li class="chapter inner">
-                                    <div class="simple menu-toggler" data-toggle="collapse" ${
-                                      isNormalMode
-                                        ? 'data-target="#directives-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                        : 'data-target="#xs-directives-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                    }>
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#directives-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' : 'data-target="#xs-directives-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${
-                                      isNormalMode
-                                        ? 'id="directives-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                        : 'id="xs-directives-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                    }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' :
+                                        'id="xs-directives-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' }>
                                         <li class="link">
                                             <a href="directives/NgxEditorJSDirective.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxEditorJSDirective</a>
@@ -169,20 +136,14 @@ customElements.define(
                                     </ul>
                                 </li>
                                 <li class="chapter inner">
-                                    <div class="simple menu-toggler" data-toggle="collapse" ${
-                                      isNormalMode
-                                        ? 'data-target="#injectables-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                        : 'data-target="#xs-injectables-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                    }>
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' : 'data-target="#xs-injectables-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${
-                                      isNormalMode
-                                        ? 'id="injectables-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                        : 'id="xs-injectables-links-module-NgxEditorJSModule-d80eee9a4f19a2cc59afed565a726ee9"'
-                                    }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' :
+                                        'id="xs-injectables-links-module-NgxEditorJSModule-fb6a2a02e93ca924ca953aee550a66f1"' }>
                                         <li class="link">
                                             <a href="injectables/NgxEditorJSService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>NgxEditorJSService</a>
@@ -191,25 +152,16 @@ customElements.define(
                                 </li>
                             </li>
                             <li class="link">
-                                <a href="modules/NgxEditorjsPluginsModule.html" data-type="entity-link">NgxEditorjsPluginsModule</a>
-                            </li>
-                            <li class="link">
-                                <a href="modules/NgxPluginServiceModule.html" data-type="entity-link">NgxPluginServiceModule</a>
+                                <a href="modules/NgxEditorJSPluginServiceModule.html" data-type="entity-link">NgxEditorJSPluginServiceModule</a>
                                 <li class="chapter inner">
-                                    <div class="simple menu-toggler" data-toggle="collapse" ${
-                                      isNormalMode
-                                        ? 'data-target="#injectables-links-module-NgxEditorJSPluginServiceModule-b7610187fbdf4426e6fb9fc9ecf926d4"'
-                                        : 'data-target="#xs-injectables-links-module-NgxEditorJSPluginServiceModule-b7610187fbdf4426e6fb9fc9ecf926d4"'
-                                    }>
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-NgxEditorJSPluginServiceModule-c90e72d94fb28d2be98d33ce8eaac159"' : 'data-target="#xs-injectables-links-module-NgxEditorJSPluginServiceModule-c90e72d94fb28d2be98d33ce8eaac159"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${
-                                      isNormalMode
-                                        ? 'id="injectables-links-module-NgxEditorJSPluginServiceModule-b7610187fbdf4426e6fb9fc9ecf926d4"'
-                                        : 'id="xs-injectables-links-module-NgxEditorJSPluginServiceModule-b7610187fbdf4426e6fb9fc9ecf926d4"'
-                                    }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-NgxEditorJSPluginServiceModule-c90e72d94fb28d2be98d33ce8eaac159"' :
+                                        'id="xs-injectables-links-module-NgxEditorJSPluginServiceModule-c90e72d94fb28d2be98d33ce8eaac159"' }>
                                         <li class="link">
                                             <a href="injectables/NgxEditorJSPluginService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>NgxEditorJSPluginService</a>
@@ -218,25 +170,40 @@ customElements.define(
                                 </li>
                             </li>
                             <li class="link">
+                                <a href="modules/NgxEditorjsPluginsModule.html" data-type="entity-link">NgxEditorjsPluginsModule</a>
+                            </li>
+                            <li class="link">
                                 <a href="modules/NgxTinynodesComponentsModule.html" data-type="entity-link">NgxTinynodesComponentsModule</a>
                             </li>
                             <li class="link">
-                                <a href="modules/NgxTinynodesMatJsonOutputModule.html" data-type="entity-link">NgxTinynodesMatJsonOutputModule</a>
+                                <a href="modules/NgxTinynodesMaterialFormFieldDemo.html" data-type="entity-link">NgxTinynodesMaterialFormFieldDemo</a>
                                     <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${
-                                          isNormalMode
-                                            ? 'data-target="#components-links-module-NgxTinynodesMatJsonOutputModule-0f6d16c0c678203da42ca29f9770e68e"'
-                                            : 'data-target="#xs-components-links-module-NgxTinynodesMatJsonOutputModule-0f6d16c0c678203da42ca29f9770e68e"'
-                                        }>
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#components-links-module-NgxTinynodesMaterialFormFieldDemo-eff663d1724bb23ab483466f19a31332"' : 'data-target="#xs-components-links-module-NgxTinynodesMaterialFormFieldDemo-eff663d1724bb23ab483466f19a31332"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${
-                                          isNormalMode
-                                            ? 'id="components-links-module-NgxTinynodesMatJsonOutputModule-0f6d16c0c678203da42ca29f9770e68e"'
-                                            : 'id="xs-components-links-module-NgxTinynodesMatJsonOutputModule-0f6d16c0c678203da42ca29f9770e68e"'
-                                        }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxTinynodesMaterialFormFieldDemo-eff663d1724bb23ab483466f19a31332"' :
+                                            'id="xs-components-links-module-NgxTinynodesMaterialFormFieldDemo-eff663d1724bb23ab483466f19a31332"' }>
+                                            <li class="link">
+                                                <a href="components/NgxTinynodesMaterialFormFieldDemoComponent.html"
+                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxTinynodesMaterialFormFieldDemoComponent</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/NgxTinynodesMatJsonOutputModule.html" data-type="entity-link">NgxTinynodesMatJsonOutputModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#components-links-module-NgxTinynodesMatJsonOutputModule-0f6d16c0c678203da42ca29f9770e68e"' : 'data-target="#xs-components-links-module-NgxTinynodesMatJsonOutputModule-0f6d16c0c678203da42ca29f9770e68e"' }>
+                                            <span class="icon ion-md-cog"></span>
+                                            <span>Components</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxTinynodesMatJsonOutputModule-0f6d16c0c678203da42ca29f9770e68e"' :
+                                            'id="xs-components-links-module-NgxTinynodesMatJsonOutputModule-0f6d16c0c678203da42ca29f9770e68e"' }>
                                             <li class="link">
                                                 <a href="components/NgxTinynodesMatJsonOutputComponent.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxTinynodesMatJsonOutputComponent</a>
@@ -247,20 +214,14 @@ customElements.define(
                             <li class="link">
                                 <a href="modules/NgxTinynodesMatTagInputModule.html" data-type="entity-link">NgxTinynodesMatTagInputModule</a>
                                     <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${
-                                          isNormalMode
-                                            ? 'data-target="#components-links-module-NgxTinynodesMatTagInputModule-5805b735157e3b852e1835a74690b3a0"'
-                                            : 'data-target="#xs-components-links-module-NgxTinynodesMatTagInputModule-5805b735157e3b852e1835a74690b3a0"'
-                                        }>
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#components-links-module-NgxTinynodesMatTagInputModule-5805b735157e3b852e1835a74690b3a0"' : 'data-target="#xs-components-links-module-NgxTinynodesMatTagInputModule-5805b735157e3b852e1835a74690b3a0"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${
-                                          isNormalMode
-                                            ? 'id="components-links-module-NgxTinynodesMatTagInputModule-5805b735157e3b852e1835a74690b3a0"'
-                                            : 'id="xs-components-links-module-NgxTinynodesMatTagInputModule-5805b735157e3b852e1835a74690b3a0"'
-                                        }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxTinynodesMatTagInputModule-5805b735157e3b852e1835a74690b3a0"' :
+                                            'id="xs-components-links-module-NgxTinynodesMatTagInputModule-5805b735157e3b852e1835a74690b3a0"' }>
                                             <li class="link">
                                                 <a href="components/NgxTinynodesMatTagInputComponent.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxTinynodesMatTagInputComponent</a>
@@ -269,7 +230,39 @@ customElements.define(
                                     </li>
                             </li>
                             <li class="link">
+                                <a href="modules/PageStoreModule.html" data-type="entity-link">PageStoreModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-PageStoreModule-86d90c3a0ae357c2b13bbee8924eaaf0"' : 'data-target="#xs-injectables-links-module-PageStoreModule-86d90c3a0ae357c2b13bbee8924eaaf0"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PageStoreModule-86d90c3a0ae357c2b13bbee8924eaaf0"' :
+                                        'id="xs-injectables-links-module-PageStoreModule-86d90c3a0ae357c2b13bbee8924eaaf0"' }>
+                                        <li class="link">
+                                            <a href="injectables/PagesQuery.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PagesQuery</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/PagesService.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PagesService</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/PagesStore.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PagesStore</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
                                 <a href="modules/PluginCodeModule.html" data-type="entity-link">PluginCodeModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/PluginEmbedModule.html" data-type="entity-link">PluginEmbedModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/PluginEmbedModule.html" data-type="entity-link">PluginEmbedModule</a>
                             </li>
                             <li class="link">
                                 <a href="modules/PluginHeaderModule.html" data-type="entity-link">PluginHeaderModule</a>
@@ -293,35 +286,53 @@ customElements.define(
                                 <a href="modules/PluginParagraphModule.html" data-type="entity-link">PluginParagraphModule</a>
                             </li>
                             <li class="link">
+                                <a href="modules/PluginQuoteModule.html" data-type="entity-link">PluginQuoteModule</a>
+                            </li>
+                            <li class="link">
                                 <a href="modules/PluginSimpleImageModule.html" data-type="entity-link">PluginSimpleImageModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/PluginWarningModule.html" data-type="entity-link">PluginWarningModule</a>
                             </li>
                 </ul>
                 </li>
                     <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse" ${
-                          isNormalMode ? 'data-target="#classes-links"' : 'data-target="#xs-classes-links"'
-                        }>
+                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#classes-links"' :
+                            'data-target="#xs-classes-links"' }>
                             <span class="icon ion-ios-paper"></span>
                             <span>Classes</span>
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
-                        <ul class="links collapse" ${isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"'}>
+                        <ul class="links collapse" ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
                             <li class="link">
-                                <a href="classes/FixedHeader.html" data-type="entity-link">FixedHeader</a>
+                                <a href="classes/MockEditorJS.html" data-type="entity-link">MockEditorJS</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/MockPlugin.html" data-type="entity-link">MockPlugin</a>
                             </li>
                         </ul>
                     </li>
+                        <li class="chapter">
+                            <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#injectables-links"' :
+                                'data-target="#xs-injectables-links"' }>
+                                <span class="icon ion-md-arrow-round-down"></span>
+                                <span>Injectables</span>
+                                <span class="icon ion-ios-arrow-down"></span>
+                            </div>
+                            <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
+                                <li class="link">
+                                    <a href="injectables/MockNgZone.html" data-type="entity-link">MockNgZone</a>
+                                </li>
+                            </ul>
+                        </li>
                     <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse" ${
-                          isNormalMode ? 'data-target="#interfaces-links"' : 'data-target="#xs-interfaces-links"'
-                        }>
+                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#interfaces-links"' :
+                            'data-target="#xs-interfaces-links"' }>
                             <span class="icon ion-md-information-circle-outline"></span>
                             <span>Interfaces</span>
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
-                        <ul class="links collapse" ${
-                          isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"'
-                        }>
+                        <ul class="links collapse" ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
                                 <a href="interfaces/Block.html" data-type="entity-link">Block</a>
                             </li>
@@ -386,6 +397,15 @@ customElements.define(
                                 <a href="interfaces/NgxTinynodesMatFieldComponent.html" data-type="entity-link">NgxTinynodesMatFieldComponent</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/Page.html" data-type="entity-link">Page</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PageBlock.html" data-type="entity-link">PageBlock</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PagesState.html" data-type="entity-link">PagesState</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Paragraph.html" data-type="entity-link">Paragraph</a>
                             </li>
                             <li class="link">
@@ -404,21 +424,21 @@ customElements.define(
                                 <a href="interfaces/SavedMap.html" data-type="entity-link">SavedMap</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/Tag.html" data-type="entity-link">Tag</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/ToolSettingsMap.html" data-type="entity-link">ToolSettingsMap</a>
                             </li>
                         </ul>
                     </li>
                     <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse" ${
-                          isNormalMode ? 'data-target="#miscellaneous-links"' : 'data-target="#xs-miscellaneous-links"'
-                        }>
+                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#miscellaneous-links"'
+                            : 'data-target="#xs-miscellaneous-links"' }>
                             <span class="icon ion-ios-cube"></span>
                             <span>Miscellaneous</span>
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
-                        <ul class="links collapse" ${
-                          isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"'
-                        }>
+                        <ul class="links collapse" ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
                             <li class="link">
                                 <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>
                             </li>
@@ -442,7 +462,6 @@ customElements.define(
             </ul>
         </nav>
         `);
-      this.innerHTML = tp.strings;
+        this.innerHTML = tp.strings;
     }
-  }
-);
+});

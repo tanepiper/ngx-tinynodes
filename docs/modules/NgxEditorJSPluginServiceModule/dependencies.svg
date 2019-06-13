@@ -21,11 +21,11 @@
 <polygon fill="#fb8072" stroke="transparent" points="406,-10 406,-30 426,-30 426,-10 406,-10"/>
 <text text-anchor="start" x="429.7258" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Exports</text>
 <g id="clust1" class="cluster">
-<title>cluster_NgxPluginServiceModule</title>
+<title>cluster_NgxEditorJSPluginServiceModule</title>
 <polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="117,-70 117,-195 379,-195 379,-70 117,-70"/>
 </g>
 <g id="clust6" class="cluster">
-<title>cluster_NgxPluginServiceModule_providers</title>
+<title>cluster_NgxEditorJSPluginServiceModule_providers</title>
 <polygon fill="none" stroke="#000000" points="125,-78 125,-130 371,-130 371,-78 125,-78"/>
 </g>
 <!-- NgxEditorJSPluginService -->
@@ -37,7 +37,7 @@
 <!-- NgxEditorJSPluginServiceModule -->
 <g id="node2" class="node">
 <title>NgxEditorJSPluginServiceModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="329.1979,-187 326.1979,-191 305.1979,-191 302.1979,-187 166.8021,-187 166.8021,-151 329.1979,-151 329.1979,-187"/>
+<polygon fill="#8dd3c7" stroke="#000000" points="353.4198,-187 350.4198,-191 329.4198,-191 326.4198,-187 142.5802,-187 142.5802,-151 353.4198,-151 353.4198,-187"/>
 <text text-anchor="middle" x="248" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">NgxEditorJSPluginServiceModule</text>
 </g>
 <!-- NgxEditorJSPluginService&#45;&gt;NgxEditorJSPluginServiceModule -->

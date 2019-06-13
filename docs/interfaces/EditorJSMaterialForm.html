@@ -62,7 +62,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts</code>
+            <code>libs/ngx-editorjs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.component.ts</code>
         </p>
 
             <p class="comment">
@@ -130,8 +130,7 @@ export interface EditorJSMaterialForm
     OnInit,
     AfterContentInit,
     OnDestroy,
-    DoCheck {
-}
+    DoCheck {}
 
 /**
  * This component provides a [Material](https://material.angular.io) compatible &#x60;&lt;mat-form-field&gt;&#x60; component.
@@ -145,8 +144,8 @@ export interface EditorJSMaterialForm
 @Component({
   selector: &#x27;ngx-editorjs-mat-field&#x27;,
   templateUrl: &#x27;editorjs-mat-field.component.html&#x27;,
-  styleUrls: [ &#x27;editorjs-mat-field.component.scss&#x27; ],
-  providers: [ EDITORJS_MATERIAL_FIELD_CONTROL ],
+  styleUrls: [&#x27;editorjs-mat-field.component.scss&#x27;],
+  providers: [EDITORJS_MATERIAL_FIELD_CONTROL],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implements EditorJSMaterialForm {
@@ -305,7 +304,7 @@ export class NgxEditorJSMatFieldComponent extends NgxEditorJSComponent implement
    * Host binding to the unique ID for this editor for material
    */
   @HostBinding()
-  id &#x3D; &#x60;ngx-editorjs-mat-field-${ NgxEditorJSMatFieldComponent.nextId++ }&#x60;;
+  id &#x3D; &#x60;ngx-editorjs-mat-field-${NgxEditorJSMatFieldComponent.nextId++}&#x60;;
 
   /**
    * Gets if the Material label should float
