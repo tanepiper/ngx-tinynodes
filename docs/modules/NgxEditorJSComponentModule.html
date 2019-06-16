@@ -194,6 +194,15 @@
         </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>Base module for the <code>NgxEditorJSComponent</code>, <code>NgxEditorJSDirective</code> and <code>NgxEditorJSService</code>.
+All providers for the app are set here, however <code>FOR_ROOT_OPTIONS_TOKEN</code> can be set in any
+<code>.forRoot</code></p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -263,8 +272,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs/src/lib/containers/editorjs/editorjs.module.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs/src/lib/containers/editorjs/editorjs.module.ts:63</a></div>
                 </td>
             </tr>
 
@@ -343,6 +352,11 @@ export function createEditorJSInstance(editorjs: any) {
   return editorjs;
 }
 
+/**
+ * Base module for the &#x60;NgxEditorJSComponent&#x60;, &#x60;NgxEditorJSDirective&#x60; and &#x60;NgxEditorJSService&#x60;.
+ * All providers for the app are set here, however &#x60;FOR_ROOT_OPTIONS_TOKEN&#x60; can be set in any
+ * &#x60;.forRoot&#x60;
+ */
 @NgModule({
   imports: [CommonModule, FormsModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
