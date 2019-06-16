@@ -17,3 +17,6 @@ export {
   NGX_EDITORJS_CONFIG
 } from './lib/types/config';
 export { CreateEditorJSOptions } from './lib/types/editorjs-service';
+
+export { NgxEditorJSComponentModule } from './lib/containers/editorjs/editorjs.module';
+export { NgxEditorJSMatFieldModule } from './lib/containers/editorjs-mat-field/editorjs-mat-field.module';

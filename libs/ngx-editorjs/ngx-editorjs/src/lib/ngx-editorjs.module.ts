@@ -1,23 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import EditorJS from '@editorjs/editorjs';
-import { createModuleConfig } from './config/module-config';
-import { NgxEditorJSMatFieldComponent } from './containers/editorjs-mat-field/editorjs-mat-field.component';
-import { NgxEditorJSComponent } from './containers/editorjs/editorjs.component';
-import { NgxEditorJSDirective } from './directives/ngx-editorjs.directive';
-import { NgxEditorJSService } from './services/editorjs.service';
-import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from './types/config';
-import { EditorJSInstance, EDITORJS_MODULE_IMPORT } from './types/injector';
-
-/**
- * Factory function to return the EditorJS base class
- */
-export function createEditorJSInstance(editorjs: any) {
-  return editorjs;
-}
+import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig } from './types/config';
+import { NgxEditorJSComponentModule } from './containers/editorjs/editorjs.module';
+import { NgxEditorJSMatFieldModule } from './containers/editorjs-mat-field/editorjs-mat-field.module';
 
 /**
  * The `@tinynodes/ngx-editorjs` module provides a collection of demos to allow
@@ -28,30 +12,8 @@ export function createEditorJSInstance(editorjs: any) {
  * default instance.
  */
 @NgModule({
-  imports: [CommonModule, FormsModule, MatInputModule, MatFormFieldModule],
-  declarations: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective],
-  exports: [NgxEditorJSComponent, NgxEditorJSMatFieldComponent, NgxEditorJSDirective],
-  providers: [
-    NgxEditorJSService,
-    {
-      provide: FOR_ROOT_OPTIONS_TOKEN,
-      useValue: {}
-    },
-    {
-      provide: NGX_EDITORJS_CONFIG,
-      useFactory: createModuleConfig,
-      deps: [FOR_ROOT_OPTIONS_TOKEN]
-    },
-    {
-      provide: EDITORJS_MODULE_IMPORT,
-      useValue: EditorJS
-    },
-    {
-      provide: EditorJSInstance,
-      useFactory: createEditorJSInstance,
-      deps: [EDITORJS_MODULE_IMPORT]
-    }
-  ]
+  imports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldModule],
+  exports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldModule]
 })
 export class NgxEditorJSModule {
   constructor(
@@ -72,11 +34,6 @@ export class NgxEditorJSModule {
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
           useValue: config
-        },
-        {
-          provide: NGX_EDITORJS_CONFIG,
-          useFactory: createModuleConfig,
-          deps: [FOR_ROOT_OPTIONS_TOKEN]
         }
       ]
     };
