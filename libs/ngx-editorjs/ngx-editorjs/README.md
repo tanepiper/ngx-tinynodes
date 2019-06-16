@@ -7,7 +7,7 @@ This library provides Angular support for [EditorJS](https://editorjs.io).
 Inside the module you will find:
 
 - `NgxEditorJSDirective` - An Angular Directive used to attach an `EditorJS` instance to any block DOM element
-- `NgxEditorJSComponent` - An [out-of-the-box Angular component](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-component) that is Reactive Forms compatible
+- `NgxEditorJSComponent` - An [out-of-the-box Angular component](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-component) that is Reactive Forms compatible.
 - `NgxEditorJSMaterialFieldComponent` An [Angular Material](https://material.angular.io/) Form Field component that provides all the required properties and life-cycle events required. See the [Form Demo](https://tinynodes-ngx.firebaseapp.com/ngx-editorjs-demo/angular-form) on an example usage
 - `NgxEditorJSBaseComponent` - A base Angular component that is Reactive form compatible but with no template, can be used to create custom UI framework containers
 - `NgxEditorJSService` - A Service that can be injected into an application to provide a interface to interact with `EditorJS` instances and manage plugins.
@@ -29,7 +29,7 @@ Install the library via `npm` along with the plugins module and `EditorJS` modul
 
 Once installed, include the `NgxEditorJSModule` module in your project with the `forRoot` method. The `forRoot` takes an optional configuration.
 
-You also need to pass a provider for `UserPlugins` with a factory function that returns an options map tools to provide to the `EditorJS` instance. An example of this is shows [in the demo application](https://github.com/tanepiper/ngx-tinynodes/blob/master/libs/ngx-editorjs-demo/src/lib/config/index.ts)
+> If you don't want to use Angular material you can import `NgxEditorJSComponentModule` instead.
 
 ```typescript
 import { NgModule } from '@angular/core';
@@ -53,7 +53,7 @@ import { AppComponent } from './app.component';
           blocks: []
         }
       }
-    }),
+    })
   ],
   bootstrap: [AppComponent]
 })
@@ -79,7 +79,7 @@ The module configuration allows EditorJS to be provided with a set of options fo
 | `minHeight`        | Height of Editor's bottom area that allows to set focus on the last Block                                                                                       |
 | `blockPlaceholder` | Placeholder of the first block                                                                                                                                  |
 | `sanitizer`        | Content sanitizer configurations                                                                                                                                |
-| `excludeTools`     | Excludes tools from the application, if no value or empty list passed all plugins available are added|
+| `excludeTools`     | Excludes tools from the application, if no value or empty list passed all plugins available are added                                                           |
 
 ### Adding custom tools
 

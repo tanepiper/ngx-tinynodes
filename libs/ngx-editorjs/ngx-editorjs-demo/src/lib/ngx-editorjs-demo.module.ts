@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
-import { NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
+import { NgxEditorJSComponentModule, NgxEditorJSModule } from '@tinynodes/ngx-editorjs';
 import { PageContainerComponent } from './containers/page-container/page-container.component';
 import { ngxEditorjsDemoRoutes } from './ngx-editorjs-demo.routes';
 import { PageStoreModule } from './store/pages/pages.module';
@@ -22,7 +22,7 @@ import { NgxEditorjsPluginsModule } from '@tinynodes/ngx-editorjs-plugins';
     ReactiveFormsModule,
     PageStoreModule,
     NgxTinynodesCoreModule,
-    NgxEditorJSModule,
+    NgxEditorJSComponentModule,
     NgxEditorjsPluginsModule,
     NgxEditorJSDemoMaterialModule
   ],
