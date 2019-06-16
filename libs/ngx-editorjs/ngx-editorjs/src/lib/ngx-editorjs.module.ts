@@ -4,8 +4,8 @@ import { NgxEditorJSComponentModule } from './containers/editorjs/editorjs.modul
 import { NgxEditorJSMatFieldModule } from './containers/editorjs-mat-field/editorjs-mat-field.module';
 
 /**
- * The `@tinynodes/ngx-editorjs` module provides a collection of demos to allow
- * any Angular app to use and control an [EditorJS](http://editorjs.io) instance
+ * The `@tinynodes/ngx-editorjs` module provides the directive, service and components to use [EditorJS](http://editorjs.io)
+ * within Angular and Material.
  *
  * To use import the module `NgxEditorJSModule.forRoot()` into the root of your application.
  * The `forRoot` method takes an optional `NgxEditorJSModuleConfig` config, this will provide a

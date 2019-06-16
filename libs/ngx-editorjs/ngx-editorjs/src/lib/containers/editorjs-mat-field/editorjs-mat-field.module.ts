@@ -5,6 +5,10 @@ import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig } from '../../types/con
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+/**
+ * This module provides the `NgxEditorJSMatFieldComponent` along with exporting the
+ * `NgxEditorJSComponentModule`. If using this module, Angular Material is required
+ */
 @NgModule({
   imports: [NgxEditorJSComponentModule, MatInputModule, MatFormFieldModule],
   declarations: [NgxEditorJSMatFieldComponent],

@@ -17,6 +17,11 @@ export function createEditorJSInstance(editorjs: any) {
   return editorjs;
 }
 
+/**
+ * Base module for the `NgxEditorJSComponent`, `NgxEditorJSDirective` and `NgxEditorJSService`.
+ * All providers for the app are set here, however `FOR_ROOT_OPTIONS_TOKEN` can be set in any
+ * `.forRoot`
+ */
 @NgModule({
   imports: [CommonModule, FormsModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
