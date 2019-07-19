@@ -58,8 +58,6 @@ export class NgxEditorJSService {
    */
   private readonly lastChangeMap: ChangeMap = {};
 
-  private toolbarOpen = false;
-
   /**
    * @param editorJs The EditorJS class injected into the application and used to create new editor instances
    * @param config The configuration provided from the NgxEditorJSModule.forRoot method
@@ -248,8 +246,8 @@ export class NgxEditorJSService {
       });
     }
     return this.lastChangeMap[options.holder].pipe(
-      distinctUntilChanged((a, b) => (b && b.time && b.time === 0) || (a && b && (a.time && a.time === b.time))),
-      filter(hasChanged => typeof hasChanged !== 'undefined')
+      distinctUntilChanged((a, b) => (a && b && (a.time && a.time === b.time))),
+      filter(hasChanged => typeof hasChanged !== 'undefined' && hasChanged.time !== 0)
     );
   }
 
@@ -299,10 +297,10 @@ export class NgxEditorJSService {
     if (!this.lastChangeMap[options.holder]) {
       this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({ blocks: [] });
     }
-    return (change: OutputData) => {
-      if (change) {
-        this.lastChangeMap[options.holder].next(change);
-      }
+    return () => {
+      this.save({holder: options.holder}).pipe(take(1)).subscribe(change => {
+        this.lastChangeMap[options.holder].next(change.result);
+      });
     };
   }
 

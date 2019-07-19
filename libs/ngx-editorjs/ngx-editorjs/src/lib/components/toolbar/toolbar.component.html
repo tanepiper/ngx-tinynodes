@@ -1,0 +1,19 @@
+<div #toolbar class="toolbar" [ngClass]="{'active': editorFocused }">
+  <div class="group button-group">
+    <button type="button"></button>
+  </div>
+  <div class="group button-group">
+    <button type="button" (click)="toggleAutosave()">{{ (autosave | async) > 0 ? 'Disable' : 'Enable'}} Autosave</button>
+    <button type="button" (click)="clear()">Clear</button>
+    <button type="button">Load</button>
+
+  </div>
+  <div class="group info">
+    <dl>
+      <dt>Is Saved</dt>
+      <dd>{{hasSaved | async }}</dd>
+      <dt>Blocks</dt>
+      <dd>{{blockCount | async}}</dd>
+    </dl>
+  </div>
+</div>

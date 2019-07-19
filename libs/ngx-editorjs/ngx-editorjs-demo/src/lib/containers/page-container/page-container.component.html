@@ -28,6 +28,7 @@
           <mat-list-item>Saved: {{ ngxEditorJS.hasSaved | async }}</mat-list-item>
         </mat-list>
       </mat-card-content>
+      <ngx-editorjs-toolbar [holder]="ngxEditorJS"></ngx-editorjs-toolbar>
       <ngx-editorjs #ngxEditorJS [holder]="holder"></ngx-editorjs>
     </mat-card-content>
     <mat-card-content>

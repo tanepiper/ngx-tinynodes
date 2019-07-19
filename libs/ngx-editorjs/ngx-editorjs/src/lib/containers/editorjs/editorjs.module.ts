@@ -9,6 +9,7 @@ import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../../types/injector';
 import EditorJS from '@editorjs/editorjs';
 import { NgxEditorJSService } from '../../services/editorjs.service';
 import { createModuleConfig } from '../../config/module-config';
+import { NgxEditorJSToolbarModule } from '../../components/toolbar/toolbar.module';
 
 /**
  * Factory function to return the EditorJS base class
@@ -23,9 +24,9 @@ export function createEditorJSInstance(editorjs: any) {
  * `.forRoot`
  */
 @NgModule({
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgxEditorJSToolbarModule],
   declarations: [NgxEditorJSComponent, NgxEditorJSDirective],
-  exports: [NgxEditorJSComponent, NgxEditorJSDirective],
+  exports: [NgxEditorJSComponent, NgxEditorJSDirective, NgxEditorJSToolbarModule],
   providers: [
     NgxEditorJSService,
     {

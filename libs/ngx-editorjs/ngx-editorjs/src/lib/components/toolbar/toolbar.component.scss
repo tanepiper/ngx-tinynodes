@@ -1,0 +1,42 @@
+.toolbar {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid transparent;
+
+
+  &.active {
+    border: 1px solid grey;
+  }
+
+  .group {
+    flex: 1;
+
+    &.button-group {
+      display: flex;
+      flex-direction: row;
+
+      button {
+        flex: 1;
+      }
+    }
+
+    &.info, &.info dl {
+      display: flex;
+      flex-direction: row;
+
+      dt {
+        font-weight: bold;
+      }
+
+      dd {
+        margin-inline-start: 20px;
+        margin-inline-end: 20px;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+
+}

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "types": ["node", "jest"],
     "paths": {
-      "@tinynodes/ngx-editorjs-plugins": ["dist/libs/ngx-editorjs-plugins"]
+      "@tinynodes/ngx-editorjs-plugins": ["libs/ngx-editorjs/ngx-editorjs-plugins", "dist/libs/ngx-editorjs-plugins"]
     }
   },
   "include": ["**/*.ts"]
