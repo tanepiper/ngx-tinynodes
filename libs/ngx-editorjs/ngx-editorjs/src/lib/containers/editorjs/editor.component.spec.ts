@@ -10,8 +10,7 @@ import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../../types/injector';
 import { createModuleConfig } from '../../..';
 import EditorJS from '@editorjs/editorjs';
 import { createEditorJSInstance } from './editorjs.module';
-import { NgxEditorJSPluginService } from '@tinynodes/ngx-editorjs-plugins';
-import { NgxEditorjsPluginsModule } from '../../../../../ngx-editorjs-plugins/src';
+import { NgxEditorJSPluginService, NgxEditorjsPluginsModule } from '@tinynodes/ngx-editorjs-plugins';
 
 describe('NgxEditorJSComponent', () => {
   @Component({

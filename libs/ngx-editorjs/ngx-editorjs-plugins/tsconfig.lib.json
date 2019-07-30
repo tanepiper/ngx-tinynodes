@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../dist/out-tsc/libs/ngx-editorjs-plugins",
+    "outDir": "../../../dist/out-tsc/libs/ngx-editorjs/ngx-editorjs-plugins",
     "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",
