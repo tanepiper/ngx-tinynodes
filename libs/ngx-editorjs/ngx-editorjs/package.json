@@ -11,8 +11,8 @@
     "@angular/common": "~8.1.2",
     "@angular/core": "~8.1.2",
     "@angular/material": "~8.1.2",
-    "@editorjs/editorjs": "~2.15.0",
-    "@tinynodes/ngx-editorjs-plugins": "~2.1.0"
+    "@editorjs/editorjs": "^2.15.0",
+    "@tinynodes/ngx-editorjs-plugins": "^2.1.0"
   },
   "license": "MIT",
   "readme": "README.md",
