@@ -3,18 +3,22 @@ import { async, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { MockNgZone } from '../../testing/ng-zone-mock';
-import { MockPlugin } from '../../testing/shared';
-import { NGX_EDITORJS_CONFIG } from '../types/config';
+import { MockEditorJS } from '../../testing/shared';
+import { FOR_ROOT_OPTIONS_TOKEN, NGX_EDITORJS_CONFIG } from '../types/config';
 import { NgxEditorJSService } from './editorjs.service';
 import {
   createPluginConfig,
   EDITOR_JS_TOOL_INJECTOR,
-  NgxEditorJSPluginService,
-  NgxPluginServiceModule,
+  NgxEditorjsPluginsModule,
+  NgxEditorJSPluginServiceModule,
   PLUGIN_CONFIG,
   PluginClasses,
   PluginTypes
 } from '@tinynodes/ngx-editorjs-plugins';
+import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
+import { createModuleConfig } from '../..';
+import EditorJS from '@editorjs/editorjs';
+import { createEditorJSInstance } from '../containers/editorjs/editorjs.module';
 
 describe('NgxEditorJSService', () => {
   let service: NgxEditorJSService;
@@ -24,24 +28,16 @@ describe('NgxEditorJSService', () => {
 
   beforeEach(async(() => {
     onDestroy$ = new Subject<boolean>();
+    console.log(NgxEditorjsPluginsModule, NgxEditorJSPluginServiceModule);
 
     TestBed.configureTestingModule({
-      imports: [ NgxPluginServiceModule ],
+      imports: [ NgxEditorjsPluginsModule ],
       providers: [
-        {
-          provide: NGX_EDITORJS_CONFIG,
-          useValue: {}
-        },
-        {
-          provide: EDITOR_JS_TOOL_INJECTOR,
-          useValue: MockPlugin,
-          multi: true
-        },
         {
           provide: PLUGIN_CONFIG,
           useValue: {
             key: 'plugin',
-            type: PluginTypes.Block,
+            type: 'block',
             pluginName: 'EditorJS Mock Block Plugin'
           },
           multi: true
@@ -52,16 +48,26 @@ describe('NgxEditorJSService', () => {
           deps: [ PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR ]
         },
         {
-          provide: NgxEditorJSPluginService,
-          useClass: NgxEditorJSPluginService
-        },
-        {
           provide: NgZone,
           useClass: MockNgZone
         },
         {
-          provide: NgxEditorJSService,
-          useClass: NgxEditorJSService
+          provide: FOR_ROOT_OPTIONS_TOKEN,
+          useValue: {}
+        },
+        {
+          provide: NGX_EDITORJS_CONFIG,
+          useFactory: createModuleConfig,
+          deps: [FOR_ROOT_OPTIONS_TOKEN]
+        },
+        {
+          provide: EDITORJS_MODULE_IMPORT,
+          useValue: EditorJS
+        },
+        {
+          provide: EditorJSInstance,
+          useFactory: createEditorJSInstance,
+          deps: [EDITORJS_MODULE_IMPORT]
         }
       ]
     }).compileComponents();

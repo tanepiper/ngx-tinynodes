@@ -16,27 +16,9 @@ export function createEditorJSConfig(inputConfig?: EditorConfig): EditorConfig {
     };
   }
   const editorJsConfig: EditorConfig = {};
-  if (inputConfig.autofocus) {
-    editorJsConfig.autofocus = inputConfig.autofocus;
-  }
-  if (inputConfig.data) {
-    editorJsConfig.data = inputConfig.data;
-  }
-  if (inputConfig.hideToolbar) {
-    editorJsConfig.hideToolbar = inputConfig.hideToolbar;
-  }
-  if (inputConfig.initialBlock) {
-    editorJsConfig.initialBlock = inputConfig.initialBlock;
-  }
-  if (inputConfig.minHeight) {
-    editorJsConfig.minHeight = inputConfig.minHeight;
-  }
-  if (inputConfig.placeholder) {
-    editorJsConfig.placeholder = inputConfig.placeholder;
-  }
-  if (inputConfig.sanitizer) {
-    editorJsConfig.sanitizer = inputConfig.sanitizer;
-  }
+  Object.entries(inputConfig).forEach(([key, val]) => {
+    editorJsConfig[key] = val;
+  });
   return {
     holder: inputConfig.holder || DEFAULT_HOLDER_ID,
     ...editorJsConfig

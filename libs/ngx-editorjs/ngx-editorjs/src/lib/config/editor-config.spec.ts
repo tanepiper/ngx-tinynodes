@@ -23,7 +23,6 @@ describe('createEditorJSConfig', () => {
       holder: 'test-holder',
       initialBlock: 'paragraph',
       minHeight: 300,
-      blockPlaceholder: 'Test',
       sanitizer: {}
     };
     const config = createEditorJSConfig(inputConfig);
@@ -43,7 +42,6 @@ describe('createEditorJSConfig', () => {
       hideToolbar: true,
       initialBlock: 'paragraph',
       minHeight: 300,
-      blockPlaceholder: 'Test',
       sanitizer: {}
     };
     const config = createEditorJSConfig(inputConfig);

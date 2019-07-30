@@ -25,7 +25,7 @@ export interface EditorJSInstanceConfig {
  * Default values for each internal map
  */
 export const MAP_DEFAULTS = [
-  ['lastChangeMap', { time: 0, blocks: [], version: EditorJS.version }],
+  ['lastChangeMap', { time: 0, blocks: [], version: typeof EditorJS !== 'undefined' && EditorJS.version || ''}],
   ['isReadyMap', false],
   ['hasSavedMap', false]
 ];

@@ -51,6 +51,7 @@
           <mat-label>Content Editor for {{ editorForm.value.pageName || 'Page Name' }}</mat-label>
           <mat-hint>Click on the editor to active it</mat-hint>
           <ngx-editorjs-mat-field
+            *ngIf="holder"
             [id]="holder"
             [holder]="holder"
             formCotrolName="pageEditor"
