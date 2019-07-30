@@ -7,25 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] 2019-07-30
 
-## Changed
+### Changed
 
 - Updated dependencies to latest version
 - Changed EditorJS plugin dependencies from `~` to `^` versioning for easier upgrading.
 
+###
+
+- No longer need to use extended `Header` component as main component fixed. [Link](https://github.com/editor-js/header/pull/25)
+
 ## [2.0.3] 2019-06-13
 
-## Added
+### Added
 
 - Support for block tools `inlineToolbar` option which displays in inline toolbar within blocks
 - Additional plugins added: Inline Code, Quote, Warning
 
-## Changed
+### Changed
 
 - Updated dependencies for new [EditorJS Release](https://github.com/codex-team/editor.js/blob/master/docs/CHANGELOG.md)
 
 ## [2.0.1] 2019-06-06
 
-## Changed
+### Changed
 
 - There is a [known issue](https://github.com/editor-js/header/pull/25) since upgrading to Angular 8 with the EditorJS Header Module.
   This causes the Header module to fail rendering when data is passed to it on initial setup. The Header itself still works
@@ -35,13 +39,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] 2019-06-05
 
-## Added
+### Added
 
 - `NgxEditorJSPluginService` returns to the plugin module as a requirement to avoid circular dependencies.
   This service now provides a more reliable way of handling plugins, each plugin is a module with two `multi` providers
   which are turned into a configuration map of plugins.
 
-## Changed
+### Changed
 
 - Plugins no longer provide an injectable class, all plugins are modules that provide
   injectable `EDITOR_JS_TOOL_INJECTOR` and `PLUGIN_CONFIG`. These provides are injected in the
@@ -50,13 +54,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.1] - 2019-05-15
 
-## Changed
+### Changed
 
 - Documentation updates
 
 ## [1.1.0] - 2019-05-13
 
-## Removed
+### Removed
 
 - Removed the NgxEditorJSPluginService from this module back to core
 
