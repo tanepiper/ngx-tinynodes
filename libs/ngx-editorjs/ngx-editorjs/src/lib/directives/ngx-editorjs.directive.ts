@@ -29,7 +29,7 @@ import { Block } from '../types/blocks';
  * <div id="my-editor" ngxEditorJS></div>
  */
 @Directive({
-  selector: '[ngxEditorJS]'
+  selector: '[ngxEditorJS]',
 })
 export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentInit {
   /**
@@ -303,7 +303,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     if (this.blocks && this.blocks.length > 0) {
       config.data = {
         time: Date.now(),
-        version: EditorJS.version,
+        version: typeof EditorJS !== 'undefined' && EditorJS.version || '',
         blocks: this.blocks
       };
     }

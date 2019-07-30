@@ -18,7 +18,7 @@
       "@tinynodes/*": ["libs/*"],
       "@tinynodes/ngx-editorjs": ["libs/ngx-editorjs/ngx-editorjs/src/index.ts"],
       "@tinynodes/ngx-editorjs-demo": ["libs/ngx-editorjs/ngx-editorjs-demo/src/index.ts"],
-      "@tinynodes/ngx-editorjs-plugins": ["libs/ngx-editorjs/ngx-editorjs-plugins/src/index.ts", "node_modules/"],
+      "@tinynodes/ngx-editorjs-plugins": ["libs/ngx-editorjs/ngx-editorjs-plugins/src/index.ts", "dist/libs/ngx-editorjs-plugins/"],
       "@tinynodes/ngx-editorjs-ngrx": ["libs/ngx-editorjs-ngrx/src/index.ts"],
       "@tinynodes/ngx-hideable-header-demo": ["libs/ngx-hideable-header-demo/src/index.ts"],
       "@tinynodes/ngx-tinynodes-core": ["libs/ngx-tinynodes-core/src/index.ts"],
@@ -26,5 +26,8 @@
     },
     "downlevelIteration": true
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "include": [
+    "libs/ngx-editorjs/ngx-editorjs-plugins/src/**/*.ts"
+  ]
 }

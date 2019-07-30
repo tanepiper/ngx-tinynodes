@@ -204,7 +204,7 @@ export class NgxEditorJSService {
   public update(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     const data = {
       time: (options.data && options.data.time) || Date.now(),
-      version: (options.data && options.data.version) || this.editorJs.version,
+      version: (options.data && options.data.version) || this.editorJs && this.editorJs.version || '',
       blocks: [...options.data.blocks]
     };
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).pipe(
@@ -244,7 +244,7 @@ export class NgxEditorJSService {
       this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({
         time: 0,
         blocks: [],
-        version: this.editorJs.version
+        version: this.editorJs && this.editorJs.version || ''
       });
     }
     return this.lastChangeMap[options.holder].pipe(

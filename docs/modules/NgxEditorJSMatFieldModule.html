@@ -216,8 +216,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.module.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">libs/ngx-editorjs/ngx-editorjs/src/lib/containers/editorjs-mat-field/editorjs-mat-field.module.ts:30</a></div>
                 </td>
             </tr>
 
@@ -283,13 +283,14 @@ import { NgxEditorJSMatFieldComponent } from &#x27;./editorjs-mat-field.componen
 import { FOR_ROOT_OPTIONS_TOKEN, NgxEditorJSModuleConfig } from &#x27;../../types/config&#x27;;
 import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
 import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
 
 /**
  * This module provides the &#x60;NgxEditorJSMatFieldComponent&#x60; along with exporting the
  * &#x60;NgxEditorJSComponentModule&#x60;. If using this module, Angular Material is required
  */
 @NgModule({
-  imports: [NgxEditorJSComponentModule, MatInputModule, MatFormFieldModule],
+  imports: [CommonModule, NgxEditorJSComponentModule, MatInputModule, MatFormFieldModule],
   declarations: [NgxEditorJSMatFieldComponent],
   exports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldComponent]
 })
@@ -330,6 +331,7 @@ export class NgxEditorJSMatFieldModule {
 
 
 
+                   
 
 
 

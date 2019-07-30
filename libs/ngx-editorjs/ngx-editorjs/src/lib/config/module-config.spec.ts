@@ -26,7 +26,6 @@ describe('createModuleConfig', () => {
       hideToolbar: true,
       initialBlock: 'paragraph',
       minHeight: 300,
-      blockPlaceholder: 'Test',
       sanitizer: {}
     };
     const config = createModuleConfig({ editorjs: inputConfig });
@@ -48,7 +47,6 @@ describe('createModuleConfig', () => {
       hideToolbar: true,
       initialBlock: 'paragraph',
       minHeight: 300,
-      blockPlaceholder: 'Test',
       sanitizer: {}
     };
     const config = createModuleConfig({ editorjs: inputConfig });

@@ -1,22 +1,29 @@
-import { Component, DebugElement, EventEmitter, NgZone, SimpleChanges } from '@angular/core';
+import { Component, DebugElement, EventEmitter, SimpleChanges } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { MockNgZone } from '../../testing/ng-zone-mock';
 import { MockEditorJS, MockPlugin } from '../../testing/shared';
-import { NgxEditorJSInstanceService } from '../services/editorjs-instance.service';
-import { NgxEditorJSService } from '../services/editorjs.service';
-import { NgxEditorJSPluginService } from '../services/plugins.service';
 import { Block } from '../types/blocks';
-import { NGX_EDITORJS_CONFIG } from '../types/config';
-import { UserPlugins } from '../types/plugins';
+import { FOR_ROOT_OPTIONS_TOKEN, NGX_EDITORJS_CONFIG } from '../types/config';
 import { NgxEditorJSDirective } from './ngx-editorjs.directive';
 import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
+import { createModuleConfig } from '../..';
+import EditorJS from '@editorjs/editorjs';
+import { createEditorJSInstance } from '../containers/editorjs/editorjs.module';
+import {
+  createPluginConfig, EDITOR_JS_TOOL_INJECTOR,
+  NgxEditorjsPluginsModule,
+  PLUGIN_CONFIG,
+  PluginClasses
+} from '@tinynodes/ngx-editorjs-plugins';
 
 describe('NgxEditorJSDirective', () => {
+
+  /**
+   * Mock Component for Tests
+   */
   @Component({
-    selector: 'ngx-mock-component',
     template: `
-      <div id="my-editor" ngxEditorJS></div>
+      <div [holder]="'my-editor'" ngxEditorJS></div>
     `
   })
   class MockComponent {
@@ -39,45 +46,45 @@ describe('NgxEditorJSDirective', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NgxEditorJSDirective, MockComponent],
+      imports: [ NgxEditorjsPluginsModule ],
+      declarations: [ NgxEditorJSDirective, MockComponent ],
       providers: [
         {
-          provide: NGX_EDITORJS_CONFIG,
+          provide: PLUGIN_CONFIG,
+          useValue: {
+            key: 'plugin',
+            type: 'block',
+            pluginName: 'EditorJS Mock Block Plugin'
+          },
+          multi: true
+        },
+        {
+          provide: EDITOR_JS_TOOL_INJECTOR,
+          useValue: MockPlugin,
+          multi: true
+        },
+        {
+          provide: PluginClasses,
+          useFactory: createPluginConfig,
+          deps: [ PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR ]
+        },
+        {
+          provide: FOR_ROOT_OPTIONS_TOKEN,
           useValue: {}
         },
         {
-          provide: UserPlugins,
-          useValue: {
-            paragraph: new MockPlugin(),
-            header: new MockPlugin()
-          }
-        },
-        {
-          provide: NgxEditorJSPluginService,
-          useClass: NgxEditorJSPluginService
-        },
-        {
-          provide: NgxEditorJSInstanceService,
-          useClass: NgxEditorJSInstanceService
-        },
-        {
-          provide: NgZone,
-          useClass: MockNgZone
-        },
-        {
-          provide: NgxEditorJSService,
-          useClass: NgxEditorJSService
+          provide: NGX_EDITORJS_CONFIG,
+          useFactory: createModuleConfig,
+          deps: [ FOR_ROOT_OPTIONS_TOKEN ]
         },
         {
           provide: EDITORJS_MODULE_IMPORT,
-          useValue: MockEditorJS
+          useValue: EditorJS
         },
         {
           provide: EditorJSInstance,
-          useFactory: function create(editorjs: any) {
-            return editorjs;
-          },
-          deps: [EDITORJS_MODULE_IMPORT]
+          useFactory: createEditorJSInstance,
+          deps: [ EDITORJS_MODULE_IMPORT ]
         }
       ]
     }).compileComponents();
@@ -98,10 +105,6 @@ describe('NgxEditorJSDirective', () => {
       expect(editor).toBeInstanceOf(MockEditorJS);
       done();
     });
-  });
-
-  it('should provide the service instance', () => {
-    expect(directive.service).toBeInstanceOf(NgxEditorJSService);
   });
 
   it('should update the service when changes are detected', () => {

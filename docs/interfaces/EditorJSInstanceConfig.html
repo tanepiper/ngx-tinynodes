@@ -255,7 +255,7 @@ export interface EditorJSInstanceConfig {
  * Default values for each internal map
  */
 export const MAP_DEFAULTS &#x3D; [
-  [&#x27;lastChangeMap&#x27;, { time: 0, blocks: [], version: EditorJS.version }],
+  [&#x27;lastChangeMap&#x27;, { time: 0, blocks: [], version: typeof EditorJS !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; EditorJS.version || &#x27;&#x27;}],
   [&#x27;isReadyMap&#x27;, false],
   [&#x27;hasSavedMap&#x27;, false]
 ];
@@ -335,6 +335,7 @@ export interface EditorJSClass&lt;T &#x3D; EditorJS&gt; extends Function {
 </div>
 
 
+                   
 
 
 
