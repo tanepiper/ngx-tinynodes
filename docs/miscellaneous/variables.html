@@ -44,6 +44,7 @@
 
 
 
+                   
 
 <ol class="breadcrumb">
   <li>Miscellaneous</li>
@@ -522,7 +523,7 @@
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>[
-  [&#x27;lastChangeMap&#x27;, { time: 0, blocks: [], version: EditorJS.version }],
+  [&#x27;lastChangeMap&#x27;, { time: 0, blocks: [], version: typeof EditorJS !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; EditorJS.version || &#x27;&#x27;}],
   [&#x27;isReadyMap&#x27;, false],
   [&#x27;hasSavedMap&#x27;, false]
 ]</code>
