@@ -120,34 +120,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                             </li>
                             <li class="link">
-                                <a href="modules/NgxEditorJSDemoMaterialModule.html" data-type="entity-link">NgxEditorJSDemoMaterialModule</a>
-                            </li>
-                            <li class="link">
-                                <a href="modules/NgxEditorJSDemoMaterialModule.html" data-type="entity-link">NgxEditorJSDemoMaterialModule</a>
-                            </li>
-                            <li class="link">
-                                <a href="modules/NgxEditorjsDemoModule.html" data-type="entity-link">NgxEditorjsDemoModule</a>
-                                    <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-NgxEditorjsDemoModule-42f693847e71185fee7f7fc40a7a1501"' : 'data-target="#xs-components-links-module-NgxEditorjsDemoModule-42f693847e71185fee7f7fc40a7a1501"' }>
-                                            <span class="icon ion-md-cog"></span>
-                                            <span>Components</span>
-                                            <span class="icon ion-ios-arrow-down"></span>
-                                        </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxEditorjsDemoModule-42f693847e71185fee7f7fc40a7a1501"' :
-                                            'id="xs-components-links-module-NgxEditorjsDemoModule-42f693847e71185fee7f7fc40a7a1501"' }>
-                                            <li class="link">
-                                                <a href="components/NgxEditorJSDemoHomeComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxEditorJSDemoHomeComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/PageContainerComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">PageContainerComponent</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                            </li>
-                            <li class="link">
                                 <a href="modules/NgxEditorJSMatFieldModule.html" data-type="entity-link">NgxEditorJSMatFieldModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
@@ -193,24 +165,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/NgxTinynodesComponentsModule.html" data-type="entity-link">NgxTinynodesComponentsModule</a>
                             </li>
                             <li class="link">
-                                <a href="modules/NgxTinynodesMaterialFormFieldDemo.html" data-type="entity-link">NgxTinynodesMaterialFormFieldDemo</a>
-                                    <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-NgxTinynodesMaterialFormFieldDemo-6da66011f6264f620b356553286eb801"' : 'data-target="#xs-components-links-module-NgxTinynodesMaterialFormFieldDemo-6da66011f6264f620b356553286eb801"' }>
-                                            <span class="icon ion-md-cog"></span>
-                                            <span>Components</span>
-                                            <span class="icon ion-ios-arrow-down"></span>
-                                        </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-NgxTinynodesMaterialFormFieldDemo-6da66011f6264f620b356553286eb801"' :
-                                            'id="xs-components-links-module-NgxTinynodesMaterialFormFieldDemo-6da66011f6264f620b356553286eb801"' }>
-                                            <li class="link">
-                                                <a href="components/NgxTinynodesMaterialFormFieldDemoComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">NgxTinynodesMaterialFormFieldDemoComponent</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                            </li>
-                            <li class="link">
                                 <a href="modules/NgxTinynodesMatJsonOutputModule.html" data-type="entity-link">NgxTinynodesMatJsonOutputModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
@@ -245,32 +199,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             </li>
                                         </ul>
                                     </li>
-                            </li>
-                            <li class="link">
-                                <a href="modules/PageStoreModule.html" data-type="entity-link">PageStoreModule</a>
-                                <li class="chapter inner">
-                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-PageStoreModule-86d90c3a0ae357c2b13bbee8924eaaf0"' : 'data-target="#xs-injectables-links-module-PageStoreModule-86d90c3a0ae357c2b13bbee8924eaaf0"' }>
-                                        <span class="icon ion-md-arrow-round-down"></span>
-                                        <span>Injectables</span>
-                                        <span class="icon ion-ios-arrow-down"></span>
-                                    </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-PageStoreModule-86d90c3a0ae357c2b13bbee8924eaaf0"' :
-                                        'id="xs-injectables-links-module-PageStoreModule-86d90c3a0ae357c2b13bbee8924eaaf0"' }>
-                                        <li class="link">
-                                            <a href="injectables/PagesQuery.html"
-                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PagesQuery</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="injectables/PagesService.html"
-                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PagesService</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="injectables/PagesStore.html"
-                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>PagesStore</a>
-                                        </li>
-                                    </ul>
-                                </li>
                             </li>
                             <li class="link">
                                 <a href="modules/PluginCodeModule.html" data-type="entity-link">PluginCodeModule</a>
@@ -313,35 +241,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                 </ul>
                 </li>
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#classes-links"' :
-                            'data-target="#xs-classes-links"' }>
-                            <span class="icon ion-ios-paper"></span>
-                            <span>Classes</span>
-                            <span class="icon ion-ios-arrow-down"></span>
-                        </div>
-                        <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
-                            <li class="link">
-                                <a href="classes/MockEditorJS.html" data-type="entity-link">MockEditorJS</a>
-                            </li>
-                            <li class="link">
-                                <a href="classes/MockPlugin.html" data-type="entity-link">MockPlugin</a>
-                            </li>
-                        </ul>
-                    </li>
-                        <li class="chapter">
-                            <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#injectables-links"' :
-                                'data-target="#xs-injectables-links"' }>
-                                <span class="icon ion-md-arrow-round-down"></span>
-                                <span>Injectables</span>
-                                <span class="icon ion-ios-arrow-down"></span>
-                            </div>
-                            <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
-                                <li class="link">
-                                    <a href="injectables/MockNgZone.html" data-type="entity-link">MockNgZone</a>
-                                </li>
-                            </ul>
-                        </li>
                     <li class="chapter">
                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#interfaces-links"' :
                             'data-target="#xs-interfaces-links"' }>
@@ -414,15 +313,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/NgxTinynodesMatFieldComponent.html" data-type="entity-link">NgxTinynodesMatFieldComponent</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Page.html" data-type="entity-link">Page</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/PageBlock.html" data-type="entity-link">PageBlock</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/PagesState.html" data-type="entity-link">PagesState</a>
-                            </li>
-                            <li class="link">
                                 <a href="interfaces/Paragraph.html" data-type="entity-link">Paragraph</a>
                             </li>
                             <li class="link">
@@ -439,9 +329,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/SavedMap.html" data-type="entity-link">SavedMap</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/Tag.html" data-type="entity-link">Tag</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ToolSettingsMap.html" data-type="entity-link">ToolSettingsMap</a>
