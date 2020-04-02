@@ -11,7 +11,7 @@ import {
   InjectorApiCallOptions,
   InjectorApiCallResponse,
   InjectorMethodOption,
-  MAP_DEFAULTS,
+  MAP_DEFAULTS
 } from '../types/injector';
 import { ChangeMap, EditorMap, ReadyMap, SavedMap } from '../types/maps';
 
@@ -30,7 +30,7 @@ import { ChangeMap, EditorMap, ReadyMap, SavedMap } from '../types/maps';
  * for any call to be made to EditorJS that matches it's API.
  */
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class NgxEditorJSService {
   /**
@@ -86,7 +86,7 @@ export class NgxEditorJSService {
     const editorConfig: EditorConfig = {
       ...this.config.editorjs,
       ...options.config,
-      tools: this.getTools(options.excludeTools),
+      tools: this.getTools(options.excludeTools)
     };
 
     // Bind the editor onChange method from the config, otherwise use the local createOnChange method
@@ -134,7 +134,7 @@ export class NgxEditorJSService {
    */
   public apiCall<T = any>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
     return this.getEditor(options).pipe(
-      switchMap(async (editor) => {
+      switchMap(async editor => {
         let result: InjectorApiCallResponse<T> = { ...options, result: undefined };
 
         await this.zone.runOutsideAngular(async () => {
@@ -152,7 +152,7 @@ export class NgxEditorJSService {
             if (!methodCall || (methodCall && !methodCall.then)) {
               result = {
                 ...result,
-                result: typeof methodCall === 'undefined' ? {} : methodCall,
+                result: typeof methodCall === 'undefined' ? {} : methodCall
               };
             } else {
               const r = await methodCall;
@@ -185,7 +185,7 @@ export class NgxEditorJSService {
    */
   public clear(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' }).pipe(
-      switchMap((response) => (options.skipSave ? of(response) : this.save(options)))
+      switchMap(response => (options.skipSave ? of(response) : this.save(options)))
     );
   }
 
@@ -199,10 +199,10 @@ export class NgxEditorJSService {
     const data = {
       time: (options.data && options.data.time) || Date.now(),
       version: (options.data && options.data.version) || (this.editorJs && this.editorJs.version) || '',
-      blocks: [...options.data.blocks],
+      blocks: [...options.data.blocks]
     };
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).pipe(
-      switchMap((response) => (options.skipSave ? of(response) : this.save(options)))
+      switchMap(response => (options.skipSave ? of(response) : this.save(options)))
     );
   }
 
@@ -214,7 +214,7 @@ export class NgxEditorJSService {
     if (!this.editorMap[options.holder]) {
       this.editorMap[options.holder] = new BehaviorSubject<EditorJS | undefined>(undefined);
     }
-    return this.editorMap[options.holder].pipe(filter((editor) => typeof editor !== 'undefined'));
+    return this.editorMap[options.holder].pipe(filter(editor => typeof editor !== 'undefined'));
   }
 
   /**
@@ -237,12 +237,12 @@ export class NgxEditorJSService {
       this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({
         time: 0,
         blocks: [],
-        version: (this.editorJs && this.editorJs.version) || '',
+        version: (this.editorJs && this.editorJs.version) || ''
       });
     }
     return this.lastChangeMap[options.holder].pipe(
       distinctUntilChanged((a, b) => (b && b.time && b.time === 0) || (a && b && a.time && a.time === b.time)),
-      filter((hasChanged) => typeof hasChanged !== 'undefined')
+      filter(hasChanged => typeof hasChanged !== 'undefined')
     );
   }
 
@@ -264,7 +264,7 @@ export class NgxEditorJSService {
   public destroyInstance(options: InjectorMethodOption): void {
     this.getEditor(options)
       .pipe(take(1))
-      .subscribe((editor) => {
+      .subscribe(editor => {
         this.zone.runOutsideAngular(() => {
           editor.destroy();
           this.zone.run(() => {
@@ -279,7 +279,7 @@ export class NgxEditorJSService {
    * Call this to destroy all subscriptions within the service
    */
   public destroy() {
-    Object.keys(this.editorMap).forEach((holder) => this.destroyInstance({ holder }));
+    Object.keys(this.editorMap).forEach(holder => this.destroyInstance({ holder }));
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
   }

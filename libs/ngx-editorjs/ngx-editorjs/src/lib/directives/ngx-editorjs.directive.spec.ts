@@ -14,7 +14,7 @@ import {
   EDITOR_JS_TOOL_INJECTOR,
   NgxEditorjsPluginsModule,
   PLUGIN_CONFIG,
-  PluginClasses,
+  PluginClasses
 } from '@tinynodes/ngx-editorjs-plugins';
 
 describe('NgxEditorJSDirective', () => {
@@ -22,7 +22,9 @@ describe('NgxEditorJSDirective', () => {
    * Mock Component for Tests
    */
   @Component({
-    template: ` <div [holder]="'my-editor'" ngxEditorJS></div> `,
+    template: `
+      <div [holder]="'my-editor'" ngxEditorJS></div>
+    `
   })
   class MockComponent {
     change = new EventEmitter<any>();
@@ -37,9 +39,9 @@ describe('NgxEditorJSDirective', () => {
     {
       type: 'test',
       data: {
-        text: 'test',
-      },
-    },
+        text: 'test'
+      }
+    }
   ];
 
   beforeEach(async(() => {
@@ -52,39 +54,39 @@ describe('NgxEditorJSDirective', () => {
           useValue: {
             key: 'plugin',
             type: 'block',
-            pluginName: 'EditorJS Mock Block Plugin',
+            pluginName: 'EditorJS Mock Block Plugin'
           },
-          multi: true,
+          multi: true
         },
         {
           provide: EDITOR_JS_TOOL_INJECTOR,
           useValue: MockPlugin,
-          multi: true,
+          multi: true
         },
         {
           provide: PluginClasses,
           useFactory: createPluginConfig,
-          deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR],
+          deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR]
         },
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
-          useValue: {},
+          useValue: {}
         },
         {
           provide: NGX_EDITORJS_CONFIG,
           useFactory: createModuleConfig,
-          deps: [FOR_ROOT_OPTIONS_TOKEN],
+          deps: [FOR_ROOT_OPTIONS_TOKEN]
         },
         {
           provide: EDITORJS_MODULE_IMPORT,
-          useValue: EditorJS,
+          useValue: EditorJS
         },
         {
           provide: EditorJSInstance,
           useFactory: createEditorJSInstance,
-          deps: [EDITORJS_MODULE_IMPORT],
-        },
-      ],
+          deps: [EDITORJS_MODULE_IMPORT]
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockComponent);
@@ -98,8 +100,8 @@ describe('NgxEditorJSDirective', () => {
     expect(directive).toBeDefined();
   });
 
-  it('should provide the editor instance', (done) => {
-    directive.editor.subscribe((editor) => {
+  it('should provide the editor instance', done => {
+    directive.editor.subscribe(editor => {
       expect(editor).toBeInstanceOf(MockEditorJS);
       done();
     });
@@ -113,8 +115,8 @@ describe('NgxEditorJSDirective', () => {
         firstChange: false,
         previousValue: [],
         currentValue: blocks,
-        isFirstChange: () => false,
-      },
+        isFirstChange: () => false
+      }
     };
     directive.ngOnChanges(changes);
     expect(directive.service.update).toHaveBeenCalled();
@@ -128,15 +130,15 @@ describe('NgxEditorJSDirective', () => {
         firstChange: false,
         previousValue: false,
         currentValue: true,
-        isFirstChange: () => false,
-      },
+        isFirstChange: () => false
+      }
     };
     directive.autofocus = true;
     directive.ngOnChanges(changes);
 
     expect(directive.createEditor).toHaveBeenCalledWith({
       autofocus: true,
-      holder: 'my-editor',
+      holder: 'my-editor'
     });
   });
 });

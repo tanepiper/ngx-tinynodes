@@ -12,7 +12,9 @@ import { NgxEditorjsPluginsModule } from '@tinynodes/ngx-editorjs-plugins';
 
 describe('NgxEditorJSComponent', () => {
   @Component({
-    template: ` <ngx-editorjs [holder]="'test'"></ngx-editorjs> `,
+    template: `
+      <ngx-editorjs [holder]="'test'"></ngx-editorjs>
+    `
   })
   class TestHostComponent {
     @ViewChild(NgxEditorJSComponent)
@@ -26,27 +28,27 @@ describe('NgxEditorJSComponent', () => {
       providers: [
         {
           provide: NgZone,
-          useClass: MockNgZone,
+          useClass: MockNgZone
         },
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
-          useValue: {},
+          useValue: {}
         },
         {
           provide: NGX_EDITORJS_CONFIG,
           useFactory: createModuleConfig,
-          deps: [FOR_ROOT_OPTIONS_TOKEN],
+          deps: [FOR_ROOT_OPTIONS_TOKEN]
         },
         {
           provide: EDITORJS_MODULE_IMPORT,
-          useValue: EditorJS,
+          useValue: EditorJS
         },
         {
           provide: EditorJSInstance,
           useFactory: createEditorJSInstance,
-          deps: [EDITORJS_MODULE_IMPORT],
-        },
-      ],
+          deps: [EDITORJS_MODULE_IMPORT]
+        }
+      ]
     }).compileComponents();
   }));
 

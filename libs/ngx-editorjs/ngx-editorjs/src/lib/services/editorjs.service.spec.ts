@@ -10,7 +10,7 @@ import {
   EDITOR_JS_TOOL_INJECTOR,
   NgxEditorjsPluginsModule,
   PLUGIN_CONFIG,
-  PluginClasses,
+  PluginClasses
 } from '@tinynodes/ngx-editorjs-plugins';
 import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
 import { createModuleConfig } from '../..';
@@ -34,38 +34,38 @@ describe('NgxEditorJSService', () => {
           useValue: {
             key: 'plugin',
             type: 'block',
-            pluginName: 'EditorJS Mock Block Plugin',
+            pluginName: 'EditorJS Mock Block Plugin'
           },
-          multi: true,
+          multi: true
         },
         {
           provide: PluginClasses,
           useFactory: createPluginConfig,
-          deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR],
+          deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR]
         },
         {
           provide: NgZone,
-          useClass: MockNgZone,
+          useClass: MockNgZone
         },
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
-          useValue: {},
+          useValue: {}
         },
         {
           provide: NGX_EDITORJS_CONFIG,
           useFactory: createModuleConfig,
-          deps: [FOR_ROOT_OPTIONS_TOKEN],
+          deps: [FOR_ROOT_OPTIONS_TOKEN]
         },
         {
           provide: EDITORJS_MODULE_IMPORT,
-          useValue: EditorJS,
+          useValue: EditorJS
         },
         {
           provide: EditorJSInstance,
           useFactory: createEditorJSInstance,
-          deps: [EDITORJS_MODULE_IMPORT],
-        },
-      ],
+          deps: [EDITORJS_MODULE_IMPORT]
+        }
+      ]
     }).compileComponents();
 
     service = TestBed.get(NgxEditorJSService);
@@ -81,15 +81,15 @@ describe('NgxEditorJSService', () => {
     expect(editor).toBeDefined();
   });
 
-  it('should create a ready instance', (done) => {
+  it('should create a ready instance', done => {
     service
       .isReady({ holder })
       .pipe(
         distinctUntilChanged(),
-        filter((isReady) => isReady),
+        filter(isReady => isReady),
         takeUntil(onDestroy$)
       )
-      .subscribe((isReady) => {
+      .subscribe(isReady => {
         expect(isReady).toBeTruthy();
         done();
       });
@@ -97,15 +97,15 @@ describe('NgxEditorJSService', () => {
     service.createInstance({ config: { holder } });
   });
 
-  it('should trigger a change on update', (done) => {
+  it('should trigger a change on update', done => {
     service
       .lastChange({ holder })
       .pipe(
         distinctUntilChanged(),
-        filter((hasChanged) => hasChanged.time !== 0),
+        filter(hasChanged => hasChanged.time !== 0),
         takeUntil(onDestroy$)
       )
-      .subscribe((hasChanged) => {
+      .subscribe(hasChanged => {
         expect(hasChanged).toBeTruthy();
         done();
       });
@@ -114,11 +114,11 @@ describe('NgxEditorJSService', () => {
     service.update({ holder, data: { blocks: [{ type: 'test', data: { text: 'Test' } }] } }).subscribe();
   });
 
-  it('should trigger a change on save', (done) => {
+  it('should trigger a change on save', done => {
     service
       .lastChange({ holder })
       .pipe(takeUntil(onDestroy$))
-      .subscribe((hasChanged) => {
+      .subscribe(hasChanged => {
         expect(hasChanged).toBeDefined();
         done();
       });

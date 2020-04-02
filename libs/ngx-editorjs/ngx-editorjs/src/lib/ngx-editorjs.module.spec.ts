@@ -8,11 +8,13 @@ describe('NgxEditorJSModule', () => {
 
   it('should create from a module import', () => {
     TestBed.configureTestingModule({
-      imports: [ NgxEditorJSModule, NgxEditorjsPluginsModule ],
-      providers: [ {
-        provide: FOR_ROOT_OPTIONS_TOKEN,
-        value: {}
-      } ]
+      imports: [NgxEditorJSModule, NgxEditorjsPluginsModule],
+      providers: [
+        {
+          provide: FOR_ROOT_OPTIONS_TOKEN,
+          value: {}
+        }
+      ]
     }).compileComponents();
 
     module = TestBed.get(NgxEditorJSModule);
@@ -22,7 +24,7 @@ describe('NgxEditorJSModule', () => {
 
   it('should create from a forRoot import', () => {
     TestBed.configureTestingModule({
-      imports: [ NgxEditorJSModule.forRoot(), NgxEditorjsPluginsModule ]
+      imports: [NgxEditorJSModule.forRoot(), NgxEditorjsPluginsModule]
     }).compileComponents();
 
     expect(NgxEditorJSModule).toBeDefined();
