@@ -171,16 +171,16 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { NgxTinynodesMatJsonOutputComponent } from &#x27;./mat-json-output.component&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { MatButtonModule, MatCardModule } from &#x27;@angular/material&#x27;;
 import { NgxJsonViewerModule } from &#x27;ngx-json-viewer&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 
 @NgModule({
   imports: [CommonModule, MatCardModule, MatButtonModule, NgxJsonViewerModule],
-  declarations: [ NgxTinynodesMatJsonOutputComponent ],
-  exports: [ NgxTinynodesMatJsonOutputComponent ]
+  declarations: [NgxTinynodesMatJsonOutputComponent],
+  exports: [NgxTinynodesMatJsonOutputComponent],
 })
-export class NgxTinynodesMatJsonOutputModule {
-}
+export class NgxTinynodesMatJsonOutputModule {}
 </code></pre>
     </div>
 </div>
@@ -217,6 +217,7 @@ export class NgxTinynodesMatJsonOutputModule {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
             var COMPODOC_CURRENT_PAGE_URL = 'NgxTinynodesMatJsonOutputModule.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
