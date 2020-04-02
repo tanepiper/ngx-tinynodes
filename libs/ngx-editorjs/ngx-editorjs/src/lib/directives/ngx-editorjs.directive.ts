@@ -9,7 +9,7 @@ import {
   OnChanges,
   OnDestroy,
   Output,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import EditorJS, { EditorConfig, OutputData, SanitizerConfig } from '@editorjs/editorjs';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -199,7 +199,7 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     await this.service.createInstance({
       config,
       excludeTools: this.excludeTools || excludeTools,
-      autoSave: this.autosave || 0
+      autoSave: this.autosave || 0,
     });
     this.cd.markForCheck();
   }
@@ -234,8 +234,8 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
           'minHeight',
           'blockPlaceholder',
           'sanitizer',
-          'includeTools'
-        ].find(key => {
+          'includeTools',
+        ].find((key) => {
           return changesKeys.includes(key);
         })
       ) {
@@ -259,21 +259,21 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
     this.service
       .isReady({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(isReady => {
+      .subscribe((isReady) => {
         this.isReady.emit(isReady);
       });
 
     this.service
       .lastChange({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(change => {
+      .subscribe((change) => {
         this.hasChanged.emit(change);
       });
 
     this.service
       .hasSaved({ holder: this.holder })
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(saved => {
+      .subscribe((saved) => {
         this.hasSaved.next(saved);
       });
   }
@@ -298,13 +298,13 @@ export class NgxEditorJSDirective implements OnDestroy, OnChanges, AfterContentI
       initialBlock: this.initialBlock,
       placeholder: this.blockPlaceholder,
       minHeight: this.minHeight,
-      sanitizer: this.sanitizer
+      sanitizer: this.sanitizer,
     });
     if (this.blocks && this.blocks.length > 0) {
       config.data = {
         time: Date.now(),
-        version: typeof EditorJS !== 'undefined' && EditorJS.version || '',
-        blocks: this.blocks
+        version: (typeof EditorJS !== 'undefined' && EditorJS.version) || '',
+        blocks: this.blocks,
       };
     }
     return config;

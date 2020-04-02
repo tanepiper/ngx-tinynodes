@@ -13,7 +13,7 @@ import { NgxEditorJSMatFieldModule } from './containers/editorjs-mat-field/edito
  */
 @NgModule({
   imports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldModule],
-  exports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldModule]
+  exports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldModule],
 })
 export class NgxEditorJSModule {
   constructor(
@@ -33,9 +33,9 @@ export class NgxEditorJSModule {
       providers: [
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
-          useValue: config
-        }
-      ]
+          useValue: config,
+        },
+      ],
     };
   }
 }

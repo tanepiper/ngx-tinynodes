@@ -128,13 +128,13 @@
           "options": {
             "tsConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.lib.json",
             "project": "libs/ngx-editorjs/ngx-editorjs-plugins/ng-package.json"
-          }
-        ,          "configurations": {
+          },
+          "configurations": {
             "production": {
               "tsConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.lib.prod.json"
             }
           }
-},
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -168,13 +168,13 @@
           "options": {
             "tsConfig": "libs/ngx-editorjs/ngx-editorjs/tsconfig.lib.json",
             "project": "libs/ngx-editorjs/ngx-editorjs/ng-package.json"
-          }
-        ,          "configurations": {
+          },
+          "configurations": {
             "production": {
               "tsConfig": "libs/ngx-editorjs/ngx-editorjs/tsconfig.lib.prod.json"
             }
           }
-},
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -236,13 +236,13 @@
           "options": {
             "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.lib.json",
             "project": "libs/ngx-editorjs-ngrx/ng-package.json"
-          }
-        ,          "configurations": {
+          },
+          "configurations": {
             "production": {
               "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.lib.prod.json"
             }
           }
-},
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {

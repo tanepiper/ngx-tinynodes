@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [CommonModule, NgxEditorJSComponentModule, MatInputModule, MatFormFieldModule],
   declarations: [NgxEditorJSMatFieldComponent],
-  exports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldComponent]
+  exports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldComponent],
 })
 export class NgxEditorJSMatFieldModule {
   constructor(
@@ -33,9 +33,9 @@ export class NgxEditorJSMatFieldModule {
       providers: [
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
-          useValue: config
-        }
-      ]
+          useValue: config,
+        },
+      ],
     };
   }
 }

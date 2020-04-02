@@ -4,9 +4,6 @@
     "outDir": "../../dist/out-tsc/apps/ngx-tinynodes",
     "types": []
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
+  "files": ["src/main.ts", "src/polyfills.ts"],
   "include": ["**/*.d.ts"]
 }
