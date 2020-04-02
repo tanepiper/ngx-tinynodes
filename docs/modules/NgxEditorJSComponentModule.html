@@ -318,7 +318,7 @@ which sets some defaults, or use the provided defaults.</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://angular.io/api/core/ModuleWithProviders" target="_blank" >ModuleWithProviders</a></code>
+                        <b>Returns : </b>        <code><a href="../components/NgxEditorJSComponent.html" target="_self" >ModuleWithProviders&lt;NgxEditorJSComponentModule&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -365,23 +365,23 @@ export function createEditorJSInstance(editorjs: any) {
     NgxEditorJSService,
     {
       provide: FOR_ROOT_OPTIONS_TOKEN,
-      useValue: {}
+      useValue: {},
     },
     {
       provide: NGX_EDITORJS_CONFIG,
       useFactory: createModuleConfig,
-      deps: [FOR_ROOT_OPTIONS_TOKEN]
+      deps: [FOR_ROOT_OPTIONS_TOKEN],
     },
     {
       provide: EDITORJS_MODULE_IMPORT,
-      useValue: EditorJS
+      useValue: EditorJS,
     },
     {
       provide: EditorJSInstance,
       useFactory: createEditorJSInstance,
-      deps: [EDITORJS_MODULE_IMPORT]
-    }
-  ]
+      deps: [EDITORJS_MODULE_IMPORT],
+    },
+  ],
 })
 export class NgxEditorJSComponentModule {
   constructor(
@@ -395,15 +395,15 @@ export class NgxEditorJSComponentModule {
    * which sets some defaults, or use the provided defaults.
    * @param config The optional configuration to pass
    */
-  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders {
+  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders&lt;NgxEditorJSComponentModule&gt; {
     return {
       ngModule: NgxEditorJSComponentModule,
       providers: [
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
-          useValue: config
-        }
-      ]
+          useValue: config,
+        },
+      ],
     };
   }
 }
@@ -443,6 +443,7 @@ export class NgxEditorJSComponentModule {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
             var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSComponentModule.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

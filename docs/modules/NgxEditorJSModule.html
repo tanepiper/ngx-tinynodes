@@ -249,7 +249,7 @@ which sets some defaults, or use the provided defaults.</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://angular.io/api/core/ModuleWithProviders" target="_blank" >ModuleWithProviders</a></code>
+                        <b>Returns : </b>    <code>ModuleWithProviders&lt;NgxEditorJSModule&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -293,7 +293,7 @@ export class NgxEditorJSModule {
    * which sets some defaults, or use the provided defaults.
    * @param config The optional configuration to pass
    */
-  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders {
+  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders&lt;NgxEditorJSModule&gt; {
     return {
       ngModule: NgxEditorJSModule,
       providers: [
@@ -341,6 +341,7 @@ export class NgxEditorJSModule {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
             var COMPODOC_CURRENT_PAGE_URL = 'NgxEditorJSModule.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

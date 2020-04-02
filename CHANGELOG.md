@@ -4,7 +4,7 @@
 This changelog is related to the overall site. You can also find changelogs for libraries <a href="additional-documentation/tinynodes-library-docs.html">under the library docs</a>
 </div>
 
-## UNRELEASED
+## 30th July 2019
 
 Today `@tinynodes/ngx-editorjs@3.0.0` has been released, along with `@tinynodes/ngx-editorjs-plugins@2.0.0`
 
