@@ -19,7 +19,7 @@ describe('NgxEditorJSComponent', () => {
     `
   })
   class TestHostComponent {
-    @ViewChild(NgxEditorJSComponent, { static: false })
+    @ViewChild(NgxEditorJSComponent)
     childComponent: NgxEditorJSComponent;
   }
 

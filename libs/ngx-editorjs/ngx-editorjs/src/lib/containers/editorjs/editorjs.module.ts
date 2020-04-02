@@ -60,7 +60,7 @@ export class NgxEditorJSComponentModule {
    * which sets some defaults, or use the provided defaults.
    * @param config The optional configuration to pass
    */
-  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders {
+  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders<NgxEditorJSComponentModule> {
     return {
       ngModule: NgxEditorJSComponentModule,
       providers: [

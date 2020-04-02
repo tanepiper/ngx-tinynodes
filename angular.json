@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/apps/ngx-tinynodes",
             "index": "apps/ngx-tinynodes/src/index.html",
             "main": "apps/ngx-tinynodes/src/main.ts",
@@ -45,6 +46,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -79,7 +84,8 @@
           "options": {
             "jestConfig": "apps/ngx-tinynodes/jest.config.js",
             "tsConfig": "apps/ngx-tinynodes/tsconfig.spec.json",
-            "setupFile": "apps/ngx-tinynodes/src/test-setup.ts"
+            "setupFile": "apps/ngx-tinynodes/src/test-setup.ts",
+            "passWithNoTests": true
           }
         }
       }
@@ -123,7 +129,12 @@
             "tsConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.lib.json",
             "project": "libs/ngx-editorjs/ngx-editorjs-plugins/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.lib.prod.json"
+            }
+          }
+},
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -139,7 +150,8 @@
           "options": {
             "jestConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/jest.config.js",
             "tsConfig": "libs/ngx-editorjs/ngx-editorjs-plugins/tsconfig.spec.json",
-            "setupFile": "libs/ngx-editorjs/ngx-editorjs-plugins/src/test-setup.ts"
+            "setupFile": "libs/ngx-editorjs/ngx-editorjs-plugins/src/test-setup.ts",
+            "passWithNoTests": true
           }
         }
       },
@@ -157,7 +169,12 @@
             "tsConfig": "libs/ngx-editorjs/ngx-editorjs/tsconfig.lib.json",
             "project": "libs/ngx-editorjs/ngx-editorjs/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "libs/ngx-editorjs/ngx-editorjs/tsconfig.lib.prod.json"
+            }
+          }
+},
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -173,7 +190,8 @@
           "options": {
             "jestConfig": "libs/ngx-editorjs/ngx-editorjs/jest.config.js",
             "tsConfig": "libs/ngx-editorjs/ngx-editorjs/tsconfig.spec.json",
-            "setupFile": "libs/ngx-editorjs/ngx-editorjs/src/test-setup.ts"
+            "setupFile": "libs/ngx-editorjs/ngx-editorjs/src/test-setup.ts",
+            "passWithNoTests": true
           }
         }
       },
@@ -200,7 +218,8 @@
           "options": {
             "jestConfig": "libs/ngx-editorjs/ngx-editorjs-demo/jest.config.js",
             "tsConfig": "libs/ngx-editorjs/ngx-editorjs-demo/tsconfig.spec.json",
-            "setupFile": "libs/ngx-editorjs/ngx-editorjs-demo/src/test-setup.ts"
+            "setupFile": "libs/ngx-editorjs/ngx-editorjs-demo/src/test-setup.ts",
+            "passWithNoTests": true
           }
         }
       },
@@ -218,7 +237,12 @@
             "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.lib.json",
             "project": "libs/ngx-editorjs-ngrx/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.lib.prod.json"
+            }
+          }
+},
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -231,7 +255,8 @@
           "options": {
             "jestConfig": "libs/ngx-editorjs-ngrx/jest.config.js",
             "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.spec.json",
-            "setupFile": "libs/ngx-editorjs-ngrx/src/test-setup.ts"
+            "setupFile": "libs/ngx-editorjs-ngrx/src/test-setup.ts",
+            "passWithNoTests": true
           }
         }
       },
@@ -258,7 +283,8 @@
           "options": {
             "jestConfig": "libs/ngx-hideable-header-demo/jest.config.js",
             "tsConfig": "libs/ngx-hideable-header-demo/tsconfig.spec.json",
-            "setupFile": "libs/ngx-hideable-header-demo/src/test-setup.ts"
+            "setupFile": "libs/ngx-hideable-header-demo/src/test-setup.ts",
+            "passWithNoTests": true
           }
         }
       },
@@ -282,7 +308,8 @@
           "options": {
             "jestConfig": "libs/ngx-tinynodes-core/jest.config.js",
             "tsConfig": "libs/ngx-tinynodes-core/tsconfig.spec.json",
-            "setupFile": "libs/ngx-tinynodes-core/src/test-setup.ts"
+            "setupFile": "libs/ngx-tinynodes-core/src/test-setup.ts",
+            "passWithNoTests": true
           }
         }
       },
