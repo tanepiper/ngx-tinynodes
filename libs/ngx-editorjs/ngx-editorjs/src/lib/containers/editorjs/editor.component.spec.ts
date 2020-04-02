@@ -1,16 +1,14 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { MockNgZone } from '../../../testing/ng-zone-mock';
-import { MockEditorJS } from '../../../testing/shared';
 import { NgxEditorJSDirective } from '../../directives/ngx-editorjs.directive';
-import { NgxEditorJSService } from '../../services/editorjs.service';
 import { FOR_ROOT_OPTIONS_TOKEN, NGX_EDITORJS_CONFIG } from '../../types/config';
 import { NgxEditorJSComponent } from './editorjs.component';
 import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../../types/injector';
 import { createModuleConfig } from '../../..';
 import EditorJS from '@editorjs/editorjs';
 import { createEditorJSInstance } from './editorjs.module';
-import { NgxEditorJSPluginService, NgxEditorjsPluginsModule } from '@tinynodes/ngx-editorjs-plugins';
+import { NgxEditorjsPluginsModule } from '@tinynodes/ngx-editorjs-plugins';
 
 describe('NgxEditorJSComponent', () => {
   @Component({
@@ -19,14 +17,14 @@ describe('NgxEditorJSComponent', () => {
     `
   })
   class TestHostComponent {
-    @ViewChild(NgxEditorJSComponent, { static: false })
+    @ViewChild(NgxEditorJSComponent)
     childComponent: NgxEditorJSComponent;
   }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [NgxEditorjsPluginsModule],
-      declarations: [ TestHostComponent, NgxEditorJSDirective, NgxEditorJSComponent ],
+      declarations: [TestHostComponent, NgxEditorJSDirective, NgxEditorJSComponent],
       providers: [
         {
           provide: NgZone,

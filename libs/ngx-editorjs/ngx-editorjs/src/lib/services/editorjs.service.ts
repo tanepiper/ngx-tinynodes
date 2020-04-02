@@ -3,7 +3,7 @@ import EditorJS, { EditorConfig, OutputData } from '@editorjs/editorjs';
 import { NgxEditorJSPluginService, ToolSettingsMap } from '@tinynodes/ngx-editorjs-plugins';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, switchMap, take, tap } from 'rxjs/operators';
-import { NgxEditorJSModuleConfig, NGX_EDITORJS_CONFIG } from '../types/config';
+import { NGX_EDITORJS_CONFIG, NgxEditorJSModuleConfig } from '../types/config';
 import { CreateEditorJSOptions } from '../types/editorjs-service';
 import {
   EditorJSClass,
@@ -58,8 +58,6 @@ export class NgxEditorJSService {
    */
   private readonly lastChangeMap: ChangeMap = {};
 
-  private toolbarOpen = false;
-
   /**
    * @param editorJs The EditorJS class injected into the application and used to create new editor instances
    * @param config The configuration provided from the NgxEditorJSModule.forRoot method
@@ -109,11 +107,10 @@ export class NgxEditorJSService {
       await editor.isReady;
       await this.zone.run(async () => {
         await this.setupSubjects({ holder });
-        if (this.editorMap[holder]) {
-          this.editorMap[holder].next(editor);
-        } else {
-          this.editorMap[holder] = new BehaviorSubject<EditorJS>(editor);
+        if (!this.editorMap[holder]) {
+          this.editorMap[holder] = new BehaviorSubject<EditorJS>(undefined);
         }
+        this.editorMap[holder].next(editor);
         this.isReadyMap[holder].next(true);
         this.ref.tick();
       });
@@ -137,7 +134,6 @@ export class NgxEditorJSService {
    */
   public apiCall<T = any>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
     return this.getEditor(options).pipe(
-      take(1),
       switchMap(async editor => {
         let result: InjectorApiCallResponse<T> = { ...options, result: undefined };
 
@@ -176,7 +172,6 @@ export class NgxEditorJSService {
    */
   public save(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     return this.apiCall({ holder: options.holder, namespace: 'saver', method: 'save' }).pipe(
-      take(1),
       tap((response: InjectorApiCallResponse<OutputData>) => {
         this.hasSavedMap[options.holder].next(true);
         this.lastChangeMap[options.holder].next(response.result);
@@ -190,7 +185,6 @@ export class NgxEditorJSService {
    */
   public clear(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' }).pipe(
-      take(1),
       switchMap(response => (options.skipSave ? of(response) : this.save(options)))
     );
   }
@@ -204,11 +198,10 @@ export class NgxEditorJSService {
   public update(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     const data = {
       time: (options.data && options.data.time) || Date.now(),
-      version: (options.data && options.data.version) || this.editorJs && this.editorJs.version || '',
+      version: (options.data && options.data.version) || (this.editorJs && this.editorJs.version) || '',
       blocks: [...options.data.blocks]
     };
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).pipe(
-      take(1),
       switchMap(response => (options.skipSave ? of(response) : this.save(options)))
     );
   }
@@ -244,11 +237,11 @@ export class NgxEditorJSService {
       this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({
         time: 0,
         blocks: [],
-        version: this.editorJs && this.editorJs.version || ''
+        version: (this.editorJs && this.editorJs.version) || ''
       });
     }
     return this.lastChangeMap[options.holder].pipe(
-      distinctUntilChanged((a, b) => (b && b.time && b.time === 0) || (a && b && (a.time && a.time === b.time))),
+      distinctUntilChanged((a, b) => (b && b.time && b.time === 0) || (a && b && a.time && a.time === b.time)),
       filter(hasChanged => typeof hasChanged !== 'undefined')
     );
   }
@@ -299,9 +292,10 @@ export class NgxEditorJSService {
     if (!this.lastChangeMap[options.holder]) {
       this.lastChangeMap[options.holder] = new BehaviorSubject<OutputData>({ blocks: [] });
     }
-    return (change: OutputData) => {
-      if (change) {
-        this.lastChangeMap[options.holder].next(change);
+    return async (change: any) => {
+      const data = await change.saver.save();
+      if (data) {
+        this.lastChangeMap[options.holder].next(data);
       }
     };
   }

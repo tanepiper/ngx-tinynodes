@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, Input, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
+import { AfterContentInit, Component, Input, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AppService } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -11,7 +11,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 @Component({
   selector: 'tinynodes-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  styleUrls: ['app.component.scss'],
 })
 export class AppContainerComponent implements AfterContentInit, OnDestroy {
   /**
@@ -48,7 +48,7 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
     this.mobileView = this.matcher.matchMedia('(max-width: 768px)');
     this.mobileView.addListener(this.matchView.bind(this));
 
-    this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe(hidden => {
+    this.app.hidden.pipe(takeUntil(this.onDestroy$)).subscribe((hidden) => {
       this.sidebarHidden$.next(hidden);
     });
   }
@@ -81,11 +81,8 @@ export class AppContainerComponent implements AfterContentInit, OnDestroy {
    */
   ngAfterContentInit() {
     this.sidebarHidden$
-      .pipe(
-        distinctUntilChanged(),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(hidden => (hidden ? this.sidenav.close() : this.sidenav.open()));
+      .pipe(distinctUntilChanged(), takeUntil(this.onDestroy$))
+      .subscribe((hidden) => (hidden ? this.sidenav.close() : this.sidenav.open()));
   }
 
   /**

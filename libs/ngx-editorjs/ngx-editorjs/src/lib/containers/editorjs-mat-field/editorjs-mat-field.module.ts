@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [CommonModule, NgxEditorJSComponentModule, MatInputModule, MatFormFieldModule],
   declarations: [NgxEditorJSMatFieldComponent],
-  exports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldComponent]
+  exports: [NgxEditorJSComponentModule, NgxEditorJSMatFieldComponent],
 })
 export class NgxEditorJSMatFieldModule {
   constructor(
@@ -27,15 +27,15 @@ export class NgxEditorJSMatFieldModule {
    * which sets some defaults, or use the provided defaults.
    * @param config The optional configuration to pass
    */
-  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders {
+  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders<NgxEditorJSMatFieldModule> {
     return {
       ngModule: NgxEditorJSMatFieldModule,
       providers: [
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
-          useValue: config
-        }
-      ]
+          useValue: config,
+        },
+      ],
     };
   }
 }

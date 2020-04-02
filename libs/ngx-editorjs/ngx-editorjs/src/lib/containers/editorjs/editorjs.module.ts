@@ -30,23 +30,23 @@ export function createEditorJSInstance(editorjs: any) {
     NgxEditorJSService,
     {
       provide: FOR_ROOT_OPTIONS_TOKEN,
-      useValue: {}
+      useValue: {},
     },
     {
       provide: NGX_EDITORJS_CONFIG,
       useFactory: createModuleConfig,
-      deps: [FOR_ROOT_OPTIONS_TOKEN]
+      deps: [FOR_ROOT_OPTIONS_TOKEN],
     },
     {
       provide: EDITORJS_MODULE_IMPORT,
-      useValue: EditorJS
+      useValue: EditorJS,
     },
     {
       provide: EditorJSInstance,
       useFactory: createEditorJSInstance,
-      deps: [EDITORJS_MODULE_IMPORT]
-    }
-  ]
+      deps: [EDITORJS_MODULE_IMPORT],
+    },
+  ],
 })
 export class NgxEditorJSComponentModule {
   constructor(
@@ -60,15 +60,15 @@ export class NgxEditorJSComponentModule {
    * which sets some defaults, or use the provided defaults.
    * @param config The optional configuration to pass
    */
-  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders {
+  static forRoot(@Optional() config?: NgxEditorJSModuleConfig): ModuleWithProviders<NgxEditorJSComponentModule> {
     return {
       ngModule: NgxEditorJSComponentModule,
       providers: [
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
-          useValue: config
-        }
-      ]
+          useValue: config,
+        },
+      ],
     };
   }
 }

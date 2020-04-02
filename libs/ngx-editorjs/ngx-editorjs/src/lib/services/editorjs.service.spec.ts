@@ -3,17 +3,14 @@ import { async, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { MockNgZone } from '../../testing/ng-zone-mock';
-import { MockEditorJS } from '../../testing/shared';
 import { FOR_ROOT_OPTIONS_TOKEN, NGX_EDITORJS_CONFIG } from '../types/config';
 import { NgxEditorJSService } from './editorjs.service';
 import {
   createPluginConfig,
   EDITOR_JS_TOOL_INJECTOR,
   NgxEditorjsPluginsModule,
-  NgxEditorJSPluginServiceModule,
   PLUGIN_CONFIG,
-  PluginClasses,
-  PluginTypes
+  PluginClasses
 } from '@tinynodes/ngx-editorjs-plugins';
 import { EDITORJS_MODULE_IMPORT, EditorJSInstance } from '../types/injector';
 import { createModuleConfig } from '../..';
@@ -28,10 +25,9 @@ describe('NgxEditorJSService', () => {
 
   beforeEach(async(() => {
     onDestroy$ = new Subject<boolean>();
-    console.log(NgxEditorjsPluginsModule, NgxEditorJSPluginServiceModule);
 
     TestBed.configureTestingModule({
-      imports: [ NgxEditorjsPluginsModule ],
+      imports: [NgxEditorjsPluginsModule],
       providers: [
         {
           provide: PLUGIN_CONFIG,
@@ -45,7 +41,7 @@ describe('NgxEditorJSService', () => {
         {
           provide: PluginClasses,
           useFactory: createPluginConfig,
-          deps: [ PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR ]
+          deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR]
         },
         {
           provide: NgZone,
@@ -115,7 +111,7 @@ describe('NgxEditorJSService', () => {
       });
 
     service.createInstance({ config: { holder } });
-    service.update({ holder, data: { blocks: [ { type: 'test', data: { text: 'Test' } } ] } }).subscribe();
+    service.update({ holder, data: { blocks: [{ type: 'test', data: { text: 'Test' } }] } }).subscribe();
   });
 
   it('should trigger a change on save', done => {

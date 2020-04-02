@@ -1,7 +1,7 @@
 {
   "name": "@tinynodes/ngx-editorjs-plugins",
   "description": "Plugin service and default plugin modules for @tinynodes/ngx-editorjs",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "author": {
     "name": "Tane Piper",
     "email": "me@tane.dev",
@@ -21,10 +21,10 @@
     "plugins"
   ],
   "peerDependencies": {
-    "@angular/common": "~8.1.2",
-    "@angular/core": "~8.1.2",
+    "@angular/common": "~9.1.0",
+    "@angular/core": "~9.1.0",
     "@editorjs/code": "^2.4.1",
-    "@editorjs/header": "^2.3.0",
+    "@editorjs/header": "^2.4.0",
     "@editorjs/image": "^2.3.1",
     "@editorjs/link": "^2.1.3",
     "@editorjs/list": "^1.4.0",

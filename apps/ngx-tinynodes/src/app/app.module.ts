@@ -15,12 +15,13 @@ import { SidebarComponent } from './components/sidebar-component/sidebar.compone
 import { AppContainerComponent } from './containers/app/app.component';
 import { MaterialModule } from './material.module';
 import { HomePageComponent } from './pages/home/home-page.component';
+import { CommonModule } from '@angular/common';
 
 const PLATFORM_IMPORTS = [BrowserModule, HttpClientModule];
 
 const PRESENTATION_IMPORTS = [LayoutModule, MaterialModule, FlexLayoutModule, BrowserAnimationsModule];
 
-const DEV_IMPORTS = [AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule.forRoot()];
+const DEV_IMPORTS = [AkitaNgDevtools, AkitaNgRouterStoreModule];
 
 /**
  * The main `ngx-tinynodes` module that builds the core single page application.
@@ -29,14 +30,15 @@ const DEV_IMPORTS = [AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule.forRoot
 @NgModule({
   declarations: [AppContainerComponent, NavBarComponent, SidebarComponent, HomePageComponent],
   imports: [
+    CommonModule,
     ...PLATFORM_IMPORTS,
     ...PRESENTATION_IMPORTS,
     ApplicationDataModule,
     AppRoutingModule,
     NgxTinynodesCoreModule,
     NgxEditorjsDemoModule,
-    environment.production ? [] : DEV_IMPORTS
+    environment.production ? [] : DEV_IMPORTS,
   ],
-  bootstrap: [AppContainerComponent]
+  bootstrap: [AppContainerComponent],
 })
 export class AppModule {}

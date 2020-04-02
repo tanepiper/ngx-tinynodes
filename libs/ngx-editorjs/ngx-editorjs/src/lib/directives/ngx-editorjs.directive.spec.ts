@@ -10,14 +10,14 @@ import { createModuleConfig } from '../..';
 import EditorJS from '@editorjs/editorjs';
 import { createEditorJSInstance } from '../containers/editorjs/editorjs.module';
 import {
-  createPluginConfig, EDITOR_JS_TOOL_INJECTOR,
+  createPluginConfig,
+  EDITOR_JS_TOOL_INJECTOR,
   NgxEditorjsPluginsModule,
   PLUGIN_CONFIG,
   PluginClasses
 } from '@tinynodes/ngx-editorjs-plugins';
 
 describe('NgxEditorJSDirective', () => {
-
   /**
    * Mock Component for Tests
    */
@@ -46,8 +46,8 @@ describe('NgxEditorJSDirective', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ NgxEditorjsPluginsModule ],
-      declarations: [ NgxEditorJSDirective, MockComponent ],
+      imports: [NgxEditorjsPluginsModule],
+      declarations: [NgxEditorJSDirective, MockComponent],
       providers: [
         {
           provide: PLUGIN_CONFIG,
@@ -66,7 +66,7 @@ describe('NgxEditorJSDirective', () => {
         {
           provide: PluginClasses,
           useFactory: createPluginConfig,
-          deps: [ PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR ]
+          deps: [PLUGIN_CONFIG, EDITOR_JS_TOOL_INJECTOR]
         },
         {
           provide: FOR_ROOT_OPTIONS_TOKEN,
@@ -75,7 +75,7 @@ describe('NgxEditorJSDirective', () => {
         {
           provide: NGX_EDITORJS_CONFIG,
           useFactory: createModuleConfig,
-          deps: [ FOR_ROOT_OPTIONS_TOKEN ]
+          deps: [FOR_ROOT_OPTIONS_TOKEN]
         },
         {
           provide: EDITORJS_MODULE_IMPORT,
@@ -84,7 +84,7 @@ describe('NgxEditorJSDirective', () => {
         {
           provide: EditorJSInstance,
           useFactory: createEditorJSInstance,
-          deps: [ EDITORJS_MODULE_IMPORT ]
+          deps: [EDITORJS_MODULE_IMPORT]
         }
       ]
     }).compileComponents();

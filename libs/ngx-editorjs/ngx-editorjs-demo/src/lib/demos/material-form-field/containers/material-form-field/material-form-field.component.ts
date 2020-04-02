@@ -1,9 +1,9 @@
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Block, NgxEditorJSService } from '@tinynodes/ngx-editorjs';
+import { NgxEditorJSService } from '@tinynodes/ngx-editorjs';
 import { AppService, MenuGroup, NgxEditorJSDemo } from '@tinynodes/ngx-tinynodes-core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, pluck, switchMap, take, takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { PagesService } from '../../../../store/pages/pages.service';
 import { OutputData } from '@editorjs/editorjs';
 
@@ -14,8 +14,8 @@ import { OutputData } from '@editorjs/editorjs';
 @Component({
   selector: 'ngx-tinynodes-mat-form-field-demo',
   templateUrl: 'material-form-field.component.html',
-  styleUrls: [ 'material-form-field.component.scss' ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['material-form-field.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentInit {
   /**
@@ -32,9 +32,9 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
    * Editor form group
    */
   public editorForm = this.fb.group({
-    pageName: [ '' ],
+    pageName: [''],
     pageTags: new FormControl([]),
-    pageEditor: new FormControl([])
+    pageEditor: new FormControl([]),
   });
   /**
    * Internal onDestroy$ subject
@@ -67,13 +67,11 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
   ) {
     this.editorService
       .lastChange({ holder: this.holder })
-      .pipe(
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(hasChanged => {
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((hasChanged) => {
         if (hasChanged && hasChanged.blocks) {
           this.editorForm.patchValue({
-            pageEditor: hasChanged.blocks
+            pageEditor: hasChanged.blocks,
           });
           this.cd.markForCheck();
         }
@@ -93,7 +91,6 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
   public get menu() {
     return this.menu$;
   }
-
 
   /**
    * Enable autosave, set the value from the autosaveTime
@@ -127,12 +124,7 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
       pageName: '',
       pageTags: [],
     });
-
-    this.editorService
-      .clear({ holder: this.holder, skipSave })
-      .pipe(take(1))
-      .subscribe();
-
+    this.editorService.clear({ holder: this.holder, skipSave }).pipe(take(1)).subscribe();
     this.cd.markForCheck();
   }
 
@@ -142,10 +134,7 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
    * @param skipSave Optional parameter, if set to true the save method won't be called
    */
   public update(data: OutputData, skipSave = false) {
-    this.editorService
-      .update({ holder: this.holder, data, skipSave })
-      .pipe(take(1))
-      .subscribe();
+    this.editorService.update({ holder: this.holder, data, skipSave }).pipe(take(1)).subscribe();
     this.cd.markForCheck();
   }
 
@@ -156,12 +145,12 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
     this.app
       .getDemoData<NgxEditorJSDemo>('material-form-field-demo')
       .pipe(take(1))
-      .subscribe(data => {
+      .subscribe((data) => {
         this.menu$.next(data.links);
         this.editorForm.patchValue({
           pageName: 'A test page for the Material EditorJS Component',
-          pageTags: ['Angular', 'Material', 'EditorJS', 'TypeScript', 'Open Source']
-        })
+          pageTags: ['Angular', 'Material', 'EditorJS', 'TypeScript', 'Open Source'],
+        });
         this.update({ time: Date.now(), blocks: data.blocks });
       });
   }
