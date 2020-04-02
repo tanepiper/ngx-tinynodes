@@ -225,71 +225,6 @@
       },
       "schematics": {}
     },
-    "ngx-editorjs-ngrx": {
-      "root": "libs/ngx-editorjs-ngrx",
-      "sourceRoot": "libs/ngx-editorjs-ngrx/src",
-      "projectType": "library",
-      "prefix": "tinynodes",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.lib.json",
-            "project": "libs/ngx-editorjs-ngrx/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/ngx-editorjs-ngrx/tsconfig.lib.json", "libs/ngx-editorjs-ngrx/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ngx-editorjs-ngrx/jest.config.js",
-            "tsConfig": "libs/ngx-editorjs-ngrx/tsconfig.spec.json",
-            "setupFile": "libs/ngx-editorjs-ngrx/src/test-setup.ts",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {}
-    },
-    "ngx-hideable-header-demo": {
-      "root": "libs/ngx-hideable-header-demo",
-      "sourceRoot": "libs/ngx-hideable-header-demo/src",
-      "projectType": "library",
-      "prefix": "tinynodes",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ngx-hideable-header-demo/tsconfig.lib.json",
-              "libs/ngx-hideable-header-demo/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ngx-hideable-header-demo/jest.config.js",
-            "tsConfig": "libs/ngx-hideable-header-demo/tsconfig.spec.json",
-            "setupFile": "libs/ngx-hideable-header-demo/src/test-setup.ts",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {}
-    },
     "ngx-tinynodes-core": {
       "root": "libs/ngx-tinynodes-core",
       "sourceRoot": "libs/ngx-tinynodes-core/src",
@@ -332,11 +267,11 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/jest:jest",
           "options": {
-            "main": "libs/ngx-tinynodes-components/src/test.ts",
+            "jestConfig": "libs/ngx-tinynodes-components/jest.config.js",
             "tsConfig": "libs/ngx-tinynodes-components/tsconfig.spec.json",
-            "karmaConfig": "libs/ngx-tinynodes-components/karma.conf.js"
+            "setupFile": "libs/ngx-tinynodes-components/src/test-setup.ts"
           }
         }
       },
