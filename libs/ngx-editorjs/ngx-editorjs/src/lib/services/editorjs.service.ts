@@ -58,8 +58,6 @@ export class NgxEditorJSService {
    */
   private readonly lastChangeMap: ChangeMap = {};
 
-  private toolbarOpen = false;
-
   /**
    * @param editorJs The EditorJS class injected into the application and used to create new editor instances
    * @param config The configuration provided from the NgxEditorJSModule.forRoot method
@@ -109,11 +107,10 @@ export class NgxEditorJSService {
       await editor.isReady;
       await this.zone.run(async () => {
         await this.setupSubjects({ holder });
-        if (this.editorMap[holder]) {
-          this.editorMap[holder].next(editor);
-        } else {
-          this.editorMap[holder] = new BehaviorSubject<EditorJS>(editor);
+        if (!this.editorMap[holder]) {
+          this.editorMap[holder] = new BehaviorSubject<EditorJS>(undefined);
         }
+        this.editorMap[holder].next(editor);
         this.isReadyMap[holder].next(true);
         this.ref.tick();
       });
@@ -137,7 +134,6 @@ export class NgxEditorJSService {
    */
   public apiCall<T = any>(options: InjectorApiCallOptions, ...args: any[]): Observable<InjectorApiCallResponse<T>> {
     return this.getEditor(options).pipe(
-      take(1),
       switchMap(async (editor) => {
         let result: InjectorApiCallResponse<T> = { ...options, result: undefined };
 
@@ -176,7 +172,6 @@ export class NgxEditorJSService {
    */
   public save(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     return this.apiCall({ holder: options.holder, namespace: 'saver', method: 'save' }).pipe(
-      take(1),
       tap((response: InjectorApiCallResponse<OutputData>) => {
         this.hasSavedMap[options.holder].next(true);
         this.lastChangeMap[options.holder].next(response.result);
@@ -190,7 +185,6 @@ export class NgxEditorJSService {
    */
   public clear(options: InjectorMethodOption): Observable<InjectorApiCallResponse<OutputData>> {
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'clear' }).pipe(
-      take(1),
       switchMap((response) => (options.skipSave ? of(response) : this.save(options)))
     );
   }
@@ -208,7 +202,6 @@ export class NgxEditorJSService {
       blocks: [...options.data.blocks],
     };
     return this.apiCall({ holder: options.holder, namespace: 'blocks', method: 'render' }, data).pipe(
-      take(1),
       switchMap((response) => (options.skipSave ? of(response) : this.save(options)))
     );
   }

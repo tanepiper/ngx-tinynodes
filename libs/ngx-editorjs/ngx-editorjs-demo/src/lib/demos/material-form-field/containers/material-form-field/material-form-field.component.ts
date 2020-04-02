@@ -124,9 +124,7 @@ export class NgxTinynodesMaterialFormFieldDemoComponent implements AfterContentI
       pageName: '',
       pageTags: [],
     });
-
     this.editorService.clear({ holder: this.holder, skipSave }).pipe(take(1)).subscribe();
-
     this.cd.markForCheck();
   }
 
