@@ -100,6 +100,9 @@
     "tsickle": "~0.36.0",
     "tslib": "~1.10.0",
     "tslint": "~5.18.0",
-    "typescript": "~3.4.5"
+    "typescript": "~3.4.5",
+    "@nrwl/jest": "8.12.11",
+    "ts-jest": "24.0.0",
+    "@nrwl/cypress": "8.12.11"
   }
 }
